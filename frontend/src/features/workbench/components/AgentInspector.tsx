@@ -35,7 +35,7 @@ export function AgentInspector() {
     }
 
     return (
-        <aside className="w-[320px] border-l border-zinc-200 bg-white/50 backdrop-blur-sm flex flex-col h-full flex-shrink-0 relative">
+        <aside className="w-full border-l border-zinc-200 bg-white/50 backdrop-blur-sm flex flex-col h-full flex-shrink-0 relative">
 
             {/* Header - Minimal */}
             <div className="h-10 border-b border-zinc-100 flex items-center justify-between px-4">
@@ -131,7 +131,7 @@ function TimelineItem({ agent, status, time, desc, logs, icon: Icon }: any) {
                 <span className="text-[10px] text-zinc-400 font-mono group-hover:text-zinc-600 transition-colors">{time}</span>
             </div>
 
-            <p className="text-[11px] text-zinc-500 leading-snug mb-3 font-serif">{desc}</p>
+            <p className="text-sm text-zinc-600 leading-relaxed mb-3 font-serif">{desc}</p>
 
             {logs && (
                 <div className="bg-zinc-50/80 rounded-sm border border-zinc-100 p-3 space-y-1.5 mt-2">

@@ -34,25 +34,27 @@
 
 ## 3. 系统架构 (System Architecture)
 
-### 3.1 前端架构 (v6.1 Next.js MPA)
-> **状态**: Phase 2.2 (System Ignition)
-> **文档**: `reports/design_docs/Architecture_Execution_v6.1.md`
+### 3.1 前端架构 (v6.2 Island Architecture)
+> **状态**: Phase 3 (Island Layout)
+> **文档**: `reports/design_docs/frontend_design/PHASE3_ISLAND_DESIGN.md`
 
-前端采用 **Next.js 16 (App Router)** 构建的多页面应用 (MPA)，遵循 **v6.1 Enforcement Edition** 标准。
+前端采用 **Next.js 16 (App Router)** 构建的多页面应用 (MPA)，升级为 **Island Architecture** (岛屿架构)。
 
 *   **路由结构**:
     *   `/dashboard`: 全局概览。
-    *   `/studio`: **[核心]** 创作工坊，采用 **Quantum Trinity** 三栏布局。
-    *   `/knowledge`: 知识库管理（Lark 同步）。
-    *   `/settings`: 系统配置与 API Key 管理。
+    *   `/studio`: **[核心]** 创作工坊，采用 **Z-Stack 浮岛布局**。
+    *   `/knowledge`: 知识库管理。
+    *   `/settings`: 系统配置。
 
-*   **UI 布局 (Quantum Trinity)**:
-    1.  **Adaptive Sidebar (Left 280px)**: 导航与上下文输入。集成 Space Switcher。
-    2.  **Writing Canvas (Center Fluid)**: 纯净创作区。
-    3.  **Agent Inspector (Right 320px)**: AI 思考过程与参数控制。
+*   **UI 布局 (The Athenaeum)**:
+    1.  **Config Island (Left)**: 悬浮配置面板 (Mode, Style, Length)。
+    2.  **Agent Island (Right)**: 悬浮智能体时间轴 (Thinking/Active/Done)。
+    3.  **Central Canvas (Center)**: 沉浸式创作白板。
+    4.  **Studio Navbar (Top)**: 胶囊式全局导航。
 
 *   **状态管理**:
-    *   `useWorkbenchStore` (Zustand): 管理生成内容、模式、WebSocket 消息。
+    *   `useStudioUI` (Zustand): UI 状态。
+    *   `nuqs`: URL 状态同步。
 
 ### 3.2 后端架构 (FastAPI + LangGraph)
 *   **服务入口**: `app.main:app` (FastAPI)。
@@ -69,28 +71,18 @@
 ├── frontend/                    # Next.js 前端
 │   └── src/
 │       ├── app/                 # 页面路由
-│       │   ├── page.tsx         # 主页 (三栏布局)
-│       │   └── settings/        # 设置页
+│       │   ├── page.tsx         # Dashboard
+│       │   └── studio/          # Studio (Island Layout)
 │       ├── components/          # UI 组件
-│       │   ├── agent-timeline.tsx
-│       │   ├── terminal-view.tsx
-│       │   └── style-selector.tsx
-│       └── config/
-│           └── api.ts           # API 配置 (端口: 8004)
+│       │   ├── layout/          # Island, Navbar
+│       │   └── timeline/        # AgentTimeline
+│       └── features/            # 业务模块 (studio/...)
 │
 ├── backend/                     # FastAPI 后端
 │   └── app/
-│       ├── main.py              # API 入口 (端点定义)
+│       ├── main.py              # API 入口
 │       ├── graph.py             # LangGraph 工作流
-│       ├── agents/              # Agent 实现
-│       │   ├── strategist.py
-│       │   ├── writer.py
-│       │   ├── critic.py
-│       │   └── polisher.py
-│       ├── core/
-│       │   ├── llm.py           # LLM 客户端
-│       │   └── prompts.py       # Prompt 模板管理
-│       └── data/prompts/        # Jinja2 模板
+│       └── agents/              # Agent 实现
 │
 └── PROJECT_HANDBOOK.md          # 本文档
 ```
@@ -98,6 +90,27 @@
 ---
 
 ## ✅ 已完成功能 (Milestone)
+
+### 🔹 Phase 3 - Island Architecture (v6.2) ✅
+> **Goal**: 实现 "High-End Minimalism" 视觉风格，采用浮岛架构提升认知清晰度。
+> **完成日期**: 2026-01-20
+
+#### 核心交付
+*   **Design Lab**: 验证了三种布局方案，最终选定 Visual Variant A。
+*   **架构升级**:
+    *   `IslandContainer`: 统一封装悬浮、阴影、圆角逻辑。
+    *   `Z-Stack Layout`: 层叠式后的背景纹理与主体内容。
+*   **组件实现**:
+    *   `ConfigPanel`: 接入 `nuqs` 实现 URL 状态同步。
+    *   `AgentTimeline`: 可视化 Agent 思考过程 (Pulse 动画)。
+*   **技术债清理**:
+    *   降级 Tailwind CSS 至 v3.4.17 以确保生态兼容性。
+    *   清理了旧的 `(studio)` 路由组。
+
+#### 关联文档
+*   📄 **[Phase 1 Summary](reports/design_docs/frontend_design/PHASE1_SUMMARY.md)**
+*   📄 **[Phase 2 Summary](reports/design_docs/frontend_design/PHASE2_SUMMARY.md)**
+*   📄 **[Phase 3 Design](reports/design_docs/frontend_design/PHASE3_ISLAND_DESIGN.md)**
 
 ### 🔹 P1 - Agent 独立模型配置 ✅
 - **后端**: 支持 Agent 级别的 API Key 和模型配置
@@ -174,8 +187,8 @@
 
 | 指标 | 值 |
 |------|-----|
-| **阶段** | P8 完成，P10 (前端清理) 启动中 |
-| **前端端口** | `localhost:3000` |
+| **阶段** | Phase 3 (Island Design) 完成，准备接入 Deep Research |
+| **前端端口** | `localhost:3002` (Auto-allocated) |
 | **后端端口** | `localhost:8004` (通过 `frontend/src/config/api.ts` 配置) |
 | **已集成模型** | Gemini, DeepSeek, Doubao (火山引擎), OpenAI |
 

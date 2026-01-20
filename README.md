@@ -134,10 +134,9 @@ wenzhang001/
 ## 📋 开发进度
 
 - [x] Phase 2: Dashboard 上线 + 系统状态监测
-- [x] Phase 3: Studio 三栏布局 (Quantum Trinity)
-- [x] Phase 3.5: 交互重构 + 视觉降噪
-- [x] Phase 3.6: 布局重力 (Responsive Gravity)
-- [ ] Phase 4: Knowledge 知识库管理页面
+- [x] Phase 2: Design Lab & Tailwind v3 Fix
+- [x] Phase 3: Studio - Island Architecture (Variant A) 实现
+- [ ] Phase 4: 业务逻辑接入 (Deep Research Agent)
 - [ ] Phase 4: Settings 系统设置页面
 
 ---
