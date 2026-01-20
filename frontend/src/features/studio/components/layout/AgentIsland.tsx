@@ -1,23 +1,21 @@
+'use client';
+
 import { IslandContainer } from "./IslandContainer";
 import { Activity } from "lucide-react";
-import { AgentTimeline, TimelineStep } from "../timeline/AgentTimeline";
-
-// Mock Data for Verification
-const MOCK_STEPS: TimelineStep[] = [
-    { id: '1', agent: 'strategist', label: 'Strategy', status: 'completed', message: 'Analyzed user intent: Deep Research', duration: '1.2s' },
-    { id: '2', agent: 'researcher', label: 'Research', status: 'active', message: 'Searching knowledge base...', duration: '0.5s' },
-    { id: '3', agent: 'writer', label: 'Drafting', status: 'idle', message: 'Waiting for research insights' },
-    { id: '4', agent: 'critic', label: 'Review', status: 'idle', message: 'Pending draft' },
-];
+import { AgentTimeline } from "../timeline/AgentTimeline";
+import { useAgentStore } from "@/features/agent/stores/useAgentStore";
 
 /**
  * AgentIsland - 右侧智能体岛
  * 
  * 职责:
- * 1. 展示 Agent 思考流
+ * 1. 展示 Agent 思考流 (From useAgentStore)
  * 2. 状态指示器
  */
 export function AgentIsland() {
+    const { steps, status } = useAgentStore();
+    const isActive = status === 'thinking' || status === 'writing' || status === 'connecting';
+
     return (
         <IslandContainer position="right">
             {/* Header */}
@@ -27,16 +25,19 @@ export function AgentIsland() {
                         <Activity className="w-4 h-4 text-primary" />
                         <h3 className="text-sm font-semibold text-ink-primary">Agent Flow</h3>
                     </div>
+                    {/* Active Logic: Show pulsing green dot if active */}
                     <span className="flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        {isActive && (
+                            <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
+                        )}
+                        <span className={`relative inline-flex rounded-full h-2 w-2 ${isActive ? 'bg-green-500' : 'bg-zinc-300'}`}></span>
                     </span>
                 </div>
             </div>
 
             {/* Timeline Content */}
             <div className="flex-1 p-4 overflow-y-auto">
-                <AgentTimeline steps={MOCK_STEPS} />
+                <AgentTimeline steps={steps} />
             </div>
         </IslandContainer>
     );

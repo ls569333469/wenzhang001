@@ -1,160 +1,183 @@
 'use client';
 
-import * as React from 'react';
-import { Eye, EyeOff, Save } from "lucide-react";
-
-/**
- * Settings Page v8.0: Digital Luxury Aesthetic
- * 
- * Design: Clean editorial layout, generous spacing
- * Typography-driven hierarchy, no heavy card borders
- */
+import React, { useEffect, useState } from 'react';
+import { cn } from "@/lib/utils";
+import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { toast } from 'sonner';
+import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
 
 export default function SettingsPage() {
-  const [showApiKey, setShowApiKey] = React.useState(false);
-  const [temperature, setTemperature] = React.useState(0.7);
+  const [apiKey, setApiKey] = useState('');
+  const [model, setModel] = useState('gpt-4-turbo');
+  const [baseUrl, setBaseUrl] = useState('');
+
+  // Phase 6: Prompt State
+  const [prompts, setPrompts] = useState({
+    strategist: DEFAULTS.strategist,
+    writer: DEFAULTS.writer,
+    critic: DEFAULTS.critic
+  });
+
+  useEffect(() => {
+    // Load from localStorage on mount
+    const storedKey = localStorage.getItem('qs_api_key');
+    const storedModel = localStorage.getItem('qs_model');
+    const storedUrl = localStorage.getItem('qs_base_url');
+    if (storedKey) setApiKey(storedKey);
+    if (storedModel) setModel(storedModel);
+    if (storedUrl) setBaseUrl(storedUrl);
+
+    // Load Prompts
+    const pStrat = localStorage.getItem('qs_prompt_strategist');
+    const pWriter = localStorage.getItem('qs_prompt_writer');
+    const pCritic = localStorage.getItem('qs_prompt_critic');
+
+    setPrompts({
+      strategist: pStrat || DEFAULTS.strategist,
+      writer: pWriter || DEFAULTS.writer,
+      critic: pCritic || DEFAULTS.critic
+    });
+  }, []);
+
+  const handleSave = () => {
+    try {
+      localStorage.setItem('qs_api_key', apiKey);
+      localStorage.setItem('qs_model', model);
+      localStorage.setItem('qs_base_url', baseUrl);
+
+      // Save Prompts
+      localStorage.setItem('qs_prompt_strategist', prompts.strategist);
+      localStorage.setItem('qs_prompt_writer', prompts.writer);
+      localStorage.setItem('qs_prompt_critic', prompts.critic);
+
+      toast.success('Configuration saved successfully');
+    } catch (e) {
+      toast.error('Failed to save settings');
+    }
+  };
 
   return (
-    <div className="h-full flex flex-col bg-paper overflow-hidden">
-      {/* Header */}
-      <div className="px-8 pt-8 pb-6 shrink-0">
-        <h1 className="text-2xl font-serif font-medium text-ink-primary tracking-tight">
-          系统设置
-        </h1>
-        <p className="text-sm text-ink-muted/60 mt-1">
-          配置模型参数与集成服务
-        </p>
-      </div>
-
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto px-8 pb-32">
-        <div className="max-w-xl space-y-12">
-
-          {/* Section: Model */}
-          <section className="space-y-6">
-            <h2 className="text-xs font-medium text-ink-muted/60 uppercase tracking-widest">
-              模型配置
-            </h2>
-
-            <div className="space-y-8">
-              {/* Provider */}
-              <div className="space-y-2">
-                <label className="text-sm text-ink-muted">
-                  LLM Provider
-                </label>
-                <select className="w-full py-2.5 text-ink-primary bg-transparent border-b border-hairline/50 focus:border-ink-primary focus:outline-none transition-colors cursor-pointer">
-                  <option value="openai">OpenAI (GPT-4)</option>
-                  <option value="anthropic">Anthropic (Claude)</option>
-                  <option value="gemini">Google (Gemini)</option>
-                  <option value="volcengine">火山引擎 (Doubao)</option>
-                </select>
-              </div>
-
-              {/* API Key */}
-              <div className="space-y-2">
-                <label className="text-sm text-ink-muted">
-                  API Key
-                </label>
-                <div className="relative">
-                  <input
-                    type={showApiKey ? "text" : "password"}
-                    placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
-                    className="w-full py-2.5 pr-10 text-ink-primary bg-transparent border-b border-hairline/50 focus:border-ink-primary focus:outline-none transition-colors font-mono text-sm"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowApiKey(!showApiKey)}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-ink-muted/50 hover:text-ink-primary transition-colors"
-                  >
-                    {showApiKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Temperature */}
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm text-ink-muted">
-                    Temperature
-                  </label>
-                  <span className="text-sm font-mono text-ink-primary">
-                    {temperature.toFixed(1)}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={temperature}
-                  onChange={(e) => setTemperature(parseFloat(e.target.value))}
-                  className="w-full h-1 bg-hairline/50 rounded-full appearance-none cursor-pointer accent-zinc-900"
-                />
-                <div className="flex justify-between text-[10px] text-ink-muted/50">
-                  <span>保守</span>
-                  <span>创意</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-hairline/50 to-transparent" />
-
-          {/* Section: System Prompt */}
-          <section className="space-y-6">
-            <h2 className="text-xs font-medium text-ink-muted/60 uppercase tracking-widest">
-              系统提示词
-            </h2>
-
-            <textarea
-              placeholder="定义 AI 的角色和行为准则..."
-              className="w-full py-3 text-ink-primary bg-transparent border-b border-hairline/50 focus:border-ink-primary focus:outline-none transition-colors resize-none min-h-[140px] text-sm leading-relaxed"
-              defaultValue="你是一位专业的 Web3 投研分析师，擅长撰写深度分析文章。你的写作风格专业严谨，善于用数据和案例支撑观点。"
-            />
-          </section>
-
-          {/* Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-hairline/50 to-transparent" />
-
-          {/* Section: Integrations */}
-          <section className="space-y-6">
-            <h2 className="text-xs font-medium text-ink-muted/60 uppercase tracking-widest">
-              飞书集成
-            </h2>
-
-            <div className="space-y-8">
-              <div className="space-y-2">
-                <label className="text-sm text-ink-muted">App ID</label>
-                <input
-                  type="text"
-                  placeholder="cli_xxxxxxxxxxxxxxxx"
-                  className="w-full py-2.5 text-ink-primary bg-transparent border-b border-hairline/50 focus:border-ink-primary focus:outline-none transition-colors font-mono text-sm"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm text-ink-muted">App Secret</label>
-                <input
-                  type="password"
-                  placeholder="xxxxxxxxxxxxxxxxxxxxxxxx"
-                  className="w-full py-2.5 text-ink-primary bg-transparent border-b border-hairline/50 focus:border-ink-primary focus:outline-none transition-colors font-mono text-sm"
-                />
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      {/* Floating Save Button */}
-      <div className="absolute bottom-0 left-0 right-0 pointer-events-none">
-        <div className="h-20 bg-gradient-to-t from-paper via-paper/95 to-transparent" />
-        <div className="bg-paper px-8 pb-6 pointer-events-auto">
-          <div className="max-w-xl">
-            <button className="flex items-center gap-2 px-6 py-2.5 bg-zinc-900 text-white rounded-md hover:bg-zinc-800 transition-all text-sm font-medium shadow-lg shadow-zinc-900/10 ml-auto">
-              <Save className="w-4 h-4 opacity-70" />
-              保存配置
-            </button>
+    <div className="flex flex-col h-full bg-canvas overflow-y-auto">
+      <div className="max-w-3xl mx-auto w-full p-8 space-y-8">
+        {/* Header */}
+        <div className="flex items-center gap-3 pb-6 border-b border-zinc-100">
+          <div className="w-10 h-10 bg-white rounded-xl shadow-sm border border-zinc-200 flex items-center justify-center">
+            <Settings className="w-5 h-5 text-ink-primary" />
           </div>
+          <div>
+            <h1 className="text-2xl font-serif font-medium text-ink-primary">System Settings</h1>
+            <p className="text-sm text-ink-muted">Configure your Quantum Studio environment</p>
+          </div>
+        </div>
+
+        {/* API Configuration */}
+        <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
+              <Key className="w-4 h-4 text-indigo-600" />
+            </div>
+            <div className="flex-1 space-y-1">
+              <h3 className="font-medium text-ink-primary">Model Provider</h3>
+              <p className="text-xs text-ink-muted">Configure connection to LLM provider</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 pl-11">
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">API Key</label>
+              <input
+                type="password"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+                placeholder="sk-..."
+                className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono"
+              />
+              <p className="text-[10px] text-ink-muted flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />
+                Stored locally in your browser. Never synced to server.
+              </p>
+            </div>
+
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Base URL (Optional)</label>
+              <input
+                type="text"
+                value={baseUrl}
+                onChange={(e) => setBaseUrl(e.target.value)}
+                placeholder="https://api.openai.com/v1"
+                className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono"
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Model Name</label>
+              <select
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none cursor-pointer"
+              >
+                <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                <option value="gpt-4o">GPT-4o</option>
+                <option value="claude-3-opus-20240229">Claude 3 Opus</option>
+                <option value="deepseek-chat">DeepSeek V3</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        {/* Prompt Configuration (New Phase 6) */}
+        <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
+          <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-purple-500" />
+            Agent Process Configuration
+          </h3>
+
+          <div className="grid grid-cols-1 gap-6">
+            {/* Strategist Prompt */}
+            <div className="space-y-2">
+              <label className="text-xs font-medium text-ink-muted uppercase">Strategist Prompt (Analysis)</label>
+              <textarea
+                value={prompts.strategist}
+                onChange={(e) => setPrompts({ ...prompts, strategist: e.target.value })}
+                className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
+                placeholder="Enter system prompt for Strategist..."
+              />
+            </div>
+
+            {/* Writer Prompt */}
+            <div className="space-y-2">
+              <label className="text-xs font-medium text-ink-muted uppercase">Writer Prompt (Drafting)</label>
+              <textarea
+                value={prompts.writer}
+                onChange={(e) => setPrompts({ ...prompts, writer: e.target.value })}
+                className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
+                placeholder="Enter system prompt for Writer..."
+              />
+            </div>
+
+            {/* Critic Prompt */}
+            <div className="space-y-2">
+              <label className="text-xs font-medium text-ink-muted uppercase">Critic Prompt (Review)</label>
+              <textarea
+                value={prompts.critic}
+                onChange={(e) => setPrompts({ ...prompts, critic: e.target.value })}
+                className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
+                placeholder="Enter system prompt for Critic..."
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Save Button */}
+        <div className="flex justify-end pt-4">
+          <Button
+            onClick={handleSave}
+            className="bg-primary text-white hover:bg-primary/90 rounded-xl shadow-lg shadow-primary/20"
+          >
+            <Check className="w-4 h-4 mr-2" />
+            Save Configuration
+          </Button>
         </div>
       </div>
     </div>

@@ -78,7 +78,7 @@ function TimelineItem({ step, isLast }: { step: TimelineStep, isLast: boolean })
                     {step.status === 'thinking' && (
                         <div className="flex items-center gap-2 text-ink-muted italic">
                             <Sparkles className="w-3 h-3 animate-pulse" />
-                            <span>Thinking...</span>
+                            <span>{step.message || '思考中...'}</span>
                         </div>
                     )}
                     {step.status === 'active' && (

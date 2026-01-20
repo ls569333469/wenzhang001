@@ -1,0 +1,42 @@
+{
+    "input": "[SYSTEM OVERRIDE]\nStrategist: Analyze this as a Web3 Data Report.\nWriter: Role: Mimeng (咪蒙). Style: Emotional, provocative, short sentences. Use 'KV' language. Focus on 'Transparency' and 'Value'.\nContext: Connect to Lark Web3 Data (via Backend RAG).\n\n[USER INPUT]\nJustLend DAO 已通过两阶段系统性回购销毁机制，累计完成 1,084,890,753 枚 JST 的销毁，实现总供应量永久性降低 10.96%，累计销毁价值约 3870 万美元。其中，第一阶段实现价值 1773 万美元的销毁，第二阶段进一步扩大规模，完成约 2100 万美元的销毁进程。JustLend DAO 将继续贯彻透明、可持续的通缩经济策略，持续夯实 JST 代币模型的长期价值基础。",
+    "mode": "deep_analysis",
+    "narrative_type": "project_review",
+    "references": [],
+    "selected_option": {
+        "id": "option_1",
+        "title": "炸了！JustLend DAO狂烧38亿枚JST，你的仓位还在吗？",
+        "hook_angle": "Fear of Missing Out + 财富效应冲击",
+        "pain_point": "散户担心错过通缩红利，害怕资产被稀释",
+        "target_audience": "JST持有者、DeFi收益农民、短期交易者",
+        "outline": [
+            "血洗市场！JustLend DAO烧掉10%总供应量",
+            "两阶段屠杀：1773万刀+2100万刀，刀刀见血",
+            "通缩核弹已引爆，JST持有者躺赢还是踏空？",
+            "深度拆解：回购销毁背后的资本游戏",
+            "预警：下一波燃烧何时到来？你的策略是什么"
+        ]
+    },
+    "info_anchors": {
+        "must_mention": [
+            "JustLend DAO",
+            "JST代币",
+            "两阶段系统性回购销毁机制",
+            "通缩经济策略",
+            "透明、可持续"
+        ],
+        "key_data": [
+            "累计销毁1,084,890,753枚JST",
+            "总供应量永久性降低10.96%",
+            "累计销毁价值约3870万美元",
+            "第一阶段销毁价值1773万美元",
+            "第二阶段销毁价值约2100万美元"
+        ]
+    },
+    "api_config": {
+        "provider": "volcengine",
+        "model_id": "deepseek-v3-2-251201",
+        "api_key": ""
+    },
+    "agent_config": {}
+}

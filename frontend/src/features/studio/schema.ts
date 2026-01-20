@@ -21,10 +21,17 @@ export const CreationModeSchema = z.enum([
 
 /** 写作风格 */
 export const WritingStyleSchema = z.enum([
-    'professional',    // 专业投研
-    'kol',             // KOL 观点
-    'academic',        // 学术风格
+    'professional',    // 专业投研 (Default)
     'casual',          // 轻松随意
+    // Business Styles (from src/lib/styles.ts)
+    'mimeng',          // 咪蒙体
+    'banfo',           // 半佛体
+    'xinshixiang',     // 新世相体
+    'shijuezhi',       // 视觉志体
+    'lianbushou',      // 链捕手体
+    'lingongzi',       // 临公子体
+    'fengqiongzi',     // 风茕子体
+    'chengshian',      // 程十安体
 ]);
 
 /** 目标字数 */
@@ -50,6 +57,7 @@ export const CreationConfigSchema = z.object({
     length: ArticleLengthSchema.default('medium'),
     knowledgeSources: z.array(z.string()).default([]),  // source IDs
     temperature: z.number().min(0).max(1).default(0.7),
+    topP: z.number().min(0).max(1).default(0.9),
     maxTokens: z.number().positive().default(4096),
 });
 

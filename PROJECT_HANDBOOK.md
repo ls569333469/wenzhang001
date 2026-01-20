@@ -112,6 +112,26 @@
 *   📄 **[Phase 2 Summary](reports/design_docs/frontend_design/PHASE2_SUMMARY.md)**
 *   📄 **[Phase 3 Design](reports/design_docs/frontend_design/PHASE3_ISLAND_DESIGN.md)**
 
+### 🔹 Phase 4 - Deep Research Integration ✅
+> **Goal**: 将静态岛屿架构接入真实 AI 业务逻辑，实现流式生成的沉浸体验。
+> **完成日期**: 2026-01-20
+
+#### 核心交付
+*   **Data Layer**:
+    *   `useAgentStore`: 基于 Zustand 实现的 SSE 流式客户端，管理全周期会话状态。
+    *   **Robust State Machine**: Idle -> Connecting -> Thinking -> Writing -> Completed。
+*   **Component Wiring**:
+    *   `ConfigPanel`: 新增 `StartButton`，支持 Stop 中止操作。
+    *   `AgentIsland`: 实时可视化 Agent 思考步骤 (Thinking -> Active -> Done)。
+    *   `StudioPage`: 正文画布实时打字机效果。
+*   **API Integration**:
+    *   对接后端 `POST /generate` SSE 接口。
+    *   实现 `text/event-stream` 解析器。
+
+#### 关联文档
+*   📄 **[Phase 4 Summary](reports/design_docs/frontend_design/PHASE4_SUMMARY.md)**
+*   📄 **[Phase 4 Design](reports/design_docs/frontend_design/PHASE4_DEEP_RESEARCH.md)**
+
 ### 🔹 P1 - Agent 独立模型配置 ✅
 - **后端**: 支持 Agent 级别的 API Key 和模型配置
 - **前端**: 设置页面可为每个 Agent 分配不同的 LLM 提供商
@@ -173,13 +193,18 @@
   - `POST /generate` — 接收 `selected_option`，跳过 Strategist 直接生成
 - **前端流程**: "分析 → 选择 → 生成" 两阶段交互
 
-### 🔹 P5 - Strategist UI 反馈优化 ✅
-- **后端**: `/analyze` 端点改造为 SSE 流式响应
-- **Agent 模块化**: `strategist.py` 拆分为：
-  - `build_strategist_context()` — 加载上下文
-  - `build_strategist_prompt()` — 构建提示词
-  - `execute_strategist_analysis()` — 执行 LLM 调用
 - **前端**: `handleAnalyze` 消费 SSE 流，实时显示思考进度
+- **Phase 7 & 8 Completed**: 验证了 backend-driven UX 和 Context Panel。
+
+### 🔹 Phase 9 - 生产环境准备 (Production Prep) ░
+> **Goal**: 将 Dev Mode 原型转化为 Production Ready 商业级产品。
+> **状态**: 规划中 (Next Step)
+
+#### 核心任务
+*   **构建优化**: Frontend Tree Shaking, Backend Gunicorn/Uvicorn Workers.
+*   **安全加固**: Rate Limiting, CORS Policy, Secret Management.
+*   **部署架构**: Dockerization, CI/CD Pipeline.
+*   **监控体系**: Structured Logging (Sentry/ELK), Health Checks.
 
 ---
 
@@ -187,8 +212,8 @@
 
 | 指标 | 值 |
 |------|-----|
-| **阶段** | Phase 3 (Island Design) 完成，准备接入 Deep Research |
-| **前端端口** | `localhost:3002` (Auto-allocated) |
+| **阶段** | Phase 4 (Deep Research Integration) 完成，进入 Phase 5 Polish |
+| **前端端口** | `localhost:3000` |
 | **后端端口** | `localhost:8004` (通过 `frontend/src/config/api.ts` 配置) |
 | **已集成模型** | Gemini, DeepSeek, Doubao (火山引擎), OpenAI |
 

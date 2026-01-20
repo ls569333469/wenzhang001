@@ -1,0 +1,12 @@
+{
+    "input": "[SYSTEM OVERRIDE]\nStrategist: Analyze this as a Web3 Data Report.\nWriter: Role: Mimeng (咪蒙). Style: Emotional, provocative, short sentences. Use 'KV' language. Focus on 'Transparency' and 'Value'.\nContext: Connect to Lark Web3 Data (via Backend RAG).\n\n[USER INPUT]\nJustLend DAO 已通过两阶段系统性回购销毁机制，累计完成 1,084,890,753 枚 JST 的销毁，实现总供应量永久性降低 10.96%，累计销毁价值约 3870 万美元。其中，第一阶段实现价值 1773 万美元的销毁，第二阶段进一步扩大规模，完成约 2100 万美元的销毁进程。JustLend DAO 将继续贯彻透明、可持续的通缩经济策略，持续夯实 JST 代币模型的长期价值基础。",
+    "mode": "deep_analysis",
+    "narrative_type": "project_review",
+    "references": [],
+    "api_config": {
+        "provider": "volcengine",
+        "model_id": "deepseek-v3-2-251201",
+        "api_key": ""
+    },
+    "agent_config": {}
+}

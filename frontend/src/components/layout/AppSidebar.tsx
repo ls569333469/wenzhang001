@@ -1,7 +1,7 @@
 'use client';
 
 import React from "react";
-import { LayoutGrid, FileText, Settings, PenTool, Brain } from "lucide-react";
+import { LayoutGrid, FileText, Settings, PenTool, Brain, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,7 @@ export function AdaptiveSidebar() {
         { href: "/dashboard", icon: LayoutGrid, label: "仪表盘" },
         { href: "/studio", icon: PenTool, label: "创作工坊" },
         { href: "/knowledge", icon: Brain, label: "知识库" },
+        { href: "/agents", icon: Users, label: "智能体团队" }, // Added Agents Link
         { href: "/settings", icon: Settings, label: "系统设置" },
     ];
 
