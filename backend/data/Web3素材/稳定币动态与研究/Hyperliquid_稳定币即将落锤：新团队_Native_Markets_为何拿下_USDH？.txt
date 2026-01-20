@@ -1,0 +1,61 @@
+标题: Hyperliquid 稳定币即将落锤：新团队 Native Markets 为何拿下 USDH？
+链接: https://www.chaincatcher.com/article/2205347
+发布时间: 2025-09-13
+
+==================================================
+
+作者: kkk, Blockbeats
+
+近日，去中心化衍生品交易平台 Hyperliquid 上演了一场备受瞩目的稳定币争夺战。9 月 5 日，官方宣布即将开放原生稳定币 USDH 的 Ticker 拍卖，这一决定瞬间点燃了市场。包括 Paxos 、 Ethena 、 Frax 、 Agora 与 Native Markets 在内的多家机构纷纷提交方案，竞逐 USDH 的发行权。作为 perp DEX 热门赛道的头部玩家， Hyperliquid 已成为机构眼中即便"不赚钱"也必须入局的战略性机会。而目前， Native Markets 以 97% 的断层优势领跑，几乎锁定胜局。
+
+01 Native Markets 的策略
+
+Native Markets 的想法是， USDH 的储备由 BlackRock （链下）与 Superstate （链上）共同管理，既保证合规性，又保持发行人中立。其机制别具一格：储备利息对半分流——一半通过援助基金（ Assistance Fund ）用于 HYPE 回购，另一半则投入生态建设，包括 HIP -3 市场与 HyperEVM 应用 的发展。
+
+用户可通过 Bridge 铸造或赎回 USDH ，未来还将开放更多法币入金通道。协议核心组件 CoreRouter 已完成审计并开源，鼓励社区直接参与建设。 Native Markets 还承诺， USDH 将符合美国 GENIUS 监管标准，并继承发行方 Bridge 的全球合规资质与法币通道能力。值得注意的是， Bridge 去年已被支付巨头 Stripe 收购， Native 计划借助其网络完成稳定币与法币的深度对接。
+
+尽管 Native Markets 是当前几大竞标方中知名度最小的一家，但凭借团队在 Hyperliquid 链的长期深耕，以及邀请到多位行业重磅人物（来自 Paradigm 、 Uniswap 等）加入，成为目前呼声最高的玩家。
+
+02 创始团队
+
+@fiege_max
+
+过去一年里， Max 一直深耕 Hyperliquid 生态，作为投资人和顾问推动了近 25 亿美元的 HyperEVM 锁仓量 与 150 亿美元的 HyperCore 交易量。他曾在 Liquity 和 Barnbridge 负责产品与战略，专注稳定币与固定利率工具。同时，作为 Hyperion 的社区领袖，他还牵头推动了 Hyperliquid DAT 上市公司的成立。
+
+@Mclader
+
+Mary - Catherine Lader 曾任 Uniswap Labs 总裁兼首席运营官（2021–2025），早在 2015 年就推动 BlackRock 布局数字资产，并作为董事总经理在高盛投资金融科技业务，如今已准备好为 USDH 和 Hyperliquid 在后 GENIUS 时代的发展指明方向。
+
+@_anishagnihotri
+
+Anish 是区块链研究员与软件工程师，深耕十余年。他曾是 Ritual 的首位员工，也曾短暂担任 Paradigm 最年轻的研究员，并在 Polychain 担任专有 DeFi 交易员。此外，他在 MEV 与 DeFi 工具开源方面也有长期贡献与影响力。
+
+03 社区争议
+
+当然，关于这场社区投票，也有不少质疑。知名 VC Dragonfly 的执行合伙人哈西布·库雷希 ( Haseeb Qureshi ) 周二写道，他"开始觉得 USDH RFP 有点荒唐"，并声称验证者似乎不愿意认真考虑 Native Markets 以外的任何团队。
+
+他补充说， Native Markets 的竞标几乎是在征求建议书发布后立即出现的，"这意味着他们已经提前收到通知"，而其他竞标者则忙于准备投标文件。他表示，尽管 Paxos 、 Ethena 和 Agora 等更老牌的参与者提出了更强有力的提案，但这一流程似乎"为 Native Markets 量身定制"。
+
+不过，Nansen CEO @ASvanevik 发文否定了这一推测，并声明作为 Hyperliquid 最大的验证节点运营方之一，他们与 @hypurr_co 团队投入了大量精力去审查提案、和竞标方沟通，目标是找到最优稳定币方案。最终选择了支持 Native Markets。
+
+Ethena Labs 一看大势已去后，宣布退出 USDH 的竞标，并表示虽然有人质疑 Native Markets 的可信度，但认为他们的成功完美体现了 Hyperliquid 和其社群的特质：这里是公平的竞技场，新兴参与者可以赢得社群的支持，获得公平成功的机会。
+
+KOL 加密韦陀 @thecryptoskanda Native Market 被选择是必然，交易平台的核心的上币定价，其他团队给不了 Hyperliquid 最明显的需求。
+
+在 Hyperliquid 链上，美元流动性的沉淀长期依赖于 USDC 等外部稳定币，流通规模一度高达约 57 亿美元，占据 USDC 总发行量的 7.8%。而 Hyperliquid 团队的这一选择，实际上意味着他们将每年可能高达数亿美元的利息收益，直接让渡给了社区。
+
+也正因如此， USDH 的发行权不仅关乎庞大的市场份额，更关乎谁能掌握这笔巨额潜在收益的主导权。在 Hyperliquid 的案例中，我们看到稳定币发行方愿意让渡几乎全部收益，只为换取场景中的分发机会——这一幕在过去几乎难以想象。可以预见，一旦 USDH 顺利上线并跑通了"收益返还社区、价值反哺生态"的正循环逻辑，其他交易平台或公链势必会竞相效仿，从而引发行业稳定币战略的重大变革。届时，"稳定币 2.0 时代"或许将真正拉开帷幕。
+
+ 
+
+点击了解ChainCatcher在招岗位
+
+ 
+
+推荐阅读：
+
+监管破冰、机构入场：复盘加密货币渗透华尔街的十年风雨路
+
+Pantera Capital 深度解读：数字资产财库 DATs 的价值创造逻辑
+
+Backroom：信息代币化，AI 时代数据冗杂的解决方案？| CryptoSeed

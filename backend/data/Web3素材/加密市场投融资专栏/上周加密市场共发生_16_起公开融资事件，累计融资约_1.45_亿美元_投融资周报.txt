@@ -1,0 +1,111 @@
+标题: 上周加密市场共发生 16 起公开融资事件，累计融资约 1.45 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2200414
+发布时间: 2025-08-26
+
+==================================================
+
+整理：Janna，RootData
+
+据 RootData 不完全统计，2025 年 8 月 18 日- 8 月 24 日期间，区块链和加密行业共发生 16 起公开投融资事件，累计融资约 1.45 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和DeFi赛道。热门项目包括去中心化 AI 推理网络 DecentralGPT、欧洲上市公司 Capital B、链上 RWA 交易所 DigiFT 、游戏资产交易平台 OVERTAKE。
+
+此外，人工智能合规平台 IVIX 宣布完成 6000 万美元 B 轮融资，OG Venture Partners (OGVP) 领投，Insight Partners、Citi Ventures、Team8、Disruptive AI、Cardumen Capital 和 Cerca 等参投。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+去中心化 AI 推理网络 DecentralGPT 完成 700 万美元战略投资，AGICrypto 领投
+
+据官方消息，去中心化 AI 推理网络 DecentralGPT 宣布完成 700 万美元战略投资，此轮融资由 AGICrypto 领投。DecentralGPT 表示，所有投资者代币均锁定 1 年。
+
+作为完全去中心化的大型语言模型（ LLM ）基础设施， DecentralGPT 通过创新性的分布式 AI 推理网络，革命性地实现了包括 DeepSeek R1、Llama4.0在内的多个顶尖开源大模型的去中心化部署。
+
+稳定币支付处理商 Loop Crypto 完成战略轮融资，VanEck 和 Fabric Ventures 联合领投
+
+据 BlockWorks 报道，稳定币支付处理商 Loop Crypto 已完成由 VanEck 和 Fabric Ventures 联合领投的战略融资轮，使公司总融资额达到 600 万美元。
+
+Loop Crypto 专注于构建稳定币支付基础设施，已开发出稳定币订阅支付等创新功能。
+
+可编程数据链 Irys 完成 1000 万美元 A 轮融资，CoinFund 领投
+
+可编程数据链 Irys 宣布完成 1000 万美元 A 轮融资，由 CoinFund 领投，Hypersphere、Tykhe Ventures、Varrock Ventures、Breed VC、Echo Group、Amber Group 和 WAGMI Ventures 参投。本轮融资使 Irys 总融资额达到 2000 万美元。
+
+欧洲上市公司 Capital B 获 AdamBack 220 万欧元投资，预计可增持约 17 枚比特币
+
+据官方公告，欧洲上市公司 Capital B 宣布完成约 220 万欧元增资，认购方为 Adam Back，每股价格约为 2.24 欧元。
+
+此次融资将用于扩大公司的比特币持仓量，预计可增持约 17 枚比特币，使公司潜在总持仓量达到 2,218 枚比特币。
+
+二、DeFi
+
+链上 RWA 交易所 DigiFT 完成战略融资， SBI Holdings 领投
+
+据悉，链上 RWA 交易所 DigiFT 宣布于 2025 年 8 月完成新一轮战略融资，由日本最大金融集团 SBI Holdings 领投，Mirana Ventures、Offchain Labs（Arbitrum）、云启资本及全球金融科技领域高管参投。
+
+本轮融资后，DigiFT 累计融资总额达 2500 万美元，资金将用于扩展通证化产品、提升 RWA 二级市场流动性、拓展链上应用场景，并构建合规智能合约基础设施。
+
+链上股票交易平台 StableStock 完成种子轮融资，YZi Labs 等领投
+
+据官方消息，链上股票交易平台 StableStock 宣布完成种子轮融资，YZi Labs 和 MPCi 领投，Vertex Ventures 参投。
+
+StableStock 是一个围绕链上股票生态系统构建的交易型去中心化金融（TraDeFi）平台。StableStock 目前现已向用户开放公测。
+
+区块链数据智能平台 LYS Labs 完成总额 400 万美元融资，Alchemy Ventures 参投
+
+据 Chainwire 报道，区块链数据智能平台 LYS Labs 完成总额 400 万美元融资，包括 200 万美元天使轮和 200 万美元种子轮。
+
+投资方包括 Alchemy Ventures、Delphi 等机构投资者，以及来自 0G Labs、Ocean Protocol 等项目的个人投资者。
+
+去中心化交易所 o1.exchange 完成 420 万美元融资，Coinbase Ventures 等领投
+
+据官方消息，去中心化交易所 o1.exchange 在社交平台宣布，已完成 420 万美元融资，Coinbase Ventures 和 AllianceDAO 共同领投。
+
+o1.exchange 正在构建首个专为 Base 链设计的综合交易终端，并同时启动现金返利激励计划，旨在提升用户交易体验和平台流动性。
+
+加密初创公司 Legion 完成 500 万美元融资，VanEck 等领投
+
+据 Fortune 报道，加密货币初创公司 Legion 宣布完成 500 万美元融资，VanEck 和 Brevan Howard Digital 领投，加密货币交易所 Kraken 以及 Coinbase 和 Crypto.com 的风险投资部门等参投。
+
+该公司拒绝透露估值信息，仅表示这轮融资用于股权和代币认股权证。
+
+四、游戏
+
+游戏资产交易平台 OVERTAKE 完成 700 万美元战略融资，Sui 等参投
+
+据官方消息，游戏资产交易平台 OVERTAKE 宣布完成 700 万美元战略融资。Sui、ItemMania、ItemBay、JB Investment、Green Whale Ventures 以及 Immutable 等参投。
+
+OVERTAKE 是基于 Sui Network 的点对点游戏资产交易市场，通过智能合约托管实现安全交易。
+
+五、其他
+
+稳定币支付处理商 Loop Crypto 完成战略轮融资，VanEck 和 Fabric Ventures 联合领投
+
+据 BlockWorks 报道，稳定币支付处理商 Loop Crypto 已完成由 VanEck 和 Fabric Ventures 联合领投的战略融资轮，使公司总融资额达到 600 万美元。
+
+Loop Crypto 专注于构建稳定币支付基础设施，已开发出稳定币订阅支付等创新功能。
+
+Kerberus 收购 Pocket Universe，将开发加密货币专用杀毒软件
+
+据 Cointelegraph 报道，加密安全平台 Kerberus 宣布以七位数金额收购欺诈防护浏览器扩展 Pocket Universe 的开发商 Refract。此次收购后，Kerberus 计划将 Pocket Universe 与其安全扩展 Sentinel3 整合，并扩大保护范围至所有以太坊虚拟机(EVM)链和 Solana 网络。
+
+公司 CEO Alex Katz 表示，他们正着手开发业内首个专用加密货币杀毒软件，以解决当前最大的安全威胁——恶意软件攻击。
+
+加密教育与交易支持平台 Cointel 完成 740 万美元战略融资，Avalanche 和 Sugafam 共同领投
+
+据 Chainwire 报道，AI 驱动的加密货币教育与交易支持平台 Cointel 今日宣布完成 740 万美元战略融资，Layer 1 区块链 Avalanche 和日本知名 Web 3 创新公司 Sugafam Inc.共同领投。
+
+新资金将支持其构建可扩展平台，满足新用户、数据驱动的交易者需求。
+
+加密借贷平台 Block Earner 完成 800 万美元新一轮融资，Titan Fund 领投
+
+据 SmartCompany 报道，澳大利亚加密借贷平台 Block Earner 宣布完成 800 万美元新一轮融资，CMCC Global 旗下 Titan Fund 领投，澳大利亚本土投资机构 King River Capital 参投。
+
+据悉，新资金将用于推进推出其比特币支持的住房贷款存款产品，允许客户将持有的比特币等数字资产作为个人贷款的担保，该产品将允许以澳元、比特币、或者是两者结合的方式偿还贷款。
+
+AI 合规平台 IVIX 完成 6000 万美元 B 轮融资，OGVP 领投
+
+据 businesswire 报道，人工智能合规平台 IVIX 宣布完成 6000 万美元 B 轮融资，OG Venture Partners (OGVP) 领投，Insight Partners、Citi Ventures、Team8、Disruptive AI、Cardumen Capital 和 Cerca 等参投。
+
+新资金拟用于加速其研发能力，以在复杂的加密货币网络、区块链匿名交易、以及高频交易等领域打击金融犯罪，其 AI 图形分析可以揭示金融犯罪背后的隐形联系。

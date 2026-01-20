@@ -1,0 +1,129 @@
+标题: 上周加密市场共发生 18 起公开融资事件，累计融资约 1.95 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2186267
+发布时间: 2025-06-16
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 6 月 9 日- 6 月 15 日期间，区块链和加密行业共发生 18 起公开投融资事件，累计融资约 1.95 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和 DeFi 赛道。热门项目包括AI 区块链平台 Yupp ，可信账户框架项目 OneBalance、通信平台 Towns Protocol 、机构质押平台 Colossus Digital。 
+
+此外，TOOL 协议开发商 nuConstruct 宣布完成 600 万美元种子轮融资，Cyber Fund 领投，Maven11、DCG、Greenfield、Eden Block 等参投。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+加密钱包服务商 PlutoPe 完成 58 万美元 Pre-Seed 轮融资，Manit Gupta 领投
+
+据 Fundz 报道，加密钱包服务商 PlutoPe 完成 5000 万卢比（约合 58 万美元） Pre-Seed 融资，Manit Gupta 领投。该公司计划利用这笔资金拓展至银行服务欠发达的市场并加强用户获取策略。
+
+PlutoPe 成立于 2022 年，提供非托管加密货币钱包服务，其计划推出加密货币借记卡和商户应用程序，以实现无缝加密货币支付接受。公司定位为加密货币新银行，致力于为所有人提供金融赋能，不受地理位置或社会经济状况限制。
+
+AI 区块链平台 Yupp 完成 3300 万美元种子轮融资，a16z 创始人等领投
+
+据官方公告，AI 区块链平台 Yupp 完成 3300 万美元种子轮融资，由 a16z 创始人 Chris Dixon 和 a16z 投资合伙人 Elizabeth Harkavy 领投。Yupp 平台允许用户免费比较各类 AI 模型，用户可输入提示并查看多个 AI 并列生成的回答，选择最佳结果后形成"偏好数据包"，这些数据用于 AI 模型的后训练与评估。
+
+该平台结合区块链技术实现评估过程的透明化，用户提供反馈可获得相应奖励，AI 开发者则获取可验证的训练数据。平台设计使人类判断成为循环资源：用户增多带来更多评估数据，评估数据改进模型质量，优质模型又吸引更多用户参与。
+
+The Blockchain Group 完成 970 万欧元融资，用于比特币储备战略
+
+据 Bitcoin Magazine 报道，欧洲上市公司 The Blockchain Group（ALTBG）宣布完成 970 万欧元融资，用于推进比特币储备战略。该笔资金通过股权和可转换债券组合募集，主要投资者包括 Adam Back、TOBAM 和 Ludovic Chechin-Laurans。
+
+其中 TOBAM 认购了 600 万欧元可转换债券，转股溢价达 30%；Ludovic Chechin-Laurans 以比特币形式投资 240 万欧元；Adam Back 将其持有的全部第一期债券转换为 1490 万股 ALTBG 股票，并追加认购 210 万股。此次融资预计可为公司增持约 80 枚比特币，总储备量将达 1611 枚。
+
+可信账户框架项目 OneBalance 完成 2000 万美元 A 轮融资，Cyber Fund 等领投
+
+据 The Block 报道，可信账户框架项目 OneBalance 宣布完成 2000 万美元 A 轮融资，Cyber Fund 和 Blockchain Capital 领投，Mirana Ventures 和 L2IV 参投，截至目前其总融资额达到 2500 万美元。
+
+OneBalance 是可信账户的新框架，结合链抽象、gas 抽象和权限管理，以解决碎片化的 Web3 用户体验。
+
+支付公司 Stripe 将收购加密货币钱包提供商 Privy
+
+据彭博社报道，美国支付巨头 Stripe 宣布将收购加密钱包基础设施提供商 Privy，具体交易金额未披露。
+
+这是继其收购稳定币基础设施公司 Bridge 后又一重大布局。Privy 可嵌入式创建钱包服务已被 OpenSea 等平台采用，简化 NFT 购买流程。
+
+Stripe CEO 表示，整合 Privy 与 Bridge 有望推动全球加密原生金融服务发展。交易预计数周内完成。
+
+SVM 网络 SOON 完成 500 万美元战略融资，Jump Crypto 等参投
+
+据 The Block 报道，SVM 网络 Solana Optimistic Network（SOON）宣布完成 500 万美元战略融资， Jump Crypto、Amber Group 、 zkSync 的 Nana Murugesan、Kamino Finance 联合创始人 Mark Hull、Switchboard 创始人 Chris Hermida 和 Wormhole 的 Tori Cohen 等天使投资人参投。
+
+SOON 计划利用这些资金来提供高性能链和交易工具，进一步扩展到 RWA 领域，并扩大其复制交易产品。
+
+通信平台 Towns Protocol 完成 330 万美元额外融资，Coinbase Ventures 和 echo 领投
+
+据官方消息，通信平台 Towns Protocol 完成 330 万美元额外融资，此轮融资由 Coinbase Ventures 和 echo 领投，融资已于今年 4 月完成。
+
+今年 4 月，Towns Protocol 宣布完成 1000 万美元 B 轮融资，本轮融资由 a16z crypto 领投，Coinbase Ventures、Benchmark 等参投。
+
+Towns Protocol 基于 Base 网络构建，旨在推动 Web3 社交与协作工具的发展。Towns 希望通过去中心化和 Web3 创建一个数字城镇广场，成员可以在其中定义边界、制定规则并建立他们想要的世界，用户将成为数字城镇广场的主人。
+
+加密钱包开发商 Turnkey 完成 3000 万美元 B 轮融资，Bain Capital Crypto 领投
+
+加密钱包基础设施公司 Turnkey 宣布完成 3000 万美元 B 轮融资，Bain Capital Crypto 领投，Lightsped Faction 和 Galaxy Ventures 参投。
+
+Turnkey 由 Coinbase 前员工 Bryce Ferguson 和 Jack Kearney 共同创立，旨在帮助开发人员使用 API 构建用户友好的钱包，目前员工人数为 35 人。
+
+二、AI
+
+Netcapital 旗下公司 Zelgor 收购加密原生协议 Mixie
+
+据 globenewswire 报道，纳斯达克上市金融科技公司 Netcapital 宣布收购加密原生协议 Mixie，具体金额未披露。
+
+Netcapital 旗下投资组合公司 Zelgor 完成此次收购，Zelgor表示这是首次有上市公司为拓展区块链业务收购加密原生协议。Netcapital 总部位于波士顿，运营数字资本市场平台，其股票代码为 NCPL，市值约 680 万美元。
+
+三、DeFi
+
+金融科技基础设施平台 OpenTrade 完成 700 万美元融资，由 Notion Capital 和 Mercury Fund 领投
+
+据 Techfundingnews 报道，总部位于伦敦的金融科技基础设施平台 OpenTrade 完成了一轮 700 万美元的战略融资，由 Notion Capital 和 Mercury Fund 领投，AlbionVC、a16z crypto 和 CMCC Global 跟投。
+
+OpenTrade 使金融科技公司能够将基于现实世界资产（RWA）的稳定币收益产品直接嵌入到现有应用程序中，将稳定币从被动支付工具转变为主动储蓄工具，年利率高达 3-9%。自 2024 年初推出以来，OpenTrade 已处理超过 1.75 亿美元的交易量，管理的客户资产达 4700 万美元，过去六个月实现了平均月环比增长 20%。
+
+基于 Hyperliquid 的隐私执行层 Silhouette 完成 300 万美元 Pre-Seed 轮融资，RockawayX 领投
+
+据官方消息，基于 Hyperliquid 的隐私执行层 Silhouette 官方宣布完成由 RockawayX 领投的 300 万美元 Pre-Seed 轮融资，Amber Group、HiveMind、Protagonist、No Limit Holdings、NGC Ventures 与 Echo 等参投。
+
+Silhouette 是基于 TEE 打造的“Shield Exchange”，目标在 Hyperliquid 上实现隐私保护的订单撮合与结算功能，支持 HyperCore 与 HyperEVM，提供包括 TWAP、VWAP、RFQ 等多种高阶策略操作的新型 DeFi 体验，旨在解决链上交易“信息过度透明”问题，使用户能在无需暴露策略的前提下自由交易。
+
+四、CEX
+
+机构质押平台 Colossus Digital 获 SBI Ven Capital 投资 100 万欧元
+
+据 Crowdfundinsider 报道，机构质押平台 Colossus Digital 获 SBI Ven Capital 的 100 万欧元（约 115 万美元）投资。此次投资由 SBI Ven Capital、Sygnum Bank 和 Azimut Group 支持的联合基金进行，资金将用于推出 Colossus Digital 的机构加密平台，该平台将连接受监管托管人与验证者以进行质押和治理。
+
+稳定币初创公司 Noah 完成 2200 万美元融资，LocalGlobe 领投
+
+据 Fortune 报道，稳定币初创公司 Noah 完成 2200 万美元融资，本轮融资由欧洲风投机构 LocalGlobe 领投，其他参与者包括 Felix Capital、FJ Labs，以及 Palantir 联合创始人 Joe Lonsdale 和 Adyen 前首席技术官 Alexander Matthey 等天使投资人。金融科技巨头 Adyen 前高管 Thijn Lamers 以联合创始人兼总裁身份加入。
+
+五、其他
+
+TOOL 协议开发商 nuConstruct 完成 600 万美元种子轮融资，Cyber Fund 领投
+
+TOOL 协议开发商 nuConstruct 宣布完成 600 万美元种子轮融资，Cyber Fund 领投，Maven11、DCG、Greenfield、Eden Block 等参投。
+
+据悉，TOOL 通过 Intel TDX TEE 构建可信执行环境，目标是取代 Flashbots MEV-boost 并改善链上交易用户体验。
+
+区块链忠诚度平台 Try Your Best 完成 1100 万美元 A 轮融资，Offline Ventures 等领投
+
+据 Fortune 报道，基于区块链的忠诚度平台 Try Your Best（TYB）完成 1100 万美元 A 轮融资，Offline Ventures 和 Strobe Ventures 共同领投，Coinbase Ventures、Castle Island Ventures 和 Unusual Ventures 参投。
+
+TYB 上的消费者可以参与游戏化挑战，赢取数字藏品，并拥有基于区块链的忠诚度档案，这些档案可以追踪他们在不同品牌之间的互动情况。
+
+数字身份项目 Humanity Protocol 收购注意力资产协议 Moongate
+
+数字身份项目 Humanity Protocol 宣布收购注意力资产协议 Moongate，具体收购金额未披露。此次收购将使 Moongate 继续以自有品牌运营。HumanID 将接入 Moongate 的基础设施，将检票口、节日庆典和会议转变为 PoH 检查点。
+
+Moongate 正在构建一个用于现实世界激活的注意力资产协议。Moongate 将消费者的现实世界资产和体验转化为链上成就，以获得独家奖励、访问权和社区。Moongate 此前是一个 NFT 票务与会员平台。
+
+Web3 安全公司 Hypernative 完成 4000 万美元 B 轮融资，Ten Eleven Ventures 和 Ballistic Ventures 领投
+
+ Axios 报道，Web3 安全公司 Hypernative 完成 4000 万美元 B 轮融资，Ten Eleven Ventures 和 Ballistic Ventures 领投，StepStone Group、Boldstart Ventures 和 IBI Tech Fund 等参投。
+
+此前消息，Hypernative 完成 1600 万美元 A 轮融资，Quantstamp 领投。

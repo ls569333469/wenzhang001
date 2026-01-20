@@ -1,0 +1,9 @@
+标题: 疑似 BSC 链 NFT 项目 StepHeroNFTs 相关合约遭重入攻击，损失约 9 万美元
+链接: https://www.chaincatcher.com/article/2168782
+发布时间: 2025-02-21
+
+==================================================
+
+ChainCatcher 消息，据 BlockSec Phalcon 披露，BSC 链上一个合约遭遇可疑交易，该合约似乎与一个不活跃的 NFT 项目 StepHeroNFTs 有关，经检测为典型的重入攻击。
+
+该合约未开源，此次攻击已造成约 9 万美元的损失。

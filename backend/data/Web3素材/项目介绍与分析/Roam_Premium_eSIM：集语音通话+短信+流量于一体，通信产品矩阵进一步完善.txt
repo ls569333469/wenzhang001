@@ -1,0 +1,50 @@
+标题: Roam Premium eSIM：集语音通话+短信+流量于一体，通信产品矩阵进一步完善
+链接: https://www.chaincatcher.com/article/2182837
+发布时间: 2025-05-24
+
+==================================================
+
+美东时间 5 月 23 日，在纽约举行的 Solana Accelerate 大会上，Roam 带来了其全新产品Premium eSIM —— 一个集语音通话、短信与流量功能于一体，更加灵活、高速、安全的全球移动通信解决方案。Roam Premium eSIM 服务覆盖全球 160 多个国家和地区，无漫游费用，无需实体 SIM 卡，通过 Roam App 一键激活，即可开启无感通信体验。
+
+Roam Premium eSIM：贴心的全球移动通信解决方案
+
+Roam Premium eSIM 在原本支持流量服务的 Global eSIM 基础上，进一步增加了语音通话与短信功能，真正实现集通信与流量于一体、一张 eSIM 通行全球。目前，用户可以注册 Premium eSIM，并完成邮箱绑定、账户充值及 KYC 认证，在本次 Solana Accelerate 大会上，Roam 在现场向观众演示了相应操作，据悉Premium eSIM 手机号码将于近日开放，届时语音和短信服务将同步上线。
+
+与传统的 eSIM 服务相比，Roam Premium eSIM 具有独特优势：
+
+配备手机号
+每位用户将获得一个归属地为奥地利的手机号码（+43 开头），可用于全球拨打电话和收发短信。
+全球覆盖
+Premium eSIM 服务将覆盖160多个国家与地区，实现全球畅联。
+语音通话 + 短信 + 流量一体化
+不再局限于上网功能，Premium eSIM 同时支持语音通话（拨打与接听）、短信服务（发送与接收）以及高速流量连接，实现真正的一体化通信体验。
+免实体卡
+无需实体 SIM 卡，即可在 Roam App 内一键激活，享受即插即用的无缝体验。
+无漫游费
+帮助用户告别传统意义上的「漫游费」。
+多元支付方式
+支持绑定信用卡自动充值，也支持 USDC、USDT、ROAM 等加密货币支付，以及 WeChat Pay / Alipay 等本地化支付方式，确保通信服务持续不中断。
+
+除了全球免漫游费之外，Premium eSIM 的资费结构也具备极高的性价比，用户可通过 Roam App 实时查看账户余额与使用明细，所有账户管理与功能操作均可在 App 内完成，无需联系客服或线下流程，操作简单便捷，帮助用户在全球范围内轻松掌握通话成本，避免意外开支。
+
+一键注册，操作简单便捷，Roam App 一站式管理
+
+用户可在 Roam App 内完成 Premium eSIM 的全流程开通：
+
+下载 Roam App（iOS/Android），购买并注册 Premium eSIM
+邮箱验证与绑定
+完成 KYC 认证
+充值确保账户余额 ≥ $20 并完成扣费（开卡将扣除 $2，其余费用将转为账户余额）
+成功激活 Premium eSIM
+
+对于已开通 Roam Global eSIM的用户，Roam 将提供Global eSIM和Premium eSIM的服务转移，系统将自动转移账户剩余流量，确保通信服务不中断。需注意的是，同一时间内 Roam Global eSIM 和 Premium eSIM 两种方案仅可激活其一；从 Premium eSIM 切回 Global eSIM 时，原奥地利号码将失效，但数据将完整保留。
+
+融合 Solana 身份验证，Roam 推动全球移动通信信任机制变革
+
+在本次 Solana Accelerate 大会上，Roam 宣布成为首批落地 Solana Attestation Service（SAS） 的项目之一。SAS 是一种基于 Solana 区块链的去中心化身份验证和信任认证服务，旨在为用户和项目提供安全、可信的数字身份解决方案，确保数据隐私和交易透明性。Roam 与 SAS 合作，为用户提供安全的身份管理，更好地验证用户信息，促进网络安全发展。
+
+Roam 致力于打造 OpenRoamingTM WiFi 与 eSIM 结合的去中心化全球开放式无线网络，目前全球有 380 万+ Roam 自建 WiFi 节点和 450 万+ OpenRoaming™ WiFi 节点，全球 270 万Roam用户每天都在自发打卡（Check-In），贡献了超过 3 亿次网络验证行为，Roam 搭建起了全球最大、最为活跃的 DePIN 开放式无线网络。依托 Roam 全球 800 万+ WiFi 节点，Roam eSIM 用户可在覆盖区域内畅享无限流量，并通过 Roam App 领取免费流量福利。这一庞大且持续增长的网络，不仅为用户提供稳定可靠的连接体验，也为 Roam eSIM 在全球范围内的扩展与 Web3 大规模应用奠定了坚实的基础。
+
+Roam eSIM 已率先在 Web3 企业中落地，头部交易所 Bybit 和 MEXC 均已加入 Roam 企业版 eSIM 福利计划，为其员工远程办公和全球差旅提供无缝连接的移动通信服务。如今，随着集语音通话、短信与流量于一体的 Roam Premium eSIM 正式推出，Roam 的服务能力从「全球连接」跃升至「全面通信」，标志着其在开放式无线网络的产品矩阵进一步完善。
+
+Roam Premium eSIM 的推出，不仅满足了日益增长的全球化团队在「身份、安全、连接」方面的多重需求，也为企业在多国运营中消除通信割裂提供了解决方案。未来，Roam 将与更多 Web3 与 Web2 企业、跨国组织展开合作，推动去中心化通信身份标准的普及，共同加速全球通信从物理基础设施向可信身份网络的根本性变革。

@@ -1,0 +1,43 @@
+标题: a16z 领投融资1亿美元，隐私 L2 Aztec 生态盘点
+链接: https://www.chaincatcher.com/article/2084929
+发布时间: 2022-12-22
+
+==================================================
+
+作者：Maverick，吴说
+
+ 
+
+在 Tornado Cash 事件后，隐私赛道正值信任危机之时。近日，采用 UTXO 模型与隐私证明的 Layer 2 扩容网络 Aztec Network 宣布完成由 a16z crypto 领投，A Capital 等参投的 1 亿美元 B 轮融资。此前 Aztec Network 已在 Paradigm 领投的 A 轮融资中已经筹集将近 1700 万美元。获得融资后，Aztec 联合创始人 Andrews 表示这笔资金将主要用于在全球范围内雇用更多工程师来建设网络。
+
+Aztec 是以隐私为先的架构构建的零知识 Rollup，允许用户在完全保护隐私情况下访问 Layer 1 想使用的应用程序，其产品体系为基于底层的 PLONK 证明系统，实现账户间的匿名交易，并通过网关合约的嫁接来实现和 DeFi 项目的隐私交互。Aztec 在近期还推出了编程语言 Noir，让开发者在以太坊上更容易、更方便构建具有零知识证明的应用程序。
+
+DeFi Llama 数据显示，当前 Azetc TVL 约 1100 万美元。目前 Aztec 近期没有发行 Token 的计划，但其也被认为是与 Arbitrum、ZkSync 等类似的有望待发的高价值空投。不过此前 FTX 等交易所的第三方合规工具曾冻结过从 Aztec 等隐私协议转入资金的账号，用户交互时需注意相关安全。
+
+本文将介绍 Aztec 生态上的重点项目。
+
+Aztec 重点之一 Aztec Connect 在 7 月 7 日正式上线，这是一套连接以太坊 DeFi 协议和 Aztec 的 private rollup 工具，其能够在三部分（Layer 1 DeFi 协议、Aztec Connect SDK 和 Aztec Connect Bridge 合约）的帮助下支持隐私 DeFi。Aztec Connect 扩展了 Zk.money 的功能，增加了蓝筹 DeFi 合作伙伴的功能，它通过与其他 Zk.money 用户的批量交易来允许隐私访问以太坊主网上的协议，使以太坊项目较容易可地集成 Aztec。Aztec Connect 像 DeFi 的代理服务，允许任何人存入 Aztec 网络，与以太坊 DeFi 交互，并依赖于 Layer 1 的可信合约、流动性。当前 Aztec Connect 生态系统包含以太坊主流 DeFi 协议，包括 Aave、Curve、Lido、Compound 和 Liquity 等。
+
+Zk.money
+
+Zk.Money 是 Aztec Network 的第一个应用，发布于 2021 年 3 月。旧版 Zk.money 只能实现简单的转账支付，使其内的资金可以完全私密地发送到另一个 Aztec 账户或提币到 Layer 1，但仅支持 ETH，DAI 和 renBTC 等少量资产，以及一次 5 ETH 或 10000 DAI 的交易上限。用户将 zkETH 或 DAI 发送到 Zk.money 上的用户名（@name），收件人将获得 zkETH 或 DAI；而将 zkETH 或 DAI 发送到 Zk.money 以外的任何以太坊地址，钱包将收到常规的 ETH 或 DAI。Zk.money 官方宣称自推出以来拥有超过 75,000 名注册用户，超过 22.5 万笔交易和 8000 万美元的总交易，同时比现有的隐私转账协议费用便宜 96%。
+
+新版的 Zk.Money 则在保留原有的转账支付功能添加了隐私 DeFi 功能，用户的资金在完全保护隐私情况下可用于与主流的 DeFi 协议进行交互，例如使用 ETH 或 DAI 在 AAVE 上进行借贷、在 LIDO 上质押 ETH 获取奖励、将 DAI 存入 Yearn 金库获取被动收入等。不过 Zk.Money 当前仅支持 DeFi-Earn 功能，Trade 功能仍在开发中。
+
+ZKPay
+
+ZKPay 是为 Aztec 隐私支付而设计的快速提款桥。在 Aztec 网络上的资产存取可能需要 6 个小时，但在 ZKPay 上只需要几秒钟。在 v2.0.0 升级后，ZKPay 已支持 ETH，DAI，USDT，USDC 等主流资产的转账。另外除了支持以太坊主网，ZKPay 同时还支持 Polygon 网络的转账。与 Zk.Money 一样，ZKPay 也设置了 5 ETH 或 10000 DAI 的交易上限。当前 ZKPay 的 swap 功能尚在测试中，参与测试权限仅限于 VIP 成员。ZKPay 团队创建 ZK 徽章，只要在 V1 存款总额为 0.1 ETH 或在 V2 存款总额为 0.1 ETH 并且至少进行了 3 次存款即可 Mint 此徽章。团队表示未来将对拥有 ZK 徽章用户在使用 ZKPay 时获取费用折扣。
+
+Trelis
+
+Trelis 是非托管的以太坊支付集成，现在正处于测试阶段，在测试模式下可通过使用支付链接、Trelis API 和 WooCommerce Plugin 体验 Trelis，交易上限额度 100 USDC，支持所有主流的以太坊钱包。目前 TrelisTrelis 支持 USDC 和 ETH 生成 Token 的支付链接。Trelis 比较突出的功能 Gasless Payments，该功能允许用户（发送者）在不支付 gas 的情况下付款，商家（接收者）预先购买 Trelis Gas 积分，Trelis 代表用户支付 gas，但该功能只限于用 USDC 支付。此外需要注意的是，如果 gas 价格飙升，那么 USDC 交易将恢复为标准交易，客户需要支付 gas 费用；如果应付的 gas 总额超过交易金额的 5%，Trellis 将把 Gasless 交易恢复为标准交易。Trelis 将会在该功能收取 10% 的gas服务费，Gasless 支付的成本约为标准支付的 1.9 倍。
+
+Nucleo
+
+在今年 11 月，Nucleo 已完成由贝恩资本和 6th Man Ventures 领投 400 万美元的种子轮融资。Nucleo 是一款为组织提供开发隐私多重签名基础设施，能够进行隐私交易、隐私 DeFi、隐私筹等。公共透明度是有益的，但它也有可能使个人和组织在许多领域面临法律、战略和运营漏洞，Nucleo 则致力于解决这个问题。借助 Nucleo，个人、社区和组织可以享受隐私，同时也能保持审计友好性。除了与 Aztec 合作，Nucleo 还与 Aleo、Espresso 进行合作。当前 Nucleo 只推出了多签功能，未来会陆续推出 DeFi、Fundraise、隐私跨链交易等功能。目前 Nucleo 处于测试阶段，用户想加入测试需加入候补名单。
+
+与大部分隐私赛道一样，Aztec 生态处于有待开荒的起步阶段，原生项目稀少，当前以集成主网 DeFi 协议为主，其目标是实现与主网所有协议、智能合约的隐私交互。
+
+参考文章：
+
+https://mp.weixin.qq.com/s/EM58U0CvcXnoGEe9SgI54A

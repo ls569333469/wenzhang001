@@ -1,0 +1,7 @@
+标题: Tether 在 Tron 启动离岸人民币稳定币 CNH₮，此前 CNH₮已在以太坊上推出
+链接: https://www.chaincatcher.com/article/2084140
+发布时间: 2022-12-06
+
+==================================================
+
+ChainCatcher 消息，Tether 在 Tron 上启动锚定离岸人民币的稳定币 CNH₮。Bitfinex 将成为第一家允许其用户在 Tron 网络存取 CNH₮ 的交易所。CNH₮ 最初由 Tether 在 2019 年在以太坊上作为 ERC-20 代币推出。

@@ -1,0 +1,176 @@
+标题: 加密狗整编空投第303篇：一文搞懂 Particle 空投联盟重难点交互步骤，每笔多拿50分（一鱼多吃）
+链接: https://www.chaincatcher.com/article/2134208
+发布时间: 2024-07-18
+
+==================================================
+
+ 
+
+两周前链抽象最有潜力的项目，Particle钱包发公告称将推出Co-Testnet联盟，这说明在撸Particle空投的时候，会有很多一鱼多吃的收益出来。
+
+https://x.com/JiamigouCn/status/1809134041549111497
+
+Co-Testnet 联盟昨天上线，第一期合作的是行业内最大的项目（如 Berachain、Sei、Arbitrum 和其他一级区块链）。
+
+联盟一出来，之前撸Particle的步骤也要随着变动改变。所以今天我们从头开始，一步步来搞定联盟中最难、也是最牛空投项目：Berachain，看看是 怎么交互的。
+
+一、教程前
+（一）注册 Particle Network 联盟账号
+相关链接：https://pioneer.particle.network?inviteCode=A58DD1
+推荐码：A58DD1
+（二）在钱包中添加 Sepolia测试网络（已添加，可忽略）
+网络名称：Sepolia测试网络
+RPC URL：https://sepolia.infura.io/v3/
+链 ID：11155111
+货币符号：SepoliaETH
+区块浏览器 URL（可选）：https://sepolia.etherscan.io
+
+ 
+
+（三）领取 ETH 测试币
+在Infura领取0.5ETH的测试币
+
+链接：https://faucetlink.to（水龙头聚合网站）
+
+ 
+
+ 
+
+有可能你找了很多方法，就是不给水，那可以直接购买：
+
+ 
+
+ 
+https://testnetbridge.com/sepolia
+
+ 
+
+不一定非要领取eth测试币，其他测试币也是可以的。水龙头集合：https://link.medium.com/5XztnvgqkLb
+
+ 
+ 
+二、具体操作指南
+
+领水后，进入官网：https://pioneer.particle.network?inviteCode=A58DD1，邀请码：A58DD1
+
+点击 POINS，进入积分任务
+
+ 
+
+（一）完成任务2：将 ETH Sepolia 转入Particle 测试网
+
+（这里并不是只能用eth，可以用别的测试币，比如bnb、matic等）
+
+界面往下拉，找到任务。官方按照 TASK 1–4 来排序，这里我们不按照官方排序来做，快捷顺序如下：
+
+ 
+
+ 
+选择链（教程用ETH Sepolia，大家也可以用其他的）
+将 ETH Sepolia 转入Particle 测试网
+点击 DEPOSIT
+点击DEPOSIT UNIVERSAL GAS；
+
+ 
+
+需要注意的是：这里的操作是将其他链上的原生测试代币转换为Particle Pioneer平台的通用Gas — — USDG，是用来在下面的交互当中做Gas费燃烧的。测试网代币不好领，所以请珍惜，不要在这一步将所有测试网代币都转换成USDG了。
+
+（二）完成任务3：完成 Berachain 跨链交互（重点）
+
+任务三中每完成一笔交易可获得 100 积分（每天最多 50 次），使用 Berachain bArtio 或 Sei Testnet结算额外拿50分/笔。
+
+这里以Berachain为例，交互步骤如下：
+
+步骤一、点击 OPEN WALLET，打开钱包
+
+ 
+
+ 
+
+步骤二、将 USDG 发送到Berachain bArtio 或 Sei Testnet
+
+复制 Particle钱包 地址
+点击 Send
+选择 USDG
+选择 Berachain bArtio 或 Sei Testnet
+输入金额
+
+完成后，就能在主页面看到你交互了多少笔：
+
+这里并不需要我们在用 $Bera 当作手续费，只是用通用Gas——USDG来完成所有交易间的费用问题，这就是通用账户中“一个账户，一个余额，任何区块链”的概念，让我们根本就不知道在跨链。
+
+（三）完成任务1：每日签到
+
+（1）签到前
+
+每日签到用的还是 Optimism Sepolia，很多人想的是去领 Optimism Sepolia 上的测试币，这就完全没有领会到 Particle【通用账户】的优势了。
+
+Particle已经完成内部跨链功能，你需要一个账户余额就可以内部跨到各种链上。
+
+ 
+
+（2）将 ETH 跨到 Optimism Sepolia （算任务三的交易积分）
+
+ 
+
+步骤1、打开Particle钱包
+
+复制Particle钱包地址
+点击 Send
+选择 ETH
+粘贴地址
+选择 Optimism Sepolia
+输入数量
+点击 Send
+完成
+
+ 
+
+ 
+
+（3）签到
+
+点击 CHECK-IN
+点击 CONFIRM
+
+ 
+
+（四）购买NFT
+
+页面下拉，找到 TASK 4
+
+点击 PURCHASE NFT
+
+ 
+
+ 
+点击PURCHASE
+
+ 
+
+ 
+选择代币
+点击 NFT
+支付USDG（与前几期不同的是，这里消耗的是Berachain、Sei上的资产）
+
+ 
+
+ 
+小狐狸确认
+购买成功
+
+ 
+
+ 
+
+购买一次NFT可获得100 积分，每日完成上限为10次。
+
+更多积分意味着有更多机会获得更多 $PARTI 代币，所以不要断档，每天将积分拉满。据悉持有 $ALY、CAPYBARA NFTs 以获得更多奖金。
+
+ 
+
+以上就是今天的全部教程，从教程整个体验来看，Particle 完全符合“一个账户，一个余额，任何区块链”的概念，这是链抽象的基本概念。
+
+WEB3 EVM和非EVM并不互通，用户要下载各种钱包，这无疑造成用户的资产逐渐碎片化，这无疑是一种浪费。如果用户通过一个钱包，用一个账户、一种余额充当GAS费、并且兼容EVM/非EVM/BTC链，这样的应用完全能够满足未来的各种需求，同时降低了Web2用户进入Web3的门槛，这样的项目出圈只是时间问题。
+
+而 Particle Network 正是在解决这方面的问题，从长达半年的测试网体验中，我们能感受上主网后需求场面，所以我们作为早期用户，尽可能的去获得他的免费额度，为后面变现做好准备。

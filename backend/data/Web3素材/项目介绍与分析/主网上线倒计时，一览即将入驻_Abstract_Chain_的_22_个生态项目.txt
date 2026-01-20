@@ -1,0 +1,103 @@
+标题: 主网上线倒计时，一览即将入驻 Abstract Chain 的 22 个生态项目
+链接: https://www.chaincatcher.com/article/2159768
+发布时间: 2024-12-30
+
+==================================================
+
+作者：Nancy，PANews
+
+ 
+
+近来，Pudgy Penguins因空投事件夺市场注意力后，其背后母公司Igloo Inc.开发的L2链Abstract Chain，也因PENGU空投预期以及主网上线在即备受市场关注。
+
+Abstract Chain是一个以消费者为中心的区块链，用于消费者加密、开拓文化、社区和链上创造力，将于明年1月上线主网。今年7月，Abstract Chain宣布获得知名风投公司Founders Fund领投的超1100万美元融资。
+
+过去一段时间，不少项目官宣即将登陆Abstract Chain生态，本文盘点了其中22个市场关注度较高的加密项目，以NFT类的项目为主，还覆盖游戏、DeFi、Launchpad和AI等多个赛道。
+
+Khuga
+
+Khuga是由Khuga Lab开发的Web3项目，旨在通过创新的IP和区块链技术，打造一个充满创意和互动的去中心化虚拟世界，鼓励创作者和玩家共同构建生态系统。OpenSea数据显示，NFT项目Khuga by KhugaLabs累计交易量迄今已达667枚ETH。
+
+Mintify
+
+Mintify是成立于2022年的数字资产交易平台，已上线以太坊、Base、比特币、ApeChain和Flow等。Mintify迄今完成超2万枚ETH交易量，拥有约18万名用户，并筹集了500万美元资金。
+
+77-Bit
+
+77-Bit是一个赛博朋克风格的动漫系列，旨在为新一代重新定义 MMORPG（大型多人在线角色扮演游戏），将在下个月开放测试版。早在2022年4月，77-Bit就曾发行了NFT，迄今交易总量已超2.1万枚ETH。
+
+Imaginary Ones
+
+Imaginary Ones旨在打造下一代Web3娱乐公司，获得了爱奇艺副总裁、前Netflix副总裁Kuek Yu-Chuang、Cypher Capital、Animoca Brands、Polygon Ventures等投资。据PANews此前报道，Imaginary Ones最初是基于以太坊的NFT项目，并发布同名首款NFT系列，并在今年5月宣布计划推出实用代币$BUBBLE，用于质押、治理、平台支付、独家访问游戏、商品和内容。
+
+Blever
+
+Blever是一个NFT门户，旨在重新定义创作者与收藏者之间的关系，可帮助创作者通过NFT和数字奖励来回馈忠实粉丝，此前获得Yuga Labs旗下的L2 ApeChain DAO资助并在该链上线。
+
+Multiplier
+
+Multiplier是一个结合NFT的创新Web3项目，旨在通过游戏化的方式为用户提供多元化的娱乐体验，为玩家提供奖励和互动机会，鼓励社区成员参与内容创作、游戏竞技和社交互动。
+
+Wolfswap
+
+Wolfswap是家支持多种区块链的DEX，旨在为用户提供安全、便捷的加密资产交易体验。Wolfswap推出的$WOLF包含常规代币和NFT，可参与质押赚取收益。
+
+Kabu
+
+Kabu是一个由7000个小熊角色组成的NFT，背景是6只来自不同背景的小熊在充满活力的Sunset City中共同生活、成长并享受乐趣。该项目旨在通过其富有创意的内容和互动平台，弥合传统与数字艺术之间的鸿沟，促进大众进入Web3世界。
+
+NFTs2Me
+
+NFTs2Me是一款无代码的NFT工具包，用户可以免费使用自定义子域创建、部署和管理NFT收藏和铸造页面，旨在打破了传统NFT购买过程中的复杂性和门槛。
+
+Abstract Cats
+
+Abstract Cats是Abstract Chain上首个以猫为主题的PFP NFT项目，每个 NFT 都是手绘插图，展示了各种抽象风格的猫咪，持有者可获得独家活动、DAO治理、未来发售参与权等福利。Abstract Cats将在主网上线首日时正式推出。
+
+zkMarkets
+
+zkMarkets是一个基于zkSync Era的NFT交易平台，旨在为用户提供最优质的NFT交易和管理体验，核心功能包括Launchpad、Paymaster、Aggregation和Twitter Bot。
+
+Canna Sapiens
+
+Canna Sapiens是一个PFP NFT系列，计划于2025年1月在Abstract Chain上铸造，旨在以幽默和创造力为驱动的大麻文化社区，建立一个大麻文化社区，围绕幽默和创新展开，鼓励参与者成为创作者。NFT持有者可获得NFT授权、优先访问、商店专属折扣和创意奖励等福利。
+
+DOGAMÍ
+
+DOGAMÍ是一个获得Ubisoft、Animoca Brands和SANDBOX等支持的Web3娱乐平台，旨在结合游戏、数字收藏品和跨媒体故事叙述来构建以狗狗为主题的数字娱乐宇宙。DOGAMÍ于2021年成立，曾是Tezos上最大的NFT游戏项目，于2023年扩展到Polygon生态，并在近期宣布即将登陆Abstract Chain。此前，DOGAMÍ通过NFT销售筹集了400万美元的收入。
+
+Hotdogs
+
+Hotdogs是一个以社区为驱动的Web3项目，结合了 NFT、互动机制和个性化体验。Hotdogs与像素艺术家Zonix合作发行了NFT，总量为3333个。另外，Hotdogs还与Abstract Chain合作发行了测试网NFT项目Abstract Hotdogs Early SBT NFT，获得超过4800万次的铸造记录。
+
+Upcade
+
+Upcade是个Web3游戏中心，旨在通过独特的数字资产和NFT打造一个去中心化的互动体验。
+
+Moonsheep
+
+Moonsheep将成为Abstract Chain上首个404项目，推动艺术与技术的边界，用户可通过Telegram机器人赚取几积分或者购买The Sad Times NFT获得白名单资格。
+
+Seedify
+
+Seedify是Web3孵化器和启动平台，专注于DeFi、人工智能、NFT和Web3游戏等创新技术的 Web3项目，其代币$SFUND持有者可通过质押获得早期访问权、代币购买等福利。
+
+YOLO
+
+YOLO是一个创新的PFP NFT项目，可为NFT持有者提供独特的AI助手体验。YOLO结合了个人AI助手、先进的投资工具、简化的交易流程以及与社区的深度整合，旨在为用户提供个性化、智能化和高效的Web3体验。其中，YOLO NFT总量为2222个，核心代币$YOLO具备生态系统集成、奖励和激励机制、金融与交易便利和质押与收入分享等主要功能。
+
+Telgather
+
+Telgather是首个集成到Telegram中的迷你游戏平台，旨在打造一个玩家驱动、社区支持的游戏生态系统，让每个玩家都能够参与游戏开发、资产交易和生态建设。
+
+RUYUI
+
+Ruyui Studios是一支由创意人员、游戏玩家、建设者和远见者组成的充满活力的团队，致力于开发游戏、数字艺术以及互动娱乐项目，团队曾参与超能陆战队和唐老鸭俱乐部等作品。 Ruyui NFT总量为7777个，面向社区开放了预售名额。
+
+Cat AI
+
+Cat AI是首批登陆Abstract Chain上的像素化猫猫主题的AI Agent，将人工智能技术与艺术创作、NFT交易结合。
+
+The Plooshies
+
+The Plooshies是一个互动式、游戏化的NFT故事冒险，拥有3333个可动画化并可玩耍的 Plooshies角色NFT。OpenSea数据显示，截至12月27日，其NFT交易量达1536枚ETH。

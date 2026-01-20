@@ -1,0 +1,239 @@
+标题: 2025 年空投宝藏清单｜这 30 多个项目值得关注
+链接: https://www.chaincatcher.com/article/2159095
+发布时间: 2024-12-25
+
+==================================================
+
+撰文：KarenZ，Foresight News
+
+ 
+
+错失了 Hyperliquid、Magic Eden、Pudgy Penguins、Fuel 的丰厚空投？无需忧虑，更不必气馁！本文精心梳理了 极具潜力的 30 个项目，帮助你找到新的空投机会。
+
+pump.fun 
+
+在这一轮周期中，pump.fun 无疑是耀眼的存在，其收入屡创新高，累计收入达到 1,595,278 SOL。在 2024 年 10 月的 X Space 直播中，pump.fun 联合创始人 Sapijiju 暗示了对未来代币发行和空投的计划，进一步点燃了社区的期待。
+
+交互策略：内盘交易、使用平台各类功能。
+
+推荐阅读：《Pump.fun 要发币？工作室已经开卷了》
+
+Phantom
+
+Phantom 已从 Solana 生态钱包发展成为 Crypto 领域内多数用户的首选多链钱包之一。Phantom 总融资额突破 1.18 亿美元，投资方包括 Paradigm、a16z 和 Solana Ventures 等。
+
+交互策略：体验 Phantom 多链钱包，钱包内兑换、购买。
+
+Eclipse 
+
+Eclipse 在 11 月份上线公共主网，生态项目包括预测市场 Polymarket（12 月初上线）、去中心化点对点跨链借贷协议 EnsoFi、Renzo Protocol（通过 ezSOL）、由 Rarible 驱动的 Eclipse 原生 NFT Launchpad Scope、原生 DeFi 中心 Astrol、Orca 等。Eclipse 总融资额达 6500 万美元，投资方包括 Placeholder、Hack VC、Polychain Capital、Delphi Digital 等。
+
+交互策略：在 https://app.eclipse.xyz/bridge 上跨链资产，在 Orca 兑换和提供流动性以及交互其他生态应用。
+
+推荐阅读：《淘金手册 ｜Eclipse 生态前瞻与空投指南》
+
+Berachain 
+
+Berachain 是一个基于流动性证明共识构建的高性能 EVM 兼容区块链，通过三 Token 模型和流动性证明（PoL）共识机制解决 DeFi 领域的流动性问题，在 2024 年 6 月份启动公共测试网 bArtio B2。Berachain 累计融资额超过 1.4 亿美元。
+
+交互策略：参加 Berachain v2 Bartio 测试网，在 https://bartio.faucet.berachain.com/#dapps 探索生态应用。
+
+Abstract 
+
+Abstract 是一个消费级加密货币区块链，构建在 ZK Stack 之上，通过执行链下交易、批处理以及使用 ZK 证明验证以太坊上的批量交易来实现可扩展性。Abstract 贡献者由发起或帮助构建 Pudgy Penguins、以太坊、Frame 和 Kubernetes 的人员组成。Pudgy Penguins 母公司 Igloo 监督并以贡献者的身份参与开发 Abstract。Abstract 已上线测试网，将在 2025 年 1 月上线主网。
+
+Abstract 已经在 2024 年 7 月份上线测试网，此前计划在 2025 年年底上线主网。Pudgy Penguins 母公司 Igloo 此前表示，Pudgy Penguins 会先在 Solana 上推出，之后会在以太坊和 Abstract 上启动。
+
+交互策略：加入候补名单获得 Early Bird 徽章，持有 Pudgy Penguins、Lil Pudgys，跨链，转账测试以及持续持有 PENGU 空投。
+
+MegaETH
+
+MegaETH 致力于打造实时区块链，宣称能够以毫秒级的响应速度每秒处理 10 万笔交易。6 月份，MegaETH 开发商 MegaLabs 宣布完成由 Dragonfly 领投的 2000 万美元种子轮融资，并且得到 Vitalik Buterin、Consensys 创始人 Joseph Lubin、EigenLayer 创始人 Sreeram Kannan 等人的支持。
+
+MegaETH 目前尚未推出测试网，不过目前可关注稳定币项目 CAP Labs、交易趋势平台 Noise 等。
+
+推荐阅读：《获 Vitalik 青睐一夜爆火的 MegaETH 究竟是什么？》
+
+SOON 
+
+Solana Optimistic Network（SOON）目前主要着力于两个方向，首先是 SOON Stack，这是一个结合 SVM 和 OP Stack 的模块化 Rollup 框架，允许在 L1（如以太坊、比特币和 Cosmos）上部署任何 SVM L2。使用 SOON Stack 部署的链称为 SOON Chain。其次，SOON 计划与 Caldera、AltLayer 和 Conduit 等 EVM RaaS（Rollup-as-a-Service）提供商合作，旨在将 SVM RaaS 无缝整合到他们的服务体系中，以简化用户的部署流程。
+
+8 月 27 日，SOON 完成 Co-Builder 轮融资，投资人包括 Solana Labs 联合创始人 Anatoly Yakovenko（toly）、Solana 基金会主席 Lily Liu、Celestia 联合创始人 Mustafa Al-Bassam 等。
+
+交互策略：测试网跨链、交互（借贷协议 EnsoFi 等）
+
+推荐阅读：《toly 青睐之选：SOON 解锁所有 L1 的终极 L2 Rollup Stack?》
+
+Story Protocol 
+
+Story Protocol 是一个链上 IP 协议。Story Protocol 总融资额超过 1.4 亿美元，投资方包括 a16z Crypto、Polychain、Foresight Venture 等。
+
+Story Protocol 在 11 月份推出最终测试网 Odyssey。Story 此前明确表示，他们坚决反对 farmers（刷分者）、女巫攻击以及自动化活动等行为，这些行为将不会获得任何奖励。相反，他们更加重视来自真实社区成员对真实问题的真实反馈。
+
+Story Protocol 目前已经结束奥德赛活动，测试网仍可交互。
+
+Monad 
+
+Monad 是一个兼容 EVM 的 L1 区块链，通过 MonadBFT、延迟执行、并行执行以及 MonadDb 数据库提升区块链的吞吐量。的一个新颖之处在于执行与共识分离，采用流水线式共识执行分级机制。Monad 在 2024 年 4 月份完成 2.25 亿美元融资，Paradigm 领投。
+
+交互策略：Monad Discord 角色、持有 Pythenian NFT（Monad 联创已购买），质押生态系统代币（如 W 或 PYTH）、尝试玩 Monad 生态 Sparkball 游戏和探索 Monad 生态其他项目。
+
+推荐阅读：《速览「Jump 黑帮」 Monad Labs：EVM 终极方案？》
+
+《Monad 生态版图先睹为快》
+
+Nillion 
+
+Nillion 可以理解为是一个去中心化的安全计算网络，旨在为高价值数据构建一个在存储、传输和计算过程中都加密的网络，解决当前在加密数据计算时仍需「解密 - 计算 - 再加密」的问题。Nillion 于 2022 年 12 月以 1.8 亿美元估值完成了 2000 万美元种子轮融资，Distributed Global 领投。2024 年 10 月，Nillion 完成 2500 万美元融资，Hack VC 领投。
+
+交互策略：盲计算质押、验证节点。12 月 11 日，Nillion 宣布正式结束 Nillion Verifier 计划，TGE 在 2025 年上半年。
+
+推荐阅读：《Uber 工程师创立，「盲计算」网络 Nillion 有何创新？》
+
+Solayer 
+
+Solayer 作为 Solana 再质押的新星项目，在 2024 年 7 月 2 日宣布完成了建设者轮融资，投资人包括 Solana Labs 联创 Anatoly Yakovenko、Solend 创始人 Rooter、Tensor 联创 Richard Wu、Polygon 联创 Sandeep Nailwal 等。12 月份，Solayer 创建官方基金会推特账号。
+
+交互策略：再质押
+
+推荐阅读：《速览 Solana 再质押新星项目 Solayer》
+
+ink 
+
+ink 是美国加密货币交易所 Kraken 基于 Optimism Superchain 推出的 L2 网络，已在 2024 年 11 月份推出测试网。Ink 文档中暗示了超级链的排序器去中心化，已经推出主网。
+
+交互策略：跨链，探索 ink 网络生态。
+
+Babylon 
+
+Babylon 是一个比特币生态头部质押协议，允许比特币持有者在权益证明（PoS）系统（如 PoS 链、L2、数据可用性（DA）层等）上质押他们的比特币并获得收益收益。Babylon Babylon 总融资额接近 1 亿美元，投资方包括 Paradigm、Binance Labs、Polychain 等。
+
+在 2024 年 5 月份完成 7000 万美元融资，Paradigm 领投，Polychain Capital 和加密货币交易所 Bullish 的风投部门参投。
+
+交互策略：参与 Babylon Cap-3 质押 BTC，参加 Babylon Odyssey 活动。
+
+Solv Protocol 
+
+Solv Protocol 也是比特币生态头部质押协议，总融资额达 2500 万美元，投资方包括 Solv Protocol、OKX Ventures、Blockchain Capital 和野村证券等。
+
+交互策略：质押比特币或封装比特币，参与积分活动。
+
+AO 
+
+Arweave 计算网络 AO 主网将于 2025 年 2 月 8 日推出。目前，33.3% 的 AO 铸造新代币按比例分配给 AR 持有者，66.6% 的 AO 代币将分配给资产跨链至 AO 的用户。AO 已支持存入 stETH 以获得代币奖励。
+
+交互策略：持有 AR（尽量在链上）、跨链 stETH。
+
+Farcaster
+
+Farcaster 是当前最为活跃的 Web3 社交项目，最近又通过 AI 代理东山再起。2024 年 6 月份，据《财富》杂志援引一位因业务约束而要求匿名的消息人士表示，像大多数协议一样，他预计 Farcaster 将推出代币，投资者将渴望捕捉其完全稀释的价值。
+
+交互策略：发帖、体验不同客户端
+
+Polymarket
+
+预测市场 Polymarket 自 2024 年初以来经历了爆发式增长，在大选结束之后也表现出了比较强的韧性。
+
+交互策略：预测
+
+Perennial 
+
+Perennial 是一个基于 Arbiturm 的衍生品协议，该项目曾在 2022 年 10 月完成 1200 万美元融资，Polychain Capital 和 Variant 领投，Archetype、Coinbase Ventures 等参投。
+
+2024 年 12 月份，Perennial 推出意图层，使交易者能够即时执行和获得来自链上和链下场所的深度流动性，具体来说，交易者指定他们想要执行交易的确切价格，不管是市价交易还是限价交易；Solvers 充当做市商，执行并自动结算到 AMM 中。同时，Perennial 还推出 Perennial Petals 计划，将向忠诚参与者、新用户和早期采用者提供奖励（主要于交易额有关）。
+
+交互策略：参与 Perennial Petals 计划。
+
+daos.fun
+
+daos.fun 是一个由@baoskee 创立并得到 Alliance DAO 支持的平台。这个平台的主要功能是帮助基金经理、创作者筹集资金，以便他们能够建立自己的 DAO，并代表代币持有者投资 Meme。daos.fun 暂未明确或暗示会发行发币。
+
+交互策略：交易
+
+Pump Science
+
+Pump Science 建立在 Pump.fun 之上。Pump Science 是一个几乎无门槛的研究试验与筹资平台。在 pump.science 上，包括药品开发商、科学家等在内的任何人都可以提交长寿养生想法、药物策略，为其实验筹集资金，其他人可以押注哪种干预措施将延长所测试的不同模式生物的寿命，支持看好的想法。目前，Pump Science 上仅有两项实验，利福平 Rifampicin（RIF）和尿石素 A Urolithin A（URO）。
+
+根据 pump.science 路线图，2025 年 1 月 25 日，将利用利福平 Rifampicin（RIF）和尿石素 A Urolithin A（URO）进行小鼠试验，2025 年 2 月 25 日与 VitaDAO 合作启动新的化合物。
+
+Pump Science 暂未明确或暗示会发行发币，不过有社区成员猜测 Pump Science 将发行平台代币。
+
+交互策略：交易
+
+Soneium 
+
+Soneium 是一个由索尼旗下区块链部门索尼区块解决方案实验室（Sony Block Solutions Labs）推出的 L2 网络 ，已于 2024 年 8 月份上线公共测试网 Minato 以及开发者孵化计划 Spark。
+
+交互策略：跨链，探索 Soneium 生态。
+
+Nexus 
+
+Nexus 设想构建一个建立在可验证计算基础上的互联网，将分散在世界各地的计算设备（如大型 GPU farms、计算机、手机等设备）连接起来，共同组成一台超级计算机。通过利用 Nexus zkVM，Nexus 将计算供应与证明需求连接，任何人都可以将自己的设备接入网络，不仅参与计算，还能因此获得相应的奖励。
+
+交互策略：Nexus 新测试网已结束，可关注后续测试网部署情况。
+
+推荐阅读：《速读超级计算机 Nexus：如何运行？怎么参与？》
+
+BOB 
+
+BOB 是「Build on Bitcoin」的缩写，是一个旨在支持比特币 DeFi 创新和生态发展的 L2 技术堆栈，不仅能继承比特币 PoW 安全性，支持 Ordinals、Lightning 和 Nostr 等比特币生态系统，还能与 EVM 完全兼容。
+
+交互策略：参与 BOB Fusion 最终季赚取 Spice 积分，包括通过将资产存入 BOB 上的各种 DeFi 应用来最大化 Spice，用 Spice 投票，以及推荐等。
+
+Perena 
+
+Perena 是一个 Solana 生态稳定币基础设施协议，在 12 月份完成 Pre-Seed 轮融资，Borderless 领投，投资方还包括 Binance Labs。
+
+交互策略：通过进行稳定币间的交易和组 LP 可以获取花瓣积分。
+
+推荐阅读：《币安投资新项目，Perena 值得参与吗》
+
+Lombard 
+
+Lombard 是一个比特币 LST 协议，在 2024 年 7 月份完成 1600 万美元种子轮融资，由 Polychain Capital 领投，Franklin Templeton、Foresight Ventures 等。2024 年 10 月，Lombard 还获得来自 Binance Labs 的投资。
+
+交互策略：质押比特币、cbBTC、BTCB 为 LBTC，将 LBTC、WBTC 或 cbBTC 资产存入 Lombard DeFi Vault（自动化收益管理解决方案）
+
+ZERϴ Network 
+
+ZERϴ Network 是由 Web3 钱包 Zerion 基于 ZKsync 推出的 L2 网络。
+
+交互策略：参与 Zerion 奖励计划赚取 XP，XP 衡量用户在 Zerion 中的活动并解锁新奖励；做 quests 任务；探索 ZERO Network 生态。
+
+Kaito AI 
+
+Kaito AI 是一个 AI 加密搜索引擎，已在 2024 年 12 月份推出 Yaps 积分计划。
+
+交互策略：连接推特创建账户，发布加密相关推文，推荐邀请。
+
+DAWN
+
+DAWN 是一个物理资源网络中的去中心化自主无线网络，利用点对多点 (PtMP) 无线技术，使节点能够高效地直接与多个节点通信。DAWN 此前在 2024 年 8 月份完成 1800 万美元融资，Dragonfly 领投。随后于 12 月份 VanEck 旗下 Digital Assets Alpha 基金和 VanEck Ventures 通过战略融资向 DAWN 投资了 250 万美元。
+
+推荐阅读：《DAWN ：Dragonfly 领投 1800 万美元， Solana DePIN 再添新势力》
+
+交互策略：下载浏览器插件，充当验证节点获得早期积分奖励。
+
+Reddio 
+
+Reddio 是一个由用于自主 AI 的 GPU 提供支持的并行 EVM Layer2。Reddio 在 2024 年 8 月份完成种子轮融资（由 Paradigm 和 Arena Holdings 领投），即将宣布 A 轮融资。Reddio 已启动公共测试网。
+
+交互策略：跨链和探索 Reddio 生态。
+
+Paradex
+
+Paradex 是由加密货币机构流动性平台 Paradigm（非风投 Paradigm）在 Starknet 上孵化的去中心化永续衍生品 Layer2 应用链，计划将 20% 的代币将分配给创世空投。该空投跨越多个 XP 赛季，包含 2024 年 2 月 1 日至 2025 年 1 月 2 日的第一赛季，和 2025 年 1 月 3 日至 7 月 31 日的第二赛季，代币发放计划在第二赛季结束时进行。
+
+交互策略：交易。
+
+ZORA
+
+ZORA 是一个艺术品铸造平台，也已经基于 OP Stack 发布了 L2 网络 Zora Network。ZORA 总融资额 6000 万美元，投资方包括 Haun Ventures、Coinbase Ventures 等。随着 OpenSea 发币预期的不断增强，如果 NFT 市场在明年热度继续上升，ZORA 是否会跟进发行自己的代币成为了一个热议话题。但同时，ZORA 也被部分用户吐槽为 PUA 空投之王。
+
+交互策略：创建 ZORA 账户，铸造 NFT，探索 Zora Network 生态。
+
+Virtual 生态空投 
+
+诸如 Virtual 生态 AI 音乐代理 MUSIC 等曾给 Virtual Protocol 生态用户发放过空投。预计 2025 年 AI 代理持续火爆，可能会有越来越多在 Virtual 上启动的 AI 代理会给 Virtual 生态用户发放空投。
+
+交互策略：在 Virtual 交易，持有 3 种以上的 AI 代理代币。

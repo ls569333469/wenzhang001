@@ -1,0 +1,176 @@
+标题: 初学空投必看 — Blue 怎么让所有人都拿到500U+低保（教科书级空投分配）--预计12月10日TGE
+链接: https://www.chaincatcher.com/article/2156010
+发布时间: 2024-12-09
+
+==================================================
+
+Hyperliquid 撕开衍生品赛道的估值体系后，市场意识到DEX逐渐在蚕食CEX市场。这并不是危言耸听，$Hype 当前FDV已达148.5亿美元，而$OKB也才184亿美元。
+ 
+DEX已经开始触动CEX巨大蛋糕，要知道CEX合约交易和现货交易量的比例是多少，Uniswap只是瓜分了部分现货交易市场，数倍于现货交易体量的衍生品，这中间会出多少个Uni级别的项目，这些想象空间不是一般的大。
+ 
+目前各公链的Perps（衍生品）DEX很多都还没有发币，这给我们撸空投的群体来说无疑是一个巨大的财富机会，万一又出来一个Hyperliquid给3000U的空投呢？
+ 
+所以我们在撸空投的时候，如果想要收益最大化，就得在撸空投前做好投研，刚好Bluefin最近公布了空投分配公告，里面有很多值得我们学习的地方，看完我们就知道为什么有些人没有交互也能拿到空投，我们也能搞清楚怎么养钱包不被女巫了。
+本文主要分为以下三个部分：
+ 
+Bluefin 空投解析
+Blue 价格分析
+现在入场我们还有哪些收益（估计12/10日TGE，最晚周五）
+ 
+一、人人都要看的——Bluefin 空投解析
+ 
+（一）Bluefin 人人都拿到的空投
+ 
+11月底 Bluefin 宣布空投查询，并公布代币经济学，社交媒体就被 Bluefin 刷屏，与Hyperliquid只有少数人拿到空投不同的是， 不管你有没有交互过Bluefin，基本人人都有积分（1:1兑换代币），本文截取不同语言用户的空投。
+空投查询地址：
+https://trade.bluefin.io/airdrop
+ 
+ 
+ 
+ 
+$blue场外价查询：
+https://app.aevo.xyz/perpetual/blue
+以上积分可以1:1兑换成 $blue代币，$blue盘前0.35价格计算，平均每个钱包1200U左右，低保用户在200–500U左右，空投收益超过 Jupiter、Aptos、Jito。
+ 
+ 
+https://dune.com/cryptokoryo/history-of-airdrops
+ 
+在看到推特上这么多人Bluefin的晒图中，我发现很多人说自己没有在Bluefin平台做过任何交易，但还是有200～500积分，这就不得不学习Bluefin的空投分配了。
+ 
+（二）Bluefin 空投分配解析（并不是17%）z
+代币符号： BLUE
+最大供应量： 1,000,000,000 枚
+空投分配：19.68％
+初始流通量： 150,385,000 枚，占总供应量的 15.04%
+解锁机制：投资机构和团队分3年解锁，包括1年锁定期。生态和社区分5年解锁，TGE解锁空投奖励、流动性储备、上所资金。
+ 
+ 
+$blue空投分配：
+https://learn.bluefin.io/bluefin/bluefin-airdrop/bluefin-airdrop-explained
+ 
+从上面可以看出 $blue 空投分为两个部分：
+
+ 
+第一部分：已确认的额外空投
+ 
+1、Bluefin 早期社区支持者，包括：Trader Alliance、Firefly Pioneers、Ambassadors、League Holders（很多人都是金卡500分）
+2、SUI 生态合作伙伴用户，包括：AlphaFi、Suilend、Cetus、Scallop、Turbos、FlowX、DoubleUp、7k、FUD、Deepbook、AAA、Aftermath、Bucket、Typus、Navi、Hop、Suiplay
+3、其他生态合作伙伴用户，包括：Jupiter、Aerodrome、Wormhole、Pyth、Elixir
+4、NFT 社区伙伴，包括：Pudgy Penguins、MadLads、Azuki、Prime Machin
+解锁规则：
+TGE 时释放 50%
+TGE 1 个月后释放 25%
+TGE 2 个月后释放 25%
+从上面可以看出，Bluefin不仅给自己早期用户发空投，还给Sui生态上龙头项目持有者分配空投，还给不同链上NFT持有者分配空投，所以最好看看。这就说明Bluefin并不吝啬，他们希望生态上大部分项目都能持有代币。那么我们就知道以后养钱包，我们可以对照着这些资产来持仓。
+ 
+第二部分：Bluefin累计交互奖励（Historical Rewards）
+ 
+作为DEX，用户交易越多，自然收益就越多，所以这部分空投分配最多，占13.19%；
+在Bluefin交互，获得的积分和Sui奖励（合约交易、推荐奖励、现货LP池、稳定币池）
+目前奖励仍在持续累计，尚未进行快照。
+解锁方式：
+TGE 时释放 80%
+TGE 1 个月后释放 10%
+TGE 2 个月后释放 10%
+
+ 
+
+总结 Bluefin 的空投分配
+ 
+由于参与人数巨大，之前我一直以为Bluefin会像很多其他空投那样，没参与的一个不给，空投的用户释放20%，然后锁仓6个月。
+没想到第一期公告说分配17%，后来更新后分配19.68%，锁仓也只是象征性锁2个月，并且给付出实际交互的用户释放80%的额度，按照0.35盘前价计算，除去交互成本相当于每个人都有很大的盈利空间。
+现在基本可以确定的是，已经查到积分的都有空投了，而没有查到积分的，由于还没有快照，可以乘发币前抓紧时间再交易；
+Bluefin注册连接：
+https://trade.bluefin.io/referral/v2-i5yp5l
+现在空投已经可以查询了，估计用不了多久就会发空投，那么我们在拿到空投后，是直接卖了还是留一段时间呢？
+ 
+二、Blue 价格分析
+ 
+早期的Perps（衍生品）DEX并没有和做现货的Uniswap携手冲击CEX的交易体系，这导致链上衍生品一直处于一个很尴尬的处境，像早期dydx、Perpetual、GMX都没有挽回衰落的趋势。
+ 
+从Hyperliquid 跑通就能看出，衍生品市场天花板已经被打开。衍生品是一个足够大的市场，可以容纳多家百亿千亿级项目，有了龙头项目，必然会出现龙二，就看谁去争夺了。
+ 
+ 
+https://app.artemis.xyz/sectors
+ 
+上图交易量前十的Perps（衍生品）DEX中，只有Bluefin还没有发币，本文从Bluefin而起，那我们就结合已发币项目：Dydx、GMX、Jupiter、Drift、Hyperliquid以及12月6日开盘的SynFutures，来看看Bluefin估值能达到多少？
+ 
+我们采集了app.artemis.xyz、defillama.com等平台数据，发现Bluefin的数据与Base上刚上线的SynFutures基本相同，现在
+$blue场外（盘前）价格为0.35u，估计上线后FDV会达到4亿美元，保守估计代币会上涨到0.41–0.85左右。
+ 
+ 
+https://app.openblocklabs.com/app/bluefin/overview
+
+ 
+
+从基本面上看
+ 
+Bluefin是唯一同时支持 Perps 和 Spot 的 Sui 项目，Sui生态交易量最大的 DEX，主要表现在：
+ 
+累计交易量突破 390 亿美元，稳居 Sui 网络之首
+今年手续费收入已达 950 万美元，在生态中遥遥领先
+衍生品交易占 Sui 网络合约交易量的 85% 以上，市场主导地位稳固
+新推出的 Spot AMM 上线仅两周，已经迅速占领市场，日均新增用户超 2,000 名
+
+ 
+
+从项目背景来看，2020 年成立，累计融资超 2,000 万美元，资方包括 Polychain、Brevan Howard Digital、Tower Research、Cumberland DRW、SIG 等全球顶级机构。
+ 
+ 
+ 
+ 
+SUI强劲的发展势头让我感觉到这是一个喜欢扶持龙头的公链，比如SUI上曾经上线过一个项目——Cetus，发币时TVL才3152万美元、FDV才1.2亿美元，各方面数据比Bluefin还少，但他后来直线上涨400%。
+ 
+需要注意的是Cetus是熊市发币（23年5月），现在Bluefin发币正好赶上牛市，并且SUI喜欢给龙头项目赋能，Bluefin是SUI上唯一同时支持 Perps 和 Spot 的项目，想象空间较大。
+ 
+ 
+ 
+Bluefin 还有哪些赋能？
+ 
+Bluefin目前已搭建完整的 meme 交易基础设施，有望成为 Sui 生态的 meme 交易中心，被视为下一个Jupiter。
+Bluefin是唯一与 Solana 顶级项目（如 Jupiter 和 Pyth）深度合作的 Sui 项目，明年将与 Pyth 联合在Sui上推出独家产品。
+作为对标 Jupiter的产品，他已经集合合约交易、聚合器和 LP 池，覆盖链上做市功能，将在 2025 年 大规模布局RWA 叙事，有望成为一站式全方位链上交易平台。
+ 
+看了上面的分析，拿到空投后出不出，相信大家自己也有自己的决定了。
+那么还没有任何空投的人，我们该干嘛呢？
+ 
+三、现在入场我们还有哪些收益
+ 
+很多看到海内外用户都在晒blue积分，你是不是以为之前没参与了，代币分配就没你什么事儿了呀。
+其实并不是，没有TGE前可以继续参与，估计12/10日（最晚周五）
+目前可以做的有五项（前3项为长期任务）
+ 
+1、Bluefin Perps 交易挖矿
+ 
+根据交易手续费获得 SUI 奖励和 Blue 积分
+今年以来在Bluefin进行Trade&Earn的用户将获得20%的积分加成
+教程如下：
+https://link.medium.com/9BFCsCC4aPb
+ 
+2、Bluefin Stable Pool 稳定币池
+ 
+• 存入 wUSDC，获取 SUI 和 Blue 积分，APR 动态变化，几乎零风险
+• 取出规则：
+周一晚 9 点前提交赎回申请→周三晚 9 点到账
+周一晚 9 点后提交→下周三到账
+赎回期间仍然继续计算利息和积分
+
+ 
+
+3、Bluefin Spot LP 池
+ 
+• 提供现货流动性，获得 SUI 和 Blue 积分，收益非常不错
+• 资金可随时取出
+ 
+4、Gate合作任务
+ 
+ 
+https://www.gate.io/zh/web3/tasks/detail?id=158&network=SUI
+ 
+5、钱包联合活动
+ 
+ 
+https://x.com/bluefinapp/status/1864715015409844293?s=46
+ 
+总结
+Bluefin 我陆续写了有半年时间了，曝光度已经拉满，执行力强的应该都不会错过，所以大部分人都有200–1000u的空投，这篇文章算是给大家辛苦一年的交待。如果你拿到空投不知道什么时间点出售，可以参照刚上线的SynFutures，这是BASE上的衍生品项目，FDV达到4亿美元以上，Bluefin上线第一个超越目标就是4亿FDV，相当于0.4u/blue，这很容易达到。Bluefin对标的是Jupiter（FDV 134亿美元），作为SUI上龙头项目，Bluefin会随着Sui 生态能追赶 Solana，迎来飞跃式增长。

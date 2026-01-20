@@ -1,0 +1,89 @@
+标题: GameFi 平台 Mirror World 有何吸引力？
+链接: https://www.chaincatcher.com/article/2071240
+发布时间: 2022-03-14
+
+==================================================
+
+原文标题：《资本齐聚GameFi平台Mirror World》
+
+作者：凯尔， 蜂巢Tech
+
+ 
+
+3月11日，GameFi平台型项目Mirror World的一笔400万美元融资吸引了十余家资本参投。资方名单中不仅有YGG SEA链游公会、OKX Blockdream Ventures等圈内熟脸，还有Galaxy Interactive这样的专注于游戏赛道的传统风投机构。
+
+从官网介绍看，Mirror World定位为一个互联、互通的元宇宙游戏世界。用户拥有一个Mirror NFT角色后，便可穿梭在与其连接的各个游戏之中，在Mirror World不同游戏中获得的装备和道具等NFT也可跨游戏使用。
+
+Mirror World的另一大特点在于「NFT智能化」。该项目采用了AI 初创公司 rct AI的智能NFT技术。简单来说，当现有NFT与AI技术结合后，可以在游戏世界中与玩家智能交互，理想情况下，这些虚拟的NFT可以根据环境的变化主动调整自身行为。
+
+十余家投资机构齐聚Mirror World，不仅表现出对项目本身的看好，也意味着机构们对NFT和GameFi赛道的发展前景达成共识。
+
+实际上，除了加密圈内的投资机构外，红杉资本、老虎基金、软银投资、高盛投资等传统资本大鳄都在NFT和元宇宙领域有不同程度的布局。当这些敏锐的投资机构齐聚一堂，已然成为趋势变革的风向标。
+
+ 
+
+Mirror World获十余家机构投资
+
+ 
+
+美国东部时间3月11日，GameFi项目Mirror World宣布完成400万美元的种子轮融资。此次融资的数额虽然不大，但投资方却多达十余个。
+
+本次融资的领投方为交互娱乐投资机构Galaxy Interactive、Republic Crypto 与加密领域量化基金 Alameda Research。跟投的还有GameFi赛道的知名公会YGG SEA、Avocado Guild，也有欧易OKX旗下的基金OKX Blockdream Ventures。
+
+此外，Infinity Ventures Crypto、LD Capital、Sky9 Capital、Metasense DAO和Nihil Ventures等多家机构都参与了投资。
+
+总计400万美元的融资额，吸引了如此多的机构投资，有些「僧多粥少」的意味。机构抢投的Mirror World究竟是什么来头？
+
+根据官网介绍，Mirror World是一个基于区块链的虚拟世界，它并不是一款游戏，可以理解拥有一个游戏矩阵的元宇宙平台。Mirror World之所以如此定位，是看到了单款GameFi游戏在吸引力下降后，游戏内的资产也将随之贬值，直到无人问津。
+
+Mirror World希望把不同的游戏和体验连接起来，让用户在不同的游戏场景中穿梭，并拥有相互关联、彼此独立的经济系统。
+
+举例来说，用户在Mirror World的不同游戏中获得的装备和道具等NFT可以跨游戏使用；当玩家拥有了Mirror World的NFT角色后，也相当于有了一个畅玩所有游戏的角色，虽然每个游戏玩法、场景都不同，但角色是可以自由穿梭的。
+
+在已有的游戏世界设计中，Mirror World包含结合了角色扮演玩法的ARPG游戏《Mirrama》，以PVP为主的轻松休闲向的竞技场决斗游戏《Brawl of Mirrors》，以及一款SLG策略游戏。据介绍，本次种子轮融资完成后，Mirror World将全面构建和加速推进这3款游戏的正式上线。
+
+在此前的2021年9月，Mirror World已经率先发行了可在游戏中使用的NFT角色，总计11000个Mirror NFT，均可在该平台的多款游戏里跨游戏使用。
+
+ Mirror World系列NFT
+
+除了互联、互通的属性之外，Mirror World的另一大特点在于采用了AI技术，简单来说，它可以让NFT变得智能，这意味着游戏中的虚拟生物可以「生命化」，与玩家进行交互。
+
+这项「智能NFT」技术是依托于 Y Combinator 孵化的初创公司 rct AI实现的。去年11月，Mirror World基于此推出了首款人工智能对话芯片NFT——Soul。
+
+根据介绍，每个Soul NFT 都可以绑定到现有的NFT，从而使它们栩栩如生。理想情况下，结合了人工智能技术后，这些虚拟的NFT可以根据变化主动调整自己的行为，并与玩家对话。
+
+试想，当玩家在进行游戏时，游戏中的NPC（非玩家角色）不再是机械地完成对话任务，而能够智能地与玩家交互，游戏的沉浸体验也将大幅提升。
+
+这项智能NFT技术已经有所应用。去年底，Cryptopunks、Bored Ape等知名NFT项目已经可以与Soul NFT结合进行NFT智能化升级；今年1月，NFT项目AgeofZ引入Soul NFT机制，以使其NFT角色变得更具互动性、沉浸感和吸引力。
+
+游戏互通以及智能NFT概念，让Mirror World在GameFi板块显得与众不同，这显然也是其获得多家资本青睐的重要因素。
+
+ 
+
+NFT吸引各路资本跑步入场
+
+ 
+
+在Mirror World的投资阵营中，部分资方的背景也值得关注。除了YGG SEA、Avocado Guild等链游公会和加密基金这些圈内熟脸外，投资方中也有Galaxy Interactive这样的专注于交互式内容与技术公司的风投机构。
+
+资料显示，Galaxy Interactive成立于2018年，是数字资产银行 Galaxy Digital 的子公司，该基金专注于VR/AR、AI及基于区块链的游戏。严谨点说，它并非是纯粹的加密圈资本，而是面向所有采用新一代技术提升交互体验的「互动技术行业」进行投资。
+
+Galaxy Interactive的联合创始人Sam Englebardt将下一代互动技术行业描述为「内容、金融和技术的交集」，并相信该技术将推动可观的经济增长。因此，该公司特别专注于数字收藏品和构建元宇宙，Englebardt认为NFT是打造沉浸式互联网的基础支柱。
+
+据不完全统计，Galaxy Interactive在过去3年多时间里已经投资了超过75家公司，公司管理资产额超过6.5亿美元。除了投资Mirror World外，该机构还投资了Republic、1047 Games、rct AI、Elodie、Roar、Art Blocks和Masterworks等创业项目。
+
+实际上，随着GameFi、NFT和元宇宙成为出圈加密世界的新潮流，越来越多的传统资本和新兴资本开始着眼这一赛道。
+
+今年2月17日，知名风投机构红杉资本推出了独立的加密投资基金，这也是其自1972 年成立以来的首个特定行业基金。红杉资本合伙人 Maguire认为，加密资产将成为未来20至30年最大的趋势。
+
+在过去的一年里，红杉资本已经投资了包括Solana链游开发商Faraway、板球NFT平台Faze Technologies在内的多个NFT相关项目。
+
+除此之外，该机构也面向Layer2、DeFi、Web3等领域进行了多笔投资。去年12月，红杉资本还将2005年YouTube原始投资备忘录铸造为NFT并在OpenSea上拍卖，以纪念YouTube在互联网发展历程中的地位。
+
+看重NFT和元宇宙赛道的资本大鳄不只红杉一家。今年1月，老虎基金（Tiger Global）向Flow公链上的NFT平台Unblocked投资1000万美元，去年11月，它也参投了板球NFT平台Faze Technologies。
+
+去年以来，软银投资也大举进军加密行业，除了投资加密资产交易平台FTX外，其还投资了足球NFT收藏品平台Sorare、NFT沙盒游戏The Sandbox等。
+
+此外，Insight partner、Coatue、Lightspeed Venture Partners、高盛等成立于上个世纪的传统投资机构，也都纷纷拥抱NFT和GameFi这两大加密领域。
+
+从历史的进程看，每当世界发生重大技术革新时，这些经验丰富的资本巨头总能够站在最前线。如今，各路传统资本和新兴风投们不约而同地集结在NFT和元宇宙领域，某种程度上将成为引领趋势的风向标。

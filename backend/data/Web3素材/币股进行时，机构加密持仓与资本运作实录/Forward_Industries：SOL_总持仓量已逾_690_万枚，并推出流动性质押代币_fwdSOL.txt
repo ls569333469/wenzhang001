@@ -1,0 +1,9 @@
+标题: Forward Industries：SOL 总持仓量已逾 690 万枚，并推出流动性质押代币 fwdSOL
+链接: https://www.chaincatcher.com/article/2226015
+发布时间: 2025-12-03
+
+==================================================
+
+ChainCatcher 消息，据 Businesswire 报道，纳斯达克上市的 Solana 财库公司 Forward Industries 披露最新业务运营情况，其中指出该公司已购入 6,834,505.96 枚 SOL，平均购买价为 232.08 美元，加上质押奖励截至 12 月 1 日的 SOL 总持仓量已达到 6,921,342 枚。
+
+此外，该公司还披露已推出流动性质押代币 fwdSOL，旨在最大限度地提高质押 SOL 的收益，同时将用作 DeFi 抵押品。

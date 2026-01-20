@@ -1,0 +1,145 @@
+标题: 加密狗整编空投第310篇：一文搞清楚 The Banana Game，不仅仅是单号0撸500U
+链接: https://www.chaincatcher.com/article/2136480
+发布时间: 2024-08-01
+
+==================================================
+
+ 
+
+一直在Steam上发布的小游戏The Banana Game，近3天上线TON，相信很多人都开始在撸了，还没撸也没有关系，早着呢，还可以撸。
+
+The Banana Game 所有操作都是0成本，每8小时可以领取一个香蕉NFT，做社交任务可以获得NFT，拿到NFT可以在平台卖掉，基本上普通用户都能拿到价值10U一个的NFT（多号福音），还有很多人可以拿到价值500U的NFT。
+
+值得注意的是，以上只是NFT的价格，还没有计算后面本币空投和CARV空投，所以The Banana Game 一出来就爆火。
+
+那么今天我们就来看看怎么0撸，具体内容如下：
+
+先介绍：保姆级空投教程
+再介绍：为什么要撸The Banana Game，他和Hamster Combat、 Pixelverse有什么区别
+最后介绍：项目背景和一鱼多吃
+ 
+前言：游戏特点
+每次游戏时间：5分钟
+每日最高频率：3次
+主要游戏目的：积累香蕉皮（Peels），后期空投的积分凭证
+最具吸引力：NFT可交易
+NFT地板价：$10/NFT
+最高稀有度NFT：$500/NFT
+低等级NFT可卖出兑换成Peels
+ 
+一、The Banana Game 保姆级教程
+步骤一、领取香蕉
+玩家每 8小时 可领取一个普通香蕉
+游戏链接：https://t.me/OfficialBananaBot/banana?startapp=referral=D8O0F71 （注册可以获得1个NFT）
+点击 Claim
+点击 Harvest
+点击 Put to bag ，领取香蕉（完成社交任务，第一天可以领取7根香蕉）
+
+ 
+
+步骤二、领取香蕉皮——Peels
+不停点击屏幕中心，领取香蕉皮Peels（相当于积分，是后期空投的依据。）
+不同稀有度香蕉，领取的Peels不一样
+
+ 
+
+步骤三、完成社交任务，获取更多香蕉
+点击 Tasks
+完成社交任务，可以获得Peels
+每完成3个任务，可以获得一个香蕉
+
+ 
+
+ 
+上面的任务，除了绑定钱包目前无法完成，其他都可以领
+第一天可以领取7跟香蕉
+每玩 18 小时，会掉落一个稀有香蕉；
+基本上连续玩3–5天，就可以获得一个价值10U的NFT，运气好可以获得一个价值500U高级NFT；
+步骤四、邀请
+
+The Banana Game 显然是要多号玩才能收益最大化的，所以如果能多号尽量多号，用云手机、雷电模拟器都可以多开。
+
+这里的策略是，用主要去邀请副号，资源集中在主号上（多开注意IP隔离）。
+
+ 
+
+ 
+前 5 次邀请，每次可获赠 1 根香蕉；
+第 6 次至第 15 次邀请期间，每邀请 2 次可获得 1 根香蕉；
+达到 30、50 和 100 个邀请，每次可获得 5 个香蕉的奖励；
+达到 200、500、1000、2000 和 5,000 个邀请，每个邀请可获得 10 根香蕉的奖励；
+二、为什么重点撸The Banana Game，他和Hamster Combat、 Pixelverse有什么区别？
+（一）为什么要重点撸The Banana Game
+
+当前TON上用户最多当属 Hamster Combat ，Hamster Combat 官方6月的公告显示已经有 4760 万名有效用户，很多第三方统计 Hamster Combat 到目前为止用户已达到6000万。
+
+如果8月Hamster Combat 发空投，有可能会像Pixelverse一样出一个很严格女巫审核，届时 Hamster Combat 获得空投的用户可能会有5000万。我们就按照5000万用户计算，平均每位用户发10U的空投，Hamster Combat 至少遭遇5亿美元的抛压，FDV至少要8亿美元以上才保证不崩盘，这么高的FDV，只有Binance 才能承接住。也有一种可能是，Hamster Combat 出一个锁仓机制，通过缓慢释放来报市值。
+
+TON生态上第一个游戏项目 Notcoin ，FDV最高达到20亿美元，当前FDV 13.5亿美元。Hamster Combat作为仿盘，FDV达到20亿短时间内可能有点困难。
+
+如果Hamster Combat 的FDV达不到20亿美元，那么很多用户可能只能拿到5–15U的空投。现在入场Hamster Combat，显然已经迟了。
+
+6月最火的Pixelverse，已经发空投了。8月我们能第一时间入场的可能就是The Banana Game，市场似乎也意识到这个问题，Decrypt 报道：The Banana Game 上线72小时，用户量突破100万。
+
+https://decrypt.co/242349/ton-game-banana-hits-1m-users-in-72-hours
+
+
+
+今天刚好是上线第4天，任何人都还可以入场挖头矿，所以不要错过了，游戏中免费开出高稀有度NFT都可以出售。
+
+游戏注册链接：https://t.me/OfficialBananaBot/banana?startapp=referral=D8O0F71 （注册可以获得1个NFT）
+
+（二）从用户角度看，The Banana Game与其他游戏有什么创新？
+
+到目前为止 TON 生态上已经有几百款游戏了，很多游戏同质化非常严重，所以我们就不一一分析了，比较有代表性的游戏如下图：
+
+ 
+
+以上项目有些免费有些需要氪金，氪金项目在现在市场环境下不一定能回本，请注意风险。
+
+从玩家的角度来看，我们需要选择那种用户少、投入少，刚开始上线，且资产能在代币上线前可交易可变现的项目。
+
+三、The Banana Game项目背景和一鱼多吃方法
+
+The Banana Game 是第一款由 CARV 提供支持的Ton 生态系统游戏，由 Strong 和 Doxxed 团队提供支持，该团队已经开发了不同的产品超过 2 年。
+
+The Banana Game 用户除获得本币空投外，后期还能获得CARV平台空投，CARV除了节点能获得空投，平台上也有自己的任务，大家可以参照：https://protocol.carv.io/airdrop
+
+ 
+
+关于CARV
+
+CARV 是游戏和AI领域最大的模块化数据层，主要解决目前AI中最棘手的数据使用和共享方式，让每个人都能拥有、控制和利用自己的个人数据获利。
+
+目前CARV打造了 3 款关键产品：
+
+CARV 协议：用于游戏和 AI 的模块化数据层，https://protocol.carv.io/airdrop
+CARV Play：由AI驱动的超级应用程序，用于游戏玩家的分析、社交和游戏发现平台， https://play.carv.io
+CARV AI Agent：个性化游戏伴侣
+
+CARV 的旗舰游戏CARV Play与 790 多个 web2 和 3 游戏集成以及与 Linea、BNB Chain、zkSync 和 Ronin 等主要区块链的合作伙伴关系，为 270 多万游戏玩家提供服务。
+
+和很多区块链一样， 为了快速扩展及网络稳定，CARV 引入验证者节点，以审查每个协议层的结果。节点奖励最初将以 $veCARV 的形式发放，即 CARV 代币的质押版本。
+
+CARV 节点由Animoca Brands 提供基础设施运营，确保网络正常运行时间和稳健性。这也使得Animoca Brands 及其 400 多家游戏和元宇宙公司能够参与 CARV 的治理投票系统——Infinite Play。
+
+正因平台强大的整合能力，CARV 得到了顶级基金和生态系统5000万美元的融资，例如淡马锡的 Vertex Ventures、ConsenSys（Metamask 的开发商）、Tribe Capital、IOSG Ventures、Animoca Brands、HashKey Capital、Infinity Ventures Crypto、 MARBELX等。
+
+ 
+
+以上就是关于 The Banana Game 全部内容。
+
+我们来币圈很多时候都是为了翻身，很多需要高投入的项目我们可能承担不了那么大的风险，这个时候我们需要选择那种用户少、投入少，刚开始上线，且资产能在代币上线前可交易可变现的项目。
+
+The Banana Game 0 投入，除了获得本币和平台币空投外，NFT在代币上线前就可以在二级市场直接变现，现在上线才4天，符合用户少、投入少，资产可交易的项目。
+
+ 
+
+每个空投都可以多号操作，目前我用的多号工具是：MorLogin指纹浏览器，经过测试 MoreLogin 在安全层面下足了功夫：
+
+https://www.morelogin.com/?from=AANvwSB8onX4
+
+大家最关心的钱包插件方面，MoreLogin 做了层层加密，即使是别有用心的人侵入了你的电脑，拉走钱包插件文件，也无法进行破解。这个是我一直在用的，其他的chrome 内核的浏览器数据都是通用的并非进行数据加密。
+
+空投多开教程如下：https://link.medium.com/AJTESILAHL
+参考文献：https://cryptoadventure.com/carv-brings-on-animoca-brands-as-strategic-investor-and-node-operator/

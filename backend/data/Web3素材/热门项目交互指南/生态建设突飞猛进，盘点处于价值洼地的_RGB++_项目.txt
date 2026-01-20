@@ -1,0 +1,99 @@
+标题: 生态建设突飞猛进，盘点处于价值洼地的 RGB++ 项目
+链接: https://www.chaincatcher.com/article/2123736
+发布时间: 2024-05-10
+
+==================================================
+
+作者：Golem，Odaily 星球日报
+
+ 
+
+RGB++ 是一个基于 RGB 的扩展协议，在技术上同样利用一次性密封条和客户端验证来管理状态变更和交易验证。区别于 RGB 协议需要用户运行客户端验证交易，RGB++ 通过同构绑定把比特币 UTXO 映射到 Nervos CKB 的 Cell 上，将 Nervos CKB 直接充当 DA 层，虽然牺牲了一部分隐私性，但为比特币带来了无须跨链、不损失安全性的图灵完备合约扩展和性能扩展。
+
+因设计的优越性及首个资产 Seal 发行引发的市场 FOMO，即使在生态一片空白的情况下， 4 月份的香港大会仿佛也成为了 RGB++ 协议的布道主场，人们生怕错过 RGB++ 这趟未来财富列车。然而，时过境迁，短短 1 个月 RGB++ 协议热度已不及当初，龙头资产 Seal 地板价从高点跌幅超过 70% ，交易量也萎缩。
+
+RGB++ 协议究竟是昙花一现，还是在低谷中积蓄力量，生态建设程度是最好的检验标准。下面 Odaily 星球日报将从钱包、DEX、基础设施、娱乐、工具等角度盘点 RGB++ 生态项目，以期为读者呈现该协议上线后生态发展的现状。
+
+钱包
+
+JoyID
+
+JoyID 是构建在 Nervos CKB 上的多链、跨平台钱包。 它允许用户使用生物识别来创建和使用钱包，而无需使用密码或助记词。同时它是第一个支持 RGB++ 资产的钱包，用户不仅可以使用它在比特币主网转移 RGB++ 资产，也可以使用其内置的 DEX 在二层 Nervos CKB 上交易 RGB++ 资产。
+
+REI Wallet
+
+REI Wallet 是一款原生的 Nervos CKB 浏览器插件钱包，目前也已经兼容 RGB++ 协议， 4 月 25 日发出了测试网版本，目前虽然支持了主网，但据悉也还在测试中。
+
+DEX
+
+HueHub
+
+HueHub 是比特币主网上第一个基于 RGB++ 资产的 Launch 平台和去中心化交易所，用户可在平台公平发行和铸造 RGB++ 资产，并且在主网上交易。HueHub 支持连接 JoyID、Unisat、OKX 等主流比特币钱包。
+
+Omiga
+
+Omiga 是二层 Nervos CKB 上第一个基于 RGB++ 资产的去中心化交易所，其原本是建立在 Nervos CKB 上的铭文项目，当 RGB++ 协议火爆时，选择为 RGB++ 生态做建设。目前平台已经支持批量扫货的功能。
+
+Nomadland
+
+Nomadland 是一家支持 RGB++ 资产的比特币服务提供商。目前主要开发了 RGB++ 资产的交易市场，AMM swap 功能预计将在 5 月中旬上线。同时 Nomadland 还开发了 RGB++ 插件钱包，支持 RGB++ 资产在 BTC 主网和二层 Nervos CKB 是自由双向 Leap。
+
+UTXOSwap
+
+UTXOSwap 是基于 BTC 生态的去中心化交易所（DEX）协议，旨在通过意图（Intent-based）交易为用户提供更好的交易体验，主要特点为融合订单簿和 AMM 的优势、交易效率更高、交易 Gas 更低等。UTXOSwap 首先会支持 RGB++ 和 CKB 生态的资产进行交易，未来计划还将支持 Ordinals 和 Runes 等其他 BTC 生态资产。但其目前只发布了白皮书，预计将在 5 月底进行公测。
+
+基础设施
+
+UTXO Stack
+
+UTXO Stack 由区块链软件开发公司 CELL Studio 推出，是比特币生态中的 RAAS（Rollup as a Service），类似于以太坊生态中的 OP Stack，其能够帮助开发者一键发行基于 UTXO 架构的 BTC Layer 2 。并且原生兼容 RGB++ 协议，使资产可以在 BTC 和同构的 UTXO 链之间无缝传输，无需跨链桥。同时其还融合了 EigenLayer 提出的 Restaking 概念，可通过质押 BTC、CKB 等资产保障 同构链的安全。
+
+UTXO Stack 已经完成种子轮融资，由 ABCDE Capital 和 SNZ Holding 领投，OKX Ventures、Waterdrip Capital 等参投，金额未披露。
+
+稳定币
+
+Stable++
+
+Stable++ 是第一个基于 RGB++ 协议发行的超额抵押稳定币，通过超额抵押 BTC 和 CKB 发行稳定币 USDPP，利用 RGB++ 协议的 Leap 功能，USDPP 可以在比特币区块链及其他 UTXO 同构链中自由流通。Stable++ 团队成员主要来自于 Google、斯坦福大学、加州大学伯克利分校等，同时其已获得 CKB 生态基金 Eco Fund 的投资。
+
+娱乐
+
+World 3 
+
+World 3 是基于 RGB++ 协议和 数码物（DOB） 的比特币自主世界。World 3 将以比特币主网为数码物的资产控制层，以 Nervos CKB 为数码物的 DA 层和智能合约层，打通比特币和其余生态链。
+
+团队计划将在 BTC 主网上空投 DOB，并逐步开放基于 DOB 的交互测试场景。World 3 此前已经获得了 600 万美元的融资，Animoca Brands、Dapper Labs、EVG、Com 2 uS 等公司参投。
+
+SilentBerry
+
+SilentBerry 是一个基于 RGB++ 协议的 Web3 数字音乐发行平台，为数字音乐资产的发行、投资、收益分配提供一站式生态服务。其中 FT 资产 $Berry 将在 BTC 主网发行，总供应量为 6, 600 万，每张 10, 000 $Berry，共计 6, 600 张，NFT 资产在 Nervos CKB 和其他区块链生态系统上发行。
+
+目前产品还未上线，预计将在 5-6 月份正式推出 SilentBerry 平台。
+
+DID
+
+.bit
+
+.bit 是 d.id 旗下的去中心化身份协议，其在 4 月 15 日宣传支持 RGB++ 协议，使.bit 能够运行在 BTC 网络上。目前.bit 已经支持对比特币地址的绑定和解析，可以直接通过.bit 转移比特币和 RGB++ 资产。同时，.bit 计划打造多链 DID，以比特币区块链为基础，跨越其他链生态。
+
+治理
+
+Metaforo
+
+Metaforo 是一个 2021 年成立的老牌去中心化社区治理协议， 5 月 9 日宣布支持 RGB++ 协议，用户可以使用 CKB 或 RGB++ 资产参与去中心化社区治理，进行投票或者快照等。RGB++ 上的首个资产 $seal 是第一个接入 Metaforo 协议进行投票治理的 RGB++ 社区。
+
+工具
+
+CKB Explorer
+
+CKB Explorer 是 Nervos CKB 区块链的浏览器，不仅可以了解 Nervos CKB 网络运行数据，还支持查看 RGB++ 资产与相关交易。
+
+Haste
+
+Haste 是社区开发的 RGB++ 资产管理器，不支持 RGB++ 协议的钱包如 OKX Wallet、Unisat 等，可通过此管理器转移 RGB++ 资产。
+
+总结
+
+综上，在市场热度减退的情况下，RGB++ 生态建设并未停滞不前，钱包、DEX、基础设施等生态关键部件正在稳步建设。从 2 月份推出协议概念到 4 月份上线主网，短短几月时间已经有多个项目在填补其生态的空缺，实际上这在比特币生态众多资产协议中也算发展迅速了。
+
+但 RGB++ 协议并非没有争议，有社区成员诟病其蹭 RGB 协议概念，及其对 Nervos CKB 的过度依赖表示担忧。RGB 协议创始人 Maxim Orlovsky 也曾发文说明 RGB++ 与 RGB 没有任何关系。

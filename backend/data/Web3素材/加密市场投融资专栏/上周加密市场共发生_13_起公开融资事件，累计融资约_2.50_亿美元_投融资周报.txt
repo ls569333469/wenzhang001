@@ -1,0 +1,113 @@
+标题: 上周加密市场共发生 13 起公开融资事件，累计融资约 2.50 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2177995
+发布时间: 2025-04-21
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 4 月 14 日- 4 月 20 日期间，区块链和加密行业共发生 13 起公开投融资事件，累计融资约 2.50 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和 DeFi 赛道。热门项目包括去中心化 AI 平台 ORO AI、DeFi 协议 Neutrl 、加密投资初创公司 Glider、比特币矿机制造商 Auradine。
+
+此外，比特币矿机制造商 Auradine 完成 1.53 亿美元 C 轮融资，StepStone Group 领投，Maverick Silicon、Premji Invest、Samsung Catalyst Fund、Qualcomm Ventures、Mayfield、MARA Holdings、GSBackers 和其他现有投资者参投。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+EdgeX Labs 获得 Ryze Labs 战略投资，推进全球边缘计算布局
+
+EdgeX Labs 宣布完成来自 Ryze Labs 的战略融资。作为一家专注于去中心化边缘计算与 AI 智能代理的平台，EdgeX Labs 将利用本轮资金加速全球边缘节点的部署、优化 EdgeX OS 系统性能，并拓展核心产品 EdgeX AI Agent 的生态应用。
+
+EdgeX Labs 正构建融合边缘计算、AI Agent 与 Web3 的智能基础设施网络，已在全球部署超过 10,000 台 XR7、40SoC Edge Server 等边缘设备，支持多 AI 代理协同运行，提升 AI 推理效率并保障数据隐私。
+
+目前，EdgeX Labs 已与 Google Cloud (GCP)、MTK Edge、ROAM 等建立合作，推进核心技术的落地与全球扩展。
+
+本轮投资方 Ryze Labs 的加入，为 EdgeX Labs 生态注入新动力。此前，项目已获得 Waterdrip Capital 与 ZC Capital 的早期支持。
+
+去中心化 AI 平台 ORO AI 完成 600 万美元种子轮融资，a16z CSX 和 Delphi Ventures 领投
+
+据官方消息，去中心化 AI 平台 ORO AI 宣布完成 600 万美元种子轮融资，a16z Crypto Startup Accelerator (CSX)和Delphi Ventures 领投，Ocular VC、Orange DAO、NEAR Protocol 和 0G Labs 参投。
+
+据介绍，ORO 是一个去中心化的 AI 平台，旨在为高级 AI 模型解锁优质、私密的数据。ORO 利用区块链技术，促进安全且经过许可的数据共享，使 AI 开发者能够在质量数据集上训练模型，同时保护数据隐私。
+
+基于区块链的数据验证平台 Rekord AG 完成约 551 万美元种子轮融资
+
+据 Startupticker 报道，基于区块链的数据验证平台 Rekord AG 完成 450 万瑞士法郎（约 551 万美元）种子轮融资，投资方未披露。
+
+据介绍，Rekord AG 是一家总部位于瑞士的数据基础设施公司，专注于区块链支持的数据验证和完整性解决方案。
+
+去中心化高性能内存基础设施 Optimum 完成 1100 万美元种子轮融资，1kx 领投
+
+据官方消息，适用于任何区块链的去中心化、性能增强型内存层 Optimum 完成 1100 万美元的种子轮融资，1kx 领投，Robot Ventures、Finality Capital、Spartan、CMT Digital、SNZ、Triton Capital、Big Brain、CMS、Longhash、NGC、Animoca、GSR、Caladan、Reforge 等参投。
+
+Optimum 创新的核心是一种针对分布式系统的分散编码方法，称为随机线性网络编码 (RLNC) ，由麻省理工学院教授 Muriel Médard 开发。
+
+据 Web3 资产数据平台 RootData 显示，全链扩容方案 Optimum 是一个面向区块链的去中心化高性能内存基础设施。基于随机线性网络编码(RLNC)技术，Optimum 提供两大核心产品：高性能节点通讯层 OptimumP2P 和去中心化内存层 DeRAM，旨在为任意区块链网络提供高效的数据传输、存储和访问解决方案。
+
+二、DeFi
+
+DeFi 协议 Neutrl 完成 500 万美元种子轮融资，STIX 等领投
+
+据 CoinDesk 报道，DeFi 协议 Neutrl 宣布完成 500 万美元种子轮融资，数字资产私募市场 STIX 和风险投资公司 Accomplice 领投，Amber Group、SCB Limited、Figment Capital 和 Nascent 等众多加密货币天使投资者参投，包括 Ethena 创始人 Guy Young 和 Arbelos Markets（最近被 FalconX 收购）的衍生品交易员 Joshua Lim。
+
+据 Web3 资产数据平台 RootData 显示，Neutrl 是一种高收益的合成美元协议，利用场外套利策略在山寨币市场上获得可扩展的、市场中性的回报。
+
+Delta 中性稳定币协议 Resolv Labs 完成 1000 万美元种子轮融资，Cyber​​.Fund 和 Maven11 共同领投
+
+据 CoinDesk 报道， Delta 中性稳定币协议 Resolv Labs 宣布完成 1000 万美元种子轮融资，Cyber.Fund 和 Maven11 共同领投，Coinbase Ventures、Susquehanna、Arrington Capital 和 Animoca Ventures 等参投。
+
+据 Web3 资产数据平台 RootData 显示，Resolv 是一种 Delta 中性稳定币协议，围绕市场中性投资组合的代币化展开。 该架构基于经济上可行且独立于法币的收益来源。 这允许将有竞争力的回报分配给协议的流动性提供者.
+
+加密投资服务公司 Glider 完成 400 万美元融资，a16z 领投
+
+据 Fortune 报道，加密投资初创公司 Glider 完成 400 万美元融资，a16z 领投，Coinbase Ventures、Uniswap Ventures 和 GSR 参投，估值信息暂未披露。
+
+这家总部位于纽约的公司计划利用人工智能帮助用户根据自身需求调整加密货币投资，今年春天将加入 Andreessen Horowitz 加密货币创企加速器。
+
+数字资产基础设施公司 Treehouse 以 4 亿美元估值完成新一轮融资
+
+据官方消息，数字资产基础设施公司 Treehouse 完成一轮战略融资，估值达 4 亿美元。
+
+本轮由管理超 5,000 亿美元资产的大型金融服务机构风险投资部门领投，联合多家加密货币及传统金融领域知名投资者。天使投资人包括 Jordi Alexander（Selini）、Guy Young（Ethena）、Darius Sit（QCP）、Rich Teo（Paxos）、Matthew Tan（Etherscan）、Michael Ashby（Algoquant）、Mirko Schmiedl（Staking Rewards）、Jack Yang（LTP）、Benedict Chan（Chainlink）以及 Lido 和 EtherFi 的关键贡献者。
+
+此轮融资延续了 Treehouse 1,800 万美元种子轮的基础，当时获得 Binance、Lightspeed、Jump Capital、Mirana Ventures、Wintermute、GSR 等多家大型机构支持。
+
+据 Web3 资产数据平台 RootData 显示，Treehouse 是一家数字资产数据公司，专注于机构级投资组合、协议和市场分析。该公司的旗舰产品 Hyperion 是最全面的投资组合管理和市场情报平台，为机构投资者和专业交易者提供对其数字资产的完全控制。该平台精选 30 多个投资组合和市场小部件，用于个性化仪表板可视化，重新定义了财务专业人士如何监控 加密货币领域的动向并分析其投资组合风险和绩效。
+
+三、游戏
+
+Meme 应用链 Embr.fun 完成 180 万美元融资，Robot Ventures 等领投
+
+基于 Initia 构建的 Meme 应用链 Embr.fun 宣布完成 180 万美元融资，本轮融资由 Robot Ventures、Lattice Fund 领投，TempleDAO 等参投。
+
+Embr.fun 由 Embr Labs 构建，并由 Initia Interwoven Stack 提供开发支持。该项目专为下一代 Meme 经济而构建，旨在带来 Meme 更多创新趣味玩法，成为推动下一代 Meme 发展的首先平台。
+
+四、其他
+
+a16z 再度对 LayerZero 投资 5500 万美元，锁定期为 3 年
+
+a16z 普通合伙人 Ali Yahya 发推表示，a16z 已经对 LayerZero 代币 ZRO 额外投资 5500 万美元，锁定期为 3 年。当前，ZRO 报价 2.5 美元，近 24 小时上涨 5.7%，FDV 为 25 亿美元，此前最高价为 7.1 美元。
+
+据 RootData 数据显示，此前在 2023 年 4 月，a16z 曾领投 LayerZero 的 1.2 亿美元融资，估值为 30 亿美元。此前在 2022 年3 月，a16z 还曾领投 LayerZero 的 1.35 亿美元融资，估值为 10 亿美元。
+
+比特币矿机制造商 Auradine 完成 1.53 亿美元 C 轮融资，StepStone Group 领投
+
+据 The Block 报道，比特币矿机制造商 Auradine 完成 1.53 亿美元 C 轮融资，StepStone Group 领投，Maverick Silicon、Premji Invest、Samsung Catalyst Fund、Qualcomm Ventures、Mayfield、MARA Holdings、GSBackers 和其他现有投资者参投。
+
+Auradine 联合创始人兼首席执行官 Rajiv Khemani 表示，此轮融资超额认购超过 22%，新资金将用于进军人工智能基础设施领域。
+
+Futureverse 收购 Candy Digital，并与 Netflix 和 DC Comics IP 达成合作
+
+据 Decrypt 报道，元宇宙技术公司 Futureverse 于 2025 年 4 月 16 日宣布收购数字收藏品平台 Candy Digital，交易金额未披露。此次收购使 Futureverse 获得了 Candy Digital 的 400 万数字收藏品和 150 万用户账户，以及与 Netflix、DC Comics 和 MLB 等蓝筹品牌的合作关系。
+
+据悉，Futureverse 成立于 2022 年底，曾在 2023 年完成 5400 万美元 A 轮融资，估值约 10 亿美元。
+
+Tether 宣布战略投资自托管加密钱包 Fizen
+
+Tether 宣布对自托管加密钱包和数字支付金融科技公司 Fizen 进行战略投资，具体金额暂未披露。
+
+据悉，Fizen 提供支付技术，助力实现无缝衔接的稳定币交易，让消费者和企业更便捷地获取数字资产。

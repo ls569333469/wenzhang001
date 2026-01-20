@@ -1,0 +1,7 @@
+标题: PeckShield：GMX 和 MIM 相关合约已被黑客入侵，损失约 650 万美元
+链接: https://www.chaincatcher.com/article/2174142
+发布时间: 2025-03-25
+
+==================================================
+
+ChainCatcher 消息，据 PeckShield 监测，GMX 和 MIM Spell 相关合约已被黑客入侵，损失约 3260 ETH（价值约 650 万美元）。

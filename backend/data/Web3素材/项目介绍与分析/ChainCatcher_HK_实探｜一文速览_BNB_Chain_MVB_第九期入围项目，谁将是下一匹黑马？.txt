@@ -1,0 +1,123 @@
+标题: ChainCatcher HK 实探｜一文速览 BNB Chain MVB 第九期入围项目，谁将是下一匹黑马？
+链接: https://www.chaincatcher.com/article/2175793
+发布时间: 2025-04-06
+
+==================================================
+
+作者：ChainCatcher
+
+ 
+
+4月5日，香港铜锣湾谢斐道535号，AWS办公空间内，一场低调而专注的闭门活动正在进行。BNB Chain联合YZi Labs和CMC Labs主办的“最有价值建设者”（MVB）加速器计划第九期入围的16个项目方均聚集于此。
+
+这场为期4周的加速器计划旨在为BNB Chain生态系统培养技术驱动的创新者，BNB Chain业务负责人Sarah 表示，MVB第九期专为真正的建设者打造。在现场，Chain Catcher HK 实探小助手确实感受到了浓厚的希望气息。
+
+接下来，小编将梳理入围的16个项目，看看是否会跑出下一匹黑马？
+
+（市场不易，到处走走看看，才有可能挖掘希望的小火种）
+
+AI
+
+bitGPT
+
+bitGPT Network 是一个去中心化 AI 代理网络,核心理念是构建一个隐私友好、可互操作、普惠可及的AI 生态，推动“委托经济”（Delegation Economy），使 AI 真正为人类服务，同时确保用户对个人数据的完全掌控。
+
+bitGPT 采用“中心辐射式”架构，结合代理层、盲训练协议、安全隔离环境、门限 Paillier 同态加密和零知识证明等技术，并专注于SLMs（小型语言模型），在效率与安全之间取得平衡。通过引入 Delegates（AI 代理），实现了 AI 在链上和链下的自主决策与任务执行，支持从加密交易到数据分析等多种应用。
+
+Datai Network
+
+Datai Network为链上AI提供结构化数据层，将原始区块链数据转换为结构化、可用于 AI 的智能数据。
+
+Datai 通过提炼、关联和组织多条区块链的数据，将其整合成一个智能化的统一数据层。Datai 专有的数据增强流程能够挖掘关键信号和模式，为 AI 模型提供对链上动态的深入理解。这使开发者能够做出 更智能的、基于数据的决策，无论是构建 AI 代理、dApp，还是探索 Web3 生态。
+
+Echopy
+
+Echopy是BNB Chain 生态 AI 投资组合优化器，分析市场趋势和数据。Echopy通过人工智能实时分析市场趋势、情绪变化、社交媒体数据以及顶级分析师的行为，帮助用户发现潜在的 Web3 投资机会，并提供可执行的操作建议。
+
+Echopy 采用免费增值模式，允许用户测试核心功能，并通过订阅模式解锁高级功能。目前，Echopy 支持 BNB Chain 上的资产和 dApp。未来将进一步扩展到其他区块链。
+
+EureXa AI
+
+EureXa AI是首个机器人技术链上通证化平台。EureXa AI利用RST（机器人主权代币）协议连接开发者、投资者和企业，加速机器人模型的训练和商业化，为早期机器人技术提供资金和资源支持。
+
+Everlyn
+
+Everlyn是高速Web3视频生成工具。2月6日Everlyn宣布推出专为视频 AI 设计的 L1 网络Lyn，Lyn 由其自研的自回归基础视频模型 Everlyn-1 提供支持。
+
+Lyn 生态系统的原生资产是 LYN 代币，Lyn 生态系统及其平台 Everworld 的核心是 LYN，它是支持所有代理间活动、奖励所有任务执行并充当平台内主要货币的代币。LYN 代币初始总供应量为 1,000,000,000 枚。
+
+分配情况如下：
+
+JoJoWorld 
+
+JoJoWorld是去中心化3D空间数据平台，用户可以在镜像现实中使用虚拟化身，体验自己的理想生活。jojoWorld 支持前沿基础模型的训练，如 Text-to-3D 模型训练以及具身机器人（Embodied Robotics）等应用。
+
+Super Protocol
+
+Super Protocol是协作式机密AI市场。在 Super Protocol cloud中，机密计算技术可在数据执行过程中提供安全保护，而基于区块链的去中心化网络则确保所有流程的 协调、透明性和可验证性。
+
+Super Protocol 于 2024 年 11 月 27 日 推出了 Marketplace 2.0 的首个公开版本。该版本提供 OAuth2 登录、支持 Intel TDX 和 NVIDIA GPU 机密计算、模型文件上传、机密通道 AI 部署以及全新 UI/UX 体验。
+
+TermiX
+
+TermiX 是AI 驱动的 Web3 操作系统，支持无代码 AI 代理集成与创建。TermiX 通过 Chat2Agent 智能代理 和 TermiX Agent Universe（TAU） 生态系统，提供可插拔的智能代理组件、跨链原子指令集（TAIS）、无代码工作流编辑器，并支持个性化定制。它让开发者和用户能够高效创建和共享 Web3 任务，推动 Web3 生态系统的发展。
+
+基础设施
+
+Pieverse
+
+Pieverse Timepot 是一个构建于 BNB Chain 上的创新型时间经济平台，旨在解决当前 Web2 与 Web3 时间变现过程中的四大痛点：变现难、流通差、信任低、激励错配。Timepot 创建了一套结构化、公平化、实用化的链上时间交易基础设施，让每一份时间都能被合理定价、有效流动。
+
+平台核心包括三大功能模块：Time Bid（时间竞标），让用户以公平竞价方式获取名人或专家的时间；Time Draw（时间抽奖），用小额参与的形式，赢取与目标人物互动机会或集体众筹内容；Time Task（时间任务），支持普通用户之间的技能交换与时间服务。Timepot 未来还将支持法币支付与链上智能合约保障，促进 Web2 与 Web3 的无缝融合，致力于成为全球首个时间价值基础设施。
+
+DeFi 
+
+BitFi
+
+BitFi是原生BTC生息CeDeFi解决方案，为 BTC 资产提供原生收益解决方案。对 BTC、BSC、Bitlayer 和 Hemi 等主要区块链的 BTC 资产提供原生支持，预计年收益率 (APY) 为 4.5% 以上。
+
+用户在 BitFi 平台上存入资产后，将获得相应的流动性质押代币 bfBTC 和 bfUSD。bfBTC 和 bfUSD 可以在生态系统内自由流通，从而可以参与 DeFi 挖矿、流动性提供、治理和其他产生收益的活动。
+
+2024年7月，BitFi 宣布完成种子轮融资，Fundamental Labs、IBC Group Ventures、CGV FoF、TyreGate Capital Group 和 Citizen Journalism Network Accelerator (CJNA)参投，具体金额暂未披露。
+
+LIKWID
+
+LIKWID是无许可、无预言机的保证金交易协议。Likwid Protocol 基于 Uniswap V4 的流动性池，提供了一种完全去中心化的衍生品机制。
+
+Likwid Protocol 采用资金池模式，即用户提供的流动性被整合至共享池，其他用户可以借入这些资金进行做空或杠杆交易。借贷不需要借款人与放款人一一匹配，而是依赖池内的总流动性和用户抵押品状态。这种模式允许根据资金池状况进行即时贷款操作，最大化资金效率。
+
+DePIN
+
+XPIN
+
+XPIN是AI驱动的消费者级DePIN平台，将去中心化无线技术与用户创新结合。通过针对各种用例量身定制的一系列产品（例如 Global eSIM、XPIN PowerLink、XPIN BOX 和 XPIN 基站），满足全球网络连接的需求。XPIN 还推出了可交易的收益 AI 代理 Xtella.AI。
+
+XPIN 代币PIN总供应量为 1000 亿枚，其中，8% 用于空投；2% 预留给IDO 和IEO 期间的公开代币销售；40% 用于生态系统激励；投资者分配20%；团队和基金会分别分配20%和10%。
+
+DeSci
+
+Citadel Labs
+
+Citadel Labs 是深科技项目启动平台，致力于利用区块链和去中心化工具重塑科学研究与商业化模式，打造新一代融资生态。其投资范围涵盖慈善、专利代币、风险投资等领域。
+
+Citadel Labs生态流动方式：
+
+Stadium Science
+
+Stadium Science是一个面向科学领域的预测市场。Stadium Science通过加密激励的预测市场、研究挑战和数据验证机制，将用户的可穿戴设备数据转化为科学发现。
+
+目前，Stadium Science 以睡眠科学为起点，允许用户加入实验、贡献数据，并通过预测市场探索不同的研究协议。平台采用基于加密经济学的验证系统，确保数据的真实性和可靠性，同时保护用户隐私。
+
+游戏与娱乐
+
+Oneverse
+
+Oneverse是为游戏产业打造的虚拟经济引擎，旨在打破传统游戏与 Web3 游戏之间的壁垒。通过统一游戏货币 OOC，Oneverse 实现跨游戏经济互通，让玩家能够在不同游戏中自由交易和互动。
+
+此外，Oneverse 提供 东南亚及拉美 60+ 可靠支付渠道，确保用户获得无缝支付体验。Oneverse 还整合了开发工具、服务和数据分析，为游戏开发者提供生态支持。
+
+TCOM Global
+
+TCOM Global是AI+Web3去中心化IP协议，结合 AI 与 Web3 技术，赋能内容创作者与社区，实现更公平、高效的 IP 生产、治理与商业化。TCOM 由 ACGWORLDS Co., Ltd. 和 Tezuka Productions Co., Ltd. 共同管理，并计划推出 NFT 系列、GameFi 运营及代币发行。
+
+此外，其将打造一个用户共创的 N 次创作空间，让用户参与内容创作，并推动各种新内容的生产、销售和发布。

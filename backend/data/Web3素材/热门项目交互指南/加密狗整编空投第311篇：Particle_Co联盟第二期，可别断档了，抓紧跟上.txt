@@ -1,0 +1,119 @@
+标题: 加密狗整编空投第311篇：Particle Co联盟第二期，可别断档了，抓紧跟上
+链接: https://www.chaincatcher.com/article/2136476
+发布时间: 2024-08-01
+
+==================================================
+
+ 
+
+月初@ParticleNtwrk发布Co联盟第一期，一个账户、一个余额、链接任何链。我撸了一个月，确实省心省力，一鱼多吃估计妥妥的。
+
+这次Particle 加入Base、Linea、Taiko、Kakarot、Zircuit等公链，里面有几个可得重点交互呢。
+
+ 
+
+教程如下：
+
+一、先来说说Particle推出的 Co 联盟的意义 1.1 Particle Co 联盟概念
+
+Particle推出的Co-Testnet联盟是行业的首创活动，该联盟由 60 多个公链组成，包括EVM、非 EVM 和 BTC 生态系统，例如Arbitrum、Avalanche、Berachain、Botanix、BNB Chain、Linea……
+
+在这个联盟内，我们只需要一个账户、一个余额，就能链接所有链。
+
+ 
+
+ 
+1、Particle的Co联盟意义在哪里呢？（举例说明）
+
+举个Web2的例子，比如全球金融体系内VISA、Apple Wallet、Paypal等（用中国的话可以比作：银联或云闪付、支付宝），他们可以链接所有银行账户和支付体系。
+
+如果他们有自己的电子货币，比如叫“Apple币”，你将货币转入Apple Wallet，就相当于认购了等额的Apple币，用户只需要使用Apple Wallet就可以用Apple币在各金融生态中畅游，金融生态中的各中福利也全部都由Apple Wallet享受，实现一个账户、一个余额，就能链接所有生态。
+
+2、Particle的Co联盟意义在哪里呢？（Web3模式）
+
+回到Web3，现在各公链达到几百个，各公链有自己钱包，GAS又基本都是独立的。用户想要入门需要先学习各种专业知识，无形中增加新人门槛。
+
+Particle 提出的概念就是像Apple Wallet那样，想只通过一个账户、一个余额，链接所有生态。
+
+Particle 现在“一个账户”和“一个余额”已经跑通，之前的测试网我们也都体验过，现在就开始就是“链接所有生态”。Particle的Co联盟的意义就在这里，通过技术手段，逐渐打通EVM、非 EVM 和 BTC 生态系统，实现真正的“一个账户、一个余额，链接所有生态”
+
+上面举例中，我们说使用Apple Wallet可以享受金融生态内各机构福利。在Particle也是一样，合作的公链如果有激励活动，通过Particle交互的，Particle用户也能享受相关福利，比如最近上的Base、Linea、Kakarot、Zircuit
+
+ 
+
+ 
+二、具体交互教程
+
+ 
+
+1、基本操作
+
+· 进入官网注册：https://pioneer.particle.network/?inviteCode=A58DD1…，邀请码：A58DD1
+
+· 领水
+
+· 完成任务2：将 ETH Sepolia 转入Particle 测试网
+
+以上两步请参照往期教程（只做到任务2，剩下的操作请看下文）： https://link.medium.com/f5PkUidFGLb
+
+ 
+
+2 、完成Co-Testnet 第二期活动
+
+这一步对应上文教程中的（步骤三），只不过Co-Testnet 第二期活动要做Base、Linea、Taiko、Kakarot、Zircuit等公链的交互。
+
+交互示例如下：
+
+ 
+
+ 
+3、 完成官网任务三
+
+· 打开AA钱包（复制地址）
+
+· 点击 Send
+
+· 粘贴AA钱包地址
+
+· 选择目标链，这里选择（Base、Linea、Taiko、Kakarot、Zircuit ）
+
+· 输入转账数量
+
+· 确认
+
+需要注意的是，选择ETH作为主链，手续费比较高，建议第一笔多转一些ETH到其他链（比如Base），然后用Base链往这几个链互转。
+
+ 
+
+ 
+4 、完成官网任务四（购买NFT）
+
+这个任务是需要在不同链上购买NFT，每天可以交互5次，交互50次可以CO-TESTNET NFT。
+
+· 页面下拉，找到任务四
+
+· 点击PURCHASE NFT
+
+ 
+
+ 
+
+· 选择链
+
+· 点击PURCHASE
+
+· 选择想要支付的资产
+
+· NEXT
+
+· 确认
+
+需要注意的是，购买不同链上的NFT，并不需要你在该链上持有相关ETH，只需要通过USDG支付即可。比如你想在Linea上也购买NFT，不需要将ETH转入Linea。这就是“一个账户、一个余额，链接所有生态”的贯彻。
+
+ 
+
+ 
+
+每个空投都可以多号操作，目前我用的多号工具是：MorLogin指纹浏览器，经过测试 MoreLogin 在安全层面下足了功夫。
+
+空投多开教程如下（有为期一个月，50个免费环境）： https://link.medium.com/ksIzjipHGLb

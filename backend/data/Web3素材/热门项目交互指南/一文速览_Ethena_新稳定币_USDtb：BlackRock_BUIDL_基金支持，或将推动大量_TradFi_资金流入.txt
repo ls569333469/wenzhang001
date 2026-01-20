@@ -1,0 +1,47 @@
+标题: 一文速览 Ethena 新稳定币 USDtb：BlackRock BUIDL 基金支持，或将推动大量 TradFi 资金流入
+链接: https://www.chaincatcher.com/article/2157847
+发布时间: 2024-12-18
+
+==================================================
+
+作者：Weilin，PANews
+
+ 
+
+12月16日，DeFi项目Ethena Labs宣布其新稳定币USDtb正式上线。作为一款基于区块链的美元稳定币，USDtb的90%储备资金投资于BlackRock的代币化基金BUIDL，并与头部现实资产代币化公司Securitize合作。
+
+上线首日，根据DefiLlama数据，USDtb的TVL达到了6450万美元。此前，Ethena CEO Guy Young预测，USDtb的首月TVL将会达到5亿到10亿美元。他还表示，一些 TradFi实体尽管并没有真正接触其他加密货币，但是目前对Ethena正在做的事情已经有相当大的敞口。
+
+由BlackRock BUIDL基金支持，应对熊市的市场波动
+
+新推出的USDtb是一个相对传统的加密稳定币，看起来与USDC和USDT几乎相同。唯一的区别是，Ethena用贝莱德的 BUIDL 国库基金作为抵押品支持这种稳定币。BUIDL是一种投资于等同于美元的资产（如现金、美国国债和回购协议）的代币化基金。并非Ethena管理财务资产，而是将其委托给现实世界中的不同银行或不同服务提供商。基本上，是让 BlackRock 和 Securitize 负责整个过程。因此，USDtb与Ethena的旗舰稳定币 USDe 的产品原理完全不同。
+
+USDtb将作为Ethena的备选稳定币，承接USDe在极端行情下的资金。Ethena的CEO Guy Young最近在Unchained播客中介绍，USDtb看起来与普通稳定币非常相似，本身不具有收益，因此购买它的散户用户不会像使用国债基金那样获得收益。他表示，这两种产品实际上是并行工作的，在98%的情况下，当加密货币汇率看起来比传统金融汇率更具吸引力时，USDe 的运作方式就像现在一样。然后，在环境发生变化的程度上（比如进入熊市），用户始终保留着选择权，能够关闭（头寸）并进入 USDtb，并在自己的产品中保留资产负债表。
+
+因此，USDtb可能帮助USDe的持有者“应对艰难的市场环境”。Ethena Labs在12月16日的公告中表示：“Ethena将能够关闭USDe背后的对冲头寸，并将其支持资产重新配置到USDtb，以进一步缓解相关风险。”
+
+该稳定币的90%由BlackRock的BUIDL支持，并与区块链代币化公司Securitize合作。Ethena的委员会成员之一Block Analiticia在已经批准的提案中指出，像USDC这样的稳定币将占USDtb储备的剩余10%，这些稳定币可以在国债市场无法交易的周末或其他时段提供额外流动性。USDtb的智能合约“核心”部分在10月通过了Pashov、Quantstamp和Cyfrin的三次完整审计。
+
+USDtb或将推动大量资金从TradFi流入
+
+Ethena Lab的合成稳定币 USDe于今年2月推出，随后迅速增长，现在是仅次于 USDT 和 USDC 的第三大稳定币。自11月1日以来，也就一个半月前，其市值翻了一番多，达到近 60 亿美元，甚至超过了 DAI 这一历史悠久的 DeFi 原生稳定币。
+
+USDe成功的关键在于它提供的收益率。该代币年收益率为27%，远高于DAI和USDS提供的12.5%。USDe是通过将比特币、以太坊或Solana存入Ethena协议，随后在像Bybit这样的期货交易所上开启做空（看跌）头寸而创建的。这创建了所谓的“delta中性”头寸，其中资产的价值和做空头寸相互抵消，从而保持整体价格的稳定。
+
+目前，由于大多数交易者对加密货币持看涨态度，他们向Ethena支付资金进行做空，而该协议通过质押将这些资金转给USDe持有者。只要这种情况持续下去，USDe的收益率应该会保持较高。但如果交易者转为看跌，Ethena将无法提供如此高的收益率。
+
+此外，Ethena推出的Staked USDe（sUSDe）是一种收益代币，用户可以通过质押USDe代币获得额外收益。通过质押奖励和基差交易（Basis Trading）策略，sUSDe为持有者提供了高收益。
+
+Blockworks Research 最近在推特上发布了关于 Ethena 主要使用的不同方式。Pendle 是资产超过 10 亿美元的 Staked USDe 的首选目的地，Aave 位居第二。Ethena CEO Guy Young最近在Unchained播客中介绍，Pendle 大约 50% 到 60% 的 TVL 建立在 sUSDe 之上。Aave 在几个月内增加了超过 10 亿TVL。
+
+回到新稳定币USDtb本身，在推出USDtb后，Ethena的增长主管 Seraphim Czecker, 表示，Ethena 的路线很清晰：
+
+- 将保守的 TradFi 纳入 USDtb
+
+- 让他们适应 USDe
+
+- 帮助他们了解 Aave、Maker 等 USDe 链上机会
+
+区块链研究与开发公司Delphi Labs的创始人之一José Maria Macedo预测USDtb将在推出后的一个月内成为最大的代币化国债产品。Ethena的增长负责人Seraphim Czecker表示，USDtb有潜力扩展到1000亿美元，因为该公司现在能够在看跌市场环境中有效地分配资本，通过“围绕国库券利率创建APY ‘地板’”来实现这一目标。“USDtb将推动大量资金从 TradFi 流入我们的领域，”Seraphim总结说。
+
+目前，Ethena 在许多不同的指标上确实已经超越了一堆加密原生协议。其中之一是它一直是费用最高的“发电机”之一。它曾多次超过了 Tether、Uniswap、Ethereum、Jito、Solana 等，已经成为DeFi用户互动的重要项目。

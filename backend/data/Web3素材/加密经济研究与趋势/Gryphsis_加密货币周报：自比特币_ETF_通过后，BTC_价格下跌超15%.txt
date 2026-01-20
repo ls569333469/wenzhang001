@@ -1,0 +1,237 @@
+标题: Gryphsis 加密货币周报：自比特币 ETF 通过后，BTC 价格下跌超15%
+链接: https://www.chaincatcher.com/article/2112255
+发布时间: 2024-01-23
+
+==================================================
+
+作者：Gryphsis
+
+ 
+
+市场和行业快照
+
+Layer 2 Overview:
+
+上周，Layer 2除了zkSync Era和Starknet 外，其余均呈下降趋势，但两者上涨幅度均不明显。像Mountain Protocol, Baklava Space, ZeroLend, StarkDefi 这些协议展示出了值得注意的 TVL 增长比例。
+
+
+
+
+LSD Sector Overview:
+
+在 LSD 领域，以太坊存入量和总退出量均有所上涨，但相对而言退出量更加明显。就市场份额而言，除了sfrxETH外，其余蓝筹LSD均有所下降，其中sfrxETH本周上涨4.25%。
+
+
+
+
+
+
+
+RWA Sector Overview: 
+
+上周，世界真实资产市值上涨15.25%，但24小时成交量上涨明显为111.02%。RWA代币化国库上涨和代币化美国国债价值均轻微上涨。值得注意的增长代币包括  $PENDLE, $MIMO 和 $TRADE, 像 $ELAND, $DEXTF 和 $EPOCH 这样的代币经历了较大的亏损。
+
+ 
+
+Main Topics
+
+宏观概述:
+
+US Stock V.S. Crypto
+
+本周大事件:
+
+BTC Price Drops Over 15% Following ETF Approval
+
+每周协议推荐:
+
+B² Network
+
+每周VC投资聚焦:
+
+WOO Network($9M)
+
+Fetcch($1.5M)
+
+DIMO($11.5M)
+
+推特Alpha:
+
+@TheDefiDog on $ARB
+
+@wacy_time1 on $SAVM
+
+@stacy_muur on AI
+
+@Vaultkaofficial on GLM
+
+@zerokn0wledge_ on Eigenlayer
+
+ 
+
+宏观概述
+
+本周，股市层面相比于加密行业变化幅度较强，SPX和NASDAQ分别增长1.17%和2.86%。在未来一周，要关注核心标普全球美国制造业采购经理人指数，加拿大央行利率决议，原油库存，存款利率等重大事件。
+
+ 
+
+本周大事件
+
+
+
+
+自BTC ETF通过后，BTC价格下跌超15%
+
+自1月11日新批准的现货比特币 ETF 开始交易以来，比特币（BTC）价格在（上）周四再次下跌4.5%，跌至一个月以来的最低价40,800美元，至今已经下跌了大约13%。此外，金融巨头摩根大通（JPM）周四在一份研究报告中表示，自上周现货交易所交易基金（ETFs）首次推出以来，比特币已经下跌了超过15%，而Grayscale Bitcoin Trust GBTC流出了15亿美元。
+
+K33研究分析师Vetle Lunde表示，全球的交易所交易产品（ETPs）目前持有超过864,000个比特币。然而，过去一周加拿大和欧洲的ETPs也出现了大量的资金流出，因为投资者在获利并/或将资金投入到更便宜的美国 ETF 中。
+
+此外，ProShares 比特币策略ETF（BITO），最近管理资产超过20亿美元。虽然这个基于期货的 ETF 没有持有比特币，但根据Lunde 的说法，它占据了芝商所（CME Group）比特币合约未平仓利益的36%。他补充说，基于期货的比特币 ETF 占据了 CME 所有比特币未平仓利益的48%。
+
+摩根大通的分析师团队指出，过去一年来购买 GBTC 基金的 GBTC 投资者，他们以较净资产价值（NAV）大幅折价买入 GBTC 基金，以期待其最终转为 ETF，现在在 ETF 转换后已经充分获利，他们选择完全退出比特币市场，而不是转向更便宜的现货比特币 ETF。
+
+该银行警告说，“如果 GBTC 失去其流动性优势，可能会有更多的资金，或许额外的50亿至100亿美元，退出 GBTC。”截至周五， GBTC 是同类产品中最昂贵的 ETF，有些在前六个月或达到一定的资产管理（AUM）目标之前不收取任何费用。
+
+https://www.coindesk.com/markets/2024/01/18/bitcoin-plunges-below-41k-as-sell-the-bitcoin-etf-news-wins-the-day/
+
+https://www.coindesk.com/markets/2024/01/19/bitcoin-exposed-to-possible-15b-in-future-gbtc-sales-jpmorgan-says/
+
+ 
+
+每周协议推荐
+
+欢迎来到我们的每周协议环节——在这里，我们会重点关注在加密空间掀起波澜的协议。本周，我们选择了 B² Network, 一个部署在 Bitcoin 网络上的ZK Rollup二层网络。
+
+
+
+
+B² 团队早在 2015 年就开始参与加密货币行业，在意识到Ordinals资产给比特币网络带来的创新机制和社区重大潜力，团队于2022年推出 B² Network，一个以零知识证明 Rollup 技的 EVM 兼容的网络，同时支持 BTC 地址和 EVM 地址的二层网络。在 OKX 公布 23 年投资年报中，B² Network 被列入其中，但具体的融资金额未知。
+
+由于比特币图灵不完备，所以零知识证明无法直接在 Layer 1 (比特币)上执行零知识证明验证。因而 B² Network 的 ZK-Rollup 方案只将零知识证明和 Rollup 的聚合数据通过Taproot写入比特币中，确保了 ZK-Rollup 的数据在比特币中是锚定的，并且无法篡改。但是，它并不能保证 ZK-Rollup 中的交易的有效性和正确性，也不能利用比特币的强大共识能力来确保 Layer 2 ZK-Rollup 的安全性。因此，需要在比特币上确认 ZK-Rollup，作为最终结算层。
+
+以下为其技术框架，主要包含以下几个部分：
+
+
+
+
+Source: Official Doc
+
+1.  Rollup Layer
+
+B² Network 采用 ZK-Rollup 作为 Rollup Layer，ZK-Rollup Laye r采用 zkEVM 解决方案，负责在 Layer-2 网络内执行用户交易并输出相关证明。用户的交易在 ZK-Rollup Layer 中提交和处理，状态也存储在 ZK-Rollup Layer 中。批量提案和生成的零知识证明会被转发到数据可用性层进行存储和验证。
+
+
+2.  DA Layer（数据可用性层）
+
+数据可用性层包括分散式存储、B² 节点和比特币网络。这一层负责永久存储 Rollup 数据的副本、验证 Rollup zk 证明，并最终在比特币上进行确认。
+
+
+3.  Decentralized Storage（分散式存储）
+
+B² Network 的一个关键方面，分散式存储作为 ZK-Rollup 用户交易及其相应证明的存储库。通过分散式存储，网络本质上增强了安全性，减少了单点故障，并确保了数据的不可变性。
+
+4.  B² 节点
+
+由多个模块组成，执行各种角色。它们通过zk存储证明和经济激励，激励分散式存储，确保 B² rollup 数据副本的准确和高效存储。验证 zk rollup 的证明，检查 zk rollup 交易和状态生成的准确性和效率。B² 节点的比特币提交模块，通过Tapscript将数据写入比特币，为 zk 证明验证创建位值承诺，并通过挑战-响应机制在比特币上执行最终确认。
+
+比特币网络是 B² Network 的最终结算层。用户可以通过比特币恢复所有 B² rollup 交易，并使用在比特币上记录的 zk 证明验证其真实性。B² Network 采用zk证明验证承诺和挑战-响应机制，在比特币上进行最终确认。这一过程得到比特币强大的工作证明（POW）算法的支持，确保了 B² rollup 的安全性。
+
+通过这些技术手段，B² 为 BTC 和其他比特币相关资产提供了构建应用的场景，使比特币不仅仅是“数字黄金”，而且是加密货币应用场景的领导者，为 BTC 相关资产奠定基础，让 DeFi、NFT、SocialFi 和其他应用程序能够蓬勃发展。
+
+ 
+
+我们的洞察
+
+比特币原本作为价值存储货币，其网络限制导致了交易堵塞限制了生态的发展。但随着 Ordinals 资产，铭文，BRC20 等资产概念爆火，似乎开辟了一条新的道路，比特币网络的市值和生态活跃度引来了爆发。
+
+从去年的11月开始，比特币市值增长了20.6%，生态交互费用增长了32倍。越来越多的用户和项目涌入比特币生态，而由于其图灵不完备，区块大小限制等等因素，无法承载爆火的网络需求，越来越多的比特币二层网络协议应运而生。
+
+
+
+
+Source: Tokenterminal
+
+比特币二层网络起初以闪电网络，Stacks, Rootstock, Liquid 等为主，以太坊创始人 Vitalik 在关于一场比特币生态的 Twitter Space 中建议，比特币需要像 Plasma 或 Rollup 这样的扩展解决方案，从而为比特币带来更多可能性。越来越多的二层网络，不仅采用 Rollup，更是百花齐放提出了各种解决方案。
+
+Source: Crypto.com
+
+B² Network 作为一个采用 ZK Rollup 技术的二层网络，通过创新性的引入零知识证明确保 rollup 交易安全；基于 rollup zk 证明验证生成 Taproot 承诺，作为 rollup 的欺诈证明发布在比特币网络上；通过比特币网络上的质询-响应机制确认欺诈证据，最终确保rollup的安全性。
+
+目前，B² Network 已于12月上线 Alpha 测试网 MYTICA，并公开招募生态开发者，合作伙伴和开发者可在 B² Network 测试网上部署 DApps。且开设了自己的奥德赛和价值 $1M 的 Grant，吸引用户在测试网进行体验。
+
+ 
+
+每周VC投资聚焦
+
+欢迎来到我们的每周投资聚焦，我们在这里为你揭示加密空间中最重大的风险投资动态。每周，我们将重点关注获得最多融资的协议。
+
+WOO Network
+
+WOO Network 连接交易者、交易所、机构和 DeFi 平台，为他们提供零或低成本的最佳流动性和交易执行的民主化访问。它最初是由大型加密量化交易公司 Kronos Research 孵化的。WOO Network 的目标是通过解决加密货币的一个主要问题——流动性碎片化，来减少市场的低效和破坏加密货币市场。
+
+https://x.com/WuBlockchain/status/1747909315745489071?s=20
+
+Fetcch
+
+Fetcch 正在构建一个带有ID协议的新钱包，使各种钱包和 dApp 能够向其用户发行跨链、可组合的钱包 ID。这些 ID 使用户能够连接来自任何链的任意数量的地址，从而在跨链上实现单一身份。Fetcch 希望简化支付，并改善钱包与区块链之间的连接，允许 dApp 为用户创建简单的入门体验。
+
+https://x.com/FetcchX/status/1747581921801163229?s=20
+
+DIMO
+
+DIMO 是一个去中心化的软硬件物联网（IoT）平台，使用户能够创建经过身份验证的车辆数据流，以便与应用程序私下共享。这可以使用户协商更好的服务，例如汽车融资和保险。
+
+https://www.theblock.co/post/272456/decentralized-infrastructure-11-5-million-series-a-coinfund
+
+ 
+
+协议事件
+
+Bungee protocol exploited as funds worth at least $3.3 million appear to be stolen
+
+Chainlink integrates with Circle’s CCTP protocol for cross-chain USDC transfers
+
+Jupiter, the Solana DEX aggregator confirms token release date
+
+OP Crypto Rebrands as Inception Capital: A Name That Embodies Vision And Multicultural Strength
+
+Solana Mobile unveils cheaper Saga crypto phone successor
+
+ 
+
+行业更新
+
+South Korea weighs crypto tax abolition amid new income tax regime
+
+EU provisionally agrees on stricter due diligence rules for crypto firms
+
+Coinbase takes its turn in court, arguing the tokens it listed are not securities
+
+Cumulative spot bitcoin ETF volume crosses $11 billion on fourth day of trading
+
+Ethereum devs implement Dencun upgrade on Goerli testnet
+
+ 
+
+推特Alpha
+
+在加密推特中蕴含了许多 Alpha，但在数千条推特线程中导航可能很困难。每周，我们都会花费几个小时进行研究，精选出充满洞见的线程，并为您策划每周的精选列表。让我们深入了解吧！
+
+https://x.com/TheDefiDog/status/1748095435431145722?s=20
+
+https://x.com/wacy_time1/status/1748164431555510368?s=20
+
+https://x.com/stacy_muur/status/1747975954704834838?s=20
+
+https://x.com/Vaultkaofficial/status/1747944479007662157?s=20
+
+https://x.com/zerokn0wledge_/status/1747762080378478962?s=20
+
+ 
+
+下周事件
+
+
+
+
+ 

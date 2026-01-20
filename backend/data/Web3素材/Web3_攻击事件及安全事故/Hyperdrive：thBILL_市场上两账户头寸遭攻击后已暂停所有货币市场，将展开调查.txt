@@ -1,0 +1,11 @@
+标题: Hyperdrive：thBILL 市场上两账户头寸遭攻击后已暂停所有货币市场，将展开调查
+链接: https://www.chaincatcher.com/article/2209031
+发布时间: 2025-09-27
+
+==================================================
+
+ChainCatcher 消息，据官方消息，Hyperliquid 生态 DeFi 协议 Hyperdrive 表示，thBILL 市场上的两个账户仓位已遭到攻击。为谨慎起见，Hyperdrive 已暂停所有货币市场，并将进一步展开调查。此次问题不会影响 HYPED 代币。
+
+ChainCatcher 此前报道，据加密 KOL @CryptoNyaRu 披露，Hyperliquid 生态 DeFi 协议 Hyperdrive 遭遇攻击，原因在于借贷过程中用户将 Router 设置为 Operator，但 Router 可对白名单内的任意合约执行 Call，而 Market 合约在白名单内，导致第三方地址可通过 Router 任意操作用户仓位。相关合约地址分别为 Router (0x8D9e...) 和 Market (0xa522...)。目前已出现利用交易，涉及用户资产安全。
+
+另据推特用户 @xhanTululu 监测，Hyperliquid 生态 DeFi 协议 Hyperdrive 疑似遭受攻击，损失约 70 万美元。目前，项目方尚未作出回应。

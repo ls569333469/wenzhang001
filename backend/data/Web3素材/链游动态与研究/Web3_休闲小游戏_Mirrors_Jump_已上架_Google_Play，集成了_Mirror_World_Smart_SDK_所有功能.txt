@@ -1,0 +1,11 @@
+标题: Web3 休闲小游戏 Mirrors Jump 已上架 Google Play，集成了 Mirror World Smart SDK 所有功能
+链接: https://www.chaincatcher.com/article/2081941
+发布时间: 2022-11-02
+
+==================================================
+
+ChainCatcher消息，集成 Mirror World Smart SDK 的游戏产品 Mirrors Jump 成功上线 Solana Mainnet，用户在 Google Play 内搜索 Mirrors Jump 即可免费下载体验。
+
+据悉，在 Mirrors Jump，玩家进入游戏即可免费获得随机角色，并且可以 Mint 为 NFT，玩家可以直接在游戏当中对获得的 NFT 进行 List 以及 Transfer，所有开发者还可以使用 Smart SDK 的 NFT 发行与交易等功能。
+
+此前 9 月份，Mirror World 推出一站式移动开发工具 Smart SDK；3 月份，Mirror World 宣布完成 400 万美元种子轮融资，FTX Ventures 领投，YGG SEA、Avocado Guild、OKX Blockdream Ventures 等参投。

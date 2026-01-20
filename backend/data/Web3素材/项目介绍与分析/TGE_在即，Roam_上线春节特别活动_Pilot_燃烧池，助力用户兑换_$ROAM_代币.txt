@@ -1,0 +1,57 @@
+标题: TGE 在即，Roam 上线春节特别活动 Pilot 燃烧池，助力用户兑换 $ROAM 代币
+链接: https://www.chaincatcher.com/article/2164461
+发布时间: 2025-01-24
+
+==================================================
+
+2025年1月24日下午6点（UTC+8），Roam将正式上线Pilot燃烧池，帮助用户将Roam Points转换为$ROAM代币，在 TGE 前熟悉燃烧池机制及操作流程，从而最大化Roam Points的收益。作为春节特别活动，Pilot燃烧池将从1月24日开始，持续至TGE。
+
+什么是Pilot 燃烧池？
+
+作为推动 Roam 生态系统的重要资产之一，Roam Points积分代币在激励用户参与网络建设方面发挥着关键作用，用户在 Roam网络中的每一次贡献都会得到相应的 Roam Points作为奖励。Pilot 燃烧池的推出将会进一步丰富 Roam 生态，带领用户解锁全新功能，参与更多生态活动。用户可以灵活管理手中的 Roam Points，将其兑换$ROAM代币。Roam Points一旦燃烧将永久销毁。Roam Pilot 燃烧池采用动态转换率机制，具体转换率取决于特定时间段内燃烧的积分总量及生成的代币数量。$ROAM代币在每个周期内的生成量是固定的，但转换率会有所波动，因此选择合适时机参与可以获得更高回报。
+
+Roam Pilot 燃烧池以周期为单位，每个周期为1000秒。用户可以选择的周期数最少为10个，最多为1000个。一旦选择了周期数，所投入的Roam Points将在该周期内锁定，无法提前解锁。用户只能在当前周期结束后才能加入下一个周期。所有燃烧生成的$ROAM代币将在TGE后可直接提取至用户个人的Roam钱包。
+
+Roam提供了三种不同类型的燃烧池，旨在满足不同用户的需求：
+
+1. 通用燃烧池（General “Burning” Pool）：面向所有Roam用户，提供简单易行的参与方式。用户可通过Roam App 添加WiFi节点、签到、邀请朋友等方式赚取Roam Points参与通用燃烧池。
+
+2. 矿工燃烧池（Miner “Burning” Pool）：仅限Roam矿机用户（如Rainier MAX60、Baker MAX30或MetaBlox OG设备），该池提供更高的专属转换率。矿机用户可通过挖矿、邀请打卡、将路由器安装在人流量大的区域或部署更多路由器矿机来增加积分。
+
+3. 贴纸燃烧池（Sticker “Burning” Pool）：专为Roam Sticker持有者设计，用户通过Roam App打卡即可获得Sticker，并根据Sticker的数量和稀有度兑换Roam Points参与燃烧。Roam Sticker按稀有度分为 4 类：
+
+常见（Common sticker）: 50 Roam Points
+稀有（Rare sticker）100 Roam Points
+史诗（Epic stickers）250 Roam Points
+传奇（Legendary stickers）1000 Roam Points
+如何计算$ROAM代币数量？
+
+每个燃烧周期内生成的$ROAM代币数量是固定的，参与该周期的用户按比例获得代币，计算公式如下：
+
+(该周期内生成的$ROAM代币总量) ÷ (该周期内燃烧的Roam Points总量) × (用户该周期内燃烧的Roam Points数量)
+
+以两个连续的燃烧周期举例说明： 
+
+Cycle 1：用户A燃烧1,000 Roam Points，用户B燃烧2,000 Roam Points。总共燃烧了3,000 Roam Points。如果该周期生成了30个$ROAM代币，用户A获得10个代币，用户B获得20个代币，按比例分配。
+
+Cycle 2：如果用户C加入，燃烧3,000 Roam Points，总共燃烧了6,000 Roam Points。本周期生成代币数仍为30个，奖励将按比例调整为：用户A获得5个$ROAM代币，用户B获得10个$ROAM代币，用户C获得15个$ROAM代币。
+
+从以上例子可以看出，参与人数和燃烧时机对最终收益有显著影响。用户在每次参与之前都需根据个人账户的Roam Points数量以及本周期参与人数和该燃烧池的转换率调整决策以获得最大收益。
+
+如何参与Pilot 燃烧池？
+下载并安装Roam App，创建个人账户。
+通过完成任务或部署Roam矿机获取Roam Points 和 Roam Stickers。
+在 App 内活动页面点击“Join Now”。
+选择适合的燃烧池（通用池、矿工池或贴纸池），并确定燃烧周期。
+确认后，Roam Points将被锁定，直到燃烧周期结束。
+
+此外，用户还需要注意：
+
+最低投入Roam Points：参与任何燃烧池，最低需要投入500个Roam Points。
+积分锁定：Roam Points必须在钱包中持有48小时（基于 UTC 时间计算）后才能参与燃烧。
+无法撤销：燃烧过程一旦开始，用户将无法取消，燃烧结束后，Roam Points将被永久销毁。
+$ROAM代币提取：$ROAM代币将在TGE之后开放领取。
+收益差异：预估的$ROAM代币数量与最终领取的代币数量可能会存在差异，具体数额将受参与人数和燃烧转换率影响。
+总结
+
+Roam Pilot 燃烧池为用户提供了一种将Roam Points转化为$ROAM代币的灵活方式。无论是通用池、矿工池还是贴纸池，每个池都根据用户的贡献提供不同的收益机会。通过了解每个池的转换率并选择合适的参与时机，用户可以不断优化收益。未来，Roam燃烧池将推出更多功能，提供更丰富的参与机会。燃烧池上线了，TGE 还会远吗？立即下载Roam App，赚取Roam Points，参与此次春节特别活动，为即将到来的TGE做准备。

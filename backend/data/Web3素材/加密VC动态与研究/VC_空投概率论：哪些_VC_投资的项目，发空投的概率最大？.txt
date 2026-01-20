@@ -1,0 +1,85 @@
+标题: VC 空投概率论：哪些 VC 投资的项目，发空投的概率最大？
+链接: https://www.chaincatcher.com/article/2130057
+发布时间: 2024-06-21
+
+==================================================
+
+作者：defizard
+
+编译：深潮TechFlow
+
+ 
+
+L0、zkSync 和 Starknet 有什么共同点？
+
+有同样的资金投资了他们。如果这些风险投资人投资了该项目 - 那么这个项目保证了会有空投。
+
+a16z 
+
+投资数量：169。
+
+有空投的项目：15个。
+
+Farcaster、EigenLayer、Worldcoin、LayerZero、zkSync、Uniswap、Sui、Aptos、Optimism、Goldfinch、Ape、dYdX、Forta、Gitcoin。
+
+空投比例：8.87%。
+
+Paradigm 
+
+投资数量：92 个。
+
+有空投的项目：10 个。
+
+Uniswap、Farcaster、Friend Tech、Optimism、dYdX、Osmosis、Blur、Ribbon Finance、Gitcoin、Starknet。
+
+空投比例：10.86%。
+
+Binance Labs
+
+投资数量：216 个。
+
+有空投的项目：19个。
+
+Aptos、1inch、Biconomy、Axelar、Space ID、Maverick、Galxe、Mint Club、Aevo、Bounce Bit、Renzo Protocol、Ethena、Arkham、Polyhedra、Sui、Hooked Protocol、Magic Square、Fusionist、Celestia。
+
+空投比例：8.79%。
+
+Coinbase Ventures 
+
+投资数量：394 个。
+
+有空投的项目：25 个。
+
+Uniswap、Aptos、Arbitrum、Optimism、TheGraph、IMX、Sei、Ribbon、Worldcoin、Biconomy、Hashflow、Arkham、Maverick、Galxe、Evmos、Goldfinch、Forta、Umee、Connext、Hop、Axelar、Wormhole、Maverick、Arkham、EigenLayer。
+
+空投比例：6.34%
+
+DragonFly 资本
+
+投资数量：149 个。
+
+有空投的项目：25 个。
+
+Aptos、dYdX、1inch、Ribbon Finance、Axelar、Hashflow、Galxe、Avail、Ethena、zkSync、Parcl。
+
+空投率：7.38%。
+
+HashKey Capital
+
+投资数量：236 个。
+
+有空投的项目：8 个。
+
+dYdX、1inch、Galxe、Evmos、Avail、Polyhedra、Beoble、Aethir。
+
+空投比例：3.38%。
+
+当我开始这条推文时，我觉得统计数字会更好。我从 @CryptoRank_io 中获取了所有数据，并将 "投资数量 "类别作为总体指标，即投资总数。
+
+本主题中提到的每家风险投资公司所投资的项目，我都确信会进行空投，比如 Monad、Babylon 或 Symbiotic。
+
+但我们不能保证，如果其中一些风险投资人投资了你在撸的项目，他们就会进行空投。
+
+您应该查看代币经济、开发阶段、白皮书、团队、风险投资人、传言等，以了解是否有空投的机会。
+
+这并不难，您只需要一些基本知识和运气。

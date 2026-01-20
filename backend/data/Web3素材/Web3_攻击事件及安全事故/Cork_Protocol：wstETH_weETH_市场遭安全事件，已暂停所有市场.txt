@@ -1,0 +1,7 @@
+标题: Cork Protocol：wstETH:weETH 市场遭安全事件，已暂停所有市场
+链接: https://www.chaincatcher.com/article/2183556
+发布时间: 2025-05-28
+
+==================================================
+
+ChainCatcher 消息，据 Cork Protocol 公告，今日 UTC 时间 11:23，该平台 wstETH:weETH 市场发生安全事件。目前为防止风险扩大，Cork 已暂停所有其他市场交易，暂无其他市场受影响。团队正在积极调查事件原因，并将持续更新相关进展。

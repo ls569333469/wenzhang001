@@ -1,0 +1,123 @@
+标题: 一览Terra生态的DeFi版图：更高效的「金钱乐高」
+链接: https://www.chaincatcher.com/article/2071548
+发布时间: 2022-03-19
+
+==================================================
+
+原文作者：0x137，律动 BlockBeats
+
+ 
+
+此前在市场整体疲软的环境下，LUNA 成了为数不多表现强劲的项目，甚至一度创造了价格新高。和其他公链不同，Terra 的 DeFi 生态完全由 Anchor 在支撑，截至目前，Terra 的 TVL 约为 170 亿美元，其中 Anchor 就占了 130 亿。
+
+当然，Terra 未来想要实现生态的持续增长，仅靠一个王牌协议是远远不够的，最近在 Astroport、Mars Protocol 等主打协议逐渐落地后，Terra 生态未来的 DeFi 版图也开始逐渐清晰，可组合性以及网络效应也开始逐渐凸显。
+
+ 
+借贷平台：Anchor、Mars
+
+ 
+
+Anchor
+
+Anchor 可以说是现在 Terra 生态以及 UST 普及的引擎，通过提供 20% 的稳定 APY，Anchor 为稳定币储蓄用户带来了更加可预测的收入来源，因此吸引了大量的 UST 存款及借款。
+
+Anchor 利用权益证明网络（PoS）的验证奖励，以及借款用户的利息为储蓄用户生成固定的利率。
+
+在 Anchor 平台，借款人需要抵押 bLUNA 或者 bETH 这些 PoS 资产才能借出 UST。bLUNA 和 bETH 是一种流动质押衍生品，「b」代表「Bonded」，是 Lido 平台为质押在验证节点里的 LUNA 或 ETH 发行的持有凭证。它可以用于自由交易或作为抵押品，如果 bLuna 在用户的钱包里，还会产生 UST 质押奖励，可以在 Anchor 上的「bAsset」页面下领取。
+
+在用户存入 bLUNA 或者 bETH 后，Anchor 则将这些资产用于质押 Terra 网络和以太坊 2.0 网络的节点验证，并获得稳定的质押奖励。
+
+当然，不到 10% 的验证奖励肯定不足以长期维持 20% 的 APY，剩下 10% 左右的利率则来自于借款用户的利息。而为了产生更多利率收入，Anchor 通过向借款用户奖励 ANC Token，以鼓励用户借出更多的 UST。
+
+这种模式被 Anchor 称为「无风险利率」，而对于大部分稳定币持有者来说，能在加密世界创造稳定的被动收入是非常具有吸引力的。在过去一年，Anchor 平台的 TVL 也一直稳步攀升，不久前超越 Aave，成为了加密领域第二大借贷平台，并且不久后还将接入 Avalanche 生态。
+
+但随着越来越多的 UST 存入平台，Anchor 也开始面临收益储蓄枯竭的问题，Anchor 的治理投票也在前不久通过了依靠修改利率以保障可持续性的方案。但即使修改了利率，Anchor 仍需要生态内的其他协议来为其分担压力。在这方面 Mars Protocol 等协议就起到了重要的作用。
+
+Mars Protocol
+
+实际上，Anchor 更像是一个储蓄协议，为个体和协议提供固定费率的储蓄服务 (Saving-as-a-Service)。而 Mars 则不同，它的利率是基于市场的需求，因此利率会产生波动，也就会带来不同的收益。
+
+Mars 旨在成为整个 Terra 生态的通用借贷协议，支持几乎所有生态内的 Token 作为抵押品。虽然当前仅支持 UST 和 LUNA 的借贷服务，但是协议未来可以通过治理投票，添加各种抵押资产。
+
+因为很多质押资产并不会产生 PoS 验证奖励，因此储蓄用户在 Mars 平台的费率收入全部来自借款方的利息，也就是说，Mars 的费率收入是由借贷需求驱动的，借款需求越多，Mars 上的借贷利率就越高。
+
+另外，Mars 能够为其他协议提供独特的 C2C 借贷服务，以此产生更多的借贷需求。最近，像 Alpha Finance、Spectrum Protocol，以及 Apollo DAO 等协议都已经与 Mars 在这方面有了合作。
+
+ 
+交易枢纽：Astroport、Loop Finance
+
+ 
+
+Astroport
+
+在 Astroport 之前，Terra 生态的主要交易场所是 Terraswap。但是该应用的功能非常原始，在版本更新之前，Terraswap 只有基础的交易功能，流动性提供者也无法看到自己的具体收益，和其他生态的 DEX 相比用户体验有着很大的差距。
+
+而最近上线的 Astroport 将会有很大的改善。除了在滑点控制、价格影响预览、汇率和费用计算等核心功能优化之外，Astroport 还会为流动性提供者（LP）和交易者带来了可视化的图表和分析数据，同时向 LP 提供双币奖励的选项，LP 即可以选择只接收交易对里的一种 Token 作为奖励，也可以选择同时接收两种 Token。
+
+另外，Astroport 也打算引用 veToken 的模式，赋予 xASTRO 和 vxASTRO 不同程度的投票权，并在 LP 和 ASTRO 质押者之间分摊平台收入。
+
+Astroport 在这些方面的升级对于 Terra 生态非常关键，因为更好的定价和效率有助于生态内其他应用实现集成、产生规模效益，并吸引更多的流动性。
+
+Loop Finance
+
+除了 Astroport 之外，Terra 生态里的 DEX 还有 Loop Finance。不过 Loop 不光是一个 DEX，它还是一个社区，有自己的媒体平台、NFT 市场、风投基金，以及移动应用，而平台费用的 25% 将用于购买 LOOP Token 并分配给质押者。
+
+创作者可以通过在 Loop Community 中分享有价值的内容，以获得 LOOPR 奖励。而用户则可以随时了解最新的 DeFi 项目发布，并直接在 Loop 上购买或者交易这些项目的 Token。当然，Loop Ventures 也会孵化自己的项目，然后帮助他们启动。
+
+而 Loop 的 NFT 市场则是 Terra 生态里第一个专注于 NFT 实用性的市场。通过「NFT Bond」质押 NFT，使 NFT 为持有者带来收益。
+
+ 
+
+高组合性「金钱乐高」
+
+ 
+
+Terra 生态一个较大的优势，就是协议之间不是单打独斗，而是合作竞争的关系。在有了借贷和交易框架后，Terra 里的其他 DeFi 应用便可以在这个基础上相互协作，形成高组合性的「金钱乐高」，从而增强整个生态的网络效应。
+
+Nexus Protocol
+
+Nexus Protocol 是 Terra 生态的收益优化器，通过为用户建立收益策略，在保证用户资金不被清算的前提下使回报最大化。Vault 是 Nexus 推出的收益产品，通过自动生成收益、重新平衡、优化交易成本等方式为用户带来更高的收益，用户则无需深入了解底层协议的机制即可获得 Nexus 所提供的好处。
+
+目前 Nexus 仅支持针对 Anchor 的收益优化，用户将 bLUNA 或 bETH 存入 Vault 并接收 nLUNA、nETH 作为凭证。存放的 bLUNA、bETH 将按照 Nexus 此前制定的收益策略存入 Anchor 并借出 UST 进行储蓄操作，产生的收益以 Psi Token 的形式支付。最近，Nexus 团队在推特上宣布了与 Prism 的合作，未来将支持针对 Prism 的收益优化。
+
+同时，用户还可以将自己的 nLUNA 放进 Nexus 上的流动性池，协议会将其自动提供给 Astroport 并赚取 Farming 收益，最后同样以 Psi 的形式支付奖励。
+
+Prism
+
+Prism 是一个针对 LUNA 的衍生品协议，通过将数字资产分解为收益成分和主成分两个不同的部分，帮助用户以简单且效率的方式管理价格波动及非稳定收益带来的风险。
+
+用户首先需要在 Rrism 质押自己的 LUNA 并接收 cLUNA 作为凭证。而 cLUNA 则可以分解为主成分 pLuna（principal LUNA）以及收益成分 yLuna（yield LUNA），其中质押 yLUNA 可以获得质押奖励和空投，而持有 pLUNA 则没有太多收益选项。当然，分解后的 pLUNA 和 yLUNA 价格上存在着差异，因此也为交易者提供了套利空间。
+
+Edge Protocol
+
+Edge Protocol 目前还处于测试版本，它类似 Terra 生态的 Abracadabra，允许用户将自己的生息资产作为抵押物进行借贷操作，进一步提升了 Terra 生态的应用可组合性以及资金利用率。
+
+譬如说，在 Anchor 平台有 UST 储蓄的用户，就可以在 Edge 上将自己的 aUST 作为抵押品进行 loop 操作，以提升自己的固定 APY。当然，用户也可以选择借出其他资产去参加各种 DeFi 活动，比如 LunaX。
+
+Stader
+
+Stader 正在为多个 PoS 公链构建质押验证的中间层基础设施，并采用模块化的方法，吸引第三方应用在其基础之上构建多个质押方案。目前 Stader 主要是为 LUNA 提供流动性质押，未来也会扩展到 Solana、以太坊 2.0 等 PoS 公链。
+
+LunaX 是 Stader 平台的流动质押衍生品，它和 aUST 类似，是一种复利累积 Token（auto-compounding accrual token）。
+
+用户可以在 Stader 上质押 LUNA 并接受 LunaX 凭证，在 Edge 上使用 LunaX 作为抵押品借出 UST 和 LUNA，部分存入 Anchor 以及 LunaX-LUNA 流动性池。然后在 Mirror 上使用 aUST 借出合成资产实现复利。
+
+ORCA
+
+ORCA 是 Kujira 团队的第一款产品，它能让更多的 DeFi 用户也参与到 Anchor 平台的清算套利中来，这是因为 ORCA 支持以 aUST 进行清算。
+
+用户可以先将 LUNA 转换为 bLUNA 或者 LunaX，在 Anchor 或者 Edge 借出 UST 并存入 Anchor。然后利用 aUST 凭证在 ORCA 上进行清算套利，提高自己的质押收益。
+
+Apollo DAO
+
+Apollo DAO 是 Terra 上的收益聚合器，也是一个社区驱动的基金组织。Apollo DAO 上的收益策略主要来自于为 Astroport 提供流动性，获得的收益会自动进行复利操作，同时以奖励 APOLLO Token 的形式为用户带来额外收入。
+
+Apollo 独特的地方是，用户可以直接存入 UST，协议会自动帮你转换为对应的 LP Token 并开始产生收益。
+
+Apollo 的「Farmers Market」也很有意思，这是一个 Launchpad，但不同的是它通过 Farming 来启动新项目并为其提供流动性。用户同样只需要存入 UST 即可。
+
+Osmosis
+
+当然我们也不能忘记，Terra 同样是 Cosmos 生态的一部分。前不久，Terra Bridge 开始支持和 Osmosis Zone 之间的资产转移，在 Terra 生态里的 LUNA 和 UST 等资产可以轻松的转移到 Osmosis 上以获得 farming 收益。
+
+不可否认的是，UST 的普及仍然需要 Anchor 的支持。但 Terra 生态的发展却在逐渐摆脱「单极化」，并逐渐向「一超多强」的方向发展，更多可组合性应用的建设不仅能够 Anchor 的压力，同时也能产生更强的网络效应。因此，Terra 生态的 DeFi 发展同样值得我们去关注。

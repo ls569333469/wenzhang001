@@ -1,0 +1,101 @@
+标题: 上周加密市场共发生 16 起公开融资事件，累计融资约 10.05 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2188802
+发布时间: 2025-06-30
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 6 月 23 日- 6 月 29 日期间，区块链和加密行业共发生 16 起公开投融资事件，累计融资约 10.05 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在DeFi和游戏赛道。热门项目包括链上衍生品交易平台 Sphinx，知名加密风险投资机构 Paradigm、加密货币初创公司 Blueprint Finance 、链上衍生品交易平台 Sphinx。 
+
+此外，加密工资单平台 Niural 近日完成 3100 万美元 A 轮融资，由 Marathon Management Partners 领投。该公司专注于开发全球 PEO (专业雇主组织)和支付平台，融合 AI 技术与专有税务引擎。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、DeFi
+
+链上衍生品交易平台 Sphinx 完成 200 万美元 Pre-Seed 轮融资，Eckhardt Capital 领投
+
+据官方消息，链上衍生品交易平台 Sphinx 宣布完成 200 万美元 Pre-Seed 轮融资，Eckhardt Capital 领投，Big Brain Holdings、Blockchain Founders Fund、Blizzard、TRIVE Ventures、Cosmos Hub、London Real Ventures、GS Futures，以及 Andrew Durgee、Stefan Rust、Zachary Keats 等参投。
+
+Sphinx 正构建基于自研许可型 Layer 1 的能源商品衍生品交易所，支持油气等市场的期货与永续合约，资金将用于主网上线和机构合作拓展。
+
+MegaETH 生态 DEX GTE 完成 1500 万美元 A 轮融资，Paradigm 领投
+
+据 The Block 报道，知名加密风险投资机构 Paradigm 独家领投了去中心化交易所初创公司 GTE 的 1500 万美元 A 轮融资。
+
+GTE 创始团队表示，平台采用中心化限价订单簿（CLOB）机制，交易延迟与币安、Coinbase 等中心化交易所持平，同时保持去中心化特性。
+
+GTE 旨在解决中心化交易所“盲目信任”及传统 DEX 高延迟、高成本等问题，平台已在兼容 EVM 的 MegaETH 区块链上搭建，测试网吸引约 70 万用户。
+
+ChainCatcher 此前报道，基于 MegaETH 区块链的去中心化交易所 GTE 已通过三轮融资募集 1000 万美元，包括 150 万美元的 Pre-Seed 融资、694.2 万美元的种子轮融资，以及 Echo 的 250 万美元社区融资。
+
+GTE 风险投资者包括 Maven 11、Wintermute、Flow Traders、Robot Ventures、IMC Trading、Ethena 的 Guy Young、Anza 的 Max Resnick 以及来自 Jump Trading 的未公开交易者。
+
+DeFi 公司 Blueprint Finance 完成 950 万美元融资，Polychain Capital 领投
+
+据 Fortune 报道，加密货币初创公司 Blueprint Finance 宣布完成 950 万美元融资，本轮融资由 Polychain Capital领投，YZi Labs 和 VanEck 参投。
+
+Blueprint Finance 由 CEO Nic Roberts-Huntley 于 2023 年创立，专注于简化加密货币投资者的资产增值流程。公司已推出两款产品：Concrete 和 Glow，前者针对以太坊生态系统的借贷服务，后者则是基于 Solana 区块链的借贷平台。
+
+公司计划将新资金用于招聘、工程开发和市场营销。加上此前的 750 万美元融资，Blueprint Finance 迄今总融资额已达 1700 万美元。
+
+DeFi 基础设施公司 Veda 完成 1800 万美元融资，CoinFund 领投
+
+据 CoinDesk 报道，DeFi 基础设施公司 Veda 宣布完成 1800 万美元融资，CoinFund 领投。
+
+该公司旨在简化跨区块链应用程序和机构的 DeFi 收益，新资金拟用于支持其平台使应用程序和机构能够提供简化的加密收益产品，包括一个模块化保险库框架，开发人员可以创建智能合约来管理收益策略，而无需让用户接触 DeFi 的复杂性。
+
+二、游戏
+
+美国游戏公司 Spekter Games 完成 500 万美元融资轮，a16z speedrun 领投
+
+据 Business Wire 报道，Spekter Games Inc. 宣布完成了 500 万美元的 pre-seed 融资轮，并推出了其首个 Web3 游戏 Spekter Agency。本轮融资吸引了众多知名投资机构的参与，包括 a16z speedrun、London Venture Partners、BRV Capital、Chamaeleon、Accelerator Ventures、Impact46、Versus Ventures 和 Alumni Ventures。
+
+此次筹集的资金将使 Spekter Games 能够将 Spekter Agency 扩展到更多平台，包括其他基于聊天的超级应用和传统的移动商店，如 App Store 和 Google Play。此外，这笔资金还将支持该出版商的第二款游戏的持续开发，该游戏已经在进行中。
+
+三、衍生品
+
+链上衍生品交易平台 Sphinx 完成 200 万美元 Pre-Seed 轮融资，Eckhardt Capital 领投
+
+据官方消息，链上衍生品交易平台 Sphinx 宣布完成 200 万美元 Pre-Seed 轮融资，Eckhardt Capital 领投，Big Brain Holdings、Blockchain Founders Fund、Blizzard、TRIVE Ventures、Cosmos Hub、London Real Ventures、GS Futures，以及 Andrew Durgee、Stefan Rust、Zachary Keats 等参投。
+
+Sphinx 正构建基于自研许可型 Layer 1 的能源商品衍生品交易所，支持油气等市场的期货与永续合约，资金将用于主网上线和机构合作拓展。
+
+四、社交
+
+YZi Labs 宣布投资去中心化娱乐平台 MEET48
+
+据官方消息，YZi Labs 宣布投资于 MEET48，一个来自 BNB Chain MVB（最有价值建设者）加速器的去中心化娱乐平台，旨在通过代币驱动的解决方案应对粉丝互动中的挑战。
+
+本轮融资将加速 MEET48 的发展，并通过虚拟演出、偶像养成游戏及现实世界活动，进一步丰富其 Web3 粉丝体验。
+
+五、其他
+
+加密工资单平台 Niural 完成 3100 万美元 A 轮融资，Marathon Management Partners 领投
+
+加密工资单平台 Niural 近日完成 3100 万美元 A 轮融资，由 Marathon Management Partners 领投。该公司专注于开发全球 PEO (专业雇主组织)和支付平台，融合 AI 技术与专有税务引擎。
+
+公司数据显示，Niural 过去一年 ARR 增长700%，客户包括 Tensor、Polygon Labs 和 Karate 等企业。此轮融资后， Gokul Rajaram 加入 Niural 董事会。据悉，融资资金将用于进一步开发面向 CFO 的 AI 原生智能系统，扩展全球业务范围。
+
+Kalshi 将以 10 亿美元估值完成 1 亿美元融资，已得到 Paradigm 支持
+
+据市场消息，Paradigm 将以超过 10 亿美元的估值支持合规预测市场 Kalshi 完成 1 亿美元融资。
+
+Nano Labs 签署 5 亿美元可转换票据私募融资，用于 BNB 战略储备
+
+Nano Labs Ltd （纳斯达克代码：NA ）宣布已与多位投资者签署可转换票据认购协议，将发行总额为 5 亿美元的可转换票据。本票据期限为 360 天，到期前本金不计息，持有人可在期限内选择将票据转换为公司 A 类普通股，初始转换价为每股 20 美元。
+
+Nano Labs 计划初期通过本次融资及私募形式收购价值 10 亿美元的 BNB ，并以长期持有 BNB 总流通供应量的 5 %至 10 %为目标。
+
+Canton Network 开发商 Digital Asset 完成 1.35 亿美元战略融资，DRW Venture Capital 等领投
+
+据 CoinDesk 报道，隐私区块链 Canton Network 的开发商 Digital Asset 宣布完成 1.35 亿美元战略融资，此轮融资由 DRW Venture Capital 和 Tradeweb Markets 领投，参与机构包括 BNP Paribas 、 Circle Venture s、 Citadel Securities 、 DTCC 、 Virtu Financial 、 Paxos 等传统金融和加密领域的知名企业。
+
+Canton Network 以可配置隐私为核心，吸引了包括高盛和纽约梅隆银行在内的多家公司测试其平台上的 RWAs 。此次融资将助力 Canton 网络进一步扩展 RWAs 的覆盖范围，目前已包括债券、货币市场基金、另类基金、大宗商品、回购协议、抵押贷款、寿险和年金等资产类别。
+
+据 Web3 资产数据平台 RootData 显示，Digital Asset 是一家区块链软件和服务提供商，帮助企业通过互联网络建立经济价值。 Digital Asset 的产品建立在 Daml 之上，Daml 是利用创新的智能合约语言和工具构建和运行复杂的多方应用程序的领先平台。 Daml 具有隐私和一流的 SDK，可确保应用程序中的所有参与者保持同步并访问可靠的实时数据。

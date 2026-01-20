@@ -1,0 +1,54 @@
+标题: 每周DeFi数据观察 | 各公链TVL总计达到1489亿美元，DDX、QUICK、FARM等代币涨幅最大
+链接: https://www.chaincatcher.com/article/2064185
+发布时间: 2021-08-15
+
+==================================================
+
+作者：谷昱
+
+ 
+
+本周，DeFi市场继续保持上升态势，各大公链DeFi项目TVL达到1489亿美元。在头部DeFi协议中，本周TVL增速最快的头部协议包括TrueFi（56.1%）、Synthetix（16.5%）、Venus（16.5%），而价格涨幅最高的币种包括DerivaDAO代币DDX（86.5%）、Quickswap代币QUICK（77%）、Havest Finance代币FARM（48%）。
+ 
+下面，链捕手将综合DeFi liama、Coingecko等网站数据，从TVL、价格以及重要事件等三个角度对本周的DeFi市场进行进一步总结。
+ 
+一、TVL
+ 
+来源：DeFi liama
+ 
+截至周日中午15：30，各大公链DeFi项目TVL总计达到1489亿美元，较上周日增长约19%，其中以太坊TVL为1138亿美元，占比为76.4%,。各公链共计107个项目TVL超过1亿美元，共计28个项目TVL超过10亿美元。
+ 
+在所有DeFi项目中，Aave、Compound与Curve的TVL在本周位居前三，其中Aave的TVL达到132.9亿美元。
+ 
+在TVL超过10亿美元的头部DeFi协议中，本周TVL增速最快的协议包括TrueFi（56.1%）、
+Synthetix（16.5%）、Venus（16.5%），其中TrueFi的TVL达到11.4亿美元，首次突破10亿美元。
+ 
+其它增速较高的DeFi协议还包括Charm Finance（103%）、B.Protocol（74.5%）、NAOS Finance（70%）、ApeSwap（67.8%）、xToken（56.7%）、DeversiFi （37.5%）等。
+ 
+增速较慢乃至负增长的DeFi协议包括BarnBridge（- 40%）、Serum（- 33%）、Ruler （- 31%）、Flamingo Finance（- 24%）、Olympus DAO（- 9.5%）、Liquity（- 6%）。
+ 
+二、代币价格：
+ 
+来源：Coingecko
+ 
+本周随着加密市场整体行情向好，DeFi市场再度迎来普涨，截至周日16点，价格涨幅最高的币种包括DerivaDAO代币DDX（86.5%）、Quickswap代币QUICK（77%）、Havest Finance代币FARM（48%）、Hegic代币HEGIC（64%）等。
+ 
+来源：Coingecko
+ 
+同时，也有部分DeFi代币下跌态势明显，下跌幅度较大的DeFi代币包括Olympus代币OHM（- 40.4%）、Ampleforth代币AMPL（- 22.7%）、Alchemix代币ALCX（- 18.2%）、Instadapp代币INST（- 13.6%）与Perpetual Protocol代币PERP（- 13.5%）。
+ 
+三、DeFi重要新闻：
+ 
+8月9日，Sushiswap表示由于治理和监管问题的复杂性、社区意见的多样性等问题，决定暂停之前的融资提案。
+ 
+8月10日，跨链协议Poly Network宣布遭到黑客攻击，被盗资产价值超过6亿美元，成为DeFi历史上最严重的安全事故。
+ 
+8月11日，Uniswap 成为首个历史总收入超过 10 亿美元的 DeFi 协议，该数据为以太坊主网（未包含 Optimism 上的数据）上 V2 和 V3 的费用收入之和，分别约为 7.5 亿美元和 2.5 亿美元。
+ 
+8月12日，SushiSwap首席技术官Joseph Delong发推表示，SushiSwap之所以选择Arbitrum而非Optimism作为二层扩容方案，是因为Optimism受VC影响给了Uniswap优惠待遇，阻碍 SushiSwap而支持Uniswap率先推出，因此SushiSwap才决定改在更“可信中立”的Arbitrum 上推出。
+ 
+8月12日，Solana 生态去中心化跨保证金交易平台 Mango Market 在关于 MNGO 代币的销售中筹集了逾 7000 万美元（70462383 美元），同时 24 小时的销售过程中最高有 5 亿美元左右的资金涌入。
+ 
+8月14日，Mask Network、Polygon 、PoolTogether、dHEDGE、Augur等 16 个项目共同发起 Social DeFi Alliance 以推动去中心化社交金融，帮助用户快速高效的从 Web 2.0 进入到 Web 3.0 ，未来将通过一系列的活动探索去中心化社交结合 DeFi 的可能性。
+ 
+8月14日，以太坊扩容方案 Polygon 以 2.5 亿美元收购以太坊 L2 扩容方案 Hermez Network，两个项目的代币 MATIC 和 HEZ 将进行合并，Hermez 的产品也将合并到 Polygon 中，Hermez 的 26 名员工也将加入 Polygon 的 80 人团队。

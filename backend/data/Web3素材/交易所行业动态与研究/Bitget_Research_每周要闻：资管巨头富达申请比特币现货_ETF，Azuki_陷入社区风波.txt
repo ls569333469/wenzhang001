@@ -1,0 +1,73 @@
+标题: Bitget Research 每周要闻：资管巨头富达申请比特币现货 ETF，Azuki 陷入社区风波
+链接: https://www.chaincatcher.com/article/2095783
+发布时间: 2023-06-30
+
+==================================================
+
+作者：Bitget 研究院
+
+ 
+
+过去一周（6/26-6/30），市场出现了不少新的热门币种和话题。
+
+ 
+
+1.市场焦点 Market Trends
+
+ 
+
+本周( 06.26-06.30)市场最关注的焦点话题为：
+
+富达重新提交 BTC 现货 ETF，BCH 上涨突破 300 美元
+
+PEPE 2.0 带领 meme 2.0 概念， Azuki  加深 NFT 熊市
+
+BTC 保持区间震荡，meme 板块短期触底反弹
+
+板块轮动周期缩短，OP 上涨结束 ARB 接力
+
+巨鲸加仓 AAVE，DeFi 板块项目轮番上涨
+
+ 
+
+2.热门项目 Popular Projects
+
+ 
+
+本周( 06.26-06.30)热度最高的项目有：
+
+PEPE 2.0 （token）：被 PEPE 创始人放入黑名单的钱包地址所创建的 meme coin，旨在比 pepe 更去中心化，近两日引领了链上 meme coin 行情，衍生出一系列 2.0 meme 代币；代币目前市值 1800 万美金， 24 小时交易量 1900 万美金，换手率较高； Bitget  可交易；
+
+BILI（token）：国内最大的 shib 社区地推项目，项目源于 Bilibili 在 Nasdq 的股票代号，团结华语社区发展的一个实验性项目，目前代币市值 247 万美金， 24 小时交易量 6 万美金，持有地址 2101 个；
+
+L（token）：以死亡笔记中人物 L 为 IP 的社区 meme，该项目针对 TwitterBlue 用户进行空投，用户基数巨大且均为真人，代币链上流动性 91 万美金，近 24 小时交易额 290 万美金，价格处于低位震荡；
+
+VMPX（Token）： 6 月 27 日，XEN 创始人 Jack 举行社区 AMA，宣传 VMPX 将作为  Bitcoin & Ethereum  与公链  X  1 之间的桥梁作用，随着 X 1 发布的临近，VMPX 在未来将以 1: 3 的比例兑换成代币 XN，导致近期市场买盘持续增多；
+
+Azuki（NFT）：昨日 Azuki 发行 Elementals 系列 NFT，发售价 2 ETH，发行之初社区抢筹热情高。但是当 NFT reveal 后，社区发现 NFT 内容与之前的原始系列差异并不大。伴随社区感受到失望与欺骗的情绪蔓延，Azuki、Beanz 系列 NFT 价格暴跌 50% ，交易量暴增。
+
+Seaport（NFT）：Seaport 是一种全新的开源 web 3 市场协议，用于安全高效地买卖 NFT。Seaport 首先在以太坊上推出，目前 polygon 也已经上线，此项数据是直接衡量 opensea 交易量的标准；随着 blur 的代币价格下跌及热度减退，blur 交易频率和交易量也有所衰退，最直观的表现即为 seaport gas 消耗重新超过 blur；
+
+zkSync（Dapp）：近期 zkSync 的交互活跃度一直保持在 ETH 新增用户的头部位置，根据 dune 最新数据显示， zkSync Era  主网独立钱包地址达 106.1 万个，跨链到 zkSync 上的 ETH 达 53.9 万个，总转账次数达 128.9 万次，此外用户可以使用https://byfishh.github.io/zk-flow/查询自己钱包与 zkSync 的交互次数，结合 dune 看板数据，定向打造精品号；
+
+Maverick（Dapp）：一个根据交易价格移动的，动态分布自动做市商（AMM）的 DEX，近期上线  Binance Launchpool ，项目由顶级机构支持，包括 Founders fund、Pentera、Jump、 Circle  等，今日平台交易量 4535 万美金，进入了 DEX 日交易量前十，热度较高；
+
+Holograph （Dapp）：全链 NFT 协议，其解决方案允许 NFT 在区块链间无缝转移而无需封装， LayerZero 将作为 Holograph 的跨链消息传递解决方案为其提供支持。昨日推出 How Far We’ve Come 限时免费多链铸造活动，出自艺术家 JimenaBuenaVida 之手，可在多条链免费铸造 72 小时；
+
+ 
+
+3.热搜话题 Hot Searches
+
+ 
+
+本周( 06.26-06.30)热度最高的话题有：
+
+BTC（Token）：BTC 市占率上升到 52% ，过去 2 个月 MicroStrategy 加仓 3.5 亿美元 btc，不过有意思的是历史上每当 ETG 基金会卖出，或者 MicroStrategy 买入，市场都会短期下跌。
+
+APE（Token）： Bored Ape Yacht Club （BAYC）宣布将于 6 月 29 日推出新游戏 HV-MTL Forge，这是一款空间建造游戏，游戏玩家可以搭建或者定制一个专展的特色空间。HV-MTL Forge 游戏故事围绕 BAYC 创建者的 HV-MTL 机器人 NFT 展开，持有其 NFT 就可以访问参与。代币价格无明显涨势，代币已上线 Bitget
+
+SUI（Token）：此前， DeBank  排名前 10 的巨鲸“DeFi^ 2 ”称， Sui  团队谎报代币释放量，并且正通过币安抛售通过“锁定”和“非流通”质押 SUI 获得的奖励，SUI 持有者的持币比例每月或被稀释 20% 。Sui 基金会回应：未在币安出售非流通 SUI 产生的质押奖励，将很快发布代币释放详细计划；
+
+XEN（Token）：XEN 创始人 Jack 举行社区 AMA，宣传 VMPX 将作为 Bitcoin&Ethereum 与公链 X 1 之间的桥梁作用，随着 X 1 发布的临近，VMPX 在未来将以 1: 3 的比例兑换成代币 XN，导致近期市场买盘持续增多。
+
+Bitget 研究院专注于“聚焦链上数据，挖掘价值资产”，通过时时监测链上数据以及区域热搜等维度，挖掘前沿的价值投资，为加密世界爱好者提供机构级的洞见。截止至今已为 Bitget 全球用户提供了【 Arbitrum 生态】、【AI 生态】、【SHIB 生态】等多个热门板块的早期价值资产，通过以数据为驱动的深入研究为 Bitget 全球用户创造更优质的财富效应。

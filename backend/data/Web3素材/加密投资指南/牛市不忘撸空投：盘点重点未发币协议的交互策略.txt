@@ -1,0 +1,438 @@
+标题: 牛市不忘撸空投：盘点重点未发币协议的交互策略
+链接: https://www.chaincatcher.com/article/2107926
+发布时间: 2023-12-07
+
+==================================================
+
+原作者: The DeFI Saint
+
+编译: 深潮 TechFlow 
+
+ 
+
+这篇文章为大家带来无代币协议的投资指南和策略，如果坚持下去，本文可能为您带来 10 万美元以上的收益。
+
+A级：L2区块链
+
+Kroma
+
+Manta Pacific
+
+Linea
+
+Base
+
+Mantle
+
+zkSync
+
+Zora
+
+在我们开始本文之前，这里有一些重要的协议，它们的空投具有时间敏感性，有些则基于积分程序。
+
+我建议你首先布局这些协议，然后再布局其他的。
+
+基于EVM的积分和推荐空投
+
+Aevo
+
+空投已确认，记住$RBN保持着DeFI价格最高空投之一的记录。
+
+点此来交易永续和期权
+
+Hyperliquid（基于积分的系统）
+
+交易、增加流动性并推荐以增加你的积分，点此开始使用Hyperliquid。
+
+ether.fi（基于积分的系统）
+
+如果你没有进入EigenLayer，这是你获得$EIGEN和$EGI的机会。
+
+你可以通过在ether.fi上质押获得积分，点此开始质押。
+
+基于Solana的空投（积分系统）
+
+Marginfi
+
+借贷资产并推荐朋友以在Marginfi上赚取积分，点此进入网站。
+
+Drift Protocol
+
+交易、借贷和提供流动性，点此进入网站。
+
+Zeta Markets
+
+交易永续，点此进入网站。
+
+Kamino（积分系统尚未上线）
+
+借贷资产并增加流动性，点此进入网站。
+
+Parcl（积分系统尚未上线）
+
+交易房地产并增加流动性，点此进入网站。
+
+基于EVM的链空投
+Scroll（筹资超过8000万美元）
+
+基本策略
+
+收集主网$ETH
+
+通过Scroll原生桥将$ETH桥接到Scroll
+
+使用以下进行交换：
+
+Izumi Finance
+
+Skydrome
+
+   Syncswap
+
+   WombatExchange
+
+   ambient
+
+使用以下进行$ETH提现
+
+rhinofi
+
+Orbiter finance
+
+Kroma
+
+基本策略
+
+收集主网$ETH。
+
+通过Kroma原生桥将$ETH桥接到Kroma。
+
+使用Izumi Finance进行交换。
+
+使用Owlto提现$ETH。
+
+注：由于流动性较低，请进行小额交易。
+
+Manta Pacific
+
+基本策略
+
+收集主网ET0.00%↑ H
+
+通过Manta Pacific原生桥将$ETH桥接到Manta Pacific。
+
+使用以下进行交换：
+
+Pacificswap
+
+OpenOceanGlobal
+
+ApetureFinance
+
+使用以下进行$ETH提现
+
+  rhinofi
+
+  Orbiter finance
+
+  Meson（如果你正在提取稳定币）
+
+Linea（筹资超过7.25亿美元）
+
+基本策略
+
+收集主网$ETH
+
+通过Linea原生桥将$ETH桥接到Linea。
+
+使用以下进行交换
+
+  HorizonDEX
+
+  Lynex
+
+  OKX
+
+  Velocore
+
+  Metavault
+
+使用以下进行$ETH提现
+
+  JumperExchange
+
+  deBridge
+
+  squid
+
+  Rango
+
+高级策略
+
+收集主网$ETH
+
+使用原生桥进行桥接
+
+使用CDP
+
+  LyveFinance
+
+  AngleProtocol
+
+使用借贷和借款协议
+
+MendiFinance
+
+在衍生品上交易
+
+  Satori
+
+  ZKEX
+
+使用基本策略中的任何桥进行提现
+
+Base（筹资超过2500万美元）
+
+基本策略
+
+收集主网$ETH
+
+通过Base原生桥将$ETH桥接到Base。
+
+使用以下进行交换：
+
+  Aerodrome
+
+  Citadel
+
+  Balancer
+
+  Maverick Protocol
+
+使用以下协议进行提现
+
+  BungeeExchange
+
+  deBridge
+
+  JumperExchange
+
+  rhinoFI
+
+  Stargate
+
+高级策略
+
+收集主网 $ETH
+
+通过原生桥接使用
+
+使用CDP
+
+AngleProtocol
+
+使用借贷平台
+
+  Sonne Finance
+
+  Timeswap
+
+在衍生品市场交易
+
+  IntentX_
+
+  Vela Exchange.
+
+通过基础策略中的任一桥接提现。
+
+Mantle（已有代币，但可能有空投）
+
+基础策略
+
+收集主网 $ETH
+
+通过Mantle原生桥接到Mantle。
+
+使用以下方式进行交换：
+
+  FusionX Finance
+
+  Agni Finance
+
+  REAX
+
+通过以下方式提现
+
+  XY Finance
+
+  squid
+
+  Orbiter Finance.
+
+高级策略
+
+收集主网 $ETH
+
+通过原生桥接。
+
+使用借贷平台；
+
+Timeswap
+
+lendle.xyz
+
+使用衍生产品； @KTX_Finance.
+
+使用AUM协议
+
+  Solv Protocol
+
+  Range Protocol
+
+zkSync
+
+基础策略
+
+收集主网 $ETH
+
+通过zkSync原生桥接到Mantle。
+
+使用以下方式进行交换：
+
+  Mute.io
+
+  Velocore Syncswap
+
+通过以下方式提现
+
+  rhinofi
+
+  JumperExchange
+
+  BungeeExchange
+
+  squid
+
+高级策略
+
+收集主网 $ETH
+
+通过原生桥接。
+
+使用衍生产品；
+
+  Holdstation
+
+  Derivio
+
+  ZKEX
+
+使用AUM协议
+
+Overnight.fi
+
+通过基础策略中的任一桥接提现。
+
+Zora
+
+基础策略
+
+收集主网 $ETH。
+
+通过Zora原生桥接
+
+铸造一些NFT。
+
+通过Orbiter Finance提现
+
+Starknet
+
+虽然已经确认有空投，但我们可以尝试一些无代币协议
+
+基础策略
+
+收集主网 $ETH
+
+通过Starknet原生桥接到Starknet。
+
+使用EkuboProtocol进行交换
+
+在Paradex交易
+
+B级：流动性质押衍生品
+
+Swell
+
+策略
+
+用Swell质押 $ETH 并获得 $swETH。
+
+MEV Protocol
+
+策略
+
+用MEV Protocol质押 $ETH 以获取 $mevETH
+
+ether.fi
+
+策略
+
+用ether.fi质押 $ETH 以获得 $eETH
+
+EigenLayer
+
+最近已有几个LST在EigenLayer上获得上市资格
+
+$swETH
+
+$ETHx
+
+$OETH
+
+$osETH
+
+$wBETH
+
+$ankrETH
+
+EigenLayer池尚未开放，但即将开放。
+
+高级策略
+
+收集主网 $ETH
+
+将 $ETH 存入上述任一LST。
+
+在EigenLayer上重新质押它们。
+
+C级：跨链桥
+
+经常使用以下协议
+
+rhinoFI
+
+squid
+
+deBridge
+
+Orbiter
+
+D级：衍生品
+
+Aevo (交易永续合约和期权)
+
+Paradex (交易永续合约
+
+Hyperliquid (交易和/或添加流动性)
+
+Derivio (交易永续合约)
+
+Brine (交易)
+
+E级：去中心化交易所
+
+Swaap (进行Swap和/或添加流动性)
+
+Ambient (进行Swap和/或添加流动性)
+
+Mangrove (进行Swap)

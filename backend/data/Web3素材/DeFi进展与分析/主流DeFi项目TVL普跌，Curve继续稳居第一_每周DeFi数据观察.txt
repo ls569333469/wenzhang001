@@ -1,0 +1,59 @@
+标题: 主流DeFi项目TVL普跌，Curve继续稳居第一 | 每周DeFi数据观察
+链接: https://www.chaincatcher.com/article/2067030
+发布时间: 2021-11-29
+
+==================================================
+
+整理：念青
+
+ 
+
+近两周，DeFi市场继11月9日达2765亿美元高点后有所回落，本周日TVL达2566亿美元。在头部DeFi协议中，本周TVL增速最快的DeFi协议包括Almond（112%）、Tomb Finance（98%）、Maiar Exchange（81%）、Channel Finance（47%）、BLizz Finance（46%）、Planet Finance（45%）、Flexa（31%）、O3 Swap（31%）。
+
+降幅比较大的协议包括Apricoy Finance（-28.6%）、Geist Finance（-22.9%）、Belt Finance（-21.6%）、Orca（-21%）、Mento（-19.6%）、Bunny（-19.5%）、Pangolin（-19%）、Terraswap（-18.99%）、Synthetix（-14.5%）、JustStables（-14%）。
+
+而价格涨幅最高的币种包括：DerivaDAO的代币DDX（65%）、Seedify.fund的代币SFUND（62%）、Trustswap的代币SWAP（50%）、Amp的代币AMP（36%）、Ampleforth的代币APMPL（35.7%）、STP Network的代币STPT（18.5%）、Anyswap的代币ANY（16.8%）、Curve DAO Token的代币CRV（15%）。
+
+下面，链捕手将综合DeFi liama、Coingecko等网站数据，从TVL、价格以及重要事件等三个角度对本周的DeFi市场进行进一步总结。
+
+ 
+
+一、TVL
+
+截至周日下午17：00，各大公链DeFi项目TVL总计达到2566亿美元，较上周日下降约4%，其中以太坊TVL为1689亿美元，占比为65.8%。各公链共计171个项目TVL超过1亿美元，共计50个项目TVL超过10亿美元。
+
+本周各公链TVL与前两周相比开始出现小幅下降趋势，但各大公链中Avalanche表现最佳，并于11月26日创131.8亿美元新高。
+
+在所有DeFi项目中，Curve、MakerDAO与Convex Finance的TVL在本周位居前三，其中Convex Finance的TVL于本周五创新下160.8亿美元新高。
+
+在TVL超过10亿美元的头部DeFi协议中，本周TVL增速最快的协议包括Maiar Exchange（81%）、Sushiswap（14%）、Flexa（31%），其它增速较高的DeFi协议还包括Tomb Finance（98%）、DefiDollar DAO（48%）、Channel Finance（47%）、BLizz Finance（46%）、Planet Finance（45%）、O3 Swap（31%）。本周头部项目普遍表现不佳，但一些小体量项目开始繁荣。值得一提的是，Maiar Exchange只上线两周TVL就冲到前25名，TVL达19.7亿美元，项目上线首日11月18日TVL已接近1亿美元。
+
+降幅较大的知名协议包括Raydium（-13.8%）、Syntheix（-14%）、Orca（-17.37%）、Terraswap（18%）、Sablier Finance（-29.6%）、Belt Finance（-22%）、Pangolin（-17%）、Mars Ecosystem（-15%）、Apricot Finance（-22%）等。
+
+ 
+
+二、代币价格
+
+ 
+
+截至周日17点，价格涨幅最高的币种包括DerivaDAO的代币DDX（65%）、Seedify.fund的代币SFUND（62%）、Trustswap的代币SWAP（50%）、Amp的代币AMP（36%）、Ampleforth的代币APMPL（35.7%）、STP Network的代币STPT（18.5%）、Anyswap的代币ANY（16.8%）、Curve DAO Token的代币CRV（15%）。
+
+同时，下跌幅度较大的DeFi代币包括Popsicle Finance的代币ICE（-49%）、Lido DAO的代币LDO（-38%）、Spell Token的代币SPELL（-33.8%）、JOE（-32%）、GMX（-27%）、Rari Governance代币RGT（-22.7%）、Wonderland的代币TIME（21.9%）、Sushi的代币SUSHI（-21.6%）等。
+
+ 
+
+三、DeFi重要新闻
+
+ 
+
+11月23日，公链Elrond宣布其开发的基于AMM的去中心化交易所Maiar Exchange正式上线，并推出12.9亿美元流动性激励计划。
+
+11月24日，Tokemak 在推特宣布，著名DeFi开发者、SushiSwap联合创始人0xMaki已加入“流动性即服务”协议Tokemak核心团队，将担任新的首席战略顾问，
+
+11月25日，Sushiswap传负面言论，其亚太负责人AG表示“很遗憾，Sushi正走向失败”，随后官方回复“AG 确实已经离职，任何言论不代表Sushi官方”。
+
+11月25日，Balancer DAO与Fei DAO正式签署合作协议，并启动超900万美元的代币交换。
+
+11月26日，Composable Labs孵化的跨链收益优化器 Instrumental Finance 宣布发行代币STRM，代币总供应量的5％空投给Composable Finance的 Mosaic、Celer的 cBridge、Connext bridge、Hop Protocol跨链桥用户。
+
+11月26日，DeFi聚合器项目Zapper在官方博客宣布，该项目仪表盘月活用户达到100万，累计交易量达到100亿美元。

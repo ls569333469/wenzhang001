@@ -1,0 +1,55 @@
+标题: 2023 年 ZKR 和 OR 的首次论战：EVM 等效是下限，而不是上限？
+链接: https://www.chaincatcher.com/article/2086801
+发布时间: 2023-02-01
+
+==================================================
+
+作者：念青，ChainCatcher
+
+ 
+
+从去年下半年以来，zk-Rollup扩容项目开始集中发力，不断追赶进度，相关的方案和项目也开始涌现，也在获得更多的资金和关注度。当人人都夸赞zk拥有光明的未来时，作为竞争对手的Optimistic Rollup有些坐不住了，于是， ZKR （zk-Rollup）和 OR（Optimistic Rollup） 迎来了（在舆论上）2023年开年的第一次正面交锋。
+
+前两天，Arbitrum 开发团队 Offchain Labs 的联合创始人 Steven Goldfeder再次发推给ZK Rollup和zkEVM泼冷水。
+
+Steven Goldfeder表示，并不赞同大家总说的“ZK Rollup能更好地代替Optimistic Rollup”，目前还远未在生产环境中实现 zkEVM，而且现阶段zk-Rollup比op-Rollup更贵且兼容性更差。
+
+此外，Goldfeder提到“EVM 等效是下限，而不是上限”，在这种观点下，Arbitrum作为第一个在生产环境中完全实现EVM 等效性的 Rollup更具有长期优势。在这一步基础上，Arbitrum开始开发更高阶的EVM+，旨在对更广泛的开发人员和用户开放（例如支持Rust 或 Move）。Nitro 基于 WASM 的设计在 EVM+ 创新上存在巨大的结构优势，而zk 团队在短期内“几乎不可能”实现EVM+。
+
+最后，Goldfeder还大胆预测：在任一功能齐全的zkEVM 出来之前，Arbitrum都已经支持Solidity、Rust合约了！
+
+Steven Goldfeder这番稍显傲慢并且无差别向zk-Rollup系项目扫射的言论引来一场“精彩的讨（骂）论（战）”。
+
+Polygon zkEVM 、前零知识证明开发公司 Mir工程师 Brendan 对Goldfeder的观点进行了逐条回应：Goldfeder并不十分理解Polygon zkEVM的架构。首先是时间上，Polygon 目前已经发布了一个生产就绪的 zkEVM 测试网并生成了超过 80,000 个区块证明，大约3个月后就可上线主网。而在成本上，Polygon zkEVM的证明成本并没有那么高。例如一次 Uniswap 交易成本为 0.0019美元，未来这一成本还将降低至目前的1/100。况且将昂贵的计算卸载到ZKP优于强制每个完整节点重新执行的模型。
+
+此外，Brendan认为更大的问题应该是在引入新的操作码后是否能确保与EVM的兼容性。而他也进行了“针对性”的预测：在支持 EVM的 Optimistic Rollup具备无需许可的欺诈证明之前，一定会有功能齐全的 zkEVM 投入生产。
+
+Scroll联合创始人Ye Zhang 则反驳，Goldfeder低估了zkEVM，应该再去好好看看Scroll在8个月之前的博客，Scroll的zkEVM 是以非常模块化的方式构建的。况且，过于激进地添加功能会增加安全风险，从真实的需求的出发，并不认为有添加新功能的必要。
+
+此外，他还抛出几个进一步需要探讨的问题：有多少人真正关心与 Solidity一起编写Rust 合约？需要多少额外的工具支持？支持可组合性吗？什么是安全假设？
+
+而zkSync 联合创始人 Alex G. 部分肯定了Goldfeder的观点，他同样赞同EVM+ > EVM，比较与 Rust/Move 代码的同步互操作性比单纯的 Solidity 强大得多。但是这种开发不仅Optimistic Rollup可以做呀，我们zkSync目前正在通过LLVM 编译 Solidity，也在添加Rust和Move。这么一比较，zk-Rollup 赢得很轻松嘛。
+
+Starkware 因为CairoVM气质较为独特，未参与本场论战。
+
+事实上，随着zk-Rollup的崛起，ZKR和OR之间的交锋和论战一直持续存在。
+
+在去年 7 月Polygon 开开心心宣布开源 zkEVM 代码时，Goldfeder就泼了一盆“zkEVM 距离正常运行还很遥远”的冷水，但Goldfeder指出的现阶段 zkEVM 还存在一定中心化问题、没有在证明者上开源等问题也的确都是事实。
+
+而更热闹的是在去年波哥大 Devcon期间。
+
+随着zkSync2.0的推出，zkSync开始大张旗鼓地宣传自己是“世界上第一个功能齐全的开源 zkEVM 网络”，Polygon zkEVM 在 Devcon 期间正式推出时也宣称自己是“第一个也是唯一一个去中心化的zkEVM 测试网”。
+
+但这两位在争论“第一个zkEVM”的同时也招致了不少质疑，这其中自然少不了Steven Goldfeder，他认为，zkSync的zkEVM 测试网并没有启用 zk-proofs，也没有经过安全审计。而Polygon 则被质疑说其zkEVM 证明者（zk prover）的源代码虽在 Github 上可用，但还没有开源许可证；虽然表示“完全等效”，但其 Github 代码库显示其暂时只测出了 97% 的兼容性覆盖程度。对此，Polygon 团队回应，“没有刻意隐瞒，部分内容正在编写的更好的文档”。
+
+Steven Goldfeder有一句话还比较中肯：“虽然目前很多团队都在稳步推进 zkEVM，但其远没有到‘黄金时期’，任何推动这种叙事的团队都在损害社区。”
+
+ZKR和OPR的争论再早可以追溯到2021年底。Offchain Labs专门发表了一篇名为《为什么说 Optimistic Rollup 比 ZK Rollup 更能代表以太坊扩容的未来？》的文章，比较了ZK Rollups 和 Optimistic Rollup 两个扩容技术。从那个时候，Offchain Labs就一直在强调Optimistic Rollup系统在可扩展性和成本上的优势，与 EVM 和现有工具完全兼容。
+
+随后Polygon的零知识证明工程师Brendan Farmer（还是上文提到的那位）发表《Polygon 驳 Offchain Labs：ZK Rollup 才是以太坊扩容的未来》回应，相对于Optimistic rollup，zk能提供同等的安全性和更高的资本效率。而且OR 受限于L1，因为欺诈证明必须能够在以太坊上执行，ZK 则没有这个限制。
+
+你会发现，这两个派系论战到今年，讨论的东西并没有本质上的变化。但这些讨论都是有意义的，如果能在话题上再多做一些延伸的话。
+
+尽管Optimistic Rollup占据了先发优势并仍然在当下垄断了80%以上的市场份额，但包括Vitalik等在内的意见领袖普遍在长期更看好ZKR。去年下半年以来，资本和开发人员大量涌入zk领域，相关项目不断出现，zk-Rollup开发进度也逐步加快。OR系也的确在当下有傲慢的资本，但面对竞争对手的逐渐强大，稳坐王座的Arbitrum多少也会有些烦躁不安，因此频频出言diss也在情理之中，对zk-Rollup也是不错的敦促。
+
+总体而言，L2这个朝阳赛道相比其他领域在熊市中受到的影响要略小一些，在2023年年初，这场交锋显得热热闹闹的，颇有欣欣向荣之势。但相比抢占舆论阵地，我们更期待OR和ZKR在真枪实弹层面的决战。

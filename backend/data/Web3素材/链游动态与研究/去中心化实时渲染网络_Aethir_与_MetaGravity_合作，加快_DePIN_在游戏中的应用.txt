@@ -1,0 +1,33 @@
+标题: 去中心化实时渲染网络 Aethir 与 MetaGravity 合作，加快 DePIN 在游戏中的应用
+链接: https://www.chaincatcher.com/article/2130819
+发布时间: 2024-06-26
+
+==================================================
+
+原文标题：Aethir, MetaGravity partnership boosts scalable DePIN gaming development
+
+原文作者：Cointelegraph
+
+编译：Elvin，ChainCatcher
+
+去中心化云基础设施提供商 Aethir 已与 HyperScale Engine 开发商 MetaGravity 合作，以加速去中心化物理基础设施网络 (DePIN) 的开发。此次合作旨在通过 DePIN 技术改善 3D 互联网和游戏行业，创建可扩展的基础设施，简化游戏开发并使其更高效、更易于访问。
+
+在与 Cointelegraph 的书面问答中，Aethir 联合创始人兼首席执行官 Dan Wang 强调了合作的目标，他表示：“通过整合全球未充分利用的资源网络，我们正在为游戏和 3D 互联网的更易于访问、更具沉浸感和可持续性的未来铺平道路。”
+
+此次合作对链上游戏的影响
+
+此次合作旨在通过结合 MetaGravity 的 HyperScale Engine 和 Aethir 的 Instaplay 像素流解决方案来超越在线游戏的历史限制，使游戏开发者能够同时扩展后端模拟基础设施和前端“跨设备像素流功能”。
+
+MetaGravity 联合创始人兼首席商务官 Tobin Ireland 在问答环节中解释了因果分区：“MetaGravity 创建了一种新的并发和并行方法，用于在多台服务器上分发大规模模拟（称为因果分区），而不受以前方法的规模和成本限制。”
+
+去中心化计算
+
+MetaGravity 和 Aethir 的合作还包括制定长期研究和开发路线图的目标，以加快 DePIN 在游戏中的应用。
+
+在谈到 DePIN 对游戏的影响时，王先生表示：“DePIN 利用地理上分散的 GPU 资源，将处理能力置于更靠近用户的位置。DePIN 本质上具有可扩展性和安全性，确保即使是要求最苛刻的游戏也能顺利运行。”
+
+所有权和控制权
+
+Aethir 和 MetaGravity 的联合技术旨在开发第三代互联网，其特点是将所有权和控制权分散。
+
+Ireland 解释道，这对尽量减少延迟和网络传输成本的计算能力的需求将会增加。 “DePIN 基础设施还具有分散所有权、治理和控制的优势。”

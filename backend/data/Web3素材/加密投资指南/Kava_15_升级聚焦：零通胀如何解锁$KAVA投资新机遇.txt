@@ -1,0 +1,394 @@
+标题: Kava 15 升级聚焦：零通胀如何解锁$KAVA投资新机遇
+链接: https://www.chaincatcher.com/article/2108204
+发布时间: 2023-12-11
+
+==================================================
+
+作者：@auggest_crypto, @GryphsisAcademy
+
+
+
+
+投资概要：
+
+Kava 是 Cosmos 的原生 USDt 的 Defi Hub 链，在稳定币流动性上具有显著地位。
+
+作为衔接 Cosmos 和 EVM之 间的跨链互操作性的 Layer 1，市值（10月份）排进 Layer 1 前10，稳定币市值占据 Cosmos 生态龙头地位，生态发展较为乐观。
+
+Kava 有较为明确的 Roadmap，针对 EVM 资产种类、跨链桥的接入、资产流通等等，都有较为明确的预期。
+
+Kava 的生态发展势头较猛，伴随着 dydx 等知名 Defi 产品入驻 Cosmos，给 Kava 此类的 Defi Hub 链带来了更多的金融流通可能性。
+
+Kava 和 DWF 做市商达成合作，会显著提高流动性，提高市场的参与度，并且对 Kava 的品牌形象也有积极影响。
+
+1.项目摘要
+1.1项目简介
+
+Kava 原本是一个类似 Maker DAO 的 CDP (Collateralized Debt Position)自动化抵押借贷平台，即用户可以通过存入 BNB, BTC, XRP, BUSD 等等多样化跨链资产资产从而借出抵押品稳定币 USDX。此外还推出了 Harvest.io 借贷协议（后改名为 Hard Protocol，再更名为 Kava Lend），两者共同构建 Kava Defi 服务。
+
+Kava 建立在 Cosmos 上，可以单独成链，所以也可以理解为致力于成为 Cosmos 上首个 Defi Hub 链。
+
+但随着 Defi 互操作的发展，在2022年 Kava 10 版本上线，正式将其转向成为一条用 Cosmos SDK 开发的，POS 机制且 EVM 兼容，致力于连接 Cosmos 和 EVM 生态的跨链互操作和资产流通的 Layer 1。
+
+1.2基本信息
+
+2.项目详解
+2.1 团队
+
+目前在职45位，团队平均任职时间长2.2年，其中核心董事会成员如 Brian Kerr, Scott Stuart 保持稳定，任职长达7年。
+
+Brian Kerr: Kava Labs 的联合创始人兼董事会成员，在此之前，他是 Fnatic Gear 的创始人兼首席执行官。
+
+Scott Stuart：Kava 的联合创始人兼首席执行官
+
+Kevin Davis：首席工程师
+
+Aaron Choi：副总裁
+
+Ruaridh O'Donnell：首席开发人员和联合创始人
+
+Jack Zampolin：投资顾问
+
+2.2 融资情况
+
+Kava 已披露的融资将近 $5M，投资方包括 Binance Labs、HashKey、Xpring、Framework Ventures 等等。于2019年10月16日发行 $KAVA，通过多轮私募将40%的初始供应量出售给投资者，另外总供应量的6.25%在 Binance Launchpad 上以$0.46价格公开出售，累积筹得$3M。
+
+2.3 技术框架
+
+Kava 的结构分为 Cosmos Co-Chain 和 Ethereum Co-Chain，两者均创建在 Cosmos Tendermint 共识引擎上。Ethereum Co-Chain 允许开发者使用 Solidity 部署，或者直接迁移应用到 Kava 上，Cosmos Co-Chain 通过 IBC 协议和整个 Cosmos 生态进行互通。两者之间通过 Translator Module 来连接两个不同的执行环境，以便双方更加轻松地访问。
+
+Source: Whitepaper
+
+
+
+Kava 内部分为 Kava IBC (Cosmos环境）和 Kava EVM (EVM环境），其中：
+
+1）Cosmos 到 EVM：
+
+Kava14 上线的原生内部桥，作为一个 Cosmos SDK 模块，可以被集成在各种应用，钱包里。允许用户将 Cosmos 的资产以 ERC20 的形式传输到 EVM 环境中，从而实现资产转移。比如 $KAVA 想要在 EVM 环境中使用的话，可以将其封装成 $wKAVA（ERC20属性）在 EVM 环境中使用。
+
+和外部桥不同，Kava 内部桥是在同一个账本里进行资产传输，类似于 IBC 协议在不同账本之间改变状态的方式，保证了一致性和兼容性。
+
+2）EVM 到 Cosmos：
+
+当下允许 Kava EVM 跨到 Kava IBC，Cosmos 侧的 Osmosis, Injective以及 EVM 侧的 Evmos 跨 $USDt 和 $ATOM。
+
+可以看出 Kava 在 EVM 侧的资产转移较弱，唯一支持的 Evmos 链并不是 Ethereum 生态的，他也是同时兼容 EVM 和 Cosmos 的一条 Layer 1，所以真正的和以太坊生态交互的层面目前并没有完全实现。当下支持 EVM 资产到 Cosmos 中，只有 Stargate 等桥或者其他跨链聚合器支持，Kava 内部支持范围有限。
+
+2.4 产品体系
+
+Kava Labs 主要分为以下几块 Defi 服务：
+
+Kava Staking:对于持有 $KAVA 的散户可以作为委托人将自己的资产委托节点质押，并从中获得收益。
+
+Kava Lend：由一开始的 Harvest 到 Hard Protocol，最后更名得来。允许用户作为供应方存入 BTC, XRP, BNB, BUSD等多种生态资产，在借出其他资产。生态不仅给借贷用户基本的利率激励，还有 $KAVA 的挖矿激励。
+
+Kava Earn：作为一种 Defi 的收益策略，激励用户锁 $bKAVA 来获得高 APY，从而增加 Kava 的 TVL。
+
+Kava Mint：由 Kava CDP 协议更名得来，允许用户抵押跨链资产来铸造抵押稳定币 USDX。
+
+Liquid Staking：质押持有的 $KAVA 从而获得 $bKAVA，系统将存入的 $KAVA 转到 Earn 机制里，获得更高收益。
+
+Kava Swap：一个 AMM 模型的 Swap 机制，允许用户无缝交易不同区块链上的各种资产，或者通过提供流动性来赚取额外收益。
+
+2.5 生态系统
+
+目前 Kava 总 TVL 为 340.67M，稳定币市值 129.06M，日交易量为 1.44M。已经有超过 116 个协议部署在其之上，其中 Defi 类目占比偏高。但根据协议排名来看，当前仍以 Kava 本土的 Defi 服务占据主导地位，前五基本被 Kava Lend, Kava Mint, Kava Earn 等等涵盖，生态中并没有像 Arbitrum 上的 Blur 那样有较为出彩的原生独立协议。
+
+3.发展历程
+3.1 重大历史事件
+
+首先我们来看看 Kava 从成立至今的重大事件。
+
+2019年3月1日， Kava 融资$1.2M 由 Venture Capital 领投
+
+2020年2月5日，Kava 上线首个跨链借贷平台 CDP 测试网
+
+2020年2月27日，和 Trust Wallet 正式宣发集成，支持 $KAVA 存储，转账以及抵押
+
+2020年3月25日，宣布和 Chainlink 建立长期战略合作
+
+2020年4月16日，成为 OKChain 开源跨链生态首批合作伙伴
+
+2020年4月30日，Kava 发布 CDP 预注册页面，开放用户测试
+
+2020年5月15日，设立链上治理委员会机制
+
+2020年6月11日，Kava3 上线首个 CDP，支持抵押 BNB 贷出 USDX
+
+2020年8月13日，和 Injective Protocol 建立合作关系
+
+2020年10月15日，Kava4 支持 Harvest.io V1 版本
+
+2020年11月6日，和币安链间转账功能开通，支持 BTC, XPR, BNB, BUSD跨链交易转账
+
+2021年2月9日，CertiK 审计通过
+
+2021年4月9日，Kava5 上线 Harvest V2 版本，允许借出资产并提供 $HARD 挖矿激励
+
+2021年7月26日，Kava5 主网回滚
+
+2021年7月27日，Centre 计划在 Kava 上发行 USDC
+
+2021年8月31日，Kava 8 上线 AMM Swap 机制
+
+2021年9月22日，Kava Rise 激励计划发布$185M资金来吸引项目入驻
+
+2022年1月20，Kava9 整合 IBC 协议，面向更广泛的 Cosmos 生态
+
+2022年3月3日，开设$750M Kava Rise 开发者激励计划
+
+2022年4月7日，Ethereum Co-Chain Alpha
+
+2022年4月27日，CosmosEVM Era 正式启动
+
+2022年5月25日，Kava10 EVM 上线，正式成为 Cosmos&EVM 互操作 Hub 链
+
+2022年6月21日，和 Celer cBridge 合作实现资产跨链
+
+2022年9月9日，Curve Finance 上线 Kava
+
+2022年10月26日，Kava11 上线 $bKAVA 提高质押代币的流动性
+
+2023年1月12日，Kava12 上线 DAO
+
+2023年3月15日，Kava13 上线 EVM 2.0
+
+2023年4月4日，社区提案创建双重基金会架构
+
+2023年5月12日， Kava EVM 路线图上线
+
+2023年6月22日，Tether 将在 Kava 上推出稳定币 USDT
+
+2023年7月13日，Kava14 升级成功，部署了内部跨链桥，将原生 Cosmos 资产转化为以太坊 ERC20 标准
+
+2023年7月14日，Kava 14 开放原生的 Cosmos 资产到以太坊上
+
+2023年9月2日，Stargate 上线 Kava 原生 USDt 流动性池
+
+2023年11月15日，Kava 和 DWF Lab 达成战略合作伙伴关系
+
+2023年12月7日，Kava 15 实现代币零通胀
+
+3.2 价格K线走势
+
+3.3 Kava 15
+
+Kava 15主网将于12月7日正式上线，在对 K15 起到关键作用的141号提案中，关于未来的 Roadmap 列举了三块 Adopation, Security, Goverance。
+
+1）Adoption:
+
+Kava 希望将自己定位成 Cosmos 生态的稳定币承接商，让各类稳定币集成到 Kava 上，这样就可以成为 Cosmos 的稳定币专属 Hub 链，从而更好的和其他应用链比如 DYDX, Osmosis 等等交互。比如现在 Injective 已经支持 Kava 的 BTC/USDC，ETH/USDT 的永续池子。
+
+在 EVM 原生桥层面，Kava 后续会和主流的桥比如 Layerzero, Wormhole, Multicahin, Axelar等等集成，从而更高效快捷的和 EVM 原生资产交互。在代币层面，会考虑接入更多的包装代币比如 WBTC, WETH 等等。目前 Stargate 已经支持 Kava 上的 wETH。
+
+如此，通过连接 EVM 的流通性，生态的原生协议不仅可以享有，还能吸引更多的投资和 CEX 的流动性。
+
+2）Security:
+
+主要集中在节点可用性和软件可扩展性，通过优化节点，从而提高接收、处理，和验证器交互并最终分散的服务；优化软件可扩展性以支持更高额的交易和请求。
+
+3）Governance:
+
+Kava 在维持 Cosmos 主权自治的原则上，将社区治理扩展到 Kava EVM 层面，以保持 Cosmos 和 EVM 两块框架的治理一致性。并且未来会创立两个独立的基金会来共同维护 Kava 的持续发展，生态中处理质押奖励外其余的净盈余均由两个基金会管控。
+
+4. 经济模型
+4.1 模型&分配
+4.1.1 代币模型
+
+1）双代币经济模型
+
+Kava 采用双代币经济模型，权益及治理代币 $KAVA 和稳定币 $USDX。
+
+$KAVA：作为生态代币用途广泛，比如作为 POS 的质押代币，通胀奖励形式，交易费用，投票和治理等等。
+
+$bKAVA：流动性质押衍生品代币，允许质押的 $KAVA 仍想享有流动性。
+
+$wKAVA：$wKAVA 作为 $KAVA 的封装代币，ERC20 属性。
+
+$USDX：系统的原生稳定币，主要应用于 CDP 协议中，通过质押代币，获得 USDX，从而获得更高的流动性，类似于 MakerDAO 中的 DAI。
+
+2）$KAVA 用途：
+
+交易手续费：生态费用需要用 $KAVA 代币来支付，包括传输资产，开设/关闭 CDP，转账交易等等都需要用 $KAVA。其中 CDP 的交易手续费会按一定比例分给验证者和委托人。
+
+质押奖励：质押 $KAVA 代币，可以根据网络总质押率获得3%-20%的 APR。
+
+验证者佣金：节点验证者可以从其委托人赚取的收益中拿到一定比例的佣金
+
+社区治理：有权发起提案并投票修改平台规则
+
+3）通缩机制：
+
+网络中每产生一个新区块都会排放新的 $KAVA 给节点验证做作为奖励，预计每年产生7%的通胀率。但每一个 CDP 会有对应的稳定费率，当 $KAVA 作为支付 CDP 抵押债仓的稳定费率则会被销毁，以此来维持代币的此消彼长。
+
+4.1.2 $KAVA分配机制：
+
+代币发行无上限，但创世之初有1亿枚。
+
+Source: CoinMarketCap
+
+
+
+Source: CoinMarketCap
+
+4.1.3 $USDX挂钩机制
+
+USDX 是 CDP 抵押稳定币，与美元锚定 1: 1 软锚定，通过弹性供应机制，根据算法来调整供给，从而维持价格稳定。
+
+用户在抵押资产借出 USDX 时，存在一定的抵押率。比如存入价值150U的资产，借出价值100U的 USDX，其价格与抵押资产相挂钩。
+
+当抵押资产价格下降过快，那么系统会启动清算机制或者债务拍卖，以低于市场价的价格卖掉抵押资产，同时提高 USDX 的供应，使得 USDX 的价格也下降从而和锚定资产保持稳定。同时，如果市场变动已经超出系统的自动调整范围，$KAVA 代币会作为 “最后贷款人” 角色，将 $KAVA 代币进行通胀和拍卖作为抵押，从而弥补 USDX 价格。
+
+此外，Kava 针对 USDX 的价格机制也做出了一些优化，比如：
+
+通过 Chainlink 的 Oracle Feed 发布市场比率，来获得高质量的市场数据从而使得抵押品和 USDX 的精准锚定
+
+开设多抵押资产，分担单一资产的风险。当系统不得已低价出售抵押品时，收回的资产并不能弥补系统坏账，所以可以通过其他的抵押资产的盈利进行弥补，从而提高抗风险能力。
+
+不过，USDX 价格仍存在短期严重挂钩，在23年4月11日，USDX 价格暴跌至$0.1，随后快速反弹至$0.8。创始人 Scott Stuart 指出 USDX 的价格稳定并不是必要条件，相反其认为USDX最合适的应该是和市场波动相挂钩。
+
+4.2 2.0更新
+
+在即将推出的 K15 中，明确提出了要摒弃通胀率，即市面上流通的代币量就是最大供应量。无法创建新的 $KAVA，且计划在12月31日通胀率永久降低至0。
+
+$KAVA 的盈余主要来自原生项目排放，交易费用和基金会。即 $KAVA 作为生态费用的这一部分会回归到社区而不是直接给节点验证者。由社区来决定这笔资金的用项（销毁或者再投资），从而进一步提高网络的去中心化。
+
+这样一来，$KAVA 的总供应量只减不增，而随着 $KAVA 作为生态费用以及享有治理权，后续在生态增长中需求会日渐增长，需求侧明显增加。
+
+5. 赛道解析
+5.1赛道概览
+
+Kava 类属于 Layer 1 赛道，以 Ethereum 和 Bitcoin 作为先锋网络扩展出一系列 Layer 1 底层网络如 BSC, Sui, Aptos, Solana 等等新兴公链，使得当前整体生态繁荣，（截止写稿时）市值为1125 Billion，占整体区块链市值类目的 TOP2。其中以太坊占据赛道龙头，Tron,  BSC, TON, Solana 等公链表现良好。
+
+Source: Coingecko
+
+
+
+Source: Defillama
+
+
+
+Layer 1 区块链的底层协议，其模块构架，共识机制，区块机制等等对整个区块链的性能和扩展性都有重要影响。不同 Layer1 的底层设计不一样导致其特性也不一样，有些公链侧重于交易处理速度，有些侧重于隐私安全等等。
+
+根据特性划分类别，比如以太坊以及 EVM 兼容的为一类，非 EVM 兼容的为一类，专注做各自成链的 Cosmos&Polkadot 等为一类……
+
+其中 Kava 细分到的是 Cosmos 中的，专注于连接 Cosmos 和 EVM 生态，提供跨链互操作性的公链 Layer 1，在 Cosmos 中 TVL 位列第三。
+
+5.2 竞争项目
+
+在 Cosmos&EVM Compatible 的 Layer 1 公链中，我们来看看 Kava 的竞争对手有哪些。
+
+1.EVMOS
+
+Source: Website
+
+
+
+EVMOS 起源于 Ethermint，一个由 Cosmos SDK 构建的 EVM 链，旨在通过 Tendermint 共识协议来链接 Ethereum 和 Cosmos 生态系统。
+
+后来团队意识到 Cosmos 和 Ethereum 可以共享繁荣并互相收益的需求，因而创办了 EVMOS，旨在 Cosmos 上构建一个 EVM Stack 方案，使得原有的 EVM 社区快速部署到 Cosmos 上，同时提供两者的互操作性。
+
+因此，在2022年，Ethermint 成功 Rebrand 成 EVMOS，将 EVM 链，应用，资产和用户引入到 Cosmos 生态中。截止写稿时，EVMOS 的 TVL 为 4.52M，稳定币市值为130K，24小时交易量为160K。
+
+2. Cronos
+
+Source: Website
+
+
+
+Cronos 也是一个建立在 Cosmos SDK 上，由开源项目 Ethermint（前EVMOS）提供快速连接以太坊和其他 EVM 生态，通过 IBC 协议和其他的 Cosmos 进行互通，专注于 Defi, NFT,  Games 和 Metaverse 的 Layer 1。于2021年11月发布主网，快速积累了百万用户和500+的应用。
+
+其发行了专注的 NFT 市场，使得用户可以创建，交易 NFT；同时实现跨链桥接功能，使得用户可以将其他区块链资产转移到 Cronos 上，但是目前其 EVM 层面的公链仍在支持当中。截止写稿时，Cronos 的 TVL 为 453.34M，稳定币市值为5.9K，24小时交易量为4.2M。
+
+5.3 Kava竞争优势
+
+1）生态地位
+
+Kava 作为 Cosmos 的原生 USDt 的 Defi Hub 链，具有显著地位的稳定币流动性。并且作为Layer 1，市值排进整体赛道的前10（23年10月）；在 Cosmos 生态中位列第二，稳定币市值占据龙头地位，生态发展较为乐观。
+
+Source: Defillama
+
+
+
+不仅如此，其在 EVM 资产兼容的发展方案上有较为明确的 Roadmap，针对资产的种类，资产跨链桥的接入，以及后续和 Cosmos 其他应用链的资产流通等等，都有较为明确的预期。
+
+且伴随着 DYDX 等知名 Defi 产品入驻 Cosmos，使得整体生态发展势头较猛，给 Kava 此类的 Defi Hub 链带来了更多的金融流通可能性。
+
+2）DWF 做市商合作
+
+Kava 于11月15号达成了和 DWF 做市商的伙伴关系。在其宣发的文章中，明确指出 DWF 除了提供基本的风险管理，清算机制，收费结构等等还会提供战略指导，在 Kava 链上的 DEX 中开始自营交易并会达到目前生态所有 DEX 的总交易量的7.5%。
+
+这样一来，就可以帮助Kava显著提高流动性，通过提供更多的交易对和深度，从而提高市场的参与度。而且这样的战略合作对于Kava这边的品牌形象也有积极影响。所以综合来说和DWF合作在市场和产品都带来了正面作用。
+
+3）社区预期强（主网和经济模型）
+
+Kava 官方于 11.11 号宣布 K15 主网将于12月7日上线这一消息之后，当日币价上涨13.7%，说明社区对于主网更新的预期较强。外加上上线之后的代币经济模型的变更，使得 $KAVA 流通量受限，很可能作为叠加促使 $KAVA 的新一轮爆发。
+
+Source: Coingecko
+
+5.4 Cosmos Beta
+
+除了 Kava 以外，近期 Cosmos 生态发展较猛，我们收集了以下较为不错的协议作为 Beta 推荐：
+
+5.4.1 Neutron （$NTRN）
+
+Neutron 是首个在 Cosmos 的 Replicated Security 上启动的链，通过在 Cosmos Hub 上部署智能合约使得项目方可以快速部署。
+
+利好叙事：
+
+合作收益模式打通。Mars Protocol 协议 V2 版本将部署在 Neutron上，并给予一定比例的代币给 Neutron；Apollo, Cosmos上的 LSDfi 协议也成功上线 Neutron。
+
+收购编程环境 CosmWasm 开发商 Conflio 25% 的股权
+
+Neutron 的存在提高了项目方对 $ATOM 的需求，更受 Cosmos 官方推崇。因为和 Hub 链共享验证者的同时，需要支付 $ATOM 作为服务费。如果项目自成生态，用自己的 Token 维护生态，$ATOM 的应用场景就会被削弱。
+
+5.4.2 THORchain ($RUNE）
+
+THORChain 是跨链流动性协议，支持原生 DEX 跨链交易(专注于全链原生资产Swap)，Lend 借贷，以及其他 Earn 相关的 Defi 功能；其 AMM 机制的 DEX 多出的无常损失的保护机制以及动态滑点费使其独树一帜。
+
+利好叙事： 
+
+LiFi 即将集成 THORchain 以扩展 Swap 功能
+
+原生资产Swap支持原生BTC交易，BTC生态火热促使交易需求上升。间接提高LP激励，从而促进$RUNE的购买。
+
+THORchain 的 Forks 将以 $RUNE 驱动，来支撑各个协议的资产流动性，但同时也刺激了 $RUNE 的持有需求
+
+5.4.3 Celestia（$TIA）
+
+Celestia 是一个基于 CometBFT 和 Cosmos SDK 的 POS 区块链，专注于数据可用性的模块化。
+
+利好叙事：
+
+推出以太坊 Fallback 功能，以确保用户资金不会卡在 Layer 2 合约上。
+
+和 Manta 公链集成
+
+和 OP Stack 技术集成合作，使用 Celestia 作为 DA 层。
+
+5.4.4 Injective（$INJ）
+
+Injective 是致力于构建 Defi 应用程序的，具备互操作性的 Layer 1区块链。如支持以太坊， IBC 兼容的区块链（如 Cosmos 生态系统），以及非 EVM 兼容链（例如 Solana）等等公链之间的跨链互操作性。
+
+利好叙事：
+
+Volan 主网即将更新
+
+$INJ 燃烧机制
+
+6. 风险&挑战
+
+生态协议被本土服务垄断，其中 Kava Lend 就占据1/3的总 TVL。其他支持的 Defi 协议比如 Curve, Sushi 等等均不是 Kava 本土的原生协议，这样的局面会导致生态过于单一，似乎仍处于 Defi 服务的阶段，朝向公链生态还需要一定时间。
+
+跨链资产兑换成熟度不高，内部原生桥对于 Cosmos 资产传输到 EVM上 的支持度较高，但从 EVM 资产进入到 Cosmos 上的服务并不深入，目前只有 Stargate 或者其他DEX Aggregator 支持将 EVM 资产转移到 Kava 中，而以太坊的强金融属性会导致这个缺陷放大。
+
+Kava 的发展也受限于 Cosmos 本身及其生态的发展，若生态发展被其他底层跨链协议追赶或取代，依附 Cosmos 生态的 DeFi 也将受到影响。
+
+7. 结论
+
+Kava 作为 Cosmos 和 EVM 互操作链，相对来说内部对于 Cosmos 侧的 EVM 资产支持较弱，但和其他竞品相比仍具有优势。特别是其在国库中拥有$72.5M的 USDT（EVM）稳定币资产，为后续和 Cosmos 生态的互通有无提供基础。
+
+此外，在当下“应用链”叙事盛行的背景下，无论是 Layer 2 Stack 还是 Cosmos&Polkadot 等Layer1，生态发展永远离不开互操作性。而作为互操作链，Kava 将在未来，各大 EVM 应用链和 Cosmos 应用链之间实现 Defi 服务中间商。
+
+值得注意的是，$KAVA 作为生态&治理费用代币将在12月7日实现0通胀。在应用场景扩大的背景下停止供给侧产出，无疑会引发需求侧的爆发，且结合其与 DWF 的正式合作，相信在未来 $KAVA 可以带来更多的惊喜。

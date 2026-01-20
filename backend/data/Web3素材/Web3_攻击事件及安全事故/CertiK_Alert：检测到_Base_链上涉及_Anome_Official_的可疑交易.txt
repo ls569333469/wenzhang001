@@ -1,0 +1,7 @@
+标题: CertiK Alert：检测到 Base 链上涉及 Anome Official 的可疑交易
+链接: https://www.chaincatcher.com/article/2185327
+发布时间: 2025-06-10
+
+==================================================
+
+ChainCatcher 消息，CertiK Alert 发文表示，检测到 Base 链上涉及 Anome Official 的可疑交易。一名攻击者用 0.2 ETH 购买了 1e20 枚 Bnome，并将其提供给合约 0x7144。随后，该攻击者反复借入价值约 44 ETH（约合 12 万美元）的 Anome USD，然后将这些资金存入 Tornado.Cash。

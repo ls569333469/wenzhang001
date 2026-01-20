@@ -1,0 +1,9 @@
+标题: Tether 冻结超 1100 万 USDT，疑与钓鱼活动相关
+链接: https://www.chaincatcher.com/article/2172500
+发布时间: 2025-03-14
+
+==================================================
+
+ChainCatcher 消息，据 MistTrack 监测，Tether 已冻结1100 万 USDT，涉及 TRON 地址 THsPNvWc47swNQp2GmAoH96KtYfSR4bz9F，疑与钓鱼活动相关。
+
+此外，UniswapV2Pair 合约地址（0x652d…89E） 亦被冻结 44.24 万 USDT。

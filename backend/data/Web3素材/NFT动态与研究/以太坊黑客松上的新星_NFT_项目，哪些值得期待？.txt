@@ -1,0 +1,241 @@
+标题: 以太坊黑客松上的新星 NFT 项目，哪些值得期待？
+链接: https://www.chaincatcher.com/article/2069602
+发布时间: 2022-02-01
+
+==================================================
+
+整理：区块链研习社
+
+编辑：链捕手
+
+ 
+
+本次在线上举办的NFT黑客马拉松活动，共聚集了以太坊生态系统中的1000名开发人员和创意人员，共同推动NFT领域的发展。
+
+NFThack 2022 专注于蓬勃发展的NFT领域，共计：
+
+800 名开发黑客
+17个生态系统合作伙伴
+奖金16万元美元以上
+涉及68个国家和17个时区
+255个候选项目
+16个项目脱颖而出
+
+以下是对16个 NFTHack 决赛选手的介绍。
+
+ 
+
+1、Multi-Contract Battle Royale
+
+网站：https://maticmike.club/
+
+Multi-Contract Battle Royale 是部署在Polygon 上、完全在链上运行的大逃杀游戏和排队系统，支持多合约运行。
+
+在活动中，开发团队演示通过购买NFT，进入链上世界玩舞蹈、健身等游戏的过程。在游戏过程中，玩家可以选择 0-5个HGH代币进行能量提升。其链上排队系统将用户以每50人一组排列，用户进入系统后，如果未满50个，将进入“观看战斗”队列，直到用户人数达到。
+
+Multi-Contract Battle Royale技术难度不小，主要是：
+
+100% 链上生成 NFT 游戏，完全去中心化，使用chainlink的VRF来确保游戏的随机性。
+
+ 
+
+2、OxPhotos
+
+网站：https://showcase.ethglobal.com/nfthack2022/0xphotos
+
+一个摄影作品 NFT 市场。
+
+OxPhotos的解决方案是：
+
+A. 将摄影师图像作品上传并铸造“资产 NFT”，购买者铸造“许可证 NFT”来初始化使用和启用支付；
+
+B. 付款会自动进入“资产 NFT”，从而为摄影师创造现金流。所有付款的 2%资助预期的 DAO 和未来发展。“资产 NFT” 成为可以在 NFT 市场上交易的未来现金流资产。
+
+技术角度而言，OxPhotos所有合约和 NFT（铸币 + 市场）都部署在 Polygon 上，而不是 L1。资产和许可证存储在 IPFS 上。
+
+ 
+
+3、NFT Cam
+
+网站：https://showcase.ethglobal.com/nfthack2022/nft-cam
+
+NFT Cam可以为任何OpenSea上的NFT，生成可互动的AR体验。
+
+在现实世界中，我们喜欢分享有关艺术收藏的照片和视频，以表达品味并与其他社区成员互动。但是在 NFT 的世界里，除了改变头像之外，没有很多方式可以从视觉上向他人表达我们对收藏品的热爱。
+
+NFT Cam 可以很容易地将任何 NFT 带入相机。得益于 web3 的互通性，NFT Cam 只需要一个 OpenSea 链接就可以抓取相应的资产，并且基于 NFT 会产生完美的 AR 体验，无论是 3D 还是 2D。如果 NFT 是 JPEG，则可以将其用作背景；如果它是一个装配好的 3D 模型，可以通过身体的运动来驱动它。
+
+技术上，NFT Cam前端使用了 React、Web3.js、THREE.js 和 MediaPipe。NFT Cam后端使用了 Node.js。
+
+ 
+
+4、Creativerse
+
+网站：https://showcase.ethglobal.com/nfthack2022/creativerse-minecraft-on-ethereum
+
+一个Minecraft服务器，用户可以拥有作为NFT的地块，每个地块的所有区块数据都存储在NFT中。这允许任何人运行一个服务器，使其成为一个去中心化的 Minecraft 协议。
+
+Creativerse 是一个 Minecraft 服务器，可在以太坊上以 ERC-721（又名 NFT）的形式拥有土地。土地的所有区块数据都保存为链上 IPFS ，这意味着用户可以在任何运行 Creativerse 插件的服务器上访问土地。这意味着任何人（甚至你！）都可以运行 Creativerse 服务器，完全同步到区块链。无论用户构建什么，都无法对其进行审查。
+
+技术上，本项目使用 IPFS 和 NFT.Storage 存储每块土地的区块数据，并将 IPFS 哈希存储在以太坊上的 NFT 中。
+
+ 
+
+5、Yoink Club
+
+网站：https://showcase.ethglobal.com/nfthack2022/yoink-club
+
+Yoink Club 是一个可以从二级市场和流动性池中释放 NFT 效用代币的 DApp。
+
+每个 NFT 项目都有自己的 Yoink Club 会员资格，而这些 NFT 的属性中会包括处理提取的关键逻辑部分，这意味着部分属性或权限能够出售和交易。
+
+以 RareBunniClub（RBC）项目为例，一个 NFT 每天能赚取 10 个胡萝卜（Parrot），当然在二级市场上线和存储在流动性池中的每个 NFT 也在每天产出这种效用。
+
+而 Yoink Club 带来的解决办法是：先在二级市场 OpenSea 上以地板价购买 NFT，再从购买的 NFT 中提取出这种效用属性，然后去 NFT 流动性协议 NFTX 进行 NFT 兑换（NFTX 允许用户将其 NFT 兑换成该 NFT 机枪池中的其他任意一个 NFT），还可以再从新兑换的 NFT 中提取出效用属性，共获得双重效用属性。
+
+最后，Yoink Club 会以高于地板价的价格在 NFTX 中售出该 NFT。
+
+Yoink Club 的这种「空手套白狼」的方案虽然可以帮助用户在短期之内释放 NFT 效用，但是尤其对于一个在其 NFT 中内置奖励等类似属性的 NFT 项目，这种属性无疑是至关重要的。
+
+ 
+
+6、Graffiti Mint
+
+网站：https://showcase.ethglobal.com/nfthack2022/graffiti-mint
+
+一个将IRL涂鸦活动中的街头艺术数字化和铸币化的Dapp。
+
+该项目有助于将涂鸦活动数字化、铸造和货币化。它集成了 ERC1155 NFT，用于活动支持者的 4 层季票，以及 ERC751 合同，将在城市公园的涂鸦活动中制作的街头艺术作为 NFT。
+
+活动支持者从他们的季票活动中制作的每件艺术品中获得 OG NFT，艺术家获得用于拍卖 Event Edition NFT 的资金和 OG NFT 销售额的提成。
+
+ 
+
+7、Charisma
+
+网站：https://showcase.ethglobal.com/nfthack2022/charisma-personality-using-wallet-nft-data
+
+Charisma通过NFT资产和链上数据分析人的个性，铸造个性NFT并找到类似的朋友。
+
+Charisma 是一种通过分析钱包的 NFT 资产和链上活动来告诉人的个性的工具。类似于 Myers Briggs 性格测试，它使用 8 种性格特征来创建 16 种不同的性格类型。
+
+项目创建了钱包个性指标，这是 8 种钱包个性特征来创建 16 种不同的钱包个性类型。项目还创建了包含钱包交易频率、项目总交易量、历史价格、购买时间等变量的算法，以便客观地确定 8 种性格特征中的哪一种与用户钱包相匹配。
+
+Charisma 的底层是一个透明、适应性强和社区管理的声誉和身份系统，由可验证的链上数据支持。您的用户行为将成为声誉和身份的一部分。项目通过将信誉层与媒体对象分离来创建可移植身份。通过创建可移动的身份，Charisma 赋予用户权力，履行去中心化的承诺。
+
+ 
+
+8、NFTpia
+
+网站：https://showcase.ethglobal.com/nfthack2022/nftopia
+
+一个融合了DAO和AI力量的NFT市场，鼓励审查NFT以获得奖励，并提供智能洞察力以帮助买家做出更好的决定。
+
+NFTpia建立一个 NFT 市场，通过融合 DAO 和 AI 的力量，鼓励审查 NFT 以获得奖励，并帮助买家做出更好的决策。
+
+对于每个集合，NFTpia市场会自动生成一个提案，NFTpia代币持有者可以为每个集合提供评论和评级。所有评论和最终评级将在提案结束后公开查看。
+
+在 AI 方面，NFTpia DNN 模型经过训练，可以从 NFT 集合的图像中提取数字形式的视觉特征，并将它们与预定义标签列表相关联。当新集合中的 NFT 被铸造出来时，它会识别出最合理的标签，并生成一个创意分数，以反映这个 NFT 集合基于所有现有集合的创意程度。
+
+ 
+
+9、DuoMint
+
+网站：https://showcase.ethglobal.com/nfthack2022/duomint
+
+Duomint是进入web3的免费体验平台。新用户可免费获得一个NFT，并在指导下了解web3的魅力，无需费用和gas。
+
+Duomint 创建了一个免费体验的WEB3入口，让新手体验 web3 的魅力。用户只需设置一个 Metamask 钱包即可获得 100% 免费的 NFT！
+
+例如，在 Opensea 上检查你的 NFT 、在 Metaverse 艺术画廊中展示你的 NFT、访问仅限会员的 Discord 服务器等。
+
+ 
+
+10、Instant Blockchain Domain Search
+
+网站：https://showcase.ethglobal.com/nfthack2022/instant-blockchain-domain-search
+
+支持不同区块链名称提供商的域名查询。
+
+这是一个简单的工具，可以在各种区块链名称提供商（如 ENS、Unstoppable Domains）中搜索域名。该服务还在 .com、.xyz、.io 等一些标准顶级域名上搜索域可用性。它与 OpenSea 连接，以检查是否有域名可供出售。
+
+ 
+
+11、NFTpay
+
+网站：https://showcase.ethglobal.com/nfthack2022/nftpay
+
+制作区块链托管的发票，免费托管在IPFS上，并通过加密货币来实现。
+
+免费托管发票结帐页面；
+无需与外部供应商建立合作伙伴关系来管理发票或支付特定供应商的费用，例如来自 Stripe 的费用；
+收据自动托管为 NFT，不会丢失显示购买时间和收据的文件，收据和购买时间永远保留在以太坊的网络上；
+支付便利并以加密货币结算，使用信用卡或您选择的 ERC20 代币来结算付款；
+在成功的付款回调中，以 NFT 表示的收据在交易后由应用程序发送到买方和卖方的钱包。
+
+ 
+
+12、Spyglass
+
+网站：https://showcase.ethglobal.com/nfthack2022/spyglass
+
+Spyglass是一个NFT分析工具，具有强大的实时分析和组织工具，内置于一个快速的用户界面。使用Spyglass发现OpenSea 优质NFTs。
+
+购买 NFT 可能会很混乱，交易者需要参考各种工具来进行估值并打开数百个标签。
+
+Spyglass 使用机器学习来生成预测定价，并且还显示 NFT 是否因特征而被高估/低估。这种分析数据与允许用户使用键盘快捷键快速从集合中进行管理的快速 UI 相结合，使 Spyglass 成为任何 NFT 交易者的重要工具。
+
+ 
+
+13、Cropsin
+
+网站：https://showcase.ethglobal.com/nfthack2022/cropsin
+
+Cropsin是一个以加密货币支付创作者在其视频中使用独立艺术家歌曲的平台，并让他们通过专辑艺术、歌曲、门票、元老级商品和歌曲版税NFT的投资来分享艺术家的成功。艺术家保持独立，并得到关注、支付和资助。
+
+艺术 NFT（专辑插图、海报等）
+门票 NFT（用于演出（用于实体和元宇宙）
+商品 NFT（用于元宇宙数字化身的数字商品）
+歌曲 NFT，通过允许艺术家出售代表的 NFT 来获得资助，向平台上的创作者流式传输版税
+
+ 
+
+ 14、ZeusDAO
+
+网站：https://showcase.ethglobal.com/nfthack2022/zeusdao
+
+一个社区管理的Web3开放协议。
+
+ZeusDAO是类似于Discord的社区管理协议，不同的是， ZeusDAO是在Web3 空间中实现去中心化和真正的所有权。
+
+ZeusDAO为 NFT 社区建立了一个社区平台，在该平台中，项目的管家/管理员可以插入他们的主网站，并且所有社区管理都可以在那里进行，而无需任何Discord的参与。NFT持有者登陆Zeus NFT主网，可以根据 NFT 的访问特性访问网站内的更多选项卡（就像Discord频道一样）。
+
+ 
+
+15、DoNFT
+
+网站：https://showcase.ethglobal.com/nfthack2022/donft
+
+Do[NFT]是一个协议，允许用户创建一个可以拥有其他NFT资产的NFT。
+
+Do[NFT] 是一种去中心化协议，提供基于 AI 的 NFT 修改。使用该协议，NFT 持有者可以使用现有的 NFT 资产铸造全新的 NFT。新的 NFT 与最初的 NFT 密不可分。新的 NFT 资产是通过应用 AI 生成的效果（如 gif 动画、过滤器、艺术噪声等）创建的初始 NFT 修改。
+
+修改是通过神经网络算法完成的，结果无法准确预测。它带来了铸造不同 NFT 的机会，包括没人能预料到的稀有 NFT。
+
+这种方法可以为 NFT 所有者提供全新的体验和许多乐趣/机会来增加他们的收藏。这是一个无需许可的 dApp，任何人都可以在其中提供新的基于 AI 的过滤器、动画技术、或面临社区使用的老化算法（免费或收取一定的服务费）。
+
+ 
+
+16、Metaverse Advertisement DAO
+
+网站：https://showcase.ethglobal.com/nfthack2022/metaverse-advertisement-dao
+
+MAD是一个DAO，利用社区虚拟房地产资产进行广告宣传，与所有者和建筑商，参与者分享利润，来完成元宇宙空间的商业模式。
+
+MAD通过最大限度地利用房地产的广告，与土地持有者和建设者分享利润，促进内部商业和货币化。该项目分为三个部分：土地委托、建设、拍卖。
+
+土地委托：MAD从社区收集地块，Decentraland 和 cryptovoxels 具有称为集合运营商或合作者的功能，以允许土地所有者在他们的土地上拥有建设者，同时仍然拥有土地的所有权。通过将他们的土地委托给用户，土地所有者仍然可以拥有土地所以权，但随着时间的推移获得利润。
+
+建设：MAD从社区聚集建筑商，与我内部建筑商一起建造 nft 画廊、公共活动场所等。MAD可以在画廊和建筑物周围安装广告牌。
+
+拍卖：随着MAD从社区中获得更多地块，外部企业可以将所有地块的广告权作为捆绑投标，并在所有地块上展示其内容以获得驱动力。MAD与土地所有者和建设者分享利润，以激励社区更多地参与。

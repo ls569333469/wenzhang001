@@ -1,0 +1,373 @@
+标题: 4 月获顶级加密 VCs 投资的这 27 个项目，都是什么来头？
+链接: https://www.chaincatcher.com/article/2094004
+发布时间: 2023-05-30
+
+==================================================
+
+撰文：黑米，白泽研究院
+
+ 
+
+即便当前的市场环境仍然比较糟糕，但每天还是会有投融资事件发生，顶级加密 VC 们仍然在对 NFT、Web3 游戏、CeFi、DeFi、L1&L2、Web3 服务、基础设施等赛道进行大手笔投资。
+
+最近 VC 们都在看好哪些赛道的哪些项目？本文将盘点 27 个在 4 月获得顶级加密 VC 投资的项目，帮助读者快速理解。
+
+ 
+
+一、DeFi
+
+ 
+
+Nibiru Chain
+
+2023 年 4 月 4 日
+
+850 万美元种子轮（估值 1 亿美元）
+
+投资者：Tribe Capital、Jump Crypto、Republic Capital、NGC Ventures、Original Capital
+
+Nibiru Chain 是一个基于 Cosmos SDK 构建、专用于 DeFi 的区块链，功能范围从现货 AMM、杠杆期货交易到自己构建的 NUSD 稳定币。
+
+但是，目前 Injective Protocol 早已在 Cosmos 生态系统中运行 DeFi 功能，而 dYdX 应用链的到来也迫在眉睫。鉴于这些市场条件，目前处于测试网阶段的 Nibiru Chain 后续如何发展还有待观察。
+
+ 
+
+M^ZERO
+
+2023 年 4 月 5 日
+
+2250 万美元
+
+投资者：Pantera Capital、Road Capital、Standard Crypto、AirTree、SALT、ParaFi Capital、Distributed Capital、Kraynos、Earlybird、Mouro Capital
+
+M^ZERO 是一个去中心化货币协议，用户将能够在其中通过治理发行去中心化货币，以此来建立开发者与消费者之间的联系。
+
+ 
+
+Swaap Finance
+
+2023 年 4 月 19 日
+
+450 万美元种子轮
+
+投资者：Signature Ventures、New Form Capital、C² Ventures、Klima Ventures、Pareto Holdings、Entrepreneur First 等
+
+Swaap Finance 是一个基于 Polygon 的 DEX。Swaap 提出了一个名为矩阵做市商 (MMM) 的新颖概念，通过使用预言机和动态点差来最大限度地减少流动性提供者的无常损失风险。
+
+然而，鉴于 GMX 之前的安全漏洞，很明显，使用预言机进行资产估值会带来几个潜在的漏洞，如果流动性资金池余额与实际市场价格之间存在重大差异，则可能会导致问题。Swaap Finance 是否会建立适当的保护措施来防止这种情况尚不清楚。
+
+ 
+
+Thetanuts Finance
+
+2023 年 4 月 24 日
+
+1700 万美元
+
+投资者：Polychain Capital、Hyperchain Capital、Magnus Capital
+
+Thetanuts Finance 是一种去中心化期权金库 (DOV) 协议，旨在为 DAO 提供资金管理，用户可在其中很容易地操作各种结构化产品金库。
+
+ 
+
+DFlow
+
+2023 年 4 月 26 日
+
+500 万美元
+
+投资者：Framework Ventures、Cumberland、Coinbase Ventures、Circle Ventures、ZeePrime Capital、Spartan、Wintermute
+
+DFlow 是一个去中心化的订单流市场，通过 Cosmos SDK 构建了应用链 DFlow Chain，旨在创建一个公平的订单流支付（PFOF）市场。订单流通过去中心化和无许可的订单流拍卖（OFA）将订单流卖给做市商。这使得散户投资者能够获得安全的交易和最佳的执行，同时做市商也可以创造更多商机。
+
+ 
+
+二、CeFi
+
+ 
+
+Bitget
+
+2023 年 4 月 4 日
+
+1000 万美元
+
+投资者：Dragonfly Capital
+
+Bitget 是一家支持现货、保证金和期货交易的加密货币衍生品交易所。这笔资金将用于全球扩张和推出其他服务，例如 Launchpad 和 Earn 产品。
+
+ 
+
+Fractal
+
+2023 年 4 月 17 日
+
+600 万美元
+
+投资者：QCP、6th Man Ventures、Archetype、Avalanche Blizzard Fund、CMT Digital、Golden Tree Asset Management、CoinShares、Spartan Group、Circle Ventures、Hack VC
+
+Fractal 是一个面向加密货币交易者的平台，可实现更透明的清算和结算流程。用户可以使用 Fractal 实时监控交易对手，以降低交易对手风险。3AC、Genesis 和 FTX 等机构的破产归因于资金使用缺乏透明度，而使用 Fractal 可以避免这种情况。
+
+ 
+
+Coinflow
+
+2023 年 4 月 19 日
+
+145 万美元种子前融资
+
+投资者：Jump Crypto、Reciprocal Ventures、CMT Digital、DCG、Gumi Crypto 等
+
+Coinflow 是一个专为 Web3 公司而构建的支付堆栈，支持信用卡等传统支付系统以及加密货币支付，通过简化支付流程来最大化用户体验。如果未来加密货币支付变得普遍，该平台有望被 Web3 公司广泛采用。
+
+ 
+
+Rise
+
+2023 年 4 月 25 日
+
+380 万美元种子轮
+
+投资者：Sino Global Capital、Polymorphic Capital、Draper Associates、W Ventures、P2P、Paradigm Shift Capital、Hashkey Capital 等
+
+Rise 是一个旨在促进使用加密货币轻松支付工资的平台，允许公司以法定货币和加密货币的方式向员工支付工资。
+
+ 
+
+Credora
+
+2023 年 4 月 25 日
+
+600 万美元
+
+投资者：Coinbase Ventures、S&P Global、Hashkey Capital、Spartan、CMT Ditial、GSR、Kucoin Ventures、Amber 等
+
+Credora 是一个评估加密货币市场机构信用的平台。利用零知识证明，该平台通过数据实时评估机构的信用度，同时隐藏仓位等敏感部分。虽然区块链具有去中心化和透明化的基本属性，但以区块链市场为主的中心化实体的透明度得不到保证，导致了去年的诸多破产事件。预计 Credora 将在这方面发挥重要作用。
+
+ 
+
+Zodia Custody
+
+2023 年 4 月 27 日
+
+3600 万美元
+
+投资者：SC Ventures（渣打银行的 VC）、SBI Holdings 等
+
+Zodia Custody 是渣打银行以加密货币为重点的子公司，主要为机构提供加密货币托管服务。本轮融资将使该公司能够支持更多的代币并在全球范围内扩张。
+
+ 
+
+三、Web3 游戏、NFT
+
+ 
+
+Lore
+
+2023 年 4 月 7 日
+
+400 万美元
+
+投资者：Multicoin Capital、Seed Club Ventures、North Island Ventures、Balaji Srinivasan、Zeneca、Mischief Ventures、Sfermion、CMT Digital、Patricio Worthalter、Spice Capital、Sublime Venture 等
+
+Lore 是一个可让 Web3 社区和游戏公会等组织共同拥有和管理 NFT 的平台。社区成员可以集体筹资以购买 NFT，并集体管理 NFT。
+
+ 
+
+Gameta
+
+2023 年 4 月 10 日
+
+500 万美元种子轮
+
+投资者：Binance Labs、Huobi Ventures、Arcane Capital、Ceras Ventures、StartVC、Gate.io Labs、W3Coins、Redline Dao、DefinanceX、Rana Capital、Infinity Labs
+
+Gameta 是一个 Web3 手机游戏平台，提供多种多样的游戏。用户可以在玩这些游戏的过程中获得代币奖励。该平台的一个重要吸引力在于其提供了许多简单的手机游戏，有机会吸引了大量活跃玩家。
+
+ 
+
+Protecc Labs
+
+2023 年 4 月 14 日
+
+150 万美元种子轮
+
+投资者：Dialectic、UOB Venture Management、Signum Capital、Interlinked Capital、Side Door Ventures、0xVentures、Kronos Ventures、3.0 Capital、Concave Ventures、Cogitent Ventures
+
+Protecc Labs 是一家专注于 NFT 的做市商，相比于大部分做市商都专注于加密货币来说，这很新颖。随着越来越多 NFT-Fi 协议出现，包括交易市场、借贷协议、AMM 等，NFT 生态系统对于做市的需求将是必不可少的。
+
+ 
+
+Karate Combat
+
+2023 年 4 月 19 日
+
+1800 万美元种子轮
+
+投资者：Bitkraft Ventures、Alpha Wave、Hashkey Capital、Delphi Ventures、Contango、The Operating Group、Lattice、M13 等
+
+Karate Combat 是一家总部位于美国的真实空手道组织，最近推出了一款基于区块链的投注平台。通过该平台，用户可以对谁将赢得现实世界的比赛进行投注，赚取治理代币 $KARATE。由于该平台具有现实生活用例，因此该平台能否获得大规模采用，以及代币是否可持续，值得长期关注。
+
+ 
+
+Tribe3
+
+2023 年 4 月 26 日
+
+210 万美元
+
+投资者：Spartan Capital、Newman Capital、Infinity Ventures Crypto、Modular Capital、Cogitent Ventures、Blockbuilders、Founderheads、Lapin Digital、Blockhype 等
+
+Tribe3 是一个去中心化 NFT 期货交易所，它借鉴了 Perpetual Protocol 的 vAMM。vAMM 不需要流动性，而是允许用户以抵押品进行交易。
+
+目前 Tribe3 上支持 BAYC、MAYC、AZUKI、CryptoPunks 等 NFT 系列的交易。
+
+ 
+
+四、L1&L2
+
+ 
+
+Sei
+
+2023 年 4 月 11 日
+
+3000 万美元（估值：8 亿美元）
+
+投资者：Jump Crypto、Distributed Global、Multicoin Capital、Asymmetric Capital Partners、Flow Traders、Hypersphere Ventures、Bixin Ventures
+
+Sei 是基于 Cosmos、专注于 DeFi 的 L1 区块链。通过修改 Tendermint 核心进行高度优化，以实现高可扩展性。此外，Sei 提供了自己的预言机和订单匹配系统，以提供优化的交易环境。
+
+ 
+
+Astria
+
+2023 年 4 月 5 日
+
+550 万美元种子轮
+
+投资者：Maven 11、1kx、Delphi Ventures、Figment Capital
+
+Astria 是一个专注于排序层的模块化区块链。随着 2022-2023 年出现了大量 rollup 网络，面临一个新问题：排序器的去中心化。排序器是在 rollup 网络上接收和排序用户交易的实体，大多数 rollup 网络目前只有一个排序器。排序器是否中心化并不重要，因为交易的有效性是由以太坊网络验证的，而不是排序器。但是，如果排序器是中心化的，恶意离线却没有对策，就会有很大的风险。因此，最近出现了各种专注于排序层的项目。
+
+ 
+
+Intmax
+
+2023 年 4 月 13 日
+
+500 万美元种子轮
+
+投资者：HashKey Capital、Bitscale Capital、B Dash Ventures、SNZ、Antalpha Ventures、Scroll、Mask Network、Dora Hacks、East Ventures、MZ Web3 Fund、Hyperithm、Stacker Ventures、Cryptomeria Capital、WAGMI Ventures、Alchemy Ventures 等
+
+Intmax 是一个建立在以太坊之上的 ZK Rollup 网络，与其他 ZK Rollup 不同的是它采用无状态结构。这样做的好处是允许验证者构建一个高度可扩展的环境，而无需存储历史数据。
+
+ 
+
+Berachain
+
+2023 年 4 月 20 日
+
+4200 万美元
+
+投资者：Polychain Capital、Hack VC、dao5、Tribe Capital、CitizenX、Shima Capital、Robot Ventures 等
+
+我们曾在《开局就融资 4200 万美元的新公链 Berachain》一文中专门介绍过 Berachain，这是一个使用 Cosmos SDK 构建、专注于 DeFi 流动性的 L1 网络，使用新颖的流动性证明机制（验证者和用户可以将 BTC、ETH、USDC 等十余种代币抵押在该链上，以获取质押奖励）。该网络采用三代币模型，其中 $BERA 用于质押奖励和 Gas 费用，$BGT 作为治理代币，$HONEY 作为原生稳定币。这个名字来自一个名为 Bong Bears 的 NFT 项目。
+
+值得一提的是，由于 Berachain 源于知名 NFT 项目 Bong Bears，因此在还未上线主网前的现在就已经拥有了一支社区。
+
+ 
+
+五、Web3 服务
+
+ 
+
+Ramper
+
+ 
+
+2023 年 4 月 11 日
+
+战略投资，金额未披露
+
+投资者：Coin98
+
+Ramper 是一个 Web3 登录服务，允许用户在没有加密货币钱包的情况下通过 Google、Twitter 等账户登录并轻松使用 Web3 服务，同时还提供法币货币和加密货币之间的兑换服务。
+
+ 
+
+Helio
+
+2023 年 4 月 13 日
+
+330 万美元种子轮
+
+投资者：Peak、Lightspeed Faction、RockawayX、Solana Labs 等
+
+Helio 是一个 Web3 支付平台，允许用户连接他们的加密货币钱包以访问 Helio 的仪表板，以此来使用各种其他功能，例如创建使用加密货币付款的链接、定期支付以及创建发票。
+
+ 
+
+Yoz
+
+2023 年 4 月 20 日
+
+350 万美元种子轮
+
+投资者：Electric Capital、Collab+Currency、Coinbase Ventures、Dapper Labs、Form Capital、North Island、Mike Krieger、Naval Ravikant 等
+
+Yoz 是一个 Web3 通知服务。例如，我们可以设置 DAO 提醒，当 DAO 提出获实施治理建议时，Yoz 会给你发出提醒。
+
+根据项目方的演示，当前支持通知的项目包括 CryptoPunks、Fractional.art、Aave 和 Nouns。
+
+ 
+
+TinyTap
+
+2023 年 4 月 25 日
+
+850 万美元（估值 1 亿美元）
+
+投资者：红杉中国、Polygon、Liberty City Ventures、Kingsway Capital、Shima Capital 等
+
+TinyTap 于 2022 年 6 月被 Animoca Brands 以 3900 万美元的估值收购，是一家 Web3 教育平台，提供了种类繁多的教育游戏。Animoca Brands 旨在通过 TinyTap 平台彻底改变教育和创作者经济。
+
+ 
+
+六、基础设施
+
+ 
+
+Polyhedra Network
+
+2023 年 4 月 4 日
+
+1500 万美元 A 轮
+
+投资者：Polychain Capital、ABCDE、Sparkle Ventures、HashKey Capital、Foresight Ventures、Kucoin Ventures、NGC Ventures、Arcane Group
+
+Polyhedra Network 是一家位于美国加利福尼亚州的科技公司，利用零知识证明技术提供互操作性、可扩展性和隐私解决方案。其产品包括 zkBridge、ZK-DID 和 ZK-NFT。zkBridge 是其中最著名的产品，通过 zk-SNARKs 技术允许两条链验证彼此的共识（目前产品已上线，可供许多 L1 和 L2 的用户使用）。
+
+ 
+
+LayerZero
+
+2023 年 4 月 4 日
+
+1.2 亿美元 A 轮（估值：30 亿美元）
+
+投资者：a16z、佳士得、红杉资本、Samsung Next、Circle Ventures 等
+
+LayerZero 是一个全链协议，许多当前的协议都在使用它。最突出的例子是 Stargate Finance，这是一个可以在多个 EVM 网络之间传输代币的跨链桥。虽然 LayerZero 的代币还没有上线，但是可以代码中看到 ZRO 代币的名字。LayerZero 得到了许多顶级 VC 的投资，鉴于其目前的广泛使用，它绝对是跨链领域值得关注的协议。
+
+ 
+
+Satsuma
+
+2023 年 4 月 4 日
+
+500 万美元种子轮
+
+投资者：Initialized Capital、Archetype、OpenSea、Y Combinator、Homebrew、South Park Commons
+
+Satsuma 是一个基于 The Graph 开源协议的 SaaS 平台，可以使用户查询区块链数据变得更加容易。目前，Decentraland、Syndicate、Superfluid、Aragon 等平台都在使用 Satsuma。

@@ -1,0 +1,221 @@
+标题: DeFi 监管之殇，Uniswap 在天堂，Tornado Cash 在地狱
+链接: https://www.chaincatcher.com/article/2100741
+发布时间: 2023-09-04
+
+==================================================
+
+作者： Web3小律
+
+ 
+
+2023 年 8 月 29 日，纽约南区法院（SDNY）驳回了一项针对 Uniswap 的集体诉讼，原告指控 Uniswap 允许诈骗代币在该协议上发行和交易，对投资者造成损害并要求赔偿。法官认为当前的加密监管体系并不能为原告的诉求提供依据，Uniswap 不对第三方使用该协议造成的任何损害承担责任。
+
+而在 Uniswap“胜利”之前，同样在 SDNY，美国司法部等监管机构（DOJ）对 Tornado Cash 创始人 Roman Storm 和 Roman Semenov 提出了刑事指控，控诉两人在 Tornado Cash 运营期间涉嫌串谋洗钱、违反制裁规定并经营无牌汇款业务，两人将面临起码 20 年的牢狱之灾。
+
+同样是架构在区块链上的智能合约协议，为何 Uniswap 与 Tornado Cash 的监管待遇如此不同。本文将深入两个 DeFi 案件，剖析造成监管如此区别对待的底层逻辑。
+
+ 
+
+TL;DR
+
+技术本身是无罪的，有罪的是使用技术工具的人本身；
+Uniswap 案件的裁判利好DeFi，即 DEX 不会对用户因第三方发行的代币而遭受损失负责，这其实比 Ripple 案件带来的影响更大；
+Katherine Polk Failla 法官同样审理 SEC v. Coinbase 案件，她对加密资产证券与否的回应：“这种情况，不是由法院决定，而是由国会决定”以及“ETH 是加密商品”，是否也可以同样解读在 SEC v. Coinbase 案件中？
+Tornado Cash 案件虽然也是第三方的原因导致监管介入，但是造成案件如此严峻的原因是创始人是在明知的情况下控制协议为网络不法分子提供便利，且侵犯的是国家安全的利益；
+Uniswap 在美国设立，积极配合监管，以及其代币的单一治理功能，为其他 DeFi 项目提供了一个应对监管的良好样本。
+
+ 
+
+一、因投资诈骗代币，投资者将 Uniswap 告上法庭
+
+ 
+
+（https://uniswap.org/）
+
+2022 年 4 月，一群投资者将 Uniswap 的开发者和投资人——Uniswap Labs 与其创始人 Hayden Adams，及其投资机构（Paradigm、Andreesen Horowitz 及 Union Square Ventures）集体告上法庭，控诉被告未根据美国联邦证券法进行注册，违规上架“诈骗代币”造成投资者的损害，要求损害赔偿。
+
+主审法官 Katherine Polk Failla 表示，该案的真正被告应该是“诈骗代币”的发行方，而不是 Uniswap 协议的开发者和投资人。由于协议的去中心化性质，诈骗代币发行者的身份对于原告是不可知的（被告同样不可知）。原告只能通过起诉被告，希望法院可以将其追索权转移到被告身上。起诉理由是被告为诈骗代币发行方提供了发行、交易平台的便利，以换取交易所产生的手续费用。
+
+此外，原告还扮演了一回 SEC 主席 Gary Gensler 的角色，认为（1）在 Uniswap 上出售的代币是未注册的证券；（2）并且 Uniswap 作为一个交易证券代币的去中心化交易所，应该在监管机构进行相关的证券交易所、证券经纪商注册。法院拒绝将证券法扩展到原告所指控的行为，并以缺乏相关监管为由得出结论，认为投资者的担忧“最好向国会提出，而不是向本院提出。”
+
+综合下来，法官认为当前的加密监管体系并不能为原告的诉求提供依据，而且根据现行美国证券法，Uniswap 的开发者和投资人不应对第三方使用该协议造成的任何损害承担责任，因此驳回了原告的诉讼。
+
+ 
+
+二、Uniswap 案件争议焦点
+
+ 
+
+该案主审法官 Katherine Polk Failla 也同样是 SEC v. Coinbase 的主审法官，有着丰富的加密案件审理经验。看完该案 51 页的裁判文书，可以看出法官对于加密行业的理解之深。
+
+本案的争议焦点在于：（1）Uniswap 是否应该为第三方使用协议而承担责任；（2）谁应该承担使用协议的造成责任。
+
+ 
+
+2.1 Uniswap 的底层协议应该和发行方的代币协议区别开来，实施损害行为的发行方应该承担责任
+
+Uniswap Labs 此前表示：“Uniswap V3 分散的流动性池模型完全由底层智能合约组成，并且自动执行。该模型因为其开放性、无许可性和包容性，能够产生指数级增长的生态。该底层协议不仅消除了所谓的交易中间人，而且无许可地允许用户通过各种方法简单有效地与协议进行交互（如通过 Uniswap Labs 开发的 Dapp 进入）”。
+
+发行方正是基于上述的 Uniswap 底层协议，根据 DEX 独特的 AMM 机制，匿名上线代币而无需任何形式的行为验证或背景调查，自行创建并设立流动性池交易对（如自身 ERC-20 代币/ETH），以供投资者进行交易。
+
+（https://www.docdroid.net/APrJolt/risley-v-uniswap-PDF）
+
+Uniswap 的去中心化性质意味着该协议无法控制哪些代币在平台上发行或与谁交互。法官认为：“这些底层基础智能合约与每个流动性池独有的，由发行人创建的代币合约不同。与原告诉请相关的协议不是被告提供的底层协议，而是发行者自己起草的流动性池交易对协议或代币协议（the pair or token contracts drafted by the issuers themselves）。”
+
+为了更好地解释，法官还做出了几个类比：“就比如让自动驾驶汽车的开发商对第三方使用该汽车发生交通肇事或抢劫银行而承担责任，不论过错是否在于开发商。”法官还类比了支付应用 Venmo 和 Zelle，“原告的诉讼相当于试图让这些支付平台承担责任，而不是毒贩，因为毒贩利用支付平台进行了毒品交易的资金转移。”
+
+在这些案子中，需要追究实施损害行为个人的责任而非软件程序的开发商。
+
+ 
+
+2.2 去中心化智能合约背景下的第一裁判
+
+法官承认目前缺乏与 DeFi 协议相关的司法判例，尚未有法院在去中心化协议的智能合约的背景下作出裁判，也没有找到根据证券法追究被告法律责任的途径。
+
+法官认为在这个案件中，Uniswap 协议的智能合约确实能够合法运行，就像为加密商品 ETH 和 BTC 提供交易一样（Court finds that the smart contracts here were themselves able to be carried out lawfully, as with the exchange of crypto commodities ETH and Bitcoin）。
+
+在这一发言中，法官特别地提到了 ETH 的商品属性，虽然只有一句。
+
+ 
+
+2.3 基于证券法下的投资者保护
+
+证券法第 12 (a)(1）条赋予投资者因销售方违反证券法第 5 条（证券的注册与豁免）而起诉损害赔偿权利。由于该诉请是基于加密资产是否是证券这一监管难题，所以法官表示：“这种情况，不是由法院决定，而是由国会决定。”法院拒绝将证券法扩展到原告所指控的行为，并以缺乏相关监管依据为由得出结论，认为“投资者的担忧最好向国会提出，而不是向本院提出。”
+
+ 
+
+2.4 小结
+
+虽然 SEC 主席 Gary Gensler 迄今为止一直避免将 ETH 称为证券，但 Katherine Polk Failla 法官在该案中直接将其称为商品（Crypto Commodities），并拒绝在针对 Uniswap 的案件中扩大证券法的适用范围，以涵盖原告所指控的行为。
+
+考虑到 Katherine Polk Failla 法官同样审理 SEC v. Coinbase 案件，她对加密资产证券与否的回应：“这种情况，不是由法院决定，而是由国会决定”以及“ETH 是加密商品”，是否也可以同样解读在 SEC v. Coinbase 案件中？
+
+不论如何，虽然目前正在围绕 DeFi 正在制定相应的法律，监管机构有一天可能会解决这个灰色地带。但是，Uniswap 这个案件确实为加密 DeFi 世界提供了一个应对监管的样本，即去中心化交易所 DEX 不能对用户因第三方发行的代币而遭受损失负责。这其实比 Ripple 案件带来的影响更加巨大，利好DeFi。
+
+（https://twitter.com/dyorexchange/status/1697332141938389281）
+
+ 
+
+三、深处地狱的 Tornado Cash 及其创始人
+
+ 
+
+同为部署在区块链上的 DeFi 协议，提供混币服务的 Tornado Cash 的处境似乎并不理想。2023 年 8 月 23 日，美国司法部（DOJ）对 Tornado Cash 创始人 Roman Storm 和 Roman Semenov 提出了刑事指控，控诉两人在 Tornado Cash 运营期间涉嫌串谋洗钱、违反制裁规定并经营无牌汇款业务。
+
+Tornado Cash 是曾经以太坊上知名的混币应用，旨在为用户提供交易行为的隐私保护，其通过混淆加密货币交易的来源、去向以及交易对手，从而达到隐私匿名交易。2022 年 8 月 8 日，Tornado Cash 曾受到美国海外资产办公室（OFAC）的制裁，部分与 Tornado Cash 相关的链上地址被列入 SDN 清单，也就是说，任何实体或个人与 SDN 清单中的链上地址产生任何交互行为都是非法的。
+
+新闻稿中，OFAC 称自 2019 年以来，采用 Tornado Cash 进行洗钱犯罪的资金量超过 70 亿美金，Tornado Cash 为美国境内外非法网络活动提供实质性的协助、赞助或金融和技术上的支持，这些行为可能对美国的国家安全、外交政策、经济健康、金融稳定造成重大威胁，因此受到 OFAC 的制裁。
+
+(https://www.researchgate.net/figure/Example-of-the-Tornado-Cash-1-ETH-pool-addresses-A-through-F-deposit-to-and-withdraw_fig1_357925591)
+
+ 
+
+3.1 针对 Tornado Cash 及其两位创始人的刑事指控
+
+DOJ 在 8 月 23 日的新闻稿中表示：被告及其同谋创造了 Tornado Cash Service 的核心功能，支付关键基础设施的运营费用以推广服务，并从中获得了数百万美元的回报。被告明知交易的非法性而选择不执行法律要求的了解你的客户（KYC）及反洗钱（AML）的合规措施。
+
+在 2022 年 4 月和 5 月，Tornado Cash 服务 Lazarus Group（受制裁的朝鲜网络犯罪组织）用于清洗数亿美元的黑客收益。据称，被告明知这些是洗钱交易，而对服务进行了更改，使得他们就可以公开宣布他们“看似”遵守了合规要求，但在他们的私人聊天中，他们一致认为这种更改是无效的。此后，被告继续运营该服务，并进一步为非法交易提供数亿美元的便利，帮助 Lazarus Group 从被 OFAC 指定为封锁财产的加密钱包中转移犯罪收益。
+
+被告分别被控一项串谋洗钱罪和一项串谋违反《国际经济紧急权力法》的罪名，这两项罪名最高可判处 20 年监禁。他们还被控合谋无证经营货币传输业务（Operate an Unlicensed Money Transmitting Business），最高可判处五年监禁。联邦地区法院法官将在考虑美国量刑指南和其他法定因素后决定如何裁判。
+
+ 
+
+3.2 对于货币传输业务的定义（Money Transmitting Business）
+
+需要注意的是，美国财政部下属的金融犯罪执法网络（FinCEN）并没有针对 Tornado Cash 及其创始人因无证经营货币传输业务而提出民事诉讼。要知道如果 Tornado Cash 落入了货币传输者（Money Transmitter）的定义，这意味着该定义同样适用于其他类似的 DeFi 项目。一旦落实，这些项目都需要去 FinCEN 登记注册，去走 KYC/AML/CFT 流程，这对 DeFi 世界将造成巨大影响。
+
+FinCEN 在 2019 年发布指南（2019 FinCEN Virtual Currency Guidance）将加密活动的业务模式分类，根据业务类型判断是否纳入货币传输者的定义。
+
+ 
+
+3.2.1 匿名软件提供商（An Anonymizing Software Provider）
+
+Coin Center 的 Peter Van Valkenburgh 表示：控诉状中关于被告无证经营货币传输业务的唯一指控是：他们从事代表公众转移资金的业务，并且没有在 FinCEN 注册。但是，Tornado Cash 实际上为匿名软件提供商（Software Provider），它只是提供“货币发送者用来支持货币传输服务的交付、通信或网络接入服务”。
+
+2019 年指南明确匿名软件提供商并不属于货币传输者的定义（An Anonymizing Software Provider is Not a Money Transmitter），而匿名服务提供商（Service Provider）则属于。
+
+ 
+
+3.2.2 加密钱包服务商（CVC Wallet）
+
+顶级大所 Cravath, Swaine & Moore LLP 也发布了一篇报告，将 2019 年指南中唯一一个被明确定义为货币传输者的业务——加密钱包服务商（CVC Wallet）做类比，以此引申出货币传输者的刚性要求——必须完全独立控制传输的价值（Total Independent Control Over the Value being Transmitted），并且这种控制是必要和充分的（Necessary and Sufficient Control）。
+
+在该案中，控诉状表示被告是如何控制 Tornado Cash 软件/协议的，但是它并没有指明被告如何控制资金的传输。报告分析了 Tornado Cash 中资金的传输过程，最终表明其并不能像加密钱包服务商那样完整控制资金的传输，因为资金的传输还需用户通过密匙进行交互，所以不应落入“资金传输者的定义”。
+
+ 
+
+3.2.3 DApps
+
+Delphi Labs 的法总 @_gabrielShapir0 不同意 Cravath 的观点，他认为 Cravath 忽视了 2019 年指南中的另外一个加密活动的业务模式——Decentralized Applications (DApps)。
+
+（https://twitter.com/lex_node/status/1698024388572963047）
+
+以下是 FinCEN 对 DApps 的看法：“DApp 的所有者/运营商可以部署它来执行各种功能，但当 DApp 执行货币传输业务时，货币传输者的定义将适用于 DApp, 或 DApp 的所有者/运营商，或两者兼而有之。”
+
+控诉状正是基于 2019 年指南对 DApps 的理解，来为无证经营货币传输业务进行定义，即当一个主体（个人、法人、非法人组织）通过智能合约/DApps 运行货币传输业务时，FinCEN 的规则将适用。
+
+如果 FinCEN 在 2019 年的指南中真的如上表述的话，那么我们不得不怀疑为什么它自发布以来没有采取任何针对 DeFi 的执法行动来阐述这一解释。鉴于 DeFi 应该都是以某种方式转移资金，那么理论上它可以适用于每一个 DeFi 应用（因为它们都以某种方式转移资金）。
+
+ 
+
+3.3 小结
+
+FinCEN 2019 年的指南终归只是指南。它对司法部没有约束力，也没有法律效力。然而，在目前美国加密监管框架缺失的情况下，该指南仍然是反映监管态度的最好的文件。
+
+然而，DOJ 的做法为去中心化协议的未来留下了未解决的重要问题，这些问题包括个人行为者是否应该对第三方采取的行动，或松散社区投票而产生的决议负责。美国籍被告 Roman Storm 将在未来几天内首次出庭并接受提审。之后，法院可能有机会解决这些悬而未决的问题。
+
+总检察长 Merrick Garland 称：“该控诉状对那些认为可以利用加密货币来掩盖罪行的人再次发出警告”。FBI 局长 Christopher Wray 补充道，“FBI 将继续拆除网络犯罪分子用于实施犯罪并从中获利的基础设施，并追究任何协助这些犯罪分子的人的责任。”可见监管对于 AML/CTF 的坚决态度。
+
+(https://techcrunch.com/2023/08/23/two-founders-behind-russian-crypto-mixer-tornado-cash-charged-by-u-s-federal-courts/)
+
+ 
+
+四、同为 DeFi 协议，为何有天堂和地狱之分
+
+ 
+
+Uniswap 和 Tornado Cash 两个案件的共同点在于：（1）都是部署在区块链上的智能合约，并且能够自主运行；（2）都是因为第三人对于智能合约的不合规/非法使用，而造成了监管的介入；（3）接下来都面临到底谁应该为不合规/非法行为造成的损害承担责任？
+
+区别在于：
+
+在 Uniswap 案件中，法官认为（1）区块链上的底层智能合约区别于发行人自身部署的代币合约，底层智能合约合法运行没有问题，（2）发行人自身部署的代币合约给投资人造成了损害，（3）那么就需要去追究发行人的责任。
+
+而在 Tornado Cash 案件中，控诉状中指出，虽然也是因为第三方的非法使用造成了监管的介入，但是区别在 Tornado Cash 的创始人是在明知的情况下，其有能力控制协议并为网络不法分子提供便利，且侵犯的是国家安全的利益。至于谁来承担责任，那就不言而喻了。
+
+ 
+
+五、写在最后
+
+ 
+
+2023 年 4 月 6 日，美国财政部发布了 2023 DeFi 非法金融活动评估报告，这是世界上首份基于 DeFi 的非法金融活动评估报告。该报告建议加强美国 AML/CFT 的监管，并在可能的情况下加强对加密资产活动业务层面的（包括 DeFi 服务）执法，以提高加密资产服务提供商对美国银行保密法项下义务的合规性。
+
+可以看出美国监管也是沿袭这个思路，从 KYC/AML/CTF 角度监管加密资产的出入金活动，做到源头把控，如 Tornado Cash 为网络不法分子提供洗钱便利；再从投资者保护角度监管具体项目的业务的合规性，如在 CFTC v. Ooki DAO 的案件中，监管以 Ooki DAO 业务违反 CFTC 规定为由介入监管执法；如 Tornado Cash 案件中，监管以其违反 FinCEN 的货币传输规定而介入监管执法。
+
+虽然美国加密监管框架不明朗，但是目前来看，Uniswap 在美国设立运营主体以及基金会，积极配合监管机构实施风控措施（屏蔽某些代币），其 UNI 代币始终只有治理功能（而非卷入证券型代币的纷争），这些动作都在为其他 DeFi 项目提供了一个应对监管的良好样本。
+
+技术本身是无罪的，有罪的是使用技术工具的人本身，Uniswap 和 Tornado Cash 案件都给出了同样的答案。
+
+ 
+
+REFERENCE:
+
+[1] Risley v. Uniswap Case 1:22-cv-02780-KPF
+
+https://www.docdroid.net/APrJolt/risley-v-uniswap-pdf
+
+[2] DOJ, Tornado Cash Founders Charged with Money Laundering and Sanctions Violations
+
+https://www.justice.gov/opa/pr/tornado-cash-founders-charged-money-laundering-and-sanctions-violations
+
+[3] The International Academy of Financial Crime Litigators Publishes Working Paper by Cravath Lawyers on Tornado Cash Indictment
+
+https://www.cravath.com/news/the-international-academy-of-financial-crime-litigators-publishes-working-paper-by-cravath-lawyers-on-tornado-cash-indictment.html
+
+[4] Peter Van Valkenburgh, New Tornado Cash indictments seem to run counter to FinCEN guidance
+
+https://www.coincenter.org/new-tornado-cash-indictments-seem-to-run-counter-to-fincen-guidance/
+
+[5] Application of FinCEN’s Regulations to Certain Business Models Involving Convertible Virtual Currencies, 2019
+
+https://www.fincen.gov/resources/statutes-regulations/guidance/application-fincens-regulations-certain-business-models

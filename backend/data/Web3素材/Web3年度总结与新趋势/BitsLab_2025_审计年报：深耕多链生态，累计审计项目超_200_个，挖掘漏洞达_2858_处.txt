@@ -1,0 +1,73 @@
+标题: BitsLab 2025 审计年报：深耕多链生态，累计审计项目超 200 个，挖掘漏洞达 2858 处
+链接: https://www.chaincatcher.com/article/2235703
+发布时间: 2026-01-08
+
+==================================================
+
+2025 年是 Web3 基础设施飞速演进的一年。作为 AI 驱动的数字资产安全行业先锋，BitsLab 通过审计、渗透测试以及持续不断的安全监测来捍卫 Web3 基础设施安全，已为全球 7.16 亿用户提供安全保障，守护着超过 1,600 亿美元的链上价值。
+
+凭借旗下 MoveBit、ScaleBit 与 TonBit 三大专业品牌，BitsLab 在 2025年展现了极强的安全守护能力：不仅在 Sui 与 Aptos 为代表的 Move 生态保持绝对统治力，更在 BSC、Ethereum、Solana、TON、BTC 等主流生态及 Monad、IOTA、Supra、CKB 等新兴 L1/L2 领域完成了广泛的安全布控，构建了全方位的 AI 安全防御矩阵。
+
+2025 核心审计版图：AI 驱动多链并进，全生态深度覆盖
+
+2025 年，BitsLab 累计完成审计项目共计 204 个。这份成绩单不仅揭示了 BitsLab 在主流公链与新兴赛道的深度参与，更标志着 BitsLab 正式迈入 “AI+安全” 的新纪元。
+
+AI 赋能：BitsLabAI Scanner 与专家审计的深度协同
+
+在 204 个项目的审计过程中，BitsLab 全面升级了审计范式，引入以 BitsLabAI Scanner 为核心的 AI 驱动安全体系。基于海量真实漏洞数据训练的模型，AI 能够对智能合约进行自动化、高覆盖的风险初筛，并在此基础上结合 AI 辅助的形式化验证与高级渗透测试，由专家团队完成深度审计与最终判断，为累计超过 1640 亿美元 TVL 的项目提供安全保障，使审计从一次性交付演进为“AI + 专家”协同的智能化防护。
+
+核心链审计分布：高价值生态的 AI 防线
+
+在 204 个项目中，头部公链占据核心比例，体现了 BitsLab AI 安全技术在高价值生态中的高度认可度：
+
+Move 生态核心（Sui & Aptos）： 累计审计 96 个项目（Sui 74 个，Aptos 22 个），持续巩固在该赛道的绝对统治力。
+
+主流 EVM 生态（BSC & Ethereum）： 累计审计 43 个项目（BSC 31 个，Ethereum 12 个），利用 BitsLabAI Scanner 有效应对 EVM 复杂的逻辑风险。
+
+价值沉淀生态（TON & BTC）： 累计审计 12 个项目（TON 6 个，BTC 6 个），将 AI 安全边界扩展至新兴与经典价值链。
+
+广泛的跨链足迹：一站式 AI 安全守护
+
+除上述核心链外，BitsLab 的 AI 安全触角延伸至 Solana (4)、IOTA (4)、EVM Chains (2)、CKB (2)、Monad (1)、DuckChain (1)、Starknet (1)、Aribitrum（1）等数十条链。通过 BitsLabAI Scanner 的快速适配，我们实现了跨链环境下的高效安全响应，真正做到“审计、监测并捍卫”每一处基础设施。
+
+漏洞挖掘战果：AI 扫描+专家复核，阻击 2,858 个安全隐患
+漏洞严重性构成
+
+我们利用 AI 辅助审计精准定位了大量致命风险，有效防御了潜在的经济攻击：
+
+Critical (致命): 101 处
+
+Major (重大): 399 处
+
+Medium (中危): 661 处
+
+Minor/Informational: 1,697 处
+
+重点生态漏洞挖掘明细：AI 防线的实测表现
+
+通过 BitsLabAI Scanner 的广泛应用，我们在各大生态中均取得了显著战果：
+
+品牌矩阵：三位一体的 AI 安全屏障
+MoveBit：Move 生态的“AI 守护者”
+
+作为 Move 安全标杆，MoveBit 利用 AI 对 Sui 和 Aptos 进行全方位安全监测，2025 年累计修补隐患超 1,480 处。
+
+ScaleBit：连接 EVM 与未来的 AI 桥梁
+
+ScaleBit 成功将 AI 审计应用于 BSC、Ethereum、Solana、BTC 等多链环境，确保了复杂跨链应用在经济压力与极端情况下的安全性。
+
+TonBit：TON 生态首要安全保障提供者
+
+作为 TON 官方认证的 首要安全保障提供者 （Primary Assruance Security Provider）聚焦 TON 飞速增长的生态，TonBit 通过 AI 扫描与攻击模拟，为 TON 协议构建了坚不可摧的安全底层。
+
+战略升级：BitsLab Safe 筑牢全场景反钓鱼与反欺诈防线
+
+2025 年，BitsLab 成功收购日本知名安全插件 KEKKAI 并更名为 BitsLab Safe。此举标志着 BitsLab 的安全能力从底层审计延伸至前端交互防护，构建起“从代码逻辑到资产交互”的全方位安全矩阵。
+
+AI 驱动实时防护： BitsLab Safe 集成了 AI 交易模拟与钓鱼检测，在交易执行前预警潜在风险。
+
+赋能 Agent Security： 作为 BitsLab 智能安全栈的入口，BitsLab Safe 致力于保障 x402 与 AI Agent 的支付流安全。
+
+2025 年，BitsLab 通过 2,858 处漏洞的精准阻击与 1,600 亿美元资产的严密守护，持续捍卫 Web3 行业生态安全。从 BitsLab AI Scanner 赋能下的协议层深度审计，到 BitsLab Safe 战略性切入交互端反钓鱼与反欺诈防护，我们已成功构建起“从底层代码到终端交互、从协议逻辑到资产流转”的全方位安全矩阵。
+
+在万链互联与 AI Agent 经济加速到来的未来，BitsLab 将继续深耕多链生态，持续迭代 AI 安全技术。我们以“审计、监测、捍卫”为核心使命，定义 Web3 时代的安全新标准，确保去中心化世界的每一份价值都能在 AI 以及行业专家的守护下，远离欺诈威胁，实现真正的自由流转。

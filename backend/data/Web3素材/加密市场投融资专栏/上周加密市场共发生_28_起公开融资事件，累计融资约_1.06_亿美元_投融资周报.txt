@@ -1,0 +1,153 @@
+标题: 上周加密市场共发生 28 起公开融资事件，累计融资约 1.06 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2167818
+发布时间: 2025-02-17
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 2月 10 日- 2月 16 日期间，区块链和加密行业共发生 28 起公开投融资事件，累计融资约 1.06 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和Defi赛道。热门项目包括稳定币公司 Plasma、DeFi 项目 Defi.App、AI 驱动的音乐创作平台 SoloAI 、Telegram 生态交易应用 Blum。
+
+此外，DeFi 平台 Legends 完成 1500 万美元融资，a16z 和 Coinbase Ventures 参投。
+
+上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+FrodoBots 完成 800 万美元融资，Protocol VC 领投
+
+FrodoBots Lab 宣布完成 600 万美元种子轮融资，总融资额达 800 万美元，为即将推出的 Embodied AI 研究网络 BitRobot 做准备。
+
+本轮融资由 Protocol VC 领投，参投方包括 Big Brain Holdings、Fabric Ventures、Zee Prime Capital、Tioga Capital、Sfermion、Solana Ventures、Virtuals Protocol，以及包括 Solana Labs 联合创始人 Anatoly Yakovenko 和 Raj Gokal 在内的天使投资人。此外，Aethir 和 Gensyn 等 DePIN 项目的 8 位创始人也参与了投资。
+
+稳定币公司 Plasma 完成 2400 万美元融资，Framework Ventures 领投
+
+据《财富》报道，稳定币公司 Plasma 完成 2400 万美元融资，由 Framework Ventures 领投，加密货币交易所 Bitfinex、著名风险投资家 Peter Thiel 和 Tether 首席执行官 Paolo Ardoino 等参投。
+
+Plasma 计划在未来几个月内推出自己的区块链。Plasma 联合创始人 Paul Faecks 表示，该项目基于比特币区块链开发，采用独特的共识机制，专注于优化稳定币交易效率，将支持 Curve、Ethena 和 Aave 等 DeFi 协议。
+
+据 RootData 显示，Plasma 是比特币上的可扩展支付和金融基础设施。Plasma 建立在原生 UTXO 基础上，允许使用 BTC 支付 gas 费用，并与现有的比特币基础设施无缝协作。通过利用混合 UTXO/账户架构，用户可以解锁新功能，用于持有、质押和部署他们的比特币。
+
+DePIN 协议 Teneo Protocol 完成 300 万美元的种子轮融资，RockawayX 和 Borderless 领投
+
+DePIN 协议 Teneo Protocol 完成 300 万美元的种子轮融资，RockawayX 和 Borderless 领投，Generative Ventures 等参投。
+
+Teneo 以机器经济的第一层 peaq 为基础，通过社区的力量为 Web3 和 Web2 构建者解锁社交媒体数据。Teneo 社区节点是一个 Web3浏览器扩展，允许任何人通过收集 X 和 Reddit 等平台的公开帖子来为不断增长的数据网络做出贡献。
+
+据 RootData 显示，Teneo Protocol 是一个 DePIN 数据协议。通过针对付费墙后面或目前无法访问的数据池（例如实时社交媒体见解和来自移动和能源等行业的机器生成的数据），Teneo 创建了一个标准化的接入点。让人工智能公司、交易所、做市商、建设者、生态系统等都可以使用它。
+
+Tether 宣布战略投资 Zengo Wallet
+
+据官方消息，Tether 宣布战略投资自托管加密钱包 Zengo Wallet，以提升全球稳定币采用，这项投资将使 Zengo 能够支持主要区块链生态系统中的 Tether 稳定币，具体投资金额暂未披露。
+
+ZK 数字身份项目 Holonym 以 1000 万美元收购 Gitcoin Passport
+
+零知识（ZK）数字身份项目 Holonym Foundation 收购身份验证平台 Gitcoin Passport 。此次收购于 2024 年底完成。
+
+作为收购的一部分，Gitcoin Passport 将更名为 Human Passport，以更好地反映其作为 PoH 解决方案的地位，该解决方案使个人能够在不泄露敏感的个人数据的情况下验证其身份。
+
+Passport 是一个身份验证聚合器，允许用户从谷歌或 Holonym 等各种 Web2 和 Web3 验证器收集 “印章 ”或可验证的凭证。它的设计目的是保护用户隐私，防止假冒身份攻击或黑客操纵网络。
+
+去中心化算力货币化网络 NodeGo 完成 800 万美元融资，Hash Capital 领投
+
+去中心化算力货币化网络 NodeGo 宣布完成 800 万美元融资，Hash Capital 领投，新资金拟用于其构建网络，让用户和企业可以通过完成空间计算和其他计算为 AI 任务做贡献，同时允许参与者赚取奖励。
+
+二、Defi
+
+DeFi 项目 DeFi.app 完成 400 万美元融资，Mechanism Capital 领投
+
+据 TheBlock 报道，DeFi 项目 Defi.App 宣布完成 400 万美元融资，其中风投机构贡献了 200 万美元，Mechanism Capital 领投，DCF Capital Partners，Balaji Srinivasan 和 Pentoshi 参投。
+
+据悉，本月晚些时候，Defi.App 计划向非美国的 KYC 用户进行公开代币销售。
+
+DWF Labs 战略投资 Bidask 协议，以增强 TON 链上交易
+
+据 Chainwire 报道，Web3 投资者和做市商 DWF Labs 宣布已投资 Bidask Protocol 以增强 TON 链上交易，具体投资金额暂未披露。
+
+对于 Bidask Protocol 来说，此次合作不仅代表着一笔重大的金融投资，也是将 DWF Labs 整合为平台潜在做市商的机会。
+
+Whetstone 完成 130 万美元 Pre-Seed 融资，推出 Doppler 协议优化链上资产发行
+
+据官方消息，Whetstone 宣布完成 130 万美元 Pre-Seed 轮融资，投资方包括 Variant、Nascent、Credibly Neutral、Uniswap Ventures、Ambush、Figment 及多位天使投资人。
+
+Whetstone 推出 Doppler 协议，旨在优化链上资产发行与流动性引导，减少机器人抢购、提高价格发现效率，引入可编程可审计归属期，提升项目方与社区的长期激励对齐。Doppler 已部署至 Unichain，并通过 Pure Markets 率先提供前端支持。
+
+DeFi 项目 InfiniFi 完成 300 万美元 pre-seed 融资，Electric Capital 领投
+
+据 InfiniFi 官方消息，该项目已完成 300 万美元 pre-seed 融资。本轮融资由 Electric Capital 领投，New Form Capital、Kraynos Capital 和 Baboon VC 等机构参投。infiniFi 计划在 2025 年第二季度推出美元锚定的存款凭证代币（DRT），并将与 AAVE、Pendle 和 Ethena 等协议进行集成。
+
+L1 构建协议 Cabal 完成 300 万美元融资，Delphi Digital 等参投
+
+基于 Initia 的 L1 构建协议 Cabal 完成 300 万美元融资，Delphi Digital、Nascent 和 Hack VC 等参投。
+
+Cabal 基于 Initia 的 Layer 1 构建，受 Curve Wars 的启发，通过允许用户存入 INIT 和 LP 代币以获得流动的、可治理的 Wrapper，聚合了 VIP 奖励和治理权力。
+
+DeFi 平台 Legends 完成 1500 万美元融资，a16z 和 Coinbase Ventures 参投
+
+DeFi 平台 Legends 完成 1500 万美元融资，a16z 和 Coinbase Ventures 参投。该公司将利用本轮筹集的资金，通过扩大团队和专注于营销来加速 Legend 应用程序的开发。
+
+Legend 目前处于测试阶段，公司的重点是在苹果应用商店上市，并建立一个可靠的用户群。未来其计划通过订阅获得收入。Legend 将试图成为一个自我保管钱包，用户可以完全控制其持有的加密货币的数字钱包。
+
+三、游戏
+
+Solana 生态 AI 游戏协议 GamerBoom 完成 1100 万美元融资，获 NVIDIA 支持
+
+GamerBoom 宣布完成新一轮融资，由 SKY Ventures、MBK Capital、INK Capital、CLF Capital、Metaverse Group、Bing Ventures、New Heights、Tuna 等机构共同参与，并获得 NVIDIA 和 Solana 的支持。本轮融资后，GamerBoom 累计融资金额已突破 1100 万美元。此前，该项目曾获 Mask Network、DFG等知名机构和投资人的种子轮融资。
+
+作为基于 AI 数据标注的游戏数据分析与激励协议，GamerBoom 旨在推动 Web3 游戏数据的深度挖掘与价值释放，为行业带来更智能化的游戏分析解决方案。此外，该项目已入选 Binance MVB 8 期，并成为 SolanaAI 黑客松入围项目，进一步巩固其在 AI + Web3 游戏数据领域的领先地位。
+
+Gam3Girl Ventures 战略投资 YGG，购买 YGG 代币加入其生态系统
+
+亚洲专注于 Web3 游戏孵化的基金 Gam3Girl Ventures 宣布战略投资 Yield Guild Games（YGG），通过直接从市场购买 YGG 代币加入其生态系统。
+
+四、AI
+
+Web3 开发工作室 Mirai Labs 完成 400 万美元种子轮融资，Mechanism Capital 领投
+
+Web3 开发工作室 Mirai Labs 完成 400 万美元种子轮融资，Mechanism Capital 领投，Oak Grove Ventures、Sophon Capital、Selini Capital、Bitscale Capital、Manifold、Rubik Capital、Protagonist、Lhava 等参投。
+
+该公司计划利用新融资加强其专门从事人工智能、机器学习和编程语言 Rust 的工程师团队，此外还将在不久的将来公开推出 Partnr Vaults。
+
+Mirai Labs 正在开发一款专注于加密的 AI 代理产品 Partnr。Partnr 让 AI 代理执行面向消费者的加密任务，例如管理钱包、随着时间的推移了解用户的需求。Partnr 可以通过 Partnr Chat 将可训练的 AI 代理与消费者联系起来，并通过 Partnr Vaults 为消费者启用保险库，并为 AI 代理启用链上执行功能。 
+
+五、其他
+
+AIGC 音乐平台 Fireverse 完成 250 万美元 A 轮融资，Nobody 领投
+
+AIGC 音乐平台 Fireverse 完成 250 万美元 A 轮融资，Nobody 领投，OKX Ventures 提供支持，T-Fund、BingX、GateLabs、Chain Capital、Central Research 和 Stratified Capital 等参投。
+
+thirdweb 收购去中心化社交平台 Yup，推进 Web3 社交身份构建
+
+据 thirdweb 公告，公司已正式收购去中心化社交平台 Yup ，以增强其 Web3 社交 SDK 能力，并支持 Farcaster 与 Lens Protocol 生态。
+
+Yup 由 Nir Kabessa （ CEO ）和 Vernon Johnson （ CTO ）创立，专注去中心化社交与身份协议，其创始人将分别担任 thirdweb 的高级产品经理和高级软件工程师。此次收购旨在推动可移植身份、防审查机制及创作者变现工具的建设，进一步加速 Web3 社交应用发展。 Yup 平台将在未来几周内逐步关闭，但 YUP 代币仍将保持链上流通。
+
+Telegram 生态交易应用 Blum 完成 500 万美元 Pre-Seed 及种子轮融资，gumi Cryptos Capital 领投
+
+Telegram 生态交易应用 Blum 完成 500 万美元 Pre-Seed 及种子轮融资，gumi Cryptos Capital 领投，YZi Labs、The Spartan Group、No Limit Holdings、OKX Ventures、The Open Platform、Bitscale Capital 及 Wintermute Ventures 等参投。
+
+以太坊安全协议 Drosera 完成 325 万美元融资，Greenfield Capital 领投
+
+以太坊安全协议 Drosera 已完成 325 万美元融资，总融资额达到 475 万美元。此次融资由 Greenfield Capital 领投， Anagram、Paper Ventures、Arrington Capital、UDHC 、Pulsar 和多位天使投资者 Jan Baeriswyl、Luke Hackett、Felix Lutsch、DeFine Logic Labs 的 Max、Diogo Costa、Yaroslav Pshenitsyn、Peter Kim、Mara Schmidt、Swell Labs 的 Daniel、Abhishek、Anuj Shankar、Collin Myers 参投。
+
+Drosera 筹集的资金将用于加速产品开发、招募人员以及为计划于 2024 年第二季度推出的主网做准备。
+
+据 RootData 显示，Drosera 是一种去中心化事件响应协议，它利用隐藏的安全意图来遏制和减轻漏洞危机。它是一种自动化协议，抽象化了为去中心化应用程序创建监控系统和自动响应功能的复杂性。 Drosera 提供了一个框架，用于创建和执行对以太坊网络上事件的自动响应。
+
+ZK 数字身份项目 Holonym 以 1000 万美元收购 Gitcoin Passport
+
+零知识（ZK）数字身份项目 Holonym Foundation 收购身份验证平台 Gitcoin Passport 。此次收购于 2024 年底完成。
+
+作为收购的一部分，Gitcoin Passport 将更名为 Human Passport，以更好地反映其作为 PoH 解决方案的地位，该解决方案使个人能够在不泄露敏感的个人数据的情况下验证其身份。
+
+Passport 是一个身份验证聚合器，允许用户从谷歌或 Holonym 等各种 Web2 和 Web3 验证器收集 “印章 ”或可验证的凭证。它的设计目的是保护用户隐私，防止假冒身份攻击或黑客操纵网络。
+
+DePIN 项目 Hivello 获得由 Animoca Brands 领投的战略投资
+
+DePIN 项目 Hivello 获得由 Animoca Brands 领投的战略投资。具体金额暂未披露。所筹资金将用于进一步创新，以实现简化 DePIN 节点并使其更方便用户使用。
+
+Hivello 为 DePIN 聚合器，用户可以通过在多个去中心化网络中将闲置的计算机资源货币化来赚取收入。此前，Hivello 曾于去年 2 月完成 150 万美元融资，Blockchange 等参投。

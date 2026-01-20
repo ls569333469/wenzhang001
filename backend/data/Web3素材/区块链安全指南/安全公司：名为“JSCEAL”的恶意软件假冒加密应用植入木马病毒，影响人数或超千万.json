@@ -1,0 +1,7 @@
+{
+  "title": "安全公司：名为“JSCEAL”的恶意软件假冒加密应用植入木马病毒，影响人数或超千万",
+  "url": "https://www.chaincatcher.com/article/2194513",
+  "content": "ChainCatcher 消息，据 Cointelegraph 报道，安全公司 Check Point 警告，自 2024 年 3 月起活跃的名为“JSCEAL”的恶意软件，已通过假冒币安、MetaMask、Kraken 等近 50 款常用加密应用，借广告诱导用户下载植入木马程序，全球影响人数或超千万。该木马采用 JavaScript 语言并具反检测机制，可窃取钱包信息、账户密码、Telegram 数据及浏览器 Cookie，主要通过 Facebook 等平台投放广告传播。",
+  "published_at": "2025-07-31",
+  "downloaded_at": "2026-01-17 00:43:36"
+}

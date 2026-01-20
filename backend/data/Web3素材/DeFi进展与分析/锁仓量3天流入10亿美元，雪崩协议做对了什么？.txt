@@ -1,0 +1,143 @@
+标题: 锁仓量3天流入10亿美元，雪崩协议做对了什么？
+链接: https://www.chaincatcher.com/article/2064516
+发布时间: 2021-08-30
+
+==================================================
+
+撰文：邱祥宇，巴比特
+
+ 
+
+在整个圈子的注意力几乎被NFT Summer抢占的当下，雪崩的耀眼表现为DeFi Summer在2021年的再度上演增添了一份砝码。
+
+8月22日，雪崩协议（Avalanche）TVL首次突破10亿美元，迎来新的里程碑。8月25日，TVL首次达到20亿美元。雪崩代币AVAX的市值在1个多月的时间内从17亿美元增长到88亿美元，一度跻身全球Crypto市值TOP20。
+
+目前，雪崩上的生态项目超过100个，包含存储和计算（3）、跨链（18）、DeFi（34）、NFT（11）、AVAX原生生态项目（9）、Layer2（2）、基础工具（7）、预言机（1）、钱包（9）、其他（8），生态门类基本完善。
+
+那么，对于普通用户来说，如何分享雪崩成长红利？雪崩为何在此时主导了新公链的叙事？对比BSC、MATIC，雪崩当前估值是否合理？
+
+（https://twitter.com/jayks17/status/1429789793764978692）
+
+ 
+
+一、进入雪崩
+
+ 
+
+雪崩的链比较奇怪，包含交易链（X-Chain）、平台链（P-Chain）和合约链（C-Chain）3条内置的区块链。
+
+（图片来源：https://docs.avax.network/learn/platform-overview）
+
+在将外部生态和雪崩生态资产转移时，比如将交易所的AVAX提到雪崩协议上需要用到X链。X链具备一定的匿名性，每次资产变动后都会自动生成新的地址，当然原来的地址还能用。
+
+X链浏览器：https://avascan.info/
+
+在雪崩生态参与DeFi项目时，用到的是C链。
+
+C链浏览器：https://cchain.explorer.avax.network/
+
+在用AVAX参与质押时，用到的是P链。
+
+3条链的AVAX，可以在雪崩钱包内部自由转换。
+
+雪崩虽然支持EVM，但在设置钱包时，仍然需要使用雪崩钱包生成地址，直接用metamask生成的地址不可用。
+
+常用的雪崩钱包是Avalanche 钱包（https://wallet.avax.network），生成钱包之后，妥善保存好助记词。点击控制面板左侧的“manage Keys”，将C链的私钥导入到Metamask，然后自定义添加雪崩RPC。
+
+雪崩RPC设置：
+
+Network Name: Avalanche Network
+
+New RPC URL: https://api.avax.network/ext/bc/C/rpc
+
+ChainID: 0xa86a或者43114
+
+Symbol: AVAX
+
+Explorer: https://cchain.explorer.avax.network/
+
+从交易所或者通过Avalanche Bridge（AB跨链桥，https://bridge.avax.network）将资产转移到雪崩协议，就可以使用“小狐狸”参与各种DeFi项目了。
+
+注意：大部分交易所默认是X链地址，转进来之后需进入雪崩钱包通过控制面板左侧的“Cross Chain”转移到C链。AB跨链桥目前只能跨以太坊，可用于将 ERC20 代币从以太坊转移到 Avalanche的C链，跨来的所有资产将自动转换为带有“.e”标识符的资产（例如 LINK.e、WBTC.e、USDT.e）。
+
+ 
+
+二、头部DeFi项目
+
+ 
+
+雪崩上的DeFi项目可以通过以下网址找到
+
+1、生态大全：https://www.avax.network/ecosystem
+
+2、矿池一览：https://markr.io/#/pools
+
+3、TVL：https://defillama.com/chain/Avalanche
+
+ 
+
+借贷和DEX是发展DeFi的两大基石，以太坊如此，BSC如此，雪崩同样如此。
+
+根据defillama.com数据显示，雪崩最大的借贷协议Benqi目前锁仓量10亿美元，TVL位居第一位，也是唯一一个TVL破10亿美元的项目。DEX项目Pangolin排名第二，TVL大概3.8亿美元。
+
+Benqi上线于8月19日，为刺激新用户联合 Avalanche基金会推出了90天的流动性挖矿激励计划，用户在平台上借贷可以同时获得AVAX和Benqi代币Qi，总价值300万美元。
+
+若根据FDV/TVL比值对借贷协议比较的话，AAVE、Compound、Maker这些以太坊上的项目数值基本在0.4左右，比较统一，而BSC上的Venus是0.24，相比前几个项目的数值低了一半，这或许和以太坊生态项目天然具有高溢价有关。
+
+目前，BENQI的数值是1.41，短期有高估可能。当然，这和BENQI有流动性挖矿奖励有关。
+
+Pangolin，绰号穿山甲，是雪崩上最大的DEX，于2月10日上线。不幸的是，当时恰好是BSC生态风头正盛，并没有多少人注意到穿山甲的存在。
+
+4月，穿山甲启动链上治理，并得到了雪崩创始人滚教授的看好。
+
+5月，穿山甲TVL首次突破3亿美元。此后一路下滑，持续到7月中旬，TVL跌至1亿美元，跌幅近70%。
+
+7月29日，雪崩推出新的跨链桥Avalanche Bridge（AB）， 取代了2月份推出的旧跨链桥Avalanche-Ethereum Bridge（AEB）。
+
+新的跨链桥使用英特尔 SGX Enclave 技术构建，安全性大大提升，同时性能比原先快5倍。
+
+滚教授当时直言：新的 Avalanche Bridge 是桥接技术的一次飞跃，将成为 Avalanche 下一阶段增长的增长引擎。
+
+（https://twitter.com/avalancheavax/status/1420746276228849666）
+
+事实的确如此，穿山甲的TVL随着跨链桥的推出明显提升，并在不久前重回3亿美元。
+
+同样地，根据FDV/TVL比值对DEX项目比较的话，sushiswap、pancakeswap、Quickswap、MDEX这些TVL排名靠前的DEX的数值基本维持在0.6-1之间，而uniswap高达3.26。这或许是以太坊上的龙头项目更能享受高溢价有关。穿山甲的数值是4.8，高出了uniswap，有高估的风险。
+
+此外，一站式综合交易应用Trader Joe和机枪池Yield Yak (YAK)也是超过1亿美元的两个协议。剩余的协议锁仓不高，后续发展还需要进一步观察。
+
+ 
+
+三、雪崩为何主导了上周的叙事？
+
+ 
+
+这个问题是 Psyops Capital CEO tuba@0xtuba提出来的，相信这也是大多数人的疑问。
+
+从创始人看，雪崩没有SBF这样的既有钱又会搞事的领导者。SBF把solana搞的风生水起。尽管solana不支持EVM，对以太坊生态不友好，现在看这似乎并不是多大的问题。资金依然在涌入solan，TVL超过1亿美元的项目目前已经超过5个。
+
+雪崩偏学术派，论文早在2015年就发表了，但是项目一直到2020年9月才主网上线，这个节奏可以说相当慢了。而且雪崩的链很奇怪，分3条链，普通用户用起来显得别扭。
+
+一项技术的研发，要想成功打开市场，往往需要天时地利人和的共同配合。
+
+The block的研究总监Larry Cermak给出的答案是：
+
+1、三箭资本、a16z 和 Polychain 以 14 美元的价格购买了 AVAX
+
+2、宣布大型生态系统基金（1.8 亿美元）
+
+3、交易员 Hsaka与三箭资本创始人Su Zhu的协同影响
+
+4、新的跨链桥真的很顺畅
+
+5、低市值公链的价值洼地
+
+6、正在筹备中的酷项目
+
+7、meme因素
+
+此外，2月爆发的BSC和5月爆发的Polygon (MATIC)，刺激着人们寻找下一个BSC和Polygon，雪崩承载了这个叙事。
+
+不过，对比BNB、MATIC以及AVAX，前两者的全流通市值/链上TVL比值在3-4左右，而AVAX的是将近17。雪崩目前的全流通市值（328亿美元）已经超过MATIC（144亿美元），而雪崩上锁仓的资金（19.4亿美元）不及MATIC（48亿美元）。
+
+从对比估值角度看，雪崩似乎被高估了。如果后面的1.8亿美金刺激计划不能尽快引来流动性，需要及时防范风险。

@@ -1,0 +1,55 @@
+标题: RootData 数据共建计划（5月）
+链接: https://www.chaincatcher.com/article/2184385
+发布时间: 2025-06-03
+
+==================================================
+
+以下是2025年5月的主要披露内容：
+
+1、已验证并更新的融资事件
+
+说明：本部分聚焦于经过RootData团队深入求证后确认并更新的融资事件。我们通过多方信源交叉验证，确保数据的准确性。这些更新不仅反映了项目的最新进展，也为用户提供了更可靠的投资与合作参考。
+
+无
+
+2、待确认的融资事件
+
+说明：本部分列出了尚未完全核实或因信息不足暂未录入平台的融资事件，部分事件可能带有“存疑”标签。我们将持续跟踪这些事件的最新动态，并欢迎社区提供线索，共同完善数据。
+
+a. 存疑标签融资
+
+无
+
+b. 信息模糊的融资
+
+· 5月11日，x平台流传 Newton 完成 8300 万美元融资
+
+https://x.com/KosiOkorie/status/1921461040845345227
+
+经我们评估后，实际是其开发商 Magic Labs 3 轮累计融资 8300 万美元。RootData 仍坚持不将该轮融资收录到 Newton 项目，Newton 页面已经绑定 Magic Labs 的开发商关系。
+
+https://cn.rootdata.com/Projects/detail/Magic?k=MjE0MQ%3D%3D
+
+ 
+
+· 5月24日，x 平台用户质疑 RootData 在 B3 的融资轮次中遗漏了 Coinbase 投资者
+
+https://x.com/Airdrop_Guard/status/1926233612212420728
+
+我们检测到 Coinbase 或者 Coinbase Ventures 并未作为主体参与该投资，而是相关的、未披露的天使投资人。相关链接包括：
+
+B3 官方：https://x.com/b3dotfun/status/1815419027763900584
+
+The Block 报道：https://www.theblock.co/post/306612/coinbase-alumni-web3-gaming-npc-labs-funding
+
+另外，加密用户还发现在 Coinbase Ventures 投资组合中，B3 带有 Base Ecosystem Fund 标签。RootData 认为这并不能证实其关系属于孵化或者投资，但已将 B3 归类到 Base Ecosystem Fund 投资组合。
+
+https://www.rootdata.com/Investors/detail/Base%20Ecosystem%20Fund?k=MTIxMTc%3D
+
+ 
+
+RootData始终坚持以真实、透明的数据服务行业。我们深知，数据的完善离不开社区的共同努力。如果您发现数据遗漏或错误，欢迎通过Telegram或Email与我们联系，用户反馈是我们不断优化的动力。未来，RootData将继续深耕数据建设，助力行业生态更加健康与繁荣。
+
+Telegram：https://t.me/QuinnGong
+
+Email：quanyu@rootdata.com

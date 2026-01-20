@@ -1,0 +1,187 @@
+标题: Gryphsis 加密货币周报：比特币价格首次突破 $52,000
+链接: https://www.chaincatcher.com/article/2114891
+发布时间: 2024-02-23
+
+==================================================
+
+作者：Gryphsis 
+
+ 
+
+市场和行业快照
+
+Layer 2 Overview:
+
+上周，Layer 2 均呈正增长，其中 zkSync Era 增长最为明显 8.79% 。像 Ithil, Gravita Protocol, Teller, Interport Finance, Starksport 这些协议展示出了值得注意的 TVL 增长比例。
+
+LSD Sector Overview:
+
+在 LSD 领域，以太坊存入量和总退出量均有所上涨，但退出量更为明显为 2.51% 。就市场份额而言，stETH 实现爆发式 3-4 倍增长，占据总份额近 80% 份额，swETH 和 wstETH 分别下降 20.36% ， 40.77% 。
+
+ 
+
+RWA Sector Overview: 
+
+上周，世界真实资产市值增长 5.45% ， 24 小时成交量下跌 2.92% 。RWA 代币化国库上涨 1.88% ，代币化美国国债价值下降 - 0.92% 。值得注意的增长代币包括 $MBD, $CHEX 和 $LUMI, 像 $BKN, $BRTR 和 $STBU 这样的代币经历了较大的亏损。
+
+Main Topics
+
+宏观概述:
+
+US Stock V.S. Crypto
+
+本周大事件:
+
+比特币价格首次突破 $ 52, 000 
+
+每周协议推荐:
+
+Paal AI
+
+每周 VC 投资聚焦：
+
+Ultiverse (4 M)
+
+Lava Network (15 M)
+
+Exverse (3 M)
+
+推特 Alpha:
+
+@0x AndrewMoh on Instadapp
+
+@stacy_muur on Metahorse Unity
+
+@defi_blackjoker on ERC 4337 
+
+@wist_defi on AI
+
+@DamiDefi on Soil Protocol
+
+宏观概述
+
+本周，股市层面 SPX 和 NASDAQ 分别下降了 0.42% 和 1.54% 。在未来一周，要关注联邦公开市场委员会会议纪要、CPI、初请失业金人数、标普全球美国制造业采购经理人指数，原油库存等重大事件。
+
+本周大事件
+
+比特币价格首次突破 $ 52,000 
+
+比特币（BTC）本周首次在 26 个月内突破 52,000 美元，但其停滞的势头可能预示着在价格进一步上涨之前的“即将到来的”回调。市值最大的加密货币在一周内上涨了 10% ，超过了 CoinDesk 20 指数（CD20）的 8% 的涨幅，自 1 月底 38,500 美元的低点起，其上涨势头一直没有停止。这次涨势伴随着美国现货比特币交易所交易基金（ETF）加速流入，其中 BlackRock 的 IBIT 本周吸纳了超过 28,000 比特币。
+
+然而，Swissblock 指出， 52,000 美元区域在长期图表上是一个重要的阻力位，它在 2021 年 9 月和 12 月限制了价格的上涨，并且现在也对涨势的持续构成了实质性的障碍。Swissblock 的分析师写道：“鉴于最近几周大约 33% 的快速上涨，回调似乎是迫在眉睫和必要的，这表明这次涨势是无法持续的。”
+
+报告还补充说，除了短期的下跌，市场看起来准备好迎接更高的价格，只要 BTC 能保持在接近 47,500 美元的支持位，任何即将到来的修正都可能是一个购买机会。“在这一点上，任何回调都应被视为一个可能的购买机会。”
+
+机构级加密货币交易所 FalconX 也注意到，“异常的”交易量支持了 2024 年初的上升趋势，这是自 2023 年 3 月区域银行危机以来的最后一次看到。FalconX 的分析师在周五写道：“价格上涨后的交易量下降在加密货币中历来是虚假突破的可靠指标。这个时候的好消息是， 1 月份的涨势周围的流动性条件总体上仍然健康。”
+
+10x 研究公司的分析师在周五的更新中表示，比特币可能会向 57,500 美元的价格目标运行，原因是流动性强劲和对比特币期货需求增加。
+
+https://www.coindesk.com/markets/2024/02/16/bitcoins-stall-at-52k-may-foreshadow-imminent-pullback-before-higher-prices-swissblock/
+
+每周协议推荐
+
+欢迎来到我们的每周协议环节——在这里，我们会重点关注在加密空间掀起波澜的协议。本周，我们选择了 PAAL，一个定制化的 AI 机器人解决方案。
+
+PaaL 允许用户通过输入指令自定义生成属于自己的 Bot，并可以在 Discord, Telegram 等多平台享受机器人服务。听起来好似和 ChatGPT 没区别，但是 PaaL 提供了更多 AI 应用场景，包括：
+
+PaaS (Paal As A Service): PaaS 专注于提供广泛的 AI 驱动型解决方案，以满足不同垂直行业的独特需求。我们的专业知识涵盖各个领域，包括但不限于在线博彩、金融交易、数字收藏品以及具有高级 Web AI 功能和对话机器人的软件即服务 （SaaS） 应用程序。
+
+比如定制的 Twitter Bot，当用户提及或者 TAG 机器人时会自动根据其训练的内容进行响应；Buy Alert Bot，从交易所获得信息源来提供实时的交易警告；Stake Alert Bot，是为加密货币定制的创新通知工具，旨在为质押交易和更新提供警报，为用户提供重要信息，以有效地管理和监督他们的质押投资组合；Sniper Bot 来提升交易自动化策略，优化交易时机和执行。
+
+MyPaalBot: MyPaal 兼具聊天机器人、MOD、研究人员和社区管理员的角色，真正成为多才多艺的加密助手。
+
+PaalX：PaalX 将 DEX、研究平台、社交媒体等合并到一个 AI 驱动的工具箱中，以实现轻松的交易。通过人工智能工具过滤和分析大量数据来优化交易效率和研究效果，从而做出明智和快速的决策。
+
+PAAL 的原生代币为 $PAAL，总供应上限为 1B，其中：
+
+1% — 营销和用户获取：一种更有针对性的方法，将营销工作与专门针对获取新用户的策略相结合，从而促进社区增长和参与。
+
+1% — 开发实验室：除了单纯的开发之外，该基金还致力于创新，支持新功能的研发，并保持在技术进步的最前沿。
+
+1% — 团队：这种分配确保我们能够吸引、留住和充分补偿顶尖人才，这对我们的长期成功至关重要。
+
+1% — 生态系统：这是一个多方面的分配，包括：
+
+投资初创企业：我们现在积极投资于有前途的初创企业，这些投资的利润用于收入分享，这不仅使我们的收入来源多样化，而且还支持更广泛的加密生态系统。
+
+RevShare：继续致力于与社区分享收入。
+
+回购：回购的代币现在直接流入质押池，从而提高了质押奖励和整体代币价值。
+
+Paal 作为一个 AI 解决方案，通过白名单人工智能解决方案，供各行业的公司使用，形成主要收入来源；广告和交叉推广等与其他公司的合作可以带来额外的利润；所有 $PAAL 交易量的 1% 作为交易税；额外的订阅服务和产品佣金等等。
+
+Source: https://rewards.paalai.io/
+
+Paal 收入主要被分配给生态基金会和质押者，质押作为 Paal 经济模型中最为重要的一部分，用户可以前往质押 $PAAL，有不同时间段和 APR 的 Vault 可供选择，质押可以获得 $ETH 和 $PAAL 奖励。如图，Paal 已经累计提供了 645 个 ETH 作为奖励，$PAAL 部分的奖励则来源于协议收入和回购。
+
+我们的洞察
+
+自 2023 年 11 月开创 Staking 机制之后，其价格随着 TVL 同步涨跌，目前已质押的代币总额占据 67% 的市值，$PAAL 价格也突破了历史新高，近七天涨幅 97.39% 。
+
+Source: Defillama
+
+此外，官方在 2 月 16 日推出了质押激励活动，将 140 个 ETH 作为质押奖励给用户，除了上述的质押奖励外，还可以获得合作伙伴的潜在空投机会，产品的专属功能享用，团队孵化的项目如 AIT Protocol 等投资机会。活动推出后协议的 TVL 单日增长 10 M，可见市场反应强烈。
+
+目前 Paal 的日均交易费收入约为 $38K，PaaL AI 的收入分享模式与创收方法相结合，形成了一个有凝聚力的动态结构。但代币的目前的使用场景较弱，只有质押这一价值捕获，未来若能扩展代币使用用例，Paal 或许可以创新性爆发。
+
+每周 VC 投资聚焦
+
+欢迎来到我们的每周投资聚焦，我们在这里为你揭示加密空间中最重大的风险投资动态。每周，我们将重点关注获得最多融资的协议。
+
+Ultiverse
+
+@UltiverseDAO 是一个社交游戏元宇宙，它将 Web3 与一个身临其境、完全兼容 VR 的 AAA 级虚拟世界连接起来。通过授权具有不同经济能力的玩家建立互惠互利的关系，Ultiverse 旨在创建一个首创的 MetaFi。
+
+https://x.com/UltiverseDAO/status/1757759138959151421?s=20
+
+Lava Network
+
+@lavanetxyz 旨在成为区块链数据的市场。它激励节点提供商和去中心化应用程序用户将市场区块链数据输入其网络，就像 Airbnb 允许所有者将他们未使用的空间货币化一样。该协议强制执行数据质量，使节点运营商能够使用其带宽。
+
+https://x.com/lavanetxyz/status/1758162588381405563?s=20
+
+Exverse
+
+@exverse_io 是一款免费游戏，为 Web3 带来了对 AAA 第一人称射击游戏的全新演绎。Exverse 的三个星球——社交、任务和战斗——迎合了不同的游戏风格，同时在单一时间线内保持相互联系，用户在持续八周的赛季周期中竞争。该游戏旨在通过允许玩家参与社交活动，甚至在不断扩大的宇宙中开发用户生成的世界来培养社区。
+
+https://chainwire.org/2024/02/15/exverse-lands-3m-in-private-round-to-bring-web3 s-call-of-duty-to-life/
+
+协议事件
+
+Pudgy Penguins briefly flips Bored Ape Yacht Club in floor price
+
+Celsius distributed $ 2 billion of crypto to creditors, court document shows
+
+Ether perpetual futures open interest surges, hits all-time high on Deribit
+
+Uniswap V4 launch, featuring 'hooks,' tentatively set for Q3
+
+Jupiter cancels Ripple XRP ETP investment after self-compliance inspection
+
+行业更新
+
+Japan's financial regulator encourages stronger monitoring of 'unlawful' crypto transfers
+
+FTX creditors file class action against bankruptcy lawyers over ties to FTX prior to its collapse
+
+House Financial Services panel explores combatting illicit finance in cryptocurrency
+
+FCA issued 450 alerts against illegal crypto promotions in 2023 
+
+Court rules Genesis can sell over $ 1.3 billion worth of GBTC shares: Bloomberg
+
+推特 Alpha
+
+在加密推特中蕴含了许多 Alpha，但在数千条推特线程中导航可能很困难。每周，我们都会花费几个小时进行研究，精选出充满洞见的线程，并为您策划每周的精选列表。让我们深入了解吧！
+
+https://x.com/0x AndrewMoh/status/1757980672290120157? s= 20 
+
+https://x.com/stacy_muur/status/1758311925996499139?s=20
+
+https://x.com/defi_blackjoker/status/1758146366797127721?s=20
+
+https://x.com/wist_defi/status/1758182057534996674?s=20
+
+https://x.com/DamiDefi/status/1758161829778403518?s=20
+
+下周事件

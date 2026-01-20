@@ -1,0 +1,173 @@
+标题: 一文了解 RealYield 概念和相关项目
+链接: https://www.chaincatcher.com/article/2079980
+发布时间: 2022-09-22
+
+==================================================
+
+原文作者：Denis Balitskiy
+原文编译：0x214，BlockBeats
+
+ 
+
+近期，Arbitrum 生态 DEX GMX 势头强劲，9 月 5 日，GMX Token 价格突破 56 美元，距其 8 月低点涨幅超 30%。8 月底，据 Nansen 数据显示，GMX 上交易笔数一度超过 Uniswap，成为 Arbitrum 网络周内交易笔数最多的协议。GMX 作为产生「实际收益」（RealYield）的项目之一，这一概念随之引起市场热议——RealYield 成为 DeFi 最新趋势。
+
+加密研究员 Denis Balitskiy 列举了 10 个产生实际收益的项目以及价值主张，内容如下：
+
+ 
+
+什么是 RealYield？
+
+首先，我们需要明确「RealYield」的定义。
+
+本质上，RealYield 指协议根据其实际收入（一般以 ETH、USDC 等计价）向用户支付收益，这将消除通货膨胀、价格操纵和许多其他不光彩操作对货币价值的负面影响。
+
+而且，在熊市，「实际收益」这样的表述也显得异常有力。
+
+让我们先睹为快。
+
+ 
+
+Kujira
+
+Kujira 从 Terra 崩盘事件中涅槃重生，如今，Kujira 基于 Cosmos 生态推出 Layer1 平台，并配以一句彰显野心的标语「Grown-Up DeFi」。
+
+Kujira 团队为用户提供多样化服务：
+
+超额抵押 Stablecoin USK
+链上订单簿 DEX FIN
+清算市场 ORCA
+质押和收益 App BLUE
+
+后续将会有更多协议被纳入 Kujira 生态。
+
+协议收入来源：Kujira 网络、提款和交易手续费、ORCA 清算等。
+
+官网
+
+ 
+
+Clearpool
+
+Clearpool 允许项目从去中心化的贷款人网络中借入资金，且无需任何抵押品。
+
+Clearpool 此功能的实现借助于先进的风险管理，由其推出的「单一借款人池」（Single-Borrower Pools）和 Token 化信贷系统组成。但这还不是最吸引人的地方。
+
+贷款人还可以获得以 CPOOL 支付的额外奖励。
+
+实际上，你可以直接质押这些 CPOOL，并将获得的投票权委托给预言机 Clearpool Oracles。
+
+这些预言机不仅会追踪每个池子的动态表现，还会分享给你 Token 奖励。
+
+A.K.A. 实锤收益。
+
+官网
+
+ 
+
+Dopex
+
+该交易平台利用资金池让用户以资本高效的方式购买或出售期权。
+
+期权是一种金融工具，让你有权利对某一资产在某一特定价格的涨跌趋势进行押注或投机。
+
+Dopex 真正的厉害之处在这里：
+
+Dopex 推出了「单一质押期权金库」（Single Staking Option Vaults），这些金库可以让用户在指定时间段内锁定 Token，并获得由此产生的被动收益。
+
+Dopex 的收入来源还包括：资金池购买、Token 互换、交易量池罚金（Volume Pool Penalty）等。
+
+注：交易量池旨在增加 Dopex 协议内交易量，允许用户在每周全球纪元（Global Epoch）前存入资金，并使用池中资金以折扣价购买期权进行套利。在每个 Epoch 结束时，储户可以从交易量池中提取资金并支付 1% 罚金，因为他们并未真正「使用」资金（non-usage of funds）。
+
+因此，这也是实打实的 Real Yield。
+
+官网
+
+ 
+
+Redacted
+
+Redacted 是一个为 DeFi 协议赋能的智能合约生态系统。
+
+很多人会觉得 Redacted 的界面做的还不错。
+
+这个 dApp 本身允许用户赚取奖励，并参与治理提案投票。
+
+此外，还有两个值得注意的产品。
+
+Hidden Hand（一种治理激励「bribes」的交易市场，旨在提高用户治理参与度）
+Pirex（实现未来收益/投票事件的自动复利和 Token 化）
+
+为了从 Redacted 的协议收入中获利，用户可以将自己的 Token 锁定大约 16 周，随后即可享受 Pirex、Hidden Hand 和国库收入的分成。
+
+官网
+
+ 
+
+GMX
+
+GMX 是一个永续合约交易平台，支持主流加密货币交易，并为用户提供高达 30 倍的杠杆选择。
+
+GMX 采用「双 Token 模型」。GMX 是其主要的公用事业和治理 Token，用户可以质押 GMX 以获得 30% 的平台费用；GLP 是流动性提供者 Token，GLP 持有者获得 70% 的平台费用。
+
+官网
+
+ 
+
+CAP
+
+和 GMX 类似，CAP 允许用户以 50 倍杠杆进行交易。
+
+用户可以在池中存入 ETH 或 USDC，这些资金将作为潜在利润支付给交易者；反之亦然，如果交易者亏损或被清算，用户也将根据池中份额获得部分收益。
+
+另外，质押 CAP 也可以获得其协议收入的部分分成。
+
+简单易懂。下一个。
+
+官网
+
+ 
+
+Umami
+
+此协议允许用户访问产生风险对冲收益的金库。
+
+这种风险对冲是由向 GMX 的杠杆永续交易平台和 Tracer 的衍生品平台提供流动性实现的。
+
+收益将以 WETH 的形式支付，并且 UMAMI Token 设有供应上限以及零排放政策（Zero Emission）。
+
+官网
+
+ 
+
+Ribbon Finance
+
+跟上述几个大同小异，Ribbon Finance 允许用户通过期权库获取收益。
+
+你可以选择不同的策略，例如 Covered Call、Put-Selling 以及 Principle Protected 等。
+
+只不过最近市场的看跌情绪导致其 TVL 和回报率双双下降。
+
+官网
+
+ 
+Synthetix
+
+Synthetix 大家已经耳熟能详，此协议允许用户创建和交易合成资产（可以与任何东西绑定，包括现实世界的资产）。
+
+Synthetix 的 TVL 高达惊人的 3.14 亿美元。
+
+因此，一旦你选择质押 Token，享受协议收入的分成几乎是板上钉钉的事情。
+
+官网
+
+ 
+
+Beefy
+
+Beefy 是一个收益率优化器，允许用户采用多种投资策略实现复利。
+
+Beefy 实现了在多个 AMM 上各类 LP 奖励的最大化。
+
+此外，拥有 Token 不仅能让你分享协议收入，还能获得相应的治理权。
+
+官网

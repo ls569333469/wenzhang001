@@ -1,0 +1,69 @@
+标题: LD Capital：Zksync 主网上线两月，生态发展情况报告
+链接: https://www.chaincatcher.com/article/2093769
+发布时间: 2023-05-25
+
+==================================================
+
+作者：LD Capital
+
+ 
+
+zkSync是基于ZK Rollups架构的以太坊二层网络扩容方案，于2023年02月16日上线主网Fair Onboarding Alpha，该阶段仅允许注册的项目进行测试而不向终端用户开放。2023年03月24日zkSync Era主网向所有人开放，同时将zkSync2.0更名为zkSync Era，zkSync1.0更名为zkSync Lite。
+
+目前，zksync已经上线2个月，其网络生态发展的情况如何呢？让我们一探究竟。
+
+1、TVL
+
+zksync era TVL在上线前三周保持稳定的增长，4月中旬后增长停滞，5月中旬以来有所恢复。目前TVL$283 M，近一周增长9.5%，占layer2整体TVL的3.29%，位列第四。
+
+2、链上活跃度
+
+根据浏览器数据显示，zksync era上线以来共计处理链上交易约2100万笔，拥有170万个独立地址。受arbitrum空投的影响，Zksync上线就获得了较高的链上活跃度，上线初期日活地址数约在60–80k的范围波动，五月初下降至约30k的低位，随后在活动和空投带动下大幅上涨。
+
+5月11日，OKX Wallet推出一站式 DApp探索和空投交互平台Cryptopedia，将zkSync Era作为上线的第一期的主题，设置了zkSync Era交互专区。完成交互任务的用户除了潜在空投奖励还可抽取抽取由OKX Wallet和zkSync联合设计五种不同稀有度的NFT。受该活动影响，zksync era链上活跃度显著增加。同时OKX于5月20日开通了zkSync Era主网资产的充提。
+
+zkSync Era的元宇宙项目zkApes于5月10日上线$ZAT空投，并随后将领取空投的时间缩短至一周，在空投领取截止时间5月17日前，zksync era的链上活跃度创下新高。空投结束当日，$ZAT的持币地址数为65.5万，超越USDC成为在zksync era持币地址数位列第二的代币，位列ETH之后。
+
+5月21日zkSync ERA域名平台ERA Name Service也进行了$ERA代币空投，共有43,500个地址参与。
+
+3、跨链资金情况
+
+官方桥的数据也显示类似的活跃度。受到arbitrum空投刺激，主网上线前三周活跃地址增长较多，4月中下旬至5月上旬，活跃地址较少。5月中旬之后，数据又恢复了增长，活跃增加。
+
+4、生态项目
+
+根据defillama统计，目前zksync era生态TVL前五名均为去中心化交易所。
+
+SyncSwap具有交易、流动性挖矿和launchpad（未开始）功能，当前85%的TVL集中在 USDC/ETH Pool，APR为25%。
+
+Syncswap计划发行平台代币SYNC tokens（未上线）1亿枚，并于4月10日推出交易挖矿活动“SyncSwap Loyalty Program”，平台共计为genesis epoch分配 900,000枚SYNC， genesis epoch持续30天，于5月10日结束。
+
+用户每产生$1交易手续费可以获得1 ySYNC，genesis epoch中用户共计mint 1.18M ySYNC（即共产生1.18m美元手续费），按照ySYNC持有量平均分配900,000枚SYNC，最终每1个ySYNC可以获得约0.76枚SYNC。目前该活动在genesis epoch后处于暂停状态。
+
+iZUMi Finance是多链一站式Liquidity as a Service (LaaS)协议,目前支持ETH、Arbitrum、Polygon和zksync era四条链。
+
+iZiswap使用的创新离散流动性DL-AMM（Discretized Liquidity AMM）机制与trader joe的liquidity book机制类似，其发布时间更早，但当时并未引起类似liquidity book的广泛讨论。 DL-AMM 将流动性分配在某一些固定价格上来进一步提高资本效率。同时，iZiswap pro还提供了订单簿的交易方式。
+
+LiquidBox是iZUMi基于Uniswap V3 LP的流动性挖矿方案，项目方可以通过LiquidBox对特定价值范围内的LP设置激励，当用户通过将V3 LP代币质押到iZUMi协议后获得对应范围内的激励。
+
+该协议的相关数据defilama与其官网有较大差异，下图为官网显示TVL与交易量的情况。
+
+平台代币IZI于2021年12月上线，已上线bybit、kucoin和gate等交易所，经历较长时间下跌，于今年4月份上线后zksync出现明显反弹。
+
+Mute是zkSync Era上的第一批DEX，除了交易和提供流动性，Mute还推出了收益放大器Amplifier、债券以及 DAO治理功能。用户可以债券（Bonds）用MUTE/ETH LP折价购买具有7 天锁定期的MUTE Token。MUTE Token已上线bitget，token价格在zkync era主网上线时冲高，之后基本延续了震荡下跌的趋势。当前主要的TVL集中在 USDC/ETH Pool，APR为28%。
+
+Velocore是zksync era上第一个构建在Solidly and Velodrome基础上的ve（3，3）DEX，于2023 年4月3日和4日在自身launchpad平台进行了private sale和public sale，private sale硬顶90 ETH，public sale硬顶450 ETH，分别实现了超过500%和1814%的超募，募集价格0.0000207 ETH和0.0000229 ETH，折合约$0.037/$0.041,最高涨到约6倍，目前价格维持在2倍收益左右。
+
+SpaceFi是连接Cosmos和以太坊Layer2生态系统的跨链平台，目前集成了 Evmos和ZkSync，产品包括DEX+NFT+Launchpad+Spacebase。Spacebase是一个链上社区，创建和加入Spacebase可以提高挖矿奖励，目前共有18个spacebase被创建，共有约3万人加入了space。5月6日spacefi进行了平台代币SPACE的经济模型调整，将最大供应量从600m减少到100m，同时burned 40M Initial Supply，目前space流通市值仅78万刀，同时交易量也较低。
+
+Zigzag是一个去中心化订单簿交易所，zkSync 1.0第一个dex，目前支持zksync lite和arbitrum。2023年3月3日，超过10万名用户收到了平台代币$zz空投，占代币总供应量34%。zigzag团队还开发了去中心化下注平台zkasico，平台bet token包括usdc、usdt、zz、eth。
+
+Nexon是首批上线zkSync Era的借贷协议，现已更名为Eralend。从公布的代币模型看，61%会用于社区激励，10%用于IDO，15%分配给DAO，12%分配给团队，2%分配给顾问，分配给团队和顾问的部分会有6个月的锁定期。因代币延迟上线以及其它协议进行的活动热度分流，Eralend目前的TVL增速缓慢，仅在250万美元左右。
+
+Reactor Fusion目前是zkSync Era上 TVL最大的借贷协议，是zkSync上少数发币的项目之一。TVL在343万美元左右，目前仅支持ETH和USDC资产。
+
+UniDex是创立于2022年4月衍生品DEX协议，最初在Fantom链上，后续陆续扩展到Optimism、zksync era等其他公链和二层。目前，TVL387万美元，其中，zksync era上的TVL约为160万美元。
+
+Onchain Trade是建立在zksync era上的现货和衍生品DEX协议，目前TVL为67万美元，规模较小。其代币为OT，于2023年3月进行IFO，公募价格0.15美元，上线后曾一度冲高到1美元附近，随后下跌，目前为0.18左右。
+
+Cheems是zksync era上的meme项目。5月4日至6日，zksync era上的钱包余额大于0.01ETH或是$PEPE or $AIDOGE的holder可以claim $Cheems代币，共有6.5万个地址参与claim，当前持币地址数量5.1万个，流通市值2700万刀，目前价格较开盘仍有很高收益。

@@ -1,0 +1,7 @@
+{
+  "title": "DeepSeek 宣布开源优化并行策略",
+  "url": "https://www.chaincatcher.com/article/2169782",
+  "content": "ChainCatcher 消息，据金十报道，Deepseek 于开源周第四天宣布开源优化并行策略，其中 DualPipe——包括一种用于 V3/R1 训练中计算-通信重叠的双向管道并行算法；EPLB——一种用于 V3/R1 的专家并行负载平衡器；以及分析 V3/R1 中的计算-通信重叠。",
+  "published_at": "2025-02-27",
+  "downloaded_at": "2026-01-17 23:37:11"
+}

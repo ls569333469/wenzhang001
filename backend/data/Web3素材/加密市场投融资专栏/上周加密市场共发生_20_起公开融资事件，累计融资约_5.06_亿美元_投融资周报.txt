@@ -1,0 +1,133 @@
+标题: 上周加密市场共发生 20 起公开融资事件，累计融资约 5.06 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2193652
+发布时间: 2025-07-28
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 7 月 21 日- 7 月 27 日期间，区块链和加密行业共发生 20 起公开投融资事件，累计融资约 5.06 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和CeFi赛道。热门项目包括去中心化 AI 推理平台 Gaia ，法国上市公司 Capital B、链游开发商 Delabs Games、欧洲投资应用程序 Lightyear。 
+
+此外，韩国区块链基础设施提供商 DSRV 完成约 160 亿韩元（约合 1160 万美元）B 轮首次融资。本轮投资由 Intervest、NH-SK 证券等韩国主要投资机构参与，预计下月末还将进行有多个金融机构参与的第二次融资。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+去中心化 AI 数据平台 D-GN 完成 500 万美元 Pre-Seed 轮融资，droppGroup 等参投
+
+据 Globenewswire 报道，去中心化 AI 数据平台 D-GN（Data Guardians Network）宣布完成 500 万美元的 Pre-Seed 轮融资，droppGroup、沙特商人 Hamoud Al-Rumayyan 及 Hub Culture 参投。
+
+据介绍，D-GN 采用区块链技术进行数据可追溯验证，并通过 USDT 向全球贡献者支付稳定币报酬，强调杜绝灰色内容来源与低成本数据外包。
+
+域名注册商 Freename 完成 650 万美元 A 轮融资，Entrée Capital 领投
+
+据 Finsmes 报道，瑞士苏黎世域名注册商 Freename 宣布完成 650 万美元 A 轮融资，由 Entrée Capital 领投，Polymorphic Capital 参投，种子轮投资方 Sparkle Ventures、Blockchain Founders Fund 和 Golden Record Ventures继续跟投。参投的天使投资人包括 Target Global 联合创始人 Mike Lobanov、Rashwan 家族办公室，以及前 Coinbase Custody CEO Aaron Schnarch。
+
+Freename 由 CEO Davide Vicini 和 COO Mattia Martone 领导，致力于通过其专有 DNS 技术打通传统互联网与区块链，支持用户创建自定义顶级域名，并通过二级域名销售获利。
+
+据 Web3 资产数据平台 RootData 显示，Freename 是一个 TLD （顶级域名）和域名注册平台，允许其用户搜索和注册/创建任何类型的 TLD。在 Freename 上，用户可以构建自己的 Web3 域名生态系统，从版税中获得被动收入。
+
+AI 推理平台 Gaia 完成 2000 万美元种子轮和 A 轮融资，Mantle 等领投
+
+去中心化 AI 推理平台 Gaia 宣布完成 2000 万美元种子轮和 A 轮融资，由 ByteTrade、SIG、Mirana、Mantle 领投，Outlier Ventures、NGC、Taisu Ventures、Consensys Mesh 等参投。
+
+新资金将用于扩展去中心化 AI 基础设施，并正式推出全球首款专为用户自主智能打造的 AI 原生智能手机，Gaia AI 手机采用 Galaxy S25 Edge 硬件构建，所有 AI 推理过程本地运行，无需云端，无数据上传、无隐私泄露。
+
+去中心化数据层 Poseidon 完成 1500 万美元融资，a16z 领投
+
+据 The Block 报道，去中心化数据层 Poseidon 完成 1500 万美元融资，a16z 领投。
+
+据悉，Poseidon 基于 Story Protocol 搭建，旨在为“下一代实体 AI”解锁高质量训练数据。Poseidon 由 Story 团队孵化，致力于解决 AI 领域高质量、可用且合法授权训练数据的获取难题。
+
+a16z Crypto 创始人 Chris Dixon 表示，Poseidon 的去中心化数据层将为互联网建立新的经济基础，激励创作者和供应商为下一代智能系统提供多样化的数据输入。该项目将通过 Story 协议的可编程知识产权层和不可变注册表，为 AI 开发者提供 IP 安全、合法合规的训练数据访问。
+
+上市公司 Capital B 增资约 1030 万欧元，以推进其比特币财务公司战略
+
+据官方公告，法国上市公司 Capital B （原 The Blockchain Group ）宣布增资约 1030 万欧元，以推行其比特币财务公司战略。
+
+多 AI 智能体调度平台 Questflow 宣布完成 650 万美元种子轮融资，CyberFund 领投
+
+多 AI 智能体调度平台 Questflow 宣布完成 650 万美元种子轮融资，CyberFund 领投，Delphi Labs、Systemic Ventures、Eden Block、White Star Capital、Web3.com、Animoca Brands、HashKey Capital、Wagmi Ventures、ElizaOS、Tezos 基金会及 CatcherVC 等机构跟投，并获得 Aptos、CDP（Coinbase 开发者平台）和 Virtuals Protocol 的资助。
+
+据悉，Questflow 致力于构建全球 AI 智能体协同网络，通过调度多 AI 智能体，为消费者和企业提供 24/7 全天候工作流程自动化服务。本轮融资资金将用于生态激励和协同能力扩展，团队即将全面部署其核心创新MAOP（Multi-Agent Orchestration Protocol，多智能体编排协议，简称 MAOP），推动跨领域工作流程的现实应用落地。
+
+此外，其即将上线的 QDP（Questflow 开发者平台）将为开发者提供模块化 SDK、可视化编排工具和链上结算系统，让开发者无需处理底层技术就能快速封装 API 为 AI Agent。
+
+Questflow 的解决方案已获得 a16z、Cohere 和 MongoDB 等机构推荐，并入选 Google for Startups 计划。目前团队正积极与 Google、Coinbase 开发者平台、Aptos、Near 等 Web2/Web3 伙伴拓展生态合作。
+
+二、游戏
+
+链游开发商 Delabs Games 完成 520 万美元新一轮融资，Hashed 等领投
+
+链游开发商 Delabs Games 宣布完成 520 万美元新一轮融资，使其累计融资总额达到 1720 万美元。本轮由 Hashed、TON Ventures 和 Kilo Fund 领投，另有多家战略投资者参与。
+
+Delabs 表示，本轮资金将用于推动 AI 游戏创作平台 Verse8 的开发，并加速 AI 赋能 Web3 游戏的落地。
+
+三、CeFi
+
+加密资产配置平台 OkaFund 完成 100 万美元种子轮融资，DC Capital 等参投
+
+据官方消息，加密资产配置平台 OkaFund（OkaFund.com）完成 100 万美元种子轮融资，DC Capital，FreeLunch Capital，Locoo International Capital 参投。
+
+据悉，OkaFund 在上线不到 2 个月时间，已完成可储备投资量化团队资金 2 亿美元（通过交易所托管子账户对量化团队进行资金支持）。
+
+团队的三位创始人分别是 Jason Yu，Hao Shen，Sebastian Gawenda，创始团队之前曾供职于 Crypto.com，Kraken，Bybit，OKX，Bitman 等知名公司。
+
+OkaFund 将集成 Capital Intro，Data Show，Quant Strategy Fund，Crypto MorningStar 四大板块，成为资方和量化团队的一站式服务平台。
+
+欧洲投资应用 Lightyear 完成 2300 万美元融资，NordicNinja 领投
+
+据 CNBC 报道，欧洲投资应用程序 Lightyear 宣布在由 NordicNinja 领投的一轮融资中筹集了 2300 万美元，打车独角兽 Bolt 联合创始人 Markus Villig 等爱沙尼亚科技企业家参投。
+
+Lightyear 总部位于伦敦，开发了一款应用程序，允许用户投资超过 5,000 只股票、交易所交易基金 (ETF) 和货币市场基金，此外，Lightyear 还将推出新的人工智能功能。这家公司希望成为欧洲版 Robinhood，进军免佣金交易市场。
+
+据知情人士透露，此轮融资后 Lightyear 估值达 2 亿至 3 亿美元，较 2022 年融资时显著提升。
+
+瑞典上市公司 Hilbert Group 获得约 1580 万美元融资，支持比特币储备策略
+
+据 NLNico 监测，美股上市瑞典公司 Hilbert Group 与 LDA Capital 签订了价值 1.5 亿瑞典克朗（约 1580 万美元）的结构化融资协议，以支持其比特币储备金策略。
+
+该协议采用 ATM 式便利工具结构，允许 Hilbert Group 在 36 个月内灵活提取资金用于购买更多 BTC 。这一融资安排为该公司提供了持续扩大比特币持仓的资金支持。
+
+四、AI
+
+Coinbase Ventures 宣布支持 AI 交易代理平台 Bankr 发展
+
+Coinbase Ventures 发文宣布通过 Base Ecosystem Fund 支持 Bankr 平台的发展。
+
+据悉， Bankr 是集成于 Coinbase 新 Base 应用中的智能交易代理平台，旨在通过自动化交易代理实现全天候运行、更快反应以及数据驱动的决策，以提升市场效率。
+
+Quack AI 获得 Animoca Brands、Kenetic Capital 等机构 360 万美元融资，推动 AI 治理基础设施建设
+
+Quack AI 宣布成功完成 360 万美元融资，投资方包括 Animoca Brands、Kenetic Capital、Skyland Ventures、071Labs、Scaling Labs、CARV Labs 以及 Merlin Chain 等知名机构。此次融资将加速 Quack AI 构建一个全面的 AI 治理基础设施，进一步推动 Web3 生态的去中心化决策进程。
+
+Quack AI 是一款模块化的治理层，能够自动化生成提案、进行风险评分、投票以及执行操作，广泛适用于跨链治理，为区块链项目提供 AI 驱动的治理解决方案。截至目前，Quack AI 已与 BNB Chain、Linea、Metis 和 Taiko 等多个公链展开合作，并有 40 余个项目采用其 AI 治理方案，超过 66 万用户铸造了 Quack AI 护照，推动了其 AI 治理解决方案的实际落地与应用。
+
+五、其他
+
+加密矿企 Bitzero 完成 2500 万美元融资，扩张绿色加密挖矿业务
+
+据 The Block 报道，Bitzero，一家由 Kevin O'Leary 支持的加密挖矿公司，宣布完成 2500 万美元融资，计划购入 2900 台比特大陆 S21 Pro 矿机，预计将在 4-6 个月内部署完毕，年收入增加约 1000 万美元。公司将在北美与欧洲扩张，并强调其基于水电和低碳能源的可持续挖矿模式。
+
+英国上市公司 Satsuma 完成 1.36 亿美元融资，加速比特币增持战略
+
+英国上市公司 Satsuma（原 Tao Alpha）宣布完成 1 亿英镑（1.36 亿美元）私募融资，以加速其比特币资金战略。此外，该公司将启动短期第三轮融资，融资将仅限于公司认定为美国关键战略合格投资者的个人投资者，预计总融资额不超过 1000 万英镑，将于 2025 年 7 月 28 日左右完成。
+
+此前报道，Satsuma 宣布首次购买 28.56 枚 BTC。
+
+韩国区块链基础设施提供商 DSRV 完成约 1160 万美元 B 轮首次融资，Intervest 等机构参投
+
+据《Edaily》报道，韩国区块链基础设施提供商 DSRV 完成约 160 亿韩元（约合 1160 万美元）B 轮首次融资。本轮投资由 Intervest、NH-SK 证券等韩国主要投资机构参与，预计下月末还将进行有多个金融机构参与的第二次融资。
+
+据介绍，DSRV 为全球 70 多个区块链网络提供基础设施，管理着超过 4 万亿韩元的数字资产。去年 DSRV 年销售额约达 107 亿韩元，当期净利润为 30 亿韩元。该公司计划提升稳定币和托管等新业务领域的销售额，并正式推进包括美国、日本、非洲等地区的全球市场拓展。
+
+上市公司 MEI Pharma 完成 1 亿美元私募融资，将莱特币纳入财务储备
+
+据 BusinessWire 报道，MEI Pharma（纳斯达克代码：MEIP）宣布完成 1 亿美元私募融资，计划将资金用于购买莱特币（LTC）作为财务储备资产。
+
+据报道，此举使 MEI 成为首个在国家交易所上市并持有莱特币的公司。莱特币创始人 Charlie Lee 加入 MEI 董事会，数字资产机构 GSR 受聘为财务管理顾问。此次融资以每股 3.42 美元发行约 2924 万股，参与方包括莱特币基金会及多家投资机构。

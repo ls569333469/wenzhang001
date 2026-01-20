@@ -1,0 +1,16 @@
+标题: RootData：2025 年 H1 热门 TGE 聚焦 BTC、AI 与高性能链，OTC 市场由 Solana 引领 Move 系高性能叙事
+链接: https://www.chaincatcher.com/article/2163101
+发布时间: 2025-01-17
+
+==================================================
+
+ChainCatcher 消息，RootData 发布《2024 Web3 行业投资研究报告》。报告中显示，2025 年上半年热门 TGE 项目以 BTC、人工智能及高性能链为主。
+
+2025 H1 热门 TGE 融资概况(*代表已进行TGE)：
+
+融资总额超过 1 亿美元的项目包括 Monad、Farcaster、*EigenLayer、*Magic Eden、Berachain；
+融资总额在 5000 万美元至 1 亿美元之间的项目包括 Babylon、*Scroll、Morpho、Eclipse；
+融资总额在 1000 万美元至 5000 万美元之间的项目包括 Sahara、Nillion、 *Movement、*Puffer、Initia、Walletconnect、*Usual、Lombard、Solayer、*Bio、Sophon；
+融资总额少于 1000 万美元的项目包括 Roam、Symbiotic、*deBridge、*Grass。
+
+此外，OTC 市场报价金额总体上升，总交易量达 262 单，环比下降 3%; 总订单报价金额达到 12 亿美元，环比增长 29%， 平均每笔交易额 520 万美元，环比增长 34%， 买方占比 41.98%，卖方占比 58.02%。2025 年上半年 OTC 市场由 Solana 引领 Move 系高性能叙事。

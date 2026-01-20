@@ -1,0 +1,285 @@
+标题: 上周加密市场共发生38起公开融资事件 | 融资周报
+链接: https://www.chaincatcher.com/article/2069049
+发布时间: 2022-01-17
+
+==================================================
+
+整理：Richard Lee
+ 
+据链捕手不完全统计，2022年1月10日-1月16日期间，区块链和加密行业共发生38起公开投融资事件，链游/元宇宙赛道融资数量占比最多。本周值得注意的是，NFT、Web3等赛道的融资方向进一步丰富，如NFT赛道有预言机、衍生品市场等类型的项目获得注资，Web3领域有Vybe Network等多个项目从数据角度切入，为下一代互联网提供基础设施。
+ 
+此外，Oasis、Near两大公链分别获得4000万美元、1.5亿美元的大额融资，也为本周的一大关注点。就投资机构而言，Animoca Brands、Dragonfly Capital和LD Capital出手较为频繁。
+ 
+一、链游/元宇宙
+ 
+
+1、虚拟世界 TooRichCity（秃力富）宣布获得元宇宙投资人李荣彬个人战略投资
+
+1 月 10 日，虚拟世界 TooRichCity（秃力富）官方宣布获得元宇宙投资人李荣彬的个人战略投资。李荣彬系 SevenX Ventures 创始合伙人、NFT 收藏家，曾主导投资 Whaleshark、Rangers、Smart Token Lab 和 YGG 等 NFT 项目。 通过此次战略投资，TooRichCity 将继续为其市民打造中华未来主义的塑料朋克世界，包括别墅、摩天大楼、飞艇、游乐园等。此外，TooRichCity Studio 将在不久未来推出元宇宙首个基于中国式人际关系网络的头像身份系统，目前设计团队正在稳步推进生产。 TooRichCity 将在元宇宙搭建的同时，探索 NFT 游戏的可能性，并致力于成为 Web3.0 世界的重要贡献者。（来源链接）
+ 
+2、链游Tank Wars Zone宣布完成237万美元种子轮和私募融资，DFG等参投
+ 
+1月11日，链游Tank Wars Zone宣布完成237万美元种子轮和私募融资，Fantom Foundation、DFG、JSquare、Newave Capital、HyperChain Capital、Prometeus Labs、ZBS Capital、LD Capital等参投。
+ 
+Tank Wars Zone将推出WBOND和TGOLD代币。其中，WBOND为治理代币，总供应量为1,000,000,000个，用于投票、质押和交易NFT。TGOLD是游戏内货币，用于NFT交易、维修和升级坦克。（来源链接）
+ 
+3、GameFi NFT 市场 Lootex 完成 900 万美元融资，Spartan Capital等领投
+ 
+1月11日，来自台湾的 GameFi NFT 市场 Lootex 完成 900 万美元融资，Spartan Capital、Infinity Ventures Crypto、LD Capital 和 Akatsuki 共同领投，其他参与者包括 Polygon Studios、Morningstar Ventures 和 SweeperDAO。
+ 
+据悉，Lootex 的市场允许玩家为 NFT 游戏购买头像、物品和虚拟土地，已与 50 多种基于区块链的游戏合作，包括 RPS League、Block Monster、Dungeon Swap 和 Olympus Royale。（来源链接）
+ 
+4、基于Algorand的GameFi平台Zone完成235万美元融资，GSR等参投
+ 
+1月12日，基于Algorand区块链的GameFi生态系统Zone完成235万美元融资，DAO Maker、GSR、Altonomy、Enjinstarter、SuperLauncher DAO、MH Ventures、ZBS Capital、Tag Ventures、K300 Ventures参投。
+ 
+截至目前，Zone融资总额达到435万美元。Zone将于1月15日进行IDO。Zone已聘请The Sandbox联合创始人兼首席运营官Sebastien Borget、Mythical Games首席执行官John Linden担任顾问。（来源链接）
+ 
+5、区块链游戏Kingdom Karnage完成200万美元融资，DFG等参投
+ 
+1月12日，老牌区块链游戏 Kingdom Karnage 近日完成 200 万美元融资，由 Animoca Brands、DFG 和 Enjin 参投。
+ 
+据悉，Kingdom Karnage (KK) 是一款跨平台的虚拟集换式卡牌游戏，项目将发行 KKT Token，游戏会增加 play-to-earn 经济模式并增加 Scholarships。（来源链接）
+ 
+6、7对7足球联赛 Fan Controlled Football 完成4000万美元融资，Animoca Brands 和 Delphi Digital 领投
+ 
+1月12日，7对7足球联赛 Fan Controlled Football （FCA）完成4000万美元A轮融资，由Animoca Brands 和 Delphi Digital 领投。
+ 
+据悉，FCF 接下来的第二赛季联赛规模将扩大一倍，四个新团队的所有者都与加密货币社区有关，包括音乐家和制作人 Steve Aoki 以及被称为 Bored Ape Yacht Club 和 Gutter Cat Gang 的两个加密货币团体的领导人。
+ 
+据悉，FCF 本月晚些时候将推出与这四个新特许经营权相关的 8,888 个 NFT。购买 NFT 的人将成为球队的粉丝，并有机会选拔球员、选择比赛并获得其他福利。（来源链接）
+ 
+7、元宇宙数据分析平台 MetaCat 完成种子轮融资，HashKey 等参投
+ 
+1月13日，元宇宙数据分析平台 MetaCat 完成种子轮融资， HashKey、Zonff Partners、Digital Humanism、Metaverse Limited、Null Capital 参投。
+ 
+MetaCat专注于元宇宙数据分析、内容导航、土地租赁等业务。官网于2021年12月上线，并推出元宇宙内容导航、数据分析等功能。此外，MetaCat于2021 Q3开始提供元宇宙新地速报、元宇宙月报等数据服务。（来源链接）
+ 
+8、L2E平台Proof of Learn完成1500万美元融资，Animoca Brands等参投
+ 
+1月13日，Learn to Earn平台Proof of Learn（POL）宣布完成1500万美元融资，New Enterprise Associates领投，Animoca Brands、GoldenTree Asset Management、gumi Cryptos Capital和Infinity Ventures Crypto 等参投，本轮融资资金将用于项目推广。（来源链接）
+ 
+9、币安 Labs 宣布战略投资角色扮演链游 Nine Chronicles
+ 
+1月14日，币安Labs宣布战略投资角色扮演链游 Nine Chronicles，支持该项目扩大团队和产品套件。作为战略投资的一部分， Nine Chronicles 将与币安生态系统紧密合作，搭建通往币安智能链（BSC）的资产桥梁，并为币安NFT市场提供独家游戏内NFT皮肤。
+ 
+据悉，Nine Chronicles 是一款开源、去中心化的在线角色扮演游戏，其所有游戏操作都在由玩家提供支持的区块链网络上运行。自 2020 年 10 月启动以来，其无gas网络已铸造了 200 万个 NFT 物品，同时通过其游戏赚钱经济已向玩家分发了超过 1000 万美元的 NCG 代币。 （来源链接）
+ 
+10、A&T Capital宣布对P2E游戏 KlayCity 进行战略投资
+ 
+1月14日，据官方消息，A&T Capital 宣布对 KlayCity 进行战略投资，将为整个项目的战略和发展提供支持。 KlayCity 是一款去中心化的 P2E 游戏，基于一个被长期污染所破坏的未来地球。建立在 Klaytn 网络上，用户可以获得模拟真实城区的 NFT。并可以通过有趣和直观的视觉界面，参与游戏中的各种活动，包括「净化」、「探索」和「升级」。KlayCity 计划在 2022 年第一季度推出。（来源链接）
+ 
+11、链游 I WORLD GAME 完成680万美元种子融资，WeMade Tree与Sun Hung Kai领投
+ 
+1月16日，P2E 链游 I WORLD GAME 发博客宣布完成 680 万美元种子轮融资，WeMade Tree 和 Sun Hung Kai 领投，Animoca Brands、polygon、x21 Digital 和其他天使投资人等参投。
+
+据悉，本轮募集资金将主要用于市场营销、新品开发及产品升级等，将进一步推进游戏和 Web3 应用程序套件的开发。（来源链接）
+
+ 
+
+12、“元宇宙藏品馆”宣布获千万级天使轮融资
+ 
+1月16日，优旅区块链技术（宁波）有限公司（以下简称元宇宙藏品馆）宣布获千万级天使轮融资，该轮融资由福建威鹏实业有限公司独家投资。 元宇宙藏品馆联手知名央企设计实体建筑群，包含博物馆、数字化VR体验中心、智能酒店、游乐场等设施，通过线上线下联动，打造元宇宙藏品馆文化数字实体产业。藏品馆诞生于元宇宙概念火爆的2020年下半年，致力成为数字藏品沉浸社交平台，是一个集发行、展示、收益、分享于一体的新型开放平台。
+
+据悉，1月21日，由元宇宙藏品馆发行的城市系列NFT北京站首发，平台还将通过限定空投的玩法回馈首批用户。北京地标古建筑故宫、颐和园、长城等都将以数字艺术品的形式呈现他们的别样艺术美感。
+
+ 
+ 
+二、NFT
+1、NFT预言机和借贷项目 Banksea Finance 宣布完成数百万美元战略融资
+ 
+1月10日，AI技术驱动的NFT Oracle 和 NFT Pool-based Lending项目 Banksea Finance 宣布完成数百万美元战略融资。本轮融资由 Petrock Capital、Parrot、MEXC Global、Springwind Ventures、RioDefi、Solar Eco Fund、Digital Renaissance、Zonff Partners、Definitive Finance、Digital Assets、Investment Solutions AG、GTA Venture、INV Ventures、CatcherVC、Palar Capital、XT LABS等数十家投资机构参与。
+ 
+据悉，Banksea Finance 是为NFT 提供报价的AI预言机和NFT抵押借贷平台，Banksea致力于为NFT提供实时客观的报价，提高NFT流动性，充分释放NFT的金融价值。Banksea NFT AI Oracle将于2022年1月底上线Solana测试网，支持Solana生态的NFT实时报价，在未来将支持更多的生态。另外，Banksea 将在1月15日面向社区发售限量创世NFT，CitizenOne，并于1月20日对外公售。（来源链接）
+ 
+2、NFT 聚合器 Flip 获650万美元种子轮融资，Distributed Global 、 Chapter One 领投
+ 
+1月11日，近日，NFT 聚合器 Flip 在种子轮融资中筹集了 650 万美元，本轮融资由 Distributed Global 和 Chapter One 共同领投，CMS Holdings、NFT 艺术家 PplPleasr（又名 Emily Yang）、Keyboard Monkey、DeeZe 和 The Block 研究副总裁 Larry Cermak 等投资者参投。此次融资将帮助 Flip 扩大其现有团队并推出平台。
+ 
+据了解，Flip 将列出跨市场的 NFT 集合、底价、交易量以及其他数据和信息，该平台还将允许用户在一个地方查看和跟踪 NFT 投资组合，并将能够将他们的多个 NFT 钱包捆绑在一起以跟踪个人投资组合。该平台将于本月底或 2 月初向公众开放。（来源链接）
+ 
+3、区块链漫画平台TooNFT完成175万美元融资，HG Ventures等参投
+ 
+1月11日，基于区块链的网络漫画平台TooNFT完成175万美元融资，HG Ventures、GBIC、Alphabit、Adaptive Labs、Mindfulness Capital和Prestige Fund等参投。TooNFT基于韩国网络漫画平台Toomics推出。Toomics自2015年推出以来已积累5000万净用户（700万MAU），从传统风险投资机构获得超过1500万美元融资。
+ 
+TooNFT旨在将全球数百万网络漫画爱好者引入去中心化网络，借助TooNFT平台，散户投资者可以参与网络漫画制作的投资活动。TooNFT项目还将为用户引入质押、治理、P2P投资机会等。
+ 
+TooNFT发言人表示，TooNFT将成为网络漫画行业第一个可靠、去中心化和抗审查的筹款解决方案。自首次发布以来，TooNFT内容将提供11种语言版本，包括英语、西班牙语、法语、普通话等。
+ 
+4、NFT衍生工具公司Bliv.Club宣布完成种子轮融资，Polygon联合创始人Sandeep Nailwal等参投
+ 
+1月11日，据印度经济时报报道，NFT衍生工具公司Bliv.Club宣布完成种子轮融资，Polygon联合创始人Sandeep Nailwal等参投。
+ 
+据悉，Bliv.Club旨在通过各种新时代工具减少进入NFT行业的壁垒，并通过衍生品促进NFT生态系统的流动性。Bliv将提供一个衍生品市场，允许普通人以小规模参与NFT市场。
+ 
+5、NFTLaunchpad及市场 Starly.io 获Bigcoin Capital投资
+ 
+1月12日，NFT Launchpad和市场Starly.io宣布获得Bigcoin Capital投资。据悉，Bigcoin Capital是一家来自越南的风险投资基金，支持投资组合公司在越南市场发展自己的生态系统。投资项目包括TomoChain、Syntropy、Perlin、Blocto和最近的Starly.io。此前消息，Starly.io宣布完成612.5万美元的pre-IDO轮融资，Spartan Group领投。[原文链接]
+ 
+6、NFT项目MetaDojo完成种子轮融资，DFG领投
+ 
+1月14日，NFT项目MetaDojo宣布完成种子轮融资，DFG领投。具体融资金额未披露。[原文链接]
+ 
+三、DeFi
+
+ 
+
+1、Solana 链上最大期权协议 Friktion 开发团队 Friktion Labs 完成550万美元融资
+ 
+1月13日，Solana链上最大期权协议Friktion 背后开发团队Friktion Labs宣布完成550万美元融资，投资方包括 Jump Capital、DeFiance Capital、Pillar、Libertus Capital、Delphi Ventures、Sino Global Capital、Tribe Capital、Castle Island Ventures、Dialetic、Petrock Capital、Solana Capital。该公司表示还将邀请来自 Genesis Trading、Alameda Research、LedgerPrime、QCP Capital、CMS Holdings 等公司的一组衍生品交易商和做市商加入。
+ 
+据悉，Friktion 是 Solana 最大的期权协议，也是全网第三大期权协议，目前锁定的总价值超过 1 亿美元，专注于提供投资组合管理和结构化产品，以及基于 Solana 网络构建的期权协议，该团队还在为个人、机构经理和 DAO 构建一个链上全栈投资组合和风险管理平台。根据Friktion在一份声明中表示，他们计划利用这笔最新融资建设 Circuits，这是一种新颖的流动性和投资组合管理系统，可推动 DAO 的长期资本流入和产生回报。
+ 
+2、DeFi API初创公司Conduit完成1700万美元融资，Portage Ventures领投
+ 
+1月14日，DeFi API 初创公司 Conduit 宣布完成 1700 万美元融资，本轮融资由 Portage Ventures 领投，FinVC、Gemini Frontier Fund 等参投，天使投资人包括前 a16z 合伙人 Rex Salisbury 等。
+ 
+据悉，Conduit 创建的 API 软件工具可以使金融科技、新银行和传统金融机构能够轻松地将高收益 DeFi 产品集成到他们现有的产品中。（来源链接）
+ 
+3、去中心化资产托管协议Entropy完成195万美元融资，Dragonfly Capital领投
+ 
+1月14日，去中心化资产托管协议 Entropy 宣布完成 195 万美元 Pre-seed 轮融资，本轮融资由 Dragonfly Capital 领投，The LAO 和 P2P Capital 参投，天使投资人包括 AngelList 联合创始人 Naval Ravikant 等。 Entropy 是一个去中心化的资产托管协议，旨在利用先进的阈值密码算法和安全多方计算 (MPC) 提供一个社区拥有和领导的去中心化网络，使用户能够在任何区块链上安全地存储和使用他们的加密货币。（来源链接）
+ 
+4、Terra 生态借贷协议 Edge Protocol完成175万种子轮融资，Hashed领投
+ 
+1月16日，Terra 生态自定义借贷协议 Edge Protocol 宣布完成 175 万种子轮融资，Hashed 领投，Alliance、Qi Capital、Folius Ventures (MapleLeafCap) 和包括 Do Kwon（Terraform Labs）、Jason Choi（Spartan Capital）、Santiago R. Santos、Darryl Wang (0xWangarian)、Ashwin Ramachandran（Dragonfly Capital）、Matt Cantieri（Anchor Protocol）等在内的天使投资人参投。
+
+本轮融资用于构建下一代货币市场，即 Terra 生态系统中的货币市场即服务（money market as a service）。Edge Protocol 旨在为所有用户带来金融包容性。（来源链接）
+
+ 
+四、链上基础设施
+ 
+
+1、隐私计算网络 Oasis 获 Binance Labs 4000 万美元支持，将用于生态发展及项目孵化
+
+1月11日，隐私计算网络 Oasis 获得 Binance Labs 4000 万美元支持，用于扶持 Oasis 生态 DeFi、数据DAO、NFT、元宇宙等领域项目发展，推动 Oasis 生态进一步繁荣。此前，在 AME Cloud Ventures、Dragonfly Capital Partners、FBG、Pantera Capital 等一众生态深度合作伙伴的支持下，Oasis 成立 1.6 亿美元的生态系统发展基金，Binance Labs 加入后，该基金总额高达 2 亿美元。
+ 
+据悉，自上线以来，Oasis 不仅上线了兼容 EVM 的 ParaTime 智能合约执行环境 Emerald，生态首个 Dex YuzuSwap 也将在本周正式上线。（来源链接）
+ 
+2、去中心化e保险协议Neptun Mutual完成300万美元融资，Animoca Brands领投
+ 
+1月12日，去中心化保险协议 Neptune Mutual 宣布完成 300 万美元战略轮融资，本轮融资由 Animoca Brands 领投，Pacific Century Group、Genesis Block Ventures、Fundamental Labs、GSR、Cambium Grove Capital 等参投。
+ 
+据悉，Neptune Mutual 是一个去中心化保险协议，旨在以参数保险模型为中心化虚拟资产服务提供商、去中心化金融协议及元宇宙提供 P2P 风险管理即保险产品。该项目此前曾于 11 月 29 日宣布完成 175 万美元种子轮融资，该轮融资由 Fenbushi Capital 领投，Coinbase Ventures、Huobi Ventures、OKEx Blockdream Ventures 等参投。（来源链接）
+ 
+3、Cardano 生态首个跨链协议 CBTC Bridge 宣布完成首轮融资
+ 
+1月13日，Cardano生态首个跨链桥项目CBTC Bridge宣布完成首轮融资 ArkStream Capital、DCI、Shima Capital和Lancer Capital等机构参投，市值1200万美元。该笔融资将计划用于扩大开发团队。
+ 
+据悉，当前CBTC Bridge已完成首轮测试，目前正在第二轮迭代测试阶段，同期将开展代码审计工作，线上版本将率先支持BTC、ETH、USDT、USDC跨链到Cardano。作为Cardano生态首个跨链桥项目，CBTC Bridge致力于将主流加密资产带入Cardano生态，并最终扩展到多链多层，达到同时拥有中心化和完备去中心化跨链服务能力。（来源链接）
+ 
+4、NEAR完成1.5亿美元融资，三箭资本领投
+ 
+1月13日，NEAR Protocol近日完成1.5亿美元的最新一轮融资，未来将利用这笔资金帮助数十亿用户学习和了解区块链以及去中心化技术，加速践行自身使命。本轮融资由三箭资本领投，多家加密原生基金跟投，包括Mechanism Capital,Dragonfly Capital, a16z, Jump, Alameda, Zee Prime, Folius, Amber Group, 6th ManVentures, Circle Ventures, MetaWeb.vc（NEAR生态基金）。
+ 
+此外，多位顶级天使投资人也参与了本轮融资，包括对冲基金巨头Alan Howard, 前ParaFi Capital合伙人 Santiago Santos 以及Aave 创始人Stani Kulechov。（来源链接）
+ 
+5、跨链桥 Allbridge 宣布完成 200 万美元融资，Race Capital 领投
+ 
+1月14日，跨链桥项目 Allbridge 宣布完成 200 万美元融资，由 Race Capital 领投。
+ 
+据悉，Allbridge 充当了在以太坊和非 EVM 兼容的区块链之间转移资产的桥梁，支持的链包括 Solana、Avalanche、Fantom、Celo、Polygon、Ethereum、BSC 和 Terra，目前 TVL 超过4.7亿美元。（来源链接）
+ 
+ 
+五、Web3和DAO
+
+ 
+
+1、去中心化失能开关应用 Sarcophagus 通过出售DAO代币融资547万美元，LD Capital 等参投
+ 
+1月10日，去中心化失能开关应用 Sarcophagus 通过向VC出售DAO代币融资547万美元，Greenfield One、LD Capital、Placeholder、Inflection、Lattice、Infinite、Hinge Capital、Blockchange、Coral DeFi Investments、Blockchain.com Ventures、Lo Enterprises、Compound VC、Arweave等参投。
+ 
+Sarcophagus在其公告中表示，“投资者被要求直接与DAO合作，并对各自的投资者协议和代币释放时间表进行了投票。最棒的一点是，这些都已经记录在链上，永远都可以向公众公开。”
+ 
+据了解，Sarcophagus是一个基于以太坊和Arweave建立去中心化的失能开关应用，用户可在Sarcophagus里上传文件，指定私钥接收人。Sarcophagus先后于去年11月和12月完成180万美元和367万美元融资。（来源链接）
+ 
+2、由 Elrond Dubai 孵化的数据平台 Itheum 完成150万美元融资，Morningstar 参投
+ 
+1月11日，去中心化的多链数据经纪平台Itheum宣布从Morningstar Ventures处获得150万美元的投资。据悉，Itheum由Morningstar Ventures于2021年10月推出，是Elrond Dubai孵化器的先驱项目。此次投资旨在为Elrond生态系统带来更多项目和开发人员。
+ 
+据悉，Itheum旨在将个人数据转换为可交易资产，通过帮助用户在Web3和元宇宙时代重新获得对数据的控制权来赋予用户权力。（来源链接）
+ 
+3、数据基础设施解决方案 Vybe Network 完成250万美元融资，Alameda Research等领投
+ 
+1月12日，数据基础设施解决方案 Vybe Network 宣布完成 250 万美元种子轮融资，本轮融资由 Lemniscap、Alameda Research 和 Sino Global Capital 共同领投，Inscribed、SVC、Zokyo、Switchboard 等参投，天使投资人包括 Chris McCann（Solana 和 FTX 的种子轮投资人）等。
+ 
+据悉，Vybe Network 是一个数据基础架构解决方案，使 Solana 社区能够查询、索引和交换链上数据，帮助开发者构建 Web 3.0 dApp 并进行数据分析。（来源链接）
+ 
+4、区块链投研项目 GCR DAO 宣布完成 120 万美元融资，IDEO CoLab Ventures等参投
+ 
+1月13日，区块链投研项目 GCR DAO 完成120万美元融资，IDEO CoLab Ventures、1kx、Valhalla Capital、HanDAO和GBIC参与投资，其他投资者包括Axie Infinity联合创始人Jeff Zirlin、YGG联合创始人Gabby Dizon和Beryl Li、Polygon首席执行官Jaynti Kanani、Flamingo DAO的Adam Kornfield、Coinvise首席执行官Jenil Thakker、CoinGecko联合创始人Bobby Ong和Showtime首席执行官Alex Mesmaj 等。
+ 
+据了解，GCR DAO成立于2017年，专注于研究Web3和投资DAO，拥有超过3.1万名订阅者。GCR DAO正计划与其他投资伙伴建立子DAO，将专注于研究和投资DeFi、NFT等垂直领域。同时，GCR DAO还将计划制定一项赠款计划，以进一步扩大其在全球各地的发展。（来源链接）
+ 
+5、DeFi治理平台 Bribe 完成400万美元融资，Spartan Group 领投
+ 
+1月13日，DeFi治理平台Bribe完成400万美元种子轮融资，Spartan Group领投，Dragonfly、Hypersphere、Fundamental Labs、IOSG、Fenbushi Capital、Rarestone Capital、GravityX、Shima Capital、Figment等参投。
+ 
+Bribe协议旨在通过激励协议参与来改变去中心化治理，储户将其治理代币存入Bribe池以赚取收入，投标人借用投票权来支持或拒绝治理提案。Bribe将于2022年1月首次与Aave集成，由于Aave DAO的特殊性，Aave的Bribe池采用以太坊质押合约的形式，目前正在由Trai lof Bits和Stela Labs进行审计。Bribe之后将扩展至做市商协议Tokemak，并推出Tokemak Bribe池。（CoinDesk）
+六、其他
+ 
+1、资产管理公司Valdy Investments已收购加密交易平台INX，并更名为INX Digital
+ 
+1月11日，据CoinDesk报道，加拿大资产管理公司 Valdy Investments 宣布完成对加密交易平台 INX 的收购，并正式更名为 INX Digital。此次 Valdy 收购了 INX 的所有流通股，完成了 INX 之前筹集的 3960 万加元的私募配售。去年 5 月，INX 融资 8500 万美元。（来源链接）
+ 
+2、加密基础设施公司 Web3 Auth 获得1300万美元A轮融资，红杉印度领投
+ 
+1月12日，加密基础设施公司 Web3Auth（原名：Torus）获得1300万美元A轮融资。该融资由 Sequoia Capital India牵头，Union Square Ventures、 Multicoin Capital、 FTX、Bitcoin.com、 DARMA Capital、 Chainstry、 Hashed、 KOSMOS Capital、Kyros Ventures、LD Capital、Minted Labs、P2P Capital、Phoenix VC、Staking Facilities、YBB Capital、Moonwhale风险投资公司和 Decentralab等参投，资金将用于简化加密入门和身份验证。
+ 
+据悉，Web3Auth通过简单、安全和非托管的应用程序和钱包身份验证基础设施来推动 Web3 的大规模采用，目前已在 Binance Extension Wallet、Ubisoft、Kukai、Skyweaver 等钱包和应用程序上保护了每月超过 100 万用户和 800 万密钥。（来源链接）
+ 
+3、印尼金融应用Pluang获得5500万美元融资，Accel领投
+ 
+1月12日，印尼金融应用 Pluang 获得由 Accel 领投的 5500 万美元融资，Monzo 首席运营官 Sujata Bhatia、Axie Infinity 创始人Aleksander Leonard Larsen 和 Jeffrey Zirlin 等参投。该资金将用于更深入地布局加密市场，并在其产品组合中增加钱包、质押和 NFT 支持等功能。
+ 
+据悉，Pluang 由 Claudia Kolonas 和 Richard Chua 成立，最初仅提供黄金作为交易资产，后来扩展到指数、共同基金和加密货币。此外，Claudia Kolonas 表示，Pluang 推出数字资产交易时，只是想让用户涉足加密货币，当前加密货币在印度尼西亚已拥有近 1000 万用户，超过了股市。（来源链接）
+ 
+4、瑞士数字银行 SEBA 获1.2亿美元C轮融资，Alameda Research参投
+ 
+1月12日，瑞士数字银行在 C 轮融资中筹集了 1.1 亿瑞士法郎（约合 1.2 亿美元），该轮融资由Altive、Ordway Selections 和 Summer Capital等三个投资公司以及DeFi Technologies 组成的财团共同牵头，Alameda Research 和 SEBA 的现有投资者瑞士私人银行 Julius Baer 等其他投资者参投，资金将用于 SEBA 进行国际扩张、增加员工并推出新产品和服务。
+ 
+据悉，SEBA 由前瑞银员工创立，是一家专注于机构的加密银行，提供托管、交易、借贷和投资管理等服务，其首席执行官 Guido Buehler表示，该银行还在探索 NFT 市场，例如借贷和托管服务，以及 DeFi 市场，以提供对许可池的访问。（来源链接）
+ 
+5、数字支付公司 Checkout.com 以400亿美元估值获10亿美元股票融资，计划扩大加密业务
+ 
+1月12日，据《华尔街日报》报道，总部位于伦敦的数字支付公司Checkout.com在最近的一次股票出售中筹集了 10 亿美元，富兰克林·邓普顿、卡塔尔投资局在内的新投资者与Insight Partners 和 Tiger Global Management 等现有投资者参投。据知情人士透露，该公司目前估值为 400 亿美元。
+ 
+Checkout.com还透露，计划扩大其业务以迎合加密货币公司。据悉，Coinbase 等交易所和Meta 的Novi 等钱包均使用 Checkout.com 将客户的资金转入和转出为数字货币。其首席财务官表示，加密和金融技术交易占 Checkout.com 支付量的一半以上。（来源链接）
+ 
+6、数字资产即服务基础设施 Zero Hash 完成1.05亿美元D轮融资
+ 
+1月12日，数字资产即服务基础设施 Zero Hash 宣布完成1.05 亿美元的 D 轮融资，贝恩资本、NYCA 和史蒂夫科恩的 Point72 Ventures参投。
+ 
+据悉，Zero Hash为B2B 数字资产即服务基础设施，提供交钥匙解决方案，允许任何平台为其客户购买/出售、发送/接收、奖励、赚取和质押数字资产，使任何企业能够快速轻松地将加密和 NFT 原生嵌入到他们自己的客户体验中。其客户包括 MoneyLion 和 Wirex 等科技型银行、以及 Moonpay、Ramp、Transak 等支付处理公司和 Tastyworks、TradeZero 、TradeStation 等零售经纪商。（来源链接）
+ 
+7、区块链基础设施平台ChromaWay完成1000万美元融资，True Global Ventures领投
+ 
+1月13日，区块链基础设施平台 ChromaWay 宣布完成 1000 万美元融资，本轮融资由 True Global Ventures 4 Plus (TGV4 Plus) Fund 领投，其他具体融资信息暂未透露。
+ChromaWay 是一个区块链基础设施平台，该平台可为几乎任何行业开发用户友好的去中心化应用程序，包括 DeFi、游戏、音乐等。（来源链接）
+ 
+8、Web3创业加速器DeFi Alliance完成5000万美元融资，Twitch联合创始人Kevin Lin等参投
+ 
+1月13日，Web3创业加速器DeFi Alliance宣布创立去中心化自治组织Alliance DAO，并完成5000万美元融资，Twitch联合创始人Kevin Lin、Gemini联合创始人兼总裁/首席执行官Cameron和Tyler Winklevoss、Terra创始人Do Kwon、OpenSea联合创始人兼首席执行官Devin Finzer、Aave创始人Stani Kulechov 、Circle联合创始人兼首席执行官Jeremy Allaire和BlockFi创始人Zac Prince等参投。
+ 
+截至目前，DeFi Alliance已经帮助超过90家加密初创公司和DeFi项目，比如0x、Alpha Finance、dYdX、Kyber、Olympus DAO、Paraswap、Ribbon Finance、Sushiswap、Synthetix和Zerion等。（来源链接）
+ 
+9、Roundhill宣布对投资跟踪平台AssetDash进行战略投资
+ 
+1月14日，注册投资顾问公司 Roundhill Investments (Roundhill) 宣布对投资跟踪平台AssetDash 进行战略投资。目前，AssetDash 支持 100 多个平台，包括主要的经纪公司、加密货币交易平台、加密货币钱包和区块链。 AssetDash 由 Matias Dorta 和 Jorge Perez 共同创办，前者是 Roundhill 的营销副总裁，后者是 Cylera 的工程副总裁。（来源链接）
+ 
+10、加密资产软件公司 Lukka 以超13亿美元估值完成1.1亿美元融资，Marshall Wace领投
+ 
+
+1月14日，加密资产软件公司Lukka宣布以超13亿美元估值完成1.1亿美元的E轮融资，对冲基金Marshall Wace领投，Miami International Holdings、Summer Capital、SiriusPoint Ltd.、Soros Fund Management、Liberty City Ventures、S&P Global和CPA.com等参投。
+
+目前，Lukka的融资总金额已经达到2.1亿美元。Lukka的软件编译了超过14,000种加密现货资产、70,000种加密衍生品、300家交易所和大约30家去中心化交易所的数据。Lukka为传统金融公司和加密货币公司提供服务，包括Arca、Circle、CPA.com、eToro、IHS Markit、S&P Dow Jones Indices和State Street。（来源链接）
+
+ 
+
+11、供应链金融公司众企安链获得数千万元融资，趣链科技领投
+
+ 
+
+1月16日，由众安在线孵化的供应链金融公司拟众企安链获得数千万元融资，由趣链科技领投，凯利易方和老股东常春藤资本、分布式资本跟投，毅仁资本担任独家财务顾问。
+
+据悉，众企安链计划专注于利用区块链技术来帮助核心企业解决风险识别、数据安全问题，同时帮助金融机构或者银行设计、落地对应的金融产品，服务整条完整的供应链，累计服务超过数十家核心企业，标杆客户包括隆平高科、海南国际能源交易中心、上海银行、美宜佳等。（来源链接）

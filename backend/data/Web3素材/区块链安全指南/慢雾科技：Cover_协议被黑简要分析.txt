@@ -1,0 +1,21 @@
+标题: 慢雾科技：Cover 协议被黑简要分析
+链接: https://www.chaincatcher.com/article/2058129
+发布时间: 2020-12-29
+
+==================================================
+
+2020 年 12 月 29 日，据慢雾区情报 Cover 协议价格暴跌，以下是慢雾安全团队对整个攻击流程的简要分析。
+
+1. 在 Cover 协议的 Blacksmith 合约中，用户可以通过 deposit 函数抵押 BPT 代币；
+2. 攻击者在第一次进行 deposit - withdraw 后将通过 updatePool 函数来更新池子，并使用 accRewardsPerToken 来记录累计奖励；
+3. 之后将通过 _claimCoverRewards 函数来分配奖励并使用 rewardWriteoff 参数进行记录；
+4. 在攻击者第一次 withdraw 后还留有一小部分的 BPT 进行抵押；
+5. 此时攻击者将第二次进行 deposit，并通过 claimRewards 提取奖励；
+6. 问题出在 rewardWriteoff 的具体计算，在攻击者第二次进行 deposit - claimRewards 时取的 Pool 值定义为 memory，此时 memory 中获取的 Pool 是攻击者第一次 withdraw 进行 updatePool 时更新的值；
+7. 由于 memory 中获取的 Pool 值是旧的，其对应记录的 accRewardsPerToken 也是旧的会赋值到miner；
+8. 之后再进行新的一次 updatePool 时，由于攻击者在第一次进行 withdraw 后池子中的 lpTotal 已经变小，所以最后获得的 accRewardsPerToken 将变大；
+9. 此时攻击者被赋值的 accRewardsPerToken 是旧的是一个较小值，在进行 rewardWriteoff 计算时获得的值也将偏小，但攻击者在进行 claimRewards 时用的却是池子更新后的 accRewardsPerToken 值；
+10. 因此在进行具体奖励计算时由于这个新旧参数之前差值，会导致计算出一个偏大的数值；
+11. 所以最后在根据计算结果给攻击者铸造奖励时就会额外铸造出更多的 COVER 代币，导致 COVER 代币增发。
+
+具体 accRewardsPerToken 参数差值变化如下图：

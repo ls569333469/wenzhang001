@@ -1,0 +1,9 @@
+标题: Yearn Finance发布Q1 财报，3月份 yVault 收入约为2190万美元
+链接: https://www.chaincatcher.com/article/2061327
+发布时间: 2021-04-27
+
+==================================================
+
+链捕手消息，Yearn Finance发布2021年Q1报告。报告表明 yVault 产品线仍然是Yearn核心业务和创收的核心。v2 yVaults于1月21日推出，同时推出了额外的v1 yVaults，3月11日开始可以一键式迁移至 V2 机枪池功能，以简化迁移，提高了Q1的收入增长。
+
+据悉，整个3月份 yVault 收入约为2190万美元，调整后的息税折旧及摊销前利润（EBITDA）为480万美元。其中，Yearn Finance在第一季度推出了36个新的yVault，包括五个新的v2 yVault，yvDAI v2保管库在2021年3月经历了巨大的增长，这主要归功于在Alchemix协议中，Alchemix协议的用户将DAI存入yvDAI v2库。

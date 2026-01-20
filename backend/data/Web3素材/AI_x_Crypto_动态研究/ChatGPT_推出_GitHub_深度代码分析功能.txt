@@ -1,0 +1,9 @@
+标题: ChatGPT 推出 GitHub 深度代码分析功能
+链接: https://www.chaincatcher.com/article/2180639
+发布时间: 2025-05-09
+
+==================================================
+
+ChainCatcher 消息，据 OpenAI Developers，ChatGPT 现已支持连接 GitHub 代码库执行深度研究。用户可提问并由 AI 分析源代码及 PR 记录，生成带引用的详细报告。
+
+该功能通过“deep research → GitHub”入口启动，旨在提升开发者的代码理解与审查效率。

@@ -1,0 +1,7 @@
+{
+  "title": "CertiK：检测到 Arbitrum 上存在任意调用漏洞，黑客已窃取约 14 万美元",
+  "url": "https://www.chaincatcher.com/article/2171661",
+  "content": "ChainCatcher 消息，区块链安全公司 CertiK 发布预警，其安全团队检测到 Arbitrum 网络上多笔可疑交易，一个地址为 0x97d8170e04771826a31c4c9b81e9f9191a1c8613 的攻击者可能利用任意调用漏洞绕过签名验证，从多个未经验证的交换适配器合约中窃取了约 14 万美元资金。",
+  "published_at": "2025-03-10",
+  "downloaded_at": "2026-01-17 17:12:18"
+}

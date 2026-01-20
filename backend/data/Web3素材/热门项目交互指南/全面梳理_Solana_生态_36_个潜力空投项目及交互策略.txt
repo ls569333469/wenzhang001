@@ -1,0 +1,276 @@
+标题: 全面梳理 Solana 生态 36 个潜力空投项目及交互策略
+链接: https://www.chaincatcher.com/article/2116059
+发布时间: 2024-03-05
+
+==================================================
+
+作者：Lumus, 加密KOL
+
+编译：Felix, PANews
+
+ 
+
+加密KOL Lumus盘点了Solana生态36个具有潜在空投的项目，您需要：
+
+准备好你的钱包
+完成尽可能多的步骤
+Phantom（钱包）
+访问：https://phantom.app/
+创建钱包或导入助记词
+在内部进行一些交易
+打开 dApp - > 任务 - > Connect Drip
+在手机上下载钱包并铸造NFT（重要）
+然后，与一些DEX连接即可
+
+MagicEden（钱包）
+访问网站：https://magiceden.io/
+创建钱包
+在Solana上进行一些交易
+桥接到ETH/BTC
+在MagicEden上购买一些NFT，然后通过钱包出售
+
+Backpack（钱包）
+访问网站：https://linktr.ee/BackpackExchange
+创建钱包
+进行一些交易
+
+Tensor
+访问网站：https://links.tensor.trade/
+连接钱包（使用Backpack钱包，+ 25%积分）
+交易（买/卖）
+做多/做空一些NFT
+
+目前，这是积分活动的第三季，所以不要忘记推荐活动。
+
+Exchange ART（NFT）
+访问网站： https://exchange.art/
+连接钱包
+填写个​​人资料
+铸造NFT
+创建新系列藏品
+订阅一些作者
+
+Drip（NFT市场）
+访问网站：https://linktr.ee/drip.haus
+订阅推荐作者
+购买NFT
+如果还没有完成Phantom钱包任务，请完成
+
+Sniper（NFT市场）
+领取积分：https://www.sniper.xyz/
+上线NFT
+使用项目的Sniper
+交易一些NFT
+
+Solana Mobile（手机）
+访问：https://solanamobile.com/zh
+连接您的X账号
+连接Backpack/Magic钱包
+批准- >填写账单之类的内容
+付款
+
+Layer3（任务平台）
+访问网站：https://linktr.ee/layer3xyz
+连接SOL钱包
+填写个​​人资料（使用您的 EVM 和 SOL 钱包）
+打开任务选项 - > Solana
+完成任务
+
+这是为其他 DeFi 空投做的准备。
+
+Bags（SocialFi）
+访问网站：https://bags.fm/
+连接X账号
+连接钱包
+购买OG角色
+
+Solana TG 机器人
+BONKbot：https://t.me/bonkbot_bot -> 存入 1 SOL -> 交易
+UNIBOT：https://t.me/solana_unibot-> 重复 BANKbot 的步骤
+FLUX：http://t.me/fluxbeam_bot -> 增加交易量
+Whales Market
+访问网站：https://link3.to/whalesmarket
+创建买入/卖出报价
+质押一些WHALES
+
+Drift Protocol（DEX）
+访问网站：https://app.drift.trade/
+连接Magic/Backpack钱包
+锁仓20美元
+
+交易：
+
+做多/做空代币
+保留订单至少10分钟
+增加交易量
+
+Earn：
+
+质押USDC
+
+注意：解除质押的期限为13天。
+
+Parcl
+访问网站：https://app.parcl.co/
+连接钱包
+存入一些USDC
+通过推荐获得奖金
+质押USDC（1 美元 = 4 积分）
+交易期货
+
+Zeta（DEX）
+访问网站：https://linktr.ee/zeta_markets
+连接钱包
+存入USDC
+交易
+
+不要忘记3美元的交易费用。
+
+Backpack（Exchange）
+访问网站：https://linktr.ee/BackpackExchange
+注册并完成KYC等
+完成1万美元的交易量
+
+免责声明：每实现1万美元交易，就会损失9美元。
+
+Jupiter（DEX）
+访问网站：https://jup.ag/
+交易量达到1万美元
+使用期货
+交易量达到3万美元
+购买和使用JLP
+使用DCA（可选）
+
+Monaco Protocol
+
+有两个博彩平台：Purebet、BetDEX。以下步骤对两者都有价值：
+
+访问：https://app.betdex.com/- >完成KYC - >投注
+访问：https://www.purebet.io/- >完成KYC - >投注
+
+Solblaze（质押）
+访问：https://linktr.ee/solblaze
+质押SOL获得bSOL
+在一些DEX中使用bSOL
+
+Jito（质押）
+访问网站：https://www.jito.network/staking/
+连接钱包
+与DEX交互
+
+Marinade（质押）
+访问网站：https://linktr.ee/marinadefinance
+连接钱包
+质押SOL
+与DEX交互
+
+注意取消质押的费用。
+
+MarginFi（质押/借贷）
+访问网站：https://app.marginfi.com/
+针对LST进行质押SOL
+使用借出
+使用借入
+桥接/交易
+
+奖励机制：
+
+借出 1 美元 = 1 积分/天
+借入 1 美元 = 4 积分/天
+
+每周重复 3 次。
+
+Kamino（借贷）
+访问网站：https://linktr.ee/kaminofinance
+连接钱包
+存入SOL （积分提升5倍）
+用SOL借出USDC
+增加流动性
+
+Meteora
+访问网站：https://meteora.ag/
+选择一个池
+存入
+增加交易量
+
+您也可以使用 DLMM，但安全性较差。
+
+Cega
+访问网站：https://www.cega.fi/
+连接钱包
+在池中选择SOL
+锁定流动性
+加入Discord
+
+注意，流动性将锁仓 30 天。
+
+Asset Dash（钱包追踪）
+访问网站：https://linktr.ee/assetdash
+注册一个帐户
+打开“钱包”
+追踪几个钱包
+进行一些交易
+购买 NFT（可选）
+Squads
+访问网站：https://squads.so/
+连接钱包
+创建你的squad（填写所有内容）
+存入一些SOL
+打开Treasury - > 交易 - >使用SOL和USDC
+成交量要达到 100 美元
+
+Vault Music
+下载手机应用
+创建一个帐户
+打开发现- >选择几个免费曲目
+打开Fantasy - >选择 5 位作者
+
+SOL super stake
+访问网站：https://www.superstakesol.com/
+选择LST
+质押
+
+Circuit（质押）
+访问网站：https://docs.circuit.trade/
+连接钱包
+选择一个池
+存款
+
+Francium（借贷）
+访问网站：https://francium.io/app
+连接钱包
+打开“借出'->存入任一资金池
+打开“挖矿”- >存款
+打开“投票” - >投票
+
+Kanalabs（桥接）
+访问网站：https://app.kanalabs.io/
+连接 Phantom 钱包
+添加“质押”
+交易和质押代币
+
+Phoenix（DEX）
+访问网站：https://www.phoenix.trade/
+连接钱包
+创建大于 1,000 美元的交易量
+
+Pyth（质押）
+
+空投已经结束，但可以提高在其他空投中的机会。
+
+访问网站：https://linktr.ee/pythnetwork
+连接 EVM 钱包
+购买/借用一些PYTH
+质押
+打开“治理”- >投票
+
+Mayan
+访问网站：https://mayan.finance/
+连接钱包
+质押代币
+桥接代币
+
+Tip Link
+访问网站：https://tiplink.io/
+连接钱包
+创建TipLink

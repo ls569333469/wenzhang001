@@ -1,0 +1,251 @@
+标题: 链上聪明钱追踪：10 大 Meme 币 PVP 高手地址及其战绩
+链接: https://www.chaincatcher.com/article/2128887
+发布时间: 2024-06-13
+
+==================================================
+
+作者： Wenser ， Odaily 星球日报
+
+ 
+
+自 3 月份 PEPE、FLOKI、WIF 等老牌 Meme 币 “焕发第二春”，加之 BOME 引领的 Solana Meme 币热潮、Base 生态 Meme 币热潮以及近期的政治类 Meme 热潮、名人类 Meme 币热潮接连袭来，在这令人眼花缭乱的“ Meme 币火热季”，涌现出不少赚钱能手。
+
+本文对部分（主要是在 Meme 领域取得不俗成绩的）链上聪明钱地址进行汇总介绍，并归纳出增强胜率的通用范式。后续，我们也将按不同标的类型持续更新该系列文章，文末也包含部分聪明钱链上追踪工具网站，便于读者动态调整操作策略。
+
+PEPE
+
+提到这轮周期最亮眼的 guy，相信绝对非 PEPE 莫属，在去年上线之后，借助其 Meme 原型强大的影响力以及持续的造富效应，该项目在不断走高中一度成为 Meme 币领域的代名词和风向标，“PEPE 涨则 Meme 币 涨，PEPE 跌则 Meme 币跌”。
+
+就在昨天，过去三个月 PEPE 波段胜率 100% 的巨鲸再次加仓，目前已累积 4291 亿枚代币，总价值 618 万美元。值得一提的是，该地址平均建仓价格为 0.0000144 美元左右，浮亏 90 万美元左右。
+
+钱包地址：
+
+0xa145bd8c9e421d332718a4c416cbe4016b8992dd；
+
+钱包资产：ETH、PEPE、SHIB、SLP 等代币，余额超 2194 万美元。
+
+链上追踪地址：
+
+https://app.mest.io/public/wallets/0xa145bd8c9e421d332718a4c416cbe4016b8992dd
+
+链上追踪信息
+
+GME
+
+作为曾经的“美股轧空概念第一股”，Gamestop（游戏驿站）也已经成为了一个颇具历史意义的 Meme，而在关键性人物 Roaring Kitty 再次出山之后，相关概念的 Meme 币 GME 也曾一时风头无两，在各个区块链网络上都产生了不少同名 Meme 币，这里我们以代表性的 Solana 链和 ETH 链的同名 Meme 币作为主要探讨项目。
+
+Solana 链 GME
+
+此前，据链上分析师@ai_ 9684 xtpa 监测指出，受 Roaring Kitty 即将开设 Youtube 直播影响，Solana 网络的 GME 24 小时涨超 90% 。6 月 3 日该地址曾花费 12, 110 枚 SOL 买入 1.36 亿枚 GME 代币，后浮盈扩大到 105 万美元，当时该地址花费 206 万美元买入代币时，成本仅为 0.01514 美元，彼时价格上涨至 0.023 美元。
+
+钱包地址：
+
+AKGoP8EZo8urVhmJbHS8bwfdPx4ThQ47M1Bo2KBeL642；
+
+钱包资产：目前仍持有 110 万枚 TREMP 以及其他各类 Meme 币，余额总计 174 万美元；
+
+链上追踪地址：
+
+https://app.cielo.finance/profile/AKGoP8EZo8urVhmJbHS8bwfdPx4ThQ47M1Bo2KBeL642
+
+链上追踪信息
+
+除此以外，某聪明钱曾在 4 月 15 日至 5 月 1 日期间花费 2.86 万美元以均价 0.0005085 美元建仓 5615 万枚 GME，还收到地址 daumensoylanamanlet.sol 转移的 1326 万枚代币。该地址在5月13日以均价 0.0092 美元卖出 4842 万枚代币（占据持仓的 69%），获利 42 万美元，彼时仍剩余 2100 万枚 GME，回报率高达 1368%。
+
+钱包地址：
+
+2nU4GehM5FLtdZcx8BiAHgMFW6ziDJbtFmXsKiwkzUdP；
+
+钱包资产：包括 58.9万枚 SLERF 在内的69种 Meme币，余额为 20万美元左右。
+
+链上追踪地址：
+
+https://solscan.io/account/2nU4GehM5FLtdZcx8BiAHgMFW6ziDJbtFmXsKiwkzUdP
+
+链上追踪信息
+
+5月13日，据 LookonChain 监测一聪明钱花费了 1500 SOL（价值 21.9 万美元）以 0.0081 美元价格购入 2700 万枚 GME，该聪明钱此前在 BOME 代币上获利 18539 SOL（花费 2620 枚 SOL 购入 BOME 后，以 201159 枚 SOL 售出）。目前该地址余额不足 1000 美元，疑似为小号钱包。
+
+钱包地址：
+
+CjeBRyWfpjGo9KSo2erb2hihGiYordjnt876BK5QgoWb；
+
+链上追踪地址：
+
+https://solscan.io/account/CjeBRyWfpjGo9KSo2erb2hihGiYordjnt876BK5QgoWb
+
+链上追踪信息
+
+GME-ETH
+
+6月3日，据链上分析师@ai_9684xtpa 监测，受 Roaring Kitty 再度活跃影响，以太坊网络 GME 过去四小时上涨近 10 倍，某聪明钱地址在5月17日至30日期间建仓 GME 已浮盈约 30 万美元，该地址曾花费 6.12 ETH （约 2.3 万美元）买入 84.8 亿枚 GME，成本为单枚GME 0.000002728 美元，当时回报率已高达 1346%。
+
+钱包地址：
+
+0x8bd69e1b6858e067fe29672fd74e47d38a7ac6a2
+
+钱包资产：主要为 GME 及少量 ETH、SOL，余额为 33.2万美元左右；
+
+链上追踪地址：
+
+https://app.mest.io/wallets/0x8bd69e1b6858e067fe29672fd74e47d38a7ac6a2
+
+链上追踪信息
+
+MOTHER
+
+作为坐拥 760 万粉丝的网红名人 Iggy Azalea 一手推出的 Meme 币，MOTHER 的剧本显然也出乎了包括我在内的很多人的预料，在碰瓷 Vitalik 成功并推出代币效用权益、发力公益建设之后，MOTHER 某种程度上已经成为了“反以太坊加密力量”的破圈代名词，千倍涨幅也让市场再次见证了名人 Meme 币的恐怖之处。
+
+此前据 The Data Nerd 监测， 5 月底某聪明钱囤积了 1960 万枚 MOTHER（价值 7.87 万美元），均价仅为 0.004 美元，随后该地址以 3.1 万美元的价格售出 270 万枚代币，剩余的 1680 万枚 MOTHER 当时仍价值约 110 万美元。而现在，该地址仍持有 737 万枚 MOTHER，价值 113 万美元。
+
+钱包地址：
+
+ud5nrmfD59egFJVhapJPWSehjm5CWfkqoiu9UGjCAM8；
+
+钱包资产：包括 MOTHER、SOL 在内的 127 种代币，余额共计接近 160 万美元；
+
+链上追踪地址：
+
+https://solscan.io/account/ud5nrmfD59egFJVhapJPWSehjm5CWfkqoiu9UGjCAM8
+
+链上追踪信息
+
+PEW
+
+作为此前曾一度“重铸以太坊 Meme 币荣光”的代表性项目，PEW 也曾辉煌过一段时间，但项目方过于难看的吃相（在 Solana 链上的二次发币等骚操作）却最终使得该项目逐渐泯然众人矣。
+
+但本月初某聪明钱曾在 PEW 上线后 44 分钟花费 29 ETH （价值 11 万美元）买入 129 亿枚代币，成本为单枚代币仅 0.000008588 美元，且此后一度成为 Top 1 持仓地址，浮盈 78 万美元，回报率达 702% 。
+
+钱包地址：
+
+0x45E95a523B5Af948Cb71eC4B09A9fCfb0fe0BC92；
+
+钱包资产：目前仅剩余 ETH 及某不知名 Meme 币 KMOON，余额总计 14.1 万美元；
+
+链上追踪地址：
+
+https://app.mest.io/wallets/0x45E95a523B5Af948Cb71eC4B09A9fCfb0fe0BC92
+
+链上追踪信息
+
+MAGA-ETH
+
+2024 年作为美国大选年，政治相关的 Meme 币也是市场高度关注的焦点之一，而 MAGA （ Make America Great Again）作为政治焦点人物特朗普曾提出的标志性口号，也是一大热门 Meme 币项目的名称
+
+此前某聪明钱地址曾因 MAGA Hat（MAGA）交易获利 180 倍。据 The Data Nerd 监测， 5 月 16 日，该地址花费 0.46 枚 ETH（约合 1360 美元）买入 52.6 亿枚 MAGA，一天后，他以 24.2 万美元的价格卖出这些代币，累计获利 24.05 万美元，投资回报率 高达 180 倍。值得注意的是，该地址目前钱包资产仅 2280 美元左右，但此前曾转入 10 枚 ETH 左右的资产，并转出 103 枚左右的 ETH，疑似为小号地址，另外一个相关地址一并附上。
+
+钱包地址：
+
+0xF422c6e73Dacd0C86ce89E2D939264B173d180C7；
+
+相关地址：
+
+0x80a64c6d7f12c47b7c66c5b4e20e72bc1fcd5d9e；
+
+链上追踪地址：
+
+https://www.okx.com/zh-hans/web3/explorer/eth/address/0xF422c6e73Dacd0C86ce89E2D939264B173d180C7? channelId=odn 00 
+
+链上追踪信息
+
+THOG
+
+4 月 5 日，据 The Data Nerd 监测，某聪明钱地址将 1 枚 SOL（约合 175 美元）换成 636 万枚 THOG，并在 4 小时后以 16 万美元的价格卖出 530 万枚 THOG。当时该仍然持有 100 万枚 THOG（约合 2.94 万美元），成功实现 4 小时里盈利超 1000 倍。
+
+钱包地址：
+
+HV5p9UJFKauh5pAQvS3ocUtoZir615tbdjWwZr5xr8Qr；
+
+钱包资产：包括 69 枚 SOL 及其他 50 种稳定币及 Meme 币，余额共计 2.4 万美元；
+
+链上追踪地址：
+
+https://solscan.io/account/HV5p9UJFKauh5pAQvS3ocUtoZir615tbdjWwZr5xr8Qr
+
+链上追踪信息
+
+MANEKI
+
+作为猫主题 Meme 币，MANEKI 此前也曾在市场上引起巨大反响，尤其是其对 PEPE 等青蛙形象的 Meme 币以及 WIF 等狗形象的 Meme 币的“挑衅”，极具 Meme 感染力，而向 Solana Mobile Saga 创世&Chapter 2 预购用户空投 2000 万美元代币的举动也为该项目吸粉无数。
+
+此前据链上分析师 @ai_ 9684 xtpa 监测，某聪明钱曾在一小时内交易 MANEKI 累计获利 1412 SOL，回报率高达 1008% 。该地址在 MANEKI 上线后三分钟后花费 140 SOL 买入 4660 万枚代币，成本为单枚代币 0.0004596 美元，随即在 27 分钟后以 8 倍价格卖出了 70% 持仓，剩余 1400 万枚仍浮盈 636 SOL。值得一提的是，根据 Gmgn.ai 追踪信息显示，该地址 7 天内盈利 1.79 万美元，胜率则相对较低，仅为接近 40% 左右。
+
+钱包地址：
+
+A8JtjYMnaJ7W1DP1xghHXVNa7fNbjrfCEGPDMDFeVnct；
+
+钱包资产：目前该地址仅持有 329 枚 SOL，价值 5 万美元左右；
+
+链上追踪地址：
+
+https://solscan.io/account/A8JtjYMnaJ7W1DP1xghHXVNa7fNbjrfCEGPDMDFeVnct
+
+Gmgn 追踪信息：
+
+https://gmgn.ai/sol/address/SIw2ZCG92_A8JtjYMnaJ7W1DP1xghHXVNa7fNbjrfCEGPDMDFeVnct
+
+链上追踪信息
+
+Gmgn.ai 追踪信息
+
+SLERF
+
+作为“一系列巧合造就的现象级 Meme 币项目”，SLERF 在今年的 Meme 币热潮中也留下了属于自己的浓墨重彩的一笔，在项目方将 LP 不慎销毁后，通缩的代币量和“ Oh Fuck”的表情包使得该项目成为当时无数 Meme 币玩家追捧的对象。
+
+而在 4 月 14 日前后，SLERF 一度强势反弹 47% ，某聪明钱通过在短期底部建仓，实现了浮盈 3264 SOL，回报率达 69% 。该地址在凌晨以代币均价 0.2242 美元买入 2, 659, 661 枚 SLERF （15 日币价为 0.3801 美元）， 30 小时左右浮盈 41.4 万美元。值得一提的是，该地址现在仍持有 315 万枚 SLERF，价值 110 万美元。
+
+钱包地址：
+
+QDs6fTCPWchkb7FqDx1XA4BCsz5UJcsThXoz18wafo9；
+
+钱包资产：包括 60 余枚 SOL 及 40 种 Meme 币，余额共计 121 万美元左右；
+
+链上追踪地址：
+
+https://solscan.io/account/QDs6fTCPWchkb7FqDx1XA4BCsz5UJcsThXoz18wafo9
+
+链上追踪信息
+
+BOME
+
+作为实现“三天上币安”这一突出成就的 Meme 币，BOME 可谓是今年“Meme 币项目里的奇迹”。
+
+一个加密艺术家在收到 10000 枚 SOL 之后开启的 Meme 币项目，以其特有的文化感染力以及独特的“打钱返币”玩法，为加密市场带来了长达 3 个月甚至更久的“ Meme 币狂欢”，不得不说，无论之后价格表现如何，BOME 都是 Meme 币历史上绕不过去的一个项目，正如曾经的 DOGE、去年的 PEPE 一样。
+
+而某个聪明钱在 BOME 上线半小时后便花费 267.2 枚 SOL 买入了 2.22 亿枚代币（价值 4.5 万美元），当时单枚代币成本仅为 0.0002026 美元，随后该地址以均价 0.004039 美元卖出全部持仓，获利 85 万美元，回报率高达 1893.92% 。
+
+现在回过头来在看，如果他能够坚定持仓到 3 月 18 日，回报率可能达到惊人的数百倍，当然，这只是马后炮。身处狂热的 Meme 币市场当中，你很难断定持续上涨的 Meme 币会不会在下一秒被砸盘到腰斩，甚至归零。大多数时候，落袋为安才是更好的选择，毕竟，卖飞永赚。
+
+目前，该地址已经清空资产，最后一次链上活动已经是 3 个月前。
+
+钱包地址：
+
+56a6sxB5aBgMZgLMxBz9xhr1FyjTCBvohjh43asHX5D3；
+
+链上追踪地址：
+
+https://solscan.io/account/56a6sxB5aBgMZgLMxBz9xhr1FyjTCBvohjh43asHX5D3
+
+链上追踪信息
+
+小结：Meme币 PVP 致胜指南——唯快不破
+
+限于篇幅，本文仅挑选了部分 Meme 币聪明钱地址进行简单分析及评述，还有更多的聪明钱地址每时每刻活跃在链上，在 PVP 市场上争夺属于自己的利润和胜利，如曾盈利数百万美元的 Solana 某聪明钱GhhA4FQXjknCf4xUsNuYLK3dGJnUtBSt3DQv1a2AbSzw ，在被曝光后直接弃用了该地址，不得不说，尽显聪明钱的老辣和果断。
+
+所以说，想要在 Meme 币市场的高度 PVP 中占据先锋，玩家只有 2 个选择：
+
+一是买的早，哪怕是少量低成本投入也能够换取大量筹码；
+
+二是买的多卖的快，借助上涨趋势的红利，快速实现盈利。
+
+说到底，PVP 游戏就是一个“唯快不破”的擂台赛，比别人更快发现项目，并且能够及时卖出锁定利润，才能够在 Meme 币市场保证自己不下牌桌。
+
+某聪明钱地址信息
+
+最后，以下为主要的链上追踪工具，供大家参考：
+
+gmgn . ai 网站：狙击新币，买入卖出，貔貅检测等，点击注册即可；
+Solscan ： Solana 网络区块链浏览器，输入钱包地址或合约地址即可查看相关信息；
+Mest ：钱包追踪、热门项目、安全信息等一站式区块链信息网站，输入地址即可追踪；
+Arkham ： EVM 生态主流的人工智能驱动链上数据追踪平台，已发币 ARKM ，已上币安；
+Cielo ：链上数据追踪平台型工具，也可以绑定 Telegram 账号，相对来说可以作为补充。

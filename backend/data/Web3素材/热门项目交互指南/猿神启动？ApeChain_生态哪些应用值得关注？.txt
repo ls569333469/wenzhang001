@@ -1,0 +1,87 @@
+标题: 猿神启动？ApeChain 生态哪些应用值得关注？
+链接: https://www.chaincatcher.com/article/2148180
+发布时间: 2024-10-21
+
+==================================================
+
+作者：Karen，Foresight News
+
+ 
+
+有人断言，ApeChain 自诞生起便坐拥 Meme 流量的天然优势，也有人说，包括 BAYC 持有者在内 Yuga 生态用户视金钱如粪土，超脱物欲，对 ApeChain 的未来发展可能并不十分在意。
+
+10 月 20 日，随着 ApeCoin 在 Arbitrum Orbit L3 上推出 ApeChain 主网及其官方跨链桥，APE 代币的价格经历了从 0.75 美元至 1.72 美元的飞跃，尽管随后略有回调至 1.55 美元附近，但在短短一天多的时间里，涨幅已超 100%。与此同时，BAYC、MAYC NFT 等 Yuga Labs NFT 系列地板价也随之上涨。值得注意的是，据余烬监测，一地址花费 1140 美元购入的 CURTIS 已浮盈 146 万美元。
+
+诚然，APE 当前的价位与历史高峰的 28 美元相比仍有相当距离。但 ApeChain 无疑为 APE 增添了新的活力，它不仅成为了 ApeChain 的原生 Gas 代币，更在 Yuga Labs 生态系统中占据了核心地位，应用于交易费用、ApeCoin DAO 的投票权，以及作为 Yuga Labs 游戏和 IRL 购买中的支付方式。
+
+此外，通过与 LayerZero 的合作，APE 与 LayerZero 的 OFT 标准实现了深度整合，使得 APE 能够在 ApeChain、以太坊及 Arbitrum 之间实现无缝流转。LayerZero 进一步透露，与 Decent 构建的 ApeCoin 原生收益机制，可以让用户在无需任何手动操作的情况下，即可从 ApeCoin 余额中获得收益，同时保持全链的互操作性。
+
+然而，我们也注意到，ApeChain 上的一些 Meme 币在经历短暂的暴涨后略有降温，目前仅剩两个市值超过 1000 万美元的 Meme 币（CURTIS 和 BORED）还在坚守。
+
+Dune 的数据更是显示，ApeChain 启动后的第二天，其资产流入量便呈现出显著的下降趋势。若 ApeChain 无法持续吸引和留住更多资金，其热度和流动性恐难以维系。
+
+不过，笔者在探索 ApeChain 生态后，也发现了部分比较有创新的项目，本文汇总了整理了 7 个值得关注的 ApeChain 生态项目。
+
+ApeChain 生态值得关注的项目
+
+Ape Express
+
+Ape Express 是一个类似于 Pump.fun 的 Meme 发射平台。当新代币市值达到 131,180 美元时，来自联合曲线的所有流动性都将存入 Camelot 并销毁。
+
+Ape Express 表示，该平台在上线 24 小时之内，平台上共创建 2640 个代币，其中，55 个代币完成联合曲线，在 ApeChain 上的交易量超过 5000 万美元。
+
+除此之外，Ape Express 计划在未来推出一项积分奖励计划，以激励早期采用者（包括交易用户和代币创建用户）。根据官方文档，Ape Express 将在每周结束时为参与用户基于积分分发 FUCKIT 代币。目前有关 FUCKIT 代币的信息无从查找。
+
+Ape Express 还为 Bored Ape 或 Mutant NFT 持有者带来一项福利，在其平台上的代币可为 NFT 持有者空投 Meme 代币。
+
+https://ape.express/
+
+Camelot
+
+Camelot 是第一家支持 Ape Express 的 DEX。Camelot 此前已支持 Arbitrum 和基于 Arbitrum 的多个 L2、L3 网络。Camelot 代币当前流通市值 1700 万美元，FDV 7500 万美元。
+
+Saru
+
+Ape Express 官网显示，Saru 和 Camelot 是 Ape Express 上首批支持的交易所，不过目前，Saru 还未上线。不过，根据 Saru 官方信息，Saru 是一家由 Sushi Labs 支持的 ApeCoin 原生加密交易协议。
+
+https://x.com/saru_ex
+
+Top Trader
+
+Top Trader 是一个交易模拟游戏平台，该平台目前每日举办一场锦标赛。用户需存入 10 APE 作为参赛费用，这些 APE 会被归入奖励池，供使用杠杆的用户进行争夺。参赛用户初始时会获得 1 万游戏内的模拟交易货币 USDN。在 Top Trader 平台上，用户可以选择的最低杠杆倍数为 100 倍，最高可达 1000 倍，所有交易均为模拟进行，用户的最大损失仅限于 10 APE 的参赛费用。
+
+除此之外，为提升用户体验，Top Trader 使用 Yuga ID（由 Privy 提供支持）抽象所有链上活动。
+
+https://x.com/toptrader_xyz
+
+Ape Names
+
+Ape Names 将于 10 月 22 日 22:00 由 D3 公司推出。D3 是一家专注于弥合传统互联网基础设施和 Web3 之间差距的新一代身份公司，计划申请.APE TLD（顶级域），首先会支持在 ApeChain 上铸造和交易域名。
+
+在一份论坛提案中，D3 团队成员表示，D3 打算为每个 BAYC 和 MAYC NFT 持有者提供相关的 APE 域名，（例如 MACHI * APE， 7065 * APE）。ApeCoin 社区的成员将有优先机会在向公众提供其他 *APE 域名之前抢先注册。D3 将承诺将产生的所有总收入的 50% 回馈给 ApeCoin DAO。
+
+然而，值得注意的是，申请 TLD 顶级域名并非易事。任何实体或个人都无法直接拥有 TLD。ICANN 通过合同形式，将独家运营每个 TLD 并从中获利的权利授予特定机构，而这些 TLD 的授权合同每 10 年会自动续签一次。D3 表示，即将到来的 ICANN 申请轮次可能最早将于 2025 年开放。
+
+BattlePlan：由 Pixel Vault 发布在 ApeChain 上推出的格斗游戏。https://enterthevault.app/
+
+Rise of the Undead：NFT 系列 Chimpers 推出的游戏。https://enterthevault.app/chimpers/play
+
+附：ApeChain 交互
+
+1、在 CEX 中的以太坊上购买 APE，并通过官方跨链桥将 APE 跨链至 Apechain，或者通过 Stargate 跨链。
+
+2、连接钱包后，MetaMask 会提将网络添加到钱包中，或者手动添加：
+
+  用 MetaMask 这种兼容钱包，将 ApeChain 添加为自定义网络，或者您可以手动添加。
+
+网络名称：ApeChain
+
+网络 URL： https://apechain.calderachain.xyz/http
+
+链 ID：33139
+
+货币符号：APE
+
+3、在 DEX Screener 或 Ape Express 探索 Apechain 生态 Meme 数据：https://dexscreener.com/apechain
+
+4、探索如上 ApeChain 生态应用。

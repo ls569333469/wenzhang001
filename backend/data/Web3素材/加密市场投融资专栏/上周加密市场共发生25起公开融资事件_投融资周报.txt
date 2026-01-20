@@ -1,0 +1,219 @@
+标题: 上周加密市场共发生25起公开融资事件 | 投融资周报
+链接: https://www.chaincatcher.com/article/2061287
+发布时间: 2021-04-26
+
+==================================================
+
+据链捕手不完全统计，4月19日到4月25日期间，区块链行业共发生25起公开投融资事件，方向主要集中在DeFi、NFT板块。其中NGC、AU21、Block Dream Fund、LD Capital投资机构出手最频繁。此外，老虎环球又有出手，以2500万美元参与了印度交易所 CoinSwitch Kuber的B轮融资 ；本周出现一笔亿级融资，为智能合约语言 DAML 公司 Digital Asset 完成 1.2 亿美元D轮融资 。
+
+ 
+
+一、DeFi
+
+ 
+
+1、DeFi 借贷协议 NAOS Finance 完成 510 万美元私募轮融资
+
+4月19日，DeFi 借贷协议 NAOS Finance 宣布完成最新一轮 510 万美元的私募融资。参投机构包括 The Spartan Group、Lemniscap、CMS、Huobi DeFi Labs、HashKey、Genesis Block Ventures、OKEx Blockdream Ventures、AU21 Capital等。此外，参与本轮的个人投资者还包括 Quantstamp 首席执行官马化东和复星集团联合创始人梁信军。
+
+NAOS Finance 旨在允许链外借款方通过 DeFi 协议获取资金，并通过 KYC 和保险池为贷款方提供风险敞口，连接 DeFi 和链下资产。NAOS 目前已覆盖了财富 500 强公司、上市公司和跨国公司提供的超过 2.5 亿美元现实世界资产。
+
+ 
+
+2、合成资产协议 Duet 完成由 OmniLAB 基金会领投的 Pre-Seed 轮融资
+
+4月19日，合成资产协议 Duet 完成由 OmniLAB 基金会领投的 Pre-Seed 轮融资，融资金额未披露。OmniLAB 是比特币二层协议 OmniLayer 背后的公司，致力于围绕区块链项目构建可持续发展的生态系统。
+
+二重奏协议 Duet 是一种基于算法混合抵押的多链合成资产协议，支持传统资产迁移到高增长的加密资产。其愿景是建立一个由 DAO 治理的可自由完成低流动性传统资产加密资产间转化的平行世界，用户可仅用一个数字钱包完成全球资产配置。
+
+ 
+
+3、去中心化杠杆交易平台 Lever.Network 完成 60 万美元种子轮融资，NGC 等领投
+
+4月20日，去中心化杠杆交易平台 Lever.Network 完成 60 万美元种子轮融资。NGC Ventures、ArkStream、LD Capital、AU21 联合领投，DAOMaker、YBB、DFG 等机构参投。另外，Lever.Network 计划近期将启动 IDO。
+
+Lever.Network 是 DeFi 中基于 AMM 的杠杆交易经纪平台，支持用户在 DeFi 中进行现货等资产的杠杆交易，提高 DeFi 中资产使用效率。
+
+ 
+
+4、稳定币零滑点兑换协议Smoothy完成240万美元私募融资，Hashkey等参投
+
+4月20日，稳定币零滑点兑换协议Smoothy发推宣布完成了240万美元私募融资，Hashkey、DeFiance Capital、AscendEX、Spark Digital、X21等参投。此外，Smoothy SMTY将于04/22至04/27在BSCPad，DAOMaker，Paddle.finance和Paid Ignition上公开发售。
+
+Smoothy.finance 具有低成本、零滑点交易的流动性池，最大程度地赚取收益。
+
+ 
+
+5、Injective Protocol 完成 1000 万美元代币融资，Mark Cuban 和 Pantera 等参投
+
+4月21日，去中心化衍生品交易协议 Injective Protocol 宣布完成 1000 万美元代币融资，Mark Cuban、Pantera Capital、BlockTower、Hashed Ventures、CMS Holdings、QCP Capital 参投。团队表示，他们本轮融资是以 10 亿美元以上的估值出售了有锁定期的代币，锁定期为 1 年。
+
+Injective Protocol 是首个完全去中心化的交易协议，基于以太坊网络，集成了可验证延迟函数（VDF），通过流逝时间证明（Proof of Elapsed Time）以规避相同区块内的顺序冲突问题来杜绝交易作弊和不良交易的去中心化交易协议。
+
+ 
+
+6、DEX 聚合平台和工具 DexGuru 完成 100 万美元种子轮融资
+
+4月21日，去中心化交易聚合平台和工具 DexGuru 宣布完成 100 万美元种子轮融资，ParaFi Capital 领投，参投方包括 Lemniscap、The LAO、Divergence Ventures、BitScale 以及个人投资者 Kyber Network等。
+
+DexGuru 表示，该笔融资将用于开发一个 Web3 交易平台，帮助交易员分析跨主要 EVM 兼容的区块链数据。DexGuru 将分析和研究工具与交易执行功能相结合，可帮助交易者在一个完全集成的 UI 中为每个链上市场分析无需许可的实时数据。
+
+ 
+
+7、去中心化流动性协议 Tokemak 完成 400 万美元融资，Framework 领投
+
+4月21日，据 Cointelegraph 报道，去中心化流动性协议 Tokemak 完成 400 万美元融资，Framework Ventures 领投，Electric Capital、Coinbase Ventures、North Island Ventures、Delphi Ventures 和 ConsenSys 参投。Tokemak 将利用该笔融资在 2021 年第二季度末上线以太坊主网。
+
+Tokemak 表示，其正在构建一种流动性聚合器，旨在提高新项目的流动性。
+
+ 
+
+8、DeFi 资管协议 DePlutus 完成 100 万美元种子轮融资，Bixin Ventures 领投
+
+4月22日，去中心化资产管理协议 DePlutus （PLUT）完成 100 万美元种子轮融资，Bixin Ventures 领投，华尔街高盛高管等天使投资人参投。
+
+DePlutus 协议是基于链上操作的新一代 DeFi 资管协议，也是实现链上基金专属 Token （DF Token）功能的协议。DePlutus 旨在构建资管领域内的基础设施，为用户开启链上基金时代。DePlutus 已经通过慢雾科技代码审计，并完成以太网主网上线。
+
+ 
+
+9、算力币 2.0 赛道项目 BEST 完成私募轮融资，DuckDAO 等参投
+
+4月22日，算力币 2.0 赛道项目 BEST 宣布完成私募轮融资，新获 DuckDAO、4SV(Four Seasons Ventures) 、Crypto Differ 等投资，具体投资金额暂未披露。截止目前，BEST 成功获得 AU21、Infinity Labs、Hotbit Labs、7 O'Clock Capital等多家机构投资。
+
+BEST 是由伟斯矿业，探道矿工等矿业企业联合打造的新型算力通证体系，也是第一个混合算力 Token(BTC +ETH)，打通整个矿业生态。
+
+ 
+
+10、DeFi 指数提供商 Phuture 完成 150 万美元种子轮融资，Ascensive Assets 领投
+
+4月23日，DeFi 指数提供商 Phuture 完成 150 万美元种子轮融资，Ascensive Assets 领投，NGC Ventures、SevenX Ventures、Moonrock Capital、Origin Capital、Waterdrip Capital 以及 Bitcoin.com 首席执行官 Danish Chaudry 等参投。筹集的资金将为 Phuture 即将推出的版本提供资金，以及用于扩建团队和项目的初期推广。
+
+Phuture 上线后将提供一种“开放式设计”理念，用来创建 DeFi 投资策略，该协议将包括独特、可扩展、聚合的指数架构，使该协议能够在多个价格指数之间进行实时再平衡，支持用户在 Web 3 环境中建立，创造和投资指数。
+
+ 
+
+二、NFT&链游
+
+ 
+
+1、NFT 投资组合管理平台 NFTBank.ai 完成 140 万美元融资，Hashed 等参投
+
+4月20日，NFT 投资组合管理平台 NFTBank.ai 完成 140 万美元种子轮融资，投资机构包括 Hashed、Digital Currency Group 和 1kx 等。
+
+NFTBank.ai 是一个 NFT 投资组合管理平台，目前支持以太坊和 Polygon （原 Matic）网络上的 NFT，并计划集成 Klaytn、Flow 和 ImmutableX，聚合了诸如 The Sandbox、Axie Infinity 等项目的 NFT 资产。
+
+ 
+
+2、波卡生态 NFT 交易平台 NFTMart 完成 150 万美元私募轮融资
+
+4月20日，波卡生态 NFT 交易平台 NFTMart 宣布完成 150 万美元私募轮融资，参投方包括 PAKA、OKEx Blockdream Ventures、Signum、 LD Capital 、Bixin Ventures、Spark Digital Capital、Capital （科银资本）、7 O'Clock Capital、加密阁等。
+
+NFTMart 基于 Substrate 开发，是一个去中心化 NFT 交易市场，由两个部分组成：第一部分是开放的 NFT 公有链 nftmart.network，主要用于发行 NFT 和链上的数据交易；第二部分是 nftmart.io，为用户提供了用户友好的交易方案，使用户可以方便快捷地创建或交易 NFT。
+
+ 
+
+3、太空冒险游戏无限舰队发行商 Exordium 通过 STO 获得 50 万美元融资
+
+4月21日，基于比特币的太空冒险游戏「无限舰队」（ Infinite Fleet ）的发行商 Exordium 通过 STO 获得 50 万美元融资，投资方为 Polyient Ventures。今年 1 月份，Exordium 获得由 Tether 领投的 100 万美元融资，2020 年 8 月份，通过 STO 和投资者投资筹集到 310 万美元资金。
+
+无限舰队由 Blockstream CSO 缪永权创立的游戏公司 Pixelmatic （数码方块）开发，最初主要开发移动社交游戏。
+
+ 
+
+4、梦幻体育平台 TradeStars 完成 167 万美元战略融资
+
+4月23日，基于以太坊的梦幻体育平台 TradeStars 宣布完成 167 万美元战略融资，领投机构包括 AU21 Capital 、Block Dream Fund 和 LD Capital，参投方包括 Sfermion、Taureon、Spark Digital Capital、Morningstar Ventures、NGC Ventures 和 Krypital Group 等。
+
+TradeStars 是一个基于以太坊的 Fantasy Sports （梦幻体育）平台，通过碎片化 NFT 市场支持 DeFi 游戏化系统。
+
+ 
+
+三、其他
+
+ 
+
+1、EpiK Protocol 铭识协议完成 500 万美元机构轮融资
+
+4月19日，去中心化知识图谱和数据协作网络 EpiK Protocol 铭识协议宣布完成 500 万美元的机构轮融资，参投机构包括：GSR Matrix Fund （金沙江数字基金）、ChainUP Capital、Spring Fund (1475)、Consensus Lab、Arcanum Capital、K24 Ventures、RedBlock、CatcherVC 和 7 O’Clock Capital 等机构。
+
+EpiK Protocol铭识协议是一个去中心化的共建共享共益的安全可信知识图谱协作平台。旗下知识图谱数据采集应用「知识大陆」将于本周三公开测试，用游戏化形式组织全球社区成员共建大规模开放知识图谱数据库。
+
+ 
+
+2、波卡生态分布式可信计算基础设施 ZeroHybrid Network 完成种子轮融资
+
+4月19日，波卡生态分布式可信计算基础设施 ZeroHybrid Network 宣布完成种子轮融资，投资金额未披露。参投机构包括：BlockSync、CMS Holdings、Exnetwork Capital、JRR Group、Lancer Capital、Vega Ventures、YBB Foundation 和 Zentech Capital。
+
+ZeroHybrid Network 旨在构建跨多种架构的可信计算区块链网络。通过在 PC、服务器和移动设备等具备计算能力的实体上构建可信计算环境，采用 Substrate 实现横跨多端多架构的区块链网络，将全球各个角落里具备计算能力的设备联合起来构成全球可信计算机。
+
+ 
+
+3、新加坡金融科技公司STACS融资360万美元，为金融机构开发区块链平台
+
+4月20日，总部位于新加坡的金融科技公司Hashstacs (STACS)今日宣布筹集了360万美元的A轮前融资。本轮融资由专注于东南亚企业和深度科技公司的Wavemaker Partners领投，新加坡政府支持的区块链初创企业项目Tribe也参与了融资。
+
+据悉，去年，STACS与新加坡金融管理局基于区块链的多货币支付网络计划Project Ubin一起参与了Tribe项目。
+
+ 
+
+4、零知识隐私应用平台 Aleo 完成 2800 万美元融资，a16z 领投
+
+4月21日，基于零知识证明技术的隐私应用平台 Aleo 宣布完成 2800 万美元融资，由 a16z 领投，其他投资方为 Placeholder VC、Galaxy Digital、Variant Fund、Coinbase Ventures、Polychain Capital、Slow Ventures等。
+
+Aleo 是一个完全私密的应用平台，使用区块链和零知识证明密码学来提供一种新的网络体验，在 Aleo 的帮助下，即使开发者不是区块链或密码学方面的专家，也可以开发隐私的应用程序。
+
+ 
+
+5、中心化存储平台 Filebase 完成 200 万美元种子轮融资，Multicoin 领投
+
+4月21日，去中心化存储平台 Filebase 宣布完成 200 万美元种子轮融资，Multicoin Capital 领投，Version One Ventures 和 Messari 联合创始人 Ryan Selkis 参投。
+
+目前 Filebase 平台支持 Sia、Skynet 和 Storj 网络，并计划到 2021 年底在 Filecoin 和 Arweave 网络上进行扩展。另外，Filebase 表示，期望集成诸如 AI 和机器学习等的技术，以使得其数据管道能够自动化存储工作负载，并同时帮助优化成本和性能。
+
+ 
+
+6、数字资产托管机构 First Digital Trust（FDT）完成215万美元融资
+
+4月22日，数字资产托管机构First Digital Trust获得215万融资，该轮融资由包括亚洲风险投资公司Nogle在内的私人投资者牵头。据Crunchbase报道，该公司的总融资额现已超过700万美元，此前3月份的两轮融资中筹集了520万美元。
+
+该公司表示，这笔资金将用于推出第一个借记卡和信用卡轨道，使其数字资产客户能够无缝接受银行卡支付。届时，公司将接受100多种货币的数字资产支付，并提供即时结算、托管和合规。FDT是亚洲唯一能够同时持有传统和数字资产的合格保管机构。
+
+ 
+
+7、智能合约语言 DAML 公司 Digital Asset 完成 1.2 亿美元 D 轮融资
+
+4月22日，开源智能合约语言 DAML 公司 Digital Asset 宣布完成超 1.2 亿美元 D 轮融资，投资方包括 7RIDGE 和 Eldridge。Digital Asset 表示，将利用该笔资金在今年将其团队规模扩大 50%，还将通过新的互操作性协议来增强其产品组合，该协议使数据能够在区块链和传统数据库之间无缝交互，从而在整个记录系统之间创建一个可互操作的数据网络。
+
+Digital Asset 使用开源智能合约语言 DAML 帮助企业设计、创建和运行下一代分布式账本应用程序，旨在创建可无缝互连的全球经济网络。
+
+ 
+
+8、DAOSquare 完成天使轮融资，HashKey Capital 领投
+
+4月22日，Web3.0 孵化器 DAOSquare 完成天使轮融资，此轮估值 4000 万美元，由 HashKey Capital 领投，投资机构包括：Alameda Research、NGC Ventures、CMS Holdings、安比实验室、LD Capital、Spark Digital Capital等。
+
+DAOSquare 诞生于西方著名以太坊社区 MetaCartel，致力于 Web3 时代孵化器的构建，其目标是成为 Web3 时代的 Y Combinator，DAOSquare 即将上线孵化器 MVP，第一期全球性孵化计划已经启动，近期会公布第一期孵化名单。另外，孵化基金 (VentureDAO) 也将于近期启动。
+
+ 
+
+9、印度加密交易所 CoinSwitch Kuber 完成 2500 万美元 B 轮融资，Tiger Global 为本轮唯一投资方
+
+4月22日，印度加密货币交易所 CoinSwitch Kuber 完成 2500 万美元的 B 轮融资，投资者为 Tiger Global，融资后的估值达到 5.25 亿美元。CoinSwitch Kuber 表示，融资额将用于从技术和安全的角度扩展其平台、团队和用户群，以及用于品牌建设和提高人们对加密货币的认识。Tiger Global 曾在 2018 年 10 月向 Coinbase 投资 5 亿美元。
+
+据此前消息， CoinSwitch Kuber 于今年一月完成 1500 万美元的 A 轮融资 ，Ribbit Capital 和 Paradigm 领投，红杉资本印度公司（Sequoia Capital India）等参投。
+
+ 
+
+10、无服务器应用部署平台 ArGo 完成 130 万美元种子轮融资
+
+4月23日 ，基于区块链的无服务器应用部署平台 ArGo 宣布以 1250 万美元估值完成 130 万美元种子轮融资，由 Ascensive Assets 领投，参投方包括 Alpha chain、Onchain Capital、Moon Whale、Master Ventures、X21 Digital等，另外还包括一些天使投资人。
+
+ArGo 是一个基于 Arweave 协议的无服务器应用部署平台，可将 Web 应用程序部署到 Arweave。
+
+ 
+
+11、证券化和投资平台 Cadence完成 1250 万美元融资，并更名为Percent
+
+4月24日，证券化和投资平台 Cadence 更名为 Percent，并宣布完成了 1250 万美元 A 轮融资，White Star Capital 和 B Capital 领投，现有投资者 Revel Partners、Recharge Capital 和 Fantail Ventures 也参与了本轮投资。
+
+Percent 表示，在获得资金后，将扩张团队，并加速开发平台和基础设施。

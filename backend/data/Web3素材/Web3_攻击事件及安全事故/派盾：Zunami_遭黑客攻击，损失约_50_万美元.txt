@@ -1,0 +1,7 @@
+标题: 派盾：Zunami 遭黑客攻击，损失约 50 万美元
+链接: https://www.chaincatcher.com/article/2181655
+发布时间: 2025-05-15
+
+==================================================
+
+ChainCatcher 消息，据 PeckShield 监测，Zunami Protocol 披露其遭到黑客攻击，zunUSD 和 zunETH 的抵押品已被盗，损失约 50 万美元。攻击者已将盗取资金转移至 Tornado Cash。

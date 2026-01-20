@@ -1,0 +1,69 @@
+标题: RWAiFi Summit Dubai 开幕在即｜GAIB、Plume、StakeStone 共话 AI x RWA x DeFi 的新纪元
+链接: https://www.chaincatcher.com/article/2179029
+发布时间: 2025-04-27
+
+==================================================
+
+本次峰会聚焦 AI、RWA 和 DeFi 的深度融合，深入讨论算力分配、资产代币化、基础设施建设、数据经济以及链上流动性解决方案等多个关键领域，为行业发展提供前瞻性洞见。RWAiFi Summit 汇聚了来自全球的顶尖项目方、AI 技术专家以及金融行业先锋，共同探讨如何通过技术创新与生态协作，释放 AI 和 RWA 在链上金融中的巨大潜力。
+
+活动资讯
+
+日期：2024 年 4 月 30 日
+
+时间：12:00 - 17:00（GMT+4）
+
+地点：Bla Bla Dubai
+
+点击此处报名。
+
+
+核心议程
+
+圆桌讨论（Panels）
+
+Panel 1｜AiFi：链上金融与真实收益 ​（13:10 - 13:50）
+
+由MH Venture主持，GAIB、Aethir、Symbiotic、ICN Protocol等项目探索 AI 如何为 DeFi 引入可持续的现实世界收益。
+
+Panel 2｜RWA 价值释放：链上资产的革新之路 （14:00 - 14:40）
+
+由IDG Capital主持，Plume、Solv、OpenEden、Maple Finance等项目聚焦现实资产上链的突破与挑战，剖析如何释放真实资产的链上潜力。
+
+Panel 3｜DeFi 流动性与RWA价值：链上金融的新机遇 （14:50 - 15:30）
+
+由Spartan Group主持，StakeStone、Lagrange、Tranchess、Balloon等项目探讨 DeFi 如何为 RWA 注入流动性，打造新一代链上金融产品与应用场景。
+
+Panel 4｜AI 生态：构建真正的未来基础 （15:40 - 16:20）
+
+由Animoca Brands主持，Sahara AI、OpenLedger、Kite AI、Mind Network等项目深入探讨去中心化 AI 生态中的算力、数据和智能体，分享基础设施建设的实践经验。
+
+社交与闭幕
+
+午餐与签到 (12:00 - 13:00): 开启交流，拉开峰会序幕
+自由交流时段 (16:20 - 17:00): 探讨合作，拓展人脉
+
+主办方：
+
+GAIB 是 AI 算力的首个经济层，把 GPU 资产转化成一种新型的生息资产。GAIB 推出了AI合成资产 AID，使投资者能够无缝参与AI经济，同时从 AI 算力收益中获得真实回报，投资者可质押 AID（sAID），在保持流动性的同时获取奖励，进一步参与 AI 驱动的金融市场。 GAIB 还为云服务商和数据中心提供资本解决方案，优化其算力资源，助长 AI 基础设施发展。凭借广泛的 DeFi 协议集成，包括借贷、衍生品及结构化产品，GAIB 构建了 AI 与区块链金融的桥梁，为技术与投资解锁全新机遇。
+
+Plume是首个专为RWAfi设计的完整RWA链和生态系统，加速现实世界资产的链上整合。Plume 网络已有 200 多个项目入驻，提供与 EVM 兼容的可组合环境，支持多样化资产的管理与引入。Plume 的端到端代币化引擎和金融合作伙伴网络简化了资产上链流程，推动 RWA 与 DeFi 的深度融合，让用户能够代币化资产、全球分发，并服务于加密用户。
+
+StakeStone是一个去中心化的全链流动性基础设施协议，革新区块链网络的流动性分发方式。StakeStone 基于全链架构，支持高效收益生成、流动性供应和灵活的资产管理，为链上生态提供可持续的流动性解决方案。
+
+尊享合作伙伴
+
+OpenLedger
+
+赞助商与合作伙伴
+
+Sahara AI、Aethir、Solv、Kite AI、Lagrange、Symbiotic、OpenEden、Maple Finance、Mind Network、ICN Protocol、Tranchess、Balloon
+
+VC合作伙伴
+
+Hack VC、Spartan Group、Animoca Brands、MH Ventures、Bullish、CMCC Global、L2 Iterative
+
+社区合作伙伴
+
+Akindo、AiFi Consortium
+
+与我们一起见证 AI 与 RWA 融合的链上金融未来。

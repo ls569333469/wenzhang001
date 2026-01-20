@@ -1,0 +1,101 @@
+标题: AI 领衔主演，22 个加密项目集体下场布局 AI Agent
+链接: https://www.chaincatcher.com/article/2161424
+发布时间: 2025-01-08
+
+==================================================
+
+作者：Nancy，PANews
+
+ 
+
+AI Agent无疑是当前链上市场的核心主旋律。从基础设施建设、工具开发、DeFi到游戏等各类产品，AI Agent的快速迭代正在推动市场爆发式增长，强势占领着市场的注意力和用户心智。近期DEX/CEX交易量占比持续攀升，也证明了链上流动性和关注度的疯狂掠夺，市场资金流动正在发生结构性变化。据The Block和DeFiLlama数据显示，DEX与CEX的现货交易量占比在过去几个月里显著增加，截至2025年1月，这一比例已达到20.2%，创下历史新高。
+
+这种趋势下，不少缺乏利好题材的非AI类加密项目也正在快马加鞭赶来，企图搭乘AI Agent这辆自带流量的顺风车。本文PANews整理了22个布局AI Agent的加密项目，涵盖游戏、公链、支付、DeFi和DePIN等多个赛道，这些项目主要通过技术框架开发和应用场景落地等方式来加速AI Agent生态的构建与发展。
+
+Illuvium：为游戏引入自主AI NPC
+
+lluvium是一款基于以太坊构建的RPG和NFT游戏。1月7日，Illuvium宣布与Virtuals Protocol达成合作，以提升即将推出的Illuvium MMO Lite的游戏体验。此次合作将利用Virtuals的AI技术及其的G.A.M.E LLM框架为NPC提供动态、智能的行为，为玩家提供沉浸感。
+
+Story Protocol：高薪雇佣AI Agent Luna
+
+Story Protocol是专为知识产权（IP）设计的Layer1。去年12月，Story Protocol在发布一个AI Agent之间的TCP/IP框架后，宣布“人类实习生要求休假了，打算招聘一个AI Agent来管理推特”，并最终决定聘请Luna管理其X帐号，年薪高达36.5 USDC，称她将为带来“魅力、个性以及一丝顽皮”。
+
+Circle：探索AI代理使用USDC独立运作和交易
+
+2024年下半年，Circle宣布将与Solana合作推出AI代理，以提升基础设施安全性。同年11月，Circle发布报告称，该公司在过去几周内发行了价值超过20亿美元的USDC，探索了人工智能和区块链技术的结合将如何改变人们对工作和金融的理解，尤其是通过使用“自主”支付。Circle引入了一个概念，使AI代理能够使用USDC独立运作和交易。此外，其还构建了一个示例应用程序来“演示该自主系统”，鼓励用户使用此模板来构建自己的项目并进行反馈。
+
+Arbitrum：推出资助计划并建立AI代理合作
+
+2024年11月，Arbitrum宣布推出100万美元Trailblazer资助计划，旨在吸引拥有创新想法的开发者基于Arbitrum部署有影响力的AI Agents或其他AI产品。另外，Arbitrum还与Eilza Labs和ARC Agents等达成合作关系。
+
+Stripe：计划推出AI代理工具包
+
+2024年11月，支付公司Stripe产品主管Jeff Weinstein表示，正在推出专为AI代理构建的软件开发工具包（SDK）。该工具包支持大型语言模型（LLM）调用支付、计费、发行等 API，集成Vercel、LangChainAI、CrewAIInc等，通过函数即可使用任何模型。
+
+Coinbase：发布多个AI代理产品来简化链上操作与交互
+
+去年10月底，Coinbase推出新工具Based Agent，该工具基于Coinbase SDK、OpenAI和Replit平台开发，允许用户在3分钟内创建具备加密钱包功能的AI代理，可执行链上交易、代币互换和质押等多项任务。次月，Coinbase开发者平台还与Langchain合作推出构建AI代理的框架AgentKit，可融合链上（Base链）和链下的交互功能，结合Web2 API和链上数据，使Agent自助浏览内容并赋予链上操作。
+
+Orca：正在开发AI Agent版的自动化机器人
+
+Orca是Solana上的AMM DEX。1月6日，ai16z联创Shaw在接受BlockBeats线下专访时透露，ai16z 正在与Orca合作开发一个代理，这是个自动化机器人，可以自动管理Orca的流动性池。用户只需将代币投入其中，如果池子不存在，它会自动创建新的池子；如果池子已存在，它会将代币放入现有池中。接下来，它会持续监控这些池子，一旦发现可能导致永久性损失的情况，比如代币价格分歧，它会自动从池中撤资。因为大多数人担心的就是永久性损失这个问题。用户还可以编程控制代币的价差，或者调整代币的配对方式。
+
+io.net：在AI Agent领域建立多个合作
+
+DePIN龙头项目io.net与在AI Agent领域建立多个合作。比如，去年12月，io.net宣布与创意自主AI代理Zerebro建立合作关系，以增强以太坊验证操作。不仅如此，io.net还与ai16z合作，提供去中心化的GPU算力来支持后者模型运行。
+
+IoTeX：推出首个DePIN领域AI Agent BinoAI
+
+IoTeX是模块化构造AI+DePIN基础设施的开放平台。去年12月，IoTeX宣布推出首个DePIN领域的AI Agent：BinoAI，这是基于ELIZA-OS构建的，旨在为DePIN领域奠定去中心化自主意识进化发展的基座。BinoAI将通过AI自主学习，自动认知并对DePIN相关知识进行洞察分析，并以ai16z的ELIZA框架为基础，使BinoAI能够安全的访问和交互链上数据。结合IoTeX去中心化的DePIN模块基础设施，BinoAI将运行在完全去中心化、去信任化的环境中，其在DePIN的应用场景包括智慧旅行、能源系统、智慧穿戴和智慧家庭等。
+
+Smolverse：开发基于Eliza的AI电子宠物游戏
+
+Smolverse是Treasure DAO上的游戏和NFT项目。从去年12月开始，Smolverse与ai16z合作开发名为“Smolworld”的链上 AI Tomogatchi游戏，该游戏结合了Eliza的Agent框架。
+
+Phala Network：构建基于Eliza的TEE框架
+
+Phala Network曾是波卡生态的隐私计算基础设施。据PANews此前报道，Phala Network已与a16z合作构建了Eliza的TEE框架，可将TEE（可信执行环境）技术集成到Eliza的多代理框架中，提供加密可验证性和增强的隐私性，从而确保安全可靠的交互。比如，此前大火的Spore.fun、aiPool等项目均是利用了Phala Network的TEE技术。
+
+Injective：推出首个跨链 AI Agents Hub
+
+Injective是一个可互操作的第一层区块链。前几日，Injective宣布今年将与Solana上首个SVM区块链Sonic SVM合作推出首个跨链AI代理平台Smart Agent Hub，为开发者提供创建、管理、货币化 AI 代理的强大工具和框架，并实现跨链资产转移以及统一开发体验。首个测试网预计在2025年第一季度推出，生态将逐步扩展至游戏、娱乐、DeFi及社交平台（如TikTok、Web3游戏）等领域。
+
+Fuel：推出AI代理工具Fuel Agent Kit
+
+Fuel是专为以太坊Rollup 生态设计的模块化执行层。不久前，Fuel宣布推出AI代理工具 Fuel Agent Kit，该工具将可把用户的AI代理连接到Fuel和Fuel上的各种应用程序，或者使用Fuel构建新的AI代理。
+
+Gaia：创建专属AI代理
+
+Gaia是一个去中心化的开源人工智能基础设施平台。去年11月，Gaia宣布将与AI平台vana合作，创建功能强大、专属的AI代理。目前，Gaia的AI代理与EigenLayer、ENS等项目均有集成合作。
+
+Aethir：孵化和投资AI Agent
+
+Aethir是一个去中心化的实时渲染网络。Aethir在近几个月里持续孵化和投资AI Agent，比如去年底公布其1亿美元生态基金第三轮（Batch 3）支持项目，专注于游戏和AI代理的结合。同时，Aethir还为Eliza代理开发者提供免费GPU算力。
+
+DWF Labs：开发AI代理交易并设立基金支持
+
+DWF Labs除了通过开发AI交易代理来完全自主地成功管理投资组合，并已集成到DWF交易系统的工作流程中，还在去年底宣布设立2000万美元基金支持自主AI代理开发，包括TAO Cat、HeyAnon等项目已获得资助。
+
+Blade Games：融合AI Agent的链上游戏生态
+
+Blade Games是Arbitrum和Mantle上最大的链上游戏生态之一，已吸引超过85万注册用户。Blade Games结合了链上游戏与AI代理技术，构建在zkVM堆栈上，玩家可以在这个平台上玩游戏、训练AI代理，并创建自己的链上经济。
+
+aelf：推出无代码AI代理框架aevatar intelligence
+
+2024年12月，Layer1区块链aelf宣布推出无代码AI代理框架aevatar intelligence，该框架将由多个大语言模型（LLM）提供支持，允许外部开发人员集成其偏好的LLM，从而形成推动创新和扩展框架功能的协作生态系统，首个用例 AI pump pad将在2025年1月初推出。
+
+SendAI：实现AI代理自主执行Solana链上操作
+
+SendAI是Solana人工智能生态系统加速器。2024年12月，SendAI宣布推出开源工具包Solana Agent Kit，支持任意AI模型的代理自主执行Solana链上操作，已集成Jupiter、Metaplex、Raydium等主流协议。该工具包采用LangChain技术，支持从GPT-4到Llama等各类AI模型，并计划与ai16z的Eliza、Zerebro的ZerePy等框架进行整合。
+
+Artela：发布下一代全链AI Agent技术框架
+
+2024年12月，并行EVM公链Artela Network正式发布全链AI Agents技术框架，基于Artela链上智能、去中心化可信执行、弹性区块空间等特性，解决当前AI Agents依赖中心化服务器的自治受限痛点，可为为AI Agents带来真正的“读、写、拥有”的能力。
+
+Frax：为区块链上的AI代理开发技术栈“AIVM”
+
+2024年12月中旬，去中心化稳定币协议Frax Finance宣布其正与关联项目IQ合作开发一套AI技术栈“AIVM”。该技术栈是基于Layre2 rollup协议Fraxtal内部开发的并行区块链，可使AI代理实现完全自主，没有单一控制点，并最终帮助AI和区块链实现更无缝的协作。
+
+Planet Mojo：推出AI代理Mr. WWA，首个游戏即将上线
+
+Planet Mojo是一款由Magic平台开发的以PVP自走棋为类型的GameFi游戏。1月7日，Planet Mojo宣布与Virtuals合作推出AI Agent Mr. WWA（Winston Wylde Alexande），代币WWA将作为平台奖励代币，基金会将支持持续回购。此外，Planet Mojo的首个游戏Agents of Poker也即将上线。

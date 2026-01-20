@@ -1,0 +1,272 @@
+标题: 从 zkVM 到开放证明市场：RISC Zero 与 Boundless 解析
+链接: https://www.chaincatcher.com/article/2200417
+发布时间: 2025-08-25
+
+==================================================
+
+作者：0xjacobzhao
+
+ 
+
+在区块链领域，密码学是安全与信任的核心基础。其中，零知识证明（ZK）能够将任意复杂的链下计算压缩为简短的证明，并在链上高效验证，无需依赖第三方信任，同时还能选择性地隐藏输入以保护隐私。凭借高效验证、通用性与隐私性的兼备，ZK 已成为扩容、隐私、跨链等多类应用的关键方案。尽管当前仍存在证明生成开销较大、开发电路复杂等挑战，但 ZK 的工程可行性与落地程度已远超其他路径，成为采用度最高的可信计算框架。
+
+一、ZK 赛道的发展历程
+
+零知识证明（ZK）技术的发展并非一蹴而就，而是经历了长达数十年的理论积累与工程探索。整体可以划分为以下几个关键阶段：
+
+1. 理论奠基与技术突破期（1980s–2010s） ZK 概念由 MIT 学者 Shafi Goldwasser、Silvio Micali 和 Charles Rackoff 提出，最初停留在交互式证明理论。2010s 随着 非交互式零知识证明（NIZK） 与 zk-SNARK 出现，证明效率大幅提升，但早期仍依赖可信设置。
+
+2. 区块链应用（2010s 末期） Zcash 将 zk-SNARK 引入隐私支付，首次实现大规模区块链落地。但受限于证明生成开销高昂，实际落地场景依然较为有限。
+
+3.  爆发式增长与扩展（2020s 至今）这一时期 ZK 技术全面进入产业主流：
+
+ZK Rollup：通过链下批量计算及链上证明，实现高吞吐与安全继承，成为 Layer2 扩容核心路径。
+zk-STARKs：StarkWare 推出 zk-STARK，消除可信设置，提升透明性与扩展性。
+zkEVM：Scroll、Taiko、Polygon 等团队致力于 EVM 字节码级证明与现有 Solidity 应用无缝迁移。
+通用 zkVM：RISC Zero、Succinct SP1、Delphinus zkWasm 等支持任意程序可验证执行，把 ZK 从扩容工具拓展为「可信 CPU」。
+zkCoprocessor 将 zkVM 封装为协处理器，支持复杂逻辑外包（如 RISC Zero Steel、Succinct Coprocessor）；
+zkMarketplace 则市场化证明算力，形成去中心化 prover 网络（如 Boundless），推动 ZK 成为普适计算层。
+
+至今，ZK 技术已从晦涩的密码学概念，成长为区块链基础设施中的核心模块。它不仅支撑扩容与隐私保护，更在跨链互操作、金融合规、人工智能（ZKML）等前沿场景中展现出战略价值。随着工具链、硬件加速与证明网络的持续完善，ZK 生态正快速走向规模化与普适化。
+
+二、ZK 技术应用全景：扩容、隐私与互操作
+
+扩容（Scalability）、隐私（Privacy）与互操作与数据证明（Interoperability & Data Integrity）是当下 ZK 「可信计算」技术的三大基础场景，对应区块链性能不足、隐私缺失与多链互信的原生痛点
+
+扩容（Scalability） 是 ZK 最早落地、也是应用最广的场景。其核心思想是将交易执行移到链下，再用简短的证明在链上验证，从而在不牺牲安全性的前提下显著提升 TPS、降低成本。典型路径包括：zkRollup（zkSync、Scroll、Polygon zkEVM），通过批量交易压缩实现扩容；zkEVM，在 EVM 指令级别构建电路，实现以太坊原生兼容；以及更通用的 zkVM（RISC Zero、Succinct），支持任意逻辑的可验证外包。
+隐私保护（Privacy） 旨在证明交易或行为的合法性，同时避免暴露敏感数据。典型应用包括：隐私支付（Zcash、Aztec），保证资金转移有效性而不公开金额与对手方；隐私投票与 DAO 治理，在不泄露投票内容的情况下完成治理；以及 隐私身份 /KYC（zkID、zkKYC），仅证明「符合条件」，而不披露额外信息。
+互操作与数据证明（Interoperability & Data Integrity） 则是 ZK 技术解决「多链世界」信任问题的关键路径。通过生成另一条链状态的证明，跨链交互可摆脱中心化中继。典型形式包括 zkBridge（跨链状态证明）与 轻客户端验证（在目标链上高效验证源链区块头），代表项目有 Polyhedra、Herodotus 等。同时，ZK 也被广泛用于 数据与状态证明，如 Axiom、Space and Time 的 zkQuery/zkSQL，或 IoT 与存储场景的数据完整性验证，确保链下数据可信上链。
+
+在这三大基础场景之上，未来 ZK 技术有机会逐渐延伸至更广阔的行业应用：包括 AI（zkML），为模型推理或训练生成可验证证明，实现「可信 AI」；金融合规，如交易所储备证明（PoR）、清算与审计，降低信任成本；以及 游戏与科学计算，在 GameFi 或 DeSci 中确保逻辑与实验结果的真实性。本质上，它们都是「可验证计算 + 数据证明」在不同行业的落地扩展。
+
+三、超越 zkEVM: 通用 zkVM 与证明市场的崛起
+
+以太坊创始人 Vitalik 在 2022 年提出的 ZK-EVM 四类分类（Type 1–4），揭示了 兼容性与性能之间的权衡：
+
+Type 1（完全等价）：字节码与以太坊 L1 完全一致，迁移成本最低，但证明最慢。代表项目：Taiko。
+Type 2（完全兼容）：保持高度 EVM 等价，仅做极少底层优化，兼容性最强。代表项目：Scroll、Linea。
+Type 2.5（准兼容）：小幅修改 EVM（如 gas 成本、预编译支持），牺牲少量兼容性换取性能提升。代表项目：Polygon zkEVM、Kakarot（运行在 Starknet 上的 EVM）。
+Type 3（部分兼容）：对底层修改更彻底，能跑大多数应用，但无法完全复用以太坊基础设施。 代表项目：zkSync Era。
+Type 4（语言级兼容）：放弃字节码兼容，直接从高级语言编译至 zkVM，性能最佳但需重建生态。代表项目：Starknet（Cairo）。
+
+这一阶段的主题是「zkRollup 战争」，目标在于缓解以太坊的执行瓶颈。但随之暴露出两大局限：一是 EVM 电路化难度高、证明效率受限，二是 ZK 的潜力远超扩容，可延伸至跨链验证、数据证明甚至 AI 计算。
+
+在此背景下，通用 zkVM 崛起，取代 zkEVM 的「以太坊兼容思维」，转向「链无关的可信计算」。zkVM 基于通用指令集（如 RISC-V、LLVM IR、Wasm），支持 Rust、C/C++ 等语言，允许开发者用成熟生态库构建任意应用逻辑，再通过证明在链上验证。RISC Zero（RISC-V）、Delphinus zkWasm（Wasm）即为典型代表。其意义在于：zkVM 不只是以太坊的扩容工具，而是 ZK 世界的「可信 CPU」。
+
+RISC-V 路线：以 RISC Zero 为代表，直接选择开放通用指令集 RISC-V 作为 zkVM 的执行内核。优点是生态开放、指令集简洁、易于电路化，能够承接 Rust、C/C++ 等主流语言编译结果，适合做「通用 zkCPU」。缺点是与以太坊字节码没有天然兼容，需要通过协处理器模式嵌入。
+LLVM IR 路线：以 Succinct SP1 为代表：前端用 LLVM IR 兼容多语言，后端仍基于 RISC-V zkVM，本质是「LLVM 前端 + RISC-V 后端」，比纯 RISC-V 模式更通用，但 LLVM IR 指令复杂，证明开销更大。
+Wasm 路线：以 Delphinus zkWasm 为代表。WebAssembly 生态成熟，开发者熟悉度高，且天然跨平台，但 Wasm 指令集相对复杂，证明性能受限。
+
+进一步的演进中，ZK 技术正走向 模块化与市场化。首先，zkVM 提供了通用可信的执行环境，相当于零知识计算的「CPU/ 编译器」，为应用提供底层的可验证计算能力。在此之上，zk-coprocessor 将 zkVM 封装为协处理器，使 EVM 等链能够将复杂计算任务外包到链下执行，并通过零知识证明回链验证，典型案例包括 RISC Zero Steel 与 Lagrange，其角色可类比为「GPU/ 协处理器」。 再进一步，zkMarketplace 则通过去中心化网络实现证明任务的市场化分发，全球 prover 节点通过竞价完成任务，如 Boundless ，即是构建零知识计算的算力市场。
+
+由此，零知识技术栈逐步呈现出从 zkVM → zk-coprocessor → zkMarketplace 的演进链条。这一体系标志着零知识证明从单一的以太坊扩容工具，进化为 通用可信计算基础设施。而这一演进链条中，以 RISC-V 作为 zkVM 内核的 RISC Zero，在「开放性、可电路化效率、生态适配」之间做了最优平衡。使得它既能提供低门槛的开发体验，又能通过 Steel、Bonsai、Boundless 等扩展层，将 zkVM 演进为 zk-coprocessor 与去中心化证明市场，从而打开更广阔的应用空间。
+
+四、RISC Zero 的技术路径与生态版图
+
+RISC-V 是一种开放、免版税的指令集架构，不受单一厂商控制，具备天然的去中心化特质。RISC Zero 依托这一开放架构，构建出兼容 Rust 等通用语言的 zkVM，突破了以太坊生态内 Solidity 的局限，使开发者能够直接将标准 Rust 程序编译为可生成零知识证明的应用。这种路径让 ZK 技术的应用范围从区块链合约扩展到更广阔的通用计算领域。
+
+RISC0 zkVM：通用可信计算环境
+
+与需要兼容复杂 EVM 指令集的 zkEVM 项目不同，RISC0 zkVM 基于 RISC-V 架构，设计更为开放和通用。其应用由 Guest Code 构成并编译为 ELF 二进制文件，Host 通过 Executor 运行并记录执行过程（Session），Prover 随后生成可验证的 Receipt，其中包含公开输出（Journal）与加密证明（Seal）。第三方仅需验证 Receipt，即可确认计算正确性，而无需重复执行。
+
+2025 年 4 月发布的 R0VM 2.0 标志着 zkVM 进入实时时代：以太坊区块证明时间由 35 分钟缩短至 44 秒，成本降低最高 5 倍，用户内存扩展至 3GB，支持更复杂的应用场景。同时新增 BN254 与 BLS12-381 两个关键预编译，全面覆盖以太坊主流需求。更重要的是，R0VM 2.0 在安全性上引入形式化验证，已完成大部分 RISC-V 电路的确定性验证，目标在 2025 年 7 月实现首个 区块级实时 zkVM（<12 秒证明）。
+
+zkCoprocessor Steel：链下计算的桥梁
+
+zkCoprocessor 的核心理念是将复杂计算任务从链上卸载至链下执行，再通过零知识证明返回结果。智能合约只需验证 Proof，而无需重算整个任务，从而显著降低 Gas 成本并突破性能瓶颈。例如 RISC0 的 Steel，为 Solidity 提供外部证明接口，可以外包大规模历史状态查询或跨区块批量计算，甚至能用一个 Proof 验证数十个以太坊区块。
+
+Bonsai：SaaS 化的高性能证明服务
+
+为满足产业级应用需求，RISC Zero 推出了 Bonsai ，官方托管的 Prover-as-a-Service 平台，通过 GPU 集群分发证明任务，让开发者无需自建硬件即可获得高性能证明。与此同时，RISC Zero 提供 Bento SDK，帮助开发者在 Solidity 与 zkVM 之间实现无缝交互，显著降低 zkCoprocessor 的集成复杂度。相比之下，Boundless 通过开放市场实现去中心化证明，两者形成互补。
+
+RISC Zero 全产品矩阵
+
+RISC Zero 的产品生态围绕 zkVM 向上延展，逐步形成了覆盖执行、网络、市场与应用层的完整矩阵：
+
+五、ZK 市场：信任计算的去中心商品化
+
+零知识证明（ZK）市场将高成本、复杂的证明生成过程解耦，并转化为去中心化、可交易的计算商品。通过全球分布的 prover 网络，计算任务以竞价方式外包，在成本与效率间动态平衡，并以经济激励不断吸引 GPU 与 ASIC 参与者，形成自我强化的循环。Boundless 与 Succinct 是该赛道的代表。
+
+5.1 Boundless：通用零知识计算市场
+
+概念定位
+
+Boundless 是 RISC Zero 推出的通用 ZK 协议，旨在为所有区块链提供可扩展的 verifiable compute 能力。其核心在于将证明生成与区块链共识解耦，并通过去中心化市场机制分发计算任务。开发者提交证明请求后，Prover 节点通过去中心化的激励机制竞争执行，并凭借「可验证工作量证明（Proof of Verifiable Work）」获得奖励。不同于传统 PoW 的无意义算力消耗，Boundless 将算力转化为真实应用的 ZK 结果，使计算资源具备实际价值。
+
+架构与机制
+
+Boundless 市场的工作流程包括：
+
+请求提交：开发者提交 zkVM 程序与输入至市场；
+节点竞价：Prover 节点评估任务并出价，锁定任务后获得执行权；
+证明生成与聚合：复杂计算被拆解为子任务，每个子任务生成 zk-STARK 证明，再通过递归与聚合电路压缩为统一的终极证明，大幅降低链上验证成本；
+跨链验证：Boundless 在多条链上提供统一验证接口，实现一次构建、跨链复用
+
+这种架构使智能合约无需重复执行复杂计算，仅需验证简短证明即可完成确认，从而突破 Gas 上限与区块容量限制。
+
+生态与应用： 作为市场层协议，Boundless 与 RISC Zero 其他产品互补：
+
+Steel：EVM 的 ZK Coprocessor，可将 Solidity 复杂执行迁移到链下并回链验证；
+OP Kailua：为 OP Stack 链提供 ZK 升级路径，实现更高安全性与更快终结性。
+
+Boundless 的目标是在以太坊实现亚 12 秒实时证明，路径包括 FRI 优化、多项式并行化及 VPU 硬件加速。随着节点和需求增长，Boundless 将形成自增强算力网络，不仅降低 Gas 成本，还将开启链上可验证 AI、跨链流动性与无限计算等新应用场景。
+
+5.2 Boundless for Apps：突破 Gas 限制
+
+Boundless for Apps 旨在为以太坊和 L2 应用提供「无限算力」，将复杂逻辑卸载到去中心化证明网络执行，再以 ZK 证明回链验证。其优势包括：无限执行、恒定 Gas 成本、兼容 Solidity/Vyper、跨链原生支持。
+
+其中 Steel 作为 EVM 的 ZK Coprocessor，让开发者能够在 Solidity 合约中实现大规模状态查询、跨区块计算与事件驱动逻辑，并通过 R0-Helios 轻客户端实现 ETH 与 OP Stack 的跨链数据验证。目前已有包括 EigenLayer 在内的项目探索集成，展现其在 DeFi 与多链交互中的潜力。
+
+Steel：EVM 的可扩展计算层
+
+Steel 的核心目标是突破以太坊在 Gas 上限、单区块执行、历史状态访问等方面的限制，将复杂逻辑迁移至链下，再通过零知识证明回链验证。在保证安全性的同时，以恒定验证开销提供近乎无限的算力支持。
+
+在 Steel 2.0 中，开发者可利用三大能力扩展合约设计空间：
+
+事件驱动逻辑：直接以 Event logs 为输入，避免依赖中心化 indexer；
+历史状态查询：访问自 Dencun 升级以来任意区块的存储槽或账户余额；
+跨区块计算：执行跨多个区块的运算（如移动平均、累积指标），并以单个证明提交链上。
+
+这一设计显著降低了成本，Steel 的出现，使得原本受限于 EVM 的应用（如高频计算、状态回溯或跨区块逻辑）得以落地，并逐步成为连接链下计算与链上验证的关键桥梁。
+
+5.3 Boundless for Rollups：ZK 驱动的 Rollup 加速方案
+
+Boundless for Rollups 通过去中心化证明网络，为 OP Stack 等二层链提供更快、更安全的结算路径。其核心优势体现在：
+
+加速终结性：将 7 天的结算时间缩短约 3 小时（Hybrid 模式）或 <1 小时（Validity 模式）；
+更强安全性：通过 ZK Fraud Proof 与 Validity Proof 渐进式升级，提供密码学级安全
+去中心化演进：依托分布式 Prover 网络与低抵押需求，快速迈向 Stage 2 去中心化；
+原生可扩展性：在高吞吐链上保持稳定性能与可预测成本。
+
+OP Kailua：为 OP 链提供 ZK 升级路径
+
+作为 Boundless for Rollups 的核心方案，OP Kailua 由 RISC Zero 推出，专为基于 Optimism 的 Rollup 设计，使团队能够在 性能与安全性 上超越传统 OP 架构。
+
+Kailua 提供两种模式，支持渐进式升级：
+
+Hybrid 模式（ZK Fraud Proof）：用 ZK Fraud Proof 替代多轮交互式 Fault Proof，大幅降低争议解决复杂度和成本。证明费用由作恶方承担，最终性缩短至约 3 小时。
+Validity 模式（ZK Validity Proof）：直接转型为 ZK Rollup，利用零知识有效性证明彻底消除争议，实现 <1 小时最终性，并提供最高级别的安全性。
+
+Kailua 支持 OP 链从乐观 → 混合 → ZK Rollup 的平滑升级，符合 Stage 2 去中心化要求，降低了升级门槛并提升高吞吐场景的经济性。在保持现有应用与工具链连续性的同时，OP 生态可逐步获得快速最终性、更低质押成本和更强安全性。Eclipse 已借助 Kailua 实现 ZK Fraud Proof，加速升级；BOB 则完成向 ZK Rollup 的转型。
+
+5.4 The Signal：跨链互操作的 ZK 信号层
+
+定位与机制
+
+The Signal 是 Boundless 推出的核心应用 —— 一个开源 ZK 共识客户端。它将以太坊信标链的最终性事件压缩为单个零知识证明，任何链或合约都能直接验证该证明，从而实现无需多签或预言机的信任最小化跨链交互。其价值在于赋予以太坊最终状态「全球可读性」，为跨链流动性与逻辑交互奠定基础，并显著降低冗余计算和 Gas 成本。
+
+运行机制
+
+Boost The Signal：用户可通过提交证明请求来「增强信号」，所有 ETH 直接用于请求新的证明，延长信号持续时间，惠及所有链与应用。
+Prove The Signal：任何人都可运行 Boundless Prover 节点，生成以太坊区块的 ZK 证明并广播，取代传统的多签验证，形成「用数学替代信任」的跨链共识层。
+扩展路径：先为以太坊最终确定区块生成连续证明，形成「以太坊信号」；再推广至其他公链，构建多链统一信号；最终在同一密码学信号层上互联，形成「共享波长」，实现无包裹资产、无中心化桥的跨链互操作。
+
+目前已有 30+ 团队参与 The Signal 推进，Boundless 市场上已聚合 1,500+ Prover 节点，竞争 0.5% 代币激励，任何拥有 GPU 的用户均可无许可加入。The Signal 已在 Boundless 主网 Beta 上线，并支持基于 Base 的生产级证明请求。 
+
+六、Boundless 路线图、主网进展与生态
+
+Boundless 的发展遵循清晰的阶段式路径：
+
+Phase I – Developer Access：面向开发者开放早期接入，提供免费证明资源，加速应用探索；
+Phase II – Public Testnet 1：开启公开测试网，引入双边市场机制，开发者与 Prover 节点在真实环境中交互；
+Phase III – Public Testnet 2：引入市场激励与完整经济机制，测试自我维持的去中心化证明网络；
+Phase IV – Mainnet：全面主网上线，为所有链提供通用 ZK 计算能力。
+
+在 2025 年 7 月 15 日，Boundless 主网 Beta 已正式上线，率先在 Base 上进入生产环境。用户可用真实资金请求证明，Prover 节点则以无许可方式接入，单节点最多支持 100 块 GPU 并参与竞价。作为展示性应用，团队推出了 The Signal，这一开源 ZK 共识客户端能将以太坊信标链最终性事件压缩为单个零知识证明，任何链与合约均可直接验证。由此，以太坊的最终状态实现了「全球可读性」，为跨链互操作与安全结算提供基础。
+
+Boundless 浏览器的运行数据显示，整体网络已展现出高速增长与强大韧性。截至 2025 年 8 月 18 日，累计处理 542.7 万亿计算周期，完成 39.9 万笔订单，覆盖 106 个独立程序。单笔最大证明规模突破 1060 亿计算周期（8 月 18 日），网络算力峰值达到 25.93 MHz（8 月 14 日），均刷新了行业纪录。从订单履约情况看，日均订单数在 8 月中旬一度突破 1.5 万笔，每日算力峰值超过 40 万亿周期，展现了指数级增长态势。同时，订单履约成功率始终维持在 98%–100% 的高水准，证明市场机制已相当成熟。更值得注意的是，随着 prover 竞争加剧，单周期成本已下降至接近 0 Wei，意味着网络正进入高效、低成本的大规模计算时代。
+
+此外，Boundless 吸引了一线矿工的积极参与。比特大陆等头部厂商已着手研发专用 ASIC 矿机；6block、Bitfufu、原力区、Intchain、Nano Labs 等厂商加入网络将既有矿池资源转化为 ZK 证明计算节点，矿工群体的加入使得 Boundless 的 ZK 市场进一步迈向规模产业化阶段。
+
+七、ZK Coin 代币经济模型设计
+
+ZK Coin（ZKC）是 Boundless 协议的原生代币，也是整个网络的经济与安全锚点。其设计目标是构建一个可信、低摩擦、可持续扩展的零知识计算市场。ZKC 总量为 10 亿枚，采用逐年递减的通胀机制：首年年化通胀率约为 7%，逐步下降至第 8 年的 3%，并在此水平保持长期稳定。所有新发行的代币通过 可验证工作量证明（Proof of Verifiable Work, PoVW） 分配，确保发行直接与真实的计算任务绑定。
+
+Proof of Verifiable Work（PoVW） 是 Boundless 的核心创新机制，它将「可验证计算」从一种技术能力转变为可度量、可交易的商品。传统区块链依赖所有节点的重复执行，受限于单节点算力瓶颈，而 PoVW 通过零知识证明实现单次计算、全网验证，并引入无信任的计量体系，将计算工作量转化为可定价的资源。由此，计算不仅能按需扩展，还能通过市场发现价格、签订服务合约、激励 Prover 节点，形成需求驱动的正循环。PoVW 的引入让区块链首次摆脱算力稀缺，支持跨链互操作、链下执行、复杂计算与隐私保护等应用场景，为 Boundless 打造普适的 ZK 计算基础设施奠定了经济与技术双重基础。
+
+代币角色与价值捕获
+
+ZK Coin（ZKC） 是 Boundless 的原生代币，也是整个网络的经济支柱：
+
+质押抵押：Prover 必须在接单前质押 ZKC（通常 ≥10× 最大请求费用），若超时未交付则被罚没（50% 销毁，50% 奖励其他 prover）。
+Proof of Verifiable Work (PoVW)：Provers 通过生成零知识证明获得 ZKC 激励，类似挖矿机制。奖励分配为：75% 给 prover、25% 给协议质押者。
+通用支付层：应用方用自身原生代币（如 ETH、USDC、SOL）支付证明费用，但 prover 需用 ZKC 质押，因此所有证明都由 ZKC 背书。
+治理功能：ZKC 持有者可参与 Boundless 治理，包括市场机制、zkVM 集成、基金拨款等。
+
+代币分配（初始供应 10 亿枚）
+
+生态增长（49%）
+
+31% 生态基金：支持应用开发、开发者工具、教育与基础设施维护；线性解锁至第 3 年。
+18% 战略增长基金：用于企业级集成、BD 合作与机构 prover 集群引入；12 个月内逐步解锁，与合作成果挂钩。
+
+核心团队与早期贡献者（23.5%）
+
+20% 给核心团队与早期贡献者，25% 一年 cliff，剩余 24 个月线性解锁。
+3.5% 分配给 RISC Zero，用于 zkVM 研发与研究基金。
+
+投资者（21.5%）：战略资本与技术支持者；25% 一年 cliff，剩余两年线性解锁。
+
+社区（约 6%）：社区公募与空投，增强社区参与度；公募 50% TGE 解锁，50% 6 个月后解锁；空投 100% TGE 解锁。
+
+ZKC 是 Boundless 协议的核心经济与安全锚点，既作为抵押担保保障证明交付，又通过 PoVW 将发行与真实工作量绑定，同时充当支付背书层承载全链 ZK 需求，并在治理层面赋能持币者参与协议演进。随着证明请求增加与惩罚销毁机制叠加，更多 ZKC 被锁定并退出流通，在需求增长与供给收缩的双重作用下形成长期价值支撑。
+
+八、团队背景及项目融资
+
+RISC Zero 团队成立于 2021 年。团队由来自 Amazon、Google、Intel、Meta、Microsoft、Coinbase、Mina Foundation、O(1) Labs 等知名科技与加密机构的工程师与创业者组成，已打造出全球首个可运行任意代码的 zkVM，并正基于此构建通用零知识计算生态。
+
+Jeremy Bruestle – Co-founder & CEO, RISC Zero
+
+Jeremy 是一位资深技术专家与连续创业者，拥有超过二十年的系统架构与分布式计算经验。曾任 Intel Principal Engineer、Vertex.AI 联合创始人兼首席科学家，并在 Spiral Genetics 担任联合创始人及董事会成员。他于 2022 年创立 RISC Zero 并担任 CEO，主导 zkVM 技术的研发与战略，推动零知识证明在通用计算领域的落地。
+
+Frank Laub – Co-founder & CTO, RISC Zero
+
+Frank 长期深耕深度学习编译器与虚拟机技术，曾在 Intel Labs 与 Movidius 从事深度学习软件研发，也曾在 Vertex.AI、Peach Tech 等公司积累了丰富的工程经验。自 2021 年共同创立 RISC Zero 以来，担任 CTO，主导 zkVM 内核、Bonsai 网络和开发者工具链的建设。
+
+Shiv Shankar – CEO, Boundless
+
+Shiv 拥有超过十五年的科技与工程管理经验，涉足金融科技、云存储、合规与分布式系统等多个领域。2025 年起担任 Boundless CEO，领导产品与工程团队，推动零知识证明市场化与跨链计算基础设施建设。
+
+Joe Restivo – COO, RISC Zero
+
+Joe 是三次成功退出的创业者与运营专家，具备丰富的组织管理与风控经验。两家公司先后被 Accenture 与 GitLab 收购。他在西雅图大学商学院教授风险管理课程。2023 年加入 RISC Zero，现任 COO，负责全公司运营与规模化管理。
+
+Brett Carter – VP of Product, RISC Zero
+
+Brett 具备丰富的产品管理与生态经验。曾在 O(1) Labs 担任高级产品经理。2023 年加入 RISC Zero，现任产品副总裁，负责产品战略、生态应用落地以及与 Boundless 的市场对接。
+
+在融资方面，RISC Zero 于 2023 年 7 月完成 4,000 万美元的 A 轮融资，由 Blockchain Capital 领投，种子轮领投方 Bain Capital Crypto 继续参投，其他投资方还包括 Galaxy Digital、IOSG、RockawayX、Maven 11、Fenbushi Capital、Delphi Digital、Algaé Ventures、IOBC、Zero Dao（Tribute Labs）、Figment Capital、a100x 与 Alchemy 等。
+
+九、ZKVM 及 ZK 市场竞品分析
+
+目前市场上同时具备 zkVM 与 zkMarketplace 的代表性项目是 Succinct，由 SP1 zkVM 与 Succinct Prover Network (SPN) 组成。SP1 基于 RISC-V 构建，并通过 LLVM IR 前端兼容多语言；SPN 部署在以太坊上，通过 staking 与竞价机制分配任务，并以 $PROVE 代币承担支付、激励与安全功能。相比之下，RISC Zero 采取「双引擎」战略：一方面由 Bonsai 提供官方托管的 Prover-as-a-Service，高性能、稳定，面向企业级应用；另一方面通过 Boundless 构建开放的去中心化证明市场，允许任何 GPU/CPU 节点自由加入，最大化去中心化与节点覆盖，但性能一致性相对不足。
+
+Risc Zero 同时兼顾开放与工业化落地，而 Succinct 更聚焦于高性能与标准化路径。
+
+Risc Zero(zkVM + Bonsai + Boundless) 与 Succinct (SP1 zkVM + SPN) 区别与定位
+
+RISC-V 与 Wasm 的比较
+
+RISC-V 与 WASM 是通用 zkVM 的两条主要路线，前者是硬件级开放指令集，规则简洁、生态成熟，利于电路性能优化和未来可验证硬件加速；但与传统 Web 应用生态结合有限。WASM 则是跨平台字节码，天然支持多语言和 Web 应用迁移，运行时成熟，但因栈式架构性能上限低于 RISC-V。总体而言，RISC-V zkVM 更适合追求性能与通用计算扩展，zkWasm 则在跨语言与 Web 场景中具备优势。
+
+十、总结：商业逻辑、工程实现及潜在风险
+
+ZK 技术正在从单一扩容工具演进为区块链可信计算的通用基石。RISC Zero 以开放的 RISC-V 架构突破 EVM 依赖，将零知识证明扩展到通用链下计算，并催生了 zk-Coprocessor 与去中心化证明市场（如 Bonsai、Boundless）。它们共同构建起一个可扩展、可交易、可治理的计算信任层，为区块链带来更高性能、更强互操作性与更广阔应用场景。
+
+当然 ZK 赛道短期内仍面临不少挑战：2023 年一级市场炒作 ZK 概念见顶后，2024 年主流 zkEVM 项目上线亦消耗二级市场热度。此外，L2 头部团队多采用自研 prover，跨链验证、zkML、隐私计算等应用场景仍处早期，可撮合的任务有限。这意味着开放 proving marketplace 的订单量难以支撑庞大网络，其价值更多在于前置聚合 prover 供给，以在未来需求爆发时抢占先机。与此同时，zkVM 虽然技术门槛低，但难以直接切入以太坊生态，未来可在链下复杂计算、跨链验证及非 EVM 链对接等场景具备独特补充价值。
+
+总体来看，ZK 技术的演进路径已逐渐明晰：从 zkEVM 的兼容性探索，到通用 zkVM 的出现，再到以 Boundless 为代表的去中心化证明市场，零知识证明正在加速商品化与基础设施化。对于投资者与开发者而言，当前或许仍是验证期，但它孕育着下一轮产业周期的核心机遇。
+
+ 
+
+点击了解 ChainCatcher 在招岗位
+
+ 
+
+推荐阅读：
+
+交易所上币策略转向：DEX 发行崛起与二次上币主导的新格局
+
+Backroom：信息代币化，AI 时代数据冗杂的解决方案？| CryptoSeed
+
+对话 Saros CEO Lynn Nguyen：完成 3800 万美元回购后，如何在 Solana DEX 赛道杀出重围？

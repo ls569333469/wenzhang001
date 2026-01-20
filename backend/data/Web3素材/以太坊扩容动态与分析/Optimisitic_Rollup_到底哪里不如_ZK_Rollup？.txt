@@ -1,0 +1,55 @@
+标题: Optimisitic Rollup 到底哪里不如 ZK Rollup？
+链接: https://www.chaincatcher.com/article/2077310
+发布时间: 2022-08-01
+
+==================================================
+
+原用标题：《Optimistic Rollups 的胜负手》
+
+作者：IOBC Capital
+
+ 
+
+Vitalik 在 2021 年曾说：
+
+In general, my own view is that in the short term, optimistic rollups are likely to win out for general-purpose EVM computation and ZK rollups are likely to win out for simple payments, exchange and other application-specific use cases, but in the medium to long term ZK rollups will win out in all use cases as ZK-SNARK technology improves.
+
+（总的来说，我自己的观点是，在短期内，Optimistic Rollups 可能会在通用 EVM 计算方面胜出；而 ZK Rollups 可能会在简单的支付、交易和其他特定用途的应用场景中胜出。但随着 ZK-SNARK 技术的改进，中长期来讲 ZK Rollups 会在所有应用场景中胜出。）
+
+现在名声最响的 ZK Rollups 项目都还没有发币，比如 zkSync、StarkEX、StarkNet、Aztec 等，而 Optimistic Rollup 的绝代双骄中 Optimism 的代币已经在各大主流交易所流通交易，而且最近随着加息落地、ETH2.0 临近、OP 空投的抛压盘消化殆尽等各方面因素影响，OP 价格也有不错的表现。面对这强势的币价表现，许多人不由得就会想问：OP 到底哪里不如 ZK？
+
+我先列一下 Optimisitic Rollup 与 ZK Rollup 的几个最关键的区别：
+第一，安全性，ZK Rollup 优于 Optimistic Rollup。zk Rollup 提交给 L1 的新状态随附了 Proofs，可继承 L1 的安全保证；而 Optimistic Rollup 提交给 L1 的新状态没有随附证明，当 TVL 增长到一定量时，矿工可能被贿赂从而导致错误发生后的欺诈证明不被纳入区块中，继而发生被盗风险；
+第二，拓展性，ZK Rollup 优于 Optimistic Rollup。Optimistic 的实际吞吐量上限为 500TPS，而 ZK 超过 2000TPS，StarkEx 甚至可达到 9000TPS；
+第三，可验证最终性，ZK Rollup 优于 Optimistic Rollup。zk Rollup 的最终确定性时间很短，比如 zkSync 是 10 分钟；而 Optimistic Rollup 的最终确定性时间最少为一周。两者相比资本效率相差很大；
+第四，EVM 兼容性，Optimistic Rollup 优于 ZK Rollup。Optimistic Rollup 兼容 EVM，他们可以非常快速、便捷地将现有的 Ethereum Layer1 上的各种 Dapps 吸引过去，所以目前 Optimistic Rollup 系列的 Layer2 项目的 TVL 排名靠前。不过，随着 zkVM 的研发，Optimistic Rollup 的这个优势也将被削弱。
+
+要搞清楚为什么 Optimistic 安全性不如 ZK、资本效率低，需要了解 Optimistic Rollup 的工作原理，接下来以 Arbitrum Rollup 为例：
+
+Arbitrum Rollup 是一种 Optimistic Rollup。其基本架构如下图：
+
+Arbitrum 是作为 Ethereum 的 Layer2 协议，EthBirdge 是 Arbitrum 链中正在发生的事情的最终权威来源，也需要维护链的 Inbox/Outbox。Aribtrum 的执行环境是 AVM，AVM 的设计起点是 EVM，在许多方面都没有改变，所以 Arbitrum 支持 EVM 编写或编译的程序。Offchain Labs 给 Arbitrum 编写的操作系统是 ArbOS，ArbOS 为智能合约提供了与 EVM 兼容的执行环境，所以 ArbOS 这个操作系统中可以运行 EVM 兼容的 Dapps，也就意味着 Ethereum 链上的各种 Dapps 可以直接迁移过来。
+
+Arbitrum 在 Arbitrum Rollup 链上发生的所有交易都是记录在 Rollup 链上的。在 Arbitrum 上执行交易也需要 ETH Gas Fee，但比 Layer1 上更便宜很多。提交到 Ethereum 链上的是原始交易数据，合约的计算执行和存储是在 Arbitrum Rollup 链上。优化交易压缩以最大限度地减少需要在 Ethereum 链上发布的内容，对于 Layer2 降低成本和提高吞吐量至关重要。对于不携带自己的 Calldata 的简单转账交易，基准测试表明：Arbitrum 允许每秒最多 4500 笔转账交易。
+
+ 
+
+如何达成共识？
+
+ 
+
+Arbitrum Rollup 是一种乐观的 Rollup，也就是说先默认大家都是诚实的，所以在发布断言时，不要求随附证明其有效性。而是采取欺诈证明的机制来确保 Layer2 网络的正确共识。
+
+Arbitrum 的欺诈证明（Fraud Proofs）：当断言（Assertion）在链上发布时，做出该断言的验证者会发布保证金，并且有一个时间窗口，如果他们认为这是错误的，任何人都可以发布自己的保证金并质疑断言。在挑战窗口期，断言者和挑战者可以来回交互协议，链上合约充当协议的裁判。最后，裁判确定一方提出了虚假索赔，没收保证金来惩罚该方。
+
+那么 Arbitrum 究竟是怎么解决挑战期内的争议的？
+
+核心是交互式证明（Interactive Proving）。这其实是一种对争议做细化剖析，来寻找关键争议点，并通过 Layer1 Referee（L1 裁判）来判断的方案。
+
+举例说明：假设 Alice 提交了一个断言（承诺 93 是正确的），而 Bob 不同意并发起了挑战（并承诺 95 才是正确的）。如果 Alice 的声明涵盖了 N 个执行步骤，则她发布两个大小为 N/2 的声明，它们结合起来产生她的初始 N 步声明，然后 Bob 选择 Alice 的 N/2 步声明中的一个来挑战。现在争议的规模已经减少了一半。这个过程继续进行，在每个阶段将争议减半，直到他们对一个执行步骤产生分歧。将争议缩小到一个步骤时，L1 裁判才需要通过查看指令实际执行的操作以及 Alice 关于它的声明是否正确来解决争议。
+
+Arbitrum 采用的交互式证明与 Ethereum Layer1 采用的重新执行交易（Re-executing Transaction）相比，区别在于：重新执行交易是需要模拟整个交易的执行，而交互式证明是让 Alice 和 Bob 两个人自己把争议缩小到一个步骤，从而使得 L1 裁判只需要模拟 1 个交易的执行。Arbitrum 和 Optimism 的区别也体现在争议的解决上，Optimism 是把整个有问题的交易都通过 EVM 运行。
+
+由上可知，Optimistic Rollups 之所以安全性不如 ZK、资本效率低，关键在于证明机制不同。
+
+回归到扩容的初心，相对于以太坊 L1 的性能，Optimistic Rollup 其实已经实现了扩容的主要目的，而且因为 Optimistic Rollups 有 EVM 兼容的优点，发展情况还不错。在 Layer2 项目的 TVL 排行榜上，Optimistic Rollups 的绝代双骄 Arbitrum 和 Optimism 分别以 2.48B 和 1.04B 的 TVL 位列前 2。Arbirum 生态入驻了 21 种分类的 249 个应用协议，Optimism 生态也有 179 个项目。

@@ -1,0 +1,7 @@
+{
+  "title": "慢雾：Grafana 最近疑似遭遇攻击",
+  "url": "https://www.chaincatcher.com/article/2178971",
+  "content": "ChainCatcher 消息，慢雾科技首席信息安全官 23pds 在 X 平台发文称，开源数据可视化工具 Grafana 最近疑似被攻击，攻击者使用 Gato-X 窃取机密的签名，用 App 令牌对多个代码库进行了攻击。这个工作流程有一个可能相关的应用程序私钥，疑似攻击者使用精心设计的分支名称，注入 JavaScript 代码并窃取机密信息。",
+  "published_at": "2025-04-27",
+  "downloaded_at": "2026-01-17 17:11:56"
+}

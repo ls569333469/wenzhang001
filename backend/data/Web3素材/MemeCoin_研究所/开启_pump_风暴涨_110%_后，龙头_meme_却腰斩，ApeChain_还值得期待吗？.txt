@@ -1,0 +1,64 @@
+标题: 开启 pump 风暴涨 110% 后，龙头 meme 却腰斩，ApeChain 还值得期待吗？
+链接: https://www.chaincatcher.com/article/2148139
+发布时间: 2024-10-21
+
+==================================================
+
+作者：flowie，ChainCatcher
+编辑：念青，ChainCatcher
+
+ 
+
+昨日，沉寂多日的 Bored Ape Yacht Club 母公司 Yuga Labs 开启了一系列大动作。
+
+Yuga Labs 先是正式宣布推出 Layer2 公链 ApeChain。随后 ApeChain 链上版本的“pump .fun”、一键发币平台 Ape Express也紧跟其后上线。
+
+为了吸引用户参与ApeChain生态，ApeChain还推出了跨链桥Ape Portal、并为该链上稳定币持有者提供了自动收益模式，跨链到 ApeChain 的稳定币会被转换为 DAI 并存入 sDAI，根据 MakerDAO 的储蓄利率累积收益。
+
+此外，ApeChain还与专为AI 代理经济设计的通用基础设施Wire Network 达成了战略性合作，以开拓未来AI 代理可以代表人类执行复杂任务的新领域。
+
+随着 ApeChain 上的 CURTIS 、DOOKEY 等生态首批 meme 币发行后，迅速引起了社区的 fomo 情绪。
+
+ApeChain 开启 meme 热，APE 单日涨幅超 110 %
+
+根据ApeChain浏览器提供的数据，ApeChain 在Ape Express上线1小时后交易量便突破了100万美元，12 小时内累计交易量便超过2500 万美元。
+
+CURTIS是ApeChain生态最早跑出来的meme龙头，CURTIS市值在上线15后便突破了1000万美元，并在昨晚8点左右突破了3000万美元。
+
+不久后，据余烬监测表示，一地址花费 1140 美元购买的 CURTIS 价值在昨晚已浮盈255 万美元。
+
+据 Lookonchain 监测，在过去的 30 个小时里，某交易员在 ApeChain 上交易了 18 笔 Meme 币，并捕获了 CURTIS，获得了 300 倍的利润。
+
+ApeChain 上的meme也助推APE代币价格昨日一度突破1.7美元，单日涨幅超110%。截至发稿，APE回落至 1.47美元，24h 涨幅超63%。APE的市值也突破10亿美元，创近三个月新高。
+
+Yuga Labs 旗下NFT 系列的地板价也出现短时回暖。Bored Ape Yacht Club (BAYC) 、Mutant Ape Yacht Club (MAYC)、Bored Ape Kennel Club (BAKC) 、Otherside Koda 等地板价在昨日实现超10%-20%的涨幅。
+
+“龙一”meme 市值大幅回撤，ApeChain 还值得期待吗？
+
+ApeChain 上热度似乎没有预想中持续的久。
+
+截至发稿，ApeChain上的龙一meme CURTIS大幅回撤市值跌破1000万美元，暂报800万美元。近6小时跌幅超40%。
+
+从跨链数据来看，Dune数据面板显示，ApeChain 在昨晚8点左右，CURTIS市值突破3000万美元的峰值之际，便没有增量资金进入，并开始了持续净流出。
+
+对于ApeChain不够强势的头部效应，一些加密kol对于ApeChain后续走势暂时表达了一些悲观情绪。
+
+加密kol @yuyue_chris称，CURTIS在重要的3000万市值关卡没有稳住，同时不少 BAYC 的大 V 实际上并没有龙一的持仓，相继各自搞自己的币，没有集中火力干龙头。而“没有头部效应的链上生态就像一盘散沙，风一吹就散了。”
+
+@BroLeonAus也表示对Apechain二次回春并不抱有太大希望。@BroLeonAus认为太多人冲的只是一个预期而已，Yuga labs落地运营能力的短板已经在之前猴地等事件中暴露无疑，透支了信任。
+
+发链推 pump 炒 meme 成为一种潮流？
+
+meme的持续火爆，也成为各大公链必行的战略。继Solana后，TRON、BSC、Sui等各大公链都推出链上的“pump”平台，争做meme玩家的新大陆。
+
+这或许启发了公链之外的各领域项目方，它们先通过发链，甚至推出其链上的“pump .fun”平台来吸引meme热钱涌入。
+
+上周除了Yuga Labs 外，Worldcoin 也上线了公链 World Chian 主网。上线当天，Worldchain 也一度成为了 meme 玩家的热土。
+
+近日，dYdX 基金会首席执行官 Charles d'Haussy 宣布回归，并表示将将揭示关于护城河、特洛伊木马和飞轮的秘密，也被加密社区用户猜测将上线其链上的“pump .fun”开启 meme 热潮，dydx 代币昨日也大涨30%。
+
+而从过往的表现来看，各大公链或项目方效仿Solana的meme pump 模式虽能获得短期关注，但大部分面临昙花一现的困境。
+
+加密 KOL @yuyue_chris 认为对公链项目方来说，“仅仅只是 pump.fun 产品很难 pump （持续拉升）你的币价，资金硬件是核心。”如果想用 pump.fun 类产品实现流动性和声量的双赢，可能还是先要有资金驱动的硬件条件才比较容易顺水推舟。
+
+而对散户来说，@yuyue_chris 建议先判断链上是否有行情，最好先观察该链的主币是否处于上升趋势，有没有 CEX 内的山寨币机会，基于这一资金趋势才能带动链上溢出造成财富效。“不是所有公链推出一个 pump.fun 就都能拉盘。”

@@ -1,0 +1,185 @@
+标题: 传统 VC 与 Crypto VC，究竟有何不同？
+链接: https://www.chaincatcher.com/article/2072208
+发布时间: 2022-04-01
+
+==================================================
+
+撰文：@cjin, Tonic Fund Co-Founder
+
+ 
+
+前言
+
+ 
+
+在去年(2021/8) 因好友在Facebook 贴文建议– 如果是Crypto 项目筹资，第一重要是：「不要再找不是专业的Crypto 投资人了」。我当时快速贴文写了几个传统VC 和Crypto VC 投资上的差异。
+
+2022 Q1 快结束了，我想再整理一下，从VC 的角度，看Crypto 带起新创投资生态的剧烈变化。
+
+Web2 进入Crypto/Web3 时代，真的有很大不同吗？
+
+ 
+
+Web2 时期的早期创投
+
+ 
+
+其实回溯2010 年代Web2 兴起时，因软体新创的创业开发成本降低，初期需要资金不多，当时创投产业最剧烈的改变就是诞生了很多天使、早期基金、加速器，或成立专投Social apps 的基金、Mobile apps 的基金、甚至还有投资Google Glass apps 的基金.. 等。
+
+当年许多「传统创投或投资部门」，也纷纷请年轻人看早期新创的案子，或透过投资早期基金来接触新创。
+
+本来各个领域投资人都是不同专业，就像有人擅长的是半导体、有人软体、生技，至于是不是「专业的crypto 投资人」，除了对产业专业的了解，我们从equity vs token 投资说起：
+
+ 
+
+传统创投基金可以买Token (代币) 吗？
+
+ 
+
+传统创投在投资公司，是拿现金去购买公司发行的equity (股份), “Crypto” Projects 很自然是发Token。
+
+每个创投基金当初在设立时会和基金投资人签LPA （Limited Partnership Agreement - 基金与基金投资人的投资合约），不一定有买token 的弹性。像是设立在美国的创投基金，一般只有20% 的额度可以买Token 这高风险的资产类别，创投基金管理人跟其需要有共识， LP 有没有承受高风险的意愿，尤其许多LP 都是更传统的大公司和基金。
+
+ 
+
+Token vs Equity 公开发行速度
+
+ 
+
+创投基金原本是在公司i) IPO、 ii) 并购、iii) 清算或iv) 次级市场交易时，才有股份变现的机会。现在很多情况是， Crypto Projects 跟投资人筹完一轮，甚至没跟VC 筹资，就上币到交易所，没有以往股权型态公司筹资经历的Series ABCDE.. Pre-IPO 的概念。
+
+以这样的速度看，作为创投基金如果没有在第一轮就投到，再来就要在交易所跟散户一样在公开市场买吗?
+
+最近VC 想投资已发币的团队的做法是，VC 会跟Project 谈个市场价折价，但VC 就得要说服创办人跟社群或基金会提案说明——我这家VC 可以帮什么，这也让VC 不得不在很早期就得出手抢案子。
+
+衍生的故事：
+
+可以看Sushiswap 的例子。他们去年的筹资计划似乎就无疾而终了。社群（token 持有人aka 散户) 对想投资的创投有很多提问——到底你们VC 除了钱，还可以帮什么？（Sushi 要筹资的话，我们散户也有啊）。
+
+「Sushi 社群」还投票为想投资的VC 评分，平常没在经营「Crypto 社群的传统VC」，好比有名的: True Ventures, Lightspeed 竟然都被社群排在末段，这平行世界啊……
+
+ 
+
+Token vs Equity 流通性
+
+ 
+
+Crypto VC 面对已在流通的token 要怎么决定持有或买卖，跟以往股份投资为主的VC 基金长期持有心态不同。
+
+如果投资的这些token 上了交易所，创投面对投资项目发的币上市，散户都可以买卖，你却还没解锁，就算闭锁期到期开始线性解锁，很多人还会去查你钱包有没有“hodl” 这个token，遇到市场大好，币价超涨时。
+
+你会不会想用另一个钱包在期货市场去做空来让基金赚钱（或避险少赔），或基金LP 希望你赶快获利了解时，这档基金有弹性这么做吗？这恐怕也是传统VC 还没想过的。
+
+Are you ?
+
+市场的改变不只在Crypto 圈，传统新创也是朝更早期公司出手。
+
+之前新创上市，是公司从Seed → ABCDE 轮才上市出场。这几年欧洲美国开放比较宽松的Equity Crowdfunding (股权众筹)，美国前两年流行的SPAC (2022 SPAC 已经冷掉了) 也让公司更提早可以跟一般散户投资人筹资。
+
+综合以上2)、3)，也造成了现在Crypto 圈争抢项目最早期的投资机会。
+
+ 
+
+Crypto 圈的排外心态
+
+ 
+
+这几年Crypto 圈出现很多创新的生意模式、新的筹资发币上市方式，有的Crypto Projects 像社会实验般。但像各个行业，也会有杂鱼。很多投身Crypto 圈的人，即使是有创新想法的开发者，也常常被媒体或不喜欢新科技的人，一视同仁地认为区块链圈都是黑产或是诈骗。
+
+这导致相信Crypto 的人，就会说出「few understand」、「WAGMI」，这态度像是，我知道Crypto 是未来，懂的人就懂，还要跟不相信的投资人辩论是很累的，NGMI。
+
+当听到疲乏的老Web2 的现任创业者或投资人发表对Web3 各种新作法的不以为然，或搬出人类在一次大战前制定的法律时，年轻世代为主的Web3 创业者，自然有防御心态，想先接触已经是在同一个轨道上前进的创业者、创投。 
+
+ 
+
+到底VC 可以帮什么?
+
+ 
+
+举2021/8 Paradigm 研究员为Sushiswap 拯救了3.5亿美元这个例子。
+
+Paradigm是许多crypto 团队最向往的Crypto fund。Paradigm 的两位创办人一位是Fred Ehrsam (Coinbase联合创始人) 另一位Matt Huang (前Sequoia Partner)。
+
+Paradigm 里面有很多厉害的研究员，其中一位@samczsun 挽救Sushiswap 的漏洞，使得3.5亿美元免于被攻击。
+
+这个有点超级英雄的故事了，有趣的是，Paradigm 是Uniswap 的投资人且还帮Uniswap 设计了V3，但发现Uni 的竞争者& 致敬者的Sushi 发生危机（Sushi 甚至自己都不知道) 却会主动帮忙救火。
+
+后来2021/11 时，samczsun 又救了一次dYdX 智能合约免于被骇:
+
+回到Paradigm，但每个VC 都有这么强的技术能力可以帮团队吗？团队都可以自己发币上市筹资了，到底VC 可以帮什么呢？
+
+ 
+
+传统VC vs Crypto VC 如何评估投资案？
+
+ 
+
+i) 卖方市场：先筹资再开发、获客
+
+如前面所说，早期创业投资已经蓬勃发展10几年，很多人在评估Web2 软件创业都有非常丰富经验，从市场、团队、产品、Traction，到产品各种数据都有一堆判断指标看团队有没有找到PMF (Product-Market Fit)。
+
+但评估Crypto Projects 有些天生的难度：
+
+Web2 创投爱问团队：Active Users、Retention、CAC、LTV .. 等，可许多Web3 的公司产品都还没开发，没有用户没有Retention。
+
+Web2 通路都花钱在Google/Facebook 广告，计算CAC 不是难事。可现在大部分Crypto Projects 无法透过 Google/Facebook 买广告。
+
+还记得在Web2 时代一篇很红的文章- “ Growth Hack is the new VP Marketing ” ?
+
+现在的Crypto Projects 状况：Tokenomics is the new VP of Growth (这不是什么名言，只是我说的）  
+
+Crypto VC 关心重点除了生意本身，也要理解Tokenomics 怎么设计能让项目成长。
+
+ii) 可以投匿名、社群营运的团队、或非公司型态的DAO、Remote 型态的团队吗？
+
+重隐私、去中心化、直接信任Smart Contract 算是区块链项目的天性，至少Bitcoin 就是个匿名的例子。
+
+如果愿意以真实身份面对投资人和社群当然还是可以增加团队的Social Proof。
+
+疫情前很多创投只投某些地区的团队（好比只投硅谷公司)，以往会投资国际团队的创投，通常会亲自出国去尽职调查(Due Diligence) 。
+
+这波Web3 起飞时期，大家都在疫情期间营运跨时区的remote 型态，很多Crypto projects 至今没实体见过自己成员。
+
+Crypto-native VC 和他们的LP 对这样生态习以为常，甚至也可以看到匿名创投合伙人出现(如Starry Night Capital的GP @vvd )、或宣称对anon-friendly 的crypto fund - dao5，或创投自己都尝试成立DAO (如: 传统大创投Bessemer 成立了BessemerDAO )
+
+iii) 资金运用
+
+优秀的Crypto Projects 都是面向全球市场，在这个产业大家都是全球在竞争Crypto 客户跟人才。以前硅谷投资人会抱怨投资都被创业企业付给了旧金山的房租、薪水，而传统VC 现在要能体谅，即使一个在亚洲的团队，他们也是在跟硅谷抢人才跟用户，要全球竞争，付出去的薪资也是会很可观。
+
+这些Crypto 原生的创业生态，对传统创投评估满有挑战。
+
+投资竞争者
+
+以往早期创投都会避免投到portfolio 的竞争对手，为了支持自己的团队，也避免利益冲突，万一投到彼此在同个领域竞争，还得公开解释。
+
+比如，a16z 创始合伙人 Marc Andreessen 亲自在Quora 回答为什么同时投资到PicPlz 和Instagram两个都是social photo apps?
+
+传统创投出身的Crypto Fund，目前都还避免投资互相竞争的团队。但新兴的Crypto VC，满多背景来自Hedge fund、交易员，他们过去公开市场的经验并不会意识投到竞争的团队有什么不好，且操作比较短线。
+
+参与社群、Meme
+
+Crypto「社群」主要聚集在几个Web2 的服务：Discord、Telegram、Twitter 或Signal，因传统VC 以前在建立的客户社群是针对创业者，不需和投资公开市场的散户对话，但在Crypto 时代，人人都可参与投资早期团队，也都抢社群的话语权当Degen，尤其Crypto 社群中还充满各种迷因（Meme）、缩写跟梗图。
+
+传统VC 在过去规矩说话的包袱下，在Crypto 圈很不讨喜，但现在要进入Crypto 圈，创投要面向的客户群不只是创业者，投资界「同业」也不只是其他创投，要和「社群/ 投资人/ 用户」这几个越来越重叠的角色一起参与投资，甚至这群「社群/ 投资人/ 用户」影响Project 方向的声量可能更大（当然未必是好事）。
+
+传统VC 要怎么应对，我现在能想到最好的方式，大概也只能是传统创投自己spin off 一个Crypto Fund ，至少要spin off 一个「intern」口吻的Twitter 账号。
+
+1/ Sequoia 从twitter 开始用一些币圈术语透露要进入Crypto。
+
+2/ Crypto Fund - Zeeprime自嘲自己是在社群对VC 评分中的meh 群，且总是在一堆Party Round 的募资新闻公关稿被排到知名创投之后的“and others”。
+
+3/ CMS Holdings除了主账号，还有一个CMS intern账号，除了平常帮大家贴重点笔记，发能贴近社群的推文。
+
+ 
+
+传统创投参与Crypto
+
+现在Crypto Projects 在募资同时就需要布局一些资源：有实际运营经验的Crypto 创业者、有设计Tokenomics 经验、能和不同链、交易所、Protocol 介绍合作、有社群声量的KOL、可活络市场的交易员……。
+
+以上这些，目前传统VC 架构下不容易参与，所以也会陆续看到各传统VC 需要独立出自己的Crypto Fund。
+
+Sequoia 成立Crypto Fund 时说，成立Crypto Fund 是他们第一次为单一产业成立基金。基金主要要操作liquid token (流通代币)，包括投资、质押、提供流动性、参与治理。
+
+前Pantera GP 的新基金- DAO5将VC 和创业者更紧密结合利益：要让被投资的创办人也能获得token，参与DAO 的决定。
+
+Crypto 圈变化好快，去年的贴文如今又有很多新的做法，以上先分享这段时间观察。

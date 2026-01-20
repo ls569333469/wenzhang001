@@ -1,0 +1,78 @@
+标题: 看好 Hyperliquid 的七大理由：从 DEX 到 L1 生态的进化之路
+链接: https://www.chaincatcher.com/article/2204339
+发布时间: 2025-09-09
+
+==================================================
+
+作者：Aylo
+
+编译： Bernard ， ChainCatcher
+
+ 
+
+在加密货币领域，真正能够挑战中心化交易所霸权地位的去中心化项目屈指可数。Hyperliquid 正是其中最引人注目的一个，不仅在产品层面实现了突破，更在经济模型和生态建设上展现出独特的竞争优势。正如 2023 年底 Solana 生态爆发时的盛况，Hyperliquid 生态系统正处于类似的早期爆发阶段。
+
+01 Hyperliquid 体现了真正的加密精神
+
+Hyperliquid 从无需 KYC 、零 Gas 费、用户体验顶级的 DEX 起步，逐渐构建起自己的 L1 生态。其成功源于一系列的”组合拳”：
+
+自筹资金: 没有任何榨取式私募轮次, TGE 仅仅是一个开始，而不是套现离场。
+成功空投: 创世空投中分配了总供应量的 30%， HYPE 代币自推出以来已上涨超过 10 倍。
+产品至上: 先根据用户需求构建产品→吸引长期用户→大量空投奖励用户→通过建设链上生态继续扩张。
+未来激励: 40%的 HYPE 供应量（价值数十亿美元）被预留用于未来激励, 可能包含另一次空投。
+强大的代币经济学: 99% 的协议费用用于回购 HYPE
+高效精简的团队: Hyperliquid 团队仅有 11 人，但人均收入超过 1 亿美元。
+
+与大多数在“雇佣兵挖矿”后就销声匿迹的项目不同， Hyperliquid 在空投之后反而更加强大。各项指标都一路飙升, 正在成为首个真正能与币安等巨头竞争的 DEX 。
+
+02 Hyperliquid 是现金奶牛， HYPE 被严重低估
+
+基于约 1.14 亿美元的月度费用，目前 Hyperliquid 年化收入约为 13.7 亿美元。由于 99 %的收入用于 HYPE 回购，理论上所有流通中的 HYPE 可以在不到 9 年内被完全回购——加密领域没有任何其他协议拥有如此强劲的经济模型。
+
+03 Hyperliquid 生态正在快速增长
+
+Hyperliquid 的 TVL 图表说明了一切——增长正在加速。
+
+DeFi 领域的一些头部玩家（ Ethena 、 EtherFi 、 Pendle 、 Morpho ）正在扩展到 HyperEVM 。这些”精明”的团队都在此投入资源，无疑是一个强烈的信号，表明一些事情正在发生。
+
+与此同时， Kinetiq 和 Liminal 等 Hyperliquid 原生项目也正在蓬勃发展, Hyperliquid 近期原生 USDC 的集成进一步为生态发展扫清了障碍。
+
+04 HYPE 是强大的抵押资产
+
+就像以太坊的 ETH 、 Solana 的 SOL 、 BNB Chain 的 BNB 一样，任何 L1 要想蓬勃发展，都需要一个强大的抵押代币. 大多数 Layer 1 缺乏这样的强势资产，限制了其 DeFi 增长。而 HyperEVM , 则拥有 HYPE 这一"加密领域最强资产之一"。
+
+05 Builder Codes ：绝妙的分发策略
+
+这一机制允许开发者使用 Hyperliquid 基础设施构建交易应用，并从他们引导的交易中获得费用分成, 将 DeFi 建设者转变为 Hyperliquid 的分销合作伙伴，形成真正的双赢模式。
+
+例如， Phantom 已通过 Hyperliquid 推出永续合约交易， Rabby 钱包也暗示将采取类似举措, Ranger Finance 和 Mass 等协议也开始利用这一机制。
+
+06 HIP -3正在改写游戏规则
+
+任何人都可以通过质押 100 万 HYPE （约 4200 万美元）创建永续合约市场。部署者可以设置参数并赚取高达 50% 的费用。
+
+与 Builder Codes 分销不同， HIP -3 涉及产品扩展。更多市场→更多用户→更多费用→更多回购→更强吸引力，这形成了一个正向循环。
+
+07 Hyperliquid 与 HyperEVM 的协同效应
+
+Hyperliquid 和 HyperEVM 并不是两个不同的概念, 而是同一事物的一体两面—— HyperEVM 使 Hyperliquid 可编程，且可以与 DeFi 其余部分组合, Hyperliquid 则提供流动性和现金流, 交易所为链上带来即时交易量、可信度和收入。
+
+这创造了独特的反馈循环： Hyper EVM 上的 DeFi 协议可以直接在使用 EVM 智能合约的同时，接入 Hyperliquid 的深度流动性和订单簿。
+
+ 
+
+第二部分：Hyperliquid 空投项目全景解读：挖掘 HyperEVM 生态中的黄金机会 
+
+ 
+
+点击了解ChainCatcher在招岗位
+
+ 
+
+推荐阅读：
+
+监管破冰、机构入场：复盘加密货币渗透华尔街的十年风雨路
+
+Pantera Capital 深度解读：数字资产财库 DATs 的价值创造逻辑
+
+Backroom：信息代币化，AI 时代数据冗杂的解决方案？| CryptoSeed

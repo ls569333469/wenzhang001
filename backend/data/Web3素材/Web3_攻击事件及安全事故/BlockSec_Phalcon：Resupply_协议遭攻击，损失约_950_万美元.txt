@@ -1,0 +1,7 @@
+标题: BlockSec Phalcon：Resupply 协议遭攻击，损失约 950 万美元
+链接: https://www.chaincatcher.com/article/2188206
+发布时间: 2025-06-26
+
+==================================================
+
+ChainCatcher 消息，据加密安全研究机构 BlockSec Phalcon 披露，Resupply 协议遭受攻击，造成约 950 万美元损失。

@@ -1,0 +1,215 @@
+标题: Gryphsis 加密货币周报：FTX 预计将全额偿还客户，BTC价格反弹至43,000美元
+链接: https://www.chaincatcher.com/article/2113830
+发布时间: 2024-02-08
+
+==================================================
+
+作者：Gryphsis
+
+ 
+
+ 市场和行业快照
+
+
+
+
+Layer 2 Overview:
+
+上周，Layer 2除了zkSync Era和Optimism外其余均增长，Base增长最为明显3.82%。像Sablier，Superfluid，Interport Finance，Dexilla，StarkDefi 这些协议展示出了值得注意的 TVL 增长比例。
+
+
+
+
+
+
+
+LSD Sector Overview:
+
+在 LSD 领域，以太坊存入量和总退出量均有所轻微上涨，但相对而言退出量更加明显为4.49%。就市场份额而言，所有的蓝筹LSD均有所较大程度的下降，其中stETH下降最为明显为17.47%。
+
+RWA Sector Overview: 
+
+上周，世界真实资产市值下降1.56%，24小时成交量下降更为明显37.94%。RWA代币化国库上涨和代币化美国国债价值均变化不大。值得注意的增长代币包括  $LCX, $TIA 和 $BRTR, 像 $IMO, $MZERO 和 $MIMO 这样的代币经历了较大的亏损。
+
+Main Topics
+
+宏观概述：
+
+US Stock V.S. Crypto
+
+本周大事件：
+
+FTX 预计将全额偿还客户，BTC 价格反弹至 43,000 美元
+
+每周协议推荐：
+
+Puffer Finance
+
+每周VC投资聚焦：
+
+BRC-137 (2.5M)
+Stride (4M)
+Clusters (9M)
+
+推特Alpha：
+
+@0xTindorr on Puffer Finance
+@Flowslikeosmo on AVAX
+@poopmandefi on WhalesMarket
+@MoonKing___ on B Squared Network
+@the_smart_ape on $ALEO
+宏观概述
+
+本周，股市层面 SPX 和 NASDAQ 分别增长 1.39% 和 1.27%。在未来一周，要关注标普全球服务业采购经理人指数，ISM 非制造业采购经理人指数，ISM 非制造业价格指数，消费者信贷等重大事件。
+
+本周大事件
+
+FTX 预计将全额偿还客户，BTC 价格反弹至 43,000 美元
+
+根据法庭听证会，由 Sam Bankman-Fried 创办的加密货币交易所 (已破产)  FTX 表示，预计将全额偿还其客户，但需要基于 FTX 实际破产的时间点而定。这个日期已经初步得到美国破产法官 John Dorsey 的批准。
+
+FTX 债权人委员会律师 Kris Hansen 在周三的听证会上说：“许多索赔都是基于在申请日期前的动荡期间大幅贬值的货币。”
+
+美国破产法庭要求申请人提交他们在 FTX 上持有并随后失去资产的证明，由重组顾问进行审核。由于缺乏买家，该交易所已经放弃重新启动其平台的计划，转而将重心放在赔偿其前客户上。根据破产索赔交换平台 Xclaim 的数据，大约有 1,500 万人在FTX崩溃后失去了价值 300 亿至 350 亿美元的各种加密货币。
+
+FTX 的原生代币 FTT 在公司计划的消息发布后涨幅超过 11%，但很快大幅下跌，周三当天下跌约 15%。
+
+到发表时为止，比特币的价格已经反弹至超过 43,000 美元，比 FTX 在11月初崩溃时的价格大约 20,500 美元上涨了 110%。
+
+https://www.coindesk.com/policy/2024/01/31/ftx-expects-to-fully-repay-customers-but-wont-restart-defunct-crypto-exchange/
+
+每周协议推荐
+
+欢迎来到我们的每周协议环节——在这里，我们会重点关注在加密空间掀起波澜的协议。本周，我们选择了 Puffer Finance，一个由 EigenLayer 支持的原生的以太坊流动性再质押协议 (nLRP) 。
+
+
+
+
+Puffer 是一个基于 EigenLayer 构建的去中心化原生 Liquid Restaking 协议，通过引入原生的 Liquid Restaking Token(nLRT)-pufETH，降低节点参与以太坊质押门槛并通过再质押提高回报率。
+
+Binance Labs 已宣布战略投资 Puffer Finance，除了这轮融资外， Puffer 还获得了615 万元的总融资额，不仅曾获得以太坊基金会的资助，还在两轮融资中获得过 Jump Crypto、Brevan Howard Digital、Bankless Ventures、Animoca Ventures 等机构以及众多天使投资人的投资。
+
+协议主要包括：普通质押者（散户），节点质押 NoOp，系统中的RestakingModule 合约
+
+以下为其工作流程图：
+
+
+
+
+Source: Official Doc
+
+普通质押者可以存入 ETH 并铸造 pufETH 作为质押凭证，与传统的流动性质押代币（LST）相比，pufETH 可以为其持有者提供更多的奖励。pufETH 不仅包括 PoS 奖励和质押奖励，而且由于验证者门票 (Validator Ticket) 的销售，其价值可以迅速加速。
+
+NoOp 验证者需要存入验证者票 (Validator Ticket) 和 1 或 2 ETH 作为 PufferProtocol 合约的抵押品，作为回报会铸造 pufETH 并保持锁定状态，直到确认其验证者已成功退出。
+
+每个 RestakingModule 合约都包含一个待处理的 NoOp 注册队列。由于 PufferPool 从存款和奖励中累积了 32 个 ETH 区块，将按照计划将这些区块提供给 NoOps 的待处理验证者。
+
+一旦 NoOp 验证者注册成功，就有资格验证他们存入的验证者票证的天数。在此期间，NoOp 保留 100% 生成的 PoS 奖励。他们的执行奖励会立即存入他们的钱包，而他们的共识奖励则在模块的 EigenPod 中累积，并且可以在 NoOp 提款流程后提取。由于 NoOps 获得 100% 的 PoS 奖励，因此他们被激励最大限度地提高验证者性能，帮助保护质押者 ETH。
+
+我们的洞察
+
+Puffer Finance 隶属于 Liquid Restaking 赛道，于 2 月 1 日开放 $stETH 质押服务，而在上线之后仅仅两天就已获得 $300M 的 TVL，成为了赛道的 TOP2，与第一名的 Ether.fi 相比，已经达到了其 TVL 一半，可见势头之猛。
+
+Source: Defilama
+
+Staker 质押 ETH 的同时获得 pufETH；NoOp 验证者需要购买 Validator Ticket (VTs) 才能运行，而购买花费的 ETH 会返回给质押者以额外补贴其为验证者提供资金；验证者购买后需要锁定 VTs 和 1 个 ETH 的 pufETH 作为抵押，且将 Staker 质押的 ETH 给 ReOps 进行再质押；ReOps 返回再质押奖励给验证者和 Staker，而在以太坊获得的 POS 奖励则全部返回给验证者，ReOps 会收取一部分的再质押费用作为收入。
+
+
+
+
+Source: Official Doc
+
+Puffer Finance 的除了多重收益之外，其 AVS 技术和 Secure-Signer 远程签名也是项目亮点。其中 Puffer 的 Secure-Signer 远程签名获得了以太坊基金会的资助，允许验证者降低削减风险，同时提高 Puffer 协议内的资本效率。
+
+作为其战略的一部分，Puffer 计划将他们即将推出的 L2 作为 EigenLayer AVS 运行。此举预计将产生网络效应，特别是随着越来越多的 AVS 发挥作用并从 Puffer 提供的经济安全性中受益，这种集成在增加 Puffer 的无许可验证者的奖励方面发挥着关键作用。这不仅激励了参与，还有助于加强以太坊的去中心化。
+
+每周 VC 投资聚焦
+
+欢迎来到我们的每周投资聚焦，我们在这里为你揭示加密空间中最重大的风险投资动态。每周，我们将重点关注获得最多融资的协议。
+
+BRC-137
+
+BRC-137 协议是基于 Ordinals 协议提出的，允许任何人以完全无需许可和去中心化的方式在比特币区块链上创建可组合的 DID。BRC-137 使用户能够将其数字身份货币化，并促进链上价值交换和社交生态系统。
+
+https://x.com/brc137io/status/1753704919272685632?s=20
+
+Stride
+
+Stride 是当今 Cosmos 中最大的流动性质押协议，在 Cosmos Hub、dYdX 和 Osmosis 等链上拥有 90+% 的市场份额和 1 亿美元的 TVL。在短短一年内，Stride 推出了 10 多个 LST， 一直专注于流动性质押。
+
+https://x.com/stride_zone/status/1753468392428728639?s=20
+
+Clusters
+
+Clusters 是一种多链域名服务，旨在解决地址碎片化、钱包管理复杂度和域名抢占等问题。它由 Delegate 与跨链互操作性协议 LayerZero 合作推出。
+
+https://x.com/clustersxyz/status/1753085068522963012?s=20
+
+协议事件
+
+Ryder Ripps must pay Yuga Labs $9 million after lawsuit's final judgment
+
+Genesis asks bankruptcy court to approve $1.4 billion sale of GBTC shares
+
+Epic Games is listing Call of Duty-style crypto video game 'Shrapnel'
+
+OPNX a crypto derivatives exchange to shut down in February
+
+Aevo plans airdrop for early adopters of derivatives protocol
+
+行业更新
+
+BlackRock’s spot bitcoin ETF overtakes Grayscale’s GBTC in daily volume
+
+Hong Kong to release consultation on regulating OTC crypto venues
+
+DOJ charges trio for $400 million SIM-swapping hack targeting FTX
+
+Valkyrie adds BitGo as custodian for its spot bitcoin ETF
+
+Bitfinex Securities launches digital asset services in El Salvador
+
+推特Alpha
+
+在加密推特中蕴含了许多 Alpha，但在数千条推特线程中导航可能很困难。每周，我们都会花费几个小时进行研究，精选出充满洞见的线程，并为您策划每周的精选列表。让我们深入了解吧！
+
+https://x.com/0xTindorr/status/1753794385807114584?s=20
+
+https://x.com/Flowslikeosmo/status/1753810645718622488?s=20
+
+https://x.com/poopmandefi/status/1751256778044739870?s=20
+
+https://x.com/MoonKing___/status/1753478935801741443?s=20
+
+https://x.com/the_smart_ape/status/1753825705337708963?s=20
+
+下周事件
+
+新闻来源
+
+https://www.theblock.co/post/275909/ryder-ripps-must-pay-yuga-labs-9-million-after-lawsuits-final-judgment
+
+https://www.theblock.co/post/275907/genesis-asks-bankruptcy-court-to-approve-1-4-billion-sale-of-gbtc-shares
+
+https://www.theblock.co/post/275776/epic-games-is-listing-call-of-duty-style-crypto-video-game-shrapnel
+
+https://www.theblock.co/post/275735/blackrock-spot-bitcoin-etf-gbtc-daily-volume
+
+https://www.theblock.co/post/275728/hong-kong-to-release-consultation-on-regulating-otc-crypto-venues
+
+https://www.theblock.co/post/275695/crypto-derivatives-exchange-opnx-to-shut-down-in-february
+
+https://www.theblock.co/post/275530/aevo-airdrop-token
+
+ 
+
+以上就是本周的全部内容。感谢您阅读本周的周报。希望您从我们的洞见与观察中获益。
+
+可以在 Twitter 和 Medium 上关注我们，获取即时的更新。我们下期再见！
+
+此周报仅用于提供信息。它不应作为投资建议。在做出任何投资决策之前，您应进行自己的研究，并咨询独立的财务，税务或法律顾问。且任何资产的过去表现并不能预示未来结果。
+
+
+
+
+ 

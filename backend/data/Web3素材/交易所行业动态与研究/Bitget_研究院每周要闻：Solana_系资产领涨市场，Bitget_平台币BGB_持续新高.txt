@@ -1,0 +1,58 @@
+标题: Bitget 研究院每周要闻：Solana 系资产领涨市场，Bitget 平台币BGB 持续新高
+链接: https://www.chaincatcher.com/article/2109392
+发布时间: 2023-12-22
+
+==================================================
+
+作者：Bitget 研究院
+
+ 
+
+1.市场焦点 Market Trends
+本周( 12.18 -12.22)市场最关注的焦点话题为：
+
+Unisat 即将支持  Arc  20 资产， Solana  系资产领涨市场
+
+ETF 审核临近 BTC 重回$ 4.4 万，铭文行情扩散到各个公链
+
+Bitcoin Cats 引起链上 FOMO， Bitget  平台币 BGB 持续新高
+
+市场短暂回调后强势反弹， Helium Mobile 引领 DePIN 赛道大涨
+
+铭文赛道代币价格普跌，Bitget 平台币 BGB 创历史新高
+
+2.热门项目 Popular Projects
+本周( 12.18 -12.22)热度最高的项目有：
+
+TURT（Token）：$turt 是 @Turtsat 的平台币，turtsat 是 BRC 20 铭文项目的 IDO 平台，TurtSat 还通过捐赠协议，为  Ordinals  生态提供了一种新的代币发行方式，用户在捐赠后会锁定票据，等待区块确认后，代币会自动转移到用户的钱包，因此不存在  GAS  战的问题。既能保证公平性，又能降低 GAS 成本，还能为项目方提供早期收入。
+
+MUBI（Token）：MUBI 是 BRC 20-ERC 20 跨链桥项目 Multibit 的原生协议代币，随着 BRC 20 生态的火爆，对应的炒作热情也扩展到了以太坊上，Multibit 允许用户将 BRC 20 从比特币网络跨链到以太坊网络享受对应的 Defi 生态，因为这一独特的功能受到了市场资金的追捧和炒作。
+
+BSSB（Token）：基于比特币网络的去中心化稳定币协议 Bitstable（代币 BSSB），项目在 DEX 上的流动池有 478 万美金，总市值有 5000 万美金。目前项目开启了 Staking 功能，质押 DAII 可以获得 BSSB。24 小时交易量有 1116 万美金，代币近期有一定下跌压力，创新赛道，项目代币可以持续关注。
+
+BIIS（Token）：一站式 BRC 生态系统基础设施，提供了一整套工具，包括 BRC 20/420/721/100 等的 Launch、跨链、批量分发、批量采集、签名分发、批量操作等，项目市值 2000 万美金， 24 小时交易量 198 万美金，热度较高。
+
+Bitcoin cats（Token）：Bitcoin Cats 是一款发布在比特币网络上的游戏项目，昨日在  BakerySwap  上进行 IDO 引起链上 FOMO，认购额度超募 150 倍，代币 1  CAT  已开放交易，目前总市值 3500 万， 24 小时交易量 3800 万美金， 24 小时价格上涨 83% 。
+
+BITMAP（NFT）：Bitmap.land 是比特币生态第一个元宇宙项目，该项目建立在序数理论（Ordinals theory）和位图理论（Bitmap theory）基础之上，目前在做虚拟土地的一级市场发售。
+
+Pudgy Penguins （NFT）：作为去年一年 NFT 熊市中表现最好的 NFT 项目 Pudgy Penguins 是当之无愧的 No.1 。PP 的持有者多是加密行业圈内 Defi OG 或者是相关从业人员，整体持有者社区较为优质，项目也在持续研发和推进市场营销。
+
+Magic Eden（Dapp）: Magic Eden  是一款用户友好的平台，以其快速的处理时间、稳定的安全性和多种引人注目的功能而著称，使得买卖变得简单。例如，Magic Eden 通过其 Launchpad 与创作者紧密合作，帮助他们创建、铸造、市场化并成功启动项目。Magic Eden 是一个基于 Solana 的点对点市场，专为交易非同质代币（NFTs）而设计。
+
+LaunchBlock （Dapp）：Animoca 投资的跨媒体 NFT 项目 Grapes 在 LaunchBlock 平台上进行公开发售，共筹集 40, 321.7 枚 ETH，约合 89, 478, 626.49 美元。 GRAPE 将上线 Bitget， KuCoin 、 Bybit 平台，项目于 2023 年 5 月开始推出游戏、动画系列、商品和一系列授权。
+
+Port 3 _aggregator（Dapp）：Port 3 项目是一个旨在成为Web3社交数据网关的区块链项目，它通过聚合Web2和Web3数据，提供开放的数据服务。Port 3 的设计包括三个核心模块：数据收集、数据阅读和数据应用，以支持社区动态、社交媒体趋势和链上交易数据的汇总。
+
+3.热搜话题 Hot Searches
+本周( 12.18 -12.22)热度最高的话题有：
+
+SEI（Token）：SEI 在 12 月初发布的V2版本注于交易功能，解决了L1和L2基础设施的可扩展性问题，V2版本的“并行 EVM”可带来巨大的应用场景和用户量级。近期在铭文产生大量 Txn 和垃圾信息的情况下，很多公链出现了宕机等不同程度的问题，开始炒作 SEI 的“并行 EVM”概念。
+
+INJ（Token）：昨日  Injective  铭文 INJS 宣布将推出 Injective 生态首个铭文市场，但开铸造开始前，Injective 在其官方推特上发布警告，敦促用户不要参与 INJS 铭刻。Injective 指出，INJS 团队并不坦诚，他们在铸造过程中收取费用，并将这些费用存入未经验证的钱包。
+
+SOL（Token）：近期 Solana 上的 meme、铭文、DePIN 接二连三的成为社区的财富密码，Solana 生态有望涅槃重生，大大增加了 Sol 的使用场景，Solana 原生代币 SOL 近期连续上涨。
+
+Bitget 研究院专注于“聚焦链上数据，挖掘价值资产”，通过实时监测链上数据以及区域热搜等维度，挖掘前沿的价值投资，为加密世界爱好者提供机构级的洞见。截止至今已为 Bitget 全球用户提供了【 Arbitrum  生态】、【AI 生态】、【SHIB 生态】等多个热门板块的早期价值资产，通过以数据为驱动的深入研究为 Bitget 全球用户创造更优质的财富效应。
+
+【免责声明】市场有风险，投资需谨慎。本文不构成投资建议，用户应考虑本文中的任何意见、观点或结论是否符合其特定状况。据此投资，责任自负。

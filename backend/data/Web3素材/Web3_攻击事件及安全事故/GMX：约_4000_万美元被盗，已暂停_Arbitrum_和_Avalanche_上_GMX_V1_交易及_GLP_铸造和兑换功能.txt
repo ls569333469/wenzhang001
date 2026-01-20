@@ -1,0 +1,9 @@
+标题: GMX：约 4000 万美元被盗，已暂停 Arbitrum 和 Avalanche 上 GMX V1 交易及 GLP 铸造和兑换功能
+链接: https://www.chaincatcher.com/article/2190499
+发布时间: 2025-07-09
+
+==================================================
+
+ChainCatcher 消息，GMX 在 X 平台发文表示，Arbitrum 平台上 GMX V1 的 GLP 池遭遇漏洞攻击，约 4000 万美元的代币已从 GLP 池转移到一个未知钱包，安全合作伙伴已参与调查本次攻击事件。
+
+目前，Arbitrum 和 Avalanche 平台已暂停 GMX V1 的交易以及 GLP 的铸造和兑换功能，以防止任何进一步的攻击，但该漏洞不会影响 GMX V2，也不会影响 GMX 代币本身。

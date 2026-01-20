@@ -1,0 +1,69 @@
+标题: 速览混合 L2 BOB：合并挖矿，融合比特币安全性与 EVM 流动性
+链接: https://www.chaincatcher.com/article/2118880
+发布时间: 2024-03-29
+
+==================================================
+
+撰文：Karen，Foresight News
+
+ 
+
+比特币具有强大的安全性，但在流动性方面的限制却一直是其发展的桎梏。特别是当比特币迎来减产之时，矿工的收益将遭遇显著缩减，这无疑给整个比特币生态带来了不小的挑战。在此背景下，比特币 L2 有望提升矿工的收益。那么将比特币安全性与 EVM 流动性结合起来，会发生什么？混合 L2 BOB 给出了自己的解决方案，并且通过合并挖矿让比特币矿工仅进行验证，无需额外的 PoW，更无需承担额外的电力成本，可能会为比特币生态注入了新的活力。
+
+BOB 是什么？
+
+BOB 是「Build on Bitcoin」的缩写，是一个旨在支持比特币 DeFi 创新和生态发展的 L2 技术堆栈，不仅能继承比特币 PoW 安全性，支持 Ordinals、Lightning 和 Nostr 等比特币生态系统，还能与 EVM 完全兼容。目前，BOB 已在以太坊测试网 Sepolia 上线，计划在比特币减产前后上线主网。
+
+访问方面，BOB 通过 MetaMask Snap「BOB Bitcoin Snap」支持用户使用 MetaMask 与 BOB 网络上的比特币进行交互。这意味着，之后可以在 MetaMask 上执行转账比特币、签署比特币交易、铭刻和转账 Ordinals 等操作。根据 BOB 文档，BOB MetaMask Snap 目前正在接受 MetaMask 的正式上线审核。BOB 还通过元交易和账户抽象允许用户以跨链 BTC 和其他 ERC-20 代币支付 Gas 费。
+
+BOB 的联合创始人 Alexei Zamyatin 是一位比特币爱好者、研究员和软件开发人员，也是比特币 DeFi 项目 Interlay 的联合创始人。至于 BOB 官方提到过的另一位联合创始人@domiki0_，笔者目前暂未查到相关信息。
+
+昨日，BOB 宣布完成 1000 万美元种子轮融资，投资阵容不乏海外专注于比特币的风投公司、比特币 OG，领投方为 Castle Island Ventures，其他投资方包括 Mechanism Ventures、CMS Ventures、Bankless Ventures、Alliance、Antalpha Ventures、Asymmetric、Bitcoin Frontier Fund、UTXO Management、Web3.com Ventures、Zee Prime Capital、ViaBTC Capital、Lucky Friday、Modular Capital、Daedalus、IOSG Ventures、Hypersphere、DFG、Nexo 等，天使投资人包括 Dan Held 和 BRC-20 代币标准创建者 Domo。
+
+BOB 如何运行？
+
+最初，BOB 在 OP 堆栈上启动，可以通过合并挖矿协议（比特币重质押）继承比特币的安全性，其最终目标是直接在比特币 L1 上结算，之后可能会通过 ZK Rollups 进行全状态验证。
+
+在技术实现上，BOB 合并挖矿协议 OptiMine 遵循混合共识模型，使连接到 L1 链的任何侧链或 Rollup 都能从比特币矿工那里获得 PoW 安全性。OptiMine 将区块生产与工作量证明（PoW）分离开来，不仅能继承比特币矿工的安全性，还能消除对中心化排序器的依赖，并保留了快速的出块时间（保持 2 秒的出块时间）。
+
+具体来说，在 BOB 合并挖矿协议中，排序器负责创建和签署区块，参与合并挖矿 BOB L2 的比特币矿工仅进行验证。由于区块是由排序器生成的，而矿工只进行验证，因此排序器可以在最坏的情况下可以停止区块生产，但不会创建分叉或无效区块，也因此可以预防比特币矿工攻击。
+
+EVM 兼容方面，BOB 利用 EVM 来创建和执行智能合约，主要使用 Solidity 智能合约编程语言进行开发。核心 SDK、Lightning 和 Ordinals 等大多数比特币堆栈和围绕其构建的应用程序都是用 Rust 实现的，BOB 也支持比特币的 Rust 库，通过 RISC Zero zkVM 允许 Rust 程序的链下执行，同时使用 ZK 证明来验证 EVM 智能合约中的正确执行。BOB 表示，未来会将其视为直接在比特币上进行 ZK Rollups 的途径，其中 BOB 本身可以在 zkVM 中得到证明并通过比特币共识进行验证。
+
+此外，BOB 通过 BTC light client 提供对比特币区块和交易数据的无需信任的访问，允许 EVM 合约处理 BTC 交易（例如 P2P BTC 兑换、Ordinal 拍卖、算力代币化等），支持一系列比特币跨链桥。BOB 还计划推出一款由 BitVM 提供支持的双向轻客户端 BTC 桥。
+
+BOB 堆栈
+
+BOB 上线第一季积分活动
+
+在官宣融资喜讯当日，BOB 还宣布启动 BOB Fusion 第一季积分计划活动，鼓励用户积极参与并贡献于 BOB 生态系统的建设。第一季活动允许用户在以太坊主网上的非托管 BOB Fusion 时间锁合约内锁定资产和邀请他人，来赚取 BOB Spice 积分。积分代表对 BOB 生态系统的贡献。
+
+资产锁定方面，用户每存入价值 1 美元的资产，每天可获得 1 个 Spice。存入 tBTC 和 WBTC 资产可以获得 1.5 倍积分。具体来说，支持存入的资产包括：
+
+1、比特币锚定资产：tBTC、WBTC（1.5 倍积分）；
+
+2、稳定币和以太坊流动性质押代币：DAI、eDLLR、rETH、STONE、USDC、USDT、wstETH（1.3 倍积分）；
+
+3、ALEX、ETH、eSOV（1 倍积分）。
+
+温馨提示：切勿直接从交易所提取资金至 BOB FUSION 智能合约地址。
+
+除了资产锁定，用户还可以通过邀请机制赚取更多积分。完成初始存款后，用户可以生成个人推荐代码，邀请他人参与活动。推荐人可以获得一级被邀请人的 Spice 的 15%，获得二级被邀请人的 Spice 的 7%。
+
+BOB Fusion 第一季活动将在 4 月份主网启动后结束。届时，存入的资产将在比特币减半前后解锁提现，可以迁移至 BOB 主网，继续参与第二季活动。BOB 官网显示，离第一季积分活动结束还有 25 天。如果主网启动出现延迟，资产最晚将在 2024 年 5 月 15 日自动解锁（因为使用了时间锁合约）。
+
+BOB 路线图
+
+BOB 也公布了比较详细的路线图，展示了从公共测试网到 Multi-ZK-Rollup 的多个发布阶段。BOB L2 将分多个阶段发布，从第 0 阶段到第 5 阶段分别为公共测试网、Bootstrapping BOB：Optimistic ETH Rollup、通过新的合并挖矿协议（PoW 再抵押）继承比特币安全性、从 Optimistic Rollup 升级到 ZK 验证、通过 BitVM、一次性签名和 ZK 证明实现 BTC 质押排序器、Multi-ZK-Rollup（同时连接 ETH 和 BTC）。
+
+如前所述，最初，OB 将使用 OP 堆栈作为 Optimistic ETH Rollup 启动，BOB 排序器处理交易和区块链，然后提交涵盖 PoW 承诺的数据到以太坊 L1，以太坊上验证 DA 和 PoW 承诺，结算也发生在以太坊 L1 上。由于具有原生 L1/L2 跨链桥因此可以访问稳定币（USDT、USDC）、ETH/stETH 和 ERC-20 资产。 BOB 还通过 BTC 轻客户端跟踪比特币的状态，验证区块头并接受交易包含证明。这使得无需信任的跨链兑换 / 拍卖 / 合约执行成为可能。
+
+需要强调的是，与标准 OP 堆栈相比，BOB 进行了比较多的更改和优化，比如，BOB 将拥有自己的治理来达成社区决策并实施变更，数据可用性方面探索除以太坊之外的其他替代方案（比如比特币和 Celestia），在单个中心化排序器设置中额外添加合并挖掘，并添加了比特币矿工验证排序器工作的功能。
+
+在第二阶段，BOB 将把比特币 PoW 安全性引入 ETH Rollup，在 BOB 排序器处理交易和区块之后，比特币矿工会验证 BOB Rollup 的状态，并且只有在状态转换正确的情况下才将承诺作为 PoW 的一部分，这将最大限度地减少对排序器的信任。然后排序器提交涵盖 PoW 承诺的数据，最后以太坊智能合约验证 DA 和 PoW 承诺。
+
+BOB 的目标是引入比特币作为 BOB 的结算层，目前还在研究当中，可能有必要向 BOB 引入 ZK 压缩，这很可能会作为欺诈证明机制的一部分，并可能会与 ZK 基础设施提供商（例如 RISC Zero）合作进行。BOB 表示，其愿景是确保到 Rollup 的比特币资产由比特币保护，而 ETH 资产由以太坊保护。
+
+最近，BOB 还与加密矿企 Marathon Digital 推出的比特币侧链开发平台 Anduro 建立了战略合作伙伴关系，LayerBank、IceCreamSwap、bitSmiley、iZUMi Finance 也将在 BOB 上部署应用程序。
+
+总之，BOB 作为一个创新的 L2 技术堆栈，不仅继承了比特币的安全性，还与 EVM 兼容。随着其在主网的上线和更多功能的完善，能否推动比特币 L2 热潮和成为比特币 DeFi 领域的一股重要力量，推动整个生态的发展和繁荣，还需持续观察。

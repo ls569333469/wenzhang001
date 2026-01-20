@@ -1,0 +1,199 @@
+标题: 上周加密市场共发生 28 起公开融资事件，Web3 社交、RWA 板块火热 | 投融资周报
+链接: https://www.chaincatcher.com/article/2123010
+发布时间: 2024-05-06
+
+==================================================
+
+整理：饼干，RootData
+
+ 
+
+据 RootData 不完全统计，2024 年 4 月 29 日- 5 月 5 日期间，区块链和加密行业共发生 28 起公开投融资事件，累计融资约 1.35 亿美元。
+
+从板块分布来看，Web3 社交开始火热，RWA 板块融资事件激增。friend.tech 发布 v2 版本并推出原生代币 FRIEND，Paragraph 收购 Web3 内容发布平台 Mirror，将重点转向开发一款基于 Farcaster 的融合区块链和电子商务的 Web3 社交应用程序“Kiosk”。RWA 赛道的热门融资项目包括  Backed、Balcony、Securitize、Ironlight 等等。
+
+在基金募资和孵化器方面，纽约金融服务部前加密货币事务高级主管 Matthew Homer 创办的加密基金 XYZ 完成 510 万美元融资，Compound 创始人 Robert Leshner、Multicoin 管理合伙人 Kyle Samani 和 Gemini 联创 Winklevoss 兄弟等参投。Microcosm Labs 推出“Move to TON”生态孵化基金计划，旨在为有意向进入 TON 生态的项目团队提供全方位的支持，包括提供 5000 美元至 50000 美元的资助。
+
+（上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+1、比特币再质押协议 Chakra 完成新一轮融资，StarkWare 等参投
+
+基于零知识技术的比特币再质押协议 Chakra 在 X 平台宣布完成新一轮融资，StarkWare、Bixin Ventures、Cogitent Ventures、Trustless Labs 等参投，具体金额和估值信息暂未披露。
+
+据 Web3 资产数据平台 RootData 显示，Chakra 是一种基于 ZK 证明的比特币再质押协议。它利用 STARK 来证明比特币上的质押事件，并验证第 2 层链上的证明。(来源链接)
+
+2、比特币域名协议 TNA Protocol 完成新一轮融资，MH Ventures 等参投
+
+比特币域名协议 TNA Protocol 完成新一轮融资，MH Ventures，Cogitent Ventures以及 CSP DAO 等参投。本轮融资将用于 TNA Core 的开发、社区扩建以及代币流动性场景扩展，旨在推动比特币生态的跨链互操作标准，并促进生态扩张。(来源链接)
+
+3、Web3 初创公司 Matera 完成 360 万美元融资，Sidedoor Ventures 等参投
+
+Web3 初创公司 Matera 宣布完成 360 万美元融资，用于构建一个解决创作者经济中货币化挑战的平台。本轮融资包括 Sidedoor Ventures、HighCass Crypto、Medusa Ventures、The Sandbox 和 Saxon Partners 等多家知名企业。
+
+据悉，Matera 计划开发一个区块链基础设施，包括 DeFi 平台、协议层和 L2 网络。目前，Matera 在 X 上支持创作者，使他们能够筹集资金并从忠实粉丝群中获利。Matera 计划很快将其整合扩展到其他社交媒体平台。(来源链接)
+
+4、GPU 云基础设施提供商 CoreWeave 完成 11 亿美元 C 轮融资，Coatue 领投
+
+专注于人工智能的云服务提供商 CoreWeave 宣布完成 11 亿美元 C 轮融资，本轮融资由 Coatue 领投，Magnetar（上一轮主要投资者）、Altimeter Capital、Fidelity Management & Research Company 和 Lykos Global Management 参投。
+
+据悉，新融资将用于支持 CoreWeave 各业务领域的快速增长，以及向新地区扩张，以满足全球对 GPU 加速云基础设施持续爆发的需求。CoreWeave 联合创始人兼首席执行官 Mike Intrator 表示，CoreWeave 作为人工智能开发关键基础设施提供商的地位不断巩固，高水平投资者的持续信任，验证了其在定义下一代云计算方面的巨大机遇。
+
+随着企业日益认识到人工智能在提高效率、生产力、扩大收入、降低成本以及战略层面带来增长和创新等方面的潜力，各行各业、各种规模的组织都在争相部署大规模 AI 解决方案，这推动了对强大、可扩展基础设施的爆发性需求。而传统云供应商的通用基础设施无法满足 AI 工作负载所需的大规模并行处理能力和内存要求。(来源链接)
+
+5、动态模块化服务平台 Crestal 完成 200 万美元 Pre-Seed 轮融资，MH Ventures 等参投
+
+动态模块化服务平台 Crestal 宣布完成 200 万美元 Pre-Seed 轮融资，MH Ventures、Cogitent Ventures 以及 NxGen 等参投，新资金将用于对模块化服务的加速构建。(来源链接)
+
+二、CeFi
+
+1、代币化资产发行商 Backed 完成 950 万美元新一轮融资
+
+代币化资产发行商 Backed 完成 950 万美元新一轮融资，Gnosis 领投，Exor Seeds、Cyber​​ Fund、Mindset Ventures、Stake Capital Ventures、Blockchain Founders Fund、Blue Bay Capital 和 Nonce Classic 参投。通过这笔投资，该公司旨在加快其私人代币化发行和资产管理公司进入区块链渠道的速度。
+
+据 Web3 资产数据平台 RootData 显示，Backed 是链上资本市场的基础设施，将现实世界的资产连接到链上。Backed 发行跟踪现实世界资产价值的 ERC-20 代币，例如股票或 ETF。代币可跨钱包自由转移，由标的资产完全抵押，并根据瑞士 DLT 法案发行。
+
+2、混合加密交易所 X10 完成 650 万美元融资， Tioga Capital 等参投
+
+混合加密货币交易所 X10 宣布完成 650 万美元融资，投资者包括 Tioga Capital、Semantic Ventures、Cherry Ventures、Starkware 和 Cyber Fund，以及来自 Revolut 的高管和 Lido 创始人 Konstantin Lomashuk 等知名天使投资人。
+
+X10 由前 Revolut 加密业务主管 Ruslan Fakhrutdinov 创立，旨在结合中心化交易所（CeFi）和去中心化金融（DeFi）的优势，为用户提供类似 Revolut 的体验和资金自我保管功能。新融资将用于打造一个全新的加密交易所，在提供优质用户体验的同时实现资金的自我保管。(来源链接)
+
+3、加密交易生态系统 LazyBear 完成 400 万美元战略融资，DWF Labs 等参投
+
+加密货币交易生态系统 LazyBear 宣布完成 400 万枚 USDT 战略融资，Gogeko Labs、DWF Labs、Shadow Labs、Salad Labs、Bees Network、REI Network、IBIT、Crypto Bullish、SYNBO Protocol、Bazaars、Sypool、Bitcoin Gbox、GemX Crypto、Wikibit 等参投。
+
+据悉，LazyBear 是面向零售交易者的一个加密货币交易生态系统，致力于为用户提供行业低免费、普惠、愉悦的交易体验。(来源链接)
+
+三、DeFi
+
+1、Celestia 质押协议 MilkyWay 完成 500 万美元融资，Binance Labs 和 Polychain Capital 共同领投
+
+Celestia 生态流动性质押协议 MilkyWay 完成 500 万美元融资，Binance Labs 和 Polychain Capital 共同领投，Hack VC、Crypto.com Capital 和 LongHash Ventures 共同参投。 据悉，本轮融资的结构为联合牵头投资者的未来股权简单协议 (SAFE) 和代币认股权证，以及参与投资者的未来代币简单协议 (SAFT)。
+
+据 Web3 资产数据平台 RootData 显示，MilkyWay 是 Celestia 生态系统的一种流动性质押解决方案，最初在 Osmosis 上部署和运行，长期计划是迁移到 Celestia 的 rollkit 进行本地 milkTIA 发行。当用户将 TIA代币在 MilkyWay 进行流动性质押时，他们会收到一个 TIA 质押状态的链上表示，称为 milkTIA。这使 Celestia 代币持有人能够获得其所押资产的流动性，从而实现交易或将其用作各种 DeFi 产品的抵押品。(来源链接)
+
+2、RWA 代币化平台 Securitize 完成 4700 万美元战略融资，贝莱德领投
+
+RWA 代币化平台 Securitize 完成 4700 万美元战略融资，本轮融资由贝莱德领投，Hamilton Lane、ParaFi Capital、Tradeweb Markets、Aptos Labs、Circle 和 Paxos 等参投。本轮融资资金将用于加速产品开发，并进一步加强其在金融服务生态系统中的合作伙伴关系。
+
+作为投资的一部分，贝莱德全球战略生态系统合作主管 Joseph Chalom 已被任命为 Securitize 董事会成员。(来源链接)
+
+3、OKX Ventures 宣布领投多链流动性再质押协议 BedRock
+
+OKX Ventures 宣布领投多链流动性再质押协议 Bedrock。Bedrock 给用户提供机构级的服务，迄今为止再质押总值超过 2 亿美元，接下来会进一步创新在 Babylon 上构建第一个流动性质押比特币 (uniBTC)。
+
+OKX Ventures 创始人 Dora Yue 表示：“DeFi 如火如荼的发展下， 链上质押总值已超 934 亿美金，其中 48% 来自流动性再质押板块。对 Bedrock 的投资旨在加速流动性再质押解决方案。我们希望为社区用户提供多元化和安全的资产管理选择。期待 DeFi 使用场景逐步成熟化和体系化，促进 Web3 行业的可持续性发展”。
+
+4、模块化流动性协议 Mitosis 完成 700 万美元融资，Foresight Ventures 与 Amber Group 领投
+
+模块化流动性协议 Mitosis 发文称，已完成 700 万美元融资，Amber Group 与 Foresight Ventures 领投，Big Brain Holdings、Folius Ventures、Citizen X、GSR、Cogitent Ventures、No Limit Holdings、Digital Asset Capital Management、Pivot Global、Everstake 以及来自 Zellic、XAI、ether.fi、Hyperlane、Osmosis、DefiLlama、Injective、Keplr、Puffer、Curve、Interchain 的天使投资人等参投。
+
+Mitosis 推出的 Expedition 活动 Epoch 2 将于北京时间 5 月 2 日 23:00 开启，Epoch 1 已于 4 月 25 日 23:00 开启。
+
+据悉，Mitosis 是模块化时代的流动性协议，旨在重新定义跨链流动性。 它通过使跨链 LPing 具有流动性，使跨链 LPing 更具吸引力。 Mitosis LP 收到可 1:1 与其锁定资产兑换的衍生代币。 LP 可以使用这些衍生代币参与支持的以太坊 L1 链和 L2 Rollup 上的各种 DeFi 应用，本质上使 LP 能够让其跨链资产在默认费用共享的基础上获得额外收益。(来源链接)
+
+5、RWA 市场 Ironlight 完成 1200 万美元融资，投资方信息暂未披露
+
+RWA 市场 Ironlight 宣布完成 1200 万美元融资，具体投资方信息暂未披露。据悉，Ironlight 由 Rob McGrath 和 Matt Celebuski 创立，旨在将房地产、自然资源、美术、公共基础设施和私募股权等通常缺乏流动性的私人证券代币化，其目标是成为一个受美 SEC 监管的代币化现实世界资产 (RWA) 市场，后续将启动注册流程。(来源链接)
+
+6、跨链 DeFi 协议 EYWA 完成 700 万美元融资，Curve 创始人领投
+
+跨链 DeFi 协议 EYWA 完成 700 万美元种子轮融资，本轮融资由 Curve Finance 创始人 Michael Egorov 领投，Fenbushi Capital、GBV Capital、Big Brain Holdings、Marshland Capital、Mulana Capital 参投。
+
+据悉，EYWA 和 Curve 正在共同开发一个无需信任的桥梁。(来源链接)
+
+7、RWA 区块链平台 Balcony 完成 Pre-Seed 轮融资，Avalanche Blizzard Fund 参投
+
+美国新泽西州区块链基础设施公司 Balcony 宣布完成 Pre-Seed 轮融资，Avalanche Blizzard Fund 参投，具体金额和估值信息暂未披露。新融资将用于扩大运营和开发工作。
+
+据悉，Balcony 致力于构建面向机构和政府机构的 RWA 区块链平台，提供链上交易和资产结算服务，目前主要应用于房地产领域。(来源链接)
+
+8、DeFi 协议 Amphor 完成 400 万美元种子轮融资
+
+由对冲基金 MEV Capital 孵化的 DeFi 协议 Amphor 宣布完成 400 万美元种子轮融资，超过 80 名加密行业天使投资人参投，该项目旨在利用算法和链上技术解决方案简化普通投资者在 DeFi 领域里的投资，其具体估值数据暂未披露。(来源链接)
+
+四、游戏
+
+1、链游开发商 Overworld 获 DWF Ventures 投资
+
+DWF Ventures 宣布投资链游开发商 Overworld，Overworld 即将推出主世界竞技场，此外，Overworld 最近宣布计划推出另一 NFT 系列。
+
+据 Web3 资产数据平台 RootData 显示，链游开发商 Overworld 于今年 2 月完成 1000 万美元种子轮融资，本轮融资由 Hashed、TheSpartanGroup、SanctorCapital 和 GalaxyInteractive 共同领投，Hashkey、BigBrainHoldings 和 ForesightVentures 参投。(来源链接)
+
+2、全链游戏工作室 Blade Games 完成 240 万美元种子轮融资，PTC Crypto 和 IOSG Ventures 领投
+
+全链游戏工作室和基础设施提供商 Blade Games 完成 240 万美元种子轮融资， PTC Crypto 和 IOSG Ventures 共同领投，Bonfire Union Ventures、Animoca Ventures、Mantle、ForesightX、Formless Capital、Public Works、Puzzle Ventures、K300 Ventures 等参投。
+
+使用 Blade Game 的自研 zk 游戏引擎构建的游戏可以在 zkVM 中运行游戏逻辑，并将状态差异作为 zkSNARK 证明推送到链上，然后在 L2 上进行验证。zk 游戏引擎目前每秒最多可处理 12-15 帧，并即将更新批处理证明功能。引擎目前支持所有游戏工作室开发生存、塔防、RPG 和 roguelike 卡牌建筑游戏。
+
+Blade Games 自研游戏 Dune Factory 于 5 月 1 日启动内测，并于 4 月 29 日宣布了内测规则与奖励。游戏计划于 5 月底进行公测。(来源链接)
+
+3、Web3 游戏工作室 Games for a Living (GFAL) 获 320 万美种子轮融资，Supercell、Mitch Lasky 等参投
+
+Web3 游戏开发工作室 Games for a Living (GFAL) 获得 320 万美种子轮融资元，Supercell、Mitch Lasky 等参投。此外，GFAL 已试行推出其手机游戏 Elemental Raiders，并计划在 2024 年第四季度进行几次软发布，并将于 2025 年转换为完整版本。
+
+据 RootData 页面，Games for a Living (GFAL) 总部位于巴塞罗那，是一家开创性的电子游戏开发和发行工作室，团队领导层成员曾在 King Entertainment、动视暴雪、Electronic Arts、Netflix 和 Digital Chocolate 等行业领先企业担任过职务。GFAL 于 2023 年第一季度成功推出 GFAL 代币，筹集了 440 万美元的资金。(来源链接)
+
+4、Web3 游戏 Shadow War 完成 500 万美元融资， Momentum 6 领投
+
+瑞典游戏工作室 Patriots Division 已为其 Web3 游戏 Shadow War 在种子轮和 A 轮融资中筹集了 500 万美元，A 轮融资由 Momentum 6 领投，iAngels、Cointelligence Fund、Xborg、Andromeda VC、Cogitent Ventures 和 Cluster Capital等参投。
+
+据悉，Shadow War 是一款以科幻未来为背景的 5 对 5 第三人称动作游戏，其从《守望先锋》和《英雄联盟》等知名游戏中汲取灵感，注重未来主义、奇幻、动作和竞技的融合。 Shadow War 强调近战战斗和战术策略，旨在奖励基于技能的玩家，同时避免阻碍竞争完整性的付费获胜元素。(来源链接)
+
+五、NFT
+
+1、LayerZero 生态全链 NFT 协议 Holograph 完成 300 万美元新一轮融资，Mechanism Capital 和 Selini Capital 领投
+
+LayerZero 生态全链 NFT 协议 Holograph 宣布完成 300 万美元新一轮战略融资，Mechanism Capital 和 Selini Capital 领投，来自 Hal Press 的 Northrock Capital、Arca、Courtside Ventures 和 Hartmann Capital 参投，截至目前该项目的融资总额已达到 1100 万美元。
+
+Holograph 全链技术允许创建可在多个与以太坊兼容的区块链上使用的 NFT 资产，新资金旨在加速其向不断增长的区块链游戏市场扩张，重点对以太坊兼容网络代币的支持，包括 Optimism、Arbitrum、Avalanche、BNB Chain、Base、Mantle、Zora 和 Linea 等。
+
+据 Web3 资产数据平台 RootData 显示，Holograph是一种全链代币化协议，使资产发行者能够铸造原生可组合的全链代币。Holograph 的工作原理是在源链上燃烧代币，通过消息协议向目标链发送消息，然后将相同数量的代币重新发送到相同的合约地址。这统一了流动性，消除了滑点，并保持了区块链之间的可互换性。(来源链接)
+
+2、专注于游戏的 NFT 集成协议 STYLE Protocol 完成 250 万美元种子轮融资，GBV Capital 等参投
+
+专注于游戏的 NFT 集成协议 STYLE Protocol 宣布完成 250 万美元种子轮融资，Morningstar Ventures、Dutch Crypto Investors、GBV Capital、Protocol Labs、Alpha Ventures、以及一批来自加密项目的创始人参投，该协议旨在通过将NFT无缝集成到任何游戏或元宇宙来释放NFT潜力，能将 2D 图像或 NFT 转换成 3D 资产以参与游戏，目前支持以太坊、Polygon、币安智能链和 Solana 区块链。
+
+另据，Web3 资产数据平台 RootData 显示，STYLE Protocol 是一种去中心化基础设施，可在任何虚拟环境中实现资产和 NFT 的许可和互操作性。$STYLE 代币在虚拟世界中释放自定义头像和游戏内资产的可用性。(来源链接)
+
+六、其他
+
+1、加密货币会计事务所 Harris and Trotter Digital Assets 完成 1000 万美元战略融资，Orbs 领投
+
+总部位于伦敦、服务全球的加密货币会计事务所 Harris and Trotter Digital Assets 宣布完成一笔 1000 万美元的战略融资，以解决所有 Web3 项目面临的会计问题。此轮融资由 Orbs 领投，Kingsway Capital、RE7 Capital 以及 Web3 社区的其他知名个人也参与其中。融资以股权定价方式进行，对 Harris and Trotter Digital Assets 的估值达到 8500 万美元。
+
+Harris and Trotter Digital Assets 的高管团队曾就职于普华永道、毕马威、德勤、安永和 BDO 等大型会计师事务所，整个团队超过 45 人。CEO Nicholas Newman 表示，数字资产是一个快速发展的技术领域，其需求只能由同样具备技术实力的专业服务公司来满足。此次战略投资使公司与行业内最大的推动者和领导者结盟，有助于在发布日益增长的 SAAS 产品和服务时进一步增强技术实力。
+
+此轮投资将进一步推动 Harris and Trotter Digital Assets 的快速增长，在现有约 500 个加密原生客户的基础上继续扩张。Orbs 业务开发副总裁 Ran Hammer 表示，Harris and Trotter Digital Assets 将专业知识与区块链技术相结合，现在该团队希望在金融科技的前沿运作，提供储备证明等工具。(来源链接)
+
+2、Web3 内容分发协议 Metale Protocol 完成 200 万美元融资，Waterdrip Capital 等参投
+
+Web3 内容分发协议 Metale Protocol 近日宣布额外获得 200 万美元融资，Waterdrip Capital、Aipollo Investment 和 Ultiverse 等参投，截至目前其种子轮融资总额已达到 400 万美元。
+
+新资金将分配给其生态的内容创作基金，以刺激更多的内容创作活动，推动其协议构建内容资产链上发行和分发平台。
+
+此前 2023 年 9 月消息，Web3 去中心化阅读应用 Read2N 宣布进行品牌升级，更名为 Metale Protocol。(来源链接)
+
+3、Web3 葡萄酒市场 Baxus 完成 500 万美元融资，Multicoin Capital 领投
+
+Web3 葡萄酒市场 Baxus 完成 500 万美元融资，Multicoin Capital 领投，Solana Ventures、Narwhal Ventures、FJ Labs 和一批天使投资者参投。
+
+BAXUS 旨在通过将市场整合到一个应用程序中来连接买家和卖家，从而解决市场低效率问题，其 Web3 市场建立在 Solana 上，允许买家使用信用卡、ACH、直拨电汇或包括 USDC 在内的加密货币进行交易，去年夏天已推出测试版，至今已促成 800 万美元的交易。(来源链接)
+
+4、加密投票服务平台 Agora 完成 500 万美元融资，Haun Ventures 领投
+
+加密投票服务平台 Agora 宣布完成 500 万美元种子轮融资，Haun Ventures 领投，Coinbase Ventures、Seed Club Ventures 和 Consensys Ventures 等参投。
+
+Agora 希望为协议创建一个新的治理软件标准，帮助协议更高效地组织自己的投票系统，Uniswap、Optimism 和 Nouns 是其早期客户。(来源链接)
+
+5、Web3 内容发布平台 Paragraph 完成 500 万美元融资，Coinbase Ventures 等参投
+
+Web3 内容发布平台 Paragraph 除了收购基于以太坊的博客平台 Mirror 外，还筹集了 500 万美元的新融资，本轮融资由 Union Square Ventures 和 Coinbase Ventures 参投。Paragraph 创始人 Colin Armstrong 将担任首席执行官，Mirror 创始人 Denis Nazarov 将担任顾问角色。(来源链接)
+
+6、Web3 安全服务提供商 Resonance Security 完成 150 万美元 Pre-Seed 轮融资，Arca 等领投
+
+Web3 综合网络安全服务提供商 Resonance Security 完成 150 万美元 Pre-Seed 轮融资，Arca、Fabric VC 和 Blockchain Founders Fund 联合领投。新融资将用于进一步加速扩张。
+
+据悉，Resonance Security 将其专业知识与全套安全解决方案相结合，包括智能合约、区块链和代码审计、渗透测试、CI/CD和云安全、人工智能威胁建模、广泛的网络安全产品库、内置网络安全应用程序、通知和指导系统、全面支持的网络安全门房、网络安全教育等。(来源链接)

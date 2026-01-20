@@ -1,0 +1,56 @@
+标题: 最加密原生的游戏？速览全链游戏最新发展状况
+链接: https://www.chaincatcher.com/article/2126296
+发布时间: 2024-05-27
+
+==================================================
+
+作者：dt，DODOResearch
+
+编辑：Lisa
+
+ 
+
+区块链游戏一直以来备受资本市场期待，Web 2.5 游戏发展至今看起来仍找不到突破口。现在有一批人期望把整个游戏逻辑都放到链上让游戏和游戏间的可组合性更加强化，而被称作是全链游戏鼻祖的 Dark Forest 创始人 Gubsheep 撰写的「The Strongest Crypto Gaming Thesis」一文描述加密原生游戏是一种最大限度地拥抱区块链应用程序开发的架构模式和精神的游戏，现在社群一般称之为全链游戏或是自主世界。
+
+最近不少游戏都在近期推出测试或是更新，本周的 CryptoSnap 就跟着 Dr.DODO 一起来看近期全链游戏有什么更新吧。
+
+Redstone 主网上线
+
+Lattice 为全链游戏开发的 Plasma Mode OpStack Layer 2 Redstone 五月初正式上线主网，修改传统 layer 2 的数据可用性，大幅减少 L1 的数据占用试图克服全链游戏的高 gas 消耗问题，打造一条专为 FOCG 全链游戏设计的公链。
+
+而目前包括官方制作的 Skystrife 之外 This Cursed Machine、Biomes 和 Downstream 还有其他游戏也同时上线主网包含，同时 Lattice 也举办了黑客松让开发者开发游戏插件。
+
+Source: https://community.redstone.xyz/
+Sky Strife
+
+Sky Strife 是 Lattice 目前最具代表性的游戏，由 Lattice 官方开发的 RTS 战略游戏，不同于大部分全链游戏是步调比较慢的回合制，开发难度明显高上不少，游戏目标是保卫你的城堡并活到最后，在对手摧毁你的城堡之前摧毁其他人的所有城堡。
+
+除了游戏本身，Sky Strife 还发行 Season Pass，购买 Season Pass 的人开场可以多两个不同兵种可以选择，还有最重要的开私人局。除了 Season Pass，Sky Strife 也有自己的代币 Orbs（🔮）。Orbs 的唯一功能就是创建 Sky Strife 比赛。开一场比赛需要消耗 100 Orbs，每场比赛根据玩家的排名发放 ORBS 奖励。总奖励从 500 ORBS 到 0 Orbs 不等，由过去 7 天内进行的比赛数量决定。
+
+Source: https://latticexyz.notion.site/1054c36f2805407cbd9d738427f49d13
+近期其他全链游戏更新
+Primodium
+
+Primodium 是一款太空帝国建设 MMO 游戏，可以说是全链游戏领域完成度最高的一款游戏。在游戏中，你可以开采资源，建立军事基地，并与其他人作战以获得对小行星带的控制权。Primodium 的目标是开放且无需许可，这代表着任何第三方开发者都可以在其 Primodium 上自由开发，部署机器人或插件。
+
+近期 Primodium 发布 v 0.11.0 版本更新，增加了 Wormhole 跟 Shards 相关的积分，需要喂食黑洞和捕获 Shards 来获得经济和军事积分。
+
+Project Awakening Phase III
+
+Project Awakening Phase III 是由上线超过 20 年的太空科幻 MMORPG 游戏 Eve Online 制作的链上版本，Eve Online 开发商 CCP Game 之前宣布跟 Lattice 合作使用 MUD (Lattice 开发的 EVM 游戏引擎 ) 共同开发。Project Awakening 可以算是 MUD 的第一个链上复杂应用，而目前在进行上线前的测试。
+
+游戏测试需要签署 NDA，Gameplay 的部分就不描述太多，大部分都和 Eve Online 类似，有兴趣的各位可以自行报名参加。
+
+Source: https://x.com/HilmarVeigar/status/1792828503211356653
+Duper
+
+游戏工作室 Curio 宣布推出游戏 Duper Alpha 版本，Duper 是一款以遥远的沙漠星球为背景的链上投注社交战争游戏。目标将加密社群原生的投机引入竞争性链上游戏，玩法十分复杂。
+
+每场比赛五名玩家参与，持续约 40 分钟。每个玩家都以真实赌注（目前最低 0.005 ETH）进入游戏，以换取代表「equity」的宝石。Duper 不是赢家通吃的游戏：当游戏结束时，只有一名玩家获胜，但底池根据每个玩家持有多少获胜者的「equity」进行分配。赢家不一定赚得最多。
+
+《Duper》中最有趣的元素是社交——在《Duper》中，资源交换、阴谋和背刺等秘密联盟不仅被允许，而且受到鼓励。
+
+Source: https://docs.duper.gg/
+笔者观点
+
+笔者认为，全链游戏是这个周期少数区块链有趣的原生应用，也是少数散户玩家能够第一线接触的应用，真正有深度游戏需要集美术、音乐和软体开发，全链游戏的宏大愿景聚集了不少有才华的开发者和一些资本。虽然目前大多数游戏开发还是非常早期，玩起来非常不直觉，但还是鼓励大家尝试一下，体验区块链原生游戏，期待未来全链游戏的发展。

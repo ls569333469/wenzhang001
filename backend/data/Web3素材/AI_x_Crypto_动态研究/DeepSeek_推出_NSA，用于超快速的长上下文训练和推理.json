@@ -1,0 +1,7 @@
+{
+  "title": "DeepSeek 推出 NSA，用于超快速的长上下文训练和推理",
+  "url": "https://www.chaincatcher.com/article/2168164",
+  "content": "ChainCatcher 消息，据金十报道，DeepSeek 推出 NSA。\n\nDeepSeek 称，NSA 是一种与硬件一致且本机可训练的稀疏注意力机制，用于超快速的长上下文训练和推理。通过针对现代硬件的优化设计，NSA 加快了推理速度，同时降低了预训练成本，而不会影响性能。\n\n在一般基准测试、长上下文任务和基于指令的推理上，它的表现与完全注意力模型相当甚至更好。",
+  "published_at": "2025-02-18",
+  "downloaded_at": "2026-01-17 23:37:20"
+}

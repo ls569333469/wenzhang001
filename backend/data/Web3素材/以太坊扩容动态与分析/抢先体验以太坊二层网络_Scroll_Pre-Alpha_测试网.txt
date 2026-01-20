@@ -1,0 +1,51 @@
+标题: 抢先体验以太坊二层网络 Scroll Pre-Alpha 测试网
+链接: https://www.chaincatcher.com/article/2082047
+发布时间: 2022-11-03
+
+==================================================
+
+作者：Babywhale，Foresight News
+
+ 
+
+2022 年，多个扩容网络和新公链都获得了市场的关注与资本的青睐，这其中包括了原 Facebook（现名为 Meta）数字货币项目团队解散后由原团队成员开发的公链、为不兼容 EVM 的公链建立 EVM 兼容的侧链以及二层网络的项目、也包括了以太坊创始人 Vitalik Buterin 亲自「站台」的基于 ZK Rollup 的以太坊二层网络。
+
+今年 4 月，基于 ZK Rollup 的以太坊二层网络 Scroll 完成了 Polychain Capital 领投，Bain Capital Crypto、Robot Ventures、Geometry DAO 等参投的 3000 万美元 A 轮融资。3 个月后，Scroll 宣布推出 Pre-Alpha 测试网，并开放申请。本月，Scroll 对测试网进行了升级，允许了智能合约的部署以及 NFT 和 ERC-20 代币的跨链。
+
+目前 Scroll Pre-Alpha 测试网已上线了交易、跨链以及 Layer 1 与 Layer 2 的浏览器等功能，让我们来共同体验一下。
+
+首先，通过申请获得测试网测试权限的用户，需要通过测试网首页在 MetaMask 上添加 Layer 1 和 Layer 2 的测试网，并通过 Faucet 领取 ETH、USDC 等测试代币。
+
+在添加网络和领取测试代币之后，首先可以通过点击测试网网站上方的「Bridge」测试跨链功能，我们以从 Layer 1 向 Scroll Layer 2 跨链 100 枚 USDC 为例。
+
+ 测试网 Layer 1 上确认交易经历了约 10 秒的时间，跨链到 Layer 2 上虽然需要一定的等待时间，但相比于 Optimism 与 Arbitrum 官方跨链桥 7 天的确认时间仍存在着明显的速度优势。（推荐阅读：《三分钟读懂 Scroll：ZK Rollup 扩容新锐选手》）
+
+跨链交易确认后，用户可以点击右上角的个人地址查看交易信息。
+
+完成了将资产从 Layer 1 跨链至 Layer 2 之后，就可以测试 Layer 2 上的代币交易功能。
+
+与所有的 DEX 交易一样，需要先支付 Gas 费允许合约调用所交易的代币之后再进行交易。值得一提的是，Scroll 的 Pre-Alpha 测试网已集成了融资 700 万美元的预言机 RedStone，开发者可以申请测试资格来部署智能合约进行测试。
+
+ 
+
+该笔交易花费的 Gas 费约为 0.00021 ETH，以以太坊当前 1600 美元的价格计算，Gas 费成本约为 0.336 美元。撰写本文时，Arbitrum One 的交易的 Gas 费约为 0.07 美元，Optimism 为 0.15 美元，zkSync 为 0.1 美元。虽然从简单的数据对比上 Scroll 的价格偏高，但考虑到当前测试网节点较少，但需要处理的交易却非常多，实际数据可能有较大的下降空间。
+
+体验了交易之后，接下来可以尝试在测试 DEX 中添加流动性。在交易页面中点击「资金池」后再点击「Add Liquidity」。我们同样以添加 100 USDC 和同等价值的 ETH 为例。
+
+完成添加流动性后，可在页面上查看自己的流动性头寸。
+
+除了跨链转账和交易这些功能之外，Scroll 测试网还提供了 Layer 1、Layer 2 和 Rollup 浏览器。
+
+普通的区块浏览器无需过多解释，重点在于 Scroll 提供了 Rollup 浏览器这一特殊的数据界面。
+
+以上三个数据，第一个数据代表着 Layer 2 上的区块高度；第二个数据是指该 Layer 2 上区块已经被提交至 Layer 1 上的 Rollup 合约；第三个数据则是代表着该区块的有效性证明已经被提交且在 Layer 1 上进行了验证。
+
+Layer 2 上的交易分为四种状态：
+
+Precommitted表示区块已被包含在 Scroll Layer 2 区块链中。虽然 Precommitted 区块由于尚未发布在 Layer 1 上，因此尚未成为 Scroll Layer 2 规范链的一部分，但信任 Sequencer 的用户可以认为该区块已初步敲定。
+
+Committed表示该区块的交易数据已经发布在 Layer 1 的 Rollup 合约上。这确保了区块数据可用，但不能证明它已经以有效的方式执行。
+
+Finalized表明该区块中交易的正确执行已通过 Layer 1 上的链上有效性证明得到证明。最终区块被视为 Scroll Layer 2 规范链的一部分。
+
+Skipped表示由于缺乏证明能力或代码中的错误，跳过了该块的有效性证明生成。这只是 Pre-Alpha 测试网的临时状态。

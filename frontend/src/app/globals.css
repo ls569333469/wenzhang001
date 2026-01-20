@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 🎨 Quantum Studio v2.1: The Athenaeum (Paper Mode) */
+
+    /* Backgrounds: Warm Off-White */
+    --background: 40 10% 97%;
+    /* #F9F8F6 - The Base Paper */
+    --foreground: 240 5% 16%;
+    /* #27272A - Zinc-800 "Soft Ink" */
+
+    --card: 0 0% 100%;
+    /* #FFFFFF - Pure White Surface */
+    --card-foreground: 240 5% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 5% 16%;
+
+    --primary: 240 5% 16%;
+    /* Soft Black Action */
+    --primary-foreground: 40 20% 99%;
+
+    --secondary: 240 4.8% 95.9%;
+    /* Zinc-100 */
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    /* Zinc-100 for hovers */
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders: Crisp & Light */
+    --border: 240 5.9% 90%;
+    /* #E4E4E7 - Zinc-200 */
+    --input: 240 5.9% 90%;
+    --ring: 240 5% 16%;
+
+    --radius: 0.2rem;
+    /* 3.2px - Sharp, precise corners */
+
+    /* Font Variables Mapping */
+    --font-serif: var(--font-newsreader);
+  }
+
+  .dark {
+    /* Swiss/Pro Monochrome Theme */
+    --background: 0 0% 0%;
+    /* Pure Black */
+    --foreground: 0 0% 93%;
+    /* Zinc-100 */
+
+    --card: 0 0% 3%;
+    /* Zinc-950 */
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    /* White */
+    --primary-foreground: 0 0% 0%;
+    /* Black */
+
+    --secondary: 0 0% 10%;
+    /* Zinc-900 */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 40%;
+    /* Zinc-600 */
+
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 12%;
+    /* Zinc-800 */
+    --input: 0 0% 12%;
+    --ring: 0 0% 20%;
+    /* Zinc-700 */
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Clean typography */
+  }
+
+  /* v6.0: Global link reset - eliminate browser default blue/purple */
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: inherit;
+  }
+}
+
+/* v6.0: Tailwind utilities only. No custom CSS classes. */

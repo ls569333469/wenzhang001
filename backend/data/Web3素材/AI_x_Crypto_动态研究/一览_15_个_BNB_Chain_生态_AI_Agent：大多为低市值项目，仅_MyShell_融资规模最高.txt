@@ -1,0 +1,103 @@
+标题: 一览 15 个 BNB Chain 生态 AI Agent：大多为低市值项目，仅 MyShell 融资规模最高
+链接: https://www.chaincatcher.com/article/2168305
+发布时间: 2025-02-19
+
+==================================================
+
+作者：Nancy，PANews
+
+ 
+
+继凭借MEME热度成功搅动市场流动性之争后，BNB Chain上的AI Agent似乎正成为市场新一轮关注的焦点。2月16日，币安创始人CZ发文透露，听说团队正在制作一个新的视频教程，教人们如何在BNB Chain上创建AI Agent。随后BNB Chain上AI概念币迎来普涨行情，但CZ也明确表示，不会推销任何 AI Agent 代币，希望看到更多基于区块链的 AI Agent 开发，尤其是具备实际使用场景的项目。
+
+实际上，BNB Chain在今年1月就已宣布推出一键式无代码的 AI Agent集合方案，旨在为开发者提供工具以在Web3领域创建和部署AI Agent，从而持续发力打造AI First BNB Chain。本文PANews盘点15个BNB Chain上的AI Agent发币项目，其中大多为低市值项目，仅MyShell、Cookie DAO和ChainGPT突破亿美元大关。同时，有8个项目已获得不同规模的融资，其中MyShell的投资金额最高，且其背后的投资阵容也颇为强大。
+
+MyShell（SHELL）
+
+MyShell是一种去中心化AI消费者层，允许创建者构建消费者或用户可以使用的人工智能代理或机器人，生态系统包括如OpenVoice、MeloTTS和Alice等多个工具和服务。前不久，MyShell在Binance Wallet和PancakeSwap启动了SHELL代币生成活动，超募100多倍。2月16日，MyShell推出自研开源ShellAgent框架的三项更新：ShellAgent协议、全面IM集成与链上智能化，这些更新将简化开发流程、增强用户体验并拓展应用场景。
+
+迄今为止，MyShell公开获得了三轮融资，累计金额约为1660万美元，投资机构包括YZi Labs、Dragonfly、OKX Ventures、GSR、Animoca Brands、Bankless Ventures、Balaji Srinivasan和HashKey Capital等。
+
+CoinGecko数据显示，截至2月17日，SHELL的流通市值为1.4亿美元。
+
+Cookie DAO（COOKIE）
+
+Cookie.fun是所有AI Agent的索引和数据层，支持显示心智份额、智能关注、参与度和链上数据方面的最大赢家。Cookie.fun的开发商Cookie3是MarketingFi平台和Web3 AI营销解决方案，再两轮融资中获得了580万美元，投资机构包括SkyVision Capital、Animoca Brands、Spartan Group、Hartmann Capital、LD Capital、Master Ventures和Jsquare等。
+
+币安行情显示，截至2月17日，COOKIE的流通市值近1.2亿美元。
+
+ChainGPT（CGPT）
+
+ChainGPT是一个AI驱动的平台，旨在简化区块链和加密货币概念，使其对每个人，从初学者到企业，变得可访问，旗下包括AI聊天机器人、智能合约生成器、交易助手、NFT 创建者和安全工具等多种工具。
+
+CoinGecko数据显示，截至2月17日，CGPT的流通市值为1.1亿美元。
+
+DIN（DIN）
+
+DIN是BNB Chain及NodeReal联合推出首个专为AI Agent设计的区块链，旨在为AI代理和dAI-Apps提供全面的基础设施，涵盖可扩展的AI数据支持、RAG知识库集成、大语言模型操作（LLMOps）及AI生成内容（AIGC）变现等。DIN已在两轮融资中获得800万美元，参投机构包括YZi Labs、HashKey Capital、NGC Ventures、Manta Network、Moonbeam、Shima Capital和IVC等。
+
+CoinGecko数据显示，截至2月17日，DIN的市值约3990万美元。
+
+Holoworld AI（AVA）
+
+Holoworld AI是Web3 AI+3D娱乐社交网络，使用AI与用户互动并创建用户喜爱的虚拟角色，Agent Market是其首个代理人启动平台和市场，已在Solana和BNB Chain上线。
+
+GMGN数据显示，截至2月17日，AVA流通市值3880万美元。
+
+RichQUACK（QUACK）
+
+RichQUACK是BNB Chain上的MEME项目，推出了AI Agent产品RichQUACK，旨在随时准备捕捉最新的市场热点。
+
+GMGN数据显示，截至2月17日，QUACK的流通市值达2720万美元。
+
+Creator.Bid（BID）
+
+Creator.Bid支持用户一键创建及发行AI Agent，曾在Binance Wallet上公开发售代币筹集250万美元，并在3分钟内售罄。此外，Creator.Bid还获得Mechanism Capital、Zee Prime Capital、MH Ventures、SkyVision Capital个Moonrock Capital等投资，但并未透露具体金额。
+
+GMGN数据显示，截至2月17日，BID的市值达2170万美元。
+
+REVOX（REX）
+
+REVOX是基于AI Agents的区块链智能管理平台，可为为开发者和用户提供支持DeFAI、AI资产发行和AI Agent创建的完整解决方案，获得Binance Labs第八季MVB计划支持。REVOX获得超200万美元的多轮投资，投资机构包括SevenX Ventures、HashKey Capital、Foresight Ventures、Skyland Ventures、Cointelegraph和Arweave SCP Ventures等。
+
+CoinGecko数据显示，截至2月17日，REX的流通市值达1674万美元。
+
+Banana For Scale（BANANA）
+
+Banana For Scale是BNB Chain上AI驱动的MEME项目，依托AI技术分析市场趋势与用户行为，获得了BNB生态PUMP平台Four.meme的投资。
+
+GMGN数据显示，截至2月17日，BANANA的市值达1560万美元。
+
+AICell（AICELL）
+
+AICell是建立在BNB Chain上的AI Agent项目，用户可以将各种AI服务组合到工作流程中，类似于乐高积木，使用智能合约执行数据分析或内容创建等任务，制定量身定制的解决方案并推进去中心化AI Agent的使用，是BNB Chain 2024年第一季度黑客马拉松的获奖项目之一。
+
+GMGN数据显示，截至2月17日，AICELL市值达1378万美元。
+
+Catton AI（CATTON）
+
+Catton AI将AI NPC与基于DNA的游戏玩法相结合，是Telegram上排名第一的跨IP游戏平台，现社交用户超70万。
+
+GMGN数据显示，截至2月17日，CATTON市值达1280万美元。
+
+Eliza（ELIZA）
+
+2月13日，BNB Chain宣布为Eliza框架推出了一个专用插件，为AI驱动的链上作提供无缝集成。带有BNB Chain插件的Eliza AI框架的主要功能包括：支持OpenAI的GPT、Claude和Llama等多种大型语言模型（LLMs），可满足不同的AI需求。
+
+CoinGecko数据显示，截至2月17日，ELIZA的流通市值为1070万美元。
+
+Shieldeum（SDM）
+
+Shieldeum旗下的sdm.fun是用于跟踪人工智能代币和部署人工智能驱动的加密解决方案。Shieldeum在2020年曾获得来着V3V Ventures的投资。
+
+GMGN数据显示，截至2月17日，SDM市值达290万美元。
+
+BNB Agents（BNBAI）
+
+BNB Agents是BNB Chain上的AI Agent中心和启动平台，旨在帮助用户创建和部署AI驱动的代币。CoinGecko数据显示，截至2月17日，BNBAI的流通市值约290万美元。
+
+Rena AI（RENA）
+
+Rena AI是基于去中心化AI Agent网络DeAgentAI上的首个链上基金，可实现智能化的市场分析、风险管理和策略执行，为Web3用户带来专业级的投资体验。据DeAgentAI团队今年1月底透露，该链上基金当前以机构参与为主，计划在未来30天内向更广泛市场开放自主交易功能，让更多用户能够参与到AI驱动的智能投资中。
+
+CoinGecko数据显示，截至2月17日，RENA的流通市值约180万美元。

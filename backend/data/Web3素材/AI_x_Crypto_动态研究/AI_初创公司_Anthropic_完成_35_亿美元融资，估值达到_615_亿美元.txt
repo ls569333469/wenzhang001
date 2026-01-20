@@ -1,0 +1,9 @@
+标题: AI 初创公司 Anthropic 完成 35 亿美元融资，估值达到 615 亿美元
+链接: https://www.chaincatcher.com/article/2170587
+发布时间: 2025-03-04
+
+==================================================
+
+ChainCatcher 消息，据智通财经网报道，人工智能初创公司 Anthropic 宣布，已正式完成 35 亿美元融资，公司估值达到 615 亿美元。本轮融资 由Lightspeed Venture Partners 领投，投入 10 亿美元，其他投资者包括 General Catalyst、Jane Stree t以及 Fidelity Management & Research Company。此外，Menlo Ventures 和 Bessemer Venture Partners 等现有投资者也在本轮融资中追加投资。
+
+Anthropic 的估值飙升，部分原因是公司业务的快速扩张。据知情人士透露，2023 年底，该公司的年收入运行率约为 10 亿美元，但今年以来已增长 30%。不过，Anthropic 未就具体收入情况发表评论。新融资将用于开发下一代 AI 模型、扩大计算能力、加强AI安全研究，并推动亚洲和欧洲市场扩张。上周，Anthropic 推出了更先进的 AI 模型 Sonnet，并发布了一款能够自动化软件编程任务的新型 AI 代理。这一举措进一步展示了其在 AI 研发上的前沿创新能力。

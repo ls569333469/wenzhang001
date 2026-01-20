@@ -1,0 +1,13 @@
+标题: 第 152 次以太坊 ACDC 会议：预计需三周时间将 Holesky 恢复到稳定状态
+链接: https://www.chaincatcher.com/article/2171288
+发布时间: 2025-03-07
+           
+              以太坊 ACDC 会议
+            
+              Holesky
+
+==================================================
+
+ChainCatcher 消息，Galaxy 研究副总裁 Christine Kim 发文总结第 152 次以太坊核心开发者共识（ACDC）电话会议。
+
+本周开发人员根据 Holesky 和 Sepolia 升级的进展情况，商定了测试 Pectra 的新策略；开发人员将继续努力把 Holesky 恢复到稳定状态，预计大约需要三周时间；此外，开发人员将启动 Holesky 影子分叉，继承与原始公共测试网完全相同的状态和链上环境。

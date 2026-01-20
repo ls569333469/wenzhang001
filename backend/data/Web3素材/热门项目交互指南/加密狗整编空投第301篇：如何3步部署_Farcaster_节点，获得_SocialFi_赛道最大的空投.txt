@@ -1,0 +1,124 @@
+标题: 加密狗整编空投第301篇：如何3步部署 Farcaster 节点，获得 SocialFi 赛道最大的空投
+链接: https://www.chaincatcher.com/article/2134030
+发布时间: 2024-07-17
+
+==================================================
+
+Farcaster 是当前市场普遍认为的高价值SocialFi，由于其天然的IP和支付限制造成的门槛性，劝退了很多人。本文通过节点部署的方式，来介绍怎么撸Farcaster 空投。
+
+ 
+
+本文分为以下几个部分组成：
+
+VPS 配置
+API 服务
+基本安装步骤
+Farcaster ID
+终端安装
+ 
+一、VPS 配置
+
+1、部署节点，有两个选择：
+
+部署在你自己的设备里面
+用VPS进行部署
+
+ 
+
+这里我们选择VPS，跑节点一般选择的配置：
+
+16G RAM
+4 核 CPU
+140G 固态
+公网IP
+Ubuntu 22.04
+
+ 
+
+很多人找我要VPS推荐，VPS还好，找我要VPN就真不能推荐了。
+
+一般跑节点老外用的最多的是Contabo
+
+ 
+
+2、使用SSH工具链接VPS
+
+SSH工具：小白用户建议使用Xshell或者Finalshell（教程见下文）
+
+二、如何连接到 VPS
+
+1、下载一个应用（本教程以putty为例，小白用户建议使用Xshell或Finalshell）
+
+2、复制云服务器IP链接
+
+ 
+
+ 
+
+3、点击“接受”，输入云服务器的用户名和密码
+
+注意：要粘贴你已经复制的任何命令，只需右键单击要粘贴命令即可
+
+ 
+
+ 
+ 
+
+4、再次输入密码，并输入新密码。
+
+ 
+
+ 
+
+以上就是云服务器+SSH组合的步骤，下文所有步骤都在SSH工具中进行（小白用户建议使用Xshell或Finalshell）
+
+三、API 服务
+
+创建一个Alchemy账户（需要手机号验证，很多接码平台的电话收不到短信）
+
+官网：https://www.alchemy.com/
+
+官方教程：https://docs.alchemy.com/docs/alchemy-quickstart-guide
+
+进去后，点击“Create new app”，并将其命名为 Farcaster：
+
+ 
+
+点击“Network”找到 RPC
+四、安装基本组件
+
+步骤一、更新V​​PS
+
+sudo apt-get update && sudo apt-get upgrade -y
+Download Screen
+apt-get install screen -y
+ 
+
+步骤二、找到 Farcaster ID
+
+如果你没有Farcaster账号，可以在https://warpcast.com/下载（花5U）；
+
+ 
+
+ 
+
+也可以将你的Phaver升到2级，Phaver送你一个Farcaster账号。相关教程：
+
+https://link.medium.com/BUpAiZjIiLb
+
+ 
+
+步骤三、安装 Farcaster Hub
+
+打开屏幕会话
+screen -S farcaster
+部署节点
+curl -sSL https://download.thehubble.xyz/bootstrap.sh | bash
+
+安装过程中系统会让你提供： Ethereum 和 Optimism 的 Alchemy RPC，以及Farcaster ID。
+
+ 
+
+ 
+
+整个安装过程最快半个小时。

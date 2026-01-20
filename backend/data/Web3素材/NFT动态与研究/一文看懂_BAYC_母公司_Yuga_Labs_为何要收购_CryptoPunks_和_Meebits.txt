@@ -1,0 +1,63 @@
+标题: 一文看懂 BAYC 母公司 Yuga Labs 为何要收购 CryptoPunks 和 Meebits
+链接: https://www.chaincatcher.com/article/2071192
+发布时间: 2022-03-12
+
+==================================================
+
+撰文：Azuma
+
+ 
+
+3 月 12 日上午，一则重量级新闻瞬间引爆了整个 NFT 圈子。
+
+7:00 左右，Yuga Labs（BAYC 开发公司）与 Larva Labs（CryptoPunks 开发公司）联合发布声明称，Yuga Labs 已从 Larva Labs 的手中收购了 CryptoPunks 和 Meebits 的 IP。受此消息影响，CryptoPunks 和 Meebits 于二级市场同时抬升，截至北京时间 10:10，CryptoPunks 地板价暂报 76.2 ETH，Meebits 地板价暂报 6.93 ETH。
+
+关于该起收购的一些细节内容，Yuga Labs 与 Larva Labs 各自的公告声明给出了很详细的解释。具体如下：
+
+Q1：收购内容是什么？
+
+A：如前文所述，Yuga Labs 将从 Larva Labs 的手中获得 CryptoPunks 和 Meebits 的 IP，含品牌、艺术版权和以及其他 IP 权利，除此之外，前者还从后者手中获得了开发者所持有的大多数 NFT，随着交易的完成，Larva Labs 现持有 423 个 CryptoPunks 和 1711 个 Meebits。
+
+Q2：收购金额是多少？哪来的钱？
+
+A：Yuga Labs 和 Larva Labs 均未披露具体的收购金额，但依照地板价计算，仅通过本次收购所转移的 NFT 总价值就已高达数万个 ETH，再加上最为主要的 IP 收购费用，可推测本次收购的总金额大概率要以「亿美元」为单位。
+
+这很难不让人联想到上个月传出的一些流言。早在一月，就有知情人士透露 Yuga Labs 正在以 50 亿美元的估值寻求融资，而在 2 月初，另有知情人士透露 Yuga Labs 正与 a16z 就融资一事进行谈判。
+
+Q3：Larva Labs 为什么要卖掉 CryptoPunks 和 Meebits？
+
+A：Larva Labs 表示，之所以选择卖出 CryptoPunks 和 Meebits 的 IP，系因随着 NFT（尤其是 PFP 类）的快速发展，该团队逐渐意识到自己的调性及专长是在某项技术的早期创造新线事物，而不是做某个项目的日常管理。
+
+在 Larva Labs 处理这些社区管理问题的同时，该团队结识了 Yuga Labs，并在后者的身上发现了一些自己所缺乏的技能和专业知识。起初，Larva Labs 和 Yuga Labs 曾试图通过合作形式来解决问题，但最终 Larva Labs 意识到让 Yuga Labs 来接管运营就是最好的路子。
+
+Q4：Larva Labs 后续会如何发展？
+
+A：需要明确的是，Yuga Labs 收购的只是 CryptoPunks 和 Meebits 的 IP，而不是 Larva Labs。 未来，Larva Labs 仍将继续独立发展，该团队目前还拥有 Autoglyphs 项目，团队成员也还持有者自己最喜欢的一些 CryptoPunks 和 Meebits NFT。
+
+Q5：收购对 CryptoPunks 和 Meebits 持有者有何影响？
+
+A：Yuga Labs 已表态，将很快授予 CryptoPunks 和 Meebits 持有者与 BAYC 和 MAYC 持有者相同的商业权利，就此，Yuga Labs 正在与法律团队合作，为这两个 NFT 系列集合起草新的法律条款，以尽快向社交移交这些权利。
+
+在此之前，Larva Labs 捏着 CryptoPunks（及 Meebits）商业权利不放的行为一直饱受社区诟病，在行业的普遍认知下，Larva Labs 的一举措并不符合 Web3 的精神，在许多人看来这也是 CryptoPunks 地板价持续走低的关键原因。
+
+Q6：CryptoPunks 和 Meebits 未来将如何发展？
+
+A：Yuga Labs 的愿景是希望更多的第三方开发者及社区创建者将 CryptoPunks 和 Meebits 纳入其 Web3 项目，在这段旅途中，Yuga Labs 将同他们一起来打造 CryptoPunks 和 Meebits 的品牌。
+
+往细了说，Yuga Labs 称其并不打算将这两个 NFT 系列硬塞到其为 BAYC 开发的俱乐部模型中，而是会围绕 CryptoPunks 和 Meebits 构建新的实用。不过，这些事件当前并不是很急，所以在决定下一步行动之前，Yuga Labs 会将听取社区的意见。 
+
+Q7：收购对于 BAYC 有何影响？
+
+A：BAYC 持有者大可放心，Yuga Labs 已明确提及仍将视 BAYC 为其建设中心。
+
+Q8：BAYC + MAYC + BAKC + CryptoPunks + Meebits，Yuga Labs 该如何定位？
+
+A：随着 Yuga Labs 将 NFT 领域内一众最知名的项目纷纷揽至旗下，其已成为整个 NFT 领域内最值得关注的「新势力」。在这次公告的结尾，Yuga Labs 也明确提及了自身定位——「希望打造一个超越 NFT 的、完全由社区所拥有的品牌」。
+
+最后，推荐大家看一看「从 V1 Punks 争议读懂 CryptoPunks 为何败给 BAYC」。如果将 BAYC flip CryptoPunks 的那段故事视为 Web3.0 精神的共识拓展之路，那么这场收购就应该被视作这段征途的一次阶段性胜利。
+
+从事件本身来看，作为 NFT 历史上规模最大的收购案例（貌似也是第一起），本次收购势必会对整个 NFT 行业的未来发展带来深远影响。往小了说，两家团队截然不同的运营方式所带的不同结局必然会成为其他所有项目团队的参考。
+
+再大一点，Larva Labs 所提及的专业能力与市场阶段适配性问题，也第一次让人们意识到了（PFP）NFT 行业也可作出上下游的划分，未来 PFP NFT 的发行和运营是不是有可能分割开来。
+
+再大一点，随着 Web3.0 概念的继续普及和演化，后续项目该如何选择，才能像 BAYC 「屠龙」 CryptoPunks 那样，完成对 BAYC 的追赶及超越，值得业界里的每个人打开脑洞，自由想象。

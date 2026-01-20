@@ -1,0 +1,25 @@
+标题: SignalPlus波动率专栏(20240122)：BTC承压下行，延续Risky Flow
+链接: https://www.chaincatcher.com/article/2112256
+发布时间: 2024-01-23
+
+==================================================
+
+上周五（19 JAN）美国 1 月一年期通胀率预期录的 2.8% ，为 2020 年以来最低水平，密歇根消费者信心指数则是录得高于预期的 78.8 ，为 2021 年 7 月以来最高。过去几日美债收益率维持在近期高点小幅波动，两年期/十年期分别报 4.395% /4.113% ，另一方面，在近日多位美联储官员相对鹰派的发言和强势的数据影响下，市场对美联储 3 月不降息的概率预期已经上调至 56.8% ，马上到来的 2 月 1 日 FOMC 则被认为是美联储表态的关键节点，本周包括 PMI，PCE 在内的核心数据也将对下次会议内容产生不可忽视的影响。
+
+Source: SignalPlus, Economic Calendar
+
+Source: Binance & TradingView
+
+数字货币方面，比特币价格因持续遭到 GBTC 抛压而再度下行，失守 41000 关口，前端 IV 小幅上行，曲线走平，大宗交易相对乏善可陈，但前端以 26 JAN 24 为代表的期限上买 Put 卖 Call 的 Risky Flow 依旧是散户的热门操作；ETH 交易量的 P/C Ratio 在近日交割时点达到 0.15 的低谷，大宗数量庞大的买入建仓 2 FEB 24-2550-C（Size： 23950 ETH）和 29 MAR 24-2700-C（Size： 17717 ETH）成为市场焦点。
+
+Source: Deribit （截至 22 JAN 16: 00 UTC+ 8）
+
+Source: SignalPlus
+
+Source: SignalPlus
+
+Source: Laevitas
+
+Source: Deribit Block Trade
+
+Source: Deribit Block Trade

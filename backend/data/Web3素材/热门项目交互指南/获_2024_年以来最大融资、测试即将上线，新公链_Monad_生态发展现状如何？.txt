@@ -1,0 +1,147 @@
+标题: 获 2024 年以来最大融资、测试即将上线，新公链 Monad 生态发展现状如何？
+链接: https://www.chaincatcher.com/article/2138055
+发布时间: 2024-08-12
+
+==================================================
+
+作者：Nicky，Foresight News
+
+ 
+
+今年 4 月份，Layer1 区块链 Monad Labs 宣布完成了一笔高达 2.25 亿美元的融资，这是 2024 年迄今为止最大的加密货币项目融资，该轮融资由投资机构 Paradigm 领衔，并吸引了包括 IOSG Ventures、SevenX Ventures、Electric Capital 及 Greenoaks 等投资机构的参与。
+
+Monad Labs 旨在通过其并行 EVM Layer1 项目 Monad 引入并行执行和超标量流水线技术，提升以太坊虚拟机的性能，解决现有 EVM 兼容区块链的低吞吐量问题。目前 Monad 网络处于 Devnet 阶段，共同测试网仍在准备当中。
+
+本文将从 DeFi、NFT、全链互操作协议等多个板块全方位梳理 Monad 生态的发展现状。同时也需注意到，当前众多 Monad 生态的原生项目仍处于非常早期的开发阶段，投资者和参与者应当对此保持警惕，并充分认识到其中存在的风险。
+
+截止 2024 年 8 月 1 日，Monad 生态项目一览。（图源：Drops Tab）
+DeFi 协议
+DEX / AMM 协议
+
+Ambient Finance
+
+Ambient Finance 是一种去中心化交易协议，允许在任意一对区块链资产上组合集中和恒定产品流动性的双边 AMM。去年 7 月，Ambient Finance 宣布完成了 650 万美元的种子轮融资，由 BlockTower Capital 领投，Jane Street、Circle、Tensai Capital 等投资机构及多位个人投资者参投。
+
+Backpack
+
+Backpack 是一家受到全面监管的全球加密货币交易平台，集成了中心化交易所、链上钱包和 NFT 等，致力于为用户提供无缝、创新的加密体验，并计划拓展至更广泛的区块链生态。其交易所已获得迪拜虚拟资产监管局颁发的 VASP 许可证。并将在 Monad 上线公共测试网首日即支持该网络。
+
+Balancer
+
+Balancer 是一种 DeFi AMM 协议，该协议允许任何人在池中创建具有预定义权重的资产池。Balancer 正努力成为 DAO 和其他协议构建工具的平台，为用户和产品提供流动性。截止目前 Balancer 上的 Liquid Staked Token 交易量已超过 250 亿美元。
+
+Catalyst
+
+Catalyst 是一种在模块化区块链之间提供流动性的开源协议。借助 Catalyst，任何新的模块化区块链都可以自动连接流动性并与任何链交易——包括以太坊和 Cosmos 等流动性中心。今年 5 月，Catalyst 宣布上线主网，利用 OP Stack 构建的二层网络，如 Optimism、Base 等可以在其 Rollups 之间共享流动性。
+
+Dyson Finance
+
+Dyson Finance 是一个零售用户友好的 DEX，旨在使链上流动性范式民主化。借助其双重投资、创新的动态 AMM 和独家推荐计划，任何人都可以像专业人士一样轻松提供流动性并赚取高收益。
+
+Kuru
+
+Kuru 是基于 Monad 构建的一个完全链上订单簿 DEX，为用户提供了一个单一的平台来查找、研究和交易链上的现货资产。今年 7 月，Kuru 宣布完成了 200 万美元种子轮融资，由 Electric Capital 领投，Brevan Howard Digital、CMS Holdings 等机构，以及 Keone Hon 等天使投资人参投。
+
+Swaap Finance
+
+Swaap Finance 是一个市场中立的自动做市商 (AMM)。它结合了预言机和动态点差，为流动性提供者提供可持续的收益，并为交易者提供更便宜的价格。
+
+Timeswap
+
+Timeswap 是一种基于 AMM 的去中心化货币市场协议，不使用预言机或清算人。与可以实时交换资产的 Uniswap 不同，在 Timeswap 上借贷需要交换代币，直到还款完成。
+
+Wombat Exchange
+
+Wombat Exchange 是一个多链稳定币交易 DEX，具有开放的流动性池、低滑点和单边质押等服务。
+
+借贷协议
+
+Curvance
+
+Curvance 是一种去中心化的稳定币借贷协议，最初专注于来自 Curve、Convex、Aura 和 Frax 生态系统的 LP。 Curvance 力求让用户获得优化的收益，同时通过点对点借贷最大限度地提高资本效率。去年 12 月 Curvance 宣布完成 360 万美元种子轮融资，由 Arbitrum 开发商 Offchain Labs、Wormhole 和包括 Polygon 联合创始人 Sandeep Nailwal 在内的天使投资者等参投。今年 4 月，Curvance 已上线针对早期支持者的测试网。
+
+Pike Finance
+
+Pike Finance 是一个原生的跨链借贷市场，可在不同的区块链之间实现直接和安全的交互。Pike 建立在 Wormhole 的跨链数据消息传递协议和 Circle 的原生 USDC 铸币协议 CCTP 之上。今年 3 月，Pike Finance 公布了代币经济学，旨在通过其治理代币 P 推动跨链 DApp 的发展。
+
+流动性网络协议
+
+aPriori
+
+aPriori 是一种基于 Monad 原生构建的 MEV 基础设施和流动性质押协议，致力于为 Monad 打造一个以交易为核心的基础架构降低 gas 费用、优化网络流量，并为验证者提供可持续的激励，助力 Monad 提高吞度量及用户体验。今年 7 月，aPriori 宣布完成了 800 万美元的种子轮融资，由 Pantera 领投。此前 aPriori 完成了由 Hashed 和 Arrington Capital 共同领投的 Pre-Seed 轮融资，目前总融资额达到 1000 万美元，参与投资的机构包括 Consensys、OKX Ventures、Manifold Trading 等。同时 Binance Labs 宣布通过 Binance Labs 第 6 季孵化计划投资 aPriori。aPriori 联合创始人兼首席执行官 Ray S 透露，此轮融资使 aPriori 完全稀释后的代币估值将达到「9 位数」。
+
+Elixir
+
+Elixir 是一个模块化的流动性网络，允许用户直接向订单簿交易所的交易对提供流动性，并获得与 AMM 类似的做市商奖励，其网络支持 Vertex、Bluefin、RabbitX 等交易所的大量流动性，并将与 dYdX 和 ApeX 等平台集成。今年 3 月，Elixir 宣布完成了 800 万美元 B 轮融资，Mysten Labs 与 Maelstrom。并于去年 10 月以 1 亿美元估值完成 750 万美元的 A 轮融资，由 Hack VC 领投，NGC Ventures 等参投。
+
+Kintsu
+
+Kintsu 是基于 Monad 网络的生态流动性质押协议，今年 7 月，Kintsu 宣布完成了 400 万美元种子轮融资，由 Castle Island Ventures 领投，Brevan Howard Digital、CMT Digital、Animoca Ventures 等参投。
+
+NFT 板块
+
+Monad Nomads NFT
+
+Monad Nomads NFT 是 Monad 上的第一个由社区驱动的 NFT 提议。
+
+Poply
+
+Poply 是 Monad 上基于社区的原生 NFT 市场。
+
+全链互操作协议
+
+Axelar Network
+
+Axelar 是一个去中心化的跨链通信网络，旨在通过连接异构区块链并以优化的方式为构建者和最终用户实现资产移动性和程序可组合性，从而提高 Web3 中的互操作性。
+
+Decent
+
+Decent 旨在为应用和区块链提供链抽象服务，可帮助用户使用钱包中的任何东西进行支付。
+
+LayerZero
+
+LayerZero 是一种可用于消息传递的互操作性协议，允许任何包含有效负载的跨链合约调用。
+
+Wormhole
+
+Wormhole 是一个于 2020 年 10 月推出的通用消息传递协议，最初由 Jump Crypto 孵化和支持，旨在使开发者能够构建覆盖多个链的原生跨链应用程序，现已从专注于以太坊与 Solana 的双向跨链桥发展成为支持多链的通用消息传递协议。
+
+AI
+
+AIT Protocol
+
+AIT Protocol 是基于区块链构建的 Web3 数据基础设施，主要用于数据注释和 AI 模型训练，让用户在参与「Train-To-Eran」任务并为 AI 模型开发和训练做出贡献的同时获得奖励。去年底 AlT Protocol 宣布了完成新一轮融资，MorningStar Ventures、Megala Ventures、Contango Digital Assets 等参投。
+
+链上工具
+
+Notifi
+
+Notifi 可为任何 Web3 项目的通信提供灵活支持，具有用于应用程序的高级功能和内置的全局基础结构，可大规模支持项目应用。
+
+Parsec
+
+Parsec 是一个加密链上数据分析平台，去年 10 月，Parsec 宣布完成了新一轮 400 万美元融资，并推出 DeFi 和 NFT 分析产品「team」，该轮融资由 Galaxy Digital 领投，Uniswap Labs Ventures、Robot Ventures、CMT Digital 等参投。
+
+GameFi
+
+Breath of Estova
+
+Breath of Estova (BoE) 是一款建立在 Monad 网络上的 Play-to-Earn 的 2D 游戏。BoE 利用 Monad 的并行性能引入了区块链集成，使用户能够赚取 ESTOVA 代币，并获得独特的游戏内物品和宠物。
+
+RareBetSports
+
+RareBetSports 是一个基于 Monad 网络的 Web3 生态系统，旨在捕捉体育与加密货币相结合的体验，同时也是为下一代粉丝和未来社区量身打造的理想平台。
+
+预言机
+
+Pyth Network
+
+Pyth Network 是下一代价格预言机解决方案，旨在通过区块链技术向项目和协议以及公众提供链上有价值的金融市场数据，包括加密货币、股票、外汇和商品等。
+
+RedStone
+
+RedStone 是一个区块链预言机，类似于 Chainlink 和 Pyth Network 等流行的预言机，但基于模块化设计。今年 7 月，RedStone 完成了 1500 万美元 A 轮融资，由 Arrington Capital 领投，Kraken Ventures、White Star Capital、Spartan Group 等机构，以及 Berachain 的 Smokey the Bera 和 Homme Bera、Ether.Fi 的 Mike Silagadze 等天使投资人参投。
+
+Switchboard
+
+Switchboard 是一个用于通用数据馈送和可验证随机性的快速、无许可且可定制的多链预言机协议。今年 5 月，Switchboard 宣布完成了 750 万美元 A 轮融资，该轮融资由 Tribe Capital 和 RockawayX 领投，Solana Foundation、Aptos、StarkWare 等机构，以及部分天使投资人参投。

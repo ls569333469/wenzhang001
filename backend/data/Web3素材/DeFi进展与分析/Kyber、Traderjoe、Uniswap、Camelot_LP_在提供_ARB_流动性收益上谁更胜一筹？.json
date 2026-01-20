@@ -1,0 +1,7 @@
+{
+  "title": "Kyber、Traderjoe、Uniswap、Camelot LP 在提供 ARB 流动性收益上谁更胜一筹？",
+  "url": "https://www.chaincatcher.com/article/2090024",
+  "content": "来源：DeFi Made Here 推特\n\n编译：深潮 TechFlow\n\n \n\n作者列出了几个提供 ARB 流动性的 DEX，包括 KyberNetwork、Trader Joe、Uniswap 和 Camelot，并分别给出了它们的收益比较结果。值得注意的是，这些平台之间的生态系统和激励措施不尽相同，因此他们的收益也有所不同。在此基础上，作者还详细解释了一些聚合器如何在这些 DEX 之间路由交换，以及他们的优缺点。\n\n• KyberNetwork ：5866％\n\n• Traderjoe ：571％\n\n• Uniswap ：315％\n\n• Camelot ：207％\n\n以下是一些详细信息。\n\nKyberSwap 拥有最高的收益率，为 5866％，并且此收益率没有受到激励措施的影响。\n\n我以 588% 的 APR 为 5% 的费用层池增加了流动性，我希望额外的空投会比产生的差异更高。\n\nTrader Joe 激励池的收益比那些没有额外奖励的池要低。人们想要获得更多的 $JOE 奖励，而不是从费用中赚取收益。\n\nUniswap 在没有任何额外激励的情况下排名第三。人们更信任和习惯于使用 Uniswap，而且 LPs 愿意获得较少的产量，只要能留在他们习惯的平台上。\n\nCamelot 的收益率最低。看起来有很多人喜欢简单的仓位管理，即使获得更少的奖励。\n\n但是聚合器如何在这些 DEX 之间路由交换？我进入了 DefiLlama 的元 DEX 聚合器，以查看 100 $ ETH 交换的最佳路径。\n\n它将我引导至 Kyber 聚合器。\n\nKyberSwap 自己的 DEX 聚合器只有约 2.8％通过其自己的池进行路由，其余 97％则通过 Uniswap 进行路由。\n\n为了使实验更清晰，我决定检查 1inch 如何路由相同的交易。这次交易中有 5％通过 KyberSwap 进行路由，10％通过 Trader Joe 路由，其余 85％通过 Uniswap 进行路由。\n\n这表明，具有集中流动性的 DEX 是最有效的交易方式，流动性才是王道。\n\n虽然其他 DEX 在竞争中彼此提供额外激励来吸引 LP，但 Uniswap 没有任何努力就拥有了大部分 TVL 和交易量。低效的 DEX，如 Camelot 对于那些不想积极管理其仓位并通过额外激励获得更高奖励的人来说是不错的选择。\n\n*注意：在 KyberSwap 上的池子显示的 APR 是基于 30 分钟产生的费用（而不是 24 小时）。\n\nKS 上的 5% 费用层池只有在 $ARB 现货价格与本轮投票中的 $ARB 价格之间的差异 > 5% 时才会有交易量。",
+  "published_at": "2023-03-27",
+  "downloaded_at": "2026-01-17 00:39:12"
+}

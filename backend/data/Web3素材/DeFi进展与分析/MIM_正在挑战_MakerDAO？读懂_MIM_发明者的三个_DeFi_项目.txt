@@ -1,0 +1,88 @@
+标题: MIM 正在挑战 MakerDAO？读懂 MIM 发明者的三个 DeFi 项目
+链接: https://www.chaincatcher.com/article/2065941
+发布时间: 2021-10-28
+
+==================================================
+
+撰文：Karen
+
+ 
+
+过去两个月内，基于生息资产的借贷协议 Abracadabra 的治理代币 SPELL 暴涨 60 倍，同期锁仓量激增 7 倍达到了近 30 亿美元，作为 Abracadabra 创始人的 Daniele Sestagalli 在加密社区颇受关注，而其在加密领领域的布局远不止此，LP 收益优化器 Popsicle Finance、Avalanche 上的 OlympusDAO 分叉项目 Wonderland 也是他的「杰作」。
+
+根据公开资料，Daniele Sestagalli 毕业于巴拿马美洲大学建筑系，在构建这三个项目之前，Daniele Sestagalli 曾在 2016 年创立区块链初创公司 Zulu Republi，也是基于区块链的音乐科技平台 Utopia Genesis Foundation 的首席战略官。
+
+ 
+
+Abracadabra：正在挑战 MakerDAO？
+
+ 
+
+Abracadabra 势头迅猛是 Daniele Sestagalli 知名度得以大幅提升的主要驱动力。Abracadabra 允许用户通过存入生息资产来借入美元稳定币 MIM （神奇的互联网货币），目前支持以太坊、币安智能链、Avalanche、Fantom 和 Arbitrum One，并上线了耕种、借贷、质押、兑换和跨链桥等功能。关于 Abracadabra 具体的功能和双代币模型可参考阅读《已上线 Arbitrum 的 Abracadabra 如何通过生息资产构建链上稳定币协议？》。
+
+Abracadabra 凭借多链部署、支持使用多种生息资产和少数加密货币借入稳定币以帮助提升资金利用率的优势，「正在挑战稳定币协议龙头项目 MakerDAO」的言论也不无道理，诸如，MIM 流通量突破 18 亿美元，目前为 Dai 的 26%，据 CoinGekco 数据，按稳定币流通量来看已超越 Pax Dollar （USDP）、TrueUSD （TUSD）位列第六；锁仓量达到了 MakerDAO 的五分之一；SPELL 持有地址数达到 2.3 万，接近 MKR 的三分之一；近一周在以太坊链上 sSPELL 的费用收入是 MakerDAO 的两倍。
+
+在近期的进展方面，Abracadabra 还与 Terra 达成了合作，根据 The Defiant，合作可能包括 MIM-UST 流动性池和 LUNA 抵押品，允许用户用他们的 LUNA 代币借入 MIM。Abracadabra 另一核心贡献者 Squirrel 还提出与 Tornado.cash 合作的提案，以将 MIM 也发展成注重隐私的稳定币，不过当前尚不清楚具体的合作细节。
+
+Abracadabra 联合创始人 Squirrel 告诉 The Defiant，这个项目成功的秘诀是多方面的，几乎仅支持生息资产作为抵押品的可组合性特点即保留了生息资产的利息，还能同时借入资金，另一方面，Abracadabra 的费用结构也非常有吸引力，75% 的协议费用会用来购买 SPELL，然后分发给 sSPELL 持有者，20% 会被分配到金库来激励 MIM 流动性池。
+
+ 
+
+Popsicle Finance：LP 收益优化器
+
+ 
+
+而在推出 Abracadabra 之前，即，今年一季度末，Daniele Sestagalli 还和 Squirrel 为想要提供流动性的用户推出了一个多链收益率优化平台 Popsicle Finance （ICE），Popsicle 是冰棒的意思。Popsicle Finance 的工作机制是，在接收用户提供的资产后，通过自动比较多个区块链上多个 AMM 机制的 DEX 的资金池，来为用户将资金部署到收益最优的资金池中。
+
+Popsicle Finance 支持的网络有以太坊、币安智能链和 Fantom，还计划支持 Tron、Polygon、Solana 和波卡，产品有针对 Uniswap V3 设计的 Sorbetto Fragola、LP 收益优化优化器 Sorbetto Limone、借贷协议 Gelateria 以及 USDT 包装器 Frapped.io。
+
+其中，Sorbetto Fragola 专为引入范围内挂单（Range Orders）的 Uniswap V3 设计，会根据历史波动率数据积极帮助用户管理流动性和提升在 Uniswap V3 的资本效率，而对于用户来说，通过 Sorbetto Fragola 仅存入单边资产或对应实时比例的双边资产，就可以收到份额代币 PLP （Popsicle Liquidity Provision），然后其他策略参数都交由 Sorbetto Fragola 上的策略上运行。
+
+Sorbetto Limone 就是前面所说的多链流动性收益优化器，会将用户的流动性部署到在多个网络上收益最优的去中心化交易所中。目前 Sorbetto Limone 还在开发中，可能会在近期上线。就流动性提供者而言，不必手动查询和切换流动性即可享受最优收益，还可节省很大一部分 Gas 费，而对于整个生态系统来说，流动性也会变得更有效，交易者也能享受到最好的价格。
+
+与此同时，Daniele Sestaylor 将平台上 LP 代币 PLP 的作用也发挥到最大化。根据 Popsicle Finance 文档，还会推出一个借贷协议 Gelateria，允许用户抵押 LP 代币 PLP 来借入资产。另外，Frapped.io 已在币安智能链和 Fantom Opera 上推出 FUSDt。
+
+而关于治理代币 ICE，今年 7 月份，Popsicle Finance 团队在权衡协议的营销预算、激励方案以及项目的受欢迎程度之后，提出销毁原定总供应量的 64.98%（主要销毁潜在的 LP 奖励）的提案，并在几天之内获得通过并完成销毁。
+
+那么，治理代币 ICE 是如何在 Popsicle Finance 平台上发挥作用的呢？除治理作用外，该平台产品收取的所有绩效费（当前为利润的 10%，当前正在提议增加到 20%）会以 ICE 的形式分发给 nICE 持有者，nICE 是用户抵押 ICE 至 nICE 池后得到的存款凭证。
+
+不幸的是，今年 8 月初，Popsicle Finance 遭到黑客攻击损失了约 2000 万美元，之后将受到影响的 Sorbetto Fragola 产品下架并计划在经过四重审机等流程后重启。同时，Popsicle Finance 发布较为独特的赔偿计划，首先从 IronBank 获得了 100 万美元的贷款，偿还了受损资金的 5%，然后在之后的每个月中会至少获得 50 万美元的贷款来偿还用户资金。 此外，Popsicle Finance 还会制作两款 NFT，一款空投给受影响用户，一款（共 1 万个）会通过拍卖出售，出售资金也会用来偿还被盗资金。另一方面 Daniele Sestagalli 也承诺会在 1 年之内从其个人额度中拿出 100 万枚 ICE 来偿还受影响用户。
+
+可以看到，Popsicle Finance 遭遇黑客攻击后在安全流程、协议启动规划以及赔偿等方面后迅速响应，并提出了令用户比较满意的补偿方案。有趣的是，ICE 的价格项目在被盗当日跌约 40% 之后的两个月内，大涨 16 倍至 24 美元左右，按当前价格来算，Daniele Sestagalli 承诺要补偿的这 100 万枚代币的价值就已超被盗资金。
+
+ 
+
+Wonderland：Avalanche 上的 OlympusDAO 分叉项目
+
+ 
+
+算法稳定币项目 Wonderland （TIME）也是在 Avalanche 上推出的 OlympusDAO 分叉项目，Wonderland 的中文意思为仙境。该项目最初为匿名项目，之后，Daniele Sestagalli 在推特承认为其开发。
+
+在 Wonderland 中，每个 TIME 代币都由金库中的一篮子资产提供支持，包括 MIM、TIME-AVAX LP 代币等，也仿照 OlympusDAO 引入了质押和铸造将激励设计机制和博弈论结合起来。需要注意的是，1 个 TIME 的价值由 MIM 提供支持（而非挂钩），这意味着，TIME 的交易价格会始终高于 1MIM，而当 TIME 的交易价格低于 1MIM 时，协议就会回购并销毁 TIME，以将 TIME 价格助推至 1MIM 以上。
+
+从用户层面来看，有两种参与 Wonderland 的方式，其一是质押 TIME 通过自动复利来赚取更多的 TIME，实质上，是质押 TIME 后可获得 MEMO （质押凭证），然后 MEMO 余额会根据当前的收益率每 8 小时通过复利自动增加；其二是铸币，即提供 LP 代币（包括 TIME-AVAX LP 或 TIME-MIM LP）、MIM 或 wAVAX 来以折扣价铸造（或购买） TIME，不过，需要在铸造 5 日后完全释放。
+
+另一方面，协议为其金库获得了流动性，随着获得的流动性越来越多，也能够进一步赚取到更多的做市商佣金，增加协议收入。这部分收入会由金库来铸造 TIME，然后再将很大一部分分发给 TIME 质押者，从而保证系统的稳定性和 PCV （协议控制价值）。
+
+截止撰稿时，Wonderland 的金库余额为 1.34 亿美元，TIME 总质押率为 8.7 万枚。值得注意的是，Wonderland 当前未经审计，可能还存在一定安全隐患。
+
+小结
+
+ 
+
+综上，Abracadabra 提供给用户利用生息资产借入 MIM 的能力，可能会将 MIM 打造成更广泛的 DeFi 储备稳定币，Popsicle Finance 会自动帮助用户将流动性放至收益最优且最需流动性的资金池中，同时还将进一步推出允许用户抵押平台上 LP 代币来借入资产的借贷协议，而 OlympusDAO 分叉项目 Wonderland 同时使协议流动性和用户双方受益的设计或将形成一个正反馈机制。
+
+另一方面，更加去中心化且可用生息资产借款的稳定币 MIM，SPELL、TIME 和 ICE 三个协议治理代币，包括各自的质押凭证兼生息资产 sSPELL、MEMO、nICE，也可供用户在这三个协议中互相作用和「循环套娃」来最大化资本效率。
+
+在 Daniele Sestagalli 驱动的真正去中心化的运动「占领 DeFi」（OccupyDeFi）热潮之下，Daniele Sestagalli 作为这三个项目的创始人，通过聚焦流动性收益的最优化、流动性代币的充分利用、生息资产的资本效率最大化等需求，再结合协议自身费用结构、多链设计、可组合性以及激励措施，掀起了足够大的浪花。
+
+虽然这三款产品均为今年发布，但项目的执行力还是不错的，不管是在产品技术、合作进展还是项目表现来看取得了不错的成果。Popsicle Finance 发生过安全事故，不过从社区反应来看用户对该项目的应对方案和进展还是比较认可的。而且 Popsicle Finance 竞品较少，随着 Popsicle Finance 的重新启动以及 LP 收益优化器的即将推出，能否凭借先发优势占领在 DeFi 流动性中抢占份额值得期待。但与此同时，这些协议也存在治理代币在短中期内的通胀压力、缺乏安全审计报告以及有「循环套娃」引发的清算等风险。
+
+参考：
+https://www.blocmates.com/blogmates/a-complete-guide-to-popsicle-finance-ice-and-nice
+
+https://www.blocmates.com/blogmates/a-complete-guide-to-wonderland-money-time-mim-and-memo
+
+https://thedefiant.io/abracadabra-mim-stablecoin-makerdao/
+
+ 

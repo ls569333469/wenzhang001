@@ -1,0 +1,7 @@
+{
+  "title": "Arcadia Finance：有攻击者通过 Rebalancer 进行未经授权的交易，请立即移除 Rebalancer 权限",
+  "url": "https://www.chaincatcher.com/article/2191477",
+  "content": "ChainCatcher 消息，Arcadia Finance 官方在 X 平台发文表示，团队已注意到有攻击者通过 Rebalancer 进行未经授权的交易。官方紧急提醒用户，立即移除所有资产管理器（Asset Manager）权限，并移除所有活跃的 Rebalancer。\n\n此前 CertiK Alert 监测称，Arcadia Finance 在 Base 链上发生了多笔可疑交易，攻击者共获取约 160 万美元资金。",
+  "published_at": "2025-07-15",
+  "downloaded_at": "2026-01-17 17:11:30"
+}

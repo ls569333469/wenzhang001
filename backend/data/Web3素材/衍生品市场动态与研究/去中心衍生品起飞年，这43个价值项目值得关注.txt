@@ -1,0 +1,390 @@
+标题: 去中心衍生品起飞年，这43个价值项目值得关注
+链接: https://www.chaincatcher.com/article/2059090
+发布时间: 2021-02-08
+
+==================================================
+
+本文发于星球日报，作者黄雪娇
+
+ 
+
+在传统金融领域，衍生品的体量是现货的 40 到 60 倍。但在加密金融领域，据 BitWell CEO Jeff Young 估算，目前，加密衍生品成交量在整个数字资产的成交量中仅占40.32%。对标之下，很多从业者相信，加密衍生品依然具有很大的发展空间，「甚至完全有可能跑出几个币安这样体量的衍生品交易所。」
+
+类似现货，衍生品交易也对应着中心化平台和 DEX 两类解决方案。DEX 不断刷新的战绩已经证实了去中心化交易的爆发力，那么，去中心化衍生品平台会继续复刻 DEX 的路径吗？
+
+至少，很多资本相信如此。据不完全统计，从去年 9 月至今，已公布的去中心化衍生品了领域的融资已有 7 起，投资金额从 200 万美元到 1000 万美元不等，圈内的顶级资本基本都已进场。 
+
+在今年 1 月初 Odaily星球日报举办的活动上，Dragonfly Capital 合伙人 Mia Deng 就表示，衍生品这块今年也出现了一些小小的端倪，综合来看会是一个非常好的赛道。「目前我们还没有公布在这一块的动作，但已经在看一些做结构性产品或是去中心化衍生品的项目了。」
+
+Multicoin Capital 合伙人 Mable Jiang 更具体地指出，衍生品领域有两个方向特别值得关注。「一个是去中心化的永续合约，因为在所有的衍生品里永续合约是资本效率最高的方式，比较节约资源。第二个方向是收益通证化，包括像固定利率掉期其实也是收益通证化的一种。」
+
+一些去中心化衍生品的创业者也相信，就像 DEX 补充（甚至取代）CEX 一样，去中心衍生品的爆发、对中心化交易方式的取代只是时间问题。
+
+相较于中心化衍生品，DeFi 衍生品协议具备 5 大优势：
+
+没有中心化交易所运营商，长期来看费用更低；
+
+访问无需许可、使其具备抗审查特性，没人能关闭、掌控和改变交易协议；
+
+用户自持资金，没有交易对手风险；
+
+交易品种无许可，任何有公开喂价的资产都可以被交易；
+
+无提款限制或交易规模限制。
+
+尽管具备优势，但之前，去中心化衍生品交易一直存在交易体验较差、流动性不足、事故责任主体不明确等问题。所幸随着 Layer2 方案的集成，以及部分项目引入 AMM 模式和收益农耕玩法，部分问题正在被一步步改善。 
+
+据 DDX 中文社区统计，2020 年第三季度，数字资产衍生品市场成交量报 2.7 万亿美元，较上季度环比增长 25.1%，较 2019 年第三季度同比增长 159.4%。
+
+但稍微对比下中心化的衍生品交易量，就知道去中心化衍生品尚初出茅庐。
+
+为此，Odaily星球日报盘点了包括去中心化衍生品交易、预测和保险三大市场的新老项目，供大家关注和参与。未来，我们还将针对其中的明星项目做系列报道，敬请期待。
+
+（注：本文发布时间为 2021 年 2 月 8 日，下文中未发币均指截至 2021 年 2 月未发币。）
+
+01 衍生品交易
+（1）杠杆、期货（19 个）
+dYdX
+
+（https://dydx.exchange/，未发币）
+
+dYdX 是以太坊上交易量最大的去中心化衍生品交易平台，支持借贷、现货、杠杆和永续合约交易。
+
+此前，dYdX 曾完成 3 轮共 2000 万+美元的融资。
+
+投资方包括：a16z、Polychain Capital、Kindred Ventures、1confirmation、Elad Gil、Fred Ehrsam Three Arrows Capital、DeFiance Capital、Wintermute、Hashed、GSR、SCP、Scalar Capital、Spartan Group、RockTree Capital。
+
+Vega
+
+（https://vega.xyz/，未发币）
+
+Vega 是一个基于 Layer 2 的去中心的衍生品交易协议，拟提供的产品包含期货、掉期、期权等。
+
+2019 年，Vega 宣布获得由 Pantera Capital 牵头的 500 万美元种子轮融资，其他投资者包括 Ripple 的 Xpring、Hashed 和 KR1。
+
+2020 年 3 月，Vega 发布测试网，允许各方在其上构建交易产品。
+
+Globedx
+
+（https://globedx.com/，未发币）
+
+Globedx 是一个去中心化的衍生品交易协议，支持币本位永续合约，杠杆最高 100 倍。
+
+至今，Globe 已完成两轮共 315 万美元种子轮融资。
+
+部分投资方及投资人包括：Pantera Capital、Y Combinator 和亿万富翁 Tim Draper。 
+
+DerivaDEX
+
+（https://derivadex.com/，代币：DDX）
+
+DerivaDEX 是一个去中心化合约交易协议，计划于 2021 年一季度上线。
+
+至今，DerivaDEX 已完成两轮融资，共 270 万美元。
+
+投资方及投资人包括：Polychain、Dragonfly、Three Arrows Capital、Coinbase Ventures、CMS Holdings、Calvin Liu（Compound CSO）、Phil Daian。
+
+Serum DEX
+
+ 
+
+（https://dex.projectserum.com/，代币：SRM）
+
+Serum 是一个主打高速、低费率的 DEX。2020 年 7 月 27 日，FTX 宣布与 DeFi 项目 Serum 达成合作，FTX 创始人 Sam Bankman-Fried 担任 Serum 顾问。8 月 30 日，Serum 上第一个去中心化交易所 Serum DEX 正式问世。Serum DEX 的三大特性可概括为：基于 Solana 的快速低成本体验、可以搭建完整的订单簿、提供风险保证金。
+
+2020 年 9 月，加密和股票做市商 Jump Trading 投资 Serum，并为其提供流动性。
+
+Injective
+
+（https://injectiveprotocol.com/，代币：INJ）
+
+Injective 是一个运行在以太坊上、基于 COSMOS 的 Layer2 去中心化衍生品交易协议，支持永续及交割合约、期权等衍生品，还上线了黄金、Yield Farming、Tesla 及 Google 股票等衍生品交易。不过，目前测试版只放开了永续合约，交割合约和期权合约估计要到 2021 年下半年才能实现。
+
+至今，Injective 已完成两轮融资， 260 万美元的私募轮以及 2018 年来自 Binance Labs 的种子轮。
+
+投资方及投资人包括：Pantera Capital、QCP Soteria 、Axia8 Ventures、K42、金氪资本等，以及 Compound 战略负责人 Calvin Liu，DRW 合伙人 Josh Felker 等。 
+
+Sovryn
+
+（https://sovryn.app/，代币：SOV）
+
+Sovryn 是一个基于比特币侧链RSK构建的去中心化的借贷和杠杆交易平台。
+
+此前，Sovryn 宣布通过代币预售获得 250 万美元融资。
+
+部分投资方包括：Greenfield One、Collider Ventures 和 Monday Capital。
+
+DDEX
+
+（https://ddex.io/，未发币）
+
+DDEX 是一个基于开源交易所框架Hydro协议构建的去中心化保证金交易平台。
+
+此前，DDEX 宣布获得 210 万美元融资，领投机构包括 Initialized Capital、真格基金。 
+
+Perpetual
+
+（https://perp.exchange/，代币：PERP）
+
+Perpetual 是（原 Strike 协议）是一个去中心化永续合约协议。今年 1 月，Perpetual 宣布启动主网，用户目前可交易比特币和以太坊永续合约，杠杆倍数最高 12 倍，交易过程中无需支付 Gas 费用。
+
+至今，Perpetual 已完成 180 万美元融资。
+
+投资方包括：Multicoin Capital、Zee Prime Capital、Three Arrows Capital、CMS Holdings、Alameda Research、Binance Labs、Mechanism Capital、Divergence Ventures。
+
+SynFutures
+
+（https://www.synfutures.com/，未发币）
+
+SynFutures 是一个去中心化的期货交易所，目前已上线测试网。
+
+2021 年 1 月，SynFutures 宣布完成 140 万美金种子轮融资、
+
+部分投资方包括：Dragonfly Capital 及 Standard Crypto。
+
+Futureswap
+
+(https://www.futureswap.com/，代币：FST）
+
+Futureswap 是一个基于 AMM 的永续合约平台，允许用户以高达 20 倍的杠杆交易任何 ERC20 代币。
+
+此前，Futureswap 曾宣布获得 40 万美元投资，披露的投资方为 Framework Ventures。
+
+Nuo
+
+（https://nuo.network/，未发币）
+
+Nuo 是一个支持去中心化贷款和保证金交易的平台。
+
+至今，Nuo 已完成 25+ 万美元的融资。
+
+投资方及投资人包括：Sequoia Capital(Surge Program)、Polychain Capital、Dragonfly Capital、Consensys Labs、Astarc Ventures、Singapore Angel Network、Amrish Rau、Jitendra Gupta（CEO PayU India）、Nitin Sharma（Incrypt）。
+
+MCDEX
+
+（https://mcdex.io/，代币：MCB）
+
+MCDEX 是一个基于 Layer2 扩容方案 Arbitrum Rollup 构建的去中心化永续合约与期货交易所。
+
+2020 年 9 月，MCDEX 宣布完成首轮融资，具体金额未披露。
+
+投资方及投资人包括：Arthur Cheong（DeFinance Capital）、Qiao Wang、DeFi Dad（Zapper）、杨民道（dForce CEO）、雷宇（Fortube CEO）、张元杰（Conflux co-founder）、Steve Guo（Loopring CTO）、雷明达（DODO co-founder）、Leo Cui（Talking Data）、YOOZOO Games。 
+
+Kwenta
+
+（https://kwenta.eth.link，未发币）
+
+Kwenta 是一个基于 Synthetix 协议构建的衍生品交易平台，最近交易额已突破 5 亿美元。
+
+LN Markets
+
+（http://lnmarkets.com，未发币）
+
+LN Markets 是基于比特币的侧链闪电网络构建的比特币衍生品交易所。自从 2020 年 3 月推出，至今平台总交易量已达到 1800 万美元。 
+
+Leverj
+
+（https://www.leverj.io/，代币：LEV）
+
+Leverj 是一个基于 Plasma 的 Layer2 去中心化衍生品交易所，目前已推出针对比特币和以太坊的正向永续合约，接受 USDT 作为保证金和结算货币。 
+
+bZx
+
+（https://bzx.network/，代币：BZRX）
+
+bZx 是一个支持去中心化的借贷与保证金交易平台。
+
+Volmex
+
+（https://www.volmex.finance/，未发币）
+
+Volmex.finance 是基于以太坊的波动率指数和期货交易平台，已集成 Optimism二层扩容方案。
+
+SynLev
+
+（https://synlev.com/，代币：SYN）
+
+SynLev 是一个生成和交易合成衍生品代币的平台。
+
+dFuture
+
+（https://testnet.dfuture.com/home，代币：DFT）
+
+dFuture 是一个去中心化衍生品交易协议，目前已进入公测期。据悉，该项目由 MIX 集团旗下 Mix Labs 发起并孵化。
+
+UniMex Network
+
+（https://unimex.network，代币：UMX）
+
+UniMex 是一个基于 Uniswap 的去中心化保证金交易平台。可让用户基于 Uniswap 代币对上开立多空头寸。保证金交易所产生的交易费用归贷款人、UniMexstaker 及合作伙伴 Staker 所有。
+
+（2）期权（8 个）
+Opyn
+
+(https://opyn.co/，未发币）
+
+Opyn 是一个建立在通用期权协议“凸性协议”（Convexity Protocol）上的、基于订单薄模式的链上期权平台，其定位为为通过期权交易为用户提供保险服务。
+
+至今，Opyn 已完成两轮共 886 万美元的融资。
+
+投资方及投资人包括：Paradigm、Dragonfly、1kx、Version One Ventures、DTC Capital、Uncorrelated Ventures 和 A.Capital、Synthetix 联合创始人 Kain Warwick 和 Aave创始人 Stani Kulechov。
+
+Opium
+
+（https://opium.network/，代币：OPIUM）
+
+Opium 是支持创建、结算并交易任何衍生品去中心化平台，当前已支持期权和保险市场的创建和交易。
+
+去年 11 月份，Opium 获得 325 万美元融资。
+
+投资方及投资人包括：QCP Soteria、HashKey、Galaxy Digital、Rockaway Blockchain Fund、MetaCartel Ventures、Alameda Research、Launch Hub、CMS Holdings、Kenetic Capital、One Block、SevenX、Zee Prime、Stani Kulechov（Aave Founder）、Jordan Momtazi（Synthetix Founder）、Trevor Koverko（Polymath Founder）。
+
+Hegic
+
+（https://www.hegic.co/，代币：HEGIC）
+
+Hegic 是一个基于 AMM 模式的去中心化期权平台，当前支持美式期权。2020 年 4 月，上线 V1 版本协议；2020 年 9 月 9 日，HEGIC 代币通过联合曲线合约发行，2020 年 10 月，主网 v888 版本上线。
+
+因上线较早，Hegic 目前锁仓量 5600 万美元左右，位居去中心化期权交易平台第一位。根据 2020 年 12 月的最新数据，Hegic 的期权成交量已经超过 8800 万美元。
+
+数据来自：debank.com
+
+FinNexus
+
+（https://finnexus.io/，代币：FNX）
+
+FinNexus 是一个去中心化期权协议。目前主网已经上线。
+
+2020 年 8 月，FinNexus 获得 100 万美元战略投资，投资方为 Jubi Labs。
+
+Primitive
+
+（https://primitive.finance/，未发币）
+
+Primitive 是一个去中心化的期权市场，主网已于 2 月 8 日正式启动。 
+
+Siren
+
+（https://sirenmarkets.com/，代币：未发行）
+
+Siren 是一个去中心化期权协议，用于为 ERC20 代币创建、交易和赎回具有完全抵押物的期权合约。Siren 使用类似于 Cover 的二元期权模型，并指定了行权价格和到期日。
+
+Charm Finance
+
+（https://beta.charm.fi/，未发币）
+
+Charm Finance 是一个基于 AMM 的去中心化期权协议，支持市场定价和自动结算。
+
+Oddz
+
+（https://oddz.fi，未发币）
+
+Oddz 是币安智能链、Polkadot 以及以太坊上的多链期权交易平台，主打通过跨链的方式实现 0 gas 费的交易。
+
+02 预测市场（5个）
+Augur
+
+（https://augur.net/，代币：REP）
+
+Augur不仅是第一个预测平台，也是以太坊上的第一个 dAPP，于 2015 年 6 月正式发布。其预测流程主要分为创建市场、交易、报告与结算四步。V神还曾担任 Augur 的项目顾问。
+
+迄今为止，Augur 累计完成 3 轮融资，投资金额未披露，投资方包括 OracleDAO、KR1 等。
+
+Polymarket
+
+（https://polymarket.com/，未发币）
+
+Polymarket 是一个建立在 Matic Layer2 上的预测市场，支持用户在上面对一些热点争议话题比如如冠状病毒、政治、时事等进行投注。交易会产生 2% 的费用，将支付给流动性提供者。
+
+2020 年 10 月，Polymarket 宣布完成 400 万美元融资。
+
+投资机构及投资人包括：Polychain Capital、Naval Ravikant、Balaji Srinivasan（Coinbase CTO）、Meltem Demirors、1confirmation、ParaFi、Jack Herrick、Kal Vepuri、Stani Kulechov（Aave founder）、Kain Warwick（Synthetix Founder）、Samir Vasavade、Marc Bhargava、Calvin Liu。 
+
+Catnip
+
+（https://catnip.exchange，未发币）
+
+Catnip 作为去中心化预测市场 Augur 生态中的一个项目，主要专注于交易层，为 Augur 提供订单薄和 AMM 机制的交易平台。
+
+Prosper
+
+（https://prosper.so/，代币：PROS）
+
+Prosper 是币安智能链上的短期预测市场平台，玩家可通过 Prosper 对 BNB 市场进行预测，并获取 PROS 代币奖励。
+
+Numerai
+
+（https://numer.ai/，代币：NMR）
+
+Numerai 是一个面向数据科学家的交易数据网络，他们被激励去预测模型以提高对冲基金的回报。
+
+03 去中心化保险（8个）
+Nexus Mutual
+
+（https://nexusmutual.io/，代币：NXM）
+
+Nexus Mutual 是 DeFi 保险的先行者，其第一个产品是“智能合约保”，允许用户通过购买保险来减少以太坊上智能合出现代码缺陷或黑客攻击所导致的资产损失。
+
+2018 年，Nexus Mutual 完成种子轮融资，投资方为 KR1 和 Kenetic。根据头等舱推断，该项目的种子轮融资额在 150 万美元左右。
+
+根据 DeBank，Nexus Mutual 当前锁仓量已达 3.28 亿美元，在各类有锁仓量的 DeFi 平台中排在第 21 位。
+
+数据来自：debank.com
+
+COVER
+
+（https://coverprotocol.com/，代币：COVER）
+
+COVER 是一个去中心化保险市场，希望将保险的权利和义务代币化，当市场参与者自由博弈，通过套利来实现保险的功能。
+
+2020 年 12 月 28 日，Cover 因存在无限铸币漏洞遭到黑客攻击（两次），共造成超过 500 万美元的资产损失。当前该漏洞已修复。
+
+UNION
+
+（https://unn.finance/，代币：UNN）
+
+UNION 是一个去中心化的保险平台，产品预计将在近期上线。
+
+去年 11 月，UNION 刚完成了一轮 390 万美元的融资，参投方包括 Alameda Research、Solidity Ventures、3Commas 和 Black Edge Capital 等。
+
+Nsure
+
+（https://nsure.network/，代币：Nsure）
+
+Nsure Network 是一个去中心化保险平台，其保费是由动态定价模型厘定的。该模型将资本需求（总保险购买力）和资本供给（总质押Nsure 代币的数目）作为参数，在模型中共同决定最终保费。
+
+去年 9 月，Nsure Network 完成由 Based Ventures 领投的 145 万美元种子轮融资，其他投资者包括 Mechanism Capital、Caballeros Capital、3Commas Venture、AU21、SignalVC 以及 Genblock。
+
+Umbrella
+
+（https://yam.finance/umbrella，未发布）
+
+Umbrella 是由红薯（Yam Finance）发布的 DeFi 保险协议。目前项目方正在开发 Umbrella 的 alpha 版本代码，之后将在 Yam 社区进行内部测试。
+
+Unslashed
+
+（https://www.unslashed.finance，代币：未发布）
+
+Unslashed Finance 是一个 DeFi 保险协议，已于今年 1 月份宣布以仅限邀请的方式启动主网。
+
+Helmet
+
+（https://helmet.insure/，代币：HELMET）
+
+Helmet 是基于币安智能链 BSC 的、由期权交易逻辑作为底层构建的资产价格保险交易协议，主要服务于 BSC 的链上资产。任何人或者协议都可以通过调用 Helmet 合约来制作资产的保险并向市场发布保单。1 月 13 日，Helmet 与 PancakeSwap 达成 IFO 合作，共计出售 1000 万枚 HELMET 代币。1 月 21 日，Helmet 完成首次 CAKE 踏空险保单空投，限量产生 10 万枚保单凭证 CAKE-LONG token。
+
+Soteria
+
+（https://soteria.finance/#/，代币：SOTE）
+
+Soteria 是一个去中心化互助型保险平台。通过质押代币，用户既是收益获得者，也是风险承担者。同时，代币持有人可以用他们持有的代币决定某个项目能够拥有多少投保额度，以及决定是否批准索赔。
+
+Soteria 目前已在币安智能链上发布。 
+
+PolkaCover
+
+（https://www.polkacover.com，代币：CVR）
+
+PolkaCover 是一个基于波卡生态的去中心化保险协议，平台将分为四个开发阶段：加密保险产品、全球市场、P2P 保险以及去中心化管理和仲裁。
+
+%MCEPASTEBIN%

@@ -1,0 +1,25 @@
+标题: Uniswap增长负责人：正与Paypal等合作开发KYC产品，力求最低KYC标准
+链接: https://www.chaincatcher.com/article/2063710
+发布时间: 2021-07-26
+
+==================================================
+
+本文系链捕手原创文章。
+
+ 
+
+Uniswap增长负责人Ashleigh Schap近日在EthCC会议上表示，为促进Paypal、eTrade、Robinhood等支付应用与Uniswap的集成，Uniswap正在与上述公司合作开发KYC产品。
+
+Ashleigh Schap称，Paypal等消费者金融应用的用户希望接触更多DeFi类应用，而KYC问题是与Paypal、eTrade、Robinhood等金融科技公司合作首要的挑战。就其和上述公司尝试推进合作的经验来说，目前最大的问题是“没有人真正知道KYC到底是什么含义”。
+
+她称，部分机构如专注加密投资的对冲基金实行的KYC仅是让用户勾选、保证自身不是恐怖主义者，而如美国银行等类型的机构实行的KYC则囊括护照、生物识别甚至亲属信息。问题在于，Uniswap目前为止还没找到方式可以对KYC进行标准化，每一个想和Uniswap互动的机构都有不同层次的要求。
+
+Uniswap目前正在深入研究阶段，正和每一个消费者金融科技公司或因面临类似问题而可能有意使用Uniswap KYC产品的机构用户交流，找到他们使用Uniswap功能的“最低障碍”是什么，以及Uniswap与其合作在KYC方面的最低要求，从而提供一个可以满足大部分机构需求的解决方案。
+
+Uniswap具体策略包括：
+
+1、正与中间件提供商合作，具体包括Fireblocks、Talos、Paxos三家公司；
+
+2、探索KYC解决方案，Ashleigh Schap特别强调这并不意味着Uniswap将成为KYC的“门户”，仅仅是针对部分想要成为Uniswap用户、但需满足KYC要求的人，为其提供解决方案。
+
+不过，Ashleigh Schap在发表前述言论后也引起部分加密行业人士的质疑，例如DeFi Watch创始人Chris Blec就发文表示：“Uniswap 是否在为几十年来一直在审查和欺骗用户的 TradFi 应用程序和银行建立超级权力？”

@@ -1,0 +1,84 @@
+标题: RootData：深入解析 Hashkey Capital 的投资偏好与策略
+链接: https://www.chaincatcher.com/article/2089936
+发布时间: 2023-03-24
+
+==================================================
+
+作为加密行业最全面的投融资数据库之一，Rootdata 收录了 Web3 行业超过 3300 名投资者，超过 4500 笔投融资记录，全方位呈现了加密行业的投融资趋势。
+
+基于这些数据，Rootdata 将对一系列知名风投基金进行分析，包括他们的发展历程、投资偏好等信息。本期的研究对象是 Hashkey Capital。
+
+ 
+
+一、概述
+
+ 
+
+Hashkey Capital 的发展史最早可以追溯到 2015 年，来自万向集团的邓超和肖峰博士决定押注一个当时还名不见经传的项目——以太坊。
+
+这是该集团在加密领域的第一笔投资，直接催生了万向区块链实验室。如今，以太坊已经成长为该领域最重要的平台级基础设施。投资以太坊之后，万向也在关注其他区块链平台和基础设施方面进展，并为一些中国公司提供相关技术和咨询服务。
+
+鉴于随后中国大陆对加密货币的监管态度愈发严格与明晰，万向选择将部分业务转移到香港和新加坡，并成立新品牌 Hashkey。这就是 Hashkey Group 的由来。
+
+此后，Hashkey Group 陆续成立了Hashkey Capital、Hashkey Custody、HashKey DID等业务，近期还获香港证监会批准，可开展虚拟资产场外交易业务 (OTC)，目前是亚太地区最具影响力的加密公司之一。
+
+在这些业务中，Hashkey Capital 是 Hashkey Group 最具影响力的业务，亦在香港、新加坡等地获得资产管理相关牌照。Hashkey Capital CEO 邓超在今年一次采访中表示，该团队目前分布在香港、新加坡和旧金山湾区，拥有超过 10 亿美元的资产管理规模，并投资了大约 300 个项目。
+
+而根据 Rootdata 统计的数据，Hashkey Capital 的公开披露的投资组合数量为 224 个，在所有风投基金中位居第四，仅次于 Coinbase Ventures、Animoca Brands 与 LD Capital。在近一年，Hashkey Capital 的出手次数则达到 53 次，在所有风投基金中位居第五。
+
+其典型投资案例包括 Animoca Brands、Celestia、Coinlist、Blockdaemon、Mina、Acala、Mask Network、FalconX、dYdX 等。
+
+ 
+
+二、投资组合分析
+
+ 
+
+从 Rootdata 收录的 225 个投资组合项目来看，Hashkey Capital 过去主要投资于基础设施、DeFi、CeFi 和游戏等细分赛道。其中，基础设施赛道项目占比达到 33%，DeFi 和CeFi 项目分别为 19% 和 10%。
+
+自 2018、2019 年开始，Hashkey Capital 就发力基础设施赛道，先后投了下一代互联网基础设施协议 PlatON、Layer1 公链 Nervos、Stacks 以及 Harmony，2020 年以后更是出手多个细分方向，诸如节点基础设施（Blockdaemon、QuickNode 等）、加密钱包（WalletConnect、imToken、Burrito Wallet、AlphaWallet 等）、隐私基础设施（Aztec、NYM）、Cosmos 生态（Secret Network、Nibiru、Evmos）、模块化区块链（SKALE Network、Celestia）等。
+
+而在 DeFi 方向，Hashkey Capital 则投过 DEX（1inch Network、Krypton、DeltaFi 等）、借贷（Clearpool、Hubble、Credora、NAOS Finance）、衍生品（dYdX、ZKX、Divergence、SynFutures）、保险（InsurAce 等）。
+
+它们的组成较为全面地反映了 Hashkey Capital 投资侧重点的转变：它在 2018-2020 年投资项目多是基础设施和 DeFi 相关，此后则更多押注在游戏、社交、工具、NFT 等。这也印证了其投资逻辑的变化——在行业早期看好基础设施的搭建和创新，到了一定阶段则转向中间层和垂直领域的真实用例和工具。
+
+不过值得注意的是，Hashkey Capital 在 Layer2 赛道布局甚少，主流 Layer2 扩容方案均未参与投资。或许是为了补位，Hashkey Capital 近期投资了新兴 zkRollup 扩容方案 Intmax。
+
+此外，Hashkey Capital 对作为流量入口的加密媒体也颇为看好，投资过 The Block、Decrypt、Foresight News 等多家主流媒体。
+
+再从投资节奏看，Hashkey Capital 在 2018-2020 年期间出手很少，直到 2021 年第二季度才开始加快投资频次，该季度共出手 18 次，此后季度也大多在 10-20 次区间内。最近几个月，受到市场行情走弱影响，Hashkey Capital 的投资频次亦略有下降。
+
+从 Hashkey Capital 参与的融资规模来看，多数金额都在 100-500 万美元以及 1000-3000 万美元区间内。从它参与的轮次来看，在已披露轮次阶段的融资中，种子轮和 A 轮前后分别占比 48% 与 25%。这说明 Hashkey Capital 更倾向于押注较早期项目。
+
+在领投方面，Hashkey Capital 公开的领投轮次数量为19次，而总轮次数量为156次，领投占比在头部风投基金中处于中等水平。它领投的知名项目包括 Mask Network、Stacks、PlatON 、.bit等。
+
+在协同投资方面，Hashkey Capital 与 SNZ Holding、Fenbushi Capital、SevenX Ventures、Hash Global、IOSG Ventures 等机构合作投资较多，均共同出现在至少15个项目的投资轮次中。
+
+此外，Hashkey Capital 投资组合中超过12个项目已经停止运营，包括 FitRT、Paladin Pandas、Cykura、EdgeSwap、Smoothy、Numio、BitWell、KEY GROUP、1475、Lucidefi、BlockFi 和 CryptoMate。
+
+ 
+
+三、展望
+
+
+今年 1 月，Hashkey Capital 宣布为其第三支基金完成 5 亿美元募资，这也是近期加密市场近期规模最大的基金之一。不过，这些资金并非都在近期募集，Hashkey Capital CEO 邓超在去年 1 月接受彭博社采访时表示，该机构计划为第三支基金募集 6 亿美元资金，并且当时已经募集 3.6  亿美元。
+
+该篇报道还透露，HashKey Capital 的前两个基金总共筹集了 1 亿美元，迄今已为客户的资本带来约 11 倍的回报。此外，股权投资占 Hashkey Capital 资金分配的 20% 左右，其余的则投入加密货币，后者的比例还会继续提升。
+
+在 2023 年的市场机遇方面，邓超表示会密切关注模块化区块链、账户抽象、MEV、DeFi、机构基础设施、Web3 基础设施、DID、去中心化数据存储、ZK 技术和 RWA 的代币化。
+
+而在今年 3 月 HashKey Capital 发布的《2023 年值得关注的 5 大技术热点》研究报告中，其中提出的热点分别是以太坊的主要技术升级(上海、坎昆)、Staking 相关的技术和产品服务、模块化区块链的优化和 “L3”等应用专有 Rollup 等生态发展、ZK 跨链桥等非扩容领域内的 ZK 应用、AA+MPC、闪电网络等在终端应用方面的迭代。
+
+从 HashKey Capital 团队的其它专访中可以发现，他们认为目前正处于市场周期的底部，且 2023 年可能不会有太多变化。但有三个因素需要重点关注：
+
+其一是近两年产品的构建成熟度，是否会有一些产品真正投入使用并引发新一波热潮；
+
+其二是宏观经济发展，这将影响现有公司的资金成本、充裕程度以及融资进展；
+
+最后则是整个加密市场的监管落地进度。
+
+HashKey Capital 相信，行业发展到现在，已经涌现出很多创新的基础设施，接下来需要解决的主要问题则是如何采用这些基础设施，所以下一个机会可能会落在垂直领域的中间层和工具。
+
+以数据分析为例，现在已经出现各种各样相对通用的数据分析工具，下一步是弄清楚利基行业的真正需求是什么。例如，在 NFT 交易中需要分析什么样的数据，或者在游戏领域需要什么样的数据。HashKey Capital 看好最了解真实用例和真实业务逻辑的团队。
+
+另一方面，如何将现有服务和基础设施产品化的能力也很重要。他们认为，从传统世界吸引用户，打造更好的用户体验（至少不明显逊色于同类互联网产品），将成为下一波加密产品浪潮的催化剂。

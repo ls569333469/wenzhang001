@@ -1,0 +1,177 @@
+标题: Gitcoin 第13 轮有那些值得关注的社区和项目？
+链接: https://www.chaincatcher.com/article/2071150
+发布时间: 2022-03-11
+
+==================================================
+
+撰文：Foresight News 编辑部
+
+ 
+
+开源软件和社区捐助平台 Gitcoin 已经启动了第 13 轮捐助活动，活动时间从 3 月 9 日至 3 月 23 日。用户可以通过该平台为优秀的开源软件团队、社区、公共物品组件等进行资助，以太坊生态的项目以及很多第三方机构也会同时为用户的资助匹配更多捐助额，为区块链和更广泛的开源软件行业提供更多早期或者持续的帮助。
+
+Gitcoin 已经进行了 12 轮拨款，总共为公共产品提供了 5360 万美元资金。在本轮资助中，主轮将提供 120 万美元的配套资金（高于 GR12 中的 100 万美元）用于资助以太坊生态以太坊公共物品和项目，此外还将在其他生态和类别提供至少 150 万美元的配套资金，具体分配如下：
+
+以太坊公共物品：120 万美元
+支持乌克兰：70 万美元
+对气候变化产生积极影响的项目：46.5 万美元
+zk 生态系统中的开源项目：27.5 万美元
+在 Polygon 平台上构建的项目：10 万美元
+支持开源游戏：10 万美元
+使用 ENS DAO 构建的项目：6.9 万美元
+OlympusDAO 项目建设：5 万美元
+基于 Algorand 的项目：5 万美元
+Uniswap 生态中支持开源项目：5 万美元
+NFT 生态系统中支持开源项目：5 万美元
+维持长寿的去中心化项目：4 万美元
+使用 Radicle Drips 支付的项目：2.5 万美元
+
+此外，Gitcoin 还将于 3 月 9 日至 30 日举行 GR13 Hackathon，设计师、项目经理和开发人员等都可参加此次黑客松活动。
+
+ 
+
+Gitcoin 是什么？
+
+ 
+
+Gitcoin 为各种规模的开源项目提供了寻求资金的平台和获得资金的机会。在每轮的 Gitcoin 捐助活动中，除了各项目收到的捐款外，Gitcoin 还会以此作为参考协调以太坊基金会的基金分配以便让优质项目获得投资的机会增加。
+
+为开源项目提供资金可以促进整个区块链生态的发展，开源软件开发激励平台 Gitcoin 是造福区块链世界必不可少的力量。
+
+Gitcoin 采用二次方投票的模型对项目进行众筹实现资金的配置，解决了以太坊生态中的公共产品融资低效的问题，鼓励少数人投票。
+
+ 
+
+本轮有哪些团队和社区值得关注？
+
+ 
+
+Gitcoin 上不乏优质的项目或团队，但目前已有 648 个项目申请了赠款，数量众多用户难以抉择。本轮 Gitcoin 还设置了收藏页面，用户可参考认识的人挑选的赠款项目，也可创建自己的收藏并将喜欢的赠款项目分享给社区。
+
+Foresight 小编也整理出以下几个项目和团队供读者参考，如果你有任何推荐的团队或项目，也欢迎联系我们。（为避免 Gas 成本过高，Gitcoin 建议用户可将资金转移到 Polygon 和/或 Zksync，具体可点此参考。）
+
+推荐项目：Fileverse.io
+
+推荐人：杨树
+
+推荐理由：试想一下，如果我们可以直接和 Vitalik 发送文件，或是直接和任何已知以太坊地址的行业巨鲸（神鱼、SBF 等等）甚至黑客共享消息，那会是什么场景？Fileverse.io 作为「区块链地址之间的文件共享」，就是要借助以太坊和 IPFS。
+
+让任何一名以太坊用户都可以直接给指定的 ETH 地址发送消息，且只有对应的指定地址才能查看，从而实现点对点的链上私密社交。这可能也是 Web3 社交聊天赛道的新范式雏形，值得关注。
+
+链接：https://gitcoin.co/grants/4846/fileverseio-file-sharing-between-blockchain-addre
+
+推荐项目：Secure Remote Password with Ethereum Name Service
+
+推荐人：杨树
+
+推荐理由：相信不少人都有记不起某网站密码的无奈时刻，但在 Web3 真正席卷世界之前，一众 Web2 网站密码的准确记忆和安全保存，依旧是无法避免的头疼问题。「Secure Remote Password with Ethereum Name Service」就旨在通过 ENS，将 Web2 网站密码「Web3 化」——类似 1Password 的密码集中代理。
+
+它也开发了一个身份验证安全代理服务，借助零知识技术，用户仅需通过 ENS 连接各个网站，就可在不泄露密码的情况下利用代理服务验证身份，「一个 ENS 走遍 Web2」。
+
+链接：https://gitcoin.co/grants/3384/secure-remote-password-with-ethereum-name-service
+
+推荐项目：Building the DAO Controlled Land Trust
+
+推荐人：杨树
+
+推荐理由：宪法 DAO、阿桑奇 DAO 之外，参与一个在全球各地买地囤地的 DAO 怎么样？这个项目的愿景就是将全球数千英亩的土地放入该土地信托中，并通过各种管理手段实现土地的货币化增值。虽然现实世界中对着房子「买买买」很困难，但体验一把 DAO 版的「包租公」「包租婆」，未尝不可。
+
+链接：https://gitcoin.co/grants/1929/building-the-dao-controlled-land-trust
+
+推荐项目：zkRollups.xyz
+
+推荐人：Karen
+
+推荐理由：毫无疑问，利用零知识证明来执行链下计算和存储的 zkRollups 是以太坊扩容的最佳解决方案之一。zkRollups.xyz 希望汇聚任何构建 zkRollups、基于 zkRollups 构建以及为 zkRollups 构建的项目，把这些项目放在一个页面中，供用户查找和发现机会。团队成员 Jason Garland and Joel Kite 是基于 zkSync 的加密支付应用 Numio 的两位联合创始人。
+
+链接：https://gitcoin.co/grants/4268/zkrollupsxyz
+
+推荐项目：Orbiter Finance
+
+推荐人：Karen
+
+推荐理由：Orbiter Finance 是一个跨 Rollup 桥，算 Layer2 的一个重要基础设施，支持以太坊、zkSync、Arbitrum、Polygon、Optimism 网络上的 ETH 和 USDC 转账。Orbiter Finance 正在增加对 StarkNet 的支持，目前支持 Goerli 测试网。
+
+链接：https://gitcoin.co/grants/4669/orbiter-finance
+
+推荐项目：POAPathon
+
+推荐人：Karen
+
+推荐理由：POAPathon 主要是连接艺术家和需求方，提供的服务包括 POAPathon 设计服务、POAPathon Events、POAPathon Live 直播等，设计服务中，任何人都可以发布 POAP、PFP 或徽标设计需求，艺术家和设计师以竞赛的方式提交作品，奖励会分配给获胜艺术家。
+
+POAPathon 设计服务的客户包括 Ethstaker、GitPOAP、PeopleDAO、CRE8R DAO、Cryptopunks、POAP、AAVE、Good Ghosting、Amuzn、Balancer、Reality Cards、俄勒冈大学等。
+
+链接：https://gitcoin.co/grants/4499/poapathon
+
+推荐项目：DeFi Liama
+
+推荐人：angelilu 
+
+推荐理由：DeFi Liama 是一个 DeFi TVL 仪表板，能让用户直观地看到各个 DeFi 项目的总锁仓数据，以及不同的链上的 DeFi 项目的总锁仓量排名，其中还包含每日、每周及每月的增长统计，有助于用户分析，找到成长中的 DeFi 蓝筹。DeFi Liama 表示，赠款不会对其数据统计的优先级产生任何影响。
+
+链接：https://gitcoin.co/grants/3591/defillama
+
+推荐项目：dfdao（Dark Forest Gaming Collective）
+
+推荐人：angelilu 
+
+推荐理由：dfdao 由「黑暗森林」的一群玩家组成，旨在推广基于零知识证明技术 zkSNARKS 构建的去中心化实时战略游戏「黑暗森林」（Dark Forest）。该组织希望使使「黑暗森林」成为一个正和博弈的生态，让玩家可以在游戏中竞争、合作、学习和建设。
+
+接下来，dfdao 计划在 Layer 2 上推出一个建立一个可信的中立 PvP 竞技场模式，并建立一个社区补助金的资金池。通过 Gitcoin 筹集的资金将用于偿还贡献者的云基础设施成本、Gas 和 NFT 铸造成本。
+
+链接：https://gitcoin.co/grants/4875/dfdao-dark-forest-gaming-collective
+
+推荐项目：Proof of Integrity
+
+推荐人：angelilu 
+
+推荐理由：Proof of Integrity 是一个去中心化和非盈利的协议，为需要资助的贫困人口和伸出援手慈善者的建立一个公平和透明的系统来连接彼此。
+
+通过基于博弈论的援助系统，Proof of Integrity 以去中心化和透明的方式认证谁在为满足其基本需求而奋斗，一旦得到认证，参与者可以向几个社会保护计划提出申请。此外协议采用 PoW、PoS 和 Schelling 积分的组合来激励社会工作者做好工作。
+
+链接：https://gitcoin.co/grants/4597/proof-of-integrity
+
+推荐项目：DAO Masters
+
+推荐人：Lukie
+
+推荐理由：DAO Masters 是启动、管理和扩展 DAO 的一站式工具平台。web3.0 时代的到来伴随着从生产到生活各个方面组织形式的 DAO 化，或许你在尝试做一些 DAO 的事情，但不知从何下手，那么至少现在这个阶段 DAO Masters 是一个很好的入口，让你获得投资分析、组织管理、求职招聘、项目筹款、代币经济模型讨论、治理与投票等全方位有效的资源。
+
+链接：https://www.daomasters.xyz/
+
+项目推荐：ZachXBT
+
+推荐人：Lukie
+
+推荐理由：币圈「卓伟」。可以把它理解为一个狭义上的项目，但更确切一点地说这是研究加密诈骗的媒体平台。披露信息的主要阵地在推特账号 @zachxbt，此外其 Notion 会按 Influencers、VC、项目来把事件主体进行分类。至于披露信息的准确性尚存疑，但是一个很好的想法和尝试。
+
+链接：https://investigations.notion.site/investigations/Investigation-Threads-37d38dc977094f05afa64db51597eaad
+
+推荐项目：Geo Web
+
+推荐人：Lukie
+
+推荐理由：Geo Web 是一套开放的、将数字资产锚定到物理世界的产权协议。其地块 NFT 以 1:1 的比例映射到物理世界，数字媒体、游戏、数据、商业和 NFT 将作为共享体验而不是孤立的应用程序被带入物理世界，以促成一个增强的、覆盖地球的共享现实层的构建。
+
+其建立的共识是基于「元宇宙应该建立在无许可、公共的互联网基础设施之上」，100% 的土地市场收益都被奖励给开源开发商、创意人士、倡导者和用户，所以这个全新的 Web 层是由公益价值观而不是企业利润引导的。
+
+链接：https://www.geoweb.network/
+
+推荐项目：Dark Forest
+
+推荐人：Eliven
+
+推荐理由：黑暗森林法则是著名科幻作家刘慈欣在其代表性作品《三体》中描述的宇宙文明生存法则。它的基本内核是，一旦某个宇宙文明被发现，就必然遭到其他宇宙文明的打击，就像在森林中潜行的猎人。而以太坊由于 MEV 的存在，同样被描述为一片黑暗森林，那些专业的链上交易者和矿工是站在最顶尖的捕食者。
+
+当这样一个既科幻、又现实的法则被搬到链上，很难不被加密世界的探险者喜爱，其在推出早期就获得以太坊创始人 Vitalik Buterin 的青睐。Dark Forest 在推出后一直采用白名单邀请的方式来发展社区，但最近它宣布推出黑暗森林大厅，任何人都可以启动自己的黑暗森林宇宙，花费仅约 0.06 xDai。
+
+https://gitcoin.co/grants/2323/dark-forest
+
+推荐项目：Dataverse
+
+推荐人：iambabywhale.eth
+
+推荐理由：Dataverse 是一个 Web3 个人数据空间与 DID 系统，为用户提供了一个 Web3 个人信息库。Dataverse 可以用于创建私人博物馆、搭建项目展示空间、实现身份跨平台流通等，还可以集中个人的所有行为数据，让用户选择性的提供部分数据来获取收益。
+
+当前 Dataverse 的浏览器插件不仅可以兼容各个 NFT 交易平台，甚至可以将包括 Youtube、B 站的网站数据收藏进个人空间。这种对个人数据的集中式管理工具可能会在未来成为每个人的必需品之一。

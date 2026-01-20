@@ -1,0 +1,45 @@
+标题: 数款热门游戏出走，Polygon 成链游“黄埔军校”？
+链接: https://www.chaincatcher.com/article/2137221
+发布时间: 2024-08-06
+
+==================================================
+
+作者： Zen ， PANews
+
+8 月 2 日，在宣布要将整个生态改旗易帜的两周后， Web3 游戏平台 Planet Mojo 的 MOJO 代币成功从 Polygon 迁移至 Base 网络。 Planet Mojo 将其 logo 由紫色符文改为了契合 Base 的蓝色，其自走棋游戏 Mojo Melee 、跑酷游戏 GoGo Mojo 、游戏内头像系统 Mojo Maker 和即将推出的角色扮演游戏 Prophecy of the Ancients ，也都成为了为 Base 生态贡献活跃度的一份子。
+
+曾经作为部署 GameFi 项目的首选网络， Polygon 在过去几年一直备受开发者青睐。 Electric Capital 发布的 2022 开发者报告还将其评为了顶级开发者生态系统。不过，随着公链群雄并起，在 Pixels 、 Crypto Unicorns 等多款热门游戏纷纷出走后，作为 Web3 游戏“黄埔军校”的 Polygon ，已经失去了曾经的领先优势，游戏市场份额日渐减少。
+
+散是满天星？多款游戏各奔东西
+
+迁移到 Sky Mavis 运营的 Ronin 区块链网络，并与其实现双赢的像素风农场游戏 Pixels 堪称这当中的典范。 Pixels 于 2021 年推出，于去年年底选择从 Polygon 迁移至 Ronin 网络。 Pixels 首席执行官 Luke Barwikowski 当时在一份声明中表示：“ Sky Mavis 是唯一一家在 Web3 游戏领域取得规模化发展的公司，与一个不基于假设、而是基于实践和经验的团队合作是明智之举。迁移到 Ronin 并利用他们的智慧是我们旅程中合乎逻辑的下一步。”
+
+后来的事实证明，这次重大变更确实是明智的选择。据 DappRadar 数据显示，Pixels 的月独立活跃钱包（UAW）达 180 万，日 UAW 达到 70 多万，是当前最炙手可热的 Web3 游戏之一，其迅猛的增长势头也基本已经持续了半年以上。Ronin 随之完全从几年前黑客攻击的阴影中走出，其生态凭 Pixels 的样板也开始引入更多优质链游，如 Web3 首款上帝模拟游戏 Apeiron 便效仿 Pixels 的路子，在 2023 年12 月宣布离开 Polygon 并加盟 Ronin。
+
+在 8 月 2 日刚刚完成先锋测试的 MapleStory Universe 是韩国游戏巨头 Nexon 旗下的一款基于 PC 的 MMORPG，其将区块链技术与《冒险岛》 IP 相结合，在2 023 年年底时号称获得了 1 亿美元的投资。《冒险岛》IP 在过去的二十年间吸引了超过 1.8 亿注册用户，是 Nexon 最受欢迎的游戏之一。2023 年 3 月，Nexon 宣布选择 Polygon 作为合作伙伴，围绕 MapleStory Universe 与 Polygon Labs 的团队密切合作，包括其开发和营销。然而在今年 3 月，Nexon 与 Polygon 分道扬镳，转为使用专用的 Avalanche 子网。
+
+无独有偶，前 Nexon 首席执行官 Joonmo Kwon 领导的韩国 Web 游戏开发商 Delabs Games ，几乎与 MapleStory Universe 在同一时间宣布登陆 Polygon 生态。该开发团队曾创作过 Nexon 热门游戏系列《跑跑卡丁车》，其计划在 Polygon 推出的则是一款名为 Rumble Racing Star ( RRS )的 Web 3 街机赛车游戏。然而在今年 5 月， Delabs Games 宣布与 Arbitrum 合作，不仅把 RRS 迁移到了 Arbitrum ，其即将推出的两款 Web 3游戏 Metabolts 和 Space Frontier 也将基于 Arbitrum 构建，完全放弃了与 Polygon 的合作。
+
+除了上述提到的区块链网络外， Immutable zkEVM 、 Xai 这样的游戏公链也是“移居”的热门选择。如曾为 Polygon 贡献大量活跃度的 Hunters On - Chain 、大逃杀游戏 Blast Royale 以及集换式卡牌游戏 Storm War fare 就陆续迁入 Immutable zkEVM ，宠物收集和模拟经营游戏 Crypto Unicorns 、动作/赛博朋克 MMOYaku 、移动 RTS 游戏 Land Before War 则选择加入 Xai 。
+
+聚散终有时？链游开发商为何出走
+
+关于选择离开 Polygon 的缘由，大多数开发团队往往选择缄默不言以保持对前任的尊重。但从个别开发团队披露的信息中，也能或多或少看到一些端倪。
+
+如 MapleStory Universe 合作伙伴负责人 Angela Son 在被问到为何放弃 Polygon 时，她只强调了团队认为使用 Avalanche 在协助满足服务器和基础设施需求等方面的优势。不过据知情人士向 Decrypt 透露，在 Polygon Labs 于去年 12 月停止对允许构建自定义以太坊兼容链的 Polygon Edge 的支持后， Nexon 选择了其他网络。该消息人士补充说，在正式决定使用 Avalanche 之前， Nexon 和 Polygon Labs 就已同意分道扬镳。 Web3 游戏和创作者平台 Hytopia （原 NFT Worlds ）似乎也是基于类似的原因，最终决定迁移至 Arbitrum 。
+
+扩展性问题和“较高”的 Gas 费是链游们出走的重要原因之一。 Crypto Unicorns 在离开 Polygon 生态前，其 NFT 就已产生了约 3500 万美元的交易量。游戏开发商 Laguna Games 的联合创始人兼首席执行官 Aron Beierschmitt 称，团队在 Polygon 上运营游戏时遇到了“挑战”，尤其是网络 gas 峰值导致游戏运营成本更高，并给玩家带来了摩擦。 Aron 还表示， Laguna Games 需要为玩家的网络 gas 费提供每月约 5,000 至 10,000 美元的补贴，这种方式难以持续。而建立在 Arbitrum 之上的第 3 层游戏网络 Xai ，则让玩家完全免除此类费用。
+
+角色扮演游戏 Pirate Nation 与 Crypto Unicorns 有相似的困扰。该游戏由 Pro of of Play 开发，这家开发商曾在 2023 年 9 月宣布完成 3300 万美元种子轮融资，由 Greenoaks 与 a16z 共同领投。 Pirate Nation 在 2023 年 3 月就选择与 Polygon 分手，并入驻 Arbitrum Nova 。 Pro of of Play 联合创始人兼首席执行官 Amitt Mahajan 称， Pirate Nation 需要转向更实惠、更可扩展的平台。“随着越来越多的人迁移到 Polygon ，我们开始遇到 Polygon 链的扩展问题。”“我们每天要支付 3,000 到 4,000 美元的 gas 费。所以这变得无法维持。这阻止了我们扩大游戏规模。”
+
+除了技术支持和开支过高方面的问题外，游戏开发商没有得到太多来自平台的支持似乎也是一个重要因素。赛马 NFT 游戏 Pegaxy 由 Mirai Labs 开发，于去年年底迁入 Avalanche。该开发商的首席执行官兼联合创始人 Corey Wilton 就直言，相比之下，Polygon Labs 并没有提供太多“帮助”来在其以太坊侧链上开发游戏和加密项目。“感觉好像我们在某种意义上没有得到任何帮助”。
+
+自有后来者？ Polygon 仍手握王牌
+
+除了Ton生态小游戏拿下各种爆炸性数据外，“传统”的链游赛道整体上不瘟不火，还没有哪个链游在这个周期出圈。而Polygon生态的去中心化预测市场平台 Polymarket，则成为了这个周期内市场聚焦的加密应用，受关注度超过了上文所提到的各款游戏。从今年 4 月起，该平台开始进入大众视野，交易量和用户数量随之井喷式增长。尤其在特朗普遇刺事件这种年度事件的催化下，其作为预测市场的典型被主流媒体广泛报道，知名度和影响力得到进一步提升。自 6 月至 7 月底，Polymarket 的累计交易量从 6.63 亿美元激增 58% 至 10.5 亿美元，仅 7 月交易量就超过了 3.8 亿美元。
+
+然而树大招风，据 CryptoSlate 报道，美国立法者呼吁 CFTC 禁止对选举进行博彩。参议员伊丽莎白·沃伦等人表示，围绕选举的赌博会损害公众信任和民主进程，并要求 CFTC 立即制定规则，防止选举的“商品化”。靠总统选举热点蹿红的 Polymarket，其最大市场是关于下一任美国总统的预测，交易量已超过 4.74 亿美元，占总体交易量的 45% 以上。随着监管介入，Polymarket 的未来发展也开始蒙上迷雾。
+
+此外，Polygon 积累的技术基础也是该网络的杀手锏，尤其是可定制的工具包 Chain Development Kit (CDK)，其可使开发者基于 Polygon 的零知识技术创建自己的二层区块链。去年 3 月，Immutable 和 Polygon Labs就宣布合作推出 Immutable zkEVM ，其由 Polygon 提供技术支持，为 Immutable 生态在今年的快速增长、突破百万玩家奠定了基础。
+
+近两月 Ronin 和 Telegram 支持区块链 The Open Network ( TON )团队也陆续宣布将基于 Polygon 技术推出自有 Layer2 网络， Ronin 利用 Polygon Chain 开发套件 ( CDK ) 在 Ronin 上创建自己的 zkEVM 链，以提高可扩展性、安全性和去中心化； TON 则将利用 CDK 创建 TON Applications Chain ( TAC )，使基于 EVM 的去中心化应用能够接入 TON 生态系统，为 TON 区块链上的游戏、去中心化身份解决方案等创新应用铺平道路。

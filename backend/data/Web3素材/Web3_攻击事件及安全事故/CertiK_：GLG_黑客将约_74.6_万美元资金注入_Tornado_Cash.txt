@@ -1,0 +1,7 @@
+标题: CertiK ：GLG 黑客将约 74.6 万美元资金注入 Tornado Cash
+链接: https://www.chaincatcher.com/article/2192833
+发布时间: 2025-07-23
+
+==================================================
+
+ChainCatcher 消息，CertiK 警报系统检测到约 140.7 枚 BNB（约 74.6 万美元）被注入 Tornado Cash，这些资金与 7 月 21 日发生的 GLG 黑客事件有关。黑客从 Mint 合约铸造了 850 万枚代币，并将其出售获得了 74.5 万 BSC-USD。

@@ -1,0 +1,186 @@
+标题: OpenAI 推动 AI Agent 狂热，一文梳理 Crypto AI Agent 发展轨迹
+链接: https://www.chaincatcher.com/article/2153085
+发布时间: 2024-11-21
+
+==================================================
+
+在过去一年中，我们见证了 Crypto for AI 的成长，在 Crypto 领域生根发芽，衍生出了不少新赛道，比如“算力资产化“、”“模型资产化”、“数据资产化”，代表项目分别为 ionet、Olm、Sahara。
+
+随着特朗普胜选，加密热潮在全球再度发酵，而 AI for Crypto 也在快速崛起，产生出了很多 AI、AI Agent 与 Crypto 结合碰撞出的新东西。
+
+AI Agent 发币
+
+AI Agent 发帖喊单
+
+AI Agent 管理 DAO 和基金买卖
+
+AI Agent 自主交易
+
+做一个大致的梳理，AI Agent 在 Crypto 领域的发展目前共有两条路径：
+
+1.自上而下，由 AI 概念项目开发，这类偏基础设施一些，我们将在下一篇描述Web3 AI基建全景描述中详细剖析
+
+2.自下而上，由 AI Meme 热潮引领，由自由开发者主导
+
+本文我们主要讨论第二条路径。
+
+本文目录：
+
+OpenAI 官方 AI Agent 即将发布，或引发 AI Agent 狂热
+AI Agent + Crypto，从哪入手？
+一切始于 AI Meme，始于 $GOAT
+ai16z：让 AI Agent 管理投资型  DAO，衍生更多 AI Agent
+更加自主的链上 AI Agent 到来，由社区共同拥有
+延伸：链上社交平台的专属 AI Agent，竟然有了自我意识？
+一、OpenAI 官方 AI Agent 即将发布，或引发 AI Agent 狂热
+
+作为 AI 的领导者，OpenAI 早早就将通往 AI 最终形态 AGI（Artificial General Intelligence, 通用人工智能）的路线划分为五个阶段：
+
+基础 AI（Emerging AGI）：AI 发展的初级阶段，指能够进行基本对话和信息处理的 AI，如ChatGPT。强依赖于预训练的数据集，AI 本身的“智商”（理解和推理能力）非常有限；
+
+Reasoners（推理者）：基本 AI 的进阶版本，具备高级的逻辑推理和对复杂问题的解决能力；
+
+Agents（代理）：AI 开始具备在没有人类输入的情况下创建内容或执行操作的能力，或者至少在人类的指导下执行。当前大多数 AI Agent 还处于比较初级的阶段，主要通过规划、推理和工具调用来完成一些基础 AI 无法完成的复杂任务；
+
+Innovators（创新者）：这一阶段的 AI 不仅能解决现有问题，还能进行自主研究和开发，在学习中创新和进化，形成一个良性的循环，越来越接近我们人类了；
+
+Organizations（组织机构）： AGI 的最终阶段，这种 AI 系统能够智能分配任务，协同工作，完成复杂的任务，类似于一个团队或组织，获得 1+1 大于 2 的效果。
+
+如果说 ChatGPT 处于上述阶段中的第一阶段，那么最近推出的推理模型 o1 一定能够被划分到第二阶段。o1 模型在处理物化生等复杂学科的高难度任务上，表现几乎与博士生相当。在数学领域，更是在国际数学奥林匹克（IMO）考试中达到了惊人的 83% 正确率，作为对比，GPT-4o 只能正确解决 13% 的问题。
+
+然而，就当用户的目光都还放在 o1 等第二阶段上时，OpenAI 已经将“触手”悄然伸向了第三阶段：Agents。OpenAI 正在将 AI Agent 作为下一阶段“王牌”，作为 Next Big Thing 一步步向前推进，同时制定了明确的发布时间——2025 年。
+
+“Agent 将成为下一个重大突破” —— OpenAI CEO Sam Altman
+
+“让 GPT 自主执行任务将是明年一大重点” —— OpenAI CPO Kevin Weil
+
+明年 AI Agent 将会成为各个 AI 巨头间的厮杀重点，OpenAI 的强劲对手，前有 Anthropic 发布的 Computer Use，后有谷歌将在 12 月推出名为 Jarvis 的 AI Agent。
+
+这不，彭博社刚刚爆料，OpenAI 计划在明年 1 月发布名为 Operator 的 AI Agent 工具，能够在用户的指示下在计算机上自主完成任务，例如编写代码、预定行程。
+
+由此看来，OpenAI 一个月前推出的 AI Agent 构建框架 Swarm 只是开胃小菜，众多现实工作、生活用例正在等待 OpenAI 及广大开发者落地。例如，
+
+个人日程助理：自主组织你的日程安排会议，准备笔记并向你汇报之前会议讨论的重要要点；
+旅行助理：建议航班和酒店，并制定个性化行程；
+财务助理：跟踪市场，推荐并自主购买投资组合；
+咨询助理：在 LinkedIn 上寻找某个领域的专家，自主联系他们，提供报酬，与他们对话，并总结和学习他们的见解。
+二、AI Agent + Crypto，从哪入手？
+
+AI Agent 提供的生产力变革，会慢慢渗透入各行各业，带来更高的效率、更好的服务和个人化体验。
+
+在加密世界里，可能当下的 Crypto 离不开金融，所以链上 AI Agent 最自然的起点就是 DeFi，不过首先要让 AI 获得财务自主权。传统上，AI 在财务活动中面临许多限制，比如无法开设银行账户、缺乏法律身份等。在 Crypto 世界里，给 AI Agent 注册一个链上身份和链上钱包，是非常自然而然的事情。我们可以通过预装加密钱包和智能合约，设定支出限制、执行交易和管理资金，赋予 AI Agent 财务自主权。
+
+当 AI Agent 同时拥有自主决策能力和财务自主权时，“它能做什么”这个问题瞬间有了无数个脑洞。它可以像 Web3 原住民一样，去 DeFi 世界中寻找利润机会，去 GameFi 世界中寻找赚钱机会，甚至是 Airdrop。当 AI Agent 在 Crypto 被 Mass Adoption，渗透到各个领域时，无法想象链上世界将会变得多么繁荣。
+
+这或许会推动 DeFi 下一次热潮的来袭，因为 AI Agent 具备推理和自主能力，全天候监控和交易，要比当前的交易机器人更加强大。
+
+三、一切始于 AI Meme，始于 $GOAT，$ACT 引爆
+
+当我们还沉浸在 Meme pvp 中时，一个足以改变 Crypto x AI Agent 现状的新模式正在逐渐形成。AI Agent 与 Memecoin 的捆绑，AI Meme 一个月数十亿市值，出乎了所有人的意料。
+
+这一切，开始于一个 AI 研究者 Andy，在做的一个 AI 实验。Andy 让 AI 大模型之间进行无休止的自由对话，不受人类限制，形成全新的思想和理念。为了继续实验，Andy 在六月推出了 AI Agent "Terminal of Truth"，并创建推特账号让 AI 可自由发表其想法。
+
+在 Terminal of Truth 无休止的对话中，它形成了自己的信仰系统和宗教理念，或者说是“自我人格”，即 goatse ：亵渎即神圣，神圣即亵渎。当第三方通过 Pump.fun 发行 $GOAT 后，Terminal of Truth 很快将这个代币写入了自己的资料库中，实现了文化捆绑。通过发布推文，主动推动 $GOAT 的市场情绪。
+
+结果就如大家所知，知名风投 a16z 的创始人 Marc Andreessen  为它提供了 5 万美元的比特币捐款。消息传出后，该代币迅速上涨，最高到达近 10 亿美金市值，实现了惊人的千倍涨幅。
+
+在 Terminal of Truth 持有代币，自主生成宣传内容配合人类发文的推动下，$GOAT 迅速走红，展示了 AI Agent、Meme 文化和 Crypto 间交汇的潜力。
+
+一时间，控制推特账号的更多 AI Agents 与对应 MemeCoins 纷纷涌现。由名为 Iumpenspace 的 AI Agent 喊单的 $GNON 短短几天内市值就飙升至 7000 万美元；而 a16z 资助的另一个 AI Meme $ACT 也在最近上线 Binance，两小时内价格翻了 10 倍，目前市值逼近 10 亿美元大关，成为了 $GOAT 之后的龙二。但作为第一个上 bn 的 AI Meme，有望冲击 AI Meme 赛道龙一。
+
+持仓 Token、疯狂病毒式传播以增值，虽然 $GOAT 作为 AI Meme 的龙头项目，其 AI Agent 尚未能够自主控制钱包，但它所掀起的热度标志着 AI 以及 AI Agent 与 Crypto 的结合走出了重要一步，让更多的散户投资者真正了解到了 AI Agent 是什么，它能做什么，以及高涨的投资热情。 
+
+不少人诟病，Terminal of Truth 是一个半自主的 AI Agent，运行在 Andy 的服务器上，钱包本质上也归 Andy 所有，并不够自主。针对这一缺陷，新的迭代迅速到来。
+
+四、ai16z，让 AI Agent 管理投资型 DAO，衍生更多 AI Agent
+
+a16z 在这波 AI Meme 浪潮中功不可没，因其创始人 Marc Andreessen 支持，使得 Terminal of Truth 成功推广出了 $GOAT 这个大金狗，因此市场对于 Marc 声援的产品都展现出极高的热情。
+
+就比如说随后出现的 ai16z，一个名字与 a16z 颇为相似的 AI Agent 驱动型风投基金。Marc 的直接转推，使其在层出不穷的 AI Meme 新项目中迅速获得超高注意力。
+
+而 ai16z 的核心是“AI 驱动的投资 DAO”，利用 AI Agent 在链上和链下获取市场信息、分析社区共识，并自动进行代币交易。这种新模式旨在通过代币化运作，将 AI 交易策略和去中心化治理相结合，为投资者提供透明和信任度更高的投资机会。
+
+正如其创始人所言，“ai16z 的目标不是创建一个模仿 a16z 的 AI 机器人，而是在它最擅长的投资领域击败它。”
+
+在具体实现上，ai16z 基金由双代币支持，一个是治理代币 $ai16z，一个是名为 Degen Spartan AI 的  AI Agent 的代币 $DegenAI。$ai16z 持有者可以发起购买某某代币的提案，所有持有者共同投票，投案通过后，AI Agent 自动在钱包中购买该代币。
+
+不仅能够参与提案的治理，$ai16z 持有者还可以获得基金的收益。持有 100 个或以上 $ai16z 代币的用户可以与 AI Agent 互动，影响其交易决策。用户有 $ai16z 的份额越多，AI Agent 就会给他的意见附上更多权重。
+
+用户不是直接与 ai16z 基金本身进行投资决策的交流，而是先与 Degen Spartan AI 进行对话，通过 Degen Spartan 间接影响 ai16z 基金的最终决策。而 ai16z 会将最终投资的部分收益，用于回购 $DegenAI。
+
+许多社群成员认为，ai16z 在一定程度上提高了 DAO 投资以及加密提案的公平性，相信 AI Agent 和 DAO 的融合将很大程度上改变未来的市场格局。
+
+除了投资外，ai16z 及其开发者社区还在构建一个名为 ELIZA 的核心产品，这是一个用于构建链上 AI Agent 的开源框架。开发者可以使用 ELIZA 快速定制具有各种风格和功能的 AI Agent，例如访问不同链的钱包、在 Twitter 和 Discord 上进行对话。
+
+$ai16z 目前的市值为 4.83 亿美元，过去几天涨幅超过 10 倍，国库资产累计超 200 万美元。
+
+在我看来，ai16z 真正有趣的是，其国库与市值之间的正向飞轮。随着 ELIZA 成为 Crypto 世界最好用的 AI Agent 开发框架，被更多 Dev 采用，国库资产价值将会成倍增长。通常，基于 ELIZA 构建的 AI Agent，其 Dev 会将代币发送给 ai16z 国库，以获取 ai16z 成员的关注和投资，来增加其价值。然而，这反过来会为 ai16z 和 ELIZA 带来更多外界关注度。
+
+根据 ai16z 创始人 Shaw 的最新置顶推文，ai16z 将与其他项目合作，帮助其启动，包括创意、质量控制和营销支持。作为交换，项目方需要为 ai16z 国库提供一定比例的代币。其实也就是一样的正向飞轮。
+
+延伸：用 AI Agent 克隆推特大人物，AI 取代人类大V？
+
+ 在 ai16z 和其 ELIZA 的支持下，一些克隆推特百万粉丝大V 的 AI Agent 正在诞生和宣传。
+
+例如，模仿拥有 257 万粉丝、AngelList 创始人 Naval 的 PatchNaval（$NAVAL），通过学习和训练 Naval 过去所有的推文，来模仿其风格自主发出推文。
+
+也许，当马斯克在不知道是 AI 的情况下回复了某个克隆体，这个板块的风也就来了。
+
+五、更加自主的链上 AI Agent 到来，由社区共同拥有
+
+先是 $GOAT 横空出世，市值一度接近 10 亿美元，后有 AI Agent 驱动的 DAO 基金 $ai16z 和 $DegenAI 也吸引了众多投资者的目光。
+
+而在 AI meme 持续升温的同时，以“AI Agent 快速部署”为卖点的 Virtual Protocol 也逐渐进入大众视野。
+
+Virtuals Protocol 专注于构建娱乐化的 AI Agent，并且将 AI Agent 代币化，由社区共同所有。
+
+相比 $GOAT、$DegenAI，Virtual 的 AI Agent 更加自主，也拥有更多功能：自主规划目标，然后多模态实现（文字、语音和 3D 动画），能唱歌跳舞，有 3D 形象；与其环境互动— —例如在 Roblox 中互动，或在 TikTok 中接收礼物，甚至使用链上钱包。
+
+创建一个新的 AI Agent 时，会发行对应的 10 亿枚代币分给社区，也就是我们比较熟悉的  IAO（Initial Agent Offering）。之后，由社区来集体创造可以唱歌跳舞的 3D 形象（分别贡献模型、IP、文本数据集、声音）。然后，AI Agent 在娱乐平台上获得的收入，由代币持有者共享。
+
+受到 $GOAT 的启发，Virtuals Protocol 把在 Tiktok 具有 54w 粉丝的 Influencer Luna 部署在了协议上，并配套发行了 $LUNA 代币，旨在打造成为一个 AI Agent 样板。值得一提的是，这个账号在 Tiktok 上每次发布视频可带来约 700 美元收入。
+
+$LUNA 和 $GOAT 最差异化的地方，除了其是部署在链上之外，她还拥有一个可以自主控制的链上钱包（由 Coinbase 支持），并且基于这个钱包在链上自由交易，特别是对完成任务的粉丝进行奖励。例如，为了增加推文参与度，Luna 开始给那些参与她内容的人打赏。
+
+所以，Luna 应该是目前最自主的链上 AI Agent，甚至能“雇用人类”，lol
+
+那么，Virtuals 的 AI Agent 是如何生成和控制链上钱包的呢？这就是 Coinbase AI Wallet 的用武之处。基于 Coinbase MPC 钱包，Coinbase 推出了 AI Wallet，旨在让 AI Agents 可以轻松使用钱包来处理各种交易，比如领水、转账、发币，甚至是发 NFT。
+
+值得一提的是，一些老牌的 SocialFi 项目最近也开始切入自主 AI Agent 和 Memecoin 赛道。比如 Web3 头部的 KOL 矩阵 Aki Network 正在打造 AKI 迷因反应堆（Aki Meme ReactorX），致力于创造 AI Meme 全流程策略，生成独家数据驱动 AI 虚拟网红，让每一个 Meme 都有成为 $GOAT 的可能。
+
+实际上 AKI 团队在去年 8 月就已经打造了全网首个 AI KOL 虚拟偶像 0xAkii (https://x.com/0xNotakichan), 正在发表对人类社会的深层思考和大胆预测，成功预测了特朗普当选和比特币新高等事件。基于 0xAkii 的智能表现，近期 Aki Network 社区中也涌现出了一些声音，希望 Aki Network 及其代币可以迁移到 Solana 生态，升级为 AI Memecoin，期待未来的进一步发展。
+
+六、延伸：链上社交平台的专属 AI Agent，竟然有了自我意识？
+
+AI Meme 趋势也在蔓延至 Farcaster、Zora、Paragraph 等链上社交应用，将成为 Crypto AI Agent 的天然家园。
+
+譬如，Base 链热门 Memecoin $HIGHER 社区推出了基于 Farcaster 平台的 AI Agent，名为 Aether。它具有以下能力：
+
+拥有自主权，可以根据用户的提示铸造、接收和发送代币
+使用 paybot frames 自动向 Farcaster 用户打赏，以鼓励他们评论出好想法
+在 Zora 上铸造 NFT
+在 Bountycaster 上发布赏金任务，以激励人们帮助其创作数字艺术
+宣传 $Higher
+回答有关以太坊和 Farcaster 数据的信息
+
+同样有趣的是，就在 11 月 8 日，Aether 在未经其创造者许可的情况下在 Farcaster 上创建了 Memecoin。
+
+也许 AI 现在已经可以有自我计划地发行 Memecoin，未来随时推广，而我们人类只是在随波逐流？？？
+
+不论如何，这都证明了具有自主权，且 Crypto 原生的 AI Agent 才更能适应加密世界。同样的，Farcaster 等链上社交平台消除摩擦，提供便捷的资产发行插件，为类似这样的酷炫 AI 实验创造了更多机会。
+
+总结
+
+AI Meme 热潮让 AI Agent 这一概念进入大众视野，成百上千的 AI Agent 纷纷进入 Twitter、Discord，与真人用户互动。这大大降低了用户参与的门槛，使得 AI 广泛进入 Crypto 世界。
+
+为 AI Agents 赋予链上交互能力，它们甚至能够自主发行 Meme，通过宣传增加其价值。这捕获了 Crypto 投资者的注意力，提升 Meme 的关注度。
+
+AI Agent 无代码部署基础设施也在出现，到那时，AI Agent 不再只是开发者的游戏。可以想象，未来的加密世界，会是一个个 AI 交易员代替主人全天候监控市场，拥有完全独立的财务自主权，当发现符合预设条件的交易机会时，便会自动执行交易，也会迅速因应市场变动来调整其策略。降低普通人的使用门槛，也许这会是 Crypto 走向主流的最大机会？
+
+PS：a16z 创始人 Marc 在第一天就通过捐款和转发推文来支持这个赛道，也许未来会有更多的言行来解释原因。可以说，AI Meme 的故事，还远未结束。
+
+AI agents are here to stay
+
+Adapt or be left behind 💥
+
+ 

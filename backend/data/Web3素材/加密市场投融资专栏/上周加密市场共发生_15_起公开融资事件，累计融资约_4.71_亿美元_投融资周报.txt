@@ -1,0 +1,109 @@
+标题: 上周加密市场共发生 15 起公开融资事件，累计融资约 4.71 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2189944
+发布时间: 2025-07-07
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 6 月 30 日- 7 月 6 日期间，区块链和加密行业共发生 15 起公开投融资事件，累计融资约 4.71 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和游戏赛道。热门项目包括 Web3 基础设施开发商 Zypher Network，Web3 游戏工作室 Distinct Possibility Studios 、金融科技初创公司 AllScale 、人工智能交易市场 olaxbt。 
+
+此外，Base 链上预测市场 Limitless 宣布完成 400 万美元战略轮融资，Coinbase Ventures、1confirmation、Maelstrom、Collider、Node Capital、Paper Ventures、Public Works、Punk DAO 和 WAGMI Ventures 参投。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+Web3 基础设施开发商 Zypher Network 完成 700 万美元融资，UOB Venture 和 Signum Capital 联合领投
+
+Web3 基础设施开发商 Zypher Network 完成 700 万美元融资，UOB Venture 和 Signum Capital 联合领投，HashKey Capital、丰隆集团 (Hong Leong Group)、Cogitent Ventures、Catcher VC、Hydrogenesis Labs、DWF Venture 以及其他战略投资者参投。
+
+Zypher Network 是一个去中心化的信任平台，通过零知识协议及其专用的 Rollup 基础设施 Zytron，为 AI 代理提供可验证的自主性。
+
+美股上市公司 BitMine 完成 2.5 亿美元融资以增持 ETH 作为核心储备资产
+
+据 CNBC 报道，BitMine Immersion Technologies（美国证券交易所代码：BMNR）宣布完成一笔 2.5 亿美元的大额私募融资，以每股 4.50 美元的价格发行 55,555,556 股。该交易由 MOZAYYX 领投，Founders Fund、Pantera 等知名投资机构参与，预计将于 2025 年 7 月 3 日左右完成交割。
+
+BitMine 计划将筹集资金主要用于增持以太坊（ETH），拟将其作为核心储备资产，同时继续维持比特币挖矿主营业务。
+
+Fundstrat 创始人兼 Fundstrat Capital 首席投资官 Thomas Lee 已立即生效出任公司董事会主席。本次私募发行依据《证券法》第 4(a)(2) 条和/或 D 条例进行，ThinkEquity, LLC 担任配售代理。
+
+二、游戏
+
+Web3 游戏工作室 Distinct Possibility Studios 完成 3050 万美元融资，Bitkraft Ventures 和 Brevan Howard Digital 共同领投
+
+据 The Block 报道，Web3 游戏工作室 Distinct Possibility Studios 完成 3050 万美元融资，Bitkraft Ventures 和 Brevan Howard Digital 共同领投，Tezos 基金会、Hashed、Delphi Ventures、Shima Capital、North Island Ventures 和 Decasonic 参投。
+
+据悉，该游戏工作室由《EverQuest》联合创始人 John Smedley 创办，这笔资金将用于支持 AAA 风格射击游戏“Reaper Actual”的开发和发布，该游戏计划在 Steam 和 Epic Games Store 上发布。
+
+游戏开发工作室 Cold River Games 完成 200 万美元融资，Beam Investments 等参投
+
+游戏开发工作室 Cold River Games 完成 200 万美元融资，用于支持 ARPG 游戏《Crystalfall》的开发。
+
+本轮由 Beam Investments、CoinFund、Partnerinvest Norr、Avalanche Foundation、A100x Ventures、Lyrik Ventures、MH Ventures 等参投。
+
+三、CeFi
+
+Swyftx 将以 6580 万美元收购数字资产经纪公司 Caleb & Brown
+
+据 Decrypt 报道，澳大利亚加密货币经纪商 Swyftx 将收购数字资产经纪公司 Caleb & Brown，消息人士表示，这笔交易的价值超过 1 亿澳元（约合 6580 万美元）。Swyftx 上周向员工披露预计将扩展 Swyftx 在美国的业务范围，Caleb & Brown 已在美国建立了高净值加密货币投资者客户群。
+
+Swyftx 打算扩大 Caleb & Brown 的关系经理团队，并将合并后的集团定位为寻求定制化、全天候支持的机构投资者的替代选择 。
+
+金融科技初创公司 AllScale 宣布完成 150 万美元融资，Amber Group 等机构参投
+
+据官方消息，金融科技初创公司 AllScale 宣布完成 150 万美元融资，旨在加速其面向中小企业的合规稳定币解决方案开发，包括发票、社交电商和薪酬服务。该轮融资由 DraperDragon、Amber Group、Y2Z Capital、KuCoin Ventures、Oak Grove Ventures、Blockbooster 和 Movemaker 等机构参与，AllScale 亦为香港数码港培育计划成员。
+
+AllScale （allscale.io）专注于打通企业级稳定币支付最后一公里，帮助企业合规、安全、简单使用稳定币完成收款、销售、发薪等需求。当前全球稳定币生态快速发展，稳定币的发行、支付通道、反洗钱、出入金等流程都逐渐成熟，但是对企业而言，依旧是学习门槛高、使用成本高、交易风险高、合规与财务记录困难。而 AIIScale 则专注于打通每一个环节的底层服务商，提供企业稳定币场景的一站式端到端工具，大幅度降低传统中小企业对于稳定币使用的难度。
+
+四、其他
+
+人工智能交易市场 olaxbt 完成 338 万美元种子轮融资，Amber Group 领投
+
+人工智能交易市场 olaxbt 完成 338 万美元种子轮融资，本轮融资由 Amber Group 领投，DWF Ventures，Mindfulness Capital，Web3Labs.club 和 CREDIT SCEND 参投。
+
+据悉，Olaxbt 是一个基于人工智能的加密货币交易市场，旨在通过其独特的 MCP 技术，为用户提供高效、智能的交易体验。
+
+英国上市公司 Coinsilium Group 子公司 Forza 筹集 380万美元，用于在数字资产领域的战略发展
+
+据官方公告，英国上市公司 Coinsilium Group 子公司 Forza 筹集通过发行总计 15,486,111 股每股面值为零的新普通股，以每股 0.18 英镑的价格筹集约 380 万美元，用于在数字资产领域的战略发展。
+
+此前报道，总部位于英国的上市区块链公司 Coinsilium Group Limited 宣布其全资子公司 Forza Gibraltar Limited 增持 15.4147 枚 BTC，总持仓达 73.7304 枚。
+
+Thesis 收购比特币奖励平台 Lolli
+
+据 The Block 报道，专注于比特币生态风险投资的 Thesis 已收购比特币奖励平台 Lolli，以融入其更广泛的生态系统，具体交易条款和金额暂未公开。
+
+Thesis 此前曾孵化过比特币奖励平台 Fold，之后 Fold 正式分拆为一家独立公司。Fold 随后于 2024 年 7 月与 FTAC Emerald Acquisition Corp.达成特殊目的收购公司（SPAC）合并，并于 2 月在纳斯达克上市，股票代码为 FLD。
+
+Coinbase 收购代币管理公司 Liquifi
+
+据 Fortune 报道，Coinbase 已经收购了代币管理平台 Liquifi，具体交易条款暂未公布。
+
+据悉，Liquifi 上一次融资是在 2022 年的种子轮融资中，融资金额为 500 万美元，由风险投资公司 Dragonfly 领投，Katie Haun 和 Balaji Srinivasan 也参与其中。
+
+此外，Uniswap 基金会、OP Labs、Ethena 和 Zora 等知名加密货币公司使用该平台追踪加密货币的持股情况，在归属期后分发代币，并管理复杂的税收预扣流程。
+
+Base 链上预测市场 Limitless 完成 400 万美元战略轮融资，Coinbase Ventures 等参投
+
+据 Cointelegraph 报道，Base 链上预测市场 Limitless 宣布完成 400 万美元战略轮融资，Coinbase Ventures、1confirmation、Maelstrom、Collider、Node Capital、Paper Ventures、Public Works、Punk DAO 和 WAGMI Ventures 参投。
+
+该公司此前曾完成 300 万美元种子轮融资，截至目前融资总额达到 700 万美元，新资金拟用于准备即将到来的 TGE。
+
+云挖矿平台 TWL Miner 完成 9500 万美元 B 轮融资
+
+据 Globenewswire 报道，英国云挖矿平台 TWL Miner 完成 9500 万美元 B 轮融资，将用于支持人工智能技术与云挖矿业务的融合。
+
+该公司称本轮融资吸引了区块链和可持续技术领域的多家专业投资机构，但未披露具体参投机构。新资金将用于加强全球可再生能源数据中心网络建设，并开发人工智能挖矿系统，以动态管理计算资源、预测最佳挖矿时机、降低能耗，提升区块验证成功率和运行稳定性。
+
+据介绍，目前，TWL Miner 在多国运营着 60 多个采用风能、太阳能供电的数据中心，符合其可持续挖矿战略。该平台已服务全球 180 个国家和地区的 700 多万用户。
+
+Web3 服务平台 BACKSEAT 完成种子轮融资，Spiral Capital 和 Headline Asia 联合领投
+
+据 Coindesk 报道，BACKSEAT 完成种子轮融资，总融资达 14 亿日元（折合约 970 万美元）。
+
+该种子轮由 Spiral Capital 和 Headline Asia 联合领投，East Ventures 参投。BACKSEAT Exchange 基于此前 BACKSEAT 株式会社收购的日本加密交易所 coinbook 成立。

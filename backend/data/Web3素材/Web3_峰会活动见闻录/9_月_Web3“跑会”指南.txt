@@ -1,0 +1,63 @@
+标题: 9 月 Web3“跑会”指南
+链接: https://www.chaincatcher.com/article/2141238
+发布时间: 2024-09-02
+
+==================================================
+
+作者：angelilu, Foresight News
+
+ 
+
+9 月多场重量级活动即将登场，首先迎来韩国区块链周，紧接着全球区块链行业的目光将聚焦新加坡，全行业盛会 TOKEN 2049 以及 Solana 生态的年度峰会都将在新加坡举行。另一边，美国夏威夷将举办首个大型科技周，包含比特币、区块链等话题和周边活动，此外，纽约将举行 Mainnet 2024。
+
+Foresight News 为您带来 9 月“跑会指南”，一起探索这个全球 Web3 的金秋盛宴！
+
+KBW2024
+
+时间：2024 年 9 月 1 日至 9 月 7 日
+
+地点：韩国·首尔
+
+ 精彩看点：Korea Blockchain Week 是韩国最具影响力的区块链活动之一，为期一周的盛会汇聚了全球区块链行业的领袖、创新者、投资者和开发者，活动突出展示韩国在区块链和加密货币领域的创新成果，参与者可以深入了解韩国的区块链生态系统，韩国是全球重要的加密货币市场之一，活动可能会探讨最新的监管动向和政策走向。
+
+Foresight News 目前已收录了 KBW2024 逾 140 场周边活动，可点此查看：https://foresightnews.pro/event/detail/1198
+Hawaii Blockchain Summit
+
+时间：2024 年 9 月 16 日
+
+地点：美国·夏威夷
+
+精彩看点： Hawaii Blockchain Summit 将于 9 月 16 日在夏威夷举行，此次活动是夏威夷首个大型科技周活动 Honolulu Tech Week 中的一个重要部分，因此能吸引到各行业大量的科技人才参与此次活动，是连接区块链与科技领域的关键纽带，促进跨领域交流与创新。活动特别关注入门级内容，如「比特币入门」等话题，旨在降低区块链技术的门槛，吸引更广泛的受众参与。出席嘉宾包括 Aptos Labs 的联合创始人兼首席技术官 Avery Ching 等行业人士以及夏威夷本土的各企业。
+
+TOKEN 2049 WEEK
+
+时间：2024 年 9 月 16 日至 9 月 22 日
+
+地点：新加坡·滨海湾金沙
+
+精彩看点：TOKEN 2049 每半年在迪拜和新加坡各举办一次，凭借其高质量的内容和广泛的影响力，为全球区块链和加密货币行业提供了重要的交流平台，9 月 16 日至 22 日在新加坡举办的活动是 2024 年下半年亚洲地区最值得期待的 Web3 盛会之一，嘉宾包括 Solana 联创 Anatoly Yakovenk、币安 CEO Anatoly Yakovenk、Maelstrom CIO Arthur Hayes 等行业行人外，该包括 甲骨文红牛车队 F1 车手 Max Verstappen 和 Sergio Perez。
+
+Foresight News 目前已收录了 TOKEN 2049 WEEK 逾 170 场周边活动，可点此查看：https://foresightnews.pro/event/detail/582
+Solana Breakpoint
+
+时间：2024 年 9 月 20 日至 9 月 21 日
+
+地点：新加坡 
+
+精彩看点：Solana Breakpoint 2024 将于 9 月 20 日至 21 日在新加坡举行，这是 Solana 生态系统中最重要的年度活动，Solana 团队经常在 Breakpoint 上发布重要公告或新产品，因此备受业内关注，许多基于 Solana 的创新项目会在此亮相，展示最新的应用和解决方案。此次活动将汇集 Solana 生态开发者、创始人、投资者和爱好者，出席嘉宾除 Solana 团队和各项目的创始人外，还包括 Meme 币 MOTHER 的创始人 IGGY AZALEA。
+
+ETHGlobal Singapore
+
+时间：2024 年 9 月 20 日至 9 月 22 日
+
+地点：新加坡
+
+精彩看点：ETHGlobal Singapore 将于 2024 年 9 月 20 日至 22 日在新加坡举行，是以太坊生态的黑客松活动，此次活动在 TOKEN 2049 和 Solana 峰会之后，将汇集更多的区块链开发者，通过提供导师、合作伙伴和软件等 Web3 资源，使团队在 36 小时内完成项目，评委、演讲者包括 a16z 的 Jane Lippencott、Bankless Ventures 的 Ben Lakoff 等。
+
+Mainnet 2024
+
+时间：2024 年 9 月 30 日至 10 月 2 日
+
+地点：美国·纽约
+
+精彩看点：Mainnet 2024 是由加密研究机构 Messari 主办的第四届年度盛会，定于 2024 年 9 月 30 日至 10 月 2 日在美国纽约举行。这是北美地区最具影响力的加密货币和区块链行业峰会之一，按照以往活动惯例，Messari 团队可能会在会议期间发布最新的市场报告和预测。此次活动涵盖 DeFi、加密宏观经济等话题，且重点将讨论加密货币监管问题，除行业人士外，美国证券交易委员会专员 Hester Peirce、美国众议院多数党党鞭 Tom Emmer、美国参议院候选人 Bernie Moreno 等对加密友好的议员。

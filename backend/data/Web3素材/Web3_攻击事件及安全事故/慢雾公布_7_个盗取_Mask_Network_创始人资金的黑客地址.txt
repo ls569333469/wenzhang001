@@ -1,0 +1,15 @@
+标题: 慢雾公布 7 个盗取 Mask Network 创始人资金的黑客地址
+链接: https://www.chaincatcher.com/article/2169906
+发布时间: 2025-02-27
+
+==================================================
+
+ChainCatcher 消息，慢雾在 X 平台发文，公布 7 个 Mask Network 创始人被盗资金的黑客地址：
+
+0x7e8da2dc33416e5f73008366cd5027f22be17df7
+0xce98ad7553c73578633a286f476c641179c5695d
+0xb6a5426b885172fb73d3c8fcf9612610612df707
+0xe457171b295e3ec597ddb234a46215e6006636e7
+0x15eb933b90f13fdfa0f46a7ae52fe8cf4307fa43
+0x180fe23ff9c57031e305ecffaadff4a5ac3d9219
+0xaa937733edecda7924849c284b76912489e1f693

@@ -1,0 +1,113 @@
+标题: 埋伏“特朗普上任行情”？一文梳理新政府加密班底与相关概念币
+链接: https://www.chaincatcher.com/article/2161067
+发布时间: 2025-01-07
+
+==================================================
+
+作者：Weilin，PANews
+
+ 
+
+美国候任总统、共和党人特朗普将在13天后，即1月20日，出席美国总统就职典礼。这是首位支持加密货币的美国总统当选，特朗普的班底也有多位支持加密货币的政客，比如新任SEC主席Paul Atkins、首位白宫人工智能和加密货币主管David Sacks，以及政府效率部的主管之一马斯克，等等。
+
+伴随着这一重要的事件，哪些相关加密项目的代币和meme币可能值得关注和布局？本文，PANews根据特朗普在新政府中的核心人物关系，梳理出一系列潜在的概念币和meme币。
+
+（注：本文不构成任何投资建议，meme币波动较大，用户请务必自行研究DYOR。）
+
+特朗普相关概念
+
+受到特朗普概念启发的meme币MAGA (TRUMP)和MAGA Hat (MAGA)，已经成为美国概念meme币的头部代币，截至1月6日，MAGA(TRUMP)和MAGA Hat (MAGA)在一天内分别上涨20.82%和12.12%。
+
+MAGA (TRUMP)
+
+去年2月底，MAGA(TRUMP)迎来显著上涨，受益于当时整体meme币市场的上行。2024年5月底，因特朗普支持加密货币的视频言论和特朗普NFT晚宴的影响，TRUMP再次大幅上涨，并在6月1日创下17.51美元的历史最高点。
+
+当前报价：3.12美元
+
+当前市值：1.41亿美元
+
+MAGA Hat (MAGA)
+
+MAGA帽子是特朗普在2016年总统竞选期间推出的一款帽子。红底上以白色大写字母印有竞选口号“让美国再次伟大”（Make America Great Again）。自那时起，它成为了特朗普MAGA运动的象征。
+
+当前报价：0.0001123美元
+
+当前市值：4612万美元
+
+除此之外，还有一批特朗普家族的DeFi项目World Liberty Financial相关的代币值得关注，如该项目近期大量买入的ETH、cbBTC、LINK、AAVE、ENA、ONDO等。
+
+马斯克相关概念
+
+狗狗币DOGE
+
+因与特朗普设立、马斯克即将领导的政府效率部缩写相同，DOGE成为潜在布局标的。此外，马斯克本身也是狗狗币的忠实粉丝。
+
+当前报价：0.3827美元
+
+当前市值：564亿美元
+
+Department Of Government Efficiency (DOGE)
+
+一个与政府效率部的缩写重名的meme币
+
+当前报价：0.2319美元
+
+当前市值：2.27亿美元
+
+Peanut the Squirrel (PNUT)
+
+PNUT是一个以松鼠宠物为原型的meme币，其原型因狂犬病被纽约环境保护局安乐死。去年11月的第一个周末，PNUT成为Degen们的炒作对象，市值在一天内突破1亿美元。马斯克加入悼念活动并连发推文，演变成对民主党的讨伐行动。马斯克曾在11月13日发推文称“美国是被一只松鼠和meme币拯救的”，并引发了PNUT的暴涨。
+
+当前报价：0.7361美元
+
+当前市值：7.34亿美元
+
+Kekius Maximus(KEKIUS)
+
+2024年12月31日，马斯克将推特头像换成类似Pepe青蛙的形象，并改名为Kekius Maximus，引发了广泛关注。马斯克也曾经提到，会把游戏《流放之路》的新角色命名为Kekius Maximus。据网友推测，Kekius Maximus 这个名字和 Pepe Meme文化有一定关系。1月2日，马斯克X账号的青蛙头像和“Kekius Maximus”昵称更改回其本人的名字，相关概念币有所下跌。
+
+当前报价：0.09975美元
+
+当前市值：1.03亿美元
+
+白宫AI与加密主管David Sacks相关概念
+
+白宫人工智能与加密主管， David Sacks曾任PayPal联创，是知名“PayPal黑帮”成员之一及马斯克的密友。有消息称，Sacks自己也是 SOL的支持者。
+
+dYdX (DYDX)
+
+dYdX是David Sacks创立的Craft Ventures投资的项目之一。2024年12月6日，随着Sacks的任命，DYDX上涨30%。
+
+当前报价：1.60美元
+
+当前市值：11.5亿美元
+
+Handshake (HNS)
+
+Handshake也是Sacks旗下公司Craft Ventures投资的项目之一。
+
+当前报价：0.01011美元
+
+当前市值：651万美元
+
+0x Protocol (ZRX)
+
+David Sacks是0x Protocol的顾问，该项目的代币为ZRX。
+
+当前报价：0.5336美元
+
+当前市值：4.53亿美元
+
+此外，与Sacks本人概念相关的meme币有David Sacks (SACKS)，当前市值54.99万美元；Crypto Czar (CZAR)，当前市值：39.6万美元。
+
+此外还有MOOSE、GUS，这两个meme币与David Sacks的宠物狗相关。Sacks曾经借Moose与项目方互动，也在X平台上，发推提起过Gus。MOOSE当前市值130万美元，GUS当前市值3.6万美元
+
+新任SEC主席Paul Atkins相关概念
+
+Reserve Rights (RSR)
+
+Paul Atkins曾任Reserve协议的顾问，RSR因此被认为与其挂钩。2024年12月4日，RSR因传闻Atkins将成为SEC主席而大涨88%。
+
+当前报价：0.017美元
+
+当前市值：8.96亿美元

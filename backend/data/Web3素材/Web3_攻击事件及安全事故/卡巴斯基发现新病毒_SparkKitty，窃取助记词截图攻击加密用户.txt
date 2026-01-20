@@ -1,0 +1,9 @@
+标题: 卡巴斯基发现新病毒 SparkKitty，窃取助记词截图攻击加密用户
+链接: https://www.chaincatcher.com/article/2187713
+发布时间: 2025-06-24
+
+==================================================
+
+ChainCatcher 消息，据 Cointelegraph 报道，卡巴斯基发现一款名为 SparkKitty 的新型病毒，专门感染 iOS 与 Android 加密类应用，窃取用户相册中的助记词截图。受影响应用包括 App Store 上的 “币 coin” 及 Google Play 上超万次下载的 SOEX 通讯应用。
+
+该病毒与此前发现的 SparkCat 属同一源头，活跃时间可追溯至 2024 年初，主要攻击东南亚及中国用户。

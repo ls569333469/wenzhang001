@@ -1,0 +1,283 @@
+标题: IOSG：一文读懂稳定币公链
+链接: https://www.chaincatcher.com/article/2211365
+发布时间: 2025-10-09
+
+==================================================
+
+作者｜Sam @IOSG
+
+ 
+
+引言
+
+Artemis 2025 年的研究报告指出，2024 年通过稳定币结算的经济规模已高达约 26 万亿美元，其体量已然达到了主流支付网络的水平。相比之下，传统支付领域的费用结构如同一种“隐形税”：约 3% 的手续费、此外的外汇点差、以及无处不在的电汇费。
+
+而稳定币的支付使这些成本被压缩至几美分甚至更低。当资金转移的成本急剧下降时，商业模式也将被彻底重塑：平台将不再依赖交易抽成生存，而是转向在更深层的价值上竞争——例如储蓄收益、资金流动性、以及信贷服务。
+
+随着美国《GENIUS 法案》的生效，以及香港《稳定币条例》提供了相似的监管范本，银行、卡组织和金融科技公司正从试点阶段迈向大规模生产应用。银行开始发行自有稳定币或与金融科技公司建立紧密合作；卡组织正将稳定币纳入其后端结算体系；金融科技公司则纷纷推出合规的稳定币账户、跨境支付解决方案、内置 KYC 的链上结算以及税务报告功能。稳定币，正从交易所内的抵押品，蜕变为标准的支付“基础设施”。
+
+▲ source: Stable
+
+目前尚存的短板在于用户体验。现在的钱包仍预设用户精通加密货币知识；不同网络的费用差异很大；用户甚至常常需要先持有一种高波动的代币，才能转移与美元挂钩的稳定币。而通过赞助费用、账户抽象实现的“无 Gas 费”稳定币转账，将彻底消除这一摩擦。辅以可预测的成本、更顺畅的法币兑换通道以及标准化的合规组件，稳定币将不再让人感觉是“加密货币”，其体验将真正趋同于“货币”。
+
+核心观点：以稳定币为核心的公链已具备必要的规模与稳定性。若要成为日常货币，它们还需要：消费级用户体验、可编程的合规性、以及感知不到费用的交易。随着这些环节——尤其是无 Gas 费转账和更好的法币兑换通道——逐一完善，竞争焦点将从“为转移资金收费”转向“围绕资金转移所能提供的价值”，包括：收益、流动性、安全性以及简单可信的工具。
+
+下文将快速概览在稳定币/支付公链赛道中杰出的项目。本文将主要聚焦于 Plasma、Stable 和 Arc 这三者，并深入探讨其背后的发行方、市场动态与其他参与者，也就是这场“稳定币轨道战争”的全景图。
+
+Plasma
+
+Plasma 是专为 USDT 打造的区块链，旨在成为其原生结算层，并专为高吞吐、低延迟的稳定币支付而优化。2025 年 5 月下旬进入私有测试网，7 月转入公共测试网，并于同年 9 月 25 日成功启动了主网测试版。
+
+在稳定币支付公链赛道中，Plasma 是首个进行 TGE 的项目，并完成了成功的市场启动：占据了强大的 mindshare，创下了首日 TVL 和流动性的记录，并从一开始就建立了坚实的合作伙伴关系。
+
+自主网测试版上线以来，其增长势头有目共睹。截至 9 月 29 日，Plasma 链上的 Aave 存款已突破 65 亿美元，成为其第二大市场；到 9 月 30 日，已有超过 7.5 万名用户注册了其生态钱包 Plasma One。目前，根据 DeFiLlama 数据，Plasma 上的 Aave TVL 为 57 亿美元——虽从峰值有所回落，但仍稳居第二（仅次于以太坊的 587 亿美元和 Linea 的 23 亿美元）。Veda、Euler、Fluid 和 Pendle 等项目都有客观的 TVL，这得益于主流 DeFi 项目在上线第一天就成功部署。
+
+▲ source: DeFiLlama
+
+当然，外界也存在一种评论，认为其早期增长主要由激励措施驱动，而非完全有机。正如其 CEO 保罗所强调的，仅依赖加密原生用户和激励并非可持续的模式；真正的考验在于未来的实际应用情况——这将是我们持续密切关注的重点。
+
+市场进入策略 (Go-To-Market)
+
+Plasma 聚焦 USDT。着重新兴市场，重点瞄准东南亚、拉丁美洲和中东等地区。在这些市场，USDT 的网络效应本就最为强大，稳定币已成为汇款、商户支付和日常点对点转账的必备工具。要将这一战略构想付诸实践，意味着需要扎实的地推式分发：逐条支付走廊地推进、建立代理网络、实现本地化用户引导，并精准把握各地的监管时机。这也意味着需要划定比波场更清晰的风险边界。
+
+Plasma 将开发者体验视作护城河，并认为 USDT 需要像 Circle 为 USDC 所做的那样，提供一个友好的开发者界面。过去，Circle 投入巨资让 USDC 易于集成和开发，而 Tether 在这方面有所欠缺，这为 USDT 应用生态留下了一个巨大的机遇——前提是支付轨道能被妥善打包。具体而言，Plasma 在支付技术栈之上提供统一 API，让支付领域的开发者无需自行拼装底层设施。在这一单一接口背后，是预先集成好的合作伙伴，作为即插即用的基础模块。Plasma 同时也在探索保密支付——在合规框架下实现隐私保护。其最终目标非常明确：“让 USDT 变得极其易于集成和开发”。
+
+综上所述，这种以支付走廊为主导的市场进入策略和以 API 为核心的开发者战略，最终都汇聚于 Plasma One——这是面向消费者的前端入口，是将整个计划落地给日常用户的产品。2025 年 9 月 22 日，Plasma 发布了 Plasma One，这是一个面向消费者的“稳定币原生”数字银行及卡产品，它将存储、消费、赚取和发送数字美元的功能整合于一个应用程序中。团队将其定位为：为数亿已经依赖稳定币，却仍在应对本地化摩擦（如笨重的钱包、有限的法币兑换渠道、对中心化交易所的依赖）的用户，提供那个缺失的统一界面。
+
+该产品的访问权限正通过等候名单分阶段开放。其主打功能包括：从持续生息（目标年化超过 10%）的稳定币余额中直接支付、高达 4% 的消费返现、应用内即时零费用的 USDT 转账，以及可在超过 150 个国家、约 1.5 亿商户处使用的卡片服务。
+
+商业模式解析
+
+Plasma 的核心定价策略旨在最大化日常使用，同时通过其他环节维持经济收益：简单的 USDT 间转账免费，而链上所有其他操作则收取费用。 通过“区块链 GDP”的视角来看，Plasma 有意地将价值捕获从针对每笔交易的“消费税”（即基础 USDT 转账的 Gas 费）转向了应用层收入。其中的 DeFi 层则对应了框架中的“投资”板块：旨在培育流动性和收益市场。虽然净出口（即 USDT 的跨链桥接入/出）仍然重要，但经济的重心已从消费手续费转向了对应用和流动性基础设施的服务费。
+
+▲ source: Fidelity
+
+对用户而言，零费用不仅仅是节省成本，它更能解锁新的用例。当发送 5 美元不再需要支付 1 美元手续费时，小额支付就变得可行。汇款可以全额到账，而无需被中间环节扣费。商户可以接受稳定币支付，而无需将 2-3% 的收入拱手让给发票/账单软件和卡组织。
+
+在技术层面，Plasma 运行着一个符合 EIP-4337 标准的paymaster。Paymaster 会为 Plasma 链上官方 USDT 的 transfer() 和 transferFrom() 函数调用赞助 Gas 费。Plasma 基金会已使用其原生代币 XPL 对该支 paymaster 进行了预注资，并采用轻量级验证机制来防止滥用。
+
+Stable
+
+Stable 是专为 USDT 支付优化的 Layer 1，旨在解决当前基础设施的低效问题——包括不可预测的费用、缓慢的结算时间以及过于复杂的用户体验。
+
+Stable将自身定位为 “为 USDT 而生”的支付专用 L1，其市场策略是与支付服务提供商（PSP）、商户、业务集成商、供应商以及数字银行直接建立合作伙伴关系。PSP 们对此青睐有加，因为 Stable 消除了两个运营难题：管理波动的 Gas 代币和承担转账成本。鉴于许多 PSP 面临较高的技术门槛，Stable 目前正以 “服务工坊” 的模式运行——自主完成各种集成工作——未来则将把这些模式固化到一个 SDK 中，以便 PSP 能实现自助集成。为了提供生产环境级别的保证，他们引入了 “企业级区块空间” ，这是一种订阅服务，确保 VIP 交易能被优先打包在区块顶部，从而获得确定的、首个区块内结算的保证，并在网络拥堵时实现更平滑的成本预测。
+
+在地域策略上，其市场进入紧随 USDT 的现有使用轨迹，实行 “亚太优先”——之后将扩展至拉丁美洲和非洲等其他 USDT 主导区域。
+
+9 月 29 日，Stable 发布了一款面向消费者的应用（app.stable.xyz），目标用户是全新的、非 DeFi 用户。该应用被定位为一款满足日常需求（P2P 转账、商户支付、房租等）的简易 USDT 支付钱包，提供即时结算、点对点转账无 Gas 费、以及以 USDT 支付的透明可预测费用。该应用目前仅能通过等候名单加入。在韩国的推广活动初步证明了其市场吸引力：Stable Pay 通过线下展位直接吸引了超过 10 万名用户注册（9 月 29 日数据）。
+
+Stable 通过使用 EIP-7702 实现了免 Gas 费的 USDT 支付。该标准能让用户现有的钱包在单次交易中临时变为“智能钱包”，使其可以运行自定义逻辑并结算费用，而无需任何单独的 Gas 代币——所有费用均以 USDT 计价和支付。
+
+正如 Tiger Research 的流程图所展示的，其流程是：付款方发起支付；EIP-7702 钱包向 Stable 的支付主管（Paymaster）申请 Gas 费豁免；支付主管赞助并结算网络费用；最终，收款方收到全额款项，无任何扣费。在实践中，用户只需要持有 USDT 即可。
+
+▲ source: Tiger Research
+
+在商业模式上，Stable 采取近期优先扩张市场占有率，收入次之的策略，利用免 Gas 费的 USDT 支付来赢得用户并建立支付流量。长期来看，盈利将主要来自其消费者应用程序内部，并辅以部分精选的链上机制。
+
+除了 USDT，Stable 也看到了其他稳定币带来的重大机遇。随着 PayPal Ventures 在 2025 年 9 月底对 Stable 进行投资，作为交易的一部分，Stable 将原生支持 PayPal 的稳定币 PYUSD，并推动其分发，让 PayPal 用户能够“直接使用 PYUSD”进行支付，且 Gas 费同样以 PYUSD 支付。这意味着 PYUSD 在 Stable 链上也将是免 Gas 费的——这将把吸引 PSP 的 USDT 支付轨道的操作简易性，同样扩展到 PYUSD 之上。
+
+▲ source: https://x.com/PayPal/status/1971231982135792031
+
+架构解析
+
+Stable 的架构设计始于其共识层——StableBFT。这是一个基于 CometBFT 定制开发的权益证明协议，旨在提供高吞吐、低延迟与高可靠性。其发展路径务实而清晰：短期是优化这一成熟的 BFT 引擎，而长期路线图则指向转向基于有向无环图（DAG）的设计，以追求更高的性能扩展。
+
+在共识层之上，Stable EVM 将链的核心能力无缝融入了开发者的日常工作中。其专设的预编译合约，允许 EVM 智能合约安全、原子化地调用核心链逻辑。未来，随着 StableVM++ 的引入，性能还将进一步提升。
+
+吞吐量同样取决于数据处理能力。StableDB 通过将状态提交与数据持久化分离，有效解决了区块产生后的存储瓶颈问题。最后，其高性能 RPC 层摒弃了单体架构，采用了分流路径设计：由轻量级、专业化的节点服务不同类型的请求，从而避免资源竞争，改善长尾延迟，确保即使在链吞吐量大幅增长时也能保持实时响应。
+
+关键在于，Stable 将自身定位为 L1 而非 L2。其核心理念是：现实世界的商业应用不应为了推出支付功能而等待上游协议的更新。通过对验证者网络、共识策略、执行层、数据层和 RPC 层的全栈控制，团队能够优先确保支付场景所需的核心保障，同时保留 EVM 兼容性，让开发者可以轻松迁移现有代码。最终成果，便是一个兼容 EVM、却完全为支付而优化的 Layer 1 区块链。
+
+Arc
+
+2025 年 8 月 12 日，Circle 宣布其专注于稳定币与支付的 Layer 1 区块链——Arc，将在未来几周内进入私有测试网，并于 2025 年秋季启动公开测试网，目标是在 2026 年上线主网测试版。
+
+Arc 的核心特征在于：它由一个许可型验证者集合（运行 Malachite BFT 共识引擎）运作，提供确定的最终性；其原生 Gas 费使用 USDC 支付；并提供了一个可选的隐私层。
+
+▲ source: Arc Litepaper
+
+Arc 直接集成至 Circle 的整个生态平台——包括 Mint、CCTP、Gateway 和 Wallet——这使得价值能够在 Arc、传统法币支付轨道以及其他区块链之间无缝流转。企业、开发者和消费者将通过 Arc 上的应用进行交易（涵盖支付、外汇、资产代币化等），而资产发行方则可以在 Arc 上铸造资产，并充当支付主管（Paymaster）为其用户赞助 Gas 费。
+
+Arc 使用了名为 Malachite 的共识引擎，并采用许可型的权威证明（Proof-of-Authority）机制，其验证者节点由已知的权威机构担任。
+
+ 
+
+▲ source: Circle
+
+Malachite 是一个拜占庭容错共识引擎，应用程序可嵌入该引擎以在众多独立节点间实现强一致性协议与最终性。
+
+绿色标注的共识库是 Malachite 的核心。其内部的轮次状态机采用 Tendermint 式轮次机制（提议→预投票→预提交→提交）。投票守护器负责聚合投票并追踪法定票数。驱动器随时间推移协调这些轮次，确保即使部分节点延迟或故障时协议仍能持续决策。该共识库具有刻意设计的通用性：以抽象方式处理"数值"，使不同类型应用程序均可接入。
+
+核心模块外围是黄色标注的可靠性及网络基础组件。点对点与八卦协议在节点间传输提案与投票；节点发现机制负责建立维护连接。预写日志在本地持久化存储关键事件，确保节点崩溃重启时仍保持安全性。同步机制具备取值同步与投票同步双路径——滞后节点可通过获取已最终确认的输出结果（数值），或通过补全进行中决策所需的缺失中间投票来实现数据同步。
+
+Arc 提供约 1 秒的确定性最终性——当 ≥2/3 验证者完成确认后，交易即刻不可逆地最终确认（无重组风险）；以太坊权益证明及其二层解决方案约 12 分钟后达成经济最终性，经历初始可能重组的概率性阶段后过渡至“经济最终”状态；比特币则呈现概率最终性——随着时间累积确认数，约 1 小时后达到“经济安全”状态，但数学层面永远无法实现 100% 最终性。
+
+▲ source: Arc Litepaper
+
+当 ≥⅔ 验证者确认交易后，交易即从“未确认”状态转变为 100% 最终确定（不存在“重组概率尾迹”）。这一特性符合《金融市场基础设施原则》（PFMI）中关于明确最终结算的第 8 号原则。
+
+性能表现方面，Arc 在 20 个地理分布式验证节点上实现了约 3000 TPS 的吞吐量及低于 350 毫秒的最终确认延迟；在 4 个地理分布式验证节点上更实现了超过 10,000 TPS 的吞吐量及低于 100 毫秒的最终确认延迟。
+
+▲ source: Arc Litepaper
+
+▲ source: Arc Litepaper
+
+针对 Malachite 共识引擎的升级计划包括：支持多提案者机制（预计可提升约 10 倍吞吐量），以及可选的较低容错配置（预计可降低约 30% 延迟）。
+
+同时，Arc 推出了面向合规支付的可选保密传输功能：交易金额被隐藏而地址保持可见，授权方可通过选择性披露的“查看密钥”获取交易数值。其目标是实现“可审计的隐私保护”—适用于既需要链上保密性，又不能牺牲合规性、报告义务或争议解决机制的银行与企业。
+
+Arc 的设计选择着眼于机构所需的可预测性及与 Circle 技术栈的深度整合—但这些优势伴随相应权衡：许可制 PoA 式验证节点集将治理与审查权集中于已知机构，且 BFT 系统在出现网络分区或验证节点故障时倾向于停止运行而非分叉。批评者指出 Arc 更像一个面向银行的围墙花园或联盟链，而非具备可信中立性的公共网络。
+
+但这种权衡对于企业需求而言清晰且合理：银行、支付服务商和金融科技公司更看重确定性最终结果与可审计性，而非极致的去中心化与无许可特性。长期来看，Circle 已透露将向许可权益证明演进，在罚没与轮换规则下向合格质押者开放参与。
+
+以 USDC 作为原生燃料货币，配备机构级询价/外汇引擎，具备亚秒级确定性最终性，支持可选隐私功能，并与 Circle 全栈产品深度整合，Arc 将企业真正需要的基础能力封装为完整的支付轨道。
+
+Stablecoin Rail Wars
+
+Plasma、Stable 和 Arc 并非一场简单竞赛的三位参赛者；它们是通往同一愿景的不同路径——让美元能像信息一样自由流动。综观全局，真正的竞争焦点浮出水面：发行方阵营（USDT 对 USDC）、现有链上的分销护城河，以及正在重塑企业级市场预期的许可型轨道。
+
+发行方阵营：USDT 对 USDC
+
+我们同时目睹两场赛跑：公链之间的竞争，以及发行方之间的较量。Plasma 和 Stable 明显是 USDT 优先，而 Arc 则属于 Circle（USDC 发行方）。随着 PayPal Ventures 投资 Stable，更多发行方正在涌入——各自争夺分销渠道。在此过程中，发行方将塑造这些稳定币公链的市场进入策略、目标区域、生态系统角色和整体发展方向。
+
+Plasma 和 Stable 或许选择了不同的市场路径和初始目标区域，但它们的最终锚定点都应是 USDT 已占主导地位的市场。下图展示了 2024 年上半年全球 USDT 的流动情况。颜色越深的国家意味着向海外发送的 USDT 越多；黑色箭头标示了最主要的流动走廊。图像揭示了一个轴辐式网络，其中跨越非洲、中东、亚太和拉丁美洲的路线尤为密集。
+
+▲ source: DeFiying gravity? An empirical analysis of cross-border crypto flows—not from Decrypting Crypto
+
+在另一项研究中看到了类似的格局：Tether 的 USDT 在拥有更多新兴市场的地区表现更为强势，而 Circle 的 USDC 则在欧洲和北美更为普及。需要注意的是，该研究仅覆盖了 EVM 链（以太坊、BNB Chain、Optimism、Arbitrum、Base、Linea），并未包含 USDT 使用量巨大的 Tron 网络，因此 USDT 在现实世界中的实际足迹很可能被低估了。
+
+▲ source: Decrypting Crypto: How to Estimate International Stablecoin Flows
+
+除了区域聚焦点不同，发行方的战略选择也在重塑其自身在生态系统中的角色——并反过来影响了稳定币公链的优先事项。从历史上看，Circle 构建了一个更为垂直整合的技术栈（钱包、支付、跨链），而 Tether 则侧重于发行/流动性，并更多地依托生态伙伴。 这种分化如今为聚焦 USDT 的公链（例如 Stable 和 Plasma）创造了空间，使其能够自行构建更多价值链环节。与此同时，为了进行多链扩张，USDT0 的设计旨在统一 USDT 的流动性。
+
+与此同时，Circle 的生态建设一直是审慎且累积式的：它从 USDC 的发行和治理起步，随后通过解散 Centre 并推出可编程钱包来收回控制权。接下来是 CCTP，这将其从依赖跨链桥转变为采用原生的销毁-铸造转移方式，从而统一了跨链的 USDC 流动性。通过推出 Circle Payments Network，Circle 将链上价值与链下商业连接起来。而 Arc 则是这盘棋局的最新一步。flank 这些核心支柱的是面向发行方和开发者的服务——Mint、Contracts、Gateway 以及 Paymaster（以 USDC 计价的 Gas 费）——这些服务减少了对第三方的依赖，并 tighten 了产品与分销之间的反馈闭环。
+
+▲ source: Circle
+
+现有公链的应对策略
+
+稳定币交易量的竞争向来激烈。市场格局的动态变迁清晰可见：早期由以太坊主导，随后波场强势崛起，2024 年索拉纳异军突起，近期 Base 链也势头渐起。没有任何一条链能长期稳坐头把交椅——即便是最深的护城河也会面临月度份额的争夺。随着专精于稳定币的公链入场，竞争必将白热化，但现有巨头不会轻易让出市场份额；可以预见，它们将在手续费、最终性、钱包用户体验以及法币兑换通道集成等方面采取激进策略，以捍卫并扩大其稳定币交易量。
+
+▲ source: Stablewatch
+
+各主要公链已展开行动：
+
+BNB Chain 在 2024 年第三季度末启动了“零手续费狂欢”活动，并与多家钱包、中心化交易所和桥接器合作，全面免除用户的 USDT 和 USDC 转账手续费，该活动已延长至 2025 年 8 月 31 日。
+
+波场方向类似，其治理机构已批准降低网络“能量”单价，并计划在 2024 年第四季度推出“免 Gas 费”稳定币转账方案，进一步巩固其作为低成本稳定币结算层的定位。
+
+TON 则另辟蹊径，通过 Telegram界面将复杂性完全隐藏。用户向联系人转账 USDT 时体验为“零手续费”（实际成本由 Telegram 钱包在其闭环系统内承担或吸收），仅当提现至开放公链时才需支付正常的网络费用。
+
+以太坊 L2 的叙事核心是结构性升级而非短期促销。Dencun 升级引入的 Blob 空间大幅降低了 Rollup 的数据可用性成本，使它们能够将节省的费用传导给用户。自 2024 年 3 月起，各大 L2 的手续费已显著下降。
+
+Permissioned Rails
+
+与公链并行的一条赛道正在加速发展：为银行、市场基础设施和大型企业构建的许可型账本。
+
+其中最受关注的新成员是 Google Cloud Universal Ledger——一个许可制的 Layer 1。谷歌表示其目标应用于批发支付和资产代币化。尽管公开细节有限，但其负责人将其定位为中立、银行级的链，且 CME 集团已完成初步集成测试。GCUL 是一条非 EVM 链，由谷歌自主开发，运行于谷歌云基础设施之上，使用 Python 智能合约。它远非公有链，其模型基于对谷歌及受监管节点的信任。
+
+▲ source: https://www.linkedin.com/posts/rich-widmann-a816a54b_all-this-talk-of-layer-1-blockchains-has-activity-7366124738848415744-7idA
+
+如果说 GCUL 是单一的云托管轨道，那么 Canton Network 则采用了"网络的网络"模式。它围绕 Digital Asset的Daml 智能合约栈构建，连接了各自独立治理的应用，使资产、数据和现金能在不同领域间同步，同时具备细粒度的隐私和合规控制。其参与者名单涵盖众多银行、交易所和市场运营商。
+
+HSBC Orion（汇丰数字债券平台）自 2023 年已上线，并承办了欧洲投资银行首只英镑计价的数字债券——在卢森堡 DLT 框架下，通过私有链和公有链结合的方式发行了 5000 万英镑。
+
+在支付方面，JPM Coin 自 2020 年起为机构提供价值转移服务，支持在摩根大通运营的轨道上进行可编程的日内现金流动。2024 年底，该行将其区块链和代币化产品线重组为 Kinexys。
+
+这些努力贯穿始终的核心是务实主义：保留监管护栏和清晰的治理结构，同时借鉴公链设计的精华。无论是通过云服务（GCUL）、互操作性协议（Canton）、产品化发行平台（Orion）还是银行运营的支付轨道（JPM Coin/Kinexys）来实现，许可型账本都汇聚于同一个承诺：在机构级控制下，实现更快、可审计的结算。
+
+结论
+
+稳定币已跨越了从加密小众领域到支付网络规模的门槛，随之而来的经济学影响是深远的：当转移一美元的成本趋近于零时，靠资金转移来收费的利润空间便消失了。市场的利润中心转向了围绕稳定币转移所能提供的价值。
+
+稳定币发行方与公链之间的关系，正日益演变为一场关于谁捕获储备金收益的经济拉锯战。正如我们在 Hyperliquid 的 USDH 案例中看到的，其稳定币存款每年产生约 2 亿美元的国债收益，这些收益流向了 Circle，而非其自身生态。通过发行 USDH 并采纳 Native Markets 的 50/50 分成模式——一半用于通过援助基金回购 HYPE 代币，一半用于生态增长——Hyperliquid 将这部分收入“内部化”了。这可能是超越“稳定币公链”的另一个发展方向，即现有网络通过发行自己的稳定币来捕获价值。可持续的模式将是发行方和公链共享经济利益的生态系统。
+
+展望未来，可审计的隐私支付将逐渐成为薪资发放、财资管理和跨境资金流的标准配置——它并非通过打造一条“完全匿名的隐私链”来实现，而是通过在交易中隐藏具体金额，同时保持交易对手方地址可见并可被审计来实现。Stable、Plasma 和 Arc 都采用了这一模式：为企业提供友好的隐私保护与选择性披露功能、合规接口以及可预测的结算体验，从而实现“该保密时隐匿，该透明时可查”。
+
+我们将看到稳定币/支付公链推出更多针对企业需求定制的功能。Stable 的“保障性区块空间”就是一个典型例子：这是一个预留容量的通道，能确保薪资、财资和跨境支付即使在流量高峰时也能以稳定的延迟和成本完成清算。这就像是云服务的预留实例，但应用于链上结算。
+
+随着下一代稳定币/支付公链的出现，这将为应用程序解锁更多的机会。我们已经看到 DeFi 在 Plasma 上的强劲势头，以及像 Stable Pay 和 Plasma One 这样的面向消费者的前端，但更大的浪潮还在前方：数字银行和支付应用、智能代理钱包、二维码支付工具、链上信贷、风险分级，以及一类新型的生息稳定币和围绕它们构建的金融产品。
+
+让美元能像信息一样自由流动的时代，正在到来。
+
+Sources
+
+https://www.visaonchainanalytics.com/transactions
+
+https://app.stablewatch.io/blog/stablecoin-chains
+
+https://x.com/justinsuntron/status/1961310821541458034
+
+https://research.kaiko.com/insights/usdc-outpaces-rivals
+
+The Future of Finance Belongs to Stablechains
+
+The Infrastructure Revolution: Gas-Free USDT Transfers and the Future of Digital Payments
+
+https://reports.artemisanalytics.com/stablecoins/artemis-stablecoin-payments-from-the-ground-up-2025.pdf
+
+https://docs.stable.xyz/
+
+https://docs.stable.xyz/en/introduction/technical-roadmap
+
+https://docs.stable.xyz/en/architecture/usdt-specific-features/overview
+
+https://docs.usdt0.to/
+
+How Stable Powers The Real-World Wallet Stack
+
+: : Stable: A Digital Nation of USDT, by USDT, for USDT
+
+https://dune.com/layerzero/layerzero?OFT+Analyzer+OFT+Name_e3f7ef=USDT0-USDT0
+
+https://defillama.com/protocol/usdt0
+
+https://layerzeroscan.com/oft/USDT0/USDT0
+
+: : [Issue] How Stable Can Be the Next Growth Catalyst of Tether
+
+DeFiying gravity? An empirical analysis of cross-border Bitcoin, Ether and stablecoin flows
+
+Rich Widmann’s post: https://www.linkedin.com/posts/rich-widmann-a816a54b_all-this-talk-of-layer-1-blockchains-has-activity-7366124738848415744-7idA/
+
+https://cloud.google.com/startup/beyond-stablecoins?hl=en
+
+https://www.ccn.com/news/crypto/gcul-google-layer-1-payments-tokenization-settlement-everything-to-know
+
+https://www.cmegroup.com/media-room/press-releases/2025/3/25/cme_group_will_introducetokenizationtechnologytoenhancecapitalma.html
+
+https://www.plasma.to/faq
+
+0xResearch Plasma interview: https://www.youtube.com/watch?v=8Zd_MTSFojQ
+
+Bitfinex Plasma interview: https://www.youtube.com/watch?v=xIpw_ODiMkc
+
+Plasma: The Stablecoin Singularity: https://x.com/Kairos_Res/status/1932453898402292171
+
+https://gasfeesnow.com/
+
+https://testnet.plasmascan.to/
+
+Plasma MiCA whitepaper: https://drive.google.com/file/d/1kw2CfXp0SLPGkitm6v814vmTtWOQTYBw/view
+
+https://x.com/Tiger_Research_/status/1967950793392394457
+
+https://x.com/PineAnalytics/status/1968074503973429388
+
+https://x.com/rongplace/status/1968025055985606704
+
+https://dune.com/asxn_research/plasma-vault-deposits
+
+https://www.plasma.to/insights/introducing-plasma-one-the-one-app-for-your-money
+
+https://assets.dlnews.com/dlresearch/DL_Research_Report_Plasma_Redefining_Stablecoin_Settlement_v3.pdf
+
+https://www.arc.network/
+
+https://6778953.fs1.hubspotusercontent-na1.net/hubfs/6778953/Arc Litepaper - 2025.pdf
+
+https://x.com/ConorRyder/status/1975567685086744841
+
+https://x.com/i/spaces/1zqKVdndgMpJB
+
+https://github.com/circlefin/malachite/blob/main/ARCHITECTU

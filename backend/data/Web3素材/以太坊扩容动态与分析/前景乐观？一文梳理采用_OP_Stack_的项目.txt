@@ -1,0 +1,194 @@
+标题: 前景乐观？一文梳理采用 OP Stack 的项目
+链接: https://www.chaincatcher.com/article/2095813
+发布时间: 2023-07-01
+
+==================================================
+
+撰文：LeftOfCenter，律动BlockBeats
+
+ 
+
+BNB Chain 推出了自己的二层链，并于 6 月 19 日正式启动了 Layer 2 测试网「opBNB」，有了二层扩容链的支持，BNB Chain 可大大提升交易速度，并将转账 gas 成本降低至 0.005 美元，大大增强了 BNB Chain 已然很强大的处理性能。
+
+有意思的是，这个名为「opBNB」的应用链基于 OP Stack 构建，（确切地说是基于 OP Stack 的第一个正式版本 Bedrock 构建），要知道 OP Stack 是以太坊生态的二层扩容框架，而 BNB Chain 则是由 Binance 推出的智能合约公链，某种程度上两者属于竞争关系，那么，是什么原因促使 BNB Chain 积极采用以太坊的开发框架 OP Stack 打造自己的链呢？
+
+事实上，L2 并非以太坊独有的需求，随着 GameFi 等交易量的激增，即使 BNB Chain 这种高性能公链也面临网络拥堵和 gas 费高的难题，原来的设计和架构已经无法满足新的可扩展需求的情况下，opBNB 应运而生。
+
+opBNB 是近期加入 OP 超级链中的一员，但并不是唯一一个，事实上，我们陆续看到多个知名项目加入 OP Chain 的阵营，除了自行研发的 Optimism 区块链（现已更名为 OP Mainnet），还有 Coinbase 开发的 Base 链，Worldcoin(OpenAI CEO 的加密项目) 旗下的生态钱包 World App，由 Paradigm 投资的 NFT 交易市场 Zora，以及顶级风投 a16z 推出用 Rust 编写的客户端 Magi，共同打造超级链的宏大叙事。
+
+而这些项目本身就坐拥海量的用户、优质资源和众多的合作伙伴，其入局必然会为 OP 生态吸引更多的开发者、应用和用户，并最终产生现金流，可以说，这种由巨头支持的「一带多」模式将成为 Optimism 早期生态扩展的主要着力点。
+
+以 NFT 平台 Zora 为例，在启动自有应用链 Zora Network 的同时，也将包括 Sound.XYZ、Rainbow Wallet 和 PleasrDAO 在内的 35 个合作伙伴一并带入了 Optimism 超级链中，随之而来的还有 13 万用户，而由 OpenAI CEO 发起的 Worldcoin 在采用 OP Stack 的同时则可带来 170 万名用户量，Worldcoin 核心开发者 Tiago Sada 告诉区块律动，「目前 Worldcoin 处于迁移至超级链的第一阶段，World App 账户正往 Optimism rollup 主网进行迁移。」
+
+可以说，Optimism 曾经的叙事，已逐步落地，开始坍塌为现实。
+
+虽然还未实现最终愿景，但这回应用链的夏天真的来了。
+
+ 
+
+OP Stack 进展
+
+ 
+
+技术层面上，Optimism 的进展体现在它切实地为用户节约了大量链上费用。
+
+数据显示，自从 OP Mainnet 发布以来，已经大规模降低了以太坊的使用费，可以压缩至 90% 以下。相对于 Arbitrum One，在早期 OP Mainnet 节省的交易费用更多，后续双方的技术升级将压缩或进一步拉大费用的差距。
+
+此外，今年 6 月 7 日完成主网 Bedrock 升级后，费用降低约 50%，并缩短了存款时间。平均每笔交易 Gas 费用下降了大约 75%，使 Optimism 主网成为 Token 兑换中最便宜的以太坊 L2 网络。Bedrock 让 Optimism 更加接近「超级链」。
+
+Optimism Bedrock 是模组化网络的架构，也是 OP Stack 的第一个实现，它采用以太坊虚拟机（EVM）作为执行层，与 EVM 等效，并在结算层上使用 Cannon 作为其交互式故障证明。
+
+Bedrock 的升级也让 Optimism 整体上更加灵活及模组化，如果未来以太坊通过 EIP-4844，Optimism 还能同时引入新的交易类型，再次大幅降低手续费。
+
+Optimism 正靠 OP Stack 逐渐站稳脚跟，这不仅体现在其技术进展上，也可从越来越多的项目方加入 OP Stack 阵营一窥一二。
+
+除了最初加入的 Coinbase（基于 OP Stack 推出了自己的 L2——Base），越来越多的项目方纷纷加入超级链的阵容，采用 OP Stack 启动自己的应用链，这包括顶级风投 a16z 开发基于 OP Stack 组件的 Rollup 客户端，ChatGPT 创始人 Sam Altman 打造的 Worldcoin 也将从 Polygon 迁移至 Optimism 上，Zora 启动了面向 NFT 创作者、品牌方和藏家的二层 NFT 铸造平台 Zora Network，并带来了 35 个合作伙伴的加盟，甚至像 BNBCHAIN 这样的公链也采用 OP Stack 构建了自己的应用链 opBNB。
+
+ 
+
+采用 OP Stack 的项目方有哪些？
+
+ 
+
+OP Stack 主打一键发链，但并非目前市面上唯一可选项，实际上，像 Worldcoin、Coinbase 和 BNB Chain 此前都有考虑过打造自己的公链或者采用其他框架来构建二层链，然而，最终无一都选择了 OP Stack，这背后的原因是什么？此外，基于 OP Stack 的应用链对于各个项目又有什么样的战略意义呢？
+
+ 
+
+Zora及其 35 个生态合作伙伴
+
+ 
+
+Zora Network 基于 OP Stack 发行了一个二层 NFT 铸造平台，面向 NFT 创作者、品牌方和藏家，提供一系列NFT 创作者工具，并可将铸币成本降低 3 美金以下。
+
+围绕创作者和藏家打造最佳的用户体验，Zora 将提供速度更快、成本更低以及体验更好的链上体验。
+
+正如 Zora Engineering 发布推文所言，「一个有趣的事实是，『桥接』至 L2+『铸造』两步操作的费用加起来都比在主网上单次铸造费用少。」
+
+Zora Network 将与 Zora 市场目前已有的基础设施实现无缝集成。这意味着目前平台已有的艺术家、品牌方和藏家用户将无缝加入至新的二层网络中，包括音乐 NFT 平台 Sound.XYZ、钱包应用 Rainbow Wallet 、Web 3.0 创新孵化器 Seed Club 和 PleasrDAO 等在内的 35 个 Web3 项目方实体和目前已有的 13 万用户。
+
+「采用 OP Stack 开发应用链，希望以此最大限度地降低创作者成本，并让 Zora 成为链上媒体和文化蓬勃发展的地方。」
+
+为了纪念此次发布，Zora 发行了名为 Energy 的开放版 NFT，粉丝可以在接下来的 数 10 天内铸造。
+
+数据显示，目前为止，Zora Network 自从 21 日启动以来，其桥接地址突破 38,012，链上 TVL 达 375ETH，约合 70 万美金。
+
+ 
+BNB Chain 应用链 opBNB
+
+ 
+
+L2 并非以太坊的专利，有了 OP Stack，新公链也可加入以太坊 L2 的战局，比如基于 OP Stack 构建的二层应用链 opBNB。
+
+6 月 19 日，BNB Chain 启动基于 Optimism OP Stack 的 Layer 2 测试网（预计 2023 Q3 启动主网），通过采用 OP Stack Rollup，opBNB 可将计算和状态存储移至链下，从而缓解拥堵并降低交易成本。
+
+opBNB 可将处理速度进一步提升，其性能将优于 BNB Chain。
+
+根据官方描述，opBNB 区块时间为 1 秒，转账 Gas 费低至 0.005 美元，每秒处理的交易量（TPS）超过 4000，与之对比，目前 1 层 BNB Smart Chain 处理速度相比为每秒 2,000 笔交易），每笔交易的平均成本约为 0.109 美元，几乎是 BNB Chain 主网速度的两倍，成本也大幅降低。
+
+opBNB 是一个基于 OP Stack 构建的 BSC 上的二层网络（Layer2），与 Optimism Rollup 一样，opBNB 通过链下计算交易数据并打包，统一提交给 Layer1 来提升网络性能，最终实现高 TPS、低 Gas 费用和与 Layer1 一致的安全性。
+
+那么，opBNB 为何采用 OP Stack 构建自己的应用链呢？
+
+事实上，L2 并非以太坊的独有需求，随着 GameFi 等交易量的激增，即使是 BNB Chain 这种性能更高的公链也面临网络拥堵和 gas 费高的难题，原来的设计和架构已经无法满足新的可扩展需求的情况下，opBNB 应运而生。
+
+而早在去年 9 月，BNB Chain 就曾推出过 zkBNB 测试网（即使用零知识证明的的第 2 层网络），然而由于 zkBNB 无法兼容 EVM（不兼容 EVM 意味着无法与以太坊上的应用程序交互），这才让 BNB Chain 转而开发新的 Layer 2 方案「opBNB」。
+
+opBNB 可为 BNB 公链生态引入了改进的数据可用性、批量交易和高达 100M 的 Gas 限制。同时，EVM 兼容的 OP Stack，还可以简化将以太坊虚拟机 (EVM) 代码从以太坊迁移到 BNB 链的流程，让开发者更快更轻松地创建开放的生态系统，以此扩大用户群。
+
+和 Optimism 以及 Coinbase 的二层扩容方案 Base 不同，opBNB 建立在 BSC（而非以太坊）之上，BSC 的性能本身就优于以太坊，而 opBNB 则会将性能进一步提升，不仅超过 BSC，甚至也优于 Optimism 等扩容方案。
+
+最重要的是，BNB Chain 采用 OP Stack 构建二层应用链具有战略层面的意义。
+
+对于公链 BNB Chain 来说，采用 OP Stack 构建应用链不仅可享受一层以太坊带来的高安全性，同时，仍可用 BNB 作为 Gas 费支付代币，这意味着，随着未来涌现更多用例，可极大拓宽 BNB 的应用场景，这些收益都可被 BNB 所捕获，长远来说，BNB Chain 甚至成为以太坊不断发展的 L2 生态系统的有力竞争对手。
+
+ 
+
+由 Coinbase 开发并孵化的 Base
+
+ 
+
+于今年 2 月上线的 Base (@BuildOnBase) 是最早采用 OP Stack 启动的应用链之一，它由 Coinbase 孵化，是除了 Optimism（团队自有项目）之外最早加入 Optimism 超级链生态的应用链。
+
+此外，Base 开发团队也是 OP Stack 代码库核心贡献者，并早在之前就一起深度参与和推进 EIP-4844。可以说，Base 团队是 OP Stack 研究和开发的最大助力。
+
+主打金融服务的应用链 Base，具有安全、低成本、开发者友好和易于部署 dApp 等特点，那么，作为美国最大且合规的中心化加密交易所，Coinbase 为何要选择开发 Layer2 网络 Base 呢？
+
+在当前阶段开发 Base 这样一条应用链符合 Coinbase 未来路线图。
+
+事实上，在前一个阶段性目标「开发和投资大量去中心化应用用，为用户提供方便的应用层访问加密货币」逐渐成型后，是时候实践 Coinbase 的最终目标「最终打造一个全球开放式金融系统，重塑现在的金融体系」了。
+
+然而，打造开放式金融系统需要公链及其生态的支持。此前，Coinbase 也曾有打造自有公链的想法，但基于成本、难度、监管以及战略层的考虑，最终都放弃了。
+
+选择 OP Stack 构建 Base，不仅可复用已有的 Optimism 开发成果，还可「一键发链」，其模块化框架支持高度开放性和可组合，包括链的执行层（选择哪种虚拟机），证明方式（欺诈证明还是 ZK），数据可用性 DA 层，结算层之类的都是可选的，真正的模块化乐高方式。
+
+最重要的是，成为 OP Chain，意味着 Coinbase 加入以太坊阵容，未来可承接以太坊的流量，此外，Base 也将成为「超级链」的一员，不仅可和生态中其他 OP Chain 互换资源，同时也为这个未来可能达到互联网级别规模的「超级链」系统做出贡献。加上 Coinbase 本身已有的用户基础（2022 年 Q3 Coinbase 有近 1.1 亿用户数和超过 800 万的月交易用户），将目前客户无缝接入 Base 承载的金融服务协议，并以 Base 作为入口，跨越至以太坊 L1、其他 L2 以及其他 L1 生态系统中，Base 未来成功概率大大提高。
+
+凭借 Coinbase 背后强大的资源，早在上线阶段，Base 上就接近 60 个项目作为其生态伙伴加入，其中包括 Chainlink、Nansen、Dune Analytics、The Graph 等基础设施和工具，也有原先部署在以太坊的知名项目，如 Sushiswap、Balancer、PoolTogether。
+
+按照发展计划，Base 未来并不直接承载 C 端用户，而是引入更多去中心化应用为 C 端用户提供服务，为此，自启动以来，Base 已经联合 Upside DAO 、Developer DAO、GenTwo 、thirdweb、QuickNode、谷歌和 Blockdaemon 等多个开发者社区和组织在世界各地举办多场黑客松和开发者竞赛等活动，以吸引更多的开发者。
+
+ 
+
+Worldcoin 及其链上身份系统
+
+ 
+
+今年 5 月，Worldcoin 基金会（Worldcoin Foundation）和 Tools for Humanity (TFH) 早期协议贡献者宣布支持 Optimism Collective，共同构建基于 OP Stack 的可扩展区块链生态系统。
+
+作为进军 Optimism Collective 的第一步，Worldcoin 旗下去中心化隐私身份协议 World ID 将上线 OP 主网，其承载 Worldcoin 的原生钱包 World App 也将于后续迁移到 OP 主网上。
+
+事实上，早在 2020 年，Worldcoin 就曾自行研发并推出过一款仅针对简单支付的 Optimistic Rollup 应用链 Hubble，并推出了 World App 测试版。不过发布后，团队发现测试结果不甚理想，用户需求不止于简单的支付功能，这远远超过了 Hubble 的承载能力，后迁移至 Polygon PoS。
+
+如今，Worldcoin 转而采用 OP Stack 重新构建应用链。不过，此次双方合作的重点将围绕链上身份系统构建。
+
+ 
+
+对于 Optimism 来说，一个链上去中心化身份系统是实现其经济自增长的关键，不仅可解锁民主治理和创新，还可以使个体更好地控制自己的财务，并按照自己的方式参与全球经济。
+
+为此，Optimism 部署了身份原语 AttestationStation，这个带有实验性质的身份系统允许任何人对其他地址进行任意证明，从而可为一个特定链上地址分配一个信任分数，衡量一个该地址的真实社交关系（影响力）。
+
+对于 Worldcoin 而言，身份系统同样重要，既然要向全球 79 亿人免费发放数字货币，实现财富的公平分配，那就需要一种方法用来确定用户的身份，防止同一人以不同身份多次领取代币。为此，团队开发了 World ID，作为 Worldcoin 底层身份协议，它可以保证每人只能以瞳孔注册一个账户。另外，团队还开发了一套生物识别设备，通过扫描虹膜来验证一个人的独特性，同时通过零知识证明确保被验证者的隐私。
+
+目前 Worldcoin 拥有超过 160 万测试版注册用户和超过 500,000 名每月活跃 World App 用户，这意味着加入超级链生态的 Worldcoin 将为 OP 生态带来巨量用户。长远来看，考虑到 Worldcoin 在身份系统上的研发和投入在业内均属领先地位，这可增强 Optimism 生态系统的关键组成部分「公民之家」（OP Citizens' House）的治理能力，并推进链上声誉系统 AttestationStation的进展，最终扩展 Optimism 网络中的 Web3 身份系统，并为去中心化治理奠定基础。
+
+Worldcoin 团队暂未公布其应用链的开发进度，不过，推特用户 Spreek 发布推文 发现有人在 Optimism 网络上部署了大量 gnosis safes 账号，据统计，总共大约 30 万 gnosis safes 账号上在 Optimism 网络上部署，其中每个账号产生了一周内产生了大约 1 万-1.5 万笔交易。Worldcoin 核心开发者 Tiago Sada 认领了这一「成果」，并告诉区块律动，「这些 Safe 合约操作与 World App 账户正往 Optimism rollup 主网迁移有关，目前 Worldcoin 处于迁移至超级链的第一阶段。」
+
+ 
+
+a16z 推出的 Rollup 客户端 Magi
+
+ 
+
+Magi 是今年 4 月由 a16z Crypto 推出的二层 Rollup 客户端解决方案，它采用 Rust 语言编写，基于 OP Stack 创建，在以太坊的传统执行/共识拆分中充当共识客户端，向执行客户端提供新区块以推进链上交易。Magi 执行与参考实现（op-node）具有相同的核心功能，并与执行节点（如 op-geth）一起工作以同步到任何 OP Stack 链。
+
+Magi 的目标是成为一个独立开发的 op-node 直接替代品，以提升 Rollup 的客户端多样性。
+
+A16z 希望构建一个基于 Rust 的新客户端将鼓励整个 OP 堆栈更加安全和活跃，并为生态系统带来更多贡献者。
+
+作为加密领域最知名的投资者之一，A16z 拥有超过 76 亿美元（折合人民币约 500 亿元）的资金用于该领域的投资（截止于去年 5 月）。作为以太坊扩容项目 Optimism 的投资者之一，A16z Crypto 此次主导在 OP Stack 上开发 Magi 客户端，不仅是投资者也是开发者，这也是 a16z 迈进 Optimism Collective 的第一步。
+
+ 
+
+链上游戏：OPCraft，Keystone 和 Loot
+
+ 
+
+链上游戏通常有高频互动的场景，因此，对速度和成本的要求极高，这意味着，链上游戏需要有定制化的区块链基础设施，众多的扩容方案都推出了针对链上游戏的扩容方案。
+
+OP Stack 是链上游戏最受欢迎的基建之一，其中，最具代表性的链上游戏实验之一 OPcraft 就建立在 Op stack 上。
+
+OPCraft 是一个链上虚拟世界，在这个宇宙中，每一条河流、每一片草叶和山脉顶部的雪地都存在于链上，其中发生的每一个动作都是一笔以太坊上的交易。和大部分像素风游戏一样，你可以在 OPCraft 上探索程序生成的景观、开采矿石、放置材料和制作新物品。玩家可以独自或与其他玩家一起协作建造雄伟的建筑、竖立纪念碑、改造土地。
+
+基于 OP Stack 构建的 OPCraft，可只需通过简单调试就可获得更高的吞吐量和更短的出块时间。
+
+Keystone 则是另一条用 OP Stack 制作的链，它使用自定义预编译将游戏 tick 和 ECS 内置于链中，可将链上游戏速度提高 100 倍，并提供更加强大的游戏体验。
+
+此外，Loot 生态项目 Adventure Gold DAO 于近日宣布将采用 OP Stack 构建 Loot 社区专用的新以太坊 L2 网络 Loot Chain，以降低 Gas 费，并用自己的原生代币 AGLD 用作 Gas Token。该链还使用 Polygon 作为数据可用性层，从而显著降低了 Loot Chain 的构建、部署和运营成本。
+
+ 
+
+结语
+
+ 
+
+「一键发链+模块化」并非什么新东西，然而，依傍以太坊生态的 OP Stack，却靠其高度开放的自由度和可组合性吸引了大量生态伙伴，毕竟加入了 OP Stack 生态，就意味着可以与以太坊并联共享资源，享受以太坊高度安全性的同时，仍可选择以自己的原生代币作为 Gas token，这样的好事谁又能拒绝呢？

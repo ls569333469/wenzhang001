@@ -1,0 +1,123 @@
+标题: 上周加密市场共发生 16 起公开融资事件，累计融资约 2.55 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2171601
+发布时间: 2025-03-10
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 3 月 3 日- 3月 9 日期间，区块链和加密行业共发生 16 起公开投融资事件，累计融资约 2.55 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和AI赛道。热门项目包括去中心化 人工智能的加密基础设施公司 Validation Cloud、MEV 开发商 FastLane Labs、游戏 AI 代理 iAgent Protocol 、法国加密做市与流动性提供商 Flowdesk。
+
+此外，跨链桥接协议 Across Protocol 通过向投资者出售其 ACX 代币筹集 4100 万美元，以扩展其连接以太坊与二层网络的能力。此轮融资由 Paradigm 领投，Bain Capital Crypto、Coinbase Ventures、Multicoin Capital 以及天使投资人 Sina Habinian 参投。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+Base 已收购 Iron Fish 开发团队，不包含任何链或代币
+
+据 The Block 报道，Base 已收购 Iron Fish 开发团队，以加强其在以隐私为重点的区块链解决方案方面的努力。此次收购仅限于团队内部，Base 不会收购 Iron Fish 区块链或其原生代币。
+
+这意味着此次收购将只关注团队的专业知识，而 Iron Fish 项目将保持独立，与 Coinbase 或 Base 无关。
+
+Validation Cloud 完成 1500 万美元 A 轮融资，True Global Ventures 领投
+
+据财富杂志报道，利用人工智能的加密基础设施公司 Validation Cloud 宣布完成 1500 万美元 A 轮融资，True Global Ventures 领投，Cadenza、Blockchain Founders Fund、Side Door Ventures 和 AP Capital 参投，公司在此轮融资中的估值未披露。
+
+据介绍，这是 Validation Cloud 的第三轮融资，自 2017 年成立以来，其融资总额已达到 3080 万美元。Validation Cloud 提供三种主要产品，以支持基于权益证明（PoS）共识机制的区块链。Validation Cloud 的产品包括代币质押功能、将计算机连接到权益证明网络的软件，以及访问由人工智能分析的数据。
+
+去中心化 AI 网络 Fortytwo 完成 230 万美元 Pre-Seed 轮融资，Big Brain Holdings 领投
+
+去中心化 AI 网络 Fortytwo 宣布完成 230 万美元 Pre-Seed 轮融资，Big Brain Holdings 领投，CMT Digital、Escape Velocity Ventures （EV3）、Chorus One、Mentat Group，以及包括 Santiago R Santos、Keone Hon、Paul Taylor 和 Comfy Capital 在内的天使投资人参投。
+
+据 Web3 资产数据平台 RootData 显示，Fortytwo 是一种多代理 AI 协议，旨在释放可扩展、高效的智能，满足全球对 AI 的需求。在这个系统中，节点会相互验证和构建响应，从而形成一种集体智慧，效率更高，准确度可以超越集中式 AI 模型，而成本却只是后者的一小部分。
+
+隐私区块链 Seismic 完成 700 万美元种子轮融资，a16z Crypto 领投
+
+据官方消息，隐私区块链项目 Seismic 宣布完成 700 万美元种子轮融资，a16z Crypto 领投，Polychain、1kx、NGC、dao5 参投，具体估值信息暂未披露，新资金将用于建设私有智能合约平台。
+
+据 Web3 资产数据平台 RootData 显示，Seismic 是一种交互式屏蔽协议，其目标是帮助用户在游戏、交流和社交网络上进行协作。Seismic 的协议作为一组插入任何链的定序器提供。
+
+加密支付平台 Sati 完成 60 万美元 Pre-Seed 轮融资，BitcoinFi Accelerator 等参投
+
+基于 WhatsApp 的加密支付平台 Sati 宣布完成 60 万美元 Pre-Seed 轮融资，BitcoinFi Accelerator、Arcanum Capital、Draper Associates、Boost VC 等参投，新资金将支持其将比特币引入 WhatsApp 即时通讯应用生态，以及基于 USDC 和 USDT 的稳定币跨境交易服务。
+
+DoubleZero Foundation 获 2800 万美元投资，Dragonfly 和 Multicoin Capital 领投
+
+据 CoinDesk 报道，消息人士透露 DoubleZero Foundation 在最新融资中获 2800 万美元投资，估值达 4 亿美元，目前正以 6 亿美元的估值寻求更多投资。本轮融资由 Dragonfly 和 Multicoin Capital 领投。DoubleZero 拒绝对此置评。
+
+DoubleZero 正构建全球私有光纤网络，提升区块链数据传输效率，降低延迟，已向 Solana 验证者开放测试网，并计划扩展至更多公链。该网络整合 Jump Crypto、RockawayX、Latitude 等机构的私有线路。
+
+跨链桥接协议 Across Protocol 完成 4100 万美元代币轮融资，Paradigm 领投
+
+据 The Block 报道，跨链桥接协议 Across Protocol 通过向投资者出售其 ACX 代币筹集 4100 万美元，以扩展其连接以太坊与二层网络的能力。此轮融资由 Paradigm 领投，Bain Capital Crypto、Coinbase Ventures、Multicoin Capital 以及天使投资人 Sina Habinian 参投。
+
+Risk Labs 基金会联合创始人 Hart Lambur 透露，此轮融资分两阶段完成，分别在 2024 年第二季度和第四季度进行。投资者的代币解锁计划包括多个一年锁定期，将持续至 2025 年 11 月。Across Protocol 是一个基于意图的互操作协议，允许用户通过单一请求发起跨链交易。
+
+据 Web3 资产数据平台 RootData 显示，Across 是一种基于 optimistic 的跨链桥接协议，它允许用户几乎即时地在链之间执行交易。这是通过使用乐观预言机、绑定中继器和单面流动性池来实现的。
+
+二、Defi
+
+YZi Labs 宣布投资去中心化 AI 实验室 Tensorplex Labs
+
+据官方消息，YZi Labs 宣布已投资去中心化 AI 实验室 Tensorplex Labs，具体金额暂未披露。
+
+Tensorplex Labs 是一个去中心化的 AI 实验室，使用去中心化技术（如 Tensorplex Dojo、Backprop Finance 等）构建应用程序、基础设施和工具，以增强 AI 开发和用例。
+
+Berachain 生态流动性质押协议 Infrared 完成 1400 万美元 A 轮融资，Framework Ventures 领投
+
+据 CoinDesk 报道，Berachain 生态流动性质押协议 Infrared 已完成由 Framework Ventures 领投的 1400 万美元 A 轮融资。加上此前由 Binance Labs 领投的 225 万美元战略轮融资和 250 万美元种子轮融资，Infrared 目前总融资额达到 1875 万美元。
+
+Infrared 将为 Berachain 的原生代币 BGT 和 BERA 提供流动性质押解决方案。用户质押原生代币获取验证者奖励后，将收到流动性质押代币 iBERA，该代币可在其他 DeFi 协议中产生额外收益。此外，Infrared 也成为 Berachain 基金会孵化器“Build a Bera”支持的首个项目，该孵化器于今年 1 月宣布寻找合作创业项目。
+
+Framework Ventures 联合创始人 Michael Anderson 表示：“我们相信 Infrared 的协议将在更广泛的 Berachain 生态系统中释放大量生产性资本，同时最大化效率和收益。这将使 Berachain 框架上的开发者能够以新方式进行创新。”
+
+据 Web3 资产数据平台 RootData 显示，Infrared Finance 是基于 Berachain 的流动性证明共识机制应用。 该应用程序在三代币架构和 BGT 独特的灵魂绑定元素的背景下重新设计了流动性质押。 该协议通过其基础设施级 PoL 金库和 iBGT 流动质押衍生品，通过 BGT 的社交聚合，为利益相关者实现价值最大化。
+
+MEV 开发商 FastLane Labs 完成 600 万美元融资，Figment Capital 和 DBA 领投
+
+据官方消息，MEV 开发商 FastLane Labs 宣布完成 600 万美元融资，Figment Capital 和 DBA 领投，Coinbase Ventures、Robot Ventures、Hashkey Capital、CHORUS ONE 等参投。新资金将用于在 Monad 上打造全方位流动性质押代币。
+
+据介绍，FastLane Labs 致力于正在 Monad 上构建一个长期的 MEV 生态，让用户、dApps 和质押者都能从中获益。
+
+此前 2023 年 5 月消息，FastLane Labs 完成 230 万美元融资，Multicoin Capital 领投。
+
+三、AI
+
+游戏 AI 代理 iAgent Protocol 完成 300 万美元融资，double jump.tokyo 等参投
+
+游戏 AI 代理 iAgent Protocol 宣布完成 300 万美元融资，日本链游公司 double jump.tokyo、IBC Group、PG Group、Alliance、Cointribune 等参投，新资金将支持其构建链上 AI 代理“基础设施层”，让游戏玩家利用去中心化 GPU 算力来训练自己的 AI 代理并获得代币激励。
+
+四、CeFi
+
+Metaplanet 完成约 8700 万美元融资以增持比特币
+
+据 Metaplanet 公告，公司通过第三方定向增发方式完成第 13、14 系列股票认购权的大规模行权，总计融资约 129.7 亿日元（约 8700 万美元）。
+
+本次融资由 EVO FUND 支持，部分资金已用于提前赎回此前发行的第 7 期普通债券。Metaplanet 计划利用该资金继续增持比特币，以强化其数字资产投资战略
+
+法国加密做市商 Flowdesk 完成 5200 万美元 B 轮追加融资，HV Capital 领投其股权融资
+
+法国加密做市与流动性提供商 Flowdesk 完成 5200 万美元 B 轮追加融资，其中 80% 为股权融资，约 20%（1020 万美元）为债务融资。该轮股权融资由欧洲投资机构 HV Capital 领投，Eurazeo、Cathay Innovation 和 ISAI VC 参投，债务融资部分由贝莱德（BlackRock）管理的基金提供。HV Capital 此次还获得了 Flowdesk 的董事会席位。
+
+Flowdesk 计划利用本轮资金扩展业务，包括推出专门的加密信用业务，并在阿联酋设立办公室。公司联合创始人兼全球 CEO Guilhem Chaumont 表示，债务融资是公司在维持可持续增长的同时，优化资产负债表的战略选择，避免股权稀释。Flowdesk 此前在 2024 年 1 月完成 5000 万美元 B 轮融资，当时估值超过 2.5 亿美元。
+
+Flowdesk 成立于 2020 年，主营业务涵盖市场做市、流动性提供（包括加密 ETF）、OTC 交易、经纪服务及财务管理。
+
+五、其他
+
+Validation Cloud 完成 1500 万美元 A 轮融资，True Global Ventures 领投
+
+据财富杂志报道，利用人工智能的加密基础设施公司 Validation Cloud 宣布完成 1500 万美元 A 轮融资，True Global Ventures 领投，Cadenza、Blockchain Founders Fund、Side Door Ventures 和 AP Capital 参投，公司在此轮融资中的估值未披露。
+
+据介绍，这是 Validation Cloud 的第三轮融资，自 2017 年成立以来，其融资总额已达到 3080 万美元。Validation Cloud 提供三种主要产品，以支持基于权益证明（PoS）共识机制的区块链。Validation Cloud 的产品包括代币质押功能、将计算机连接到权益证明网络的软件，以及访问由人工智能分析的数据。
+
+Mysten Labs 宣布收购游戏开发平台 Parasol
+
+Sui 背后开发公司 Mysten Labs 宣布收购游戏开发平台 Parasol，具体收购金额暂未披露。
+
+Parasol 是一个端到端平台，使游戏开发者能够将区块链基础设施集成到他们的游戏中。

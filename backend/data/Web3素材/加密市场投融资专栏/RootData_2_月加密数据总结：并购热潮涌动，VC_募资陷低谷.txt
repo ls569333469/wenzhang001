@@ -1,0 +1,156 @@
+标题: RootData 2 月加密数据总结：并购热潮涌动，VC 募资陷低谷
+链接: https://www.chaincatcher.com/article/2170651
+发布时间: 2025-03-04
+
+==================================================
+
+整理：谷煜 & 饼干 & Elvin，RootData
+
+2025 年 2 月末， BTC 剧烈下跌触及 78000 美元，较上个月高点（109000 万美元）跌幅超过 29%。加密货币恐惧与贪婪指数已跌破 20，为 2024 年 9 月以来的最低水平，市场处于极度恐惧状态。
+
+在较为临近的春节与圣诞假期结束后，加密投融资市场持续出现回暖现象。2 月份加密领域投融资总融资金额达到 9.5 亿美元，融资数量为 99 起，均环比上升约 18%。本月平均融资金额为 1225.8 万美元，融资金额中位数 475 万美元。
+
+近 2 年加密领域融资趋势
+在本文中，我们将聚焦具体的融资数据、活跃投资者、热搜项目等多个方面，为大家呈现加密市场的变化趋势。
+一、融资数据
+
+本月发生 2 起超过 1 亿美元的融资事件，19 笔融资金融大于 1000 万美元，其中最大金额的是区块链金融服务企业 Figure 完成 2 亿美元融资，Sixth Street 参投。Delta 中性稳定币协议 Ethena 完成 1 亿美元战略融资，Franklin Templeton、F-Prime Capital 参投。其他完成融资的热门项目包括加密资产管理公司 Bitwise 完成 7000 万美元融资，礼品卡加密平台 Raise 完成 6300 万美元融资、Web3 安全工具 Blockaid 完成 5000 万美元融资等。
+
+在融资金额和轮次方面，100-300 万美元是数量占比最多的融资区间（34.2%），种子轮是最热门的融资轮次，共有 23 个项目完成种子轮融资。知名项目包括 RWA 固定收益协议 Mansa Finance（1000 万美元）、机构级链上金融资产管理和托管平台 Surus（800 万美元）、Solana 原生流动再质押协议 Fragmetric（700 万美元）、固定利率借贷协议 Tenor Finance（250 万美元）等。
+
+自 2013 年加密市场并购数据（每月）
+
+另外，2 月份加密市场发生 15 起并购事件，连续 4 个月并购数量超过 10 起，这反映出投融资市场的整体萎靡，使得越来越多项目通过寻求并购实现退出，头部项目也更乐意在合理估值区间通过并购整体来优化产业布局与扩大影响力典型案例包括包括 Phantom 收购 NFT 数据工具 SimpleHash、Coinbase 收购链上广告和归因平台 Spindl、thirdweb 收购 Web3 社交网络 Yup、Forte 收购去中心化加密货币信任平台 Sealance。
+二、活跃投资者
+
+MH Ventures、Framework Ventures 和 Bitscale Capital 是 2 月投资频次最高的风投机构，出手频次都达到 4 次：
+
+MH Ventures ：Shaga（400 万美元）、Imua（500 万美元）、Infinity Ground（200 万美元）、Fluent（800 万美元）
+Framework Ventures ：Plasma（2400 万美元）、Reservoir（1400 万美元）、henlo（300 万美元）、GOAT Gaming（400 万美元）
+Bitscale Capital ：Blum（500 万美元）、partnr（400 万美元）、Fragmetric（700 万美元）、GOAT Gaming（400 万美元）
+
+活跃度紧随其后的是 Zee Prime Capital 、 Haun Ventures 、 No Limit Holdings 、 Big Brain Holdings 等机构，出手次数都达到 3 次。此外， Will Price 、 Raj Gokal 、 Balaji Srinivasan 是 2 月最活跃的 Web3 天使投资人，每个人都投资了至少 3 个项目。
+
+另外值得注意的是，加密风投基金的募资金额持续处于历史低位状态，今年至今尚无基金披露完成募资，去年 11-12 月披露募资的 3 个加密风投基金中也情况各异，例如 Accolade Partners 是为其“Fund of Fund”母基金募资 2 亿美元，Sora Ventures 是为其比特币策略基金募资 1.5 亿美元，只有 Tioga Capital 是为其项目基金募资 4000 万欧元。
+
+尽管如此，新的加密基金仍然在出现。原 Inception Capital 多名高管与投资人（Lucas He、Calvin Du）联合创立了 tmr Ventures，专注于投资与推动现实世界中的加密货币项目。
+
+三、人物动态
+
+RootData 还记录了上万名加密行业知名人员与高管的职业动态，以下是部分值得注意的人物职业动态：
+
+Hsin-Ju C. 不再担任 Fhenix 增长主管，开始担任 Hack VC 合伙人兼平台主管；
+
+Shawn Chong 不再担任  Zerobase 联合创始人、Salus 联合创始人兼首席运营官；
+
+Jack Purdy 不再担任 Messari 销售总监，开始担任 Flipside 销售副总裁；
+
+Brett Li 不再担任 Obol Network 首席增长官，开始担任 Flipside 市场副总裁；
+
+Brian Trunzo 不再担任 Polygon Labs 副总裁兼 BD 主管，开始担任 Mantle Network 首席增长官；
+
+William Fang 不再担任 Sora Ventures 高级助理，开始担任 BIO Protocol 战略主管；
+
+Sina Nader 不再担任 Mysten Labs 战略主管；
+
+另维 不再担任 BNB Chain 生态系统发展总监；
+
+Jim Chang 在其创立的 Catalyst 被收购后，开始担任 LI.FI 产品主管；
+
+Antonio Garcia-Martinez 在其创立的 Spindl 被收购后，开始担任 Coinbase 的 Base 广告总监。
+
+Ben Gray 开始担任 Kraken 首席法务官，Marco Santori 不再担任该职务。
+
+原 FTX 首席运营官 Constance Wang 开始创立新项目 Pacifica。
+
+更多人物信息参见：https://www.rootdata.com/zh/people
+
+四、热门项目
+
+RootData 热度值是由平台搜索量、点击量、用户投票和推特热度指数等数据归一化处理后，加权计算得出。2 月热度值最高的项目包括：
+
+1、Story Protocol
+
+Story Protocol 正在构建 web3 技术，以彻底改变叙事世界的创建方式。其使命是释放一种全新的方式来创建、管理和许可链上 IP ，最终形成一个可以重新混合和组合的“故事乐高积木”生态系统。 Story Protocol 提供了一个简化的框架来管理 IP 开发的整个生命周期，支持来源跟踪、无摩擦许可和收入共享等功能。基于 Story Protocol 构建的应用程序专为所有媒体（散文、图像、游戏、音频等）的创作者而设计，使作家和艺术家能够跟踪其作品的出处，允许任何人做出贡献和重新混合，同时捕捉其贡献的价值。
+
+2、 Kaito
+
+Kaito 是基于加密货币的信息、注意力和资本分发中心，正在建设可互操作的 InfoFi 层，以全新的方式连接创作者、用户和品牌。通过索引社交媒体、治理论坛、研究、新闻、播客、会议记录等数千个来源，并将其与专有搜索算法、语义 LLM 功能和实时分析相结合， Kaito Pro 简化了对加密领域高质量、可操作见解的访问。 Kaito Yaps 利用先进的 AI 算法来提取和解释丰富的信号（例如社交图谱和语义理解）来量化注意力。 Kaito Connect 是由人工智能驱动的 InfoFi 网络，它使市场能够以更公平、更透明、更有效的方式分配注意力和资本，同时奖励所有参与者。
+
+3、Bybit
+
+Bybit 是一家成立于 2018 年 3 月的加密货币交易所，它提供了一个专业的平台，加密交易者可以在这里找到超快速的匹配引擎、出色的客户服务和多语言社区支持。该公司为全球零售和机构客户提供创新的在线现货和衍生品交易服务、挖矿和质押产品、 NFT 市场以及 API 支持，并努力成为新兴数字资产类别最可靠的交易所。
+
+4、 Monad
+
+Monad 正在为下一代去中心化应用程序构建高性能的第 1 层区块链，其使命是通过构建比最接近的竞争对手快 100 倍至 1000 倍的区块链来加速去中心化的破坏性力量，缓解现有区块链的严重瓶颈，并实现更复杂的应用程序和更广泛的采用。
+
+5、Succinct
+
+Succinct 正在构建一个去中心化的证明者网络，以便任何人都可以构建由加密事实（而不是信任）保护的区块链应用程序和基础设施。 Succinct 统一了证明供应链，为使用零知识证明的 rollup 、协处理器和其他应用程序提供了高度可用的证明生成基础设施和一流的定价。
+
+6、 Four . Meme
+
+Four . meme 是 BSC Meme 启动平台，用于在 BSC 链上启动 meme 代币。 Four . meme 是一条简化的低成本途径，可将更多 meme 代币引入世界。
+
+7、 0G
+
+0G 是一个模块化 AI 区块链，具有适用于 AI dapp 的可扩展可编程 DA 层。 其模块化技术将实现链之间的无摩擦互操作性，同时确保安全性，消除碎片并最大限度地提高连接性，以实现失重和开放的元宇宙。
+
+8、 Pi Network
+
+Pi crypto 由 Nicolas Kokkalis 和 Chengdiao Fan 于 2018 年推出，旨在简化加密货币的可访问性，并通过简单的加密挖掘和管理系统向更多人介绍加密货币。 Pi 加密货币在发布时最吸引人的功能是其移动挖矿功能。 使用 Pi 移动应用程序，用户可以在他们的移动设备上挖掘 Pi 币。
+
+9、Safe
+
+Safe 是一个领先的多签钱包提供商和数字资产管理平台。其智能合约钱包使企业能够通过预定义的访问控制方案与多个私钥和其他访问模块来管理资金。
+
+10、time.fun
+
+time . fun 是一个时间代币化平台，允许时间持有者与粉丝建立联系。随着时间持有者为粉丝提供更多价值，他们的时间价值自然会因市场需求而增加。每当有人交易他们的时间时，时间持有者都可以从交易费和赎回中赚取 ETH 。
+
+11、 SoSoValue
+
+SoSoValue 是面向加密货币投资者的一站式金融研究平台，为投资者提供真实、高质量的宏观市场资讯，辅助投资者进行更有效的投资研究。它还提供基于人工智能的分类系统新闻和研究，并将宏观经济数据与加密货币市场连接起来。
+
+12、Infini
+
+Infini 是一个加密货币支付解决方案。借助 Infini 加密卡，用户可以在任何地方进行即时加密付款，同时赚取每日利息。
+
+13、 RedStone
+
+RedStone 是一种跨链数据预言机技术，可提供快速且经济高效的数据访问、完整的历史审计跟踪和有保险支持的去中心化争议机制，在数据提供不准确的情况下为用户提供追索权。 Arweave 区块链项目用于保存数据和跟踪声誉。
+
+14、Super Exchange
+
+Super Exchange 是一个链上交易平台，通过联合曲线统一代币的发行和交易——消除了对流动性提供者的需求，并确保了每个价格下充分的流动性。
+
+15、Berachain
+
+Berachain 是一个基于流动性证明共识构建的高性能 EVM 兼容区块链。 流动性证明是一种新颖的共识机制，旨在协调网络激励，在 Berachain 验证者和项目生态系统之间建立强大的协同作用。 Berachain 的技术建立在 Polaris 之上， Polaris 是一个高性能区块链框架，用于在 CometBFT 共识引擎之上构建与 EVM 兼容的链。
+
+16、MegaETH
+
+MegaETH 正在构建超高吞吐量和低延迟 EVM 兼容的 L2 s ，加速以太坊的可扩展性终局。
+
+17、B3
+
+B3 由 Base / Coinbase 校友和 OG ETH 贡献者团队创建，是一个基于 Base 构建的横向扩展游戏生态系统。其开发公司是 NPC Labs 。
+
+18、 Solayer
+
+Solayer 正在构建 infini SVM 来扩展 Solana ，这是一个硬件加速的 SVM ，通过 SDN 和 RDMA 连接的多执行集群架构无限扩展，在保持原子状态的同时实现100 Gbps .
+
+19、Opensea
+
+OpenSea 是一个知名的 NFT 市场，用于发现、收集和销售 NFT 。
+
+20、Fragmetric
+
+Fragmetric 是 Solana 的原生流动再质押协议，其愿景是增强 Solana 生态系统的安全性和经济潜力。通过利用 Solana 的代币扩展， Fragmetric 有效地实现了 NCN 奖励分配。此外， Fragmetric 设计了实用的解决方案，即标准化代币计划，用于在再质押平台中利用各种 LST 。 Fragmetric 的使命是构建一个安全、透明且高效的再质押基础设施，为用户赋能并支持 Solana 再质押生态系统的稳定性。
+
+五、项目动态
+
+在 2 月， RootData 还记录了许多项目的主网上线、近期空投等事件，帮助用户了解市场上重要的项目动态，掌握更早期的 alpha 机会。
+
+由于篇幅所限，以上为部分主网与代币信息。更完整、更及时的数据信息，欢迎访问 RootData 官网（https://www.rootdata.com/zh/）查看了解。

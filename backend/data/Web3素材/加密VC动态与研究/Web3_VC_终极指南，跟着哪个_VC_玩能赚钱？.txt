@@ -1,0 +1,123 @@
+标题: Web3 VC 终极指南，跟着哪个 VC 玩能赚钱？
+链接: https://www.chaincatcher.com/article/2170286
+发布时间: 2025-03-02
+
+==================================================
+
+作者：塞哥（@EvanCrypto17）
+
+废寝忘食 48 小时整理，Web3 玩家必看的数据集合。
+
+在 Web3 这么多 VC 中
+
+哪些 VC 的眼光最好？ 哪些 VC 投的项目收益率最高？ 普通玩家跟哪些 VC 早期一起投入更有性价比？ 撸毛选哪个项目？ 国内外 VC 有哪些？国外 VC 投入的项目潜力更大吗？
+
+等等问题都是我们散户最关心的，也是一级市场玩家们（撸毛党）最想要关注的。
+
+本篇，我们用最直观的数据说话，一个一个的揭露这些问题的答案。
+
+所有数据来自网络披露，我们共筛选了 65 家 VC，其中 23 家国外 VC，34 家国内 VC，8 家交易所旗下 VC。
+
+结果为准，VC 投资最好的结果就是代币上了某个大所。
+
+虽然我们知道某些项目不发币也很赚钱，但这并不是普通玩家可以入的局。
+
+因此我们给出了以下维度作为判断：
+
+数量：
+
+VC 总投资笔数 -项目发币数 -项目上币安数 -项目上 OKX 数 -项目上 Coinbase 数
+
+上所成功率：
+
+项目上币安率 = 上币安数/总投资笔数 -项目上欧易率 = 上 OKX 数/总投资笔数 -项目上 Coinbase 率 = 上 Coinbase 数/总投资笔数
+
+判断条件：
+
+综合得分 = 2 * 上币安率 + 1 *上欧易率 + 1 * 上 Coinbase 率
+
+币安体量最大，所以权重为 2
+
+项目平均回报率（ROI）= 15 * 上币安率 + 10*上欧易率 + 10 * 上 Coinbase 率
+
+ROI 以前期投入上币安平均赚 15 倍，上欧易平均赚 10 倍，上 Coinbase 平均赚 10 倍为收益平均假设，每个项目不同，此处取平均值。
+
+先说结论
+
+按照综合得分的差距，我们将 VC 分为了 T0、T1、T2、T3、T4 五个等级，排名越靠前，VC 眼光越好，我们跟着这些 VC 投入精力做一级市场更有性价比。
+
+VC 等级：
+
+T0 级别 VC 有 YZi Labs（原 Binance Labs）、Continue Captial、IOSG Ventures、Bain Capital
+
+T1 级别 VC 有 Multicoin、Pantera、1Confirmation、Smrti Lab、Zonff Partners
+
+T2 级别 VC 有 Polychain、ParaFi Capital、Dragonfly、红杉中国、Delphi Digital、Electric Capital、Mint Ventures、CoinFund
+
+T3 级别 VC 有 Framework Ventures、NGC Ventures、SNZ Holding、Coinbase Ventures、OKX Ventures 等
+
+T4 级别 VC 有 Animoca Brands、GSR 、Hashkey Capital、Waterdrip、LD Capital 等
+
+地区 VC 投资产出与收益排名：
+
+国外 VC > 交易所旗下 VC > 国内 VC
+
+T0 级别 VC
+
+T0 级别 VC 有 YZi Labs（原 Binance Labs）、Continue Captial、IOSG Ventures、Bain Capital 
+
+综合得分 >1，平均 ROI 在 8 - 12 ，我们投入精力在这些 VC 前期投资的项目，基本上可以拿到大的结果，单币 A7 A8 赚麻的概率很大。
+
+详细数据如图所示
+
+T1 级别 VC
+
+T1 级别 VC 有 Multicoin、Pantera、1Confirmation、Smrti Lab、Zonff Partners 
+
+综合得分在 0.7 - 1 之间，平均 ROI 在 6 - 7.5 之间 ，我们投入精力在这些 VC 前期投资的项目，收益也很不错，A6.5 也是很好的结果
+
+详细数据如图所示
+
+T2 级别 VC
+
+T2 级别 VC 有 Polychain、ParaFi Capital、Dragonfly、红杉中国、Delphi Digital、Electric Capital、Mint Ventures、CoinFund
+
+综合得分 0.5 - 0.7 之间，平均 ROI 在 4 - 6 ，我们投入精力在这些 VC 前期投资的项目，收益有点不稳定，但试试或许有机会
+
+详细数据如图所示
+
+T3 级别 VC
+
+T3 级别 VC 有 Framework Ventures、NGC Ventures、SNZ Holding、Coinbase Ventures、OKX Ventures 等 
+
+综合得分在 0.3 - 0.5，平均 ROI 在 2.5 - 4.5 ，我们投入精力在这些 VC 前期投资的项目，收益有点不稳定，回报率不高
+
+详细数据如图所示
+
+T4 级别 VC
+
+T4 级别 VC 有 Animoca Brands、GSR 、Hashkey Capital、Waterdrip、LD Capital 等 
+
+综合得分在平均 ROI 在 0 - 0.3 ，平均 ROI 在 0 - 2.5，我们投入精力在这些 VC 前期投资的项目，收益不太乐观且上所概率较小
+
+详细数据如图所示
+
+另附彩蛋 
+
+币安、欧易投资的项目上自家的所的概率高一点
+
+Coinbase 投资的项目上“御三家”的概率都差不多
+
+总结一下
+
+从数据出发，我们发现平时听说很厉害的 VC，例如 a16z，Coinbase，Dragonfly，Polychain 等等其实对于我们普通人并没有什么参考价值。
+
+某些项目所打的“ VC 招牌”，也许是“坑”普通玩家的。
+
+实际在我们分析中 T0、T1 这些级别的 VC 所参与的项目才是我们真正应该关注和投入的。
+
+国外 VC 投入的产出要比国内 VC 高，交易所旗下 VC 投资的产出位列二者之间。
+
+当考虑一个项目值不值得前期投入时，我们看看参与的 VC 们对应的都是哪几个等级，综合判断所列出的数据，这对我们打一级市场有很大的参考价值。
+
+再次声明，本文只讨论普通玩家跟着 VC 投入的产出比，依此进行排名。并不涉及 VC 所代表的公司与品牌的综合实力和其他方面！

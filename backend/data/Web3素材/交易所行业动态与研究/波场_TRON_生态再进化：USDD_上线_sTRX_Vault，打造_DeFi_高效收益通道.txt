@@ -1,0 +1,28 @@
+标题: 波场 TRON 生态再进化：USDD 上线 sTRX Vault，打造 DeFi 高效收益通道
+链接: https://www.chaincatcher.com/article/2177316
+发布时间: 2025-04-15
+
+==================================================
+
+4月15日，USDD宣布正式上线sTRX Vault铸币功能，为用户开启高效的DeFi收益新通道。即日起，用户可通过JustLend DAO质押TRX获取收益代币sTRX，并将其存入USDD Vault铸造USDD。完成铸造后，用户参与相应质押活动，即可同时享有JustLend DAO sTRX 质押收益与USDD高达20%年化收益（APY）的双重回报。同期，USDD推出为期30天的TRX Vault铸币优惠活动及USDD x JustLend DAO Taskon联合活动，通过低成本铸币、Gas费补贴及最高20%年化收益等丰富奖励，助力用户在波场生态中实现资产增值最大化。
+
+sTRX Vault：解锁 TRX 质押资产流动性，叠加双重 APY 收益
+
+sTRX是由JustLend DAO发行的收益型代币，代表用户已质押的TRX资产。通过将TRX质押至JustLend DAO，用户可获得sTRX，在保留流动性的同时持续积累约9%的年化质押收益（APY）。此次USDD上线的sTRX Vault功能，允许用户将sTRX作为抵押品铸造USDD，进一步参与质押活动，叠加收益层级：
+
+第一层收益：通过JustLend DAO质押TRX获得sTRX（约9% APY）；
+第二层收益：将sTRX存入USDD Vault铸造USDD后，可质押至合作平台（如JustLend DAO等），享受8%-20%的APY。
+
+sTRX Vault通过灵活释放TRX质押资产的流动性，为用户构建了“一鱼两吃”的高效收益策略，在USDD年化收益稳定在8%时，通过以上方式获得的综合年化收益可达13.17%左右。
+
+限时优惠活动：费率减免 + Gas 补贴 + 高收益质押
+
+为庆祝sTRX Vault上线，并降低用户参与门槛，USDD推出为期30天的TRX Vault铸币优惠活动（2025年4月15日至5月15日），具体福利包括：
+
+稳定费率下调：活动期间，TRX-A、TRX-B、TRX-C的稳定费率统一调整至5%，sTRX的稳定费率降至1%，显著降低铸币成本。
+Gas费补贴：前50位通过TRX或sTRX Vault铸造USDD并维持仓位满7天的用户，将获640 JST的Gas费补贴，鼓励早期参与。
+高收益质押：铸造的USDD可质押于JustLend DAO或合作交易所，享受8%-20% APY，为用户提供稳健回报。
+
+与此同时，USDD携手JustLend DAO推出Taskon联合活动，进一步提升用户参与热情。活动时间为2025年4月15日至5月15日，用户只需在Taskon平台完成指定任务并通过知识问答测试，即可瓜分500 USDD奖励池。这一活动不仅为新手用户提供了低门槛的参与方式，也通过教育性任务帮助用户深入了解USDD和sTRX Vault的运作机制。USDD官方强调，Taskon活动旨在通过奖励机制吸引更多用户体验波场生态的DeFi潜力，同时增强社区的互动与粘性。
+
+USDD通过sTRX Vault铸币功能及限时优惠活动，为波场生态用户提供了低成本、高回报的DeFi参与机会。双重收益机制、优惠费率、Gas费补贴及限时优惠活动的奖励体系，共同构建了全方位的投资生态。无论是追求高收益的资深投资者，还是注重流动性和稳定性的新用户，均可通过这一系列举措，在波场生态中实现资产的稳健增值。

@@ -1,0 +1,7 @@
+标题: 加密货币借记卡公司 Baanx 与 Visa 已合作推出 USDC 稳定币支付卡
+链接: https://www.chaincatcher.com/article/2179559
+发布时间: 2025-05-01
+
+==================================================
+
+ChainCatcher 消息，据 CoinDesk 报道， Baanx 与 Visa 合作推出与自托管钱包绑定的稳定币支付卡，首发支持 Circle 发行的 USDC。该卡“使持卡人可直接从加密钱包消费 USDC”，通过智能合约在授权时将 USDC 余额实时转移至 Baanx，再由其兑换为法币完成支付。Baanx 同时也在与 Mastercard 合作开发绑定 MetaMask 的钱包卡。Baanx 表示：“我们正在赋予人们以自托管、实时方式持有和消费美元稳定币的能力——这就是金融的未来。”

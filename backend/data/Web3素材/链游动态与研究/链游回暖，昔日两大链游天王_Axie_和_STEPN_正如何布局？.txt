@@ -1,0 +1,85 @@
+标题: 链游回暖，昔日两大链游天王 Axie 和 STEPN 正如何布局？
+链接: https://www.chaincatcher.com/article/2108458
+发布时间: 2023-12-13
+
+==================================================
+
+作者：flowie，ChainCatcher
+
+ 
+
+随着链游市场的回暖，昔日两大链游天王 Axie 和 STEPN 近日也动作频频。
+
+Axie 亮出三板斧， 一方面发力游戏侧链 Ronin Network，另一方面升级经典游戏 Axie Classic，并通过 IP 卖货试图打开 Web2 新增长渠道；而 STEPN 则更专注于推出其第二款链游 Gas Hero，使用 GMT 作为游戏代币。在市场普涨阶段下，AXS 和 GMT 代币月涨幅也达到了20%左右。
+
+Axie 亮出三板斧，游戏侧链 Ronin 增长强劲
+
+自10月链游市场回暖后，Axie 积极顺势而为，主要在三件事情发力。
+
+一是，Axie开发团队Sky Mavis打造的游戏侧链Ronin Network 大放异彩。据CMC 数据显示，其代币RON 价格目前达1.56美元，近一个月涨幅近100%，近一周涨幅则超30%。
+
+除了代币增长之外，Ronin的链上数据上涨不错。据Ronin和Axie Infinity联合创始人Jef Zirlin12月9日在X平台发文称，Ronin网络月活地址数已达57.2万个，日活地址数达14.4万个。
+
+Ronin 最早是Axie Infinity于2021年2月启动的一条以太坊侧链，彼时因为以太坊性能不足，gas费过高，难以支撑Axie Infinity这款现象级游戏而诞生。2021年5月Axie便迁移至该Ronin 上。Axie Infinity作为Ronin 上最大的应用，长期以来，两者都是一荣俱荣、一损俱损。随着2021年底Axie 陷入死亡螺旋，Ronin 链上数据也开始下滑。而去年3月份损失超6亿美金的大规模攻击事件，让RoninTVL和代币暴跌之外，也让Ronin和Axie遭遇了严重的信任危机。
+
+遭遇黑天鹅事件后，Ronin 并没有“摆烂”。此次随着链游市场回暖之际，Ronin大幅增长的背后，离不开其网络和生态持续的发力。
+
+一方面，Ronin 网络在持续升级，改善性能。10月份， Ronin 宣布在其主网上推出 Lucas（v2.6.2）升级和 Shillin 硬分叉。该 Lucas 版本实现了 Optimistic Fast Finality（REP-0003）和 REP-0002 多项协议改进。其中，REP-0003 提出的最新快速最终确定机制，将 Ronin 上交易确认速度大幅提升。
+
+另一方面，Ronin积极与知名游戏工作室开展了合作，今年有众多受欢迎的游戏纷纷迁移到Ronin生态系统。先是10月底，P2E 链游 Pixels 从 Polygon 网络迁移到 Ronin 网络上。
+
+为Ronin带来了大量的新用户。据 Footprint Analytics 数据，Ronin 在 11 月 7 日链上活跃地址数超过 7 万，对比一周前增长了 238%；链上交易笔数达 19.6 万笔，均创下自 3 月下旬以来高点。（最近，Ronin的数据显示出爆炸性增长，11月初的活跃用户地址数比前一个月增加了六倍。）
+
+根据Ronin Daily统计，目前Ronin network已经集成了至少10家游戏，而在一年前该网络上仅有Axie一款链游。
+
+除此外，Ronin还与多家知名游戏工作室展开了合作。比如11月初，Sky Mavis与韩国游戏制作公司 ACT Games宣布合作，ACT Games计划旗下所有游戏迁移到Ronin网络。其中，ACT Games的集换式卡牌游戏（TCG）Zoids Wild Arena已从Polygon迁移到Ronin。不久后，12月初，Sky Mavis 又宣布与新加坡游戏开发商 Foonie Magus 合作，Foonie Magus计划将新游戏 "Apeiron "引入 Ronin 区块链。Apeiron 的试玩版可在 Epic 游戏商店下载。除此外，Sky Mavis还与Directive Games、Bali Games、Tribes Studio和Bowled.io等游戏工作室合作，这些游戏工作室会利用Ronin网络开发游戏。
+
+随着Ronin 区块链上入驻游戏频繁，且Ronin 不少游戏都是从Polygon迁移。近日社区根据 Ronin 测试网上 SAND 代币转账信息，也猜测The Sandbox  计划迁移到 Ronin 链。
+
+而除了拓展游戏业务外，Ronin 还在域名服务和钱包等业务上积极拓展。比如11 月中旬，Ronin 域名服务（ RNS ）开启公售。12月1日，Ronin Wallet  还与 Binance Pay合作，允许用户将币安中持有的 BTC、ETH 等资产兑换为 AXS、SLP 和 USDC等Ronin 链上资产。 12月6日，DeFi协议Impossible Finance也将在Ronin网络上部署其Launchpad，这将使Ronin上的开发者和游戏工作室能够推出自己的ERC-20代币。此外该Launchpad上发布的产品可能需要使用RON、AXS和IDIA等代币进行质押以进行分配。
+
+除了在Ronin Network发力外，Axie Infinity 近日还效仿Pudgy Penguin、Doodles等蓝筹NFT 售卖IP 周边。11月底，Axie宣布上线线上商城Merch Store和官方商品，Merch Store中出售 Squishmallow 风格的毛绒玩具、价值 300 美元的雕像、品牌连帽衫、T 恤和棒球帽等。除了出售官方产品外，Sky Mavis还试图走UGC路线，鼓励特定 Axie NFT 的所有者创建和销售他们的产品。Axie 所有者现在可以利用他们的 NFT 角色作为吉祥物来开展各种业务，包括 Axie 主题咖啡馆、漫画、餐厅或玩具系列。
+
+为触达更多Web2用户，Axie Infinity 还宣布与菲律宾打车巨头 Grab 合作推出用户积分奖励计划。用户可以在Grab应用程序中访问 Merch Store购买周边。据Sky Mavis 称，最终商品销售净利润的 20% 将分配给 Axie 金库中。
+
+但值得注意的是，根据 Axie 市场数据，目前 1190 万个 Axie Monster NFT 中只有不到 5000 个解除了商业限制，仅占所有 Axie Infinity NFT 的 0.04%。 Axie 自推出线上商店以来，无论是讨论的热度还是社区增长都没有明显的效果。
+
+而除了发力侧链Ronin 和IP周边售卖，Axie 还玩了一把怀旧风，其经典系列 Axie Classic 升级后再回归。Axie Classic添加了一种新的游戏模式“诅咒竞技场”，并吸引玩家追求奖励。
+
+据Axie称，其标志性游戏 Axie Classic 回归后的短短四天内，该平台的每周活跃用户数已超过 100,000 万。而AXS 也应声上涨10%。
+
+目前来看，Axie 目前在游戏侧链Ronin 上的发力以及效果最为强劲。随着潜在的链游summer到来，更多知名游戏入驻后，Ronin 可能将迎来新的增长。近日OKX 已经上线RON 的永续合约，不少加密社区用户对于其登陆币安等更多交易所也有所期待。
+
+STEPN 专注游戏新作Gas Hero，对GMT赋能有效吗？
+
+相比于Axie多方位布局，STEPN 似乎将精力更集中于其第二款自研游戏Gas Hero。
+
+今年7月份，STEPN 开发团队Find Satoshi Lab 首次宣布计划推出大型多人在线（MMO）游戏《Gas Hero》。Gas Hero部署在Polygon上，并表示不会推出新的游戏代币，而是以 STEPN 的代币 GMT 作为游戏代币。此外，STEPN对于Gas Hero的慷慨支持也体现了对其的重视程度。当游戏在角色的艺术形象征选上寻找创作者时，STEPN 开发团队Find Satoshi Lab奖励了约200万枚GMT代币，并承诺支付2%的版税。
+
+Gas Hero的游戏设定以及开发速度也凸显了其野心。据悉，游戏初期的玩家容纳数量约为13万人，但玩法和技术框架设计可以扩展至600万人以上。官宣不到半年时间，11月27日， Gas Hero 便已于正式启动社区内测。本轮测试共向 3000 名社区用户开放测试资格，资格分发对象包括 Gas Hero NFT 徽章的持有者、Find Satoshi Lab 大使、合作伙伴等不同群体。据悉一旦删档测试成功完成，正式版预计将在12月上线。
+
+Gas Hero 作为曾经的现象级游戏STPEN的新作，自然受到了不少关注度。目前其推特粉丝关注量已突破5万。而Gas Hero 又有何特点？Gas Hero 项目负责人 Johnny (@johnnyL37020770)曾在7月份的一场AMA中透露，Gas Hero 游戏模型试图解决Web3 游戏设计需要克服的三大难点，即如何实现 Web3 原生的社交方式；如何让各种资产有舒适的产出和回收方式；如何处理经济周期的影响。
+
+具体Gas Hero 的特点在以下几个方面，一是游戏的架构需要将把所有玩家放入一个共享世界的社交体系中。每个聚落有 9 名玩家，每个公会有 9 个聚落，每个辖区有 9 个公会。Gas Hero希望全游戏用户至少达到数百万人，因此在设计城市、辖区、公会、聚落和基地等层次时，需要考虑这个规模。
+
+并且该游戏设定了一个树状的世界结构，每一个单位都有其对应的管理者，他们从基地开始，一直到最高层，会考虑其中掌权者、掌权的好处与义务、权力设计与名利的结合等问题。比如游戏在公会层级之上的地图结构还涉及到一些与治理相关的建筑，如管理部门、市政厅、联合国等。玩家需要通过各种方式来不断提升自己的地位。    
+
+此外，而且该游戏的核心设计在于资源的供给与需求。“Gas Hero 中的资源种类繁多，每种资源都有其特定的消耗需求，如何抓住单品的周期和变化，将成为市场经济中的重要环节”。
+
+而根据参与的内测用户反馈来看，相比于STEPN，Gas Hero 游戏故事设定、玩赚模式都更为丰富。整个游戏的背景上讲述了未来世界核战争后，幸存人类在有限资源下，从地下开始战斗，回到地表复兴人类的故事。玩家扮演的幸存者需要加入城市、公会、部落，以集体的方式与其他玩家建立连接，并通过个人冒险以及部落战跟公会战集体作战的方式获取奖励。目前不少游戏道具在在 Mooar 市场上也有不错的价格表现。
+
+响指研究所分析称，Gas Hero 目前游戏模式同日本知名手游公司Cygames的手游 《公主连结 Re:Dive》十分相似，Cygames 以福利多而著称，GasHero是否会继承Cygames衣钵还需拭目以待。
+
+相比于Gas Hero 的游戏模式，用户可能更关注与Gas Hero 对GMT的增长赋能效果。
+
+在经历死亡螺旋后，STEPN为了激活GMT 生态，先后采取了多次尝试，包括推出去中心化交易所 Dooar，推出NFT市场MOOAR，但在市场深熊下，都未及时取得明显的效果。目前市场回暖后，Dooar TVL 在750万美元左右，但近日没有太多动态，而MOOAR自去年底推出后动态也不是很多，直到近日MOOAR 和STEPN宣布联合推出创世运动鞋，目前其总成交量已经超过7500万。
+
+此外，STEPN还和Axie类似，通过入驻Apple pay和Apple Music 等Web2渠道来试图获取新用户，目前来看效果也不明显。
+
+而Gas Hero 的此次发力，正值整个加密市场复苏和链游回暖之际，Gas Hero 游戏设定中，无论是强化游戏角色，还是玩赚模式中都需要大量消耗GMT，初步来看对于GMT来一个不错的利好，近两个月GMT代币价格最高涨幅也近50%。
+
+但目前整个链游市场中，尚未看到更多突破性的且被验证过的经济模型，以解决链游的可持续问题。Gas Hero后续能否同曾今的STEPN 吸引大规模玩家为GMT赋能，还需要更多观察。
+
+结语
+
+对于Axie、STEPN两款现象级游戏而言，曾在上一个周期下积累的庞大用户基础，是其最大优势所在。在市场深熊下，Axie、STEPN 都尝试多种自救模式以维系生态，但效果都不尽人意。随着Big Time、Fusionist等新一波链游起势，链游市场格局正在进行改写，Axie、STEPN需要更加立竿见影的手段，才能站稳其行业地位。

@@ -1,0 +1,63 @@
+标题: TVL 年内飙升超 240%，加密分级基金 Tranchess 进军流动性质押战局
+链接: https://www.chaincatcher.com/article/2140234
+发布时间: 2024-08-26
+
+==================================================
+
+作者：Nancy，PANews
+
+ 
+
+从金融创新实验到流动性市场基石，DeFi在多年起落浮沉中经历了飞速的发展和演变。而伴随着去杠杆化放大周期演变效应，DeFi生态在遭遇流动性危机后，各家的命运齿轮也随之转动，竞争进入白刃战。
+
+玩转分级基金概念的Tranchess是个DeFi赛道的老牌选手，在过去几年围绕着资产管理持续提升穿越周期的能力，并投身于流动性质押的叙事浪潮。
+
+分级基金模式匹配不同风险偏好，已吸金超2.5亿美元
+
+Tranchess是DeFi世界的分级结构基金，主要提供不同风险偏好的投资需求，并解决无常损失、资金效率低下、强制清算等问题。这种拆解风险等级和预期收益的方式一度使得Tranchess得到市场大量关注，人气可在彼时飙升的TVL指标上得到直观体现，也印证了产品的市场契合度。
+
+分级基金是一种金融衍生工具，特点是将基金产品和风险分为不同等级，一般A级子基金主要获取固定收益，B级子基金主要获取剩余收益。Tranchess将单一的主基金中衍生出了多个风险/回报矩阵，其中Queen是母基金，主要为BTCB、ETH（每年管理费1%）或BNB（每年管理费2%）基金创建，可为长期持有者提供2%至16%的额外收益；Bishop、Rook则为QUEEN拆分出来的两个不同风险回报的子基金产品，每枚QUEEN可获得0.5枚BISHOP和0.5枚ROOK，其中Bishop是DeFi语境下的稳定币高收益产品，将流动性资产出借给Rook持有者，专为稳定收益型用户设计；Rook专为激进型投资者设计的杠杆基金，可以理解为无抵押借贷挖矿，不存在强制清算风险。
+
+2023年底，Tranchess在以太坊上线了自己的qETH流动性质押产品，随后以此为基础，结合自身分级基金结构，开拓出了Turbo & Stable的产品板块。
+
+在Tranchess旗下的Turbo & Stable基金中，Turbo代表强化版ROOK，允许用户通过杠杆赚取积分奖励；Stable则为增强版BISHOP，可赚取固定利息率。根据官网显示，目前Tranchess的Turbo & Stable基金已在以太坊、BNB Chain和Scroll网络上推出相关基金，并已吸金超2.5亿美元，这些产品在活动结束后均可转换回其各自的底层代币，且没有锁定期、创建/赎回费以及拆分费等。
+
+以Scroll上推出的STONE基金产品为例，STONE基金已获得超1.9亿美元资金参与，这是Tranchess和StakeStone合作推出为期六个月的基金，主要包括stoneQUEEN、turPSTONE、staYSTONE、staYSTONE-STONE LP。其中，用户可将STONE按照1:1的比例创建stoneQUEEN来获得1倍积分，也可将每枚stoneQUEEN进一步拆分为0.1枚turPSTONE和0.9枚staYSTONE来获得2倍积分。其中，turPSTONE相当于Turbo代币，有着10倍固有杠杆率以及StakeStone额外奖励的2倍积分加成，因此持有者可获得20倍的StakeStone积分（注：基金到期后代币持有者可以根据到期时的净值按比例换回底层资产（包括STONE），故该数字均为到期日时的大约净值。在这之前，用户可以通过swap把Turbo 或stable换回STONE，这个过程则按照网页显示的市场当前交易价格兑换。QUEEN的兑换比例始终是1：1。下同）；staYSTONE为固定收益的Stable代币，持有者可获得固定的6%年化利息（基金到期后，根据其净值，约可兑换回1.0149 STONE），不获得任何积分。而staYSTONE-STONE LP持有者可获得一篮子收益，包括CHESS奖励、0.05%手续费费率、利息以及积分成数（2倍），持有者可随时以单币种或者双币种添加或移除流动性。
+
+再以Tranchess联手ether.fi联手推出的weETH基金为例，旗下包括weethQUEEN、turPWEETH、staYWEETH和staYWEETH-weETH LP，活动将于今年12月15日结束。用户可以将weETH按1:1比例兑换为weethQUEEN，并将每枚weethQUEEN拆分为 为0.1枚turPWEETH和0.9枚staYWEETH，同样每枚turPWEETH和9 枚staYWEETH可合并为10枚weethQUEEN，即比例始终为1=0.1+0.9，weethQUEEN可获得4倍积分。而turPWEETH持有者还可以10倍固定杠杆率以及ether.fi的4倍积分乘数获得40倍积分（基金到期后，根据其净值约可兑换回0.9426weETH），staYWEETH则可获得10%的固定利息（基金到期后，根据其净值约可兑换回1.006 weETH）。staYWEETH-weETH LP持有者则可获得CHESS奖励、0.05%手续费费率、利息以及积分成数（4倍）作为奖励。
+
+同时，Tranchess还通过与Scroll生态的深度合作，让在Scroll上推出的Turbo & Stable产品，均可以参与Scroll本身Session奖励，获得Scroll Marks积分。
+
+除此之外，Turbo & Stable基金还包括SolvBTC、slisBNB和Staked ETH基金，产品逻辑与上述产品一致。
+
+值得一提的是，Tranchess会根据Turbo & stable基金获得的积分收取3%的费用，其中在BNB Chain上这3%由项目方额外计算支付，不影响用户积分收益；在Scroll上则根据用户Turbo积分收益收取。所有积分收益均会配合每个项目到期以及TGE的节奏100%全额返还给对应链上的veCHESS用户，进一步提升veCHESS持有者的收益率。
+
+从BNB到以太坊，Tranchess深入发力流动性质押赛道
+
+身为DeFi生态的重要分支，流动性质押已撑起DeFi百亿TVL的半边天。自以太坊上海升级后，流动性质押一举成为DeFi赛道的热门叙事，资金流向更是直接表明这一市场风向标。DeFiLlama数据显示，截至8月24日，流动性质押赛道以超450亿美元占据DeFi市场的半壁江山。而从各个主流POS链的质押率来看，流动性质押赛道仍有较大的增长空间。
+
+实际上，经过多年迭代升级后的Tranchess已入局质押赛道。实际早在2022年初，Tranchess就已初涉质押收益赛道，彼时其启动了BNB Fund并成为BSC验证节点来获得新收入；同年12月，Tranchess上线以太坊的同时推出了流动性质押产品qETH；今年，Tranchess更是凭借V3的发布正式打响了在LSDFi赛道的第一枪。
+
+除了联手多个知名LSD协议推出多款产品外，Tranchess还支持以太坊和BNB Chain上的QUEEN代币的流动性质押。其中，若用户选择质押ETH兑换qETH，可获得4.4%的APR，当前总质押量超55万美元。除了质押奖励，用户还可以在Balancer上的qETH/ETH资金池中提供流动性，LP将获得CHESS奖励和veBAL激励，为来或将在更多DeFi协议中使用。当然，用户获得的质押奖励后平台会收取10%的费用，这笔费用会分配给节点运营商、Tranchess资金库以及veCHESS持有者的每周返利分配。
+
+BNBFund除了提高单一资产收益率的挖矿功能外，还增加了一层Alpha收益。具体来说，BNB基金将BNB质押至BNB Chain上Tranchess验证器节点中，从而获得8%~16%的APR，并将这部分奖励分发给所有nQUEEN+和nROOK+的持有者（扣除协议费用），还可质押Q/B/R类代币以CHESS代币形式获得奖励。例如用户将BNB质押创建为nQUEEN后可获得0.45%的POS质押奖励以及3.7%~11.7%的CHESS奖励。
+
+“随着以太坊需求的持续增长，我们预计类似qETH、STONE等流动性质押产品和相关产品staYSTONE、turPSTONE将继续受到关注。以太坊现货ETF将使机构投资者对以太坊和质押的兴趣增加，从而推动以太坊价值和网络需求增加，之后质押收益率将上升。”Tranchess在不久前发文称。
+
+随着BTCFi概念逐渐成熟，最早在BNB Chain上引入WBTC资产管理的Tranchess是否能借助目前与SolvBTC等项目的合作，进一步深挖参与BTCFi的机会中，也值得继续关注。
+
+TVL今年增幅超240%，曾获Binance Labs等参投
+
+亮眼的增长数据展示了Tranchess的强势竞争力。DeFiLlama数据显示，截至8月24日，Tranchess的TVL已超过2.1亿美元，在Scroll上排名第二，今年涨幅高达241.9%。
+
+作为DeFi繁荣期诞生的DeFi协议，Tranchess早在2021年就宣布完成150万美元种子轮资金，Three Arrows Capital、The Spartan Group、Binance Labs、Longhash Ventures和IMO Ventures等诸多机构参投。
+
+明星资本加持背后除了产品策略外，团队也是重要因素。Tranchess联合创始人Danny Chong拥有超过16年的银行业履历，曾负责东方汇理银行的外汇和固定利率产品销售SEA部门，其他成员在微软、谷歌、摩根士丹利、瑞银等机构拥有丰富从业经验。
+
+代币经济学也是Tranchess生态的重要组成部分，治理代币CHESS的总供应量为3亿，其中50%将用于社区分配和激励，持有者可用于参与社区决策、投票、支付交易费用等。除了二级市场购买，用户还可通过质押QUEEN、BISHOP或ROOK代币（权重比例为3:4:2）、为AMM池提供流动性等方式获得CHESS。veCHESS则代表着锁定的CHESS代币，锁定时间为一周到4年不等，兑换比例将线性增长（1枚CHESS锁定1年会得到0.25枚veCHESS，1枚CHESS锁定4年会拿到4没veCHESS）。veCHESS持有者所获权益包括可对BISHOP和ROOK之间的Alpha收益分配投票、CHESS每周释放投票、每周50%的协议收入分发、提升质押效率以及前文提到的3%Turbo & stable基金积分收入分享等。
+
+另外，Tranchess于上周四新上线的社群管理提案，表示接下来将由veCHESS用户投票决定未来Turbo & Stable的合作。一方面进一步拓展veCHESS的应用场景，另一方面说明了Turbo & stable模型快速复制的无限潜力。
+
+不仅如此，DeFi黑暗森林中，Tranchess也在安全性上下功夫，包括已经完成PeckShied与Certik的智能合约审计，并与ImmuneFi启动了漏洞赏金计划以及与DeFi保险协议InsurAce达成合作等。而根据路线图规划，Tranchess还将在2024年继续拓展结构性产品、节点运营商和X-Chain等扩展等。
+
+整体来看，这家老牌加密结构化基金Tranchess为更多用户提供多样化风险策略的同时，提升了资产配置的灵活性和效率。而在流动性质押赛道持续爆发之际，LSD赛道的热度加持也将为Tranchess在DeFi市场竞争注入强劲动力。

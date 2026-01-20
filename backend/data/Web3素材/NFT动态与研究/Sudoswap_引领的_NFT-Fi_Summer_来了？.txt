@@ -1,0 +1,169 @@
+标题: Sudoswap 引领的 NFT-Fi Summer 来了？
+链接: https://www.chaincatcher.com/article/2078730
+发布时间: 2022-08-29
+
+==================================================
+
+作者：Bryan，IOSG Ventures
+
+ 
+
+Sudoswap引领的NFT-Fi Summer来了？
+
+
+本文为IOSG原创内容，仅做行业学习交流之用，不构成任何投资参考。如需引用，请注明来源，转载请联系IOSG团队获取授权及转载须知。
+
+本文将讨论NFT-FI方向中围绕NFT抵押借贷以及衍生品的一些有意思的细分赛道/协议，以及目前的瓶颈和未来可能的发展。
+
+NFT AMM
+
+NFT AMM的应用场景主要是分为蓝筹NFT以及长尾NFT。针对蓝筹NFT，进入AMM前的一个步骤是先将其碎片化。
+
+NFTx
+
+NFTx是老牌的NFT碎片化协议，参考的主要还是老defi的那套玩法，也就是用amm的机制可以碎片化之后提供流动性挖矿，同时Floor Dao为碎片化的NFT提供了一定的流动性解决方案，允许用户将erc-20 NFT兑换成floor token, 以高apy作为奖励，基本逻辑和defi2.0的olympus dao一致。确实是一种增加erc 20 NFT的use case，但并不sustainable。
+
+碎片化NFT会有利于价格发现，比如NFT二级市场上的地板价格与在amm中流通的NFT碎片的价格趋于一致。如碎片NFT如果交易价格低于二级交易市场比如opensea，套利者可以从amm中购买一个完整的NFT碎片并从金库中赎回NFT，再在二级交易市场卖出从而做到无风险套利。
+
+Sudoswap
+
+因为本身交易的直接是整个NFT，其定位更接近于opensea, superRare这样的二级市场。区别点在于其能够提供二级市场所不具备的即时流动性，通过linear/exponential的bonding curve设定(未来会介绍更多的curve匹配不同的交易需求）确保trader可以获知既定的交易利润，并且有即时的交易体验。同一个NFT系列的定价方式有所不同，可以做到协议内的无风险套利。
+
+目前的traction挺不错，平台目前已经达到了10万的NFT交易量，并且TVL呈现不错的上升趋势。一个concern主要是UX, 因为是permissionless, 目前同一个NFT系列可以有多达200+个池子，并且每个池子的深度不一，有的深度只有个位数，这样的流动性分散也许是阻碍该协议进一步发展的可能的瓶颈。另外，该平台交易的NFT大部分是长尾资产，对于蓝筹这类准入门槛较高的系列普及率较低。
+
+Comments:
+
+‍我们认为nft碎片化协议的主要应用场景在有较高地板价的蓝筹nft中，通过碎片化的方式降低用户入场门槛并提高流动性。而对于长尾非蓝筹nft来说，其地板价相对更低，并不需要再进行一步碎片化，可以直接进行交易。虽然两者的交易模式都是AMM，但是目标NFT并不相同。
+
+Constant product Amm是一种合适的交易模型吗？constant product （x*y=k) 在erc-20 swap中是一种常见的模型(Uniswap, Bancor)，但是LP的无偿损失与其提供流动性的资产的波动性成正比，也就是说资产价格波动越大，LP的IL越高。对于碎片化nft来说，其价格波动性与现货nft成正比，所以对于LP来说其IL也是一个不小的风险敞口。（nftx在这个场景设计了新的一种减小IL的质押模式 — inventory staking, 但从本质上并不能改善依旧存在IL的问题）。
+
+目前市场上的创新比较主流的是sudoswap这样的bonding curve，确保了同一个池子里的价格的波动是与池子里的nft数量无关的，将价格滑点固定，促进更好的交易体验。
+
+作者个人的观点是，AMM是一种提高流动性/资本效率的方式之一（主要是促进地板价附近NFT的价格发现），但是AMM并不是一个适合的交易模式。
+
+NFT as collateral lending
+
+除了直接交易NFT外，以NFT为抵押品的借贷协议也是促进NFT流动性的手段之一。NFT借贷主要分为两种模式：P2P/P2pool。P2P就是所谓的点对点交易，一个borrower对于一个lender。P2Pool的模式是多个lender提供资产，并不针对单独一个borrower。
+
+P2P：P2P借贷中比较有特色的玩法。
+
+Flowty:
+在flow链上的借贷协议，主打的是区别于其他链上的pfp NFT抵押品，主要有NBA Top Shot、Ballerz. co-founder都是nba top shot的早期参与者，该平台也是更专注于体育类NFT的戏份赛道的借贷项目。有一个区别点在于其抵押品—nba top shot本身的品牌效力/活动，比如nba top shot定期举办challenges, 参与者可以用手中的NFT组合参与挑战并获得奖励，flowty可以帮助参与者解锁额外的资金同时去购买所需要的NFT。
+
+同时，flow链上还有一系列第三方的平台参考，比如说刚提到的ranking system Moment RANKS，还有其他的一些分析类平台如Own the Moment （包含历史销售数据、价格预测、走势）等等，帮助lender进行更好的判断是否为borrower提供贷款。总的来说，玩法比较多但是scalability有限，天花板依赖于flow/nba top shot生态。
+
+NFTfi:
+
+NFT P2P借贷的祖师爷，也是目前市面上pfp系列Nft P2P借贷深度最高、用户体验最好的平台。在今年四月份的开放贷款仓位达到了2k+，远超其他同类竞品。一些有意思的发现：高价值的NFT，如BAYC/Punk，一般duration较长 - 30/90天不等。这些高价值的NFT系列的LTV也相对较高 - (past month: BAYC-77%, Punk-53%, MAYC-58%，抵押品价格依照过去30天的平均成交价算）。对于一般pawn shop 25-30%的LTV，可以得出的结论是蓝筹Nft在借贷市场中的bargin power还是相对较高的。对lender比较友好的是，borrower的借贷历史会显示（如曾经借出的金额量，以及是否有过违约记录等），并且其他的参考数据包括该NFT系列的地板价以及该Nft由upshot/NFTBank给出的价值估测，都是帮助lender进行合理判断的根据。
+
+探索P2P借贷模式时候产生的一些comments：
+
+P2P基本terms模式：ntf P2P借贷的标准LTV与现实生活中的pawn shop接近，在[25-50%]之间波动。并且Duration越长，lender的风险越高，所以短期+低LTV是比较适合NFT P2P的选择。
+有两个有趣的发现：
+
+a. 总的来说所以违约率较低，数量上大约是10%。蓝筹NFT中的违约率也有层级的差异。比如借贷量最高的bayc, punk以及mayc举例，违约比例分别是1%，3%，5%左右。而价格波动较大的蓝筹，如azuki，违约比例达到了30%。不过这更多说明，对于蓝筹Nft借贷来说，borrower更多的是持有，而不是违约（即利用该平台套现）。
+
+b. APY和duration两个数据也能解释lender眼中对于不同蓝筹NFT 系列之间的保值度的差异。比如punk的apr相对其他NFT较低（平均14%，即使在波动较剧烈的近期也在10%左右，而相对来说BAYC的apy达到了40%），并且duration utilised (真实还款时间/规定还款时间），说明punk的lender与borrower对于punk这个资产的保值的认可度较高 - 即使bayc的历史地板价较punk来说更稳定。
+
+发展瓶颈: 
+
+a. terms-目前的P2P协议之所以效率低，其原因在于达成一个deal的过程是多次出价/还价的过程（一个offer的有效期为7天），如何更准确/更快速的制定terms将是P2P协议需要思考的
+
+b. 对于一些高净值的NFT来说，因本身风险较高，需要借助一些流动性方案提供者比如metastreet，来完成借贷。
+
+P2Pool:
+
+BendDAO: 是市面上主流的NFT P2Pool借贷协议。玩法简单明了，lender借出eth，borrower抵押蓝筹NFT。发展非常快，已经有830个borrowers (NFT-fi有1200+），考虑到这样的数字是其上线仅仅几个月。发展原因快的原因也很简单 - P2Pool的流动性较P2P高，抵押的NFT接近于地板价，并且协议在初期冷启动补贴 ：6%的deposit apr 以及 负16%的borrowing apr。抵押品的数据也不错 - 近两个月mayc/bayc稳定在300+以及250+。协议目前除azuki外没有出现其他NFT的清算。近期有大量的bayc存在清算风险。
+
+比较有创新的协议：
+
+Defrag:在风险控制做出尝试的借贷协议。
+
+Borrower在抵押NFT的时候，会购买一个put option（如果抵押品价格低下降，underwritting pool需要Lock一定量的eth去赎回这个Nft), underwriting pool里的eth用法 - 1.转成udtc借给用户 2.赎回NFT。underwriting pool的利润：put option的premium fees。
+
+如果put option strike price 100，现在价值80，那这个put option值20。清算价格是70，用户还没有被清算，所以不会execute put option(清算即execute option)。如果价格下降到了60，那么exectue, underwriting pool买回NFT, 用户获得100-60=40+borrowing amount。underwritter相当于将lender和option seller的角色混合在了一起，但实际上两者的角色并不一致 - 作为borrower的对手方，lender是short抵押品的，但是作为option seller(short put), 又是long 抵押品的，这是一种冲突的设定。
+
+图源：https://twitter.com/DefragFinance/status/1461770614881067009/photo/1
+
+Astaria：
+
+刚刚宣布融资8m，前sushi cto出来做的一个NFT P2Pool lending的项目，目前没有具体的协议设计出来。根据现有的资料，其模式类似于maple finance，有一个中间人（delegate/appraiser)规定池子的terms-price/amount/rate等等，具备last resort的功能。
+
+对于P2Pool协议的comment:
+
+目前tvl较高的NFT P2Pool协议相较于defi的erc20的P2Pool来说缺乏创新创新，我们预计该领域还会出现更多有意思的协议设计。
+
+区分不同P2Pool协议的点主要包括几点 - 清算机制，LTV，风险控制。
+
+清算机制主要有两种，时间-based, 价格-based，时间-based对于borrower来说更友好，允许其在规定时间内还款即不受到清算的风险，LTV潜在上是一个Trade-off。
+
+并且，P2Pool中，liquidator充当的是确保协议的风险控制的关键的一环，但同时也是相对于协议本身以及借贷双方相对独立的参与者，其存在的意义以及要求：1. 有利可图 2. 对于抵押品有一定的定价认知。
+
+关于有利可图这个点，在NFT本身流动性不足的情况下，尤其是极端的市场行情中，抵押品价格的下降速度过快也可能会导致这些独立的清算者选择不参与清算，导致对于抵押品的定价认知确保了其不会以一个irrational的价格将NFT出掉，这需要一些更合理的定价机制。（第三方估值系统不够成熟，即使是蓝筹NFT也存在对于同一个NFT标价差异很大的情况）
+
+风险控制主要是对于borrower违约的情况下（如出现黑天鹅事件），lender是否能及时被偿付的情况下的协议机制。
+
+图源：https://blockcrunch.substack.com/p/NFTfi-understanding-the-NFT-lending
+
+Closing thoughts
+
+很多人说NFT像房地产，我不太认同。NFT是一种链上的产物，自带房地产不具有的流动性属性。虽然目前的NFT协议主要都是关于NFT作为抵押品的方向（与房地产的低流动性雷同），未来有意思的一个方向是是否存在lending/borrowing标的都是NFT的借贷协议 （比如抵押bayc, 借出crypto punk) 。一个在这个方向比较积极的信号是opensea推出的seaport协议为NFT trades NFT打开了先河。不难畅想未来抵押NFT, 借出NFT的情况的出现。
+
+一个高效的资本市场上，如btc借贷市场上，btc多空双方的力量是势均力敌的。而目前的NFT协议都是在做NFT为抵押品的协议（也就是Long NFT)，本质上促进的还是erc-20的流动性（借出来的是erc-20）。同时，NFT目前的发展形式还是以pfp为主，而pfp本身并不具有生息的特质，所以借方的需求非常模糊，这也是在这个方向的一个非常亟需思考的问题，也许对于gaming NFT这样有实际落地场景/生产活动需求的NFT形式是更合适的。
+
+无论如何，属于NFT借贷的next cycle一定是与大的crypto/NFT market的牛/熊有很大的相关性，在牛市中这样的借贷协议是一种天然的加杠杆手段，会极大的促进协议的发展。
+
+P2P还是P2Pool?
+
+逻辑上来讲，P2P更适合净值相对地板价更高的NFT, p2pool更适合净值相对低，接近地板价的NFT。P2P更强调borrower的体验（定制条款），而p2pool更强调lender的体验（多个lender分散风险，同时降低入场门槛）。
+
+P2P不存在抵押品价格波动的清算风险，只需要按时还款。而P2Pool中borrower可能经常会收到margin call。
+
+P2P LTV是有一个bar（即使是bayc平均下来80%左右），但是p2pool的LTV比较高-BendDAO的最高LTV可以达到90%。资本利用率P2Pool更高。
+
+What is next?
+
+Defi借贷巨头aave大约一年前表示想要进军NFT as collateral lending市场，但一直没有推出新的进展。并且相比于传统金融，NFT借贷依然是风险系数较高的行为，需要风险对冲手段来分散风险，有且并且不限于NFT保险，期货，期权，甚至是结构化产品。
+
+NFT futures
+
+NFTperp 是一个基于vAMM模式的NFT期货交易市场，vAmm这个模式是由perpetual protocol设计的，相比于amm来说需要lp注入流动性以及pool size的限制，有funding rate的机制确保期货价格与标的资产价格的converage - vAmm的价格类比perp的价格，其价格与预言机的现货价格喂送价格差为funding rate的计算基础。但是这种vAmm机制与amm机制一样，需要有交易量冷启动，同时有没有LP奖励，所以在早期项目启动会遇到一些阻力。
+
+Synfutures推出的NFTures也是一个NFT期货合约交易市场，目前支持四个NFT的合约交易 - PUNK, UJENNY, NFD, The Doge NFT。其标的资产价格喂送来源于unicly/NFTx。Synfutures的sAMM也是battle-tested, 交易量与perpetual protocol/dydx不相上下。
+
+对于NFT 期货来说，有几个瓶颈：
+
+标的资产的价格。对标btc futures, 如dydx/perpetual protocol，标的资产的价格是通过预言机进行现货价格喂送（dydx用的是makerDAO的oracle, perpetual protocol用的是chainlink) 。而对于NFT来说，缺少一个适合可靠的价格喂送 - 本质上还是流动性不足。也许当承接更高Nft交易量的交易平台如blur/sudoswap有了一定流动性后，其交易价格可以作为价格喂送的选择。
+
+需求。如果拿btc futures举例，其需求之一是作为btc矿工的对冲手段，而很多的NFT holders并没有这样的需求。这个对于gaming NFT是个机会 - gamer在游戏中升级的过程不断地获得NFT，存在对冲的需求。
+
+NFT option
+
+NFT Option中主要的方向还是以Nft holder的角度出发的，也就是对冲持有NFT的风险，以通过买入Put option的方式。
+
+Putty是一个提供ntf put option的平台，目前有11个orders成交(其中有3个BAYC的put option)，平台发展相对早期，也没有什么活跃度。支持定制化的option(想要issue put option的用户提供NFT, premium, strike price, duration)，但是这种option的流动性/成交量从本质上来讲就不高。
+
+Nifty options也是一个提供NFT put option的平台，NFT持有者可以把NFT锁在该平台或者其他抵押借贷协议如NFTfi上，同时发起一个put option，对手方需要将strike price的eth同样锁住，option issuer可以随时选择exercise/cancel，exercise的话就相当于卖掉NFT获得strike price，cancel的话会拿回原来的NFT，对手方无论如何都会获得一定的利率的奖励。这边的利率最低需要高于aave/compound等主流借贷协议的利率，因为作为对手方承担了更多的风险。
+
+Traction方面与putty类似，还在早期的探索中，没有什么使用量。有一个类似于defrag的一样的方案是，在抵押Nft的同时买入这个期权，保证了即使清算，lender无论如何都可以拿到一定价值的资产。相对于defrag来说，option seller和lender并不是一个群体，这样的设计会更合理。
+
+Jpex.finance是一个不同于以上两个的option平台，NFT holder卖出call option，而不是买put option。相当于一个covered call的策略。但是流动性是一个问题 - 1.对手方入池就需要付钱 2. European option仅在交割日兑付，对手方无法在in-the-money的情况下就收利。
+
+对于NFT option来说，有几个瓶颈
+
+低流动性。无论是ftx,还是binance,其option的设定机制都很简单（strike price, expiration date, premium) - ftx上strike price有固定几个选择，binance则直接将futures price作为strike price，ftx与binance都是自动算出premium。而对于是NFT options，都完全由NFT holder进行填写，并且premium也都是拍脑袋写的，自然愿意交易的对手方也少得可怜。并且UI/UX方面相比于专业的交易平台要差强人意很多。
+
+Option价格。option定价主要由两个因素决定 - intrinsic value 和 time value。time value是NFT option价格比较高的原因 - 因为volatility (historical & implied)高。可以考虑降低premiuem价格的一个方法是缩小行权的时间窗口，促进更小时间窗口内投机者对于Nft价格的bet。
+
+NFT collection数量。尤其在牛市中，对于call的需求比较高，而call的seller是相对较少的（对比btc holders），并不能很好的承接牛市中的杠杆需求。
+
+NFT保险
+
+对于一些高净值/高稀缺度的NFT holder来说，除了相对间接性的对冲手段外，更直接的是进行投保。相对来说借贷成本会提高，但是部分风险也转移了。甚至用户当选择P2P/P2Pool平台时，如果该协议有内部的保险/与第三方保险进行合作时，这很有可能会成为吸引用户的一点。
+
+NFT 结构化产品
+
+NFT20有一款NFT index追踪一系列NFT的地板价，类似于tradfi中的s&p500。
+在metaverse中，土地作为生息资产NFT(比如用户需要付租金才可以在土地上生产活动），可以参考现实生活中的房贷作为一种金融衍生品，如CDS。
+
+一些基于现金流的结构化产品，类似于defi中的element finance/solv，可以允许lender将手中的未来现金流以债券的形式出售。类似的事metastreet在做。其次是一些先买后付的产品，类似于房贷，定期还款，如Cyan/Ape Now，有潜在的套利机会 - stake在NFTx等NFT碎片化协议的利率pay off定期还款的利率，除此之外同样的类似promissary notes也是一种玩法。

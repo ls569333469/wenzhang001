@@ -1,0 +1,19 @@
+标题: Cococat 受邀出席 Consensus AI Web3 Festival，探索分布式网络与 AI 的融合创新
+链接: https://www.chaincatcher.com/article/2168586
+发布时间: 2025-02-20
+
+==================================================
+
+香港共识AI Web3节将于2025年2月20日举行，这是亚洲领先的数字资产与创新峰会。此次活动由Draper Dragon、Web3link、ICP China、TradingBase、GBEUA等机构联合主办。
+
+全球顶级加密机构将齐聚一堂，参会的包括Draper Dragon、OKX、Bitget、Animoca Ventures、Aegis Ventures、Solowin Holdings、Outliers Fund、Tido Capital、Oasis Labs、NewTribe Capital、Arctic Monks、Web3Link、Nano Labs、SIG Asia Investments等30+知名机构。此次峰会将汇集区块链、AI及风险投资领域的精英人士，共同探讨由Web3技术推动的分布式AI基础设施的变革与创新潜力。
+
+作为受主办方邀请的重要嘉宾，CocoCat的联合创始人Eric Jiang将出席并发表演讲。 CocoCat始终致力于推动分布式基础设施的革新，其底层技术在这一领域展现了巨大的潜力。这与本次峰会的主题高度契合，为CocoCat提供了一个展示技术实力和全球影响力的绝佳机会。通过这个平台，CocoCat不仅能与全球行业领袖分享经验、交流见解，还能激发新的创新，进一步推动行业的进步与发展。 
+
+此外，CocoCat将在此次盛会中与全球顶尖行业领袖及创新者展开深度交流，共同探讨分布式网络与AI未来的深度融合，为推动分布式网络技术的普及与AI领域的创新贡献力量。让我们拭目以待，CocoCat将在此次盛会中带来更多突破性的思想与创新成果！
+
+关于CocoCat：
+
+CocoCat是一个以去中心化隐私社交网络为核心的综合平台，致力于为Web3用户打造集钱包、社交、金融、媒体和游戏等功能于一体的全方位应用。其数据通信基于点对点去中心化网络和抗量子加密算法，为用户提供私密、安全且自主的网络环境。
+
+CocoCat背后的技术被称为Cat网络，这是为大规模Web3应用程序设计的基础设施，提供开放的隐私P2P网络协议。其特色包括CocoApp框架和自服务协议，支持在任何设备上零成本部署Web3应用程序。应用程序可以通过BTC地址进行索引，消除了对域名或链接的需求。

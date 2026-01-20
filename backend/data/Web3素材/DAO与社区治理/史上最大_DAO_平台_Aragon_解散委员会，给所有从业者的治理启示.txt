@@ -1,0 +1,76 @@
+标题: 史上最大 DAO 平台 Aragon 解散委员会，给所有从业者的治理启示
+链接: https://www.chaincatcher.com/article/2105256
+发布时间: 2023-11-04
+
+==================================================
+
+作者：律动小工，BlockBeats
+
+
+
+
+11 月 3 日，一些媒体称 DAO 管理平台 Aragon 和 Aragon DAO 已解散。但据 BlockBeats 报道发现，实际上 Aragon 是做出了重大更新，被解散的是负责管理网络代币销售中筹集资金的 Aragon Association 委员会，Aragon 未来将继续以产品为中心的使命建设。
+
+Aragon 正在去「人治」化
+
+Aragon Association 委员会可以说是 Aragon 项目的法律管家，负责管理 Aragon 网络代币销售中筹集的资金。据官网显示， Aragon 的创始人 Luis Cuende 和 Jorge Izquierdo 分别任 Aragon Association 委员会成员的联创、执行董事。
+
+Aragon 是 Web3 社区和组织的去中心化治理解决方案，由 Luis Cuende 和 Jorge Izquierdo 于 2016 年创立。旨在使组织、企业家和投资者能够在没有法律关系的情况下开展业务。 Aragon 的开源堆栈支持部署 DAO 、管理社区、解决争议和进行企业级投票，所有这些都不需要中间人，使命是创建更好的链上、无国界和透明的组织。
+
+Aragon 为 DAO 的行业发展做出了很大贡献，可以说是史上最大 DAO 平台。比如开发了 aragonOS ——一个以软件速度试验治理的 DAO 框架。如今， aragonOS 为 Lido 和 Curve 等以太坊基础 DAO 提供支持，帮助这些项目管理超过 160 亿美元的资产。 Aragon 开发的 Aragon App 是一个用户界面，任何人都可以无需代码即可部署和管理 DAO 。
+
+重大更新的原因，Aragon 在官方公告中做出了解释：「虽然财务部门显着增长，但官僚机构的复杂性、利益相关者的不一致以及修改治理的失败尝试增加了项目内部的紧张局势。事实证明，AA 和 ANT 目前都不适合管理该项目。Aragon 需要重新开始，除了重置之外什么也做不了。」
+
+社区细数 Aragon Association 过往「六宗罪」
+
+Aragon 社区成员@Samsara79416227表示在过去的一年里，Aragon Association（AA）继续让所有 DAO 成员、其社区、监管员等失望。在过去的 6 个月里，看到 AA 做了许多直接违背其职责的事情。
+
+Samsara细数了 Aragon Association「六宗罪」：
+
+1. 无视投票：将国库转移到 AN DAO 的投票通过已经 8 个月了，但 Aragon Association 拒绝转移任何资金。为什么他们无视 AN T 持有者的意愿？
+
+2. Aragon Association 没有提供透明度：多个未回复的论坛帖子询问财政部。 Aragon Association 单方面决定合并国库，没有讨论时间/余额。
+
+3. Aragon Association 机管局错过了时间表： 声称他们有 4 个月的解决方案，但每个月都没有进展。现在是 10 月 27 日，没有任何解决方案的迹象。为什么不断延迟？
+
+4. Aragon Association 的疏忽让自己的团队成员感到沮丧——团队不得不创建一个单独的 Discord 频道来向 Aragon Association 提问，因为他们没有信息/透明度。即使是简单的 txns 也需要数周时间。
+
+5. Aragon Association 执行董事撒谎：声称他的合同没有被扣留，但这是一个公然的谎言。为什么 Aragon Association 成员会谎报自己的职位？
+
+6. Aragon Association 表现出恶意，在回答问题时缺乏谨慎，撒谎，无法关注投票等等。这种对 DAO 的嘲弄不能再继续下去了。
+
+最大的争论：剩余资金应该流向哪里？
+
+Aragon 在官方公告中表示，剩余资金将用于产品开发。同时 Aragon Association 正在以太坊主网部署了 86,343 ETH 到赎回合约中， ANT 持有者可以以 0.0025376 ETH / ANT 的固定汇率将 ANT 兑换成 ETH 。
+
+对于该决定， Aragon 表示由于法律限制，特别是代币投机和市场操纵引发的监管风险，该决定无法提交公众投票。
+
+加密研究员DCF GOD非常不认同 Aragon 的行为，指出团队将把 100% 的无人认领资金据为己有。如果持有人没有看到这个公告并在 1 年内索赔，那么持有人将再也得不到这些钱，因为团队会拿走。DCF GOD为 Aragon 列出了一些可行的解决方案：
+
+A ） Dead supply 会获得一些新的代币，这样他们就可以拥有团队用他们的钱建造的任何东西；
+
+B ）所有的国库都是可以永远领取的，所以当这些持有人发现时，他们可以 claim ；
+
+C ）如果 Dead supply 永远不会被认领（仍在迁移中），那么应该 burn 来增加每个人的 claim 价值；
+
+D ）所有 D ead supply 属于每个再次 claim 的人（这是传统中会发生的事情，但我们有智能合约，可以对后来者更公平）；
+
+DCF GOD无法理解，Aragon 选择了 E 方案，将其捐赠给团队以备将来的产品使用。
+
+Aragon Association 过往的治理问题
+
+据 BlockBeats 报道，5 月 17 日， Aragon Association 委员会表示「 Arca 等投资者对其发起的 51% 攻击」。对此，加密货币对冲基金 Arca 首席投资官 Jeff Dorman 在近日的一篇博客文章回应称：「51% 攻击的叙述实际上是不正确的，我们是 Token 持有者，我们想使用我们的 Token 参与治理。 Arca 质押 Token 推动了 Token 持有者的积极参与。」
+
+此外，针对 Aragon Association 称 Arca 等「团伙」破坏了许多 DAO 及其社区， Arca 表示其未试图解散 Aragon ，且 Arca 没有投资 Invictus 、 Rook 、 Rome 或 Temple ，其中 Fei Labs 团队自己提出了解散， Rook 团队最初提出了分拆「 Incubator DAO 」，这些都是 Token 持有者争取最好的结果。 BlockBeats 此前报道， Aragon Association 委员会宣布取缔 ANT 持有者的所有事务投票权， Arca 公开呼吁 Aragon 回购 ANT 。
+
+对于 Aragon Association 委员会的治理问题，前 Aragon Association 执行董事在当时表达了自己有直接责任：「 Aragon 犯了很多错误，在我领导该项目期间（直到 2020 年底）我觉得其中许多错误负有直接责任。遗憾的是完整的愿景还没有实现。然而，我认为在编造过去和我们的意图的替代版本方面存在一条界限」。
+
+不止如此， BlockBeats 消息，8 月 11 日，据 CoinDesk 援引一份由加密交易公司 Patagon Management LLC 编写的 24 页调查报告， Aragon 协会曾于 6 月考虑以未知价格「将该项目出售」给一位未公开的竞标者。这篇报告还指控 Aragon 浪费了其价值 1.8 亿美元的各种加密资产，并质疑该组织是否遵守瑞士非营利法律。 Aragon 表示，将在本月发布一份透明度报告以回应这些指控。今年 5 月，由于担心激进投资者的影响力， Aragon 取消了将其资金库控制权交给代币持有者的计划。
+
+再回想到 2021 年，当时影响最大的 Aragon 「集体离职」事件，5 天 13 人离职，实在令人唏嘘。
+
+尽管 DAO 的理念旨在让组织完全由代码控制，但现实中许多 DAO ，仍然有过多人为的参与和决策，而这些人为的过多参与，才是导致 DAO 产生信任危机的本质原因。
+
+DAO 的理念是将某些治理过程自动化，使其无需人为干预而持续运行。在以太坊的白皮书中，真正的 DAO 应该是完全不依赖于人为协调的去中心化自治组织。即使是比特币，也只是在一定程度上实现了这个理念，更接近 DAO 的定义，但并不完全符合。严格来说，尽管许多组织自称为 DAO ，但仍未达到真正的自治和自主。 DAO 不仅需要去中心化，还需要去「人」化。
+
+与此同时，这么多年过去， DAO 仍然在思考这一问题，区块链项目的重大决策，是让少数人决定，还是秉承社区自治、智能合约执行的方式？

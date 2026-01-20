@@ -1,0 +1,61 @@
+标题: Dragonfly 合伙人： Hyperliquid 稳定币发行竞标存在暗箱操作
+链接: https://www.chaincatcher.com/article/2204919
+发布时间: 2025-09-11
+
+==================================================
+
+作者： Squiffs 
+
+编译：佳欢，ChainCatcher
+
+Hyperliquid 计划推出的原生稳定币 USDH 已成为近年 DeFi 领域最引人注目的竞争之一，各机构和 DeFi 项目方竟相争取验证节点的投票支持。
+
+但加密投资公司 Dragonfly 合伙人 Haseeb Qureshi 声称，这场竞争早已存在“暗箱交易”。他在 X（原 Twitter）上发文称：“我从多个竞标方那里得知，所有验证节点都只对 Native Markets 有意，根本没有认真考虑其他任何方，这仿佛早已达成了一项幕后交易。Native Markets 的提案在 USDH 征集方案（RFP）公布后不久就发布了，这似乎表明他们提前得到了消息。”
+
+在 Qureshi 的帖子下，匿名加密交易员、占 Hyperliquid 总投票权 15% 的 Hypurrscan 发言人 CL 公开表示支持 Native Markets。然而，运营着 Hyperliquid 最大验证节点 The Hypurr Collective 的 Nansen 创始人 Alex Svanevik 强烈反驳了 Qureshi 的指控。
+Svanevik 回应道：“这与事实不符。我们的团队投入了大量精力来审查提案，并与竞标方沟通，以找到最适合 Hyperliquid 的方案。这周我收到了来自 USDH 竞标方的无数私信和电话。我们一直都在积极主动地与他们接触。”
+
+Native Markets 提案
+
+近一周来，USDH 的发行之争愈演愈烈，包括 Sky（原 Maker）、Ethena、Paxos 和 Agora 在内的 DeFi 巨头都提交了正式提案。值得注意的是，Dragonfly 投资了 Agora 和 Ethena，这两个项目也都提交了 USDH 提案并正在参与竞争。
+
+Haseeb 的指责主要针对 Native Markets 的提案。该提案呼吁在 HyperEVM 上原生铸造稳定币，并保持对《GENIUS 法案》的合规性，同时继承其发行方 Bridge（Stripe 的子公司）的法币通道。
+
+Stripe 上周刚刚宣布其即将推出的无需许可的 Layer 1 区块链 Tempo，这有望简化法币入场 Hyperliquid 的流程，而目前这需要通过链上跨桥解决方案。
+
+Native Markets 团队成员包括曾任职于 Liquity 和 Barnbridge 的 Max Fiege，以及 Uniswap Labs 的前总裁兼首席运营官 Anish Agnihotri。
+
+与其他提案建议将大部分 USDH 收入用于回购 HYPE 不同，Native Markets 提议将 50% 的储备收益用于 Hyperliquid 援助基金进行 HYPE 回购，而另外 50% 则用于 USDH 的增长再投资。
+
+Ethena、Sky 与 Paxos 的竞争
+
+Paxos 于昨晚迅速提出修改后的提案。该提案包括与 PayPal 的合作，将 HYPE 上架到 PayPal 和 Venmo，并提供免费的法币出入金通道、2000 万美元的生态系统激励以及一种“AF 优先的激励结构”，即 Paxos 在达到 TVL 里程碑之前不收取任何费用。
+
+在这场风波的最新进展中，Paxos 联合创始人 Bhau Kotecha 表示，他愿意与 Native Markets 合作。
+
+这一想法源于投资人 Mike Dudas 的一条推文，他写道：“最明显的 USDH 解决方案难道不是简单地将 Native Markets 和 Paxos 的提案合并吗？Native Markets 负责前端（Hyperliquid 原生、与生态系统深度融合），Paxos 负责后端（符合《GENIUS 法案》、发行方已拥有数十亿美元规模、由 PayPal/Venmo 提供分发渠道）。”
+
+与此同时，跨链版的 Tether 稳定币 USDT0 宣布，它将不参与这场竞争。
+
+除了正式提案，这些协议也在积极争取 Hyperliquid 社区的支持。Agora 的提案附上了来自拥有 1300 亿美元资产的投资公司 VanEck 首席执行官 Jan van Eck 在 X 上的公开演讲。而 Ethena 则采取了一种更幽默的方式，模仿说唱歌手 Eminem 的歌曲《Stan》中的歌词，以戏谑的口吻致信 Hyperliquid 创始人 Jeff Yan。
+
+Sky 的提案也备受关注，其联合创始人 Rune Christiansen 昨晚在 Hyperliquid Discord 群组内发布了其提案。提案中强调了 Sky 和 DAI 成功的历史，并承诺 Hyperliquid 将获得所有在 Hyperliquid 上发行的 USDH 4.85% 的年化收益率，Sky 可能会在 Hyperliquid 上部署其 80 亿美元的资产负债表，以及提供 2500 万美元的赠款，用于创建旨在自主发展 Hyperliquid 上 DeFi 的“Hyperliquid Star”。
+
+合成美元协议 Ethena 则于 9 月 9 日强势反击，提出了自己的提案。该提案设想 USDH 由 USDtb 100% 支持，而 USDtb 是一种由贝莱德 BUIDL 基金支持的稳定币。Ethena 的提案还承诺将“至少 95%”的 USDH 储备收入以购买 HYPE 的形式返还给 Hyperliquid 生态系统，并提供“至少 7500 万美元的现金和代币激励，用于发展 HIP-3 前端”。
+
+Sky 和 Ethena 分别发行着按市值计算的第三和第四大稳定币，仅次于 Circle 的 USDC 和 Tether 的 USDT。Ethena 的 USDe 市值接近 130 亿美元，而 Sky 的 DAI 市值约为 50 亿美元。然而，两者加起来的市场份额仍然远低于两位市场巨头：USDC 的市值为 720 亿美元，USDT 的市值为 1690 亿美元。
+在传统机构和 DeFi 项目方不断加码竞争的同时，HyperEVM 的构建者们正专注于未来的使命。Felix Protocol 的贡献者 Charlie 告诉 The Defiant：“整个 USDH 方案的真正工作在启动时才会开始，因为真正的问题将是如何将规模扩展到 50 亿美元。”
+
+他引用了 X 上的一个帖子，阐明了 USDH 若想对 Hyperliquid 产生真正影响，需要关注的就不仅仅是收益返利或 HYPE 代币回购。“如果他们认为这是赢得获选的途径，我不会排除 USDT/USDe/USDC 也加入这场刺激游戏。我们需要看到一个更清晰的路径来撼动 USDC 的主导地位，这样这些 USDH 提案才会变得更有吸引力。”
+值得注意的是，尽管 Tether 的子公司 USDT0 今天早些时候退出了竞争，但目前尚不清楚这是否意味着 Tether 官方也正式退出，而 Circle 迄今为止对此事一直保持沉默。
+
+Hyperliquid 的增长
+
+永续合约交易所和 Layer 1 的增长一直是 2025 年反复出现的主题。
+
+Hyperliquid 目前占据了所有加密货币收入的 35% 以上，年化收入达到 12.8 亿美元，其中 99% 的收入流向 Hyperliquid 援助基金会，用于回购 HYPE 代币。
+
+
+Hyperliquid 的 Layer 1 区块链 HyperEVM 自 2 月主网发布以来一直处于持续上升趋势，目前以 26 亿美元的总锁定价值（TVL）位居第八大区块链，而在 2025 年初其 TVL 仅为 4 亿美元。
+
+与此同时，HYPE 代币自 2024 年 11 月发布以来一直是表现最好的加密资产之一。该代币首次亮相时的完全稀释估值约为 30 亿美元，自发布以来已飙升超过 1700%，一夜之间创下 55.7 美元的历史新高。

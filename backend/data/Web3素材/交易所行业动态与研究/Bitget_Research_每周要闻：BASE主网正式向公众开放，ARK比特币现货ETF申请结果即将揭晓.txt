@@ -1,0 +1,55 @@
+标题: Bitget Research 每周要闻：BASE主网正式向公众开放，ARK比特币现货ETF申请结果即将揭晓
+链接: https://www.chaincatcher.com/article/2099094
+发布时间: 2023-08-11
+
+==================================================
+
+作者：Bitget 研究院
+
+ 
+
+1.市场焦点 Market Trends
+
+本周( 08.07-08.11)市场最关注的焦点话题为：
+
+ARK 比特币现货 ETF 申请结果临近， Binance Labs 投资 500 万美元购买  CRV
+
+BASE 主网已向公众正式开放， 13 日比特币 ETF 审查加大市场波动
+
+大盘财富效应回暖，Bot 板块领涨市场
+
+Bot 板块热度持续上升，机构开始砸盘 YGG
+
+大盘低波动率震荡，YGG 带动 GameFi 板块上涨
+
+2.热门项目 Popular Projects
+
+本周( 08.07-08.11)热度最高的项目有：
+
+OXBT（Token）：由 KOL @BitGod 发行的 BRC 20 代币，通过多社区、kol 白单+公开免费铸造方式发行，上线后持币地址迅速达到近 2 万个；项目目前仍是 BRC 20 代币持币地址最多的项目之一，链上转账活跃，项目方在推特表示目前 BRC 20 赛道士气低落、流动性有限，需要持续建设的毅力；
+
+XRP （Token）：类  Bitcoin meme 币的项目，全称 HarryPotterObamaPacMan 8 Inu，疑似 KOL 发币，由 @Yourpop 8、@stekisteks、@henokcrypto 三人重点宣传，代币上线价格上涨数十倍，市值达到 840 万美金，过去 24 小时交易量 273 万美金；
+
+LINK （Token）： Chainlink  的代币价格在试探 2 年以来的下降趋势线，自上月 Chainlink 推出跨链互操作性协议（CCIP）后，其已在拓展预言机外的基础设施能力，近期及时支持了 BASE 网络的预言机喂价，产品更新迅速，LINK 代币价格表现较强，近两个月涨幅超 60% ，维持在高位；
+
+SHIB（Token）：基于以太坊的 Layer 2 网络 Shibarium 跨链桥已上线公开测试，并将开启 SummerOfShibarium，SHIB 代币近一周最高上涨 20% ，热度较高；
+
+Pandra（NFT）： Polyhedra Network  发行的 NFT， 进行 Pandra 系列 NFT 跨链，可以同时交互 zkBridge 和 LayerZero ，任务截止时间为 8 月 20 日，刷空投党拉高了该 NFT 的 Transactions；
+
+Coinbase （Dapp）： Base  正式对公众开放主网，defi 项目 Maverick 上线 Base 网络，并进行 LP 活动，提供 cbETH-ETH 等交易对的流动性可铸造 Mava IV-Base NFT，将为 Coinbase 的 LSD Token cbETH 引入到 Base 网络提供支持；
+
+Bridegebase（Dapp）：Base L 2 宣布主网开放，并开通官方的跨链桥，支持以太坊跨链 ETH 到 Base 上，过去 7 天 Base L 2 的 TVL 资产增长迅速，达到 72% ，目前跨链资产达 1.42 亿美金；
+
+Circle （Dapp）：USDC 稳定币发行商 Circle 推出新的可编程 Web 3 钱包平台，允许开发人员和商家集成 Circle 可编程钱包，并个性化到他们的应用中，以及在上面构建服务，让消费者发送、接收和存储加密货币，包括 Circle 的 USDC 和 NFT；
+
+3.热搜话题 Hot Searches
+
+本周( 08.07-08.11)热度最高的话题有：
+
+PYUSD（Token） ：PayPal 推出用于转账和支付的美元稳定币 PayPal USD。该稳定币由 Paxos 发行，由美元、短期国债和现金等价物支持，将逐步向 PayPal 在美国的客户开放。购买 PYUSD 的合格美国 PayPal 用户将能够： 在 PayPal 和兼容的外部钱包之间转移 PYUSD、使用 PYUSD 发送点对点付款、在结账时选择使用 PYUSD、将 PayPal 支持的任何加密货币与 PYUSD 进行兑换 ；
+
+Unibot（Token）：TG Bot 赛道的头部项目，卡位不错。项目提供 TG 的 DEX 交易、自动认购、Copy Trading 等功能，目前项目的用户量体最高，协议在 7 月底实现了每天高达 65 万美金交易手续费的收入，平日收入在 10 万美金左右的水平。Unibot 关联字段在  Google  上的搜索次数在 7 月增长了近 4 倍，项目地知名度较高。目前该代币已上线  Bitget ；
+
+APT（Token）： Aptos  官方发文，微软与  Aptos Labs  合作开发新的 AI 区块链解决方案，在消息公布后，APT 价格暴涨 15% 至$ 7.7 ，目前回落至$ 7.4 水平，市场关注度较高，成为 Google 热搜词。而根据 Token Unlock 数据，APT 将在本周 12 日解锁 3058 万美金的代币，导致价格承压；
+
+Bitget 研究院专注于“聚焦链上数据，挖掘价值资产”，通过时时监测链上数据以及区域热搜等维度，挖掘前沿的价值投资，为加密世界爱好者提供机构级的洞见。截止至今已为 Bitget 全球用户提供了【  Arbitrum   生态】、【AI 生态】、【SHIB 生态】等多个热门板块的早期价值资产，通过以数据为驱动的深入研究为 Bitget 全球用户创造更优质的财富效应。

@@ -1,0 +1,81 @@
+标题: 上周加密市场共发生12起公开投融资事件 | 投融资周报
+链接: https://www.chaincatcher.com/article/2058800
+发布时间: 2021-02-01
+
+==================================================
+
+
+
+
+据链捕手统计，1月25日到31日期间，区块链行业共发生12起投融资事件，方向主要集中在波卡生态、DeFi板块，投资机构中Genesis Block Ventures（GBV）与CMS Holdings出手次数相对较多，分别各投资两个项目，此外Galaxy Digital、FBG Capital、Pantera Capital、三箭资本、Coinbase Ventures等机构均有动作 。
+
+ 
+
+
+
+1、韩国稳定币项目Terraform Labs获2500万美元融资，Galaxy Digital领投
+ 
+1月26日，Galaxy Digital已牵头领导韩国加密创业公司Terraform Labs的最新一轮2500万美元融资。该轮融资的其他参与者还包括Pantera Capital和Coinbase Ventures。
+ 
+资金将用于其创建的合成资产协议 Mirror Protocol、DeFi 储蓄协议 Anchor Protocol 以及 DeFi 应用中的关键基础设施，以使 Terra 的算法稳定币保持核心地位。
+ 
+2、去中心化衍生品交易所 dYdX 完成 1000 万美元 B 轮投资
+ 
+1月26日，去中心化衍生品交易所dYdX在由三箭资本和DeFiance Capital领投的B轮融资中筹集了1000万美元。
+ 
+该平台于2017年启动，提供了多种去中心化交易产品，包括比特币和以太坊衍生品。本轮资金将主要用来在永续合约中添加新资产和功能、将更多控制权移交给用户、与基础设施企业合作弥合 CeFi 和 DeFi 之间的差距、从战略上投资于亚洲等国际增长市场，重点是中国市场、继续完成团队组建等方面。
+ 
+3、Stellar发展基金会向加密支付公司Wyre投资500万美元
+ 
+1月26日，Stellar发展基金会宣布对加密支付公司Wyre投资500万美元，以加强对Stellar生态系统中的金融应用的支持。Stellar基金会表示，投资将引入各种支付应用程序编程接口(api)，可用于Stellar网络上的应用程序。
+ 
+4、波卡生态项目ParaState完成130万美元种子轮融资，CMSTrading领投
+ 
+1月28日，区块链项目ParaState已完成130万美元种子轮融资，由CMS Holding牵头，KeneticCapital、FBGCapital和JRRCapital参投。
+ 
+ParaState 用流行的编程语言编写与以太坊兼容的智能合约，并在波卡上更快地运行。ParaState 计划用波卡的技术路线，重新开发一个符合 eWasm 规范的 WebAssembly 虚拟机。这些筹集到的资金将用于扩大其团队并启动主网。
+ 
+5、波卡跨链预言机ParaLink Network完成280万美元融资
+ 
+1月28日，波卡跨链预言机ParaLink Network周四宣布完成280万美元融资，投资方包括LD Capital、Kenetic，3Commas、Genesis Block Ventures和NGC Ventures等。Paralink还宣布Reef Finance的首席执行官Denko Mancheski作为顾问。 
+ 
+Paralink的链上共识层建立在Polkadot的Substrate之上，其独特之处包括称为PQL的查询语言，该语言允许用户查询SQL数据库，访问Web API，抓取网站以及从其他区块链访问状态。 
+ 
+6、天气风险管理平台Arbol完成近700万美元A轮融资
+ 
+1月28日，天气风险管理平台Arbol创始人兼首席执行官SidJha表示，Arbol于2020年圣诞节前后完成了近700万美元的A轮融资，新投资者包括Mubadala Capital Ventures，所有种子轮投资者Finch Finance和Space Capital也参与了投资。
+ 
+Arbol平台利用以太坊上的智能合约和Chainlink预言机数据，为用户提供天气保险，并解决了传统保险合约的瓶颈和低效问题，比如骗保行为、贪污腐败以及理赔延迟等。
+ 
+7、DeFi协议Sovryn通过代币预售筹集250万美元
+ 
+1月28日，基于比特币的DeFi协议Sovryn周四宣布，该公司已通过代币预售融资250万美元。Sovryn联合创始人Edan Yago表示，预售为其社区保留，这允许参与者确保他们有购买协议原生代币SOV的权利，SOV将于下月启动。
+ 
+Sovryn允许进行本地和非托管交易以及借出比特币，拥有BTC、USDT和DOC稳定币的用户可以通过借出资产来赚取利息。
+ 
+8、Bifrost新获一轮天使融资，数家头部区块链投资机构支持
+ 
+1月28日，波卡生态基础协议Bifrost宣布新获一轮天使融资，这是继2020年9月60万美元种子轮融资之后，BIfrost第二轮融资。本轮参与投资的机构有：CMS Holding、Altonomy、SevenX Ventures、Zonff Partners等。
+ 
+Bifrost 曾获得 Web3 基金会 Grant，也是首批 Substrate Builders Program 和 Web3 Bootcamp 成员，目前总计获得数百万美金融资，据团队透露，近期将开启主网上线前最大规模的铸币空投活动。
+ 
+9、GBV宣布投资DAOventures、Lepricon
+ 
+1月28日，加密风投机构Genesis Block Ventures（GBV）宣布投资DeFi预测游戏平台Lepricon与DeFi投资组合管理协议DAOventures。
+
+Lepricon由结合了游戏化DeFi、流动资金池、预测市场、游戏和不可替代代币（NFT）的元素，旨在通过为开发人员提供一个平台来构建游戏化的DeFi dApp，并以用户体验为核心，从而发掘并实现区块链中游戏和NFT的潜力。
+
+DAOventures旨在简化DeFi投资，其使命是使DeFi变得更简单，可访问且包容，因此，用户可以轻松访问众多DeFi产品，包括无偏向的机器人咨询、借贷、收益率汇总、资金管理、结构化产品、分散式保险等。
+
+ 
+10、DeFi平台Parsec获得125万美元融资并正式启动
+ 
+1月29日， Polychain Capital领投了Parsec的125万美元融资，其他投资者包括Robot Ventures、Volt Capital、Free Company以及Eric Conner，Alex Pack和Will Price。
+ 
+Parsec旨在成为去中心化金融（DeFi）多合一交易平台，并且已经获得了众多加密货币风险投资公司的投资。
+ 
+11、Robinhood向现有投资者募集10亿美元
+ 
+1月29日，Robinhood表示，它从现有投资者那里筹集了超过10亿美元。尽管美国在线券商Robinhood昨日已获得信贷额度，但该公司仍需要更多现金，以确保不必对客户进一步施加交易限制，并联系了几位投资者以获得融资。
+ 
+参与谈判的人士表示，红杉资本和Ribbit资本等风险投资公司昨晚一起参与了Robinhood此次融资，这些风投公司将获得Robinhood的额外股权。Robinhood，一款免交易费的股票交易平台。2018年5月10日，Robinhood宣布，公司在D轮融资中获得了3.63亿美元的投资，公司估值为56亿美元。

@@ -1,0 +1,55 @@
+标题: 观点：Vitalik 错了，加密领域确实需要“愚蠢”的 Memecoin
+链接: https://www.chaincatcher.com/article/2129576
+发布时间: 2024-06-19
+
+==================================================
+
+撰文： David Canellis , Blockworks
+
+编译： Felix , PANews
+
+ 
+
+如果你是名人，参与 Bored Ape Yacht Club （ BAYC ）已经不合时宜了， Memecoin 正在流行。
+
+BAYC 可以说是最成功的项目，受到主流社会的追捧。然而从 BAYC 的地板价可看出， BAYC 已过时。
+
+与此同时，名人 Memecoin 产生了跨界吸引力，这是大多数加密货币所不具备的。
+
+认为 Memecoin 没有效用的想法是短视的。 Memecoin 是区块链的关键组件，是「真实」经济活动的占位符（ Placeholders ），这些活动可能会让人们从传统的金融端口转向区块链端口。为了实现这一点，这些端口必须能够处理几十万人同时交易带有愚蠢名字的 Memecoin 。
+
+在这一点上，即使部分加密人士对荒谬和毫无意义的项目更敏感，但他们反对 Memecoin 的言论可能会误解当今加密领域最活跃的一批人。
+
+名人正在与加密货币相遇：快速的 DEXs 、便宜的区块链、博彩应用程序、 Twitter 、 Telegram 和 Discord 。
+
+如果没有 Pearl clutching （表示过于保守或过分关注他人的言行），很难在其中找出什么缺陷。
+
+所以 Iggy Azalea 或 Caitlyn Jenner 拥有自己的 Memecoin 并不是一件难以启齿的事。至少不像凯蒂·佩里的 CrYpTo ClAwS ，也不像金·卡戴珊在 Instagram 上为 SafeMoon 克隆产品 EthereumMAX 做的广告那样，甚至不像 Randi Zuckerberg 的 WAGMI 音乐视频。
+
+比起 Jenner 或 Azalea 团队所做的任何事情，这些特技更像是在说「孩子们，你们好吗」。
+
+无数 Memecoin 经历了暴涨、暴跌和发展停滞（经典的「 rug pull 」发展轨迹），而 Caitlyn Jenner 的以太坊 Memecoin 却一路高歌猛进。
+
+Jenner 在 Solana 上线几天后就在以太坊上推出。 Solana 上的 JENNER 在上涨 1,000% 以上后，市值刚刚达到 3000 万美元以上。
+
+据了解， Jenner 团队被一名涉嫌连环 Memecoin 操纵者欺骗，而 Solana 版本的代币根本不应该得到认可。这使得 Solana 代币（正迅速贬值）成为非官方的无用之物。
+
+为了帮助提高人们对新代币的兴趣， Jenner 承诺，如果新的基于以太坊的 Jenner 达到 5000 万美元的市值（当前价值 580 万美元，而原代币的市值为 360 万美元）， Jenner 将向特朗普竞选团队征收 3% 的交易税。
+
+目前数以万计的地址持有名人 Memecoin 。但需要明确的是，这些都不是高市值加密货币。总体而言，包括狗狗币和 Floki 在内的 Memecoin 市值超 520 亿美元，但在加密市场（不包括比特币）中所占的份额还不到 5%。
+
+Jenner 的两种代币，以及 Iggy Azalea 的 MOTHER 和 Andrew tate 代言的 DADDY ，在整个 Memecoin 市场中所占的份额不到 1%。
+
+Memecoin 被加密人士所诟病，就连 Vitalik 也对名人参与加密货币有意见。或者说， Memecoin 让加密货币看起来不成熟，并且在某种程度上是投机性的，进而让那些有风投机构支持的更合法、技术更完善的项目所获得的关注和资金减少。
+
+名人 Memecoin 现状
+
+对于真正的信徒来说，加密货币意味着一切，从历史上最大的价值转移到 solarpunk 革命和无政府资本主义政变。
+
+但加密货币也没有任何意义。它是不可知、混乱的，技术赋予它意义。
+
+尽管与互联网陌生人一起交易 Memecoin 时产生的温暖、模糊的社区感觉并不理智，但 Memecoin 确实具有技术效用：它们以一种很少有代币类别做到过的方式对区块链进行压力测试。
+
+过去的 NFT 游戏 CryptoKittie s 显示出，以太坊需要用 Layer2 s 进行扩展；Ordinal s 显示出几乎任何 EVM 链都可能因突然爆火而宕机，而 Memecoin 狂热证明了 Solana 的交易路由确实需要改进。
+
+欢迎来到名人加密元世界。这些名人可能没有意识到这一点，他们拥抱 Memecoin 发行的乐趣，实际上可能为加密提供了正确的推动力，从长远来看可以改善基础设施。

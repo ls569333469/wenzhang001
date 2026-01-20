@@ -1,0 +1,7 @@
+{
+  "title": "DeFi期权协议Opyn计划推出新产品SQUEETH，帮助DeFi用户对冲无常损失",
+  "url": "https://www.chaincatcher.com/article/2068096",
+  "content": "作者：Samuel Haig\n\n原标题：《Opyn to Unveil Squared ETH Token as DeFi Derivatives Race Heats Up 》\n\n编译：胡韬，链捕手\n\n \n\n去中心化期权协议Opyn正准备推出其Squared ETH或SQUEETH代币，该代币旨在对冲AMM平台基于ETH的LP头寸。\n\nOpyn开发者Joe Clark在12月17日的一篇博客文章中称，SQUEETH是一种“新的DeFi原语”，它允许稳定币/ETH流动性提供者赚取交易费用，而不会受到以太坊价格波动的影响。\n\n该工具将成为以太坊不断增长的去中心化衍生品生态系统的新成员，DeFi交易员能够使用收益率代币、杠杆代币、结构化期权产品和去中心化协议提供的期货合约进行套期保值。目前，Opyn尚未宣布该产品的预期发布日期。\n\n \n一、永续期权\n\n \n\nSQUEETH首次被阐述是在8月份的一篇基于Opyn和Paradigm Research的研究论文中。彼时，SQUEETH被描述为其他基于价格曲线提供回报的“永续期权”。\n\nClark的最新博文指出，SQUEETH现在旨在克服与提供AMM流动性相关的无常损失。开发人员将SQUEETH描述为一种“二次方（quadratic）”工具，可改善针对“非线性头寸”的套期保值，即根据曲线执行的工具，如AMM LP头寸。\n\nAMM流动性提供者将包含的两项等值资产存入流动性池，并接收代表其头寸的LP代币，这些代币可用于赎回基础资产。然而，资产价格的波动导致AMM池重新平衡，导致LP遭受不同或暂时的损失。\n\n无常损失是指AMM对中只有一项资产的价格上涨时，AMM协议对LP头寸进行了再平衡，与流动性提供者的原始存款相比，表现不佳的资产金额较大，而获利的资产金额较小。\n\nSQUEETH的价格旨在对冲这种差异，预计资产价格的波动与价格波动造成的无常损失成比例。\n\nSQUEETH为稳定币/ETH流动性提供商提供两个核心实用程序。首先，流动性提供者可以在持有其LP头寸的同时购买Squeets，以抵消无常损失，使其能够从ETH价格收益中获利，同时赚取交易费用。\n\n \n\n二、交易费用\n\n \n\n当与使用期货合约的空头头寸合作时，SQUEETH还可用于对冲ETH价格的下跌，同时仍能赚取交易费用。Clark说：“我们可以用线性工具（期货）和二次方工具（SQUEETH）相当准确地对冲任何非线性风险敞口。”。\n\n开发者指出，SQUEETH还可用于对冲Uniswap v3上的LP头寸，因为SQUEETH的购买具有与v3提供的集中流动性范围相对应的可变曲率。\n\n虽然Clark承认“一些剩余的三次方和更高阶项”对套期保值的有效性会有“小影响”，但他总结说，“套期保值的整体效果非常好”。\n\n以下是USDC/ETH、SQUEETH和ETH空头头寸的Uniswap v3 LP头寸的曲率比较。\n\n资料来源：Joe Clark",
+  "published_at": "2021-12-23",
+  "downloaded_at": "2026-01-17 00:39:43"
+}

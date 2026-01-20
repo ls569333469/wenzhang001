@@ -1,0 +1,141 @@
+标题: 上周加密市场共发生 23 起公开融资事件，累计融资约 7.2 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2163426
+发布时间: 2025-01-20
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 1月 13 日- 1月 19 日期间，区块链和加密行业共发生 23 起公开投融资事件，累计融资约 7.2 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和Defi赛道。热门项目包括开源经济基础设施 Merit Systems、基于 MegaETH 区块链的去中心化交易所 GTE、Berachain 生态农场模拟游戏项目 Beratone 、AI 驱动的加密货币分析平台 Mind AI。
+
+此外，基于 Solana 的社交图谱协议 Tapestry 宣布完成 575 万美元 A 轮融资，由 Union Square Ventures 和 Fabric Ventures 共同领投。
+
+（上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+开源经济基础设施 Merit Systems 完成 1000 万美元种子轮融资，a16z crypto 等领投
+
+开源经济基础设施 Merit Systems 完成 1000 万美元种子轮融资，a16z crypto 及 Blockchain Capital 领投，Solana 联合创始人 Toly、Not Boring Capital 创始人 Packy McCormick、Farcaster 联合创始人 Dan Romero 及 Framework Ventures 联合创始人 Vance Spencer 等参投。所筹资金将用于加速开源经济发展。
+
+Merit 试图解决软件开发中的“归因问题”。Merit 正在建立一种协议，根据贡献者所创造的价值，对贡献者进行适当的归因和奖励。
+
+Web3 游戏公司 Hyve Labs 完成 275 万美元 Pre-Seed 轮融资，Framework Ventures 领投
+
+Web3 游戏公司 Hyve Labs 完成 275 万美元 Pre-Seed 轮融资，Framework Ventures 领投，Volt Capital、Builder Capital、32 Bit Ventures 和众多天使投资者参投。
+
+该公司打算利用这些资金扩大团队并开发其核心基础设施，例如推出其测试网链、第一款游戏和其他链上资产。
+
+Hyve Labs 开发了一个游戏 rollup，其中使用去中心化数据可用性服务 EigenDA 等技术来充当跨链游戏启动器。
+
+加密钱包 Phantom 以 30 亿美元估值完成 1.5 亿美元 C 轮融资，红杉资本与 Paradigm 共同领投
+
+加密钱包 Phantom 以 30 亿美元估值完成 1.5 亿美元 C 轮融资，红杉资本（Sequoia Capital）与 Paradigm 共同领投，a16z 和 Variant 参投。
+
+Phantom 自 2021 年上线以来，月活跃用户已达 1500 万，管理 250 亿美元的自托管资产。
+
+据 RootData 显示，Phantom 是一个友好的加密钱包，让用户可以安全、轻松地在 Solana 区块链上存储、购买、发送、接收、交易代币和收集 NFT。
+
+Web 2.5 基础设施公司 Torram 完成 71 万美元 Pre-Seed 轮融资，Draper Associates 参投
+
+据 Chainwire 报道，Web 2.5 基础设施公司 Torram 宣布完成 71 万美元 Pre-Seed 轮融资，Draper Associates、Blockchain Founders Fund、Boost VC、Side Door Ventures、Deep Ventures、MH Ventures、Silvermine Capital 和 Trive Digital 等参投。
+
+据 Web3 资产数据平台 RootData 显示，Torram 是一种比特币原生元协议，它为比特币 dApp 和开发人员提供 AI 增强索引，将加密原生和现实世界数据带到链上。
+
+CeDeFi 基础设施 BounceBit 获 Laser Digital 投资
+
+CeDeFi 基础设施 BounceBit 获得日本野村集团子公司 Laser Digital 投资。
+
+Laser Digital 是一家数字资产公司，在野村证券的支持下，Laser Digital 在交易、资产管理和风险投资领域提供可扩展、稳健的机会。
+
+加密钱包 Dfns 完成 1600 万美元融资，阿布扎比主权财富基金 ADQ 领投
+
+据彭博社报道，总部位于巴黎的加密钱包技术公司 Dfns 完成 1600 万美元融资，阿布扎比主权财富基金 ADQ 领投，其他投资者包括做市商 Wintermute、Motive Partners、Bpifrance 以及 Galeries Lafayette Group 所有者家族办公室 Motier Ventures。
+
+据介绍，Dfns 成立于 2020 年，该公司开发的技术可让开发人员更轻松地构建和安全管理数字资产钱包。其客户包括富达国际、Zodia Custody 和去年被 Stripe 收购的稳定币公司 Bridge。这家初创公司计划将员工人数从目前的 25 人扩大到 35 人，其曾在 2022 年筹集了 1300 万美元。
+
+比特币基础设施 Alpen Labs 完成 850 万美元战略融资，DBA 和 Cyber​​ Fun 共同领投
+
+据官方消息，比特币链上金融基础设施 Alpen Labs 宣布完成 850 万美元战略融资，DBA 和 Cyber​​ Fun 共同领投，Ribbit Capital、Castle Island Ventures 和 Geometry 是其种子轮融资的最大投资者，并在本轮融资中再次支持了 Alpen。此轮资金将帮助其加速比特币 ZK Rollup “Strata” 的开发，并在 2025 年将其发布到主网。
+
+据介绍，Strata 将作为一个开放平台推出，旨在扩大并促进比特币的使用，这将为比特币解锁许多实用功能：简单的自我托管、直观且保护隐私的支付、互操作性、以比特币为支持的借贷和稳定币，以及许多其他链上应用。Strata 将从下个月起随着即将发布的测试网络向公众开放。
+
+此前消息，比特币 L2 开发商 Alpen Labs 完成 1060 万美元融资，Ribbit Capital 领投。
+
+二、Defi
+
+CertiK Ventures 宣布投资 Solana 生态二层扩容项目 Mantis
+
+区块链安全公司 CertiK 的投资部门 CertiK Ventures 在社交平台发文宣布投资 Mantis。
+
+该项目是首个基于 Solana 虚拟机（SVM）构建的第二层扩容解决方案，旨在通过人工智能代理提升去中心化金融的互操作性和用户体验。目前，Mantis 的跨链交易功能已上线，交易量达到 3,500 万美元，正在接受 OtterSec 的安全审计。
+
+MegaETH 生态 DEX GTE 已通过三轮融资募集 1000 万美元
+
+基于 MegaETH 区块链的去中心化交易所 GTE 已通过三轮融资募集 1000 万美元，包括 150 万美元的 Pre-Seed 融资、694.2 万美元的种子轮融资，以及 Echo 的 250 万美元社区融资。
+
+GTE 风险投资者包括 Maven 11、Wintermute、Flow Traders、Robot Ventures、IMC Trading、Ethena 的 Guy Young、Anza 的 Max Resnick 以及来自 Jump Trading 的未公开交易者。
+
+三、游戏
+
+Berachain 生态游戏项目 Beratone 宣布获得 200 万美元种子轮融资
+
+据官方消息，Berachain 生态农场模拟游戏项目 Beratone 宣布获得 200 万美元种子轮融资，由 Animoca 领投，SNZ、Citizen X、Avid3, Metazero Capital, Digits 等机构及部分个人参投。
+
+四、AI
+
+加密分析平台 Mind AI 完成 120 万美元战略融资，aixcb 等参投
+
+AI 驱动的加密货币分析平台 Mind AI 宣布完成 120 万美元战略融资，aixcb、Castrum Istanbul、Dewhales、SMO Capital、Metazero Capital、X21 Digital、Lunar Labs Capital、Zephyrus Capital、AlfaCatalyst、Decubate、Maven Capital、Unreal Capital、GAINS Associates、Coinvestor Ventures、Kef Ventures、Carbon Browser、Danxia Capital、Unicorn Ventures 参投。
+
+另据，Web3 资产数据平台 RootData 显示，Mind AI 是一个加密分析平台，可帮助投资者使用数据做出更好的决策。其目标是帮助用户消除社交媒体的噪音和信息过载。
+
+五、其他
+
+Solana 生态社交图谱协议 Tapestry 完成 575 万美元 A 轮融资，USV 和 Fabric Ventures 共同领投
+
+据 The Block 报道，基于 Solana 的社交图谱协议 Tapestry 宣布完成 575 万美元 A 轮融资，由 Union Square Ventures 和 Fabric Ventures 共同领投。本轮融资采用股权加代币权证结构，股权估值达 3500 万美元，代币网络估值 7000 万美元。
+
+Tapestry 目前拥有 13 名员工，累计融资 1250 万美元。该协议利用 Solana 的状态压缩技术在 Layer 1 层面构建社交图谱，与基于 Layer 2 的 Farcaster 和 Lens 不同。项目采用免费增值商业模式，未来计划扩展至 Aptos、Monad 和 Berachain 等生态系统。
+
+数字广告平台 EarnOS 完成 500 万美元种子轮融资，Escape Velocity 领投
+
+数字广告平台 EarnOS 宣布完成 500 万美元种子轮融资，Escape Velocity(EV3) 领投，Animoca Brands、GD1、Laser Digital、XION、Mysten Labs、Opacity Network 等参投。
+
+EarnOS 平台测试版由 XION 推出，Uber、Baskin Robbins、Sunglass Hut 和 The North Face 等品牌在 EarnOS 测试版发布期间入驻。
+
+据 RootData 显示，EarnOS 是一个数字广告平台，第三方品牌可以在该平台进行获客并提供奖励。它利用 XION 的链抽象为主流品牌和企业开辟了激励 55 亿以上活跃互联网用户的新方式。
+
+加密托管商 Komainu 完成 7500 万美元比特币融资，Blockstream CEO 加入其董事会
+
+据彭博社报道，野村控股（Nomura Holdings Inc.）支持的加密货币托管商 Komainu Holdings Ltd. 已从 Blockstream Capital Partners 获得 7500 万美元比特币融资。
+
+该公司计划在获得监管批准后，利用这笔资金支持全球扩张计划，并整合 Blockstream Corp. 开发的抵押品管理和通证化技术。Blockstream 首席执行官 Adam Back 将加入 Komainu 董事会。
+
+RWA 代币化平台 Brickken 完成 250 万美元种子轮融资，Hodl Ventures 等参投
+
+据 Cointelegraph 报道，总部位于巴塞罗那的 RWA 代币化平台 Brickken 宣布完成 250 万美元种子轮融资，其投资后估值达到 2250 万美元以上，Psalion、Ergodic Fund、SNZ Capital、Blue Bay Ventures、Mocha 和 Hodl Ventures 参投。
+
+据 Web3 资产数据平台 RootData 显示，Brickken 是一家资产代币化解决方案公司，通过去中心化应用程序 (dApp) 标准化资产代币化流程，为企业提供轻松创建、销售和管理数字资产所需的工具。
+
+加密银行 Sygnum Bank 完成 5800 万美元融资，Fulgur Ventures 领投
+
+总部位于瑞士和新加坡的加密银行 Sygnum 完成 5800 万美元融资，Fulgur Ventures 领投，融资后估值达 10 亿美元。
+
+新资金将用于扩大其产品组合（重点是比特币技术）、扩大其机构基础设施、加强其合规团队并探索战略收购机会。所得款项还将帮助 Sygnum 的欧盟扩张计划，并在香港建立受监管的业务。
+
+据 RootData 显示，Sygnum 是一家拥有瑞士银行牌照和新加坡资产管理牌照的数字资产银行。 Sygnum 授权机构和私人合格投资者、企业、银行和其他金融机构以完全信任的方式投资于新兴的数字资产经济。客户可以使用他们存入的瑞士法郎、美元、欧元和新加坡元投资领先的数字资产。
+
+Chainalysis 斥资超 1 亿美元收购 AI 代理安全初创公司 Alterya
+
+据 Businessinsider 报道，Chainalysis 斥资逾 1 亿美元收购 AI 代理安全初创公司 Alterya，具体估值信息暂未披露。
+
+两位了解该交易的消息人士透露，总收购金额约为 1.5 亿美元。Alterya 是硅谷著名孵化器 Y Combinator 的毕业生，该公司开发了人工智能技术，利用代理来检测和防止针对金融机构、金融科技和加密服务提供商的诈骗。
+
+MoonPay 以 1.75 亿美元收购 Helio 以扩大加密支付基础设施
+
+MoonPay 以 1.75 亿美元收购 Helio 以扩大加密支付基础设施，本次收购 Helio 将把其技术整合到 MoonPay，从而实现 Shopify 和 Discord 等电子商务平台上的加密交易。

@@ -1,0 +1,9 @@
+标题: DoubleZero Foundation 获 2800 万美元投资，Dragonfly 和 Multicoin Capital 领投
+链接: https://www.chaincatcher.com/article/2171036
+发布时间: 2025-03-06
+
+==================================================
+
+ChainCatcher 消息，据 CoinDesk 报道，消息人士透露 DoubleZero Foundation 在最新融资中获 2800 万美元投资，估值达 4 亿美元，目前正以 6 亿美元的估值寻求更多投资。本轮融资由 Dragonfly 和 Multicoin Capital 领投。DoubleZero 拒绝对此置评。
+
+DoubleZero 正构建全球私有光纤网络，提升区块链数据传输效率，降低延迟，已向 Solana 验证者开放测试网，并计划扩展至更多公链。该网络整合 Jump Crypto、RockawayX、Latitude 等机构的私有线路。

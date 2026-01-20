@@ -1,0 +1,9 @@
+标题: Elliptic：Huione 被封后 Telegram 暗网交易商家转向 Tudou Guarantee
+链接: https://www.chaincatcher.com/article/2187652
+发布时间: 2025-06-24
+
+==================================================
+
+ChainCatcher 消息，据 Cryptoslate 报道，Elliptic 发布报告称，尽管柬埔寨 Huione Guarantee 平台因涉及 270 亿美元猪盘诈骗在 5 月 13 日被查封，但 Telegram 上的暗市交易并未减少。
+
+数据显示，商户迅速转移至 Huione 持股 30% 的竞争对手平台 Tudou Guarantee，该平台 USDT 流入量已恢复至 Huione 关停前水平。链上数据显示，禁令实施后，Huione 的 USDT 流入量降至接近零，而 Tudou Guarantee 的用户数量则增加了一倍多，流入量与 Huione 关闭前的数量相当。

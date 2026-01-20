@@ -1,0 +1,305 @@
+标题: 上周加密市场共发生47起公开融资事件 | 投融资周报
+链接: https://www.chaincatcher.com/article/2069331
+发布时间: 2022-01-24
+
+==================================================
+
+整理：Richard Lee
+ 
+据链捕手不完全统计，2022 年 1 月 17 日- 1 月 23 日期间，区块链和加密行业共发生 48  起公开投融资事件，其中链游/元宇宙赛道以14起继续延续上周的回升态势，Animoca Brands 以 50 亿美元的估值获得 3.588 亿美元融资，是本周融资金额最高的项目。此外，Solana、Algorand等公链的生态项目融资较多。
+ 
+投资机构而言，a16z 本周出手 2 次（体育NFT平台 Autograph、社交游戏发行商 Carry1st），
+Alameda Research、Multicoin Capital 和 Animoca Brands 出手最为频繁。
+ 
+一、链游/元宇宙
+ 
+1、印度游戏公司 nCore Games 完成1000 万美元融资，Animoca Brands 、 Galaxy Interactive 领投
+ 
+1月17日，印度游戏公司 nCore Games 近日在新一轮融资中筹集了 1000 万美元， Animoca Brands 和 Galaxy Interactive 领投，Polygon 和 Hyperedge Capital 参投，Amitabh Singhal、Sandeep Nailwal、Kanwaljit Bombra、Sohil Chand等天使投资人也参有参与。此轮融资将用于推出 web3 产品。
+ 
+据了解，nCore Games 拥有众多游戏工作室，包括 Studio nCore、Dot9 Games 和 IceSpice。其产品组合包括多人动作游戏 Fau-G 和 Pro Cricket Mobile，下载量已达数千万。未来，nCore 将把重心逐步转向元宇宙并推出自己的NFT。（来源链接）
+ 
+2、Animoca Brands 以 50 亿美元的估值获得 3.588 亿美元融资，Liberty City Ventures 领投
+ 
+1月18日，NFT 开发与投资公司 Animoca Brands 获得 3.588 亿美元融资，由 Liberty City Ventures 领投，10T Holdings、Gemini Frontier Fund、ParaFi Capital、Provident、红杉中国和 Winklevoss Capital 等机构参投，投前估值为50亿美元。
+ 
+据悉，Animoca 表示注资将用于为战略收购和投资、产品开发和知识产权许可获取提供资金。该公司表示，其愿景是通过 NFT 增强用户的数字产权创建一个元宇宙，投资的NFT相关项目超过150个。此前在2021年10月，该公司曾以22亿美元估值获得6500万美元融资。（来源链接）
+ 
+3、新加坡 GameFi 平台 DEA 完成1200万美元种子轮融资，JAFCO Investment领投
+ 
+1月18日，新加坡GameFi生态系统Digital Entertainment Asset Pte. Ltd.（DEA）宣布完成1200万美元种子轮融资，JAFCO Investment Ltd.领投，Spartan Group等参投。
+ 
+据悉，新的资金将用于支持和推动DEA的旗舰产品PlayMining平台开发。此外，DEA将加快基础设施建设和人才招聘活动。（来源链接）
+ 
+4、Binance Labs宣布参投商业元宇宙概念项目SPACE
+ 
+1月18日，币安风险投资机构Binance Labs发布公告宣布，已参与商业元宇宙概念项目SPACE的种子轮融资。其他参投方包括Animoca Brands、Digital Currency Group、Coinfund、Republic Realm、Hof Capital、Polygon Fund。
+ 
+据悉，SPACE 允许用户为游戏、艺术、时尚、音乐等设计自己的虚拟商业空间，让用户在虚拟世界中体验社交商务。该团队计划在 2022 年推出 iOS 和 Oculus 应用程序。私募融资资金将用于加速产品开发、招聘人才和继续发展社区。（币安）
+ 
+5、YGG子公会IndiGG完成600万美元融资，红杉印度等参投
+ 
+1月19日，1 月 19 日，YGG子公会 IndiGG 宣布完成 600 万美元融资，本轮融资由红杉印度、 Lightspeed Venture Partners、Variant Fund 等参投。本轮融资将巩固 IndiGG 成为印度最大的游戏公会的优势地位。
+ 
+IndiGG 是 Yield Guild Games (YGG) 的一个子 DAO，它与 Polygon 联合建立，旨在在印度创建一个 Play-to-Earn 游戏中心。IndiGG 正在建立一个平台，让游戏玩家发现游戏的未来并踏上虚拟世界之旅，为所有参与者创造经济机会。（来源链接）
+ 
+6、电竞元宇宙平台Yesports完成225万美元融资，Polygon Studios等参投
+ 
+1月19日，基于 Polygon 的电竞元宇宙平台 Yesports 宣布完成 225 万美元融资，本轮融资由 Polygon Studios、Alphabit、Kernel Ventures、Mozaik Capital 和 NGC Ventures 等参投。本轮融资资金将用于开发其基于 NFT 的电竞市场和以电竞为重点的元宇宙。
+ 
+Yesports 是一个电竞元宇宙平台，通过 Yesports 市场，用户可以在一系列生态系统中交易电子竞技 NFT，包括 Moonbeam、Ethereum、Polygon、Binance Smart Chain (BSC) 和其他与EVM 兼容的 Layer-1 区块链。Yesports 还将与其他团队合作，为粉丝提供私人元宇宙体验，并允许用户使用 DAO 治理 Token 进行投票。（来源链接）
+ 
+7、预测市场协议 PlotX 完成 500 万美元 Pre-A 轮融资，Polygon、Hashed 领投
+ 
+1月19日，预测市场协议 PlotX 完成 500 万美元 Pre-A 轮融资， 由Polygon、Hashed领投， Animoca Brands、Alpha Wave Global（前身为 Falcon Edge）在内的多个知名投资者以及包括 Sandeep Nailwal（Polygon 联合创始人）、Alan Howard（Brevan Howard 资产管理公司联合创始人）天使投资人参投。 
+ 
+PlotX 是一款预测市场的游戏协议，用户可以通过质押代币来预测现实世界事件的结果，并获得奖励。PlotX 即将推出的 Play-2-Earn 游戏试图解决 P2E 生态系统中的可持续性问题，承诺为世界新兴经济体提供最便捷获取加密的机会。（来源链接）
+ 
+8、越南游戏公会Ancient8完成400万美元种子轮融资，Dragonfly Capital等领投
+ 
+1月19日，位于越南的游戏公会 Ancient8 宣布完成 400 万美元种子轮融资，Dragonfly Capital、 Pantera Capital 和 Hashed 领投。
+ 
+Ancient8 表示将利用这笔资金建立一个 DAO，以进一步围绕“Play-to-Earn”建立社区。（来源链接）
+ 
+9、社交游戏发行商 Carry1st 完成2000万美元融资，a16z 领投
+ 
+1月19日，Web3、社交游戏发行商Carry1st完成2000万美元A轮融资，Andreessen Horowitz（a16z）领投，Avenir、Google母公司Alphabet、Riot Games、Konvoy Ventures、Raine Ventures、TTV Capital参投。
+ 
+据悉，Carry1st希望通过此轮融资进一步扩大非洲的产品开发。非洲大陆可能在未来十年成为游戏行业的首要枢纽。（来源链接）
+ 
+10、链游公会管理系统Infinity Force完成550万美元种子融资，Animoca Brands领投
+ 
+1月20日，P2E 链游生态公会管理系统 Infinity Force 宣布完成 550 万美元种子轮融资，Animoca Brands 领投，Jump Capital、SkyVision Capital、OKEx Blockdream Ventures、MEXC 等参投。
+ 
+据悉，新资金将用于进一步扩展平台的功能并促进向 Infinity Force DAO 的过渡。Infinity Force 的产品提供端到端软件即服务，包括公会创建、NFT 资产借贷、玩家招募和培训，以及绩效管理、支付自动化和数据分析。（来源链接）
+ 
+11、Solana 链上游戏项目 STEPN 完成500万美元种子融资，红杉印度与 Folius 领投
+ 
+1月20日，Solana 链上“Move-to-Earn”游戏 STEPN 宣布完成 500 万美元种子轮融资，红杉资本印度与 Folius Ventures 领投，Solana Ventures、Alameda Research、6th Man Ventures、Sfermion 等机构，前 ParaFi Capital 合伙人 Santiago Santos 与 Republic 亚太合伙人 Zhen Cao 等参投。该笔融资通过 SAFT 完成，将用于团队扩充和产品优化。
+ 
+据悉，STEPN 是一款基于 Solana 的“Move-to-Earn”NFT 游戏，该游戏制作团队此前曾赢得 Solana Ignition Hackathon Gaming Track，玩家可在游戏中装备 NFT 运动鞋，通过在户外散步或跑步来赚取 Token。（来源链接）
+ 
+12、Web 3.0孵化器MetaGoons完成200万美元种子轮融资，LD Capital等参投
+ 
+1 月 21 日，据官方消息，Web 3.0 孵化器 MetaGoons 完成 200 万美元种子轮融资，Flying Falcon、Arrington Capital、Hof Capital 和 LD Capital 等参投。
+ 
+本轮融资将推动 MetaGoons 建立第一个整体、垂直整合的元宇宙游戏、娱乐、投资和开发公会的计划。（来源链接）
+ 
+13、GameFi 游戏 Battle Monster 获红杉资本、Solana和FTX等战略投资
+ 
+1月21日，中国互联网投资金融集团有限公司（股份代号：810）经董事会决定联合红杉资本、Solana、FTX联合推出针对区块链领域DeFI、NFT、GameFi等高价值资产专项投资基金，Batte Monster(战斗精灵）将获得该基金首笔投资。
+ 
+Battle Monster是一款运行在Solana的GameFi游戏，玩家通过购买、孵化精灵(游戏中的BM-NFT)、精灵闯关模式中享受养成、消除战斗的无穷乐趣。将“DeFi+NFT+元宇宙”进行深度融合发展，以及通过Play-toEarn的模式游戏，玩家在参与游戏闯关获得BMG代币，每一个精灵都是一种NFT资产，可以自由交易变现。（来源链接）
+ 
+14、以太坊生态 P2E 链游 Heroes of Mavia 完成 550 万种子轮融资，币安 Labs 领投
+ 
+1月21日，基于以太坊的 P2E 链游 Heroes of Mavia 完成 550 万种子轮融资，Genblock Capital、Delphi Digital、Mechanism Capital、Alameda Research、Animoca Brands、YGG、YGG SEA、ExNetwork Capital、Double Peak Ventures、Merit Circle、Hashkey Capital等多个天使投资方参投。该项目将使用收益开发游戏，发展社区。
+ 
+Binance Labs 投资主管 Bill Chin 表示：“在全球范围内对游戏产生兴趣的时候，我们相信 Mavia 及其背后的团队将在这个领域成为全球顶级3A游戏之一。”
+ 
+据悉，Heroes of Mavia 是一款3A级MMO策略类游戏，支持玩家购买土地，建立基地，并通过竞技来赚取其代币RUBY。游戏内的三种NFT游戏道具都可以在Mavia市场上购买和出售。（来源链接）
+ 
+二、NFT
+ 
+15、去中心化拍卖协议Burnt Finance完成800万美元A轮融资，Animoca Brands领投
+ 
+1月17日，Solana 链上去中心化拍卖协议 Burnt Finance 完成 800 万美元 A 轮融资，Animoca Brands 领投，Multicoin Capital、Alameda Research、DeFiance、Valor Capital Group、Figment、Spartan Capital、Tribe Capital、Play Ventures、HashKey、Mechanism Capital、DeFi Alliance、Terra、Fantom 等参投。新融资将用于部署和集成新链和产品功能，并扩大团队规模。该协议计划在未来几个月将其产品扩展到贷款或 GameFi 等项目。
+ 
+据悉，Burnt Finance 的协议将允许用户通过在无需许可的生态系统中进行 NFT 的铸造和交易。 此前，Burnt Finance 在 2021年 5 月曾宣布完成 300 万美金融资，该轮融资由Injective Protocol、Multicoin Capital、Alameda Research、Mechanism Capital 等机构参投。（来源链接）
+ 
+16、基于Solana的NFT铸造平台Metaplex完成4600万美元融资，Multicoin Capital和Jump Crypto领投
+ 
+1月18日，NFT铸造平台Metaplex宣布已筹集了由 Multicoin Capital 和 Jump Crypto 牵头的 4600 万美元融资。Metaplex表示，它将利用这笔资金扩大其运营规模，并提供赠款以支持来自代表性不足的社区的创作者。
+ 
+据悉，Metaplex建立在Solana之上，旨在帮助创作者铸造和拍卖NFTs。自去年六月推出以来，其协议已被用于创建超过 85,000 个项目和 570 万个 NFT。（来源链接）
+ 
+17、以太坊 NFT 徽章应用程序 POAP 完成 1000 万美元融资，Archetype 和 Sapphire Sport LLC 领投
+ 
+1月19日，以太坊 NFT 徽章应用程序 POAP 宣布完成 1000 万美元融资，由 Archetype 和 Sapphire Sport LLC 领投，Collab Currency、1KX、Libertus Capital、Red Beard Ventures、6th Man Ventures、Delphi Digital、A Capital、Sound Ventures、Advancit Capital 和 The Chernin Group等机构参投。
+ 
+据悉，POAP（代表“出席证明协议”）是一款基于以太坊的应用程序，活动组织者可以使用它以 NFT 的形式发放出席证明。据该公司称，这些徽章是使用 ERC-721令牌标准铸造的，迄今为止已铸造了超过 200 万个 POAP。（来源链接）
+ 
+18、体育NFT平台 Autograph 获1.7亿美元B轮融资，a16z 联合领投
+ 
+1月20日，体育NFT平台 Autograph 宣布完成1.7亿美元B轮融资，Andreessen Horowitz（a16z）和Kleiner Perkins共同领投。其他参投方包括风投机构01A、Nicole Quinn和a16z前合伙人Katie Haun。Katie Haun等人将加入Autograph董事会。
+ 
+据悉，Autograph在Polygon上运行，由美国足球运动员汤姆·布雷迪（Tom Brady）于去年4月创办。该平台帮助体育、大众文化、时尚和娱乐界名人出售NFT，参与过的明星包括职业高尔夫球手泰格·伍兹。（The Block）
+ 
+19、NFT卡牌游戏 Spellfire 完成 380 万美元私募融资，DAO Maker 和 Shima Capital 共同领投
+ 
+1月20日，NFT卡牌游戏 Spellfire 宣布完成380万美元私募融资，DAO Maker 和 Shima Capital 共同领投， Genblock、IBC Group、Faculty Group、IBA、Maven Capital、Autonomy Capital、Terranova Ventures、x21 Digital、CatcherVC等参投。
+ 
+据称，Spellfire 将在未来几周内公布IDO活动。2021 年 10 月，其从Terranova、x21 和 Autonomy Capital等机构手中拿到36万美元种子轮融资。（来源链接）
+ 
+20、NFT 画廊初创公司 Cyber​​ 完成 670 万美元融资，Variant 领投
+ 
+1月21日，元宇宙NFT画廊初创公司 Cyber 于 2021 年 11 月份完成 670 万美元融资，Variant 领投，三箭资本、TCG Capital Management 以及数名天使投资人和 NFT 收藏家参投，包括 Cozomo de' Medici、艺术家 Joey Colombo、Product Hunt 创始人 Ryan Hoover、Adobe 首席产品官 Scott Belsky、Not Boring 创始人 Packy McCormick、Art Blocks 创始人 Erick Calderon 、匿名组合 6529，DeeZe 和 Gmoney。
+ 
+Cyber旨在元宇宙内为NFT建立虚拟陈列室。新资金将主要用于扩大团队，同时推进产品开发。其产品可通过一个中央门户将收藏家的虚拟陈列室连接在一起。Cyber 创始人 Rayan Boutaleb表示，Cyber 的使命是“让人们部署身临其境的空间，无论大小”。（来源链接）
+ 
+三、DeFi
+ 
+21、基于 Solana 的 DeFi 协议 Hubble 完成 1000 万美元融资，计划 1 月 28 日启动主网
+ 
+1月18日，基于 Solana 的 DeFi 协议 Hubble 宣布完成 1000 万美元融资，Three Arrows、 DeFiance Capital、Delphi Digital、Digital Currency Group (DCG)、Crypto.com Capital、 ParaFi、Jump Capital、Decentral Park Capital、CMS、Spartan、DeFi Alliance与 Mechanism Capital等机构参投。
+ 
+据悉，Hubble 计划在 1 月 28 日启动主网，新的资金来扩展其团队和 DeFi 产品。Hubble 路线图上的第一项目标是推出其零息借贷平台，该平台铸造抗审查的稳定币 USDH“定位为成为 Solana 生态系统中其他协议的基石”。（来源链接）
+ 
+22、Algorand生态借贷协议Folks Finance完成300万美元种子轮融资，Borderless Capital领投
+ 
+1 月 21 日，基于 Algorand 的借贷协议 Folks Finance 宣布完成 300 万美元的种子轮融资，该轮融资由 Borderless Capital 领投，Jump Crypto、ParaFi Capital、Coinbase Ventures、OKX Blockdream Ventures、Genesis Capital、Algorand Foundation 等参投。
+ 
+Folks Finance 是领先的算法资本市场协议，用于在 Algorand 区块链之上构建和运营的借贷。通过借贷操作，Folks 用户可以存入流动性并立即开始获得持续的经济回报，用户可以通过将存入的资金锁定为抵押品来请求加密货币贷款。（来源链接）
+ 
+23、去中心化交易所 Soma.Finance 完成650万美元融资，Animoca Brands 领投
+ 
+1月21日，去中心化交易所Soma.Finance完成650 万美元种子轮融资，Animoca Brands领投，Kenetic Capital、Griffin Gaming Partners、GSR、Token Bay Capital、Mind Fund、Unknown VC、Fomocraft、BCW Group、Tai Ping Shan Capital、Gate Ventures和0x Ventures等参投。
+ 
+Soma.Finance是一家用于交易数字资产和合规数字证券的去中心化交易所。Soma旨在成为面向机构和散户投资者的完全合规的DEX和产品套件，其服务包括内置KYC和AML功能。该公司是总部位于中国香港的DeFi平台Mantra DAO和总部位于美国纽约的Tritaurian Holdings的合资企业，后者拥有金融业监管局（FINRA）许可的经纪交易商子公司。（来源链接）
+ 
+24、去中心化衍生品平台01 Exchange完成220万美元种子轮融资，Multicoin Capital等领投
+ 
+1月21日，去中心化衍生品交易平台01 Exchange完成220万美元种子轮融资，Multicoin Capital和Alameda Research领投，Solana Ventures，Ledger Prime等参投。
+ 
+01 Exchange是基于Solana的去中心化衍生品交易平台，将于1月27日发布主网并推出具有深度流动性的永续合约，能够支持100个不同的衍生品市场和50种不同的抵押品。同时还将推出第一个有限订单簿模式的Power Perps产品SQUOL。（来源链接）
+ 
+25、Algorand 生态 DeFi资管平台 Prismatic 完成200万美元融资，Borderless Capital领投
+ 
+1月22日，DeFi 资管平台 Prismatic 宣布完成 200 万美元种子轮融资，本轮融资由 Borderless Capital 领投，Meld Ventures、Valhalla Capital、Chiron Partners、Cluster、Ellipti、MEXC、0x Ventures、Kangaroo Capital、8186 Capital、SigmaDAO、Fork Ventures 等参投。
+ 
+Prismatic 应用程序将建立在 Algorand 区块链平台上，计划于 2022 年第二季度推出。（来源链接）
+ 
+四、Web3和DAO
+ 
+26、短视频分享平台 Chingari 完成 1900 万美元融资，Republic Capital 领投
+ 
+1月17日，印度短视频分享平台 Chingari 近日完成一轮 1500 万美元融资，Republic Capital 领投，Onmobile、JPIN Venture Catalysts、Hill Harbor等参投，新资金将用于拓展应用程序技术、扩大团队等。
+ 
+据了解，Chingari 是一个短视频分享平台，用户在平台上观看或上传内容可获得 GARI 代币，这些代币可用于解锁创作者的特殊内容或购买与创作者语音或视频通话的体验。去年10月完成由 Alameda Research 等参投的 1900 万美元融资，11月在众筹平台 Republic 上通过发行 GARI 代币融资 4000 万美元。（来源链接）
+ 
+27、创作者经济初创公司 AppX 完成130万美元融资，Y Combinator 领投
+ 
+1月18日，创造者经济初创公司 AppX 在 Y Combinator 领投的一轮融资中筹集了 130 万美元。Global Founders Capital、Rocket Internet、Soma Capital、Shrug VC、Lenny Rachitsky、James Beshara 和 TDV Partners 为其他参投方。
+ 
+据悉，新资金将用于产品开发，以帮助更多创作者变现，发行自己的代币，以及进行国际业务上的扩张。（来源链接）
+ 
+五、链上基础设施
+ 
+28、Fantom Maker完成180万美元融资，DAO Maker和Halvings Capital领投
+ 
+1月18日，专注于 Fantom 的 launchpad 和孵化器项目 Fantom Maker 宣布完成 180 万美元种子轮融资，本轮融资由 DAO Maker 和 Halvings Capital 领投，Maven Capital、Octopus Crypto Capital、ZBS CAPITAL、Icetea Labs 等参投。
+ 
+Fantom Maker 是第一个专注于 Fantom 区块链的 launchpad 和孵化器，旨在通过孵化和推出优质项目来丰富整个 Fantom 生态系统。（来源链接）
+ 
+29、区块链安全公司Redefine完成1100万美元种子轮融资，Ribbit Capital领投
+ 
+1月18日，以色列区块链安全初创公司Redefine以5000万美元的估值完成1100万美元的种子轮融资，Ribbit Capital领投。据称，Redefine将构建第一个“加密防火墙（Crypto Firewall）”，以保护DeFi平台和协议。（来源链接）
+ 
+30、Secret Network宣布推出4亿美元生态系统基金，并获得DeFiance Capital、Alameda Research等机构投资
+ 
+1月19日，隐私公链Secret Network宣布推出4亿美元的生态系统基金，其中包括2.25亿美元的新生态系统基金和1.75亿美元的加速器池。
+ 
+据悉，该生态系统基金由SCRT Labs领投，由25个组织出资，其中包括DeFiance Capital、 Alameda Research、CoinFund、HashKey、Hashed、Arrington Capital、Dragonfly Capital Partners、Fenbushi Capital、Skyvision Capital、Blocktower Capital、Terraform Labs、 Hartmann Ventures、NGC Ventures、Figment、Arkstream Capital、Shima Capital、Magnus Capital、Bison Fund、Momentum6、Arca、Iconium、Huobi Ventures、Kucoin Labs、Skynet Trading等。
+ 
+Secret Network表示，将邀请世界各地的开发者加入其使命，构建下一代隐私应用程序，以保护和授权数百万全球用户，并将Secret Network建立为Web3的数据隐私中心。（来源链接）
+ 
+31、Algorand 生态去中心化预测协议Venue One完成340万美元融资，Borderless Capital领投
+ 
+1月20日，Algorand 生态去中心化预测协议 Venue One 宣布完成 340 万美元种子与私募轮融资，本轮融资由 Borderless Capital 领投，Algorand、Elves Long Term Capital(ELTC)、Goldentree、Cognitive Blockchain、Meld Venture、MEXC、Synaps、Youbi、D4 Ventures、CSP DAO、0x 等参投。
+ 
+Venue One 旨在彻底改变 Algorand 上的去中心化预测市场，是一个非托管的、去中心化、快速和全球性的预测协议。测试网预计将于 2 月 22 日启动。（来源链接）
+ 
+32、去中心存储及计算网络 Aleph.im 宣布完成1000万美元融资，Stratos Technologies领投
+ 
+1月20日，去中心化存储及计算网络 Aleph.im 宣布完成 1000 万美元融资，Stratos Technologies 领投，Zeeprime, NOIA Capital, Theia, Bitfwd Capital, Ellipti, Incuba Alpha, RareStone, TRGC, Winkrypto, NZVC, Token Ventures, Seven Capital, Chris McCann, and Owen Simonin 等跟投。
+ 
+Aleph.im 提供完全去中心化的计算能力和抗审查的数据存储，致力于为所有链上的 dApps 提供安全的存储和计算能力。Aleph 目前支持 Serum、Raydium、Sabre 等，此外还与 Polygon、Request Network 及 Neon Labs 密切合作。
+ 
+33、去中心化索引协议 The Graph 完成 5000 万美元融资，Tiger Global领投
+ 
+1月21日，去中心化索引协议The Graph完成5000万美元融资，Tiger Global领投，FinTech Collective、Fenbushi Capital、Reciprocal Ventures and Blockwall Digital Assets Fund 参投。新融资将用于收购其他开发商，并在亚洲和欧洲进行扩张。
+ 
+The Graph是一种使用开源API(称为子图)对区块链数据进行索引和查询的协议，旨在帮助开发人员轻松访问这些数据。据介绍，The Graph支持26个不同区块链网络的索引数据，包括以太坊、NEAR、Arbitrium、Optimism、Polygon、Avalanche、Celo、Fantom、Moonbeam和IPFS。到目前为止，The Graph的子图已经被Uniswap、Synthetix、KnownOrigin、Gnosis、Balancer、Livepeer、DAOstack、Audius和Decentraland使用。（来源链接）
+ 
+34、加密抵押管理平台 Stader Labs 以4.5亿估值完成1250万美元私募融资，三箭资本领投
+ 
+1月20日，加密货币抵押管理平台Stader Labs周四宣布以4.5亿估值完成1250万美元私募融资，三箭资本领投，Blockchain.com、Accomplice、DACM、GoldenTree Asset Management、Accel、Amber、4RC, Figment以及多位天使投资人参投。新融资将用于加速Stader Labs跨链扩张，以及发展其第三方生态系统，利用去中心化的Stader基础设施开发质押应用程序。
+ 
+目前，Stader Labs只支持Terra区块链上的质押，未来还计划扩展至Solana、以太坊、Fantom、Hedera和Polygon。去年10月，Stader Labs宣布完成400万美元种子轮融资，Pantera Capital领投，Coinbase Ventures、True Ventures、Jump Capital、Proof Group等参投。(来源链接）
+ 
+ 
+六、其他
+ 
+35、中东加密货币交易所 Rain Financial 获1.1亿美元融资，Paradigm 联合领投
+ 
+1月18日，总部位于巴林的加密货币交易所Rain Financial 宣布完成1.1亿美元B轮融资，Paradigm 和 Kleiner Perkins 共同领投。其他参投者为 Coinbase Ventures、Global Founders Capital、MEVP、Cadenza Ventures、JIMCO 和 CMT Digital。
+ 
+据称，Rain成立于2017年，2019年成为中东第一家获得许可的加密资产服务提供商，目前在巴林、土耳其和阿拉伯联合酋长国设有子公司。累计交易额超19 亿美元，活跃用户数约为185,000 名。据悉，新资金将用于在其他国家寻求许可，增强技术平台，及团队扩张。（Coindesk）
+ 
+36、法国数字资产平台Coinhouse完成1700万美元B轮融资，TGV4 Plus Fund领投
+ 
+1月18日，法国合规数字资产平台Coinhouse宣布完成1700万美元B轮融资，True Global Ventures 4 Plus（TGV4 Plus）Fund以570万美元领投。
+ 
+据称，Coinhouse是第一家在法国金融监管机构金融市场管理局（AMF）注册的加密货币公司。（来源链接）
+ 
+37、零数科技完成数千万元Pre-B轮战略融资
+ 
+1月18日，零数科技宣布完成数千万元Pre-B轮战略融资。据介绍，本轮投资方成都新跃股权投资基金是一支国有控股基金，其股东方包括四川新传媒、人民网、光明网等。
+ 
+据悉，零数科技是一家具备区块链底层技术及深度应用场景的国家高新技术企业，零数科技CEO林乐表示，融资将用于开拓新业务板块，加速数字文化产业布局，推动区块链数字版权保护、NFT等应用落地。（来源链接）
+ 
+38、企业区块链SaaS初创公司Schrocken完成A轮融资，Five Garden和ThinkKuvate领投
+ 
+1月18日，据Businesswire报道，基于企业区块链的SaaS初创公司Schrocken Inc.完成A轮融资，具体金额未披露。此轮融资由Five Gardens LLC和ThinkKuvate领投，Quentelle LLC等参投。新资金将用于增强Schrocken的平台能力，并通过加快销售和营销活动扩大公司在美国和欧洲的业务。（来源链接）
+ 
+39、加密做市商Byte Trading完成700万美元融资，Redalpine领投
+ 
+1月19日，专注于加密衍生品的加密做市商Byte Trading宣布完成 700 万美元种子轮融资，Redalpine 领投，Possible Ventures、L1 Digital 和 D4 Ventures 等参投。Redalpine 的普通合伙人 Harald Nieder 和 Possible Ventures 合伙人 Simon Leicht 已加入 Byte Trading 董事会。本轮融资资金将用于扩大团队，并在2022年使其管理资产规模增长50倍。
+ 
+Byte 是一家数字资产算法做市商，旨在为中心化和去中心化的交易所创建流动性和高效率的市场。（来源链接）
+ 
+40、资产代币化基础设施提供商Stably宣布完成Pre-A轮融资，Morgan Creek Capital等领投
+ 
+1月19日，资产代币化基础设施提供商Stably宣布完成Pre-A轮融资，Morgan Creek Capital、Cream的Jackson Fu和VeChain的Sunny Lu领投，Hard Yaka、Bloccelerate、B21 Capital、Blockchain Coinvestors的Lou Kerner、Taureon Capital的David Choi、Beenext和Pay It Forward等参投，融资金额未披露。（来源链接）
+ 
+41、加密IRA平台 iTrustCapital 完成1.25 亿美元融资，Left Lane Capital领投
+ 
+1月19日，加密 IRA 平台 iTrustCapital 以 31 亿美元估值完成 1.25 亿美元 A 轮融资，本轮融资由 Left Lane Capital 领投，其他具体融资信息暂未透露。本轮融资资金将用于开发新产品，例如质押治理 Token，并探索更多收购机会。
+ 
+iTrustCapital 是一个允许用户通过个人退休账户 (IRA) 购买加密货币的平台，该平台的托管合作伙伴是 Coinbase Custody 和 Fireblocks。iTrustCapital 高级副总裁 Kevin Maloney 表示，自推出以来，该平台已创建超过 120,000 个新帐户，每月活跃用户超过 25,000 个。（来源链接）
+ 
+42、硬件加密钱包生产商NGRAVE完成600万美元融资，Spark Digital Capital等参投
+ 
+1月19日，硬件加密钱包生产商 NGRAVE 完成 600 万美元种子轮融资，Spark Digital Capital、Woodstock Fund、Morningstar Ventures、DFG、Moonrock Capital、Mapleblock Capital 等参投。
+ 
+据悉，NGRAVE 将利用新资金扩大团队规模，并在全球建立多个办事处，并展开关于尖端安全技术的新实验。目前，NGRAVE 的产品已在全球 90 多个国家或地区进行销售。（来源链接）
+ 
+43、加密资产指数提供商Vinter完成340万美元融资，Octopus Ventures领投
+ 
+1月20日，欧洲加密资产指数提供商 Vinter 完成 340 万美元融资，本轮融资由 Octopus Ventures 领投，Ricketts 家族办公室、D4 Ventures、Pfeffer Capital 以及包括 Gokul Rajaram、Marc Powers 和 David Chreng 在内的知名天使投资人参投。
+ 
+Vinter 是欧洲增长最快的专注于加密资产的指数提供商，除了聘请高级数据分析师和科学家加入 Vinter 现有的分析风险和行业趋势的量化团队外，该公司还将利用现金注入来建立其后端开发人员和技术数据工程师团队。（来源链接）
+ 
+44、交易经纪公司 BlockFills 完成3700万美元A轮融资，CME Ventures等领投
+ 
+1月20日，BlockFills 宣布完成 3700 万美元的 A 轮融资，该公司主要业务为数字资产电子做市、交易和大宗经纪公司。 本轮融资由 Susquehanna Private Equity Investments LLLP、CME Ventures、Simplex Ventures、C6 Ventures、Nexo Inc. 等领投。
+ 
+新融资将用于推动 Blockfills 在全球范围内扩张，并推出旨在吸引机构客户、对冲基金/资产管理公司、银行等进入数字资产领域和矿机开发的新技术。 自 2018 年成立以来，该公司已在两轮融资中获得总计 4400 万美元的投资。
+ 
+45、加拿大交易平台 Shakepay 以2.51亿美元估值完成3500万美元A轮融资，QED Investors领投
+ 
+1月20日，加拿大加密交易平台Shakepay以2.51亿美元估值完成3500万美元A轮融资，QED Investors领投，Golden Ventures、Broadhaven、企业家Henri Machalani和Mike Murchison以及Shopify数位产品负责人参投。作为融资协议的一部分，QED Investors的合伙人Matt Burton将加入Shakepay的董事会。
+ 
+新融资将用于巩固公司的增长，专注于向市场推出更多产品，如最近推出的Shakepay Visa预付卡，并扩大团队。据悉，去年该公司的总交易量超过60亿美元，客户超过90万。（来源链接）
+ 
+46、比特币托管服务公司Voltage完成600万美元融资， Trammell Venture Partners领投
+ 
+1月21日，比特币和闪电网络基础设施公司 Voltage 完成 600 万美元种子轮融资，早期风险投资公司 Trammell Venture Partners 领投，Craft Ventures、GV、Stillmark、Cavalry Asset Management、Strategic Cyber Ventures、Fulgur Ventures、Tenzing.vc 参投。Trammell Venture Partners 董事总经理 Christopher Calicott 将加入 Voltage 董事会。
+ 
+Voltage 为有兴趣在云上运行比特币或闪电节点的用户提供托管服务。该服务还包括一个仪表板，用户可以通过该仪表板进行交互。Voltage 表示，此轮融资将支持其增长计划并帮助其扩大团队，进一步扩展和改进其企业级比特币和闪电基础设施解决方案。（来源链接）
+ 
+47、拉美电商巨头Mercado Libre完成对加密货币公司2TM和Paxos的投资
+ 
+1月21日，拉丁美洲电子商务公司 Mercado Libre 购买 2TM 的股票并对区块链基础设施公司 Paxos 进行了「战略投资」，但未透露投资金额。
+ 
+据称，2TM 是巴西最大的加密货币交易平台 Mercado Bitcoin 的控股公司。此前 Mercado Bitcoin 在 2021 年融资 2.5 亿美元，估值达到 22 亿美元。（来源链接）

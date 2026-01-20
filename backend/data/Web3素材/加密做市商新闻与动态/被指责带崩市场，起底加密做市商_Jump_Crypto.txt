@@ -1,0 +1,85 @@
+标题: 被指责带崩市场，起底加密做市商 Jump Crypto
+链接: https://www.chaincatcher.com/article/2137054
+发布时间: 2024-08-05
+
+==================================================
+
+作者： 西柚 ， ChainCatcher
+
+编辑： Marco ， ChainCatcher
+
+ 
+
+以太坊ETF批准上线后的第二天，加密做市商及投资机构Jump Crypto就开启了集中大规模抛售行为，被社区指责为本次加密市场崩盘的罪魁祸首。
+
+根据链上数据显示，近10天内，Jump Crypto累计抛售的ETH价值已超过3亿美元。
+
+Jump Crypto作为知名高频交易公司Jump Trading的加密子公司，曾参与了Solana、Wormhole等多个加密项目的投资和孵化，一度是加密行业的风向标，一举一动备受市场关注，这次大举抛售的异常行为，更让社区用户纷纷猜测，是否要退出加密领域。
+
+以太坊单日最大跌幅超25%，Jump Crypto抛售或是罪魁祸首
+
+8月5日，以太坊最低价触及2100美元，单日最大跌幅超25%，而单日币价波动幅度创下自2022年11月以来的新高。现以太坊报价为2358美元，已完全抹去了今年以来的涨幅，并创下近7个月以来的低点。
+
+除了外围宏观利空消息影响外，做市商Jump Crypto大规模转移代币则是引发以太坊今日价格恐慌性暴跌的主要场内诱因。
+
+加密投资公司Cake Group首席执行官兼联合创始人Julian Hosp在社交媒体发文表示，近几日加密市场被大举抛售或因Jump Trading，要么是因为传统市场被追加保证金，需要流动性，要么是因为监管原因退出加密货币业务。
+
+另外，BitMEX联创Arthur Hayes也在社交媒体上发文表示，其通过传统金融领域的消息渠道得知，某个“大家伙”倒下并卖出了所有加密资产，而这个“大家伙”被社区猜测其所指为Jump Crypto。
+
+据加密货币侦探EmberCN透露，自7月25日美国现货以太坊ETF推出几天后，Jump似乎就已开始赎回价值超过5亿美元的Lido的wstETH，以换取ETH。
+
+在过去的10天内，链上数据Spot On Chain显示，自7月25日开始，被标记为Jump Crypto钱包向CEX交易所充值了累计价值为2.79亿美元的ETH。
+
+目前，Jump Crypto向CEX转移的行动还在继续，过去24小时内，又再次向交易所充值了4678万美元的ETH。
+
+截至发稿时，Jump Crypto已陆续累计向CEX交易所转账价值超过3亿美元的ETH，这些ETH分别包括Jump Crypto从Lido中解除质押的ETH、多次从其他钱包中转移的ETH等。
+
+目前，Jump Crypto钱包仍持有价值1.01亿美元wstETH和800万美元的RETH，正处于解除质押过程中，97%的仓位主要由USDC、USDT等稳定币组成。
+
+Jump Crypto或因CFTC调查退出加密领域
+
+Jump Crypto在加密市场的频繁异动现象引发社区猜测，一周之内抛售了价值数亿美元的ETH是否准备退出加密领域。去年5月，彭博社就报道称，因监管原因Jump Crypto正在缩减加密业务，或将退出美国市场。
+
+而与Jump Crypto相关的官推@Jump Crypto、@Jump Crypto Engineering、@Jump Trading的社交媒体账号已分别在2023年9月、2023年5月、2021年9月停止了更新。
+
+这更加印证了用户的猜想，Jump Crypto出售大量资产的行为或是在为退出加密领域做准备。
+
+结合此前其被美国CFTC调查之事，本就恐慌的加密市场正在传言其加密相关业务或将被关停。
+
+今年6月被爆出，美国商品期货交易委员会CFTC正在对Jump Crypto的加密货币业务（交易和投资活动）进行调查，因为SEC对Terra提起的民事诉讼中，有投资者指控Jump Crypto或与Terra崩盘案有关。
+
+根据法庭诉讼文件显示，投资者指控Jump Crypto参与了Terra（UST）的欺诈计划，二者合谋操纵UST价格以误导投资者UST可以维持价格稳定，实际上背后是机构在操纵。Jump Crypto从本次操纵中获利近13亿美元。
+
+不过，报道也指出，CFTC的这项调查并不意味着Jump Crypto存在任何违法行为。截至目前，关于Jump Crypto的调查也未公开有新进展。
+
+在CFTC调查Jump Crypto消息公布4天后，在Jump Crypto任职总裁已有三年多的Kanav Kariya就宣布辞职。
+
+Jump Crypto从辉煌到陨落？
+
+作为全球知名高频交易公司Jump Trading的专门从事加密货币和区块链技术的部门，Jump Crypto从出生就自带光环。
+
+2021年，Jump Trading完成第七支投资基金募资，这只基金共募资3.5亿美元，创下该公司基金的募资记录，其宣布组建了加密投资部门Jump Crypto，并将第七支投资基金的40%投向加密货币领域，担任Jump Crypto总裁的是年仅26岁的Kanav Kariya。
+
+根据Kariya之前的说法，Jump Crypto曾约拥有大约140名员工，其中100多名是开发人员。
+
+背靠Jump Trading，Jump Crypto在加密领域一直是重要的市场参与者，并以做市商和投资者的身份参与主导了多个知名加密项目的投资和孵化，参与的项目包括Solana，以及Wormhole、Pyth、Serum，Avalanche等，可谓一度是加密市场方向的领导者。
+
+但进入2022年后，Jump Crypto像是在经历水逆一般，遭遇了一系列危机，孵化的项目Wormhole被盗，Terra和FTX的倒塌等，导致资金损失严重。
+
+2022年2月，Jump Crypto投资孵化的跨链桥Wormhole遭遇黑客攻击，损失金额超过3亿美元，所有损失由该团队来负责。后来，Wormhole从Jump Crypto脱离，独立运营。
+
+同年5月，作为Terra的主要投资者，随着该生态系统的崩盘，Jump Crypto不但要面对巨额损失，还面临着该公司与Terra合作操纵UST币价的刑事诉讼指控。
+
+同年11月，FTX垮台，作为FTX的投资人，Jump Crypto在FTX破产中损失了2.06 亿美元，是除FTX或Alameda外所有公司中损失金额最大的。
+
+这些危机导致Jump Crypto损失严重，随后，2023年5月Jump Crypto被传出因监管原因表示缩减了加密货币业务（如拆分Wormhole），并计划退出美国市场。
+
+随着越来越多的做市商进入加密货币市场，竞争变得异常激烈，Wintermute、DWF Labs等做市商后来者快速崛起，蚕食了市场份额，导致曾风光无限的Jump Crypto在近年来地位不断下滑。
+
+根据Rootdata数据显示，截至8月5日，Jump Crypto参与投资的加密项目有91个，其中领投的项目有31个，但进入2023年以后投资的项目仅有15个。
+
+除了投资项目数量的减少，Jump Crypto员工人数也在缩减，根据领英数据显示，该部门员工人数现还有20人左右，近半年内，人数减少了19%。
+
+尽管Jump Crypto影响力不如以前，但是从Jump Trading及Jump Crypto团队离职的人员发起或参与的项目依旧主导着加密行业的发展及趋势。
+
+如4月份以30亿估值完成2.25亿美元融资的并行EVM项目Monad，创始团队成员均来自Jump Trading，其中创始人Keone Hon曾是Jump Trading的研究负责人，在该公司工作了8年之久，另一位联创James Hunsaker是Jump Trading的高级软件工程师,还是PythNetwork的核心维护人员。

@@ -1,0 +1,90 @@
+标题: StarkNet 生态的 14 个潜在空投项目
+链接: https://www.chaincatcher.com/article/2078627
+发布时间: 2022-08-26
+
+==================================================
+
+Layer2  赛道的四大天王是 Arbitrum  、Optimism 、zkSync  以及 StarkNet。而 StarkNet 作为累计融资超过 3 亿美元，估值高达 80 亿美元的 L2 明星项目，也在 7 月公布了代币计划，给社区中的用户带来强大的空投预期。
+
+近期随着 StarkNet 生态大量新项目上线，本文盘点了14 个有潜在空投的项目，并给出了相关教程。
+
+ 
+
+准备工作
+
+ 
+
+首先需要下载 Argent X 或者 Braavos 钱包，操作流程和其他钱包类似。然后去水龙头网站领取测试币 。需要注意的是，有的应用仅仅支持 Argent X 钱包，而 Braavos 内置了水龙头网站，推荐大家同时下载两个钱包。 
+
+ 
+
+Starknet.id
+
+Starknet.id 是 StarkNet 上第一个链上身份产品，通过免费铸造 NFT  ，将Twitter、Discord、Github 等身份信息和 StarkNet 上的地址相绑定。官方推特中暗示用户可能因为链上与线下行为获得奖励。它在 StarkNet 上另一个链游 Eykar 中也被用到。
+
+Odaily 在不久前为此专门写过一篇教程。
+
+ 
+
+StarkNet Name Service
+
+StarkNet Name Service 是 StarkNet 黑客松 获奖项目，类似以太坊上的 ENS 。
+
+注册过程和 ENS 基本类似，在网站上直接搜索域名然后注册。
+
+ 
+StarkGate
+
+StarkGate 是 StarkNet 背后团队 StarkWare 开发的官方跨链桥，需要注意的是，拉到网页最下面才能点击同意协议并进入正式的桥接过程。
+
+ 
+Stark Board
+
+Stark Board 是 StarkNet 的数据网站，致力于将 StarkNet 生态相关的数据可视化。用户可以点击下图的按钮，申请成为 OG，然后连接钱包，签名，转发推特。但 Stark Board 尚处于内测阶段，下图中的数据信息还无法点击查看详情。
+
+ 
+游戏类
+
+ 
+
+Eyker
+
+Eykar 是一个融合了角色扮演、沙盘模拟等元素的多人在线游戏。
+
+登录网站后跟随教程完成所有任务就可以获得 NFT，需要注意的是会用到 Starknet.id ，而这个应用也是 Eykar 团队参与开发的。
+
+DeFi 类
+
+ 
+
+Astraly
+
+Astraly 是一个代币分发和社区建设平台，用户购买并质押 ASTR 代币可以获得项目的投资门票，类似以太坊上 JuiceBox，可帮助用户完成众筹。
+
+登录网站后可免费 Mint 代币 ASTR，然后质押，随后获得 IDO 门票，该门票可用于投资 Astraly 上的项目。
+
+ 
+Serity
+
+Serity 是一个资产合成协议。用户在网站上连接钱包后为合约交互设置限额，然后合成资产。
+
+选择 ETH  的抵押数量，输入合适的清算比例，然后合成资产。
+
+ 
+CurveZero
+
+CurveZero 是一个固定利率贷款的货币市场，致力于解决链上长期贷款固定利率过高、流动利率不稳定的问题。
+
+按照以下官方教程就可以完成测试网交互。
+
+ 
+Magnetyfi
+
+Magnetyfi 是一个链上资产管理平台，允许任何人在 StarkNet 上创建并管理基金，让专家为更多的大众提供交易策略而获得更多收益，让大众获得更专业的金融服务与更多的收益。
+
+用户访问网站后可以尝试买入或者创建一个基金。
+
+ 
+Swap 类
+
+Swap 的 DeFi 类应用大同小异，可访问网站直接进行换币、质押、借贷相关操作， 推荐 StarkNet 上的五个 Swap 应用，它们分别是 Sithswap、mySwap、Jediswap、StarkSwap、Alpharoad。

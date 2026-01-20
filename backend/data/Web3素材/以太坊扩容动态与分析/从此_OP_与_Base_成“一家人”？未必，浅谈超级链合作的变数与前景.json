@@ -1,0 +1,7 @@
+{
+  "title": "从此 OP 与 Base 成“一家人”？未必，浅谈超级链合作的变数与前景",
+  "url": "https://www.chaincatcher.com/article/2100239",
+  "content": "作者： Haotian\n\n \n\n看大家还在讨论 Base 和 OP 的利益绑定合作，我的观点：看起来只是一个短期的“口头协议”，未来变数还很大。\n\n道理很简单，要是写死的比例和合作模式，就应该把双方职责、利益分配等公开透明到链上，届时只要监控 Sequencer 相关地址的资金分配情况，就能知晓双方收益情况。技术上，只需要在 Sequencer 地址序列中添加一个分账地址就可以，为啥没这么做？\n\n答案是，这或许是 OP SuperChain 计划迈出的第一小步，一切定论得共享 Sequencer 运作模型跑通才行。\n\n什么是共享 Sequencer 模型？\n\nOP Stack 多链环境会由一个统一的 Sequencer 组件（可分布式部署），且由 Sequencer 协调和连通多链资产和数据流通。\n\n在我看来， OP Stack 用 MIT 的开源 license 吸引开发者基于 OP Stack 一键发链 L2 只是第一步，实现多链之间共享 Sequencer 组件才是第二步，之后才是多链并发构建应用的第三步。\n\n只有实现 Sequencer 共享才是 OP 组建 layer2 大家庭的根本原因。 OP 官方也说过，虽然大家都可以独立做自己的 Sequencer 但是难度大，共享符合趋势，好比大家把以太坊作为共识安全层来做 layer2 一样。\n\n其实不止 OP Stack ， ZK Stack 也在做自己的共享 Sequencer 计划，只有这条路跑通了， OP Stack 才能有一条类似 Cosmos IBC 协议的多链通信协议，基于此才可实现原子交换等交易。且相比 IBC 这种需要中继链才能完成的跨链通信， Stack 共享的 Sequencer 组件天然就是一个中继组件，可以实现异构链之间的消息和资产统一管理和状态变更。\n\n当然，光有共享 Sequencer 还不够，还要有统一的 Security Council 以及一致性的 law of chains ，这是保证共享 Sequencer 参与多条链治理的必要元素。（这次合作声明中重点强调的点）\n\n为啥变数大？\n\n1） Base 虽然表现可圈可点，但能发展成啥样还未知，2.75% OP 代币拱手让出，有点草率；\n\n2） SuperChain 要平衡数十甚至数百条链的综合利益，未来 OP Stack 会出什么王炸没人知道，过早成型的利益分配不利于宏大远景落地；\n\n3）一套基于共享 Sequencer 的链上治理协议和利益分配协议是必要的，等未来技术条件成熟后自然会权衡推出，以激发更大的多链活性。\n\n要知道， Base 原本也是 OP SuperChain 大计划中的一环，将来肯定也会共享 Sequencer 成为超级链中的一部分，届时如何利润分成，要不要体现在链上才有的谈，现在二者还没有实现 Sequencer 共享，只能通过链下口头协议的形式鼓舞下市场，给大家一个 OP Stack 大家庭共同繁荣的美丽愿景。",
+  "published_at": "2023-08-28",
+  "downloaded_at": "2026-01-17 14:25:46"
+}

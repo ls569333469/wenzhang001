@@ -1,0 +1,77 @@
+标题: 上周加密市场共发生 15 起公开融资事件，累计融资约 2.01 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2183084
+发布时间: 2025-05-26
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 5 月 19 日- 5 月 25 日期间，区块链和加密行业共发生 15 起公开投融资事件，累计融资约 2.01 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和 DeFi 赛道。热门项目包括加拿大稳定币发行商 Stablecorp、Web3 游戏开发商 Voya Games 、比特币项目 Roxom Global 、稳定币原生加密货币交易所 TrueX。 
+
+此外，比特币流动性质押协议 Rover 宣布完成 410 万美元种子轮融资，Bloccelerate、Animoca Ventures、CMS Holdings、UTXO、Maelstrom 等参投。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+加拿大稳定币发行商 Stablecorp 完成 180 万美元融资，Coinbase Ventures 等参投
+
+据 Betakit 报道，加拿大稳定币发行商 Stablecorp 完成 180 万美元融资，投资方包括 Coinbase Ventures 和 Side Door Ventures 等机构。资金将用于拓展加元稳定币 QCAD 的基础设施建设，包括建立链上外汇流动性和支付通道整合。
+
+该公司宣布将同步进行 QCAD 的结构性改革，包括设立独立信托 QCAD Digital Currency Trust 管理储备资产，实施每日市值报告、月度储备证明和年度审计。QCAD 目前由加密资管公司 3iQ 与区块链开发商 Mavennet Systems 合资运营，2022年曾获 Circle Ventures 等机构 190 万加元投资。
+
+二、AI
+
+Worldcoin 母公司 World 通过出售 WLD 代币完成 1.35 亿美元融资，用于全球扩张
+
+据官方消息，Worldcoin 项目相关方 World Foundation 的子公司 World Assets 于 5 月 21 日宣布，通过以市场价格向 Andreessen Horowitz 和 Bain Capital Crypto 出售 WLD 代币，筹集 1.35 亿美元资金，用于支持 World 网络在美国及全球范围的扩张。
+
+此前披露的参投方还包括 Selini Capital、Mirana Ventures 和 Arctic Digital。
+
+UBI Network 完成种子轮融资，LF Labs 领投推动 AI × DePIN 基础设施建设
+
+UBI Network 近日宣布完成种子轮融资，由早期技术投资机构 LF Labs 领投。本轮融资将用于全球节点部署、AI 边缘设备扩展、积分市场机制优化及生态合作拓展，进一步推动其网络基础设施的发展。
+
+总部位于纽约的 UBI Network，致力于打造融合 AI 边缘计算与 DePIN（去中心化物理基础设施网络） 的创新架构，为数字时代的通用基本收入（UBI）模式探索提供技术支持。用户可通过即插即用设备参与 AI 任务及算力共享，并实时获得积分激励，形成闭环经济体系。
+
+LF Labs 表示：“AI 与 DePIN 的结合具备长期应用潜力，UBI Network 在技术路径和产品落地方面展现出强大前瞻性，契合我们‘真实落地’的投资逻辑。”
+
+三、游戏
+
+Web3 游戏开发商 Voya Games 完成 500 万美元融资，1kx 和 Makers Fund 领投
+
+据 Venturebeat 报道，Web3 游戏开发商 Voya Games 完成 500 万美元融资，本轮融资由 1kx 和 Makers Fund 领投，RockawayX 参投，天使投资人包括 Sky Mavis 联合创始人 Jeff 'Jihoz' Zirlin 和 The Sandbox 首席运营官 Sébastien Borget。
+
+本次融资资金将用于支持休闲 Web3 游戏 Craft World 的发展。Craft World 是一款休闲资源管理游戏，玩家将与友善的恐龙合作，在陨石毁灭人类之后重建文明。游戏目前处于测试网阶段。
+
+四、DeFi
+
+比特币项目 Roxom Global 完成 1790 万美元融资，Borderless Capital 等参投
+
+比特币项目 Roxom Global 正在建立一个以 BTC 计价的交易所和一个完全致力于比特币发展的 24/7 媒体网络 RoxomTV。
+
+据悉 Draper Associates、Borderless Capital、ego death 和 Kingsway Capital 为其交易所投资了 790 万美元，并在一轮私人融资中为 RoxomTV 筹集了 1000 万美元。
+
+比特币流动性质押协议 Rover 完成 410 万美元种子轮融资，Animoca Ventures 等参投
+
+据 The Block 报道，比特币流动性质押协议 Rover 宣布完成 410 万美元种子轮融资，Bloccelerate、Animoca Ventures、CMS Holdings、UTXO、Maelstrom 等参投。
+
+Rover 正在 Botanix 上为比特币持有者开发旗舰级流动性质押解决方案，Botanix 是首个完全去中心化的比特币区块链。Rover 还获得了早期比特币风险投资基金 UTXO 的战略投资。
+
+五、其他
+
+Circle 联创新公司 Catena Labs 完成 1800 万美元种子轮融资，a16z 领投
+
+据 Fortune 报道，Circle 联合创始人 Sean Neville 创立的 AI 原生金融初创公司 Catena Labs 完成 1800 万美元种子轮融资，由 Andreessen Horowitz 加密部门领投，Breyer Capital、Circle Ventures、Coinbase Ventures 和美式足球运动员 Tom Brady 参投。
+
+Catena Labs 计划打造"人工智能原生银行"。投资者将获得股权以及未发行加密货币的代币认购权。Sean Neville 表示，该公司目前没有发行加密货币或稳定币的计划。
+
+Catena Labs 目前已开发出一套开源协议，用于人工智能支付和身份识别。该公司将整合但不局限于稳定币技术，致力于更新现有的金融基础设施，以适应未来人工智能代理主导的金融交易场景。
+
+稳定币原生加密货币交易所 TrueX 完成 1100 万美元 A 轮融资，Accomplice 和 RRE Ventures 领投
+
+稳定币原生加密货币交易所 TrueX 宣布完成 1100 万美元 A 轮融资，Accomplice 和 RRE Ventures 领投，Reciprocal Ventures、Variant 和支付巨头 PayPal 参投，新资金拟用于支持 Paxos Custody 等外部托管方进行资产保护，目前 TrueX 使用 PayPal 稳定币 PYUSD 作为其首选交易代币，Paxos 为 TrueX 的用户提供第三方托管服务，预计其服务首先向美国机构和某些地区的一些国际机构开放。

@@ -1,0 +1,69 @@
+标题: 争雄Layer2赛道：短期看Optimistic，长期或是ZKRollup
+链接: https://www.chaincatcher.com/article/2060202
+发布时间: 2021-03-17
+
+==================================================
+
+本文来自于蓝狐笔记公众号，原文标题为《Layer2赛道:短期OP，长期ZK》。
+
+ 
+
+以太坊的拥堵无需赘述，大家深有感触。以太坊生态正在紧锣密鼓地进行Layer2的落地探索。Layer2有状态通道、侧链、Plasma、Optimistic Rollups、Zk Rollup等等，目前看，最有希望走出来的是Optimistic Rollups和Zk Rollup的技术方案,此处简写为OP和ZK。
+
+关于Layer2可以参考蓝狐笔记之前的文章《以太坊的Layer 2赛道》《Layer2、以太坊与公链格局》《以太坊layer2突破性进展：意味着什么》。
+
+如果从落地角度看，会是什么情况？
+
+短期OP、长期ZK
+
+从蓝狐笔记的观察，短期和中期看Optimistic Rollups，长期看Zk Rollup。为什么？
+
+*Optimistic Rollups Vs ZK RollupOptimist
+
+采用的Optimistic Rollups方案短期内更容易落地，其重要的原因之一是具有更强的可移植性。而Zk Rollup目前还无法完全兼容EVM。Optimistic Rollups的方案也有一个大的缺点，就是它需要解决欺诈证明的问题。这导致它的提款周期长达一周。
+
+用户从Layer 2 交易所里面将其资金提取到Layer 1，如果需要等待一个星期，相信很少有人有这个耐心等待。而ZK Rollup没有这个顾虑，它通过数学可靠性证明来解决这个问题，可以及时提取到Layer 1。
+
+ZK Rollup技术在安全性上基本接近Layer 1的水平，同时存入和提取也可以根据用户需要即时进行，这是它的优势。
+
+但Optimistic Rollups方案为什么短期内还会是Layer2的最重要方案？因为其缺点并非没有解决方案。Op自身搞不定的，其他的项目帮忙搞定。有些项目可以帮用户直接将其Layer2上代币即时提取到Layer 1，用户支付一定的手续费即可，而这些项目l负责剩余的事情。
+
+例如，MakerDAO社区提出了Optimism DAI Bridge的解决方案，可以解决Optimistic Rollups需要一周提现时间的问题。虽然需要等待一周时间确保规范交易链（CTC）的正确，不过可以在几分钟内获得单个交易的链下证明。由此，MakerDAO会发行fDAI代表对Layer 1DAI的申领。fDAI通过Maker Oracle对照CTC进行验证。
+
+（OPtimism DAI Bridge，MakerDAO）
+
+除了MakerDAO，还有其他项目也会提供快速提现服务。因此，从落地的角度，从逻辑上看，短期内OP更适合，因为它有更强的可移植性，且提取周期长的问题也有解决方案。
+
+长期来看，ZK的安全性和提取周期上都占优，随着它完全支持EVM，它未来被采用的概率越来越大。
+
+*短期OP
+
+Optimist正在被DeFi的龙头采用，这使得它在短期和中期都会是Layer2最重要的落地方案之一。采用Optimistic Rollups技术方案的Optimist已经启动测试网，预计3月份发布。目前Synthetic会采用其方案。如果Synthetic实践的效果好，会引入一大批的DeFi跟随者。
+
+整个DeFi的龙头Uniswap据说也要使用Optimist项目的方案，如果最终使用，其对整个DeFi项目采用Layer2方案更具决定性的意义。不过按照Uniswap的风格，它会相对稳健，它推出Optimism Layer 2方案的时间不会太快。
+
+同时，目前V3是Uniswap的重点，这可能会延缓它采用Layer 2的进程。而Sushiswap风格更为激进，它可能会早于Uniswap推出Layer 2的解决方案。据说Sushiswap正在跟Matter labs的Zksync探索Layer2的落地方案，但最终还没有定论。如果Optimist的方案证明可行，也有可能转向Optimist的方案。
+
+如果Synthetic、Uniswap都采用Optimist项目的方案，那么，其他的DeFi可能会跟进，最终形成Optimist为主的短中期Layer 2局面。目前Optimist、 Offchain Labs（Arbitrum）、Fuel Network、 Cartesi都在积极布局这个技术方向的落地探索。
+
+*长期ZK
+
+ZK Rollup在安全性和提取时间上都有优势，一旦其实现对EVM的完全兼容，它有机会获得越来越多DeFi的青睐。不过，如果Optimist方案在实践上证明可行，这也会对ZK的采用形成一定的冲击，至少会延缓它的采用进程。
+
+不过，长期看，也许在未来几年时间内，随着更多DeFi项目采用ZK Rollup的技术，慢慢会形成一种态势，最后实现二层的ZK Rollup互通，它容纳的交易量高于Layer 1，从而形成庞大的Layer 2 生态。这也是未来会有一两家非常强大的Layer 2项目的原因。
+
+目前Matter Labs的ZKsync、Loopring、Starware、Aztec等都在积极布局ZK Rollup技术。此外，甚至还有专门为扩展NFT交易的Layer 2项目，如Immutable。
+
+Layer 2是巨无霸的大赛道
+
+在蓝狐笔记看来，Layer 2赛道仅次于btc、公链（eth等）、去中心化稳定币，位居第四的赛道。当然，DeFi作为整体无疑是最大的赛道。在Layer 2竞争尘埃落定之后，大约会诞生一到两家巨无霸，它会成为整个Layer 2的解决方案，且从根本上解决DeFi的互通问题。这样的局面意味着，未来的Layer 2会成就价值极高的项目，甚至有可能接近于Layer 1，且会高于绝大多数的公链，如果未来Layer 2诞生千亿美元级别的项目，应该不用感到意外。
+
+以太坊L2和EIP1559会扭转公链竞争态势
+
+一旦Layer2的DeFi启动，大家会发现在Layer 2上交易费用很便宜，交易速度很快。这会极大提升DeFi的用户量和交易量，尤其是DEX，随着交易量和用户量的提升，也会提升对流动性提供者的吸引力，这导致用户和流动性提供者进一步向Layer2迁移。
+
+在演化的过程中，Layer1和Layer2会形成DeFi的分层，会形成一定的割裂，但最终来说，Layer 1和Layer 2会形成均衡的态势。
+
+最终来说，Layer2的生态容量更大，但Layer1依然很重要，它承载的是Layer2的安全，还有各种高价值的结算，Layer 1是最终的结算层。
+
+对于以太坊和公链之争来说，Layer 2的落地实施，可以部分缓解以太坊的高费用和慢速度，这也会部分地降低其他公链的吸引力。随着以太坊扩展的到来，再加上EIP1559的实施，ETH将会迎来今年最重要的变化。它会对今年的公链大棋局产生极其重要的影响。

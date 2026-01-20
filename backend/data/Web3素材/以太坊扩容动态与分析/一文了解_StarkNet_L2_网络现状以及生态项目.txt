@@ -1,0 +1,193 @@
+标题: 一文了解 StarkNet L2 网络现状以及生态项目
+链接: https://www.chaincatcher.com/article/2070535
+发布时间: 2022-02-25
+
+==================================================
+
+撰文：布劳克琴
+
+来源：深链DeepChain
+
+ 
+
+2022 年加密货币行业的主旋律势必少不了 “L2 扩容方案” 的参与，以太坊社区也早早喊出了 #L222 的叙事标签。虽说目前以太坊已有不少 Optimistic Rollup 技术阵营的 L2 网络上线，如 Arbitrum、Optimism、Metis、Boba 等，但 ZK Rollup 技术始终被视为是扩容解决方案的最佳解答（无挑战期，还具备更高的可扩展性），尽管当前也有 zkSync 1.0、Loopring、Aztec 等 ZK Rollup 技术方案上线，但基本都是局限于交易转账支付这些特定应用领域，暂时无法实现图灵完备的通用计算。
+
+目前行业中最受人瞩目的两大通用型 ZK Rollup 当属：zkSync 2.0 和 StarkNet。其中 zkSync 2.0 公共测试网恰巧近期（2 月 22 日）刚上线，而 StarkNet Alpha 版本则已上线近 3 个月。 
+
+本文，我们便尝试先为读者解读一下 StarkNet 的一些相关知识背景，同时梳理一下 StarkNet Alpha 网络当前的生态现状。
+
+ 
+
+背景：StarkWare、StarkEx、StartNet、STARK
+
+ 
+
+可能很多人对这四个单词混淆不已，简单来讲，StarkWare 是一家公司，目前有两个产品：
+
+•StarkEx：这是一种特定应用于交易场景的扩展技术，目前正被几个以太坊项目使用，包括 dYdX、ImmutableX、Sorare 和 DeversiFi。
+
+•StarkNet：一个通用型的 ZK Rollup 扩展网络。
+
+那么 STARK 呢？这就得提到 zkSync 了，我们都知道 zkSync 和 StarkNet 都是基于 ZK Rollup 技术方案，但两者的主要区别是什么呢？其中之一是它们所采用的零知识证明技术：
+
+•SNARK（zkSync）：零知识简洁非交互式知识论证 | Succinct Non-interactive Argument of Knowledge。2012 年首次提出，不久后便开始采用实施，具备技术先发优势；生成的证明足够小，因此验证时间也短；需要受信任的初始设置，有可能产生“有毒垃圾”。
+
+•STARK（StarkNet）：零知识可扩展的透明知识论证 | Scalable Transparent Argument of Knowledge。由 StarkWare 团队于 2018 年推出的、相对较新的技术；生成的证明相对较大；算法运算公开透明，无需要受信任的初始设置，因此不存在“有毒垃圾”；可扩展。
+
+现在，我们再从 ZK Rollup 整体内部的理论择优来看（zkSync 2.0 vs StarkNet）：
+
+•从零知识证明技术选择的角度来看，各有千秋，目前未能断言，尚看实际上线运行状况。
+
+•从开发进度的角度来看，StarkNet 已经有了 StarkEx 技术在各大主流项目（dYdX）上的成熟运用，而且 Alpha 版本网络也上线了近 3 个月，对未来的开发进度也有较为明确的路径规划。
+
+•从开发者体验角度来看，似乎 zkSync 2.0 相比 StarkNet 更加友好，因为 zkSync 2.0 是兼容 EVM 的，开发者能够使用以太坊的原生编程语言 Solidity 进行开发构建，甚至实现以太坊主网项目的无缝迁移部署。而 StarkNET 则是采用自己独有的高级编程语言和框架 Cairo，这或许也是为何当前 StarkNet 的大多数生态项目仍在早期概念阶段的重要原因之一。不过 StarkWare 近期已经开发了相关的 Solidity → Cairo 转译器 Warp 2.0，基本也实现了将 Solidity 合约部署到 StarkNet 网络的愿景，曲线完成 EVM 兼容。
+
+综上所述，或许 StarkNet L2 网络的发展我们不容错过，值得长期保持关注参与。
+
+ 
+
+生态项目
+
+ 
+
+Argent X
+
+Argent X 是当前用于连接 StarkNet 网络的唯一浏览器插件钱包，类似于 Metamask。
+
+•官网：https://www.argent.xyz/argent-x/
+
+•获取测试币：argentlabs.github.io/argent-x/
+
+Voyager
+
+Voyager 是 StarkNet 生态的区块链浏览器。
+
+•官网：https://voyager.online/
+
+IBetYou
+
+IBetYou 是一个链上 P2P 对赌协议，对赌双方将赌注发送到智能合约后，资金会进入 AAVE 进行理财，会有两个裁判对赌注结果进行裁决，届时赢方获得赌注，裁判和协议 DAO 获得理财收益。值得注意的是，IBetYou 已经实现多链部署，目前只是在 StarkNet 上部署了仅供展示用的合约。
+
+•官网：https://ibetyou.xyz/
+
+Mint Square
+
+Mint Square 是基于 StarkNet 的一个 NFT 平台，目前提供了一个简易的 NFT 自制功能。
+
+•官网：https://mintsquare.io/
+
+Briq
+
+Briq 是基于 StarkNet 的一个 NFT 像素块构建平台，当前用户可以免费申领 1000 个像素块进行创意组合，然后生成 NFT。
+
+•官网：https://briq.construction/builder
+
+Bitmap Box
+
+Bitmap Box 是一款链上像素块构建游戏，当前用户在商店购买部分像素块，然后组装甚至拆卸你的作品进行自由创作，Bitmap Box 也将为开发者提供 SDK，可以基于协议构建新游戏。
+
+•官网：https://www.bitmapbox.xyz/
+
+Dope Wars
+
+Dope Wars 是一款像素风的 P2E 游戏，以著名的《Drug Wars | 毒品战争》为原型，带有怀旧色彩，给人一种《GTA | 侠盗飞车》初版的感觉。其中 Hustlers、DOPE NFT、DOPE 装备以及原生代币 $PAPER 是游戏内的重要组件。
+
+Dope Wars 并非 StarkNet 上的原生项目，此前已经在以太坊主网上完成了 NFT 的铸造分发，后期的 DOPE 装备也是基于 Optimism L2 网络，不过项目目前已经与 StarkWare 达成一定合作，并且获得一定资助，将致力基于 StarkNet 的开发构建。
+
+•官网：https://dopewars.gg/
+
+Influence
+
+Influence 是一款以现实小行星带和实时轨道动力学为背景的大型多人在线策略游戏。目前运行在以太坊主网上，未来将迁移到 StarkNet 上。
+
+•官网：https://www.influenceth.io/
+
+Loot Realms
+
+Loot Realms 是基于 StarkNet 构建的 Loot 衍生品项目，基于 Lootverse 的 PVP 资源掠夺游戏，每个 NFT 是一个单独的“领域”，有不同的资源组合以及地貌特征。
+
+•官网：https://bibliothecadao.xyz/
+
+NFTflow
+
+NFTflow 是一个基于 StarkNet 构建的为非流动性资产 NFT 创建流动性市场的平台。目前尚处于开发阶段，官网尚未上线，只有说明文档。
+
+•官方文档：https://nftflow.gitbook.io/nftflow/
+
+The Ninth
+
+The Ninth 是一个基于 StarkNet 构建的元宇宙游戏，玩家可以购买游戏内的土地并生成各种各样的游戏内元素道具，拥有各种游戏玩法。
+
+•官网：https://ninth.gg/
+
+Phi （Φ）
+
+Phi Φ 是一个基于 StarkNet 构建的元宇宙游戏，用户可以通过绑定其 ENS 域名到具体的土地坐标来生成土地，同时也可以基于用户的链上活动数据申领各类道具，其主旨是将用户的链上活动映射到元宇宙游戏中。Phi 在 NFTHACK 2022 中获得了 ENS 的赞助奖。
+
+•推特：https://twitter.com/phi_xyz
+
+Playoasis
+
+Playoasis 是一个基于 StarkNet 构建的 NFT 交易市场。
+
+•官网：https://testnet.playoasis.xyz/
+
+FujiDAO
+
+FujiDAO 是一个借贷聚合器，具有自动再融资以寻找更低借贷利率等特点，目前已经上线以太坊主网和 Fantom，未来将上线 StarkNet 。
+
+•官网：https://www.fujidao.org/#/
+
+JediSwap
+
+JediSwap 是一个基于 StarkNet 构建的 AMM，任何人都可创建新的交易对，开发者也可基于 JediSwap 之上进行进一步构建。
+
+•测试网：https://app.testnet.jediswap.xyz/#/swap
+
+Myswap
+
+Myswap 是一个基于 StarkNet 构建的 AMM。
+
+•官网：https://www.myswap.xyz/#/
+
+StarkSwap
+
+StarkSwap 是一个基于 StarkNet 构建的 DeFi 平台，其首发产品将是一个 AMM，未来将上线更多 DeFi 产品。
+
+•官网：https://www.starkswap.co/
+
+ZigZag
+
+ZigZag 是一个订单簿模式的 DEX，目前已经上线了 zkSync，计划支持 StarkNet。
+
+•官网：https://trade.zigzag.exchange/
+
+xBank
+
+xBank 是一个基于 StarkNet 构建的货币市场，类似 AAVE。
+
+•官网：https://www.xbank.finance/
+
+zkLend
+
+zkLend 是一个基于 StarkNet 构建的货币市场，其特色是在保证去中心化的前提下，为机构客户以及普通 DeFi 客户提供差异化服务。
+
+•官网：https://zklend.com/
+
+ZkPad
+
+zkPad 是一个基于StarkNet 构建的 launchpad。
+
+•官网：https://zkpad.io/
+
+ZKX
+
+zkx 是一个基于 StarkNet 构建的永续合约交易所，其特点是优化了链下资产的交易以及游戏化用户体验。
+
+•官网：无
+
+Serity
+
+Serity 是一个生息合成资产铸造交易协议。
+
+•官网：https://serity.finance/

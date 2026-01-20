@@ -1,0 +1,52 @@
+标题: RootData 数据共建计划（2025年4月）
+链接: https://www.chaincatcher.com/article/2180171
+发布时间: 2025-05-06
+
+==================================================
+
+以下是2025年4月的主要披露内容：
+
+1、已验证并更新的融资事件
+
+说明：本部分聚焦于经过RootData团队深入求证后确认并更新的融资事件。我们通过多方信源交叉验证，确保数据的准确性。这些更新不仅反映了项目的最新进展，也为用户提供了更可靠的投资与合作参考。
+
+4.22
+
+下架：证实 Balance 的 3000 万美元融资存在模糊地带，a16z 只是投资了其母公司E-PAL
+
+Balance 将老项目、老业务的投资方跟新投资方一起披露，以试图达到混淆视听的效果。区块链游戏平台 Balance 多次在 PR 中提及 a16z 是其投资方，领投其 3000 万美元融资，但进一步搜集信息可以发现，a16z 投资的并非 Balance 项目方本身，而是该项目母公司 E-PAL，而且是 2020 年与 2021 年分别领投。
+
+详细调查可查看：
+
+https://x.com/RootDataCrypto/status/1914671557018050621
+
+2、待确认的融资事件
+
+说明：本部分列出了尚未完全核实或因信息不足暂未录入平台的融资事件，部分事件可能带有“存疑”标签。我们将持续跟踪这些事件的最新动态，并欢迎社区提供线索，共同完善数据。
+
+a. 存疑标签
+
+无
+
+b. 疑似虚假融资报道
+
+· 4.14
+
+ZENMEV 已获得 VC VentureX 的 1.4 亿美元战略投资
+
+https://x.com/zenmev/status/1911778608030351589
+
+https://www.cryptopolitan.com/zenmev-secures-strategic-investment-from-vc-venturex-to-accelerate-mev-based-defi-growth-and-innovation/
+
+· 4.23
+
+数字资产交易平台 BitradeX 完成 1200 万英镑 A 轮融资，Bain Capital 领投
+
+https://financefeeds.com/bitradex-raises-12-million-series-a-to-scale-ai-driven-crypto-trading-infrastructure/
+
+
+RootData始终坚持以真实、透明的数据服务行业。我们深知，数据的完善离不开社区的共同努力。如果您发现数据遗漏或错误，欢迎通过Telegram或Email与我们联系，用户反馈是我们不断优化的动力。未来，RootData将继续深耕数据建设，助力行业生态更加健康与繁荣。
+
+Telegram：https://t.me/QuinnGong
+
+Email：quanyu@rootdata.com

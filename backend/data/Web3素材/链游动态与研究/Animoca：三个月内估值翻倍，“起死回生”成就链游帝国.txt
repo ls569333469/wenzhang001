@@ -1,0 +1,167 @@
+标题: Animoca：三个月内估值翻倍，“起死回生”成就链游帝国
+链接: https://www.chaincatcher.com/article/2069803
+发布时间: 2022-02-08
+
+==================================================
+
+摘要：
+
+成立背景
+
+起死回生
+
+构筑帝国
+
+未来展望
+
+ 
+
+一、成立背景
+
+ 
+
+在 INS 上，Animocabrands 这样介绍自己：“ Weare the leader in the field of digital entertainment, specializing inblockchain, gamification&AI technologies ”。在官网上，Animocabrands 这样描述自己的使命与愿景：“向全世界的游戏玩家和互联网用户提供数字产权。
+
+从而创造新的资产类别，以 P2E 的经济模式，以及一个更公平的数字框架，为开放元宇宙的构建做出贡献。” 2021 年，NFT 不仅代表着“影响力”也代表着投资，从一副纯数字作品拍卖出近 7000 万美元的天价到 12 岁男孩儿 Benyamin Ahmed 出售了系列 NFT 作品，价值超过 160,000 美元，非同质化代币仿佛一颗颗“魔戒”，被推至镁光灯下。
+
+图片来源：https://www.asiacryptotoday.com/animoca-brands/
+
+NFT的大火离不开资本的推波助澜，作为加密行业的顶流，Animoca Brands已被视为NFT和GameFi领域的投资风向标。
+
+据统计，Animoca Brands目前已累计投资超过150个NFT/元宇宙项目，成为链游领域最大的投资方。所投项目不乏造富效应一流的AxieInfinity、DapperLabs（ NBATop Shot）、OpenSea、AlienWorlds、YieldGuild Games（YGG）等优质项目。
+
+2022年1月18日，链游开发与投资公司Animoca Brands宣布完成近3.6亿美元的融资，
+
+由LibertyCity Ventures领投，10T Holdings、C Ventures、Delta Fund、 Gemini Frontier Fund、 Gobi Partners Greater Bay Area、 Kingsway、 L2 Capital、 Mirae Asset、 Pacific Century Group、 ParaFi Capital、Provident、 Senator Investment Group、Sequoia China、 Smile Group、 Stable Asset Management、SorosFund Management、 Wildcat Capital Management、Winklevoss Capital等参投。
+
+此次融资前估值约50亿美元，较2021年10月份的22亿美元估值翻倍。对于大多数人来言，Animoca Brands如同一头横空出世的独角巨兽，蛰伏已久后，在2021年链游与元宇宙赛道崭露锋芒。
+
+图片来源：https://www.investing.com/news/cryptocurrency-news/6-questions-for-yat-siu-of-animoca-brands-2646721
+
+出生于音乐世家的Animoca Brands的创始人萧逸华（YATSIU）也因其传奇经历，开始走入大众视野，YATSIU在访谈中提到，选择音乐专业是遵从父母的意愿，但却在学习音乐的过程中发掘了自身对于互联网的热爱和痴迷，他曾独立开发音乐软件来完成老师布置的音乐作业，也因此发掘了自己的编程天赋，开始走入互联网领域。
+
+1993年，苦于香港无法的电子邮箱服务尚未兴起，难以满足日常交流的需要，深感不习惯的YAT SIU独立创办了以邮件系统为主要业务的网络科技公司——香港在线（Hong Kong Online），也由此开启了他一生的创业生涯。
+
+1998网络服务公司Outblaze建立，其主要业务类似于今天的“云计算”，YAT SIU提到当时希望业务的潜力可以被发挥到极致。
+
+因此将此项业务出售给了综合研发能力更全面的IBM，2009年完成与IBM的交易后，随着iPhone手机的出现，YAT SIU开始对APP产生了强烈的兴趣，并开始开发游戏业务，然而在取得一定成就的同时，YATSIU也尝到了互联网世界“平台中心化”的苦头。
+
+2012年1月，苹果商店认为YATSIU开发的12款头部游戏产品有“不良影响”并强制下架，从头至尾不曾征询过其团队的意见或想法，而此事件，也为YATSIU日后拥抱“去中心化”、“区块链”、“NFT”埋下伏笔。
+
+ 
+
+二、起“死”回“生”
+
+ 
+
+尽管在2010-2012于游戏领域深耕期间，Animoca曾开发出12款得到市场广泛认可的手游，但被强制下架后，Animoca似乎陷入了停滞与迷茫，游戏被强制下架后，150名员工的生存，游戏玩家的权益都成为了“牺牲品”，中心化的平台并没有给予任何申诉的途径和机会。
+
+在2017年底拥抱区块链前，Animoca只能被称为“不太出名的手游开发与发行商”。在2015年1月于澳大利亚证券交易所上市（下文简称为ASX）后，长期业绩平平。
+
+从2015年到2019年，Animoca共进行九轮IPO后融资，累计达3430万美元，但截止2017年第四季度，其季度经营现金流一直为负数，17年8月其股价从此前的高点0.2澳元一度跌至0.01澳元以下，跌幅超95%。
+
+2015年到2019年AnimocaBrands股价表现来源：61finance
+
+2017年下半年，面对ASX的业绩问询压力，Animoca Brands开始调整董事薪酬结构、出售非核心资产以及裁员，其中全体高管减薪50%。2017年，Animoca Brands以800万美元总价出售了旗下60%的手游，共计318款——其中大部分都为休闲类游戏，其公司员工总数从110余人锐减至不到70人。
+
+但此次变革既是断腕也是转机。2017年11月，初代区块链游戏Cryptokitties诞生，这款游戏基于以太坊平台运行，用户在游戏中可以养大、买卖并繁育“电子宠物”小猫。
+
+每只小猫和繁衍的后代独一无二，与YATSIU所坚持的“用户所创造的的数据资产应归于用户”的理念相契合，然而此时的YATSIU绝不会想到这款游戏与两年后他所建立的数字帝国关系如此密切。
+
+沉浸于手机游戏开发业务的YATSIU彼时并未过多关注这款游戏，其好友Mick作为Cryptokitties的开发者之一，将此款游戏理念介绍给YATSIU，邀请他加入这场“区块链”游戏“实验”。
+
+在深入了解的过程中，YATSIU感慨原来这就是“许多问题的答案”是他所追求的“去中心化游戏世界”，2018年初，Animoca Brands 与Cryptokitties 的开发团队 AxiomZen签署了为期一年的许可和分销协议。AnimocaBrands有权在中国地区独家发行Cryptokitties，分成为净收入的30%。
+
+Cryptokitties也成为了Animoca Brands专注于NFT的游戏的开端。正如YAT SIU所说：“当第一次参与区块链游戏，我们便意识到这是解决多问题的关键，意识到这款游戏的力量和好处，以及NFT将如何改变“数字殖民”,通过向玩家提供数字产权，对现有游戏产业实现颠覆性革命”。
+
+然而Animoca Brands的GameFi探索之路也并非坦途，截至2018财年结束，Animoca Brands的主要营收来源仍是传统手游，区块链领域的投资为公司带来了百万美元的亏损。
+
+2020年3月，ASX指称Animoca Brands存在内部治理问题、大量参与加密货币相关活动，以及交易违规情形，ASX以缺乏足够的资源和能力来履行其在上市规则下的义务为由，正式将Animoca Brands从上市名录中删除。
+
+但退市并未影响其正常经营，反而给予其空间于加密货币领域深耕，不再掣肘于上市公司的系列规则的Animoca Brands，在投资中不断抢占先机。
+
+2020年8月AnimocaBrands以487.5万美元收购了UGC（用户生成内容）游戏平台TheSandbox的开发公司Pixowl，Sandbox是一款由社区驱动的游戏，通过将创作权下放，结合Play-to-Earn的运作模式，让玩家通过玩游戏，创建游戏玩法或搭建游戏场景，获得NFT资产，而这些资产将能够在区块链世界里进行流通及变现。
+
+此机制给予了Sandbox极强的想象空间。目前Sandbox官方的样板游戏有探险类、搜索类、社交类等等，对于成就型玩家、探索型玩家、社交型玩家、杀手型玩家来说，Sandbox都可以不同程度地满足他们的需求。
+
+Sandbox价值
+
+2020年，The Sandbox公开发行SAND代币并上线币安，代币总量为 30 亿枚，目前已流通约 9 亿枚，包括币安 IEO 代币、公司储备的部分代币、基金会持有代币。
+
+The Sandbox作为AnimocaBrands旗下最成功的项目之一，截至2021年12月21日，其代币SAND流通总市值为47亿美元，在Coinmarketcap市场排名中位列第37位，稀释后市值达到153亿美元。同时，The Sandbox的虚拟土地交易量高居不下，Republic Realm在11月30日以430万美元的购买金额，打破了虚拟土地销售价格纪录。
+
+Sandbox地图
+
+ 
+
+生态系统的自循环
+
+来源：https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2Fttarticle%2Fp%2Fshow%3Fid%3D2309404657476648960466&domain=.weibo.com&ua=php-sso_sdk_client-0.6.36&_rand=1644225491.3158#_loginLayer_1644225428377
+
+ 
+
+三、构筑帝国
+
+
+ 
+
+2021年作为元宇宙元年，DeFi 将资本带入加密领域，NFT拓宽了加密领域的边界。2021年10月，Blockdata最新分析显示，2020加密公司全年融资额仅为38亿美元，但在2021年7月至9月期间，已披露的加密公司融资额达到65亿美元，数量为339笔。
+
+一、二季度的数字分别为38.3亿美元和51.31亿美元。三季度最活跃的投资者为Coinbase Ventures,共参与18笔交易。其次为Animoca Brands和Polychain Capital,分别参与10和11笔交易。
+
+纵观整个Animoca Brands的投资版图，The Sandbox仅是其中光芒最盛的一块拼图，从2018年-2022年的三年时间中，Animoca Brands共进行了逾80次投资。
+
+YAT SIU表示“我们看好去中心化的赛道，链上世界的一切程序由智能合约执行，不以平台意志为转移。我们相信，当未来区块链技术成为基础设施，链游的火爆程度将不断刷新大众的认知。
+
+在投资中，我认为抢占时机非常重要，但时机很难判断，尤其是在未来具有无穷潜力，但当下并未充分展现其价值的事物，所以一定要尽早入局，来晚的话付出的成本会更高。NFT和链游均代表着未来，但具体什么时候真正爆发，或者成为互联网社会的基础设施，尚且无法确定。
+
+但我们希望找到一起推动这一进程的人，所以我们一直不遗余力地投资优质项目。另外，我们是自费投资，可以一直秉承长期主义而无需受困于短期回报的要求。”
+
+“数字殖民”示意图
+
+来源：https://www.bilibili.com/video/BV1oq4y1N7KC?share_source=copy_web
+
+“数字所有权”示意图
+
+来源：https://www.bilibili.com/video/BV1oq4y1N7KC?share_source=copy_web
+
+据Blockchaingamer统计，截至2021年6月，区块链游戏相关融资达14亿美元。其中Animoca Brands、Galaxy Digital和Hashed是该领域最活跃的几个投资机构。
+
+2021年，Animoca Brands前三个季度的投资和数字资产收入增长至约5.296亿美元，持有超过6亿美元的流动数字资产（包括BTC、ETH、USDC等）；属于AnimocaBrands产品和平台生态系统的数字资产储备（包括REVV、SAND、TOWER和GMEE等自有产业Token）
+
+已从2021年9月底的价值约29亿美元上升至到2021年11月结束时的约159亿美元，两个月内增长了五倍多；两种主要代币SAND和REVV月总交易量已超过100亿美元，而一年前仅为2.45亿美元。
+
+相比于前三年，2022年Animoca Brands似乎已经完成了帝国的地基建设，开始通过更加广泛的投资搭建起围绕区块链、NFT的庞大生态系统。
+
+Animoca Brands近几年每季度的投资数量
+
+数据来源：Crunchbase
+
+2021年第四季度开始，Animoca Brands的投资节奏明显加快。随着大额融资不断注入Animoca Brands，其投资规模和领投次数明显增长，2021年第四季度投资数量在全年中占比51%。
+
+领投项目占比达36%以上，平均每6天就会进行一笔投资。Yat Siu称；“在区块链领域，与元宇宙相关的项目更有可能推动主流群体的采纳，而NFT代表了实现开放元宇宙的最佳机会”。
+
+“生态系统”这个词经常被Yat Siu提起，他将大举投资区块链领域企业的举措描述为建设“NFT生态”，他认为哪怕有些投资主体是竞争对手，但他们同时也是NFT链游生态的建设者，Animoca Brands作为链游和NFT的生产主体，必会从大生态系统中受益。
+
+Animoca Brands投资版图示意图
+
+来源：Animoca Brands官网
+
+ 
+
+四、未来展望
+
+
+ 
+
+与其他科技巨头相比，Animoca Brands大起大落，一夜成名似乎更具戏剧性，在元宇宙尚鲜有人提起时，Yat siu便坚持：“去中心化的产权将是未来一切创新的基础”，不惜以数百万美金投资初代区块链游戏
+
+作为互联网技术的下一个风口，Web3.0的目标是实现一个更加开放、无需信任和无需许可的互联网生态，Animoca Brands所主张的“掌握数据的所有权”的愿景，让人们在互联网寡头时代，看到自由、平等与希望，千亿美金的庞大市场下潜藏着无数机遇和机会。
+
+但与此同时也有诸多挑战，目前，区块链的沙盒游戏存在用户参与感低，体验较差，用户群体局限。大部分参与竞拍土地的人投机性比较强，很少人愿意花精力在创建内容上，导致土地空白，从而使其他游戏参与者的用户体验变差。
+
+若内容质量不高，很难吸引更多的用户参与。用户是游戏的根本，用户留存率不提高，则会导致购买游戏NFT资产的意愿降低，最终游戏资产贬值，导致恶性循环。
+
+如何帮助玩家理解数字资产的价值？如何使玩家真正理解数字资产的存储方式？如何在玩家建设能力与建设权利的分离情况下平衡P2E与内容质量？若游戏的可玩性和趣味性不足，一旦失去了高收益，玩家的忠诚度还能保持多久？等等问题都亟待解决。
+
+总而言之，可玩性作为游戏的核心机制，是能否长久留存用户的关键之一。我们可以看到Animoca Brands旗下的多款链游如Sandbox等都在回归游戏本身，游戏的可玩性在逐渐变强，打破传统游戏枷锁的链游未来可期。

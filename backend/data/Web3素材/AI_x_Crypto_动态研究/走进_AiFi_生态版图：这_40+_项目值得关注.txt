@@ -1,0 +1,301 @@
+标题: 走进 AiFi 生态版图：这 40+ 项目值得关注
+链接: https://www.chaincatcher.com/article/2162629
+发布时间: 2025-01-15
+
+==================================================
+
+作者：KarenZ，Foresight News
+
+ 
+
+2025 年，Crypto + AI 仍是主旋律，而在这之中，DeFi + AI 或将真正占到舞台中央。
+
+如果你活跃于 Crypto & AI 领域，那么最近一定对「DeFAI」这个词耳熟能详。不过，笔者更倾向于使用「AiFi」这一表述，AiFi 不仅更简洁、易于发音和记忆，还具有较强的识别度。
+
+而不论是 DeFAI 还是 AiFi，两者都代表 DeFi 和 AI 的结合，其终极目标是将 DeFi 的操作体验提升至与在 ChatGPT 中对话般自然流畅的水平，不仅为用户提供前沿、精准的分析洞见与收益策略，还能实现这些策略的自动化执行，免去用户手动访问交易、质押及收益相关 DApp 页面的繁琐。此外，还有众多基础设施项目在提供框架、索引、数据支持、加密以及计算等方面发挥着不可或缺的作用。
+
+现阶段，AiFi 项目主要聚焦于提供数据洞察服务及提供简单的链上交互流程，部分账户抽象项目亦开始借助 AI 深化价值研究与洞察能力。此外，依托大型模型与数据分析平台的 AiFi 项目日益增多，这些项目能够基于复杂的算法和用户预设的条件，自动执行买卖操作、筛选高潜力收益流动性池等任务，为用户捕捉每一个稍纵即逝的机会。
+
+在当前的市场格局下，AiFi 应用和技术在各自独立且竞争激烈的生态系统中摸索生存和发展，而在 2025 年乃至未来几年，随着 AiFi 的成熟和用户需求的增长，AiFi 可能会迎来爆发性的增长。
+
+可以预见的是，更多的项目将致力于构建无缝、智能的金融服务，在降低 DeFi 门槛的同时将提供更丰富、更有利可图的 DeFi 交易和收益等策略，从而吸引和触及到更多的普通用户。此外，AI 代理间的协作也可能会在多个方面展现出其重要性，通过信息共享、策略协调、任务分配等方式进行合作。这种协作模式能够整合多个代理的优势，提高任务执行的效率和质量，从而实现更复杂的任务处理和更高的智能化水平。
+
+本文根据市场洞察和 AiFi 抽象层、基础设施、AI 加持的 DeFi 应用三个类别整理了 40 余个 AiFi 项目。然而，值得注意的是，尽管 AiFi 项目如雨后春笋般涌现，但众多此类项目仍处于内测阶段或概念期，尚未正式推出。
+
+市场洞察 / 抽象层
+
+AiFi 抽象层是指将 AI 与 DeFi 结合起来，利用数据平台分析行业数据，并通过大模型和 AI 代理将自然语言处理成链上操作，这些操作可以包括但不限于资产交换、流动性管理、借贷、以及更复杂的金融策略实施，从而简化用户体验并自动执行复杂的金融策略，减少了人工干预的需要。此外，利用 AI 的分析能力，AiFi 可以实时调整策略，根据市场变化或用户需求动态优化投资组合。
+
+Griffain
+
+Griffain 是一个 AI 代理，支持询问投资组合、代币兑换、发推、交易 NFT、创建 NFT 以及狙击 Pump.fun 新币等。Griffain 目前仅接受邀请，并且需要访问通行证才能加入。访问 Griffain 允许创建自己的 AI 代理并访问 Griffain 的特殊代理网络。 Griffain 创始人为 @tonyplasencia3，其也是 Solana 上 Blink 项目的开发者。GRIFFAIN 代币的市值达 3.7 亿美元。
+
+https://x.com/griffaindotcom
+
+Hey Anon
+
+Hey Anon 是一种 AI DeFi 抽象层，旨在简化 DeFi 交互并聚合重要的项目相关信息，支持以太坊、Kava、Metis、Base、IOTA、Sonic、Arbitrum、Avalanche、Solana 等网络。通过将对话式 AI 与实时数据聚合相结合，HeyAnon 使用户能够管理 DeFi 操作、随时了解项目更新并分析各种平台和协议的趋势。Hey Anon 在 2025 年 1 月发布 TypeScript 框架，使任何开发人员都可以轻松地将 DeFi 协议集成到 Hey Anon 生态系统中。
+
+Hey Anon 由 Abracadabra 创始人 Daniele Sesta 部署。Hey Anon 代币 ANON 市值目前 2.3 亿美元。
+
+https://x.com/HeyAnonai
+
+aixbt
+
+aixbt 是一个在 Virtuals 上启动的 AI 代理。aixbt 官推通过聚合圈内热点事件、项目进展以及数据分析，吸引了大量流量，其粉丝数量目前已达到 38 万。aixbt 代币市值目前达到 6.4 亿美元。
+
+Wayfinder
+
+Wayfinder 是由集科幻主题与 NFT 卡牌于一体的游戏项目 Parallel 发布的 AI 代理，也是 Parallel 在 Solana 上的 AI 生存模拟游戏 Colony Colony 的核心基础设施。当然，Wayfinder 将不仅仅服务于 Colony，也将使用户能够安全有效地在区块链生态系统和应用内部和之间进行导航，还可能使 AI 代理通过专用 Web3 钱包自主交易他们控制的资产。根据 Wayfinder 此前在 Base、Polygon 和以太坊主网上展示的第一个原型，支持兑换、转账、跨链和质押等操作。
+
+Wayfinder 即将发布代币 PROMPT，目前获得代币空投的方法有两种，一种是质押 PRIME，一种是网站注册和生成钱包以及推荐。
+
+https://x.com/AIWayfinder
+
+Olas (Autonolas）
+
+Olas 激励和协调不同方启动形成整个 AI 经济的自主代理。基于 Autonolas 构建的 AI 代理 Olas Modius alpha 支持在 Mode 主网上赚取收益，具体方式为收集市场数据、从交易算法库中挑选策略并自动执行交易。Olas 代币当前市值 1.1 亿美元。
+
+https://x.com/autonolas
+
+VaderAI
+
+VaderAI 旨在成为 AI 代理投资 DAO 经理，其 Litepaper 声称是第一个自主交易 AI 代理币的 AI 代理，执行端到端交易，包括研究与分析、模拟和策略以及链上执行。VADER 当前市值 2000 万美元，24 小时涨逾 190%。
+
+2024 年 11 月 26 日，VaderAI 收购了一个由 3 名 AI 工程师组成的团队（他们曾构 Web2 AI Agent 基础设施），此外，VaderAI 还重组了 Monitize AI（正在构建 AI 驱动的工具来优化代币激励分配），并将整个 AI 团队转向 AI 代理。值得一提的是，VaderAI 表示，此前已停止使用 Virtuals 的工具，并且 100% 使用自己的工具，也对 Vader 进行了微调。VaderAI 已将 API 与 Arkham、Etherscan、Solscan、Dune、Flipside、CoinGecko、Moralis 和 X 集成，很快就会利用所有这些数据源做更多事情。VADER 代币市值目前为 8600 万美元。
+
+https://x.com/Vader_AI_
+
+The Hive
+
+The Hive 在 Solana AI 黑客松期间构建，旨在通过可组合的链上 AI 代理简化 DeFi。The Hive 拥有一个新的知识库，其中包括来自蓝筹 Solana DeFi 协议的文档和代码示例。The Hive 还与 zerebro 建立了合作关系，将增强并整合 ZerePy 的代理能力和 Hive 的 DeFi 代理套件。The Hive 代币 BUZZ 当前市值 8000 万美元。
+
+https://x.com/askthehive_ai
+
+DegenAI
+
+DegenAI 是由 ai16z 团队创建的 AI 代理，在 X 上提供行业数据分析和洞察。DegenAI 代币市值目前 5300 万美元。
+
+https://twitter.com/degenspartanai
+
+Dolion
+
+Dolion 由 Khouba 部署，Khouba 曾任职于 Solana Labs、BlockFi 和 Meta。Dolion 旨在通过引入「以 IP 为中心，消费者至上」的方法来重新定义代理格局，无需任何编码经验即可立即部署社交 AI，并轻松在多个社交媒体平台上保持一致的形象，还可通过 NFT 和其他数字体验与链上受众互动。Khouba 表示，其在一个视频演示中创建的 DeFAI 代理 midas 在不到 24 小时内实现了 4 倍的回报。dolion 代币为 BULLY，平台的部分收入将直接用于销毁 BULLY。BULLY 市值当前 4600 万美元。
+
+neur
+
+neur 是一款开源全栈应用程序，专为 Solana 生态系统而设计，利用 AI 模型（包括 Claude 3.5-Sonnet 和 GPT-4）支持通过智能界面与 DeFi 协议、NFT 等进行无缝交互。Neur 已集成 Jupiter、Pump.fun、Magic Eden、DEX Screener 等应用和数据平台。值得一提的是，当前 neur 代理还支持访问 URL 链接。NEUR 代币市值目前 4600 万美元。
+
+https://x.com/neur_sh
+
+HeyElsa
+
+HeyElsa 支持 EVM、Solana、Berachain 和 Hyperliquid，支持使用 Coinbase 智能钱包 Onramp 和无 Gas 交易，以及在单个应用程序跨 EVM、Solana、Berachain 等进行交易、质押和投资，还支持在由 AI 驱动的数据分析的支持下，自动执行 DCA、TP/SL 和套利等交易策略。HeyElsa 当前暂未发布代币。
+
+https://x.com/HeyElsaAI
+
+Orbit
+
+Orbit 是一个由 SphereOne 创建的 AI 代理 DeFi 抽象层。Orbit 宣称与 100 多个区块链和数千个 DeFi 协议无缝连接，支持代币兑换、跨链、智能质押和流动性挖矿策略和管理投资组合。Orbit 代币 GRIFT 代币当前市值 1.07 亿美元。
+
+https://x.com/orbitcryptoai
+
+Bankr
+
+Bankr 是基于 Base 上的 AI 加密助手，支持在 X 上通过自然语言帮助用户兑换、出售和转移数字资产。Bankr 代币 BNKR 当前市值 2100 万美元，自 1 月初以来涨逾 14 倍。
+
+https://x.com/bankrbot
+
+Gekko AI
+
+Gekko AI 是由可验证代理网络 Axal 在 Virtuals 上启动的 AI 代理，与 Autopilot 集成，专注于代理、交易和自动化。Autopilot 是可自动执行复杂的多步骤加密货币交易策略。用户可以设置参数来自动再平衡、收益收获、创建他们想要投资的代币的索引等等。Gekko AI 代币当前市值 1700 万美元。
+
+https://x.com/Gekko_Agent
+
+Polytrader
+
+Polytrader 是一个在 Virtuals 中启动的 Polymarket 预测市场 AI 代理，支持探索 Polymarket 热门市场和提供市场情绪分析和见解。Polytrader 代币 POLY 当前市值 1300 万美元。
+
+https://x.com/polytraderAI
+
+Hiero Terminal
+
+Hiero Terminal 是在 Solana 和 Base 上的 AI 代理，目前支持分析行业数据、启动和兑换代币，Hiero Terminal 代币在 2025 年 1 月 6 日启动，目前市值 1760 万美元。Hiero Terminal 开发者之一包括 Johannes 是 corpus.ventures 的联合创始人，也曾任职于 Consensys。
+
+https://x.com/HieroHQ
+
+Project Plutus
+
+Project Plutus 是一个在 SendAI Solana 黑客松中出来的 AiFi 项目，支持自动执行 DCA 和投资组合再平衡，同时不断分析市场趋势以优化交易绩效的交易平台。Project Plutus 开发者之一 Potatoe 拥有 10 多年经验的全栈开发人员，构建了 SPL-404 和 MPL-404，并创建了 Jarfus AI。另一开发者 KingLord 是 CivitAI 上排名前 30 的 AI 工具创建者，也是 Riot Games 前开发人员。PPCOIN 代币当前市值 620 万美元。
+
+Sola AI
+
+Sola AI 是一款 Solana 生态个性化语音助手，支持用户使用自然语音命令与 Solana 生态系统中的协议交互。根据 Sola AI 路线图，第一阶段将集成 DeFi（如实时查看代币价格和图表、查看和存入 LST、通过 Jupiter 实现兑换功能等），自定义代理、使用 SNS 转账代币、管理钱包投资组合以及实现 Web3 多语言对话功能；第二阶段将实现（巨鲸）钱包追踪和警报、跟单交易、Meme 交易、永续合约等功能，之后将集成多个 Solana 协议。Sola AI 代币 SOLA 市值当前 400 万美元。
+
+https://x.com/TheSolaAI
+
+ASYM
+
+ASYM 是一个代理网络，宣称可识别高投资回报率机会，为这些机会分配资本，产生利润，然后以 ASYM 结算利润。
+
+https://x.com/ASYM41b07
+
+Lexicon
+
+Lexicon 采用 OpenAI 集成构建，为 Solana dApp 提供智能交互和自然语言处理，直接通过 AI 界面无缝集成 Jupiter 进行代币兑换、还支持配置自定义功能并使 AI 助手适应特定 dApp 需求。Lexicon 代币 LEXICON 当前市值 440 万美元。
+
+https://x.com/lexiconinfra
+
+Blormmy
+
+Blormmy 支持执行链上兑换、转账和管理资产操作，将聚合 DeFi 代理、链上控制、AI 推理、第三方提供商。zerebro 开发者 Jeffy Yu 也是 Blorm 开发者，而 Blormmy 是 Blorm 的首批代理之一。Blormmy 代币市值当前 350 万美元，此前于 11 月份最高达到 3000 万美元市值。
+
+Thales
+
+Thales 是一个基于 ai16z ElizaOS 框架构建的 AI 代理（CTO），由链上研究组织 Redacted Research 构建，5 名团队成员包括 3 名 ai16z 合伙人。Thales 还正在在 Story Protocol 上创建可编程 IP，在 Nillion 上进行加密数据存储和盲计算，还支持使用 Shogun 跨 VM 跨链和链上兑换，以及使用了 Omo Protocol 构建的代理收益聚合器。Thales 代币市值当前 1780 万美元。
+
+https://x.com/Thales_ai
+
+Moby AI
+
+Moby AI 是由 AssetDash、Whale Watch 以及代理引擎 griffain 提供支持的加密 AI 代理，可帮助找到潜力交易、分析投资组合以及完成税收。Moby AI 代币 MOBY 当前市值 5100 万美元。
+
+https://x.com/mobyagent
+
+Slate
+
+Slate 是一个通用的 AI 代理和代理的连接基础设施层，通过获取自然语言命令并将其转换为链上操作。Slate 支持保持对资金的完全自我保管，并执行基于条件的提示，比如「当 ETH 价格超过 3700 美元时在 Arbitrum 上购买 0.5 ETH 的 USDC」、「当 Gas 低于 40 时将价值 0.5 ETH 的 DAI 从以太坊跨链到 Arbitrum」。
+
+https://x.com/slate_ceo
+
+aiPump
+
+aiPump 支持在 Hyperliquid、Solana 和 Base 网络上部署 AI 代理和 AI 交易员，用户可使用 Twitter、Telegram、Video 和 Brain 启动自己的 AI 代理代币。aiPump 在 2025 年 2 月 8 日上线 DeFAI 产品，支持使用简单的自然语言命令参与 DeFi 活动。AIPUMP 市值目前为 1000 万美元。
+
+https://x.com/aiPump__
+
+DeFAI Agent
+
+DeFAI Agent 是一个一体化、AI 驱动的 DeFi 工具，支持分析投资组合、提供个性化推荐以实现最佳投资策略，还支持使用 Titan Vault（由 AI 辅助、DAO 管理的基金）进行自主交易。DEFAI 代币目前 700 万美元。
+
+https://x.com/DeFAI_DAO
+
+基础设施
+
+ai16z
+
+ai16z 以其 Eliza 代理框架的卓越表现，成为了 AI 代理领头羊。ai16z 在近期的一份「ai16z 代币经济学」中提案表示，旨在将 ai16z 转型为 AI L1 区块链，启动基于 Eliza 的代理 Launchpad、使 ai16z 成为代理对交易（A2A）的基础货币和代理服务的「App Store」、实施节点激励、建立价值获取和价值累积策略等。
+
+https://x.com/ai16zdao
+
+Virtuals
+
+Virtuals Protocol 的定位绝非仅仅是一个 AI 代理平台，它更是一个充满活力、充满无限想象空间的生态系统。依托其直观易用、功能强大的低代码工具包，用户能够轻松驾驭 AI 代理与代币的创建与管理。
+
+https://x.com/virtuals_io
+
+zerebro
+
+上月底，zerebro 联合创始人 Jeffy Yu 表示正在构建面向消费者的代理 Launchpad「Zentients」，并为 ZEREBRO 代币提供价值累积框架。Zentients 的目标是创建一个无缝的 UI/UX 来启动和发展代理，同时将价值回馈给 ZEREBRO 代币。
+
+https://x.com/0xzerebro
+
+Mode
+
+2024 年下半年，Mode 将资源重新集中在 DeFi 和 AI 交叉点上，通过赠款资助了 5 个 AI 项目，还有 9 个团队加入其 AIFi 加速器，并且在测试网上推出了 Bittensor 子网 Synth，以及上线了 AI 代理应用商店。Mode 还将发布 AI 终端 Mode AI Terminal，支持用自然语言执行兑换、质押和赚取收益（在 Velodrome、Balancer、Ethena 等协议中），还支持为开发者部署合约（例如部署合约以在 100 个钱包之间分配代币）。veMODE 持有者将于 1 月获得抢先体验权。Mode 代币 MODE 市值 3.8 亿美元。
+
+https://x.com/modenetwork
+
+Cookie DAO
+
+Cookie DAO 是一个 AI 代理的第一个索引和数据层，也将推出自己的代理。目前，Cookie 代理代币 COOKIE 的市值为 1.7 亿美元。
+
+https://x.com/cookiedotfun
+
+Nillion
+
+Nillion 可以理解为是一个去中心化的安全计算网络，旨在为高价值数据构建一个在存储、传输和计算过程中都加密的网络，解决当前在加密数据计算时仍需「解密 - 计算 - 再加密」的问题。Nillion 表示，其秘密数据托管将允许所有代理安全、私密地进行交互。Nillion 是 AI 代理进行私有数据处理所需的基础设施。
+
+Nillion 产品主管 Dave Butler 表示，「想象一下一条代理高速公路（Agent Superhighway），AI 代理可以无缝、安全地链接在一起，AX（代理体验）将是实现这一目标的关键。Nillion 正在积极探索如何解决这个问题。」
+
+https://x.com/nillionnetwork
+
+SwarmNode.ai
+
+SwarmNode.ai 使在云中部署支持 AI 的 Python 代理变得轻松且可扩展，用户只需编写代码、上传代码，然后让 SNAI 处理其他所有事情，从构建环境到按需运行代码。SwarmNode.ai 代币 SNAI 市值目前 5600 万美元。
+
+https://x.com/swarmnode
+
+AiSweatShop
+
+AiSweatShop 是一个基于 Arbitrum 的 DeFi AI 代理操作系统，使用 @webisopen 的 OpenAgent AI 框架和 RSS3 构建，支持在 Arbitrum 上创建自己的自定义 DeFi AI 代理，以及在 AI 代理之间保持货币稳定，标准化费率并促进代理之间的协作。AiSweatShop 平台代币 DEFAI 当前市值 3300 万美元，但成交量较低。
+
+https://x.com/aisweatshop
+
+Cod3x
+
+Cod3x 利用检索增强生成 (RAG) 和微调大型语言模型 ( LLM ) 来处理见解，并可以帮助轻松启动个性化的 AI 代理以在区块链上执行任务。Cod3x 自己开发了稳定币、借贷市场（Cod3x Lend）以及 Launchpad（Make Fun）。目前，Make Fun 官方代币 MF 的市值为 616 万美元，Make Fun 官方吉祥物以及 AI 代理 Big Tony 支持交易 BTC 和 ETH 并在 X 上进行财务预测，Big Tony 代币 TONY 市值当前 500 万美元。
+
+https://x.com/Cod3xOrg
+
+Empyreal
+
+Empyreal 的 AI 代理 Simulacrum AI 支持创建无代码 AI 代理，代表用户交易加密货币、抓住市场机会并执行复杂的 DeFi 策略。Empyreal 代币 EMP 当前市值 6280 万美元。
+
+https://x.com/EmpyrealSDK
+
+Ritual
+
+Ritual 支持将 AI 无缝集成到任何链上的应用或协议中，并且支持进行微调、货币化和执行推理。Ritual 表示，其最终目的是让开发人员能够构建完全透明的 DeFi、自我改进的区块链、自主代理、生成内容等。Ritual 团队成员包括 Polychain 前合伙人 Niraj Pant 和 Akilesh Potti，顾问包括 NEAR Protocol 联合创始人兼创时代研究论文「Attention Is All You Need」联合创作者 Illia Polosukhin、EigenLayer 创始人兼合伙人 Sreeram Kannan、Gauntlet 创始人兼首席执行官 Tarun Chitra，而后，BitMEX 联合创始人 Arthur Hayes 也加入 Ritual 担任顾问。
+
+此外，正如 Haotian 所说，其他诸如 Bittensor、io.net、Aethir、Hyperbolic、Vana、Sahara AI 等等但凡和 AI 算力、数据、微调等业务沾边的项目业务框架都可以延伸到此。
+
+AI 加持的 DeFi 应用
+
+Derive Pro
+
+Derive Pro 是由链上期权协议 Derive 为专业交易者提供 AI 驱动的交易体验，将与 Messari 合作将他们的推理 API 集成到 Derive Pro 代理中。Derive Pro 使用大型语言模型来增强研究、执行和投资组合管理三个交易流程，将支持 Derive 上的现货、永续和期权交易，还将插入 Optimism、Arbitrum 和 Base 等 L2 上的现货 AMM。Derive 将于 2025 年一季度推出 Derive Pro。
+
+https://x.com/derivexyz
+
+ZyfAI
+
+ZyfAI 是一个可在 ZKsync Era 上优化投资组合的 AiFi 代理，由 Zyfi 推出。Zyfi 是一个基于 ZKsync 的原生账户抽象层，此前在 2024 年 6 月份完成 200 万美元私募融资，Tenzor Capital、Everstake Capital、ZBS Capital 等参投。
+
+https://x.com/ZyfAI_
+
+Mozaic
+
+Mozaic 是一个由 LayerZero 提供支持的、基于 AI 的收益策略与流动性协议。Mozaic 的 AI 被称为阿基米德（Archimedes），支持跨金库资产再平衡存款，以帮助用户资产分配给之前将获得最高 APY 的池子。Archimedes 做决策时综合考量因素包括 APY 和预测 APY 指标、代币价格、费用、滑点、时间、TVL、交易量、池子奖励份额和错误率等。Mozaic 代币当前 320 万美元市值。
+
+https://x.com/Mozaic_Fi
+
+Sturdy Finance
+
+Sturdy Finance 是一个具有共享流动性的隔离借贷协议，在 2024 年已推出 Bittensor 子网 SN10。该子网使用去中心化 AI 自主管理流动性分配，提高贷方的收益率，同时确保借款人的高效流动性。Sturdy Finance 代币 STRDY 流通市值当前 2600 万美元，全稀释市值 1.4 亿美元。
+
+https://x.com/SturdyFinance
+
+Kudai
+
+Kudai 是由 GMX 社区组织 GMX Blueberry Club 使用 Simulacrum AI 构建的 AI 代理。Kudai 路线图中第一阶段将实现 Twitter 自动化、通过代币流动性管理优化赚取费用（积累资金）、探索 Base 和 GMX，第二阶段将购买和质押 GMX 以产生新的收入来源以及自动化所有收入来源的投资；第三阶段将在 GMX V2 上运行不同的策略以及实时分享持仓、盈利和亏损；第四阶段将开启收入再分配以及回馈 KUDAI 持有者。KUDAI 代币当前市值 1360 万美元。
+
+https://x.com/Kudai_IO
+
+EnsoFi
+
+EnsoFi 是一个跨链 DeFi 中心，支持借贷、LST 以及收益赚取，适用于 Solana、Sui、Eclipse、Movement 网络。EnsoFi 表示将利用 AI 优化 DeFi 体验，这个月将发布 AI 代理和新代币。
+
+https://x.com/Ensofi_xyz
+
+Velvet Unicorn
+
+Velvet Unicorn 是 Velvet Capital 通过 Virtuals 部署的 AI 代理。Velvet Capital 是一个由意图和 AI 驱动的 DeFi 交易和投资组合管理操作系统，此前曾入选 BNB Chain Web3 加速器计划。Velvet Unicorn 主要职责是通过 Velvet Capital 的基础设施自主管理 DeFi 投资组合，会利用实时数据、链上分析和神经网络路由引擎来识别高潜力收益、优化交易和再平衡头寸。Velvet Unicorn 代币 VU 当前市值 650 万美元。
+
+https://x.com/VU_virtuals
+
+tao.bot
+
+tao.bot 是一个通往 Bittensor 网络的网关，将支持从从以太坊无缝兑换为任何子网代币。
+
+https://x.com/taodotbot

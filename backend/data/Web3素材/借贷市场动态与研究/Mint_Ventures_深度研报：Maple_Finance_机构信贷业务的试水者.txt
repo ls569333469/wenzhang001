@@ -1,0 +1,166 @@
+标题: Mint Ventures 深度研报：Maple Finance 机构信贷业务的试水者
+链接: https://www.chaincatcher.com/article/2063352
+发布时间: 2021-07-12
+
+==================================================
+
+本文来源于Mint Ventures，作者为Mint Ventures 研究员李雨轩。
+
+ 
+
+小结
+
+从目前的实现形式而言，Maple Finance 的机构信贷业务空间有限；
+
+Maple Finance 相对其主要竞争对手 TrueFi 并无明显竞争优势和估值优势；
+
+业务概述
+
+Maple Finance 的业务方向为借贷 / 机构信用贷。 其业务流程中共有三种角色：借款方、流动性提供者和流动性池代表。
+
+借款方是加密货币原生机构，包括做市商和市场中性基金，他们可以用非足额抵押的方式借出资金，抵押率可以在 0-50% 之间。为机构提供信用贷款，这也是 Maple Finance 主要的价值主张。
+
+流动性提供者（liquity provider，其实就是贷款方，为了避免混淆，下文统一用「资金方」来代替）将资金存入流动性池获取利息。资金方可以随时申领其赚取的利息，但是必须在贷款完成后才能提取本金，提款时间目前设置为 180 天。
+
+流动性池代表（Pool Delegates）是流动性池的管理者，类似基金管理人的角色，他们需要评估机构借款人的信用并审查贷款条款（金额、期限、利率和抵押率）。为了贷款安全，Pool Delegates 还必须将最少 10 万美元的 USDC-MPL(项目原生代币) 的 LP 作为流动性池的质押，以在贷款违约的情况下还给资金方。
+
+除了付给资金方的利息之外，协议还会产生——
+
+设立费
+
+相当于融资服务费，设立费会在放款时直接扣除。设立费在 Pool Delegates 和 MPL 财政部之间分配，MPL 财政部会定期分配给全部 MPL 持有人
+
+持续费
+
+相当于基金管理费，比例由 Pool Delegates 设定，并从资金方收到的利息中扣除。持续费用在 Pool Delegates 和风险备付金的 MPL-USDC 的 LP 的质押者之间分配。
+
+目前的第一个也是唯一一个 pool 是数字资产基金 Orthogonal Trading，Pool Delegates 是 Orthogonal Trading 的创始人兼 CIO Josh Green. 这个池子在 5 月 25 日成功向包括 Alameda Research、Wintermute、Amber Group 和 Framework Labs 在内的借款人发放了 1700 万美元的贷款，并在 6 月底开放第二期，目前池资金总量达到了 3700 万美元。该池的具体数据如下——
+
+数据来源 https://app.maple.finance/#/liquidity/60a48265ec0b150011480d2a
+
+项目基本情况
+团队情况
+
+创始人 Sidney Powell，之前在澳大利亚一家非银行的借贷机构 Angle Finance 工作，再之前在 National Australia Bank 负责过机构业务。Powell 是一名非常早期的 DeFi 参与者，在 19 年 6 月份就曾经开始探讨 DeFi 非超额抵押借贷的可能性，他持有 CFA 证书。
+
+另一位联合创始人 Joe Flanaga，之前在澳大利亚一家上市公司做 CFO，有过 PWC 的工作经历。
+
+通过查询 LinkedIn 数据，Maple Finance 共有 38 名员工。
+
+总体而言，Maple Finance 的创始团队有丰富的传统金融经验，同时团队总人数在同等规模的项目中也相对更多，团队实力相对较强。
+
+历史发展情况和路线图
+
+Maple Finance 最初想做的是 Maple Smart Bonds，这是一个支持用户对 cDai(Dai 在 Compound 的存款凭证) 做 ABS 的平台，并且支持 3 级结构，第 1 级具有更好的安全性 (高抵押率) 和稍低的收益，第 2 级具有稍低的抵押率和稍高的收益，劣后级由发行人自己承担。当时产品有了 MVP(minimum viable product，最简可行产品)，也在 19 年底成功上线。这个思路是对现实世界中 ABS 产品的一个模拟，在当时 cDai 使用场景不足时确有空间，但是一旦有支持 cDai 抵押的平台出现 (例如 Cream)，这个系统就会显得没必要的复杂。
+
+在 2020 年初，Maple 正式转型信用贷方向，当时他们提到的贷款思路是互联网 P2P 业务的模拟，具体包括：
+
+Hawk : 抵押率要求为 0%，也就是完全的信用贷款，但在加入新成员前要求提供护照复印件并通过 zoom 的电话会议验证，以彻底评估新成员，借款人需要提供两张工资单以显示收入。设想的借款用途是为购买汽车或笔记本电脑等消费品。利息一般为 5-9％，期限为 18 个月。
+Happy Medium：抵押率要求为 20%，新会员需要使用用 Bloom 来验证 LinkedIn 或 Twitter。不需要工资单，但借款人的地址必须显示他们在过去 3 个月至少有 1,000 个 DAI，借款期限为 6-12 个月，年利率一般为 10-15%。
+Light Touch：抵押率要求为 33%，不需要身份验证，使用算法根据地址通证历史来评估违约概率，小额贷款少于 100DAI，年利率高达 40-50%。
+
+2020 年 6 月，他们的前端正式上线，思路仍然是互联网 P2P 的思路，值得一提的亮点是他们与一家机构合作推出了针对地址的评分系统，用于替代传统信贷中的评分卡。
+
+但是模拟线下 P2P 的信贷仍然有最核心的问题无法解决：P2P 贷款的 KYC 及 KYC 关联的征信 (美国的 Fico 分、中国的人行征信) 是稀缺资源，而链上贷款的地址并不是。除非能将地址与 KYC 做好有效挂钩 (如通过 BrightID 等工具)，并能够有效的将链上征信信息传递到真实世界，建立完善的「追索即服务」，否则链上的 P2P 信贷会一直是一个小众市场。
+
+关于追索即服务，可以参见 《20/21 DeFi 复盘与展望：新兴价值网络崛起和华尔街接口之潜力》
+
+在 20 年 12 月份，他们的融资文章中，披露方向改为面向机构的信贷，并在 4 月公告完成了转型。
+
+在今年的 5 月初完成 LBP(Liquidity Bootstrapping Pool, 一种降价拍卖募集资金的形式) 完成之后，MapleFinance 发布了路线图，目前来看，路线图中的事项都按计划进行，且全部执行完毕了，包括——
+
+5 月 2 日 Balancer50:50 池开放--在 Maple LBP 完成后，创建一个 50:50 的 MPL:USDC 平衡器池，将用于为 MPL 代币提供初始二级市场流动性，并在协议部署时为启动池做抵押。平衡池中的初始 MPL:USDC 由 MapleDAO 财政部提供，并将得到投资者的进一步支持，他们将在 Maple 上部署的第一个池中押注他们的 MPL 持有量。
+5 月 12 日，完成 ETH 主网部署，并创建第一个流动性资金池。启动池的上限为 1500 万美元，Orthogonal Trading 是池的代表。
+5 月 20 日，公布了面向 C 端用户的流动性挖掘计划，零售参与者将能够以六个月的锁定期向流动性池存入 USDC，以获得 USDC 收益和 MPL 奖励。
+5 月 25 日，成功达到了向借款人（包括 Alameda Research、Wintermute、Amber Group 和 Framework Labs）提供了 1700 万美元贷款。
+6 月底至 7 月初 第二个流动性资金池和增加贷款--在启动资金池创建四至六周后，第二批贷款将由 Orthogonal Trading 提供资金，第二个流动性资金池将被添加到 Maple。被列入候补名单的借款人将有机会提交贷款申请。
+
+从 Maple 的发展历史来看，他们一直致力于 DeFi 借贷的流动性释放。最开始选择资产证券化，后来选择 P2P 信贷，到目前确定的机构信贷，都是围绕这个方向，团队在此方向的探索还是比较坚定，值得肯定。
+
+融资情况
+
+Maple Finance 的投资机构阵容比较强大，一共有 2 轮——
+
+2020 年 12 月：估值为 0.56U/MPL(全流通市值 560 万美元)(反推，下文有过程)
+
+针对机构和企业的 DeFi 借贷平台 Maple Finance 宣布通过出售治理代币 MPL 完成 130 万美元种子轮融资，投资人包括 Cluster Capital、Framework Ventures、Alameda Research、FBG Ventures、One Block Capital、The LAO、Bitscale Capital、Synthetix 创始人 Kain Warwick 和 Aave 创始人 Stani Kulechov
+
+2021 年 3 月：估值为 5U/MPL(全流通市值 5000 万美元)
+
+Maple Finance 完成了由 Framework Ventures 和 Polychain Capital 牵头的 140 万美元融资，以帮助进一步开发和启动池。
+
+根据项目方在 LBP 时的披露，此轮估值为 5U/MPL，也就是说，本轮融资的 140 万美元总计获得 28 万个 MPL。而依据投资人总计获得 260 万个 MPL，可以反推出，20 年底这一轮 130 万美元总计获得 260-28=232 万个 MPL，此轮成本为 0.56U/MPL。可以看出，第一轮和第二轮估值在 3 个月之内估值差了 10 倍。
+
+此外，这篇文章中还披露，团队的 token 有 2 年 vesting 时间，投资人的 token 有 1.5 年的 vesting 时间。
+
+2021 年 4 月底，Maple Finance 在 Balancer 完成了 LBP(Liquidity Bootstrapping Pool )，总共募集金额为 $10,332,236。LBP 的平均成本为 $21.98，相当于 FDV 2.2 亿 U。
+
+通证分析
+代币
+
+项目原生代币为 $MPL，总量 1 亿枚，其代币分配和解锁情况如下图所示：
+
+数据来源 https://maplefinance.ghost.io/mpl-tokenomics/
+
+代币经济
+
+除了治理之外，MPL 还有两个作用：捕获费用和充当风险备付金 (功能尚未上线)。
+
+如上文所述，MPL 可以捕获设立费的一部分 (由 MPL 定期分配，尚未提及具体方式) 和持续费用的一部分 (通过给风险备付金做 LP)。
+
+风险备付金 (该功能尚未上线)，从官方文档中，我们可以看到，团队选择 MPL-USDC 的 LP 作为风险备付金，并且要求 Pool Delegate 在创建池子时必须先准备一部分风险备付金，作为对流动性池的一个增信措施。
+
+价格走势
+
+数据来源 https://www.coingecko.com/en/coins/maple
+
+目前 MPL 价格 6.37U，接近第二轮私募价格。
+
+MPL 目前流通市值为 1020 万美元，全流通市值 6370 万美元。
+
+业务分析
+竞争对手
+
+机构信用贷 (非闪电贷) 这个细分市场内，Maple 比较明显的竞争对手是 TrueFi。
+
+Maple 与 TrueFi 其实非常相似，都是机构非足额抵押借贷，而且稳定币部分的收益率都不高 10% 左右)，大部分 APY 来自其本身代币的分发。
+
+差异在于：Maple 使⽤流动池代表（Pool Delegate）来引入和评估贷款，每个借贷池可以由不同的池代表引入和评估。从某种程度上来讲，每个流动池代表都是一个基金经理，投资人可以选择不同的基金经理进行投资。
+
+⽽TrueFi 的所有贷款都是由 DAO 来评估贷款，投资人在 TrueFi 投资就相当于完全信任 DAO 的投资能力。两者确实有明显差距，但是个人认为，这个差距并非业务的关键因素。
+
+业务数据方面，自 2020 年 11 月底上线并被 sbf 和 ac 转发以来，TrueFi 一共完成了 2.2 亿美金的机构贷款，也积累了 Alameda、Wintermute、Poloniex 等一批机构客户 (Alameda 和 Wintermute 同时在 Maple 和 TrueFi 的客户名单中)。
+
+融资方面，TrueFi 的运营团队 TrustToken 在 2018 年完成 2000 万美元的战略融资，投资者包括 a16z crypto、BlockTower Capital、Danhua Capital、Signia Venture Partners、Slow Ventures、ZhenFund ，背景也相当不错。
+
+目前 TRU 代币流通市值 5115 万美金，总市值 2.11 亿，已经上了币安，其价格走势如下图，代币价格在历史最低价附近——
+
+数据来源 https://www.coingecko.com/en/coins/truefi
+
+另外，做信用贷方向的还有 Goldfinch，他们由两位 coinbase 的前员工创立，并获得了包括 coinbase venture 投资的种子轮 100 万美金，以及 a16z 领投的 1100 万美元 A 轮融资。其自去年 12 月份推出以来，已向墨西哥，尼日利亚以及东南亚的数千名借款人借出了 100 万美元的资金。但他们所做的业务是面向个人用户的无抵押贷款，与 Maple Finance 业务并不完全一致。
+
+目前整个机构信贷业务都处于非常早期的阶段。总体而言，Maple 相对 TrueFi，从业务模式、融资背景、实际业务数据乃至单纯的代币市值 (业务量都还太小无法有效估值) 方面，都没有表现出明显的优势。
+
+行业分析
+
+Maple 选择的机构信贷这个业务方向，一方面是面向机构，另一方面非抵押信贷也算是扩大了信用杠杆引入了新的流动性，这两个细分方向都是笔者比较看好的业务方向，但是就 Maple 目前的业务而言，却并不是很性感。
+
+如果说，Compound 和 Aave 给机构提供的服务我们可以简述为「把场外机构的钱投入到加密货币市场」，那么 Maple 和 TrueFi 的机构信用贷业务可以简述为「把散户的钱募给加密货币机构」。这块业务难做的根本原因在于：加密货币世界内的无风险收益率太高了 (这可能恰恰也是 Compound 和 Aave 的机构业务被看好的原因)，而机构能支付的收益率有限。
+
+从 TrueFi 和 Maple 的数据来看，即便是加密货币机构，可承担的贷款利率范围大概是：1 月期 8-10%、3 月期 9-12%、6 月期 10-15%。由于机构业务需要，存款只能是定期的，这就意味着用户需要放弃在加密货币世界中最重要的东西--流动性。流动性的丧失使得这个收益率看起来并不具有足够的吸引力，因此 Maple 和 TrueFi 要想吸引用户，通常对资金方提供高额的项目本身代币激励。
+
+问题是，一方面，要维持较高的 APY(也就是币价) 并不容易；更重要的是另一方面，在项目代币分发完之后，如何匹配 机构愿意支付的利率 和 散户能够接受的收益率 ?
+
+机构总体而言会更加的理性，所以借款方支付的利率会与资质有比较大的相关性，愿意支付更高利率的机构总体资质也会更差。进而可能会加大风险。而即便是顶级的加密货币的机构，其业务也并非绝对安全 (想想门头沟和 fireblocks 的丢币事件)。对于从事机构信贷业务的项目而言，一次意外都可能对项目造成比较严重的影响。
+
+因此，总体而言，我们认为，目前机构信贷业务的空间有限。
+
+参考资料
+https://app.maple.finance/#/liquidity
+https://maplefinance.gitbook.io/maple/
+https://maplefinance.ghost.io/
+https://www.chainnews.com/articles/570022485536.htm
+https://www.coindesk.com/maple-finance-corporate-lending-defi
+https://www.coindesk.com/maple-finance-raises-1-4m-for-its-reputation-based-defi-lending-platform
+https://maplefinance.ghost.io/guide-to-the-maple-lbp/
+https://medium.com/swlh/crypto-lending-the-missing-ingredient-4862d54cdf53

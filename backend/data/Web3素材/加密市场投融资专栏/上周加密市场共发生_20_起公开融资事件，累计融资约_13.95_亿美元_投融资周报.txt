@@ -1,0 +1,113 @@
+标题: 上周加密市场共发生 20 起公开融资事件，累计融资约 13.95 亿美元 | 投融资周报
+链接: https://www.chaincatcher.com/article/2176984
+发布时间: 2025-04-14
+
+==================================================
+
+整理：栾鹏，RootData
+
+ 
+
+据 RootData 不完全统计，2025 年 4 月 7 日- 4 月 13 日期间，区块链和加密行业共发生 20 起公开投融资事件，累计融资约 13.95 亿美元。
+
+从赛道分布来看，获得融资的项目主要分布在基础设施和 AI 赛道。热门项目包括AI 平台 Plastic Labs 、收益型稳定币协议 Cap、加密货币保险公司 Meanwhile、去中心化出版与阅读平台 Libraro。
+
+此外，Ripple 以 12.5 亿美元收购加密货币友好经纪商 Hidden Road，以扩大其面向机构投资者的服务。
+
+(上周融资大于 500 万美元的项目名单，数据来源：Rootdata）
+
+一、基础设施
+
+AI 平台 Plastic Labs 完成 535 万美元 Pre-Seed 融资，Variant 等领投
+
+AI 平台 Plastic Labs 宣布完成 535 万美元 Pre-Seed 轮融资，由 Variant、White Star Capital 和 Betaworks 领投，Mozilla Ventures、Seed Club Ventures、Greycroft 与 Differential Ventures 等参投，天使投资人包括 Scott Moore、NiMA Asghari 与 Thomas Howell。
+
+与此同时，其个性化 AI 身份平台“Honcho”现已开放早期访问。
+
+Layer2 解决方案 OpenZK Network 完成 600 万美元早期融资，Animoca Brands 等参投
+
+据官方消息，Layer2 解决方案 OpenZK Network 宣布完成 600 万美元早期融资，投资方包括 Animoca Brands、Coinstore、Sovereign Trust 等机构。本轮融资将用于支持其技术研发与生态建设。
+
+据悉，OpenZK 由前高盛亚太区执行总裁 Dave Sandor 创立，目前正积极与多家机构洽谈合作，推进后续战略布局。
+
+据 Web3 资产数据平台 RootData 显示，OpenZK Network 是一个基于 zk-rollup 技术的第 2 层解决方案，可显著降低交易成本并提高吞吐量，同时还通过原生 ETH 质押、再质押和稳定币质押引入了可持续的奖励机制。
+
+社交通信协议 Towns 完成 1000 万美元 B 轮融资，a16z crypto 领投
+
+据 Towns Protocol 官方消息，去中心化通信协议 Towns 宣布完成 1000 万美元 B 轮融资，本轮由 a16z crypto 领投，Coinbase Ventures 新加入投资，Benchmark 继续参投。Towns 致力于构建链上通信基础设施，推动 Web3 社交与协作工具的发展。项目方表示“通信的未来将走向链上”。
+
+Web3 AI 项目 DecentralGPT 完成 300 万美元等值资产的天使轮及 A 轮战略融资，AGICrypto Capital 领投
+
+Web3 AI 项目 DecentralGPT 宣布于日前完成 300 万美元等值资产的天使轮及 A 轮战略融资。本轮融资由 AGICrypto Capital 领投，Cherry Ventures、BTR Capital、DePINX、Aethir 等参投。
+
+作为完全去中心化的大型语言模型（ LLM ）基础设施， DecentralGPT 通过创新性的分布式 AI 推理网络，革命性地实现了包括 DeepSeek R1、Llama4.0在内的多个顶尖开源大模型的去中心化部署。项目核心架构打破传统 AI 垄断格局，真正贯彻"安全可验证、数据隐私化、治理民主化、代码全开源"的下一代 AGI 发展理念，为全球开发者及用户打造无需信任风险的智能交互生态。
+
+二、AI
+
+Magic Eden 收购去中心化交易平台 Slingshot
+
+NFT 平台 Magic Eden 已完成对去中心化交易平台 Slingshot 的收购。
+
+Magic Eden 表示，此举将推动其打造跨链资产交易平台的愿景，实现支持 8M+代币、覆盖所有链（包括即将上线的比特币）且无需跨桥或中心化交易所的交易体验。
+
+收益型稳定币协议 Cap 完成 1100 万美元融资，Triton Capital 等参投
+
+据 CoinDesk 报道，收益型稳定币协议 Cap 完成 1100 万美元融资，富兰克林邓普顿和 Triton Capital 等参投。
+
+Cap 利用一批拥有收益生成专业技能的运营商，使大众能够获得此前未曾开发的收益。
+
+三、游戏
+
+链游开发商 Gunzilla Games 获 1kx 战略投资
+
+据官方消息，加密风投 1kx 宣布战略投资反乌托邦赛博朋克射击游戏《Off The Grid》的链游开发商 Gunzilla Games，具体金额暂未披露。
+
+据悉，1kx 此前因涉及早期产品执行风险一直对在 AAA 游戏中部署加密货币策略持怀疑态度，本次投资疑似对此前投资策略做出转型调整。
+
+四、其他
+
+去中心化金融教育平台 BugsCoin 完成 1200 万美元 A 轮融资，Becker Ventures 等参投
+
+据官方信息，Web3 去中心化金融教育平台 BugsCoin（BGSC）宣布完成 1200 万美元 A 轮战略融资。此轮融资由 Becker Ventures、Castrum Capital、BullPerks、DuckDAO、Maxx Capital 及多家亚洲家族办公室联合投资。
+
+BugsCoin 旨在通过无风险模拟交易系统，构建以实践驱动的金融教育生态，实现学习与收益的双重激励。官方表示，融资将用于全球市场拓展、BugsFunded 去中心化资管协议升级、AI 智能投顾研发以及 BGSC 生态建设等方向。
+
+目前，BugsCoin 已上线 Gate.io、Bitget、HashKey、MEXC、BitMart 等交易平台，并于近期完成 500 亿枚 BGSC 的代币销毁。
+
+加密货币保险公司 Meanwhile 完成 4000 万美元 A 轮融资，Framework Ventures 等领投
+
+据财富杂志报道，加密货币保险公司 Meanwhile 周四完成了由 Framework Ventures 和 Fulgur Ventures 领投的 4000 万美元 A 轮融资，加密货币银行 Xapo 的创始人 Wences Casares 也参与了此次投资。
+
+此轮融资对 Meanwhile 的估值为 1.9 亿美元，几乎是 2022 年最近一轮融资时估值的两倍。Meanwhile 将利用此轮融资筹集的资金进行全球扩张，并确保其产品符合监管要求。
+
+据介绍，Meanwhile 的人寿保险政策与普通人寿保险类似。投保人需向精算师计算得出的每月保费进行支付。然而，与从银行账户支付或使用支票不同，客户需从加密货币钱包中用比特币支付。当投保人去世时，其家人将以比特币形式收到索赔金额。
+
+AI 网络安全公司 Octane 完成 675 万美元种子轮融资，Winklevoss Capital 等领投
+
+据福布斯报道， AI 网络安全初创公司 Octane 宣布完成 675 万美元的种子轮融资，由 Archetype 和 Winklevoss Capital （ Gemini 创始人 Tyler 和 Cameron Winklevoss 的家族理财室）共同领投。其他支持者包括加密交易所 Gemini Frontier Fund、Circle、Duke Capital Partners 和一批战略天使投资者，其中包括前 Coinbase 首席技术官 Balaji Srinivasan 。该笔资金将用于产品开发、扩大工程团队和扩大 Octane 的影响力。
+
+据介绍，Octane 的核心主张是用始终在线的 AI 防御来补充被动审计模型。 Octane 目前专注于智能合约漏洞，但未来该公司的目标是检测和预防更复杂的攻击。
+
+去中心化阅读平台 Libraro 获得 Ayre Ventures 追加投资，总投资额达到约 128 万美元
+
+据美通社报道，去中心化出版与阅读平台 Libraro 今日宣布，已获得 Ayre Ventures 的追加投资，自 2024 年 10 月获得初始种子资金以来，Ayre Ventures 对 Libraro 的总投资额已达 100 万英镑（约 128 万美元）。
+
+据介绍，Libraro 平台利用区块链技术保护作者身份，防止侵犯版权，并提高所有权和发行权的透明度。该平台通过 Web3 忠诚度计划加深读者、作者和出版商之间的联系。
+
+加密餐饮应用 Blackbird 完成 5000 万美元 B 轮融资，Spark Capital 领投
+
+据 Fortune 报道，加密餐饮应用 Blackbird 完成 5000 万美元 B 轮融资，Spark Capital 领投，Coinbase、a16z crypto、Union Square Ventures 和 Amex Ventures 参投，该公司创始人 Ben Leventhal 表示他在 2024 年第四季度筹集了这笔资金，但直到最近才披露，同时他拒绝透露该轮融资的隐含估值。
+
+自 2022 年以来，Blackbird 公司已筹集了总计 8500 万美元资金。
+
+Ripple 以 12.5 亿美元收购加密货币友好经纪商 Hidden Road
+
+Ripple 以 12.5 亿美元收购加密货币友好经纪商 Hidden Road，以扩大其面向机构投资者的服务。
+
+Ripple 首席执行官 Brad Garlinghouse 表示，此次收购代表了 XRP 背后的公司 Ripple 为整合更广泛的服务以吸引大型机构所做的努力，“Ripple 需要确保我们拥有适当的基础设施，以吸引和扩展到更大的大型机构群体。”
+
+比特币去中心化聚合协议 Sats Terminal 完成 170 万美元 Pre-Seed 轮融资，Coinbase Ventures 等领投
+
+据 The Block 报道，比特币去中心化聚合协议 Sats Terminal 完成 170 万美元 Pre-Seed 轮融资，Coinbase Ventures 和 Draper Associates 领投，Draper Dragon、BitcoinFi Accelerator、UTXO Management、Core Chain Ventures、Sats Ventures、Delta Blockchain Fund、Tenzor Capital 和 3Commas Capital 参投。
+
+Sats Terminal 由 Stanislav Havryliuk 和 Rishabh Java 创立，其初衷是让比特币原生 DeFi 产品更加直观和互联。
