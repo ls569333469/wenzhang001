@@ -1,21 +1,64 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { PenTool, Library, Settings2 } from "lucide-react";
 import { MonitorCard } from "@/features/dashboard/components/MonitorCard";
 import { ActionTile } from "@/features/dashboard/components/ActionTile";
+import { API_BASE_URL } from "@/config/api";
 
 export default function DashboardPage() {
+  // Phase 9: Dynamic health check
+  const [backendStatus, setBackendStatus] = useState<"online" | "offline" | "busy">("offline");
+  const [backendLatency, setBackendLatency] = useState<string | undefined>(undefined);
+  const [larkStatus, setLarkStatus] = useState<"online" | "offline" | "busy">("offline");
+
+  useEffect(() => {
+    async function checkHealth() {
+      const start = Date.now();
+      try {
+        const res = await fetch(`${API_BASE_URL}/health`, {
+          method: 'GET',
+          signal: AbortSignal.timeout(5000) // 5s timeout
+        });
+        const latency = Date.now() - start;
+        if (res.ok) {
+          setBackendStatus("online");
+          setBackendLatency(`${latency}ms`);
+          // Check Lark status from response if available
+          const data = await res.json().catch(() => ({}));
+          if (data.lark_connected) {
+            setLarkStatus("online");
+          }
+        } else {
+          setBackendStatus("offline");
+          setBackendLatency(undefined);
+        }
+      } catch {
+        setBackendStatus("offline");
+        setBackendLatency(undefined);
+      }
+    }
+
+    checkHealth();
+    // Refresh every 30 seconds
+    const interval = setInterval(checkHealth, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Dynamic greeting based on time
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? "早上好" : hour < 18 ? "下午好" : "晚上好";
+
   return (
     <div className="min-h-screen bg-paper">
       <div className="max-w-4xl mx-auto px-8 py-16 space-y-12">
         {/* 欢迎语 */}
         <header className="space-y-2">
           <h1 className="text-3xl md:text-4xl font-serif text-ink-primary tracking-tight">
-            晚上好，架构师。
+            {greeting}，架构师。
           </h1>
           <p className="text-ink-muted text-sm md:text-base">
-            Quantum Studio v6.1 — The Athenaeum
+            Quantum Studio v6.2 — Deep Integration
           </p>
         </header>
 
@@ -29,8 +72,8 @@ export default function DashboardPage() {
             <div className="h-px flex-1 bg-zinc-200"></div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <MonitorCard label="后端核心" status="online" latency="12ms" />
-            <MonitorCard label="知识库引擎" status="offline" />
+            <MonitorCard label="后端核心" status={backendStatus} latency={backendLatency} />
+            <MonitorCard label="知识库引擎" status={larkStatus} />
           </div>
         </section>
 
@@ -68,3 +111,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

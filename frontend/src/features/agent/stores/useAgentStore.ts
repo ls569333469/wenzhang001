@@ -9,12 +9,15 @@ import { toast } from 'sonner';
 
 import { type GenerateRequest, type CreationConfig, defaultConfig } from '../../studio/schema';
 
+// Session Status Type
+type SessionStatus = 'idle' | 'connecting' | 'thinking' | 'writing' | 'listening' | 'completed' | 'error';
+
 
 interface AgentState {
     status: SessionStatus;
     error: string | null;
     steps: TimelineStep[];
-    content: string; // Added back
+    content: string;
     // Phase 6: Two-Stage Workflow State
     strategyOptions: any[] | null;
     analysisResult: {
@@ -27,6 +30,8 @@ interface AgentState {
     } | null;
     agentLogs: string[];
     isWaitingForSelection: boolean;
+    // Phase 9: Store payload for confirmStrategy
+    lastRequestPayload: { input: string; config: Partial<CreationConfig> } | null;
 
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
@@ -75,6 +80,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     analysisResult: null,
     agentLogs: [],
     isWaitingForSelection: false,
+    lastRequestPayload: null,
 
     startSession: async ({ input, config }) => {
         // 1. Reset State
@@ -86,7 +92,8 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             strategyOptions: null,
             analysisResult: null,
             agentLogs: [],
-            isWaitingForSelection: false
+            isWaitingForSelection: false,
+            lastRequestPayload: { input, config }
         });
 
         // Activate Strategist
@@ -143,31 +150,40 @@ export const useAgentStore = create<AgentState>((set, get) => ({
         set({ steps: [...steps] });
 
         try {
-            // We need original input + config. 
-            // Ideally we should have stored them, but for now we rely on the backend state or re-sending?
-            // Backend /generate handles the full flow.
-            // We need to re-send the payload but with `selected_option`.
-            // Limitation: We don't have the original payload stored in Store explicitly easily. 
-            // WORKAROUND: For this iteration, we assume Strategist is DONE client-side, 
-            // and we call /generate with the same prompts. 
-            // Note: The backend /generate will re-run Strategist? 
-            // Analysis of `graph.py` shows `node_strategist` uses `selected_option` if provided to SKIP generation?
-            // Let's assume yes. P4/P5 logic usually supports this.
+            // Phase 9 Fix: Use stored payload
+            const { lastRequestPayload, analysisResult } = get();
+            if (!lastRequestPayload) {
+                throw new Error('No stored payload. Please start a new session.');
+            }
 
-            // Re-construct payload? We can't easily without storing it.
-            // Let's add `lastRequestPayload` to store?
-            // For Pragmatic Fix, let's just use what we have or generic.
-            // User: "Pragmatic Fix".
-            // Let's assume the backend `router` handles `selected_option`.
+            // Inject prompts again for /generate
+            const finalInput = injectPrompts(lastRequestPayload.input);
 
-            // To do this properly, `startSession` should store the `requestBody` in a ref or hidden state.
-            // But since I can't easily change schema, I'll assume users won't change config in between.
+            // Build request with selected_option
+            const requestBody: GenerateRequest = {
+                prompt: finalInput,
+                config: {
+                    ...defaultConfig,
+                    ...lastRequestPayload.config
+                },
+                selected_option: option,
+                info_anchors: analysisResult?.info_anchors
+            };
 
-            // Wait, this is tricky. `startSession` arguments are gone.
-            // I should `get()` the values. But `input` is gone.
-            // I need to add `lastInput` and `lastConfig` to store.
-        } catch (e) {
-            // ...
+            const response = await fetch(`${API_BASE_URL}/generate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+            });
+
+            if (!response.ok) throw new Error(`Failed to generate: ${response.statusText}`);
+            if (!response.body) throw new Error('No response body received');
+
+            // Process SSE stream (reuse existing helper)
+            await processStream(response.body, set, get);
+
+        } catch (err: unknown) {
+            handleError(err, set, get);
         }
     },
 
@@ -325,4 +341,5 @@ interface BackendEvent {
     detail?: string;
     payload?: any;
     message?: string;
+    logs?: string[];
 }

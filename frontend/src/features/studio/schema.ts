@@ -87,6 +87,13 @@ export const AgentStatusSchema = z.object({
 export const GenerateRequestSchema = z.object({
     prompt: z.string().min(1, '请输入创作素材'),
     config: CreationConfigSchema,
+    // Phase 9: Two-stage workflow fields
+    selected_option: z.any().optional(),
+    info_anchors: z.object({
+        must_mention: z.array(z.string()),
+        key_data: z.array(z.string()),
+        can_extend: z.array(z.string()),
+    }).optional(),
 });
 
 /** 生成结果 */

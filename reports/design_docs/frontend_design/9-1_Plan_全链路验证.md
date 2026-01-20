@@ -97,18 +97,25 @@
 
 ### 🔵 P3: 前端测试体系建设 (Frontend Testing Framework)
 
-#### 3.0 依赖安装 (Prerequisites)
+#### 3.0 依赖安装 (Prerequisites) - 优化版
 ```bash
-# 安装 Vitest + React Testing Library
-npm install -D vitest @testing-library/react @testing-library/jest-dom jsdom
+# 1. 核心测试框架 (Vitest + RTL)
+npm install -D vitest @vitejs/plugin-react jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
 
-# 安装 Playwright
-npm install -D @playwright/test
-npx playwright install
+# 2. E2E (Playwright - 内置截图对比，无需 Percy/BackstopJS)
+npm init playwright@latest
+# (初始化时选 TypeScript, 选 GitHub Actions)
 
-# 安装 Lighthouse CLI
-npm install -D lighthouse
+# 3. API 模拟 (MSW) - 解耦后端依赖
+npm install -D msw
+
+# 4. Next.js 路由模拟 - 解决 nuqs/useQueryState 报错
+npm install -D next-router-mock
 ```
+
+> ⚠️ **架构师注意事项**:
+> - **RSC 测试策略**: Server Components (`page.tsx`) 用 Playwright E2E，Client Components (`'use client'`) 用 Vitest
+> - **视觉测试字体问题**: Playwright 配置中设置 `maxDiffPixels: 100` 避免跨平台字体渲染差异
 
 #### 3.1 单元测试 (Unit Testing)
 - **工具**: Vitest (与 Vite/Next.js 生态兼容)

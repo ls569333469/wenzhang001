@@ -2,15 +2,18 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from "@/lib/utils";
-import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles } from 'lucide-react';
+import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
+import { API_BASE_URL } from '@/config/api';
 
 export default function SettingsPage() {
   const [apiKey, setApiKey] = useState('');
   const [model, setModel] = useState('gpt-4-turbo');
   const [baseUrl, setBaseUrl] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Phase 6: Prompt State
   const [prompts, setPrompts] = useState({
@@ -20,40 +23,79 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
-    // Load from localStorage on mount
-    const storedKey = localStorage.getItem('qs_api_key');
-    const storedModel = localStorage.getItem('qs_model');
-    const storedUrl = localStorage.getItem('qs_base_url');
-    if (storedKey) setApiKey(storedKey);
-    if (storedModel) setModel(storedModel);
-    if (storedUrl) setBaseUrl(storedUrl);
+    async function loadSettings() {
+      setIsLoading(true);
 
-    // Load Prompts
-    const pStrat = localStorage.getItem('qs_prompt_strategist');
-    const pWriter = localStorage.getItem('qs_prompt_writer');
-    const pCritic = localStorage.getItem('qs_prompt_critic');
+      // 1. Try to load from backend first
+      try {
+        const res = await fetch(`${API_BASE_URL}/config/keys`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.api_key) setApiKey(data.api_key);
+          if (data.model) setModel(data.model);
+          if (data.base_url) setBaseUrl(data.base_url);
+        }
+      } catch {
+        // Backend unavailable, fall back to localStorage
+        console.log('[Settings] Backend unavailable, using localStorage');
+      }
 
-    setPrompts({
-      strategist: pStrat || DEFAULTS.strategist,
-      writer: pWriter || DEFAULTS.writer,
-      critic: pCritic || DEFAULTS.critic
-    });
+      // 2. Load from localStorage as fallback/override
+      const storedKey = localStorage.getItem('qs_api_key');
+      const storedModel = localStorage.getItem('qs_model');
+      const storedUrl = localStorage.getItem('qs_base_url');
+      if (storedKey) setApiKey(storedKey);
+      if (storedModel) setModel(storedModel);
+      if (storedUrl) setBaseUrl(storedUrl);
+
+      // Load Prompts (always from localStorage)
+      const pStrat = localStorage.getItem('qs_prompt_strategist');
+      const pWriter = localStorage.getItem('qs_prompt_writer');
+      const pCritic = localStorage.getItem('qs_prompt_critic');
+
+      setPrompts({
+        strategist: pStrat || DEFAULTS.strategist,
+        writer: pWriter || DEFAULTS.writer,
+        critic: pCritic || DEFAULTS.critic
+      });
+
+      setIsLoading(false);
+    }
+
+    loadSettings();
   }, []);
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    setIsSaving(true);
     try {
+      // 1. Save to localStorage (always works)
       localStorage.setItem('qs_api_key', apiKey);
       localStorage.setItem('qs_model', model);
       localStorage.setItem('qs_base_url', baseUrl);
-
-      // Save Prompts
       localStorage.setItem('qs_prompt_strategist', prompts.strategist);
       localStorage.setItem('qs_prompt_writer', prompts.writer);
       localStorage.setItem('qs_prompt_critic', prompts.critic);
 
-      toast.success('Configuration saved successfully');
-    } catch (e) {
-      toast.error('Failed to save settings');
+      // 2. Sync to backend
+      const res = await fetch(`${API_BASE_URL}/config/keys`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          api_key: apiKey,
+          model: model,
+          base_url: baseUrl
+        })
+      });
+
+      if (res.ok) {
+        toast.success('Configuration saved to server');
+      } else {
+        toast.success('Saved locally (server sync failed)');
+      }
+    } catch {
+      toast.success('Saved locally (server unavailable)');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -173,10 +215,15 @@ export default function SettingsPage() {
         <div className="flex justify-end pt-4">
           <Button
             onClick={handleSave}
+            disabled={isSaving || isLoading}
             className="bg-primary text-white hover:bg-primary/90 rounded-xl shadow-lg shadow-primary/20"
           >
-            <Check className="w-4 h-4 mr-2" />
-            Save Configuration
+            {isSaving ? (
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            ) : (
+              <Check className="w-4 h-4 mr-2" />
+            )}
+            {isSaving ? 'Saving...' : 'Save Configuration'}
           </Button>
         </div>
       </div>
