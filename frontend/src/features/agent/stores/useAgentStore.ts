@@ -93,7 +93,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             analysisResult: null,
             agentLogs: [],
             isWaitingForSelection: false,
-            lastRequestPayload: { input, config }
+            lastRequestPayload: { input, config, mode: config.mode || 'deep_analysis' }
         });
 
         // Activate Strategist
@@ -107,12 +107,12 @@ export const useAgentStore = create<AgentState>((set, get) => ({
 
         try {
             // 2. Initiate Request to /analyze (Step 1)
-            const requestBody: GenerateRequest = {
-                prompt: finalInput,
-                config: {
-                    ...defaultConfig,
-                    ...config
-                }
+            // Backend expects: { input, mode, narrative_type, references, api_config }
+            const requestBody = {
+                input: finalInput,
+                mode: config.mode || 'deep_analysis',
+                narrative_type: 'project_review',
+                references: [],
             };
 
             // NOTE: Changing endpoint to /analyze
@@ -157,15 +157,14 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             }
 
             // Inject prompts again for /generate
-            const finalInput = injectPrompts(lastRequestPayload.input);
+            const finalInput = injectPrompts(lastRequestPayload.input || lastRequestPayload.prompt || '');
 
-            // Build request with selected_option
-            const requestBody: GenerateRequest = {
-                prompt: finalInput,
-                config: {
-                    ...defaultConfig,
-                    ...lastRequestPayload.config
-                },
+            // Backend expects: { input, mode, narrative_type, references, selected_option, info_anchors }
+            const requestBody = {
+                input: finalInput,
+                mode: lastRequestPayload.mode || 'deep_analysis',
+                narrative_type: 'project_review',
+                references: [],
                 selected_option: option,
                 info_anchors: analysisResult?.info_anchors
             };

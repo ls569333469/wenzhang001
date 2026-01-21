@@ -1,7 +1,7 @@
-# Quantum Studio v6.1 - 项目手册
+# Quantum Studio v6.2 - 项目手册
 
-> **更新日期**: 2026-01-19  
-> **版本**: v6.1 (Enforcement Edition)  
+> **更新日期**: 2026-01-21  
+> **版本**: v6.2 (E2E Verified Edition)  
 > **维护者**: AI 开发团队
 
 ---
@@ -10,7 +10,7 @@
 
 > 本手册是项目的 **Single Source of Truth**，所有重要决策、进度、问题追踪都应记录在此。
 
-### 章节标准
+### 图标标准
 
 | 图标 | 含义 | 使用场景 |
 |:----:|:-----|:---------|
@@ -20,191 +20,81 @@
 | 📅 | 未来计划 | 短期和中期规划 |
 | ✅ | 已完成 | 标记在 Initiative 标题后 |
 | 🛠️ | 进行中 | 当前正在开发的功能 |
-
-### 更新规则
-
-1. **每次值班结束**时更新 `已知问题` 和 `未来计划`
-2. **完成 Initiative**时在标题后添加 ✅ 并填写完成日期
-3. **Bug 修复**记录在 `已修复问题` 章节，标注日期
-4. **重大变更**需同步更新 `reports/` 目录下的交接报告
-
-## 📦 项目概述
-
-**Quantum Studio** 是一个基于多 Agent 协作的 AI 写作引擎，采用 LangGraph 编排多个专业化 Agent（Strategist、Writer、Critic、Polisher）完成高质量内容生成。
-
-## 3. 系统架构 (System Architecture)
-
-### 3.1 前端架构 (v6.2 Island Architecture)
-> **状态**: Phase 3 (Island Layout)
-> **文档**: `reports/design_docs/frontend_design/PHASE3_ISLAND_DESIGN.md`
-
-前端采用 **Next.js 16 (App Router)** 构建的多页面应用 (MPA)，升级为 **Island Architecture** (岛屿架构)。
-
-*   **路由结构**:
-    *   `/dashboard`: 全局概览。
-    *   `/studio`: **[核心]** 创作工坊，采用 **Z-Stack 浮岛布局**。
-    *   `/knowledge`: 知识库管理。
-    *   `/settings`: 系统配置。
-
-*   **UI 布局 (The Athenaeum)**:
-    1.  **Config Island (Left)**: 悬浮配置面板 (Mode, Style, Length)。
-    2.  **Agent Island (Right)**: 悬浮智能体时间轴 (Thinking/Active/Done)。
-    3.  **Central Canvas (Center)**: 沉浸式创作白板。
-    4.  **Studio Navbar (Top)**: 胶囊式全局导航。
-
-*   **状态管理**:
-    *   `useStudioUI` (Zustand): UI 状态。
-    *   `nuqs`: URL 状态同步。
-
-### 3.2 后端架构 (FastAPI + LangGraph)
-*   **服务入口**: `app.main:app` (FastAPI)。
-*   **业务逻辑**:
-    *   `/analyze`: 策略生成 (Strategist Agent)。
-    *   `/generate`: 流式正文生成 (Writer Agent)。
-    *   `/config/*`: 配置与 Lark 同步。
-*   **Agent 编排**: 基于 `LangGraph` 的状态机模型，支持 Human-in-the-loop。
-
-### 3.3 数据流 (Data Flow)
-1.  **Ingestion**: `cleaner_cli.py` 清洗本地 TXT/MD -> 存入 Lark Base (双脑: Knowledge + Style)。
-2.  **Retrieval**: Writer Agent 运行时，根据 `mode` 和 `topic` 从 Lark 检索 Top N 样本。
-3.  **Generation**: SSE 流式推送 Token 到前端。
-├── frontend/                    # Next.js 前端
-│   └── src/
-│       ├── app/                 # 页面路由
-│       │   ├── page.tsx         # Dashboard
-│       │   └── studio/          # Studio (Island Layout)
-│       ├── components/          # UI 组件
-│       │   ├── layout/          # Island, Navbar
-│       │   └── timeline/        # AgentTimeline
-│       └── features/            # 业务模块 (studio/...)
-│
-├── backend/                     # FastAPI 后端
-│   └── app/
-│       ├── main.py              # API 入口
-│       ├── graph.py             # LangGraph 工作流
-│       └── agents/              # Agent 实现
-│
-└── PROJECT_HANDBOOK.md          # 本文档
-```
+| ⭐ | 核心短板 | "爆款"核心能力缺失 |
 
 ---
 
-## ✅ 已完成功能 (Milestone)
+## 📦 项目概述
 
-### 🔹 Phase 3 - Island Architecture (v6.2) ✅
-> **Goal**: 实现 "High-End Minimalism" 视觉风格，采用浮岛架构提升认知清晰度。
-> **完成日期**: 2026-01-20
+**Quantum Studio** 是一个基于多 Agent 协作的 **爆款内容生成引擎**，采用 LangGraph 编排多个专业化 Agent（Strategist、Writer、Critic、Polisher）完成高质量 Web3 内容生成。
 
-#### 核心交付
-*   **Design Lab**: 验证了三种布局方案，最终选定 Visual Variant A。
-*   **架构升级**:
-    *   `IslandContainer`: 统一封装悬浮、阴影、圆角逻辑。
-    *   `Z-Stack Layout`: 层叠式后的背景纹理与主体内容。
-*   **组件实现**:
-    *   `ConfigPanel`: 接入 `nuqs` 实现 URL 状态同步。
-    *   `AgentTimeline`: 可视化 Agent 思考过程 (Pulse 动画)。
-*   **技术债清理**:
-    *   降级 Tailwind CSS 至 v3.4.17 以确保生态兼容性。
-    *   清理了旧的 `(studio)` 路由组。
+### 核心价值主张
+> 不只是 AI 写作，而是 **专门帮你打造爆款**。
 
-#### 关联文档
-*   📄 **[Phase 1 Summary](reports/design_docs/frontend_design/PHASE1_SUMMARY.md)**
-*   📄 **[Phase 2 Summary](reports/design_docs/frontend_design/PHASE2_SUMMARY.md)**
-*   📄 **[Phase 3 Design](reports/design_docs/frontend_design/PHASE3_ISLAND_DESIGN.md)**
+---
 
-### 🔹 Phase 4 - Deep Research Integration ✅
-> **Goal**: 将静态岛屿架构接入真实 AI 业务逻辑，实现流式生成的沉浸体验。
-> **完成日期**: 2026-01-20
+## 📊 项目综合评分：72/100
 
-#### 核心交付
-*   **Data Layer**:
-    *   `useAgentStore`: 基于 Zustand 实现的 SSE 流式客户端，管理全周期会话状态。
-    *   **Robust State Machine**: Idle -> Connecting -> Thinking -> Writing -> Completed。
-*   **Component Wiring**:
-    *   `ConfigPanel`: 新增 `StartButton`，支持 Stop 中止操作。
-    *   `AgentIsland`: 实时可视化 Agent 思考步骤 (Thinking -> Active -> Done)。
-    *   `StudioPage`: 正文画布实时打字机效果。
-*   **API Integration**:
-    *   对接后端 `POST /generate` SSE 接口。
-    *   实现 `text/event-stream` 解析器。
+> **评估日期**: 2026-01-21 (基于全链路 E2E DOM 测试)
 
-#### 关联文档
-*   📄 **[Phase 4 Summary](reports/design_docs/frontend_design/PHASE4_SUMMARY.md)**
-*   📄 **[Phase 4 Design](reports/design_docs/frontend_design/PHASE4_DEEP_RESEARCH.md)**
+| 维度 | 得分 | 说明 |
+|------|------|------|
+| **功能完整性** | 8/10 | 核心创作流程已打通，4阶段Agent协作运行正常 |
+| **技术稳定性** | 7/10 | Schema问题已修复，边缘case仍需测试 |
+| **UI/UX 设计** | 7/10 | 视觉效果不错，交互反馈和加载状态可优化 |
+| **爆款生成能力** | 6/10 | ⭐ **核心短板**，详见下文 |
+| **差异化竞争力** | 7/10 | 多Agent协作是亮点，但未充分展现 |
 
-### 🔹 P1 - Agent 独立模型配置 ✅
-- **后端**: 支持 Agent 级别的 API Key 和模型配置
-- **前端**: 设置页面可为每个 Agent 分配不同的 LLM 提供商
+---
 
-### 🔹 P2 - 提示词工程系统 ✅
-- **后端**: 基于 Jinja2 的 Prompt 模板系统，支持 API 读写
-- **前端**: Prompt Engineering 独立标签页，带语法高亮编辑器
+## ⭐ "爆款内容生成" 核心差距分析
 
-### 🔹 P3 - 选题参考功能 ✅
-- **后端**: `GenerateRequest` 支持 `references` 字段
-- **Strategist**: 结合参考素材进行选题分析
-- **前端**: 三栏布局 + "Extra References" 动态列表输入
+> **关键洞察**: 技术骨架已搭好，但"爆款"这个核心价值点体现不足。
 
-#### 3. 关联文档
-*   📄 **[Lark 集成操作手册](reports/Lark_Integration_Guide.md)**
-*   📄 **[素材库设计方案](reports/Material_Integration_Design.md)**
-*   📄 **[Lark 数据清洗规范 v3.0](reports/design_docs/Lark_Data_Cleaning_v3.0.md)** ✨ NEW
-*   📄 **[白班员工审查报告](reports/白班员工_代码检查报告_20260111.md)**
+### 1. 缺少"爆款要素"提取与显性化 ⭐ 关键
+- **现状**: 策略分析只给了角度选择，没有告诉用户"为什么这个角度更容易爆"
+- **改进**: 应该显示：
+  - 热点关联度评分
+  - 情绪触发点分析（FOMO/焦虑/好奇心）
+  - 预估传播力指数
+  - 目标受众画像匹配度
 
-### 🔹 P12.2 - Lark 数据清洗 v3.0 ✅ (2026-01-18)
-> **Goal**: 实现 Web3 知识库的 Antigravity 智能清洗，解决长文本问题，优化 RAG 检索效果。
+### 2. 标题优化能力不足 ⭐ 关键
+- **现状**: 生成的标题虽然有吸引力，但没有专门的标题AB测试
+- **改进**: 应该提供：
+  - 3-5个备选标题
+  - 基于爆款公式分析（数字法则、悬念法则等）
+  - 点击率预测对比
 
-#### 核心交付
-*   **双引擎架构**: Web2 风格库 (教"怎么写") + Web3 知识库 (给"写什么")
-*   **Antigravity 接入**: LLM 自动提取结构化 JSON (标题、摘要、关键词、深度、类型)
-*   **表结构统一**: 全中文字段名，核心摘要（3-5句话）替代长文本
-*   **入库脚本**: `scripts/ingest_antigravity.py` 支持批量自动化入库
+### 3. 缺少实时热点注入
+- **现状**: 只使用用户输入的主题，没有主动关联近期热点
+- **改进**: 应该：
+  - 接入热点数据源（Twitter/微博趋势）
+  - 自动建议"热点+主题"结合方案
+  - 显示热度时效性
 
-#### 字段设计要点
-| 字段 | 说明 |
-|------|------|
-| 核心摘要 | 3-5句话，用于 RAG 检索首选 |
-| 信息深度 | 快讯 / 资讯 / 深度 |
-| 事实类型 | 事实 / 观点 / 黑话 |
-| 正文原文 | 完整原文备份，仅查证时调用 |
+### 4. 内容结构不够"爆款化"
+- **现状**: 生成的内容偏学术/理性分析风格
+- **改进**: 应该支持：
+  - 开头钩子（Hook）强度设置
+  - 故事化程度调节
+  - 金句密度控制
+  - 节奏张力曲线可视化
 
-#### 关联文档
-📄 **[Lark 数据清洗规范 v3.0](reports/design_docs/Lark_Data_Cleaning_v3.0.md)**
+### 5. 缺少发布前优化建议
+- **现状**: 内容生成后直接结束
+- **改进**: 应该提供：
+  - 最佳发布时间建议
+  - 配图/封面建议
+  - SEO关键词优化提示
+  - 社交媒体摘要自动生成
 
-### 🔹 P8 - 智能素材熔炉 (Lark Integrated) ✅
-> **Goal**: 接入 **Lark Base (飞书多维表格)** 作为素材中台，实现 Web3 投研素材的自动化采集与风格化注入。
-
-#### 核心交付
-*   **同步层 (Sync)**: `SyncService` 定时拉取 Lark 数据，支持中英文自动映射和本地缓存。
-*   **生成层 (Gen)**: `Writer Agent` 成功接入 `FewShotSelector`，实现了基于 Lark 真实素材的风格化写作。
-*   **前端 (UI)**: 新增 Status Monitor 面板 (已知存在 UI 重复渲染问题，列入 P10 修复)。
-
-#### 2. 配置清单 (.env)
-系统依赖以下 Lark API 凭证 (已获取):
-- `Lark App ID`: `cli_a9e999fdc138c060`
-- `Lark App Secret`: `oRJHGiCj5vQIL8OCp85ssdTJvLgLtk1E`
-- `Lark Base Token`: `CSfdbzErqay4bnsISxEuuVais3g`
-- `Lark Table ID`: `tblbHfS1y8Nuk34j`
-
-###  P4 - 交互式选题 (Human-in-the-Loop) ✅
-- **Strategist Prompt**: 生成多个选题方案 (Options)
-- **API 拆分**:
-  - `POST /analyze` — 仅运行 Strategist，返回选题选项
-  - `POST /generate` — 接收 `selected_option`，跳过 Strategist 直接生成
-- **前端流程**: "分析 → 选择 → 生成" 两阶段交互
-
-- **前端**: `handleAnalyze` 消费 SSE 流，实时显示思考进度
-- **Phase 7 & 8 Completed**: 验证了 backend-driven UX 和 Context Panel。
-
-### 🔹 Phase 9 - 生产环境准备 (Production Prep) ░
-> **Goal**: 将 Dev Mode 原型转化为 Production Ready 商业级产品。
-> **状态**: 规划中 (Next Step)
-
-#### 核心任务
-*   **构建优化**: Frontend Tree Shaking, Backend Gunicorn/Uvicorn Workers.
-*   **安全加固**: Rate Limiting, CORS Policy, Secret Management.
-*   **部署架构**: Dockerization, CI/CD Pipeline.
-*   **监控体系**: Structured Logging (Sentry/ELK), Health Checks.
+### 6. 用户反馈闭环缺失
+- **现状**: 一次生成即结束
+- **改进**: 应该：
+  - 支持"不够爆"的一键重写
+  - 提供爆款元素自检清单
+  - 历史爆款案例对比学习
 
 ---
 
@@ -212,251 +102,129 @@
 
 | 指标 | 值 |
 |------|-----|
-| **阶段** | Phase 4 (Deep Research Integration) 完成，进入 Phase 5 Polish |
+| **阶段** | E2E 全链路验证完成，进入功能增强期 |
 | **前端端口** | `localhost:3000` |
-| **后端端口** | `localhost:8004` (通过 `frontend/src/config/api.ts` 配置) |
+| **后端端口** | `localhost:8000` (`.env.local` 配置) |
 | **已集成模型** | Gemini, DeepSeek, Doubao (火山引擎), OpenAI |
 
 ---
 
-## 🔧 近期打磨方向 (Polish Backlog)
+## ✅ 已完成功能 (Milestone)
 
-> 以下是可立即着手优化的细节任务，优先级从高到低排列。
+### 🔹 Phase 9 - 全链路验证 (E2E Verified) ✅
+> **完成日期**: 2026-01-21
 
-### 🔴 高优先级
+#### 核心交付
+* **API Schema 修复**:
+  - `/analyze` 请求: `prompt` → `input`
+  - `/generate` 请求: `prompt` → `input`, `config` → `mode`
+  - `lastRequestPayload` 存储: 添加 `mode` 字段
+* **前端渲染修复**:
+  - `WritingCanvas.tsx`: 修复 react-markdown className 渲染崩溃
+* **E2E 验证结果**:
+  - 策略分析 ✅ → 初稿撰写 (v3) ✅ → 质量审核 (78分) ✅ → 润色打磨 ✅
+  - 生成内容正常渲染在画布中
+  - 无任何 console 错误
 
-| 任务 | 说明 | 预估工时 |
-|------|------|----------|
-| **Prompt 精调** | 优化各 Agent 提示词，提升输出质量和一致性 | 2-4h |
-| **API Key 持久化** | 改用后端 Session 或配置文件存储，避免浏览器缓存丢失 | 2h |
-| **错误处理优化** | 添加 LLM 调用超时重试、友好错误提示 | 1-2h |
+### 🔹 Phase 3 - Island Architecture (v6.2) ✅
+> **完成日期**: 2026-01-20
 
-### 🟡 中优先级
+* **Design Lab**: 验证了三种布局方案，最终选定 Visual Variant A。
+* **架构升级**:
+  - `IslandContainer`: 统一封装悬浮、阴影、圆角逻辑。
+  - `Z-Stack Layout`: 层叠式后的背景纹理与主体内容。
+* **组件实现**:
+  - `ConfigPanel`: 接入 `nuqs` 实现 URL 状态同步。
+  - `AgentTimeline`: 可视化 Agent 思考过程 (Pulse 动画)。
 
-| 任务 | 说明 | 预估工时 |
-|------|------|----------|
-| **风格库扩充** | 为各写作风格添加更多高质量样本文档 | 3-5h |
-| **内容后处理** | 自动格式化输出、智能分段、标题层级优化 | 2-3h |
-| **导出功能** | 支持一键导出为 Markdown / HTML 文件 | 1-2h |
+###  Phase 4 - Deep Research Integration ✅
+> **完成日期**: 2026-01-20
 
-### 🟢 低优先级
+* **Data Layer**:
+  - `useAgentStore`: 基于 Zustand 实现的 SSE 流式客户端。
+  - **Robust State Machine**: Idle → Connecting → Thinking → Writing → Completed。
+* **API Integration**:
+  - 对接后端 `POST /analyze` 和 `POST /generate` SSE 接口。
+  - 实现 `text/event-stream` 解析器。
 
-| 任务 | 说明 | 预估工时 |
-|------|------|----------|
-| **UI 动画细节** | 添加微交互、过渡动画、骨架屏加载态 | 2-3h |
-| **深色模式** | 实现暗色主题切换 | 1-2h |
-| **移动端适配** | 响应式布局调整 | 3-4h |
+### � 其他已完成功能
+- **P1**: Agent 独立模型配置 ✅
+- **P2**: 提示词工程系统 ✅
+- **P3**: 选题参考功能 ✅
+- **P4**: 交互式选题 (Human-in-the-Loop) ✅
+- **P6**: 健壮性与持久化优化 ✅
+- **P7**: 项目全盘体检与治理 ✅
+- **P8**: 智能素材熔炉 (Lark Integrated) ✅
+- **P12**: Lark 数据清洗工具 (v2.2) ✅
 
 ---
 
 ## 🎯 未来规划 (Roadmap)
 
-### 📌 P6 - 内容历史与版本管理 (暂缓)
-- [ ] 保存生成的内容到本地数据库 (SQLite/IndexedDB)
-- [ ] 支持历史记录浏览和恢复
-- [ ] 实现内容 Diff 对比
+### � 高优先级 - "爆款"核心能力补足
 
-### 🚀 P6 (New) - 健壮性与持久化优化 (已完成) ✅
-> 解决 API Key 丢失与 LLM 调用不稳定的痛点。
+| 任务 | 说明 | 预估工时 |
+|------|------|----------|
+| **标题AB测试模块** | 生成3-5个备选标题，显示爆款公式分析 | 4-6h |
+| **爆款要素评分显性化** | 在策略选择时显示传播力指数、情绪触发点 | 4-6h |
+| **开头Hook强度设置** | 支持用户调节开头吸引力强度 | 2-3h |
 
-- [x] **后端配置持久化**:
-  - [x] 实现 `/config/keys` 读写接口
-  - [x] 使用 JSON 文件存储密钥 (带 gitignore)
-- [x] **LLM 错误处理**:
-  - [x] 引入 `tenacity` 实现指数退避重试
-  - [x] 添加 LLM 请求超时控制
-  - [x] 优化错误提示信息 (友好化)
-- [x] **前端集成**:
-  - [x] Settings 页面同步保存到后端
-  - [x] 显示更详细的错误与重试状态
+### � 中优先级 - 体验优化
 
-### 🚀 P7 (New) - 项目全盘体检与治理 (已完成) ✅
-> 对项目进行首次全面健康检查，消除隐患，夯实基础。
+| 任务 | 说明 | 预估工时 |
+|------|------|----------|
+| **Prompt 精调** | 优化各 Agent 提示词，提升输出质量 | 2-4h |
+| **发布前优化建议** | 最佳发布时间、配图建议、SEO关键词 | 3-4h |
+| **内容后处理** | 自动格式化、智能分段、标题层级优化 | 2-3h |
+| **导出功能** | 支持导出为 Markdown / HTML 文件 | 1-2h |
 
-- [x] **代码质量审计**:
-  - [x] 前端 Lint/Type Check (消除 `any` 类型)
-  - [x] 后端 PEP8 规范检查与无用代码清理
-- [x] **功能完整性验证**:
-  - [x] 核心链路 E2E 测试 (分析 -> 生成)
-  - [x] 边界情况测试 (空输入、超长文本、服务宕机)
-- [x] **架构与安全治理**:
-  - [x] 目录结构规范化检查
-  - [x] 敏感信息扫描 (Key 泄露检查)
-  - [x] 文档与代码一致性核对
+### 🟢 低优先级
 
-### 🩺 P7 体检报告 (Audit Report - 2026.01.10)
+| 任务 | 说明 | 预估工时 |
+|------|------|----------|
+| **UI 动画细节** | 微交互、过渡动画、骨架屏加载态 | 2-3h |
+| **深色模式** | 暗色主题切换 | 1-2h |
+| **热点数据注入** | 接入 Twitter/微博趋势 API | 4-6h |
 
-> 📄 **[点击查看详细报告文件](reports/P7_Audit_Report_20260110.md)**
-> 📄 **[点击查看 2026 竞品分析报告](reports/Competitor_Analysis_2026.md)**
+### 📌 远期规划
 
-| 维度 | 状态 | 详情 |
-|------|------|------|
-| **后端代码** | 🟢 优秀 | `flake8` 扫描通过 (0 errors)。核心逻辑覆盖率高。 |
-| **前端代码** | 🟢 良好 | 已修复 `require()` 引用和主要未使用变量。剩余少量 Warning。 |
-| **功能验证** | 🟢 通过 | `/health`, `/config/keys` 接口响应正常。全流程 ( 分析 -> 生成) 正常运行。 |
-| **安全性** | 🟢 安全 | `.gitignore` 正确包含 `user_config.json`。API Key 接口已脱敏。 |
-| **架构健康** | 🟢 良好 | 目录结构清晰，配置管理 (Backend/Env) 优先级逻辑正确。 |
-
-> **行动建议**: 下一步开发前建议优先修复前端的 Lint 警告，保持代码库零异味。
-
-### � P10 - 前端清理与 Lark 深度集成 (进行中)
-> **Goal**: 偿还 P8 开发过程中的前端技术债务，并完善“手动触发 -> 自动归档”的闭环。
-
-- [ ] **前端修复**: 解决 Lark Status UI 重复渲染的 Bug。
-- [ ] **代码清理**: 消除 ESLint 警告。
-- [ ] **结果回写**: 仅在用户手动生成完成后，可选将结果归档回 Lark 表格。
-
-### ⚠️ P9 - 自动化工作流引擎 (已废弃/Pivot)
-> **Decision**: 经产品讨论，用户倾向于保留“人工触发”的控制权，拒绝后台自动生成。
-> **Pivot**: 原 P9 的“自动 Worker”方案被取消，转而专注于 P10 的“辅助增强”路线。
-
-### 📌 P11 - 导出与多渠道发布 (计划中)
-- [ ] 导出为 Markdown / HTML / PDF
-- [ ] 集成推送到 CMS (如 WordPress, Ghost)
-
-### 📌 P11 - 风格微调系统 (远期)
-- [ ] 支持上传样本文章进行风格学习
-- [ ] 风格强度调节滑块
-- [ ] 自定义禁用词列表
-
-### 🛠️ P12 - Lark 数据清洗工具 (独立工具) ✅
-> **Goal**: 一个独立的 Python 脚本/GUI 工具，用于批量清洗、去重、格式化 Lark Base 中的素材数据。
-> **完成日期**: 2026-01-12
-
-**交付物**:
-- `backend/tools/cleaner_cli.py` - 核心 CLI 工具 (Shell-Kernel 壳肉分离法)
-- 更新 `sync_service.py` FIELD_MAPPING (新增 `逻辑公式`, `质量分` 字段)
-- 更新 `writer.py` Few-Shot 展示 (显示 `logic_pattern` 和 `snippet_type`)
-
-**使用示例**:
-```bash
-# 处理单个文件
-python -m tools.cleaner_cli clean --input data/mimeng/咪蒙2.txt --author 咪蒙 --style mimeng
-
-# 处理整个文件夹
-python -m tools.cleaner_cli clean --input data/mimeng/ --author 咪蒙 --style mimeng
-```
-
-### ⚡ P12.1 - 工业级清洗工具升级 ✅
-> **Goal**: 将 P12 清洗工具升级为工业级版本，支持并发处理、断点续传、智能去重。
-> **完成日期**: 2026-01-13
-
-**核心升级 (Phase 1+2)**:
-| 特性 | 说明 | 阶段 |
-|:-----|:-----|:----:|
-| AsyncIO 并发 | Semaphore(5) 控制，速度提升 5-10x | P1 |
-| 断点续传 | `processed_log.json` 记录进度 | P1 |
-| 智能分片 | 3000 字符/片，按段落切分 | P1 |
-| API 自动重试 | `tenacity` 指数退避 (429/Timeout) | P2 |
-| 双重去重 | 本地 MD5 + 服务端 Lark 查询 (`content_hash`) | P2 |
-| 智能识别 | `--input` 支持单文件或文件夹 | P1 |
-
-**效果**: 200万字处理时间 < 20 分钟，且具备高并发下的强鲁棒性。
-
-**2026-01-13 Bug 修复**:
-- 前端 API 端口配置 (8004 → 8002)
-- Critic API Key 回退逻辑
-- Lark Schema 补充 `content_hash` 字段
-- LarkClient 增加 `filter` 支持
-
-### ⚡ P12.2 - cleaner_cli v2.2 融合升级 ✅
-> **Goal**: 融合 v2.0 异步架构与 v2.1 智能规划思想，打造最终工业级清洗工具。
-> **完成日期**: 2026-01-14
-
-**v2.2 新增特性**:
-| 特性 | 说明 |
-|:-----|:-----|
-| 预扫描规划器 | 启动前显示文件数、总字符、分片数、预计耗时 |
-| 多条提取 Prompt | 优化 Prompt 明确要求提取所有有价值素材 |
-| 增强启动信息 | 更清晰的运行状态展示 |
-
-**效果**: 957KB 文件提取 230 条素材 (较 v2.0 提升 35%)
-
+- [ ] P11 - 导出与多渠道发布 (WordPress, Ghost 集成)
+- [ ] 风格微调系统 (上传样本文章学习风格)
+- [ ] 内容历史与版本管理
 
 ---
 
 ## ⚠️ 已知问题与注意事项
 
-### 🟡 待处理问题 (2026-01-13)
+### � 已修复问题 (2026-01-21)
+
+1. **API Schema 不匹配 (422 Error)**:
+   - *Issue*: 前端发送 `{prompt, config}` 但后端期望 `{input, mode}`
+   - *Fix*: 更新 `useAgentStore.ts` 中的 `startSession` 和 `confirmStrategy`
+
+2. **ReactMarkdown 渲染崩溃**:
+   - *Issue*: `className` prop 在新版本不再支持
+   - *Fix*: 将 `className` 移至包裹的 `<div>` 上
+
+3. **前端端口配置错误**:
+   - *Issue*: `.env.local` 配置为 8002，后端运行在 8000
+   - *Fix*: 更新 `.env.local` 为 `NEXT_PUBLIC_API_URL=http://localhost:8000`
+
+### � 待处理问题
 
 1. **LLM 时间感知错误**
-   - *Issue*: 生成的文章中出现 "2024年" 而非 "2026年"
-   - *原因*: LLM 未正确感知当前时间
+   - *Issue*: 生成的文章中可能出现错误年份
    - *建议*: 在 Prompt 中注入当前日期
 
-2. **Lark 旧 PS 内容**
-   - *Issue*: 已入库的 PS 开头内容未被过滤
-   - *建议*: 手动将 PS 内容的 quality_score 改为 1，或重新运行 cleaner_cli
-
-### 🟢 已修复问题 (2026-01-15: Day Shift)
-
-1. **Bug: Writer 节点超时 (P0)**:
-   - *Issue*: `/generate` 工作流在 Writer 阶段因同步 LLM 调用阻塞 Loop 而超时。
-   - *Fix*: `backend/app/graph.py` 中 `node_writer` 改为异步，并利用 `asyncio.to_thread` 将计算密集型/阻塞型操作移入线程池。
-
-2. **UI: Lark Status 重复 (P2)**:
-   - *Issue*: `page.tsx` 中重复渲染 Lark 状态组件。
-   - *Fix*: 封装 `<LarkStatusCard />` 组件，清理冗余代码。
-
-3. **Dev: 前端 Lint 警告 (P2)**:
-   - *Issue*: 累积 20+ Lint 警告。
-   - *Fix*: 修复 `any` 类型声明，移除未使用的变量和引用。
-
-### 🟢 已修复问题 (2026-01-13)
-
-1. **API 端口配置错误**:
-   - *Issue*: 前端配置 8004，后端运行在 8002
-   - *Fix*: `frontend/src/config/api.ts` 改为 8002
-
-2. **Critic API Key 缺失**:
-   - *Issue*: Critic 配置使用 deepseek 但无 Key
-   - *Fix*: `graph.py` 增加回退逻辑，无 Key 时使用 volcengine
-
-3. **Lark 情绪字段缺失**:
-   - *Issue*: 上传时报 FieldNameNotFound
-   - *Fix*: 运行 `update_lark_schema.py` 添加字段
-
-### 🟢 已修复问题 (历史归档)
-
-1. **API Key 存储 (Fixed in v5.0/P6)**:
-   - *Issue*: Key 存储在前端 localStorage，易丢失。
-   - *Fix*: 引入后端 `/config/keys` 接口与 `user_config.json` 进行持久化存储。
-
-2. **LLM 调用超时 (Fixed in v5.0/P6)**:
-   - *Issue*: 缺乏重试机制，网络波动导致任务失败。
-   - *Fix*: 引入 `tenacity` 实现 3 次指数退避重试与超时控制。
-
 ---
 
-## 📅 未来计划
-
-### 🔜 短期 (本周)
-- [x] 修复 LLM 时间感知问题 (已在 Prompt 中注入当前日期) ✅
-### 🔜 短期 (本周)
-- [x] 修复 LLM 时间感知问题 (已在 Prompt 中注入当前日期) ✅
-- [x] 清理前端 Lint 警告 ✅
-- [x] 移除重复的 Lark Status 组件 ✅
-- [x] **回归核心功能 - 爆款内容生成测试** (已修复 Writer 超时问题) ✅
-- [ ] 优化 UI 交互动画
-
-### 📌 中期 (暂缓)
-- [ ] Workflow Worker 集成 cleaner_cli (暂缓)
-- [ ] 添加 chunk_index 字段支持入库排序
-
-### 📌 远期 (P11)
-- [ ] 支持上传样本文章进行风格学习
-- [ ] 风格强度调节滑块
-- [ ] 自定义禁用词列表
-
----
-
-## 🚀 快速启动指南
+##  快速启动指南
 
 ### 1. 启动后端
 ```bash
 cd d:/AI_Projects/2026001/backend
 .\venv\Scripts\activate  # Windows
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8002
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### 2. 启动前端
@@ -467,8 +235,9 @@ npm run dev
 
 ### 3. 访问应用
 - 主页: http://localhost:3000
+- Studio: http://localhost:3000/studio
 - 设置: http://localhost:3000/settings
-- 健康检查: http://localhost:8002/health
+- 健康检查: http://localhost:8000/health
 
 ---
 
@@ -480,56 +249,41 @@ npm run dev
 | `POST` | `/generate` | SSE 流式生成，执行完整工作流 |
 | `GET` | `/health` | 健康检查 |
 | `GET` | `/config/models` | 获取可用模型列表 |
-| `GET` | `/config/keys` | (新增) 获取 API Key 配置 |
-| `POST` | `/config/keys` | (新增) 更新 API Key 配置 |
-| `GET` | `/config/prompts` | 获取所有 Agent Prompt |
-| `POST` | `/config/prompts/{agent}` | 更新指定 Agent Prompt |
-| `GET` | `/config/styles` | 获取风格配置 |
+| `GET/POST` | `/config/keys` | API Key 配置读写 |
+| `GET/POST` | `/config/prompts/{agent}` | Agent Prompt 读写 |
 
 ---
 
-## 📈 项目复盘 (Project Reviews)
+## 📂 目录结构
 
-本章节记录关键里程碑的深度复盘文档，用于指导后续迭代。
-
-| 日期 | 版本 | 阶段 | 关键文档 | 核心结论 |
-|------|------|------|----------|----------|
-## 📈 项目复盘 (Project Reviews)
-
-本章节记录关键里程碑的深度复盘文档，用于指导后续迭代。
-
-| 日期 | 版本 | 阶段 | 关键文档 | 核心结论 |
-|------|------|------|----------|----------|
-| 2026-01-15 | v5.0 | Alpha | [项目复盘_20260115_v5.0_Alpha.md](reports/reviews/项目复盘_20260115_v5.0_Alpha.md) | 技术闭环完成，需进行全真长文压力测试以验证内容质量。 |
-
-> 📂 **文档结构说明**:
-> * `reports/daily_log/`: 日常交接报告与审计日志
-> * `reports/design_docs/`: 技术方案、PRD与设计文档
-> * `reports/reviews/`: 项目阶段性深度复盘
-
-
----
-
-## 🧪 测试脚本
-
-
-```bash
-# 测试交互式流程 (SSE)
-python backend/test_interactive_flow.py
-
-# 测试完整工作流
-python backend/test_full_flow.py
-
-# 测试火山引擎连接
-python backend/test_volcengine.py
+```
+├── frontend/                    # Next.js 前端
+│   └── src/
+│       ├── app/                 # 页面路由
+│       │   ├── page.tsx         # Dashboard
+│       │   └── studio/          # Studio (Island Layout)
+│       ├── components/          # UI 组件
+│       └── features/            # 业务模块
+│
+├── backend/                     # FastAPI 后端
+│   └── app/
+│       ├── main.py              # API 入口
+│       ├── graph.py             # LangGraph 工作流
+│       └── agents/              # Agent 实现
+│
+├── reports/                     # 设计文档与报告
+└── PROJECT_HANDBOOK.md          # 本文档
 ```
 
 ---
 
-## 📞 联系与支持
+## 📈 项目复盘 (Project Reviews)
 
-如有问题，请联系开发团队或在项目仓库提交 Issue。
+| 日期 | 版本 | 阶段 | 关键结论 |
+|------|------|------|----------|
+| 2026-01-21 | v6.2 | E2E Verified | 全链路打通，需补足"爆款"核心能力 |
+| 2026-01-15 | v5.0 | Alpha | 技术闭环完成，需进行全真长文压力测试 |
 
 ---
 
-*Last updated: 2026-01-10 22:53*
+*Last updated: 2026-01-21 11:36*
