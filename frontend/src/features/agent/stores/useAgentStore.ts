@@ -12,6 +12,31 @@ import { type GenerateRequest, type CreationConfig, defaultConfig } from '../../
 // Session Status Type
 type SessionStatus = 'idle' | 'connecting' | 'thinking' | 'writing' | 'listening' | 'completed' | 'error';
 
+// P10-9: Studio Phase for adaptive layout
+export type StudioPhase = 'idle' | 'thinking' | 'generating' | 'reading';
+
+/**
+ * P10-9: Map session status to layout phase
+ */
+export function mapStatusToPhase(status: SessionStatus): StudioPhase {
+    switch (status) {
+        case 'idle':
+            return 'idle';
+        case 'connecting':
+        case 'thinking':
+        case 'listening':
+            return 'thinking';
+        case 'writing':
+            return 'generating';
+        case 'completed':
+            return 'reading';
+        case 'error':
+            return 'reading'; // Show result even on error
+        default:
+            return 'idle';
+    }
+}
+
 
 interface AgentState {
     status: SessionStatus;

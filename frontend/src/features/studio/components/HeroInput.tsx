@@ -1,32 +1,39 @@
-
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useQueryState, parseAsFloat } from 'nuqs';
-import { Play, Sparkles, Command } from 'lucide-react';
+import { Play, Sparkles, FileText, Palette, ChevronDown } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { useAgentStore } from '@/features/agent/stores/useAgentStore';
-import { UI_TEXT } from '@/config/constants';
+import { useAgentStore, mapStatusToPhase } from '@/features/agent/stores/useAgentStore';
+import { UI_TEXT, CREATION_MODES } from '@/config/constants';
+import { ALL_STYLES } from '@/lib/styles';
 import {
     CreationModeSchema,
     WritingStyleSchema,
     ArticleLengthSchema,
     defaultConfig
 } from '@/features/studio/schema';
-import { toast } from 'sonner';
 
+/**
+ * HeroInput - P10-9 Phase-Aware Input Component
+ * 
+ * Idle Mode: Centered with quick config shortcuts
+ * Active Mode: Compact in layout
+ */
 export function HeroInput() {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const [input, setInput] = useState('');
     const { startSession, status } = useAgentStore();
-    const isRunning = status === 'thinking' || status === 'listening'; // Check statuses
+    const phase = mapStatusToPhase(status);
+    const isRunning = status === 'thinking' || status === 'listening' || status === 'connecting';
+    const isIdle = phase === 'idle';
 
     // === Read Config from URL (Source of Truth) ===
-    const [mode] = useQueryState('mode', {
+    const [mode, setMode] = useQueryState('mode', {
         defaultValue: defaultConfig.mode,
         parse: (v) => CreationModeSchema.safeParse(v).success ? v : defaultConfig.mode
     });
-    const [style] = useQueryState('style', {
+    const [style, setStyle] = useQueryState('style', {
         defaultValue: defaultConfig.style,
         parse: (v) => WritingStyleSchema.safeParse(v).success ? v : defaultConfig.style
     });
@@ -42,6 +49,13 @@ export function HeroInput() {
         parse: (v) => v ? v.split(',') : ['auto']
     });
 
+    // Get current mode and style display names
+    const currentMode = CREATION_MODES.find(m => m.id === mode);
+    const currentStyle = ALL_STYLES.find(s => s.id === style);
+
+    // Quick mode options for dropdown
+    const quickModes = CREATION_MODES.filter(m => !m.compact).slice(0, 3);
+
     // Auto-resize textarea
     useEffect(() => {
         if (textareaRef.current) {
@@ -52,12 +66,6 @@ export function HeroInput() {
 
     const handleStart = () => {
         if (!input.trim()) return;
-
-        // --- Phase 6: Settings & Prompt Injection ---
-        // Need to read from localStorage for custom prompts if any
-        // Since we are prefixing, we do it here.
-        // But for "Pragmatic Fix", let's keep it simple first and just start session.
-        // We will add the injection logic in Step 3 (Settings MVP).
 
         startSession({
             input: input.trim(),
@@ -81,7 +89,10 @@ export function HeroInput() {
     };
 
     return (
-        <div className="w-full max-w-2xl mx-auto">
+        <div className={cn(
+            "w-full transition-all duration-500",
+            isIdle ? "max-w-2xl mx-auto" : "max-w-full"
+        )}>
             {/* Main Input Card */}
             <div className={cn(
                 "relative group bg-white rounded-2xl shadow-xl shadow-zinc-200/50 border border-zinc-100 transition-all duration-300",
@@ -96,12 +107,64 @@ export function HeroInput() {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
-                        placeholder={UI_TEXT?.inputPlaceholder || "Enter your research topic..."} // Fallback just in case
-                        className="w-full bg-transparent border-none focus:ring-0 text-lg text-ink-primary placeholder:text-zinc-300 min-h-[60px] max-h-[400px] resize-none py-3 px-4 font-sans leading-relaxed"
-                        style={{ height: '60px' }}
+                        placeholder={UI_TEXT?.inputPlaceholder || "输入您的研究主题或指令..."}
+                        className="w-full h-[80px] bg-transparent border-none outline-none focus:ring-0 focus:outline-none text-lg text-ink-primary placeholder:text-zinc-300 resize-none py-3 px-4 font-sans leading-relaxed"
                         autoFocus
                     />
                 </div>
+
+                {/* P10-9: Quick Config Shortcuts (Only in Idle Mode) */}
+                {isIdle && (
+                    <div className="flex items-center gap-2 px-4 pb-2">
+                        {/* Mode Selector */}
+                        <div className="relative group/dropdown">
+                            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 rounded-lg text-xs font-medium text-zinc-600 transition-colors">
+                                <FileText className="w-3.5 h-3.5" />
+                                <span>{currentMode?.title || '深度分析'}</span>
+                                <ChevronDown className="w-3 h-3 text-zinc-400" />
+                            </button>
+                            {/* Dropdown */}
+                            <div className="absolute top-full left-0 mt-1 py-1 bg-white border border-zinc-200 rounded-lg shadow-lg opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all z-50 min-w-[160px]">
+                                {quickModes.map(m => (
+                                    <button
+                                        key={m.id}
+                                        onClick={() => setMode(m.id)}
+                                        className={cn(
+                                            "w-full text-left px-3 py-2 text-xs hover:bg-zinc-50 transition-colors",
+                                            mode === m.id ? "bg-zinc-50 font-medium" : ""
+                                        )}
+                                    >
+                                        {m.title}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Style Selector */}
+                        <div className="relative group/dropdown">
+                            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 rounded-lg text-xs font-medium text-zinc-600 transition-colors">
+                                <Palette className="w-3.5 h-3.5" />
+                                <span>{currentStyle?.icon} {currentStyle?.name || '咪蒙体'}</span>
+                                <ChevronDown className="w-3 h-3 text-zinc-400" />
+                            </button>
+                            {/* Dropdown */}
+                            <div className="absolute top-full left-0 mt-1 py-1 bg-white border border-zinc-200 rounded-lg shadow-lg opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all z-50 min-w-[140px]">
+                                {ALL_STYLES.slice(0, 4).map(s => (
+                                    <button
+                                        key={s.id}
+                                        onClick={() => setStyle(s.id as any)}
+                                        className={cn(
+                                            "w-full text-left px-3 py-2 text-xs hover:bg-zinc-50 transition-colors",
+                                            style === s.id ? "bg-zinc-50 font-medium" : ""
+                                        )}
+                                    >
+                                        {s.icon} {s.name}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Bottom Bar */}
                 <div className="flex items-center justify-between px-4 pb-3 pt-1">
@@ -125,7 +188,7 @@ export function HeroInput() {
                                 : "bg-zinc-100 text-zinc-400 cursor-not-allowed"
                         )}
                     >
-                        {UI_TEXT?.startButton || "Start Creation"}
+                        {UI_TEXT?.startButton || "开始深度创作"}
                         <Play className={cn("w-3.5 h-3.5 fill-current", isRunning && "hidden")} />
                         {isRunning && <span className="animate-spin">⏳</span>}
                     </button>
@@ -135,12 +198,14 @@ export function HeroInput() {
                 <div className="absolute inset-0 rounded-2xl pointer-events-none ring-1 ring-inset ring-black/5" />
             </div>
 
-            {/* Empty State / Suggestions (Optional Polish) */}
-            <div className="mt-8 text-center">
-                <p className="text-sm text-zinc-400">
-                    尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"
-                </p>
-            </div>
+            {/* P10-9: Suggestions (Only in Idle Mode) */}
+            {isIdle && (
+                <div className="mt-8 text-center">
+                    <p className="text-sm text-zinc-400">
+                        尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"
+                    </p>
+                </div>
+            )}
         </div>
     );
 }

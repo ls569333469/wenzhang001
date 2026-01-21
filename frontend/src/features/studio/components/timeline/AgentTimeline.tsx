@@ -19,6 +19,7 @@ export interface TimelineStep {
 
 interface AgentTimelineProps {
     steps: TimelineStep[];
+    onViewThinking?: () => void; // P10-9: Trigger detail panel
 }
 
 /**
@@ -29,20 +30,26 @@ interface AgentTimelineProps {
  * - 脉冲节点 (Pulsing dots for active state)
  * - 极简排版
  */
-export function AgentTimeline({ steps }: AgentTimelineProps) {
+export function AgentTimeline({ steps, onViewThinking }: AgentTimelineProps) {
     return (
         <div className="relative pl-2 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-zinc-100">
             {steps.map((step, index) => (
-                <TimelineItem key={step.id} step={step} isLast={index === steps.length - 1} />
+                <TimelineItem
+                    key={step.id}
+                    step={step}
+                    isLast={index === steps.length - 1}
+                    onViewThinking={onViewThinking}
+                />
             ))}
         </div>
     );
 }
 
-function TimelineItem({ step, isLast }: { step: TimelineStep, isLast: boolean }) {
+function TimelineItem({ step, isLast, onViewThinking }: { step: TimelineStep, isLast: boolean, onViewThinking?: () => void }) {
     const isActive = step.status === 'active' || step.status === 'thinking';
     const isCompleted = step.status === 'completed';
     const isError = step.status === 'error';
+    const isStrategist = step.agent === 'strategist';
 
     return (
         <div className={cn("relative flex gap-4 group", isActive && "opacity-100", !isActive && !isCompleted && "opacity-50")}>
@@ -95,6 +102,16 @@ function TimelineItem({ step, isLast }: { step: TimelineStep, isLast: boolean })
                         <span className="text-ink-muted">{UI_TEXT.status.idle}</span>
                     )}
                 </div>
+
+                {/* P10-9: View Thinking Chain Link (only for completed strategist) */}
+                {isCompleted && isStrategist && onViewThinking && (
+                    <button
+                        onClick={onViewThinking}
+                        className="mt-2 text-xs text-blue-500 hover:text-blue-600 hover:underline"
+                    >
+                        查看思维链 →
+                    </button>
+                )}
             </div>
 
         </div>
