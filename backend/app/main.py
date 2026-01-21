@@ -131,7 +131,7 @@ async def analyze_narrative(request: GenerateRequest):
                 # Send the final result as a distinct event type
                 yield f"data: {json.dumps({'type': 'analysis_result', 'payload': strategy_data})}\n\n"
                 
-                yield f"data: {json.dumps({'type': 'agent_update', 'step': 'strategist', 'status': 'completed', 'logs': ['Analysis completed successfully.']})}\n\n"
+                yield f"data: {json.dumps({'type': 'agent_update', 'step': 'strategist', 'status': 'completed', 'logs': ['分析已成功完成。']})}\n\n"
                 
             except Exception as e:
                 yield f"data: {json.dumps({'type': 'error', 'message': f'JSON Parse Error: {str(e)}'})}\n\n"
@@ -140,7 +140,7 @@ async def analyze_narrative(request: GenerateRequest):
             yield f"data: {json.dumps({'type': 'error', 'message': str(e)})}\n\n"
         
         # End stream
-        yield f"data: {json.dumps({'type': 'end', 'payload': 'Analysis Finished'})}\n\n"
+        yield f"data: {json.dumps({'type': 'end', 'payload': '分析完成'})}\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
 
@@ -250,7 +250,21 @@ async def generate_narrative(request: GenerateRequest):
 
 @app.get("/health")
 async def health_check():
-    return {"status": "ok", "version": "5.0", "engine": "Web3 Consensus Engine"}
+    # Check Lark connection status
+    lark_connected = False
+    try:
+        # Test Lark connection by checking if client has valid token
+        if lark_client and hasattr(lark_client, 'tenant_access_token'):
+            lark_connected = lark_client.tenant_access_token is not None
+    except Exception:
+        lark_connected = False
+    
+    return {
+        "status": "ok", 
+        "version": "6.2", 
+        "engine": "Web3 Consensus Engine",
+        "lark_connected": lark_connected
+    }
 
 @app.get("/config/styles")
 async def get_styles():

@@ -75,5 +75,51 @@ export const UI_TEXT = {
         topP: '思维发散度 (Top P)',
         maxTokens: '最大长度 (Tokens)',
         knowledge: '知识库'
+    },
+    // New: Agent Flow localization
+    agentFlow: {
+        title: '智能体流程',
+        strategist: '策略分析',
+        writer: '初稿撰写',
+        critic: '质量审核',
+        polisher: '润色打磨'
+    },
+    // New: Status messages
+    status: {
+        idle: '等待开始',
+        thinking: '思考中...',
+        processing: '处理中...',
+        completed: '已完成',
+        error: '出错了'
+    },
+    // New: Navigation labels
+    nav: {
+        studio: '创作工坊',
+        knowledge: '知识库',
+        agents: '智能体',
+        settings: '系统设置',
+        dashboard: '控制台'
+    },
+    // New: Monitor card text
+    monitor: {
+        operational: '运行正常',
+        offline: '服务离线',
+        connectionFailed: '连接失败',
+        latencyLabel: '延迟',
+        backendCore: '后端核心',
+        knowledgeEngine: '知识库引擎'
+    },
+    // New: Multi-turn dialogue
+    actions: {
+        continueGenerate: '继续生成',
+        regenerate: '重新生成',
+        copyContent: '复制内容',
+        exportMarkdown: '导出 Markdown'
+    },
+    // New: HeroInput specific
+    heroInput: {
+        aiEnhanced: 'AI 增强',
+        keyboardHint: '⌘ + Enter 发送',
+        suggestionPrefix: '尝试输入:'
     }
 };

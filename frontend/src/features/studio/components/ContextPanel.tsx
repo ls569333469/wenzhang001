@@ -17,7 +17,7 @@ export function ContextPanel() {
             <div className="bg-white/80 backdrop-blur-sm border border-zinc-200 rounded-xl p-6 shadow-sm space-y-4">
                 <div className="flex items-center gap-2 mb-2">
                     <Sparkles className="w-5 h-5 text-indigo-500" />
-                    <h3 className="font-serif font-bold text-lg text-zinc-800">Deep Analysis Context</h3>
+                    <h3 className="font-serif font-bold text-lg text-zinc-800">深度分析上下文</h3>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -27,7 +27,7 @@ export function ContextPanel() {
                         <div className="space-y-2">
                             <div className="flex items-center gap-2 text-sm font-semibold text-zinc-600">
                                 <Target className="w-4 h-4 text-emerald-500" />
-                                <span>Must Mention Targets</span>
+                                <span>必须提及要点</span>
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 {info_anchors.must_mention.map((item, i) => (
@@ -42,7 +42,7 @@ export function ContextPanel() {
                         <div className="space-y-2">
                             <div className="flex items-center gap-2 text-sm font-semibold text-zinc-600">
                                 <Database className="w-4 h-4 text-blue-500" />
-                                <span>Extracted Data Points</span>
+                                <span>提取的数据点</span>
                             </div>
                             <ul className="space-y-1">
                                 {info_anchors.key_data.slice(0, 3).map((item, i) => (
@@ -53,7 +53,7 @@ export function ContextPanel() {
                                 ))}
                                 {info_anchors.key_data.length > 3 && (
                                     <li className="text-xs text-zinc-400 italic pl-2.5">
-                                        + {info_anchors.key_data.length - 3} more points...
+                                        + {info_anchors.key_data.length - 3} 个更多要点...
                                     </li>
                                 )}
                             </ul>
@@ -64,7 +64,7 @@ export function ContextPanel() {
                     <div className="space-y-2">
                         <div className="flex items-center gap-2 text-sm font-semibold text-zinc-600">
                             <Palette className="w-4 h-4 text-purple-500" />
-                            <span>Style Guidelines</span>
+                            <span>风格指南</span>
                         </div>
                         <div className="bg-purple-50/50 border border-purple-100 rounded-lg p-3 relative">
                             {/* Quote Icon Background */}

@@ -4,6 +4,7 @@ import { IslandContainer } from "./IslandContainer";
 import { Activity } from "lucide-react";
 import { AgentTimeline } from "../timeline/AgentTimeline";
 import { useAgentStore } from "@/features/agent/stores/useAgentStore";
+import { UI_TEXT } from "@/config/constants";
 
 /**
  * AgentIsland - 右侧智能体岛
@@ -23,7 +24,7 @@ export function AgentIsland() {
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <Activity className="w-4 h-4 text-primary" />
-                        <h3 className="text-sm font-semibold text-ink-primary">Agent Flow</h3>
+                        <h3 className="text-sm font-semibold text-ink-primary">{UI_TEXT.agentFlow.title}</h3>
                     </div>
                     {/* Active Logic: Show pulsing green dot if active */}
                     <span className="flex h-2 w-2">

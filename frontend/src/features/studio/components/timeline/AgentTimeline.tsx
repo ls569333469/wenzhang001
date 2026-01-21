@@ -2,6 +2,7 @@
 
 import { Check, Loader2, Sparkles, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UI_TEXT } from "@/config/constants";
 
 // 临时定义，后续从 schema 或 types 导入
 export type TimelineStepStatus = 'idle' | 'thinking' | 'active' | 'completed' | 'error';
@@ -78,20 +79,20 @@ function TimelineItem({ step, isLast }: { step: TimelineStep, isLast: boolean })
                     {step.status === 'thinking' && (
                         <div className="flex items-center gap-2 text-ink-muted italic">
                             <Sparkles className="w-3 h-3 animate-pulse" />
-                            <span>{step.message || '思考中...'}</span>
+                            <span>{step.message || UI_TEXT.status.thinking}</span>
                         </div>
                     )}
                     {step.status === 'active' && (
                         <div className="flex items-center gap-2">
                             <Loader2 className="w-3 h-3 animate-spin text-primary" />
-                            <span>{step.message || 'Processing...'}</span>
+                            <span>{step.message || UI_TEXT.status.processing}</span>
                         </div>
                     )}
                     {isCompleted && (
-                        <span className="text-ink-secondary">{step.message || 'Completed'}</span>
+                        <span className="text-ink-secondary">{step.message || UI_TEXT.status.completed}</span>
                     )}
                     {step.status === 'idle' && (
-                        <span className="text-ink-muted">Waiting to start</span>
+                        <span className="text-ink-muted">{UI_TEXT.status.idle}</span>
                     )}
                 </div>
             </div>
@@ -99,3 +100,4 @@ function TimelineItem({ step, isLast }: { step: TimelineStep, isLast: boolean })
         </div>
     );
 }
+

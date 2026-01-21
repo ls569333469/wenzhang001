@@ -1,5 +1,6 @@
 import React from "react";
 import { Circle } from "lucide-react";
+import { UI_TEXT } from "@/config/constants";
 
 interface MonitorCardProps {
     label: string;
@@ -22,13 +23,14 @@ export function MonitorCard({ label, status, latency }: MonitorCardProps) {
                         className={isOnline ? "text-emerald-500 fill-emerald-500 animate-pulse" : "text-red-400 fill-red-400"}
                     />
                     <span className={`text-lg font-serif font-medium ${isOnline ? "text-zinc-800" : "text-zinc-400"}`}>
-                        {isOnline ? "Operational" : "System Offline"}
+                        {isOnline ? UI_TEXT.monitor.operational : UI_TEXT.monitor.offline}
                     </span>
                 </div>
                 <p className="text-xs text-zinc-400 font-mono">
-                    {latency || "Connection failed"}
+                    {latency ? `${latency} ${UI_TEXT.monitor.latencyLabel}` : UI_TEXT.monitor.connectionFailed}
                 </p>
             </div>
         </div>
     );
 }
+

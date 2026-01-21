@@ -81,7 +81,7 @@ export function HeroInput() {
     };
 
     return (
-        <div className="w-full max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="w-full max-w-2xl mx-auto">
             {/* Main Input Card */}
             <div className={cn(
                 "relative group bg-white rounded-2xl shadow-xl shadow-zinc-200/50 border border-zinc-100 transition-all duration-300",
@@ -109,9 +109,9 @@ export function HeroInput() {
                     <div className="flex items-center gap-2 text-xs text-zinc-400">
                         <div className="flex items-center gap-1.5 bg-zinc-50 px-2 py-1 rounded-md border border-zinc-100">
                             <Sparkles className="w-3 h-3 text-indigo-500" />
-                            <span>AI Enhanced</span>
+                            <span>{UI_TEXT.heroInput?.aiEnhanced || 'AI 增强'}</span>
                         </div>
-                        <span>CMD + Enter to send</span>
+                        <span>{UI_TEXT.heroInput?.keyboardHint || '⌘ + Enter 发送'}</span>
                     </div>
 
                     {/* Right: Action Button */}

@@ -58,7 +58,7 @@ export default function DashboardPage() {
             {greeting}，架构师。
           </h1>
           <p className="text-ink-muted text-sm md:text-base">
-            Quantum Studio v6.2 — Deep Integration
+            Quantum Studio v6.2 — 全链路验证版
           </p>
         </header>
 

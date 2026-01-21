@@ -32,10 +32,14 @@ interface AgentState {
     isWaitingForSelection: boolean;
     // Phase 9: Store payload for confirmStrategy
     lastRequestPayload: { input: string; config: Partial<CreationConfig> } | null;
+    // Phase 10: Multi-turn dialogue state
+    lastGeneratedContent: string;
+    lastSelectedOption: any | null;
 
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
     confirmStrategy: (option: any) => Promise<void>; // Step 2 Trigger
+    regenerate: () => Promise<void>; // Re-run with same settings
     stopSession: () => void;
     resetSession: () => void;
 }
@@ -81,6 +85,8 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     agentLogs: [],
     isWaitingForSelection: false,
     lastRequestPayload: null,
+    lastGeneratedContent: '',
+    lastSelectedOption: null,
 
     startSession: async ({ input, config }) => {
         // 1. Reset State
@@ -178,8 +184,60 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             if (!response.ok) throw new Error(`Failed to generate: ${response.statusText}`);
             if (!response.body) throw new Error('No response body received');
 
+            // Save selected option for potential regeneration
+            set({ lastSelectedOption: option });
+
             // Process SSE stream (reuse existing helper)
             await processStream(response.body, set, get);
+
+        } catch (err: unknown) {
+            handleError(err, set, get);
+        }
+    },
+
+    regenerate: async () => {
+        // Phase 10: Re-run generation with same settings
+        const { lastRequestPayload, lastSelectedOption, analysisResult } = get();
+
+        if (!lastRequestPayload || !lastSelectedOption) {
+            toast.error('没有可重新生成的内容，请先完成一次创作');
+            return;
+        }
+
+        // Reset content but keep state
+        set({
+            status: 'writing',
+            content: '',
+            steps: get().steps.map((s, i) => ({
+                ...s,
+                status: i === 1 ? 'active' : i === 0 ? 'completed' : 'idle',
+                message: i === 1 ? '重新撰写中...' : s.message
+            }))
+        });
+
+        try {
+            const finalInput = injectPrompts(lastRequestPayload.input || '');
+
+            const requestBody = {
+                input: finalInput,
+                mode: lastRequestPayload.mode || 'deep_analysis',
+                narrative_type: 'project_review',
+                references: [],
+                selected_option: lastSelectedOption,
+                info_anchors: analysisResult?.info_anchors
+            };
+
+            const response = await fetch(`${API_BASE_URL}/generate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(requestBody),
+            });
+
+            if (!response.ok) throw new Error(`Failed to regenerate: ${response.statusText}`);
+            if (!response.body) throw new Error('No response body received');
+
+            await processStream(response.body, set, get);
+            toast.success('重新生成完成');
 
         } catch (err: unknown) {
             handleError(err, set, get);
@@ -197,7 +255,9 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             steps: INITIAL_STEPS,
             content: '',
             strategyOptions: null,
-            isWaitingForSelection: false
+            isWaitingForSelection: false,
+            lastGeneratedContent: '',
+            lastSelectedOption: null
         });
     }
 }));

@@ -28,13 +28,13 @@ export function StudioLayout({ children, leftPanel, rightPanel }: StudioLayoutPr
 
             {/* Layer 2: Islands */}
             {leftPanel && (
-                <div className="animate-in slide-in-from-left-4 duration-500 delay-100">
+                <div>
                     {leftPanel}
                 </div>
             )}
 
             {rightPanel && (
-                <div className="animate-in slide-in-from-right-4 duration-500 delay-100">
+                <div>
                     {rightPanel}
                 </div>
             )}

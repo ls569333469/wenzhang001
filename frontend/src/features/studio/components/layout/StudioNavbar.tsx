@@ -1,7 +1,9 @@
 'use client';
 
-import { Sparkles, Search, BookOpen, Bot } from "lucide-react";
+import { Sparkles, Search, BookOpen, Bot, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { UI_TEXT } from "@/config/constants";
+import Link from "next/link";
 
 /**
  * StudioNavbar - 顶部导航岛
@@ -11,18 +13,29 @@ import { cn } from "@/lib/utils";
  */
 export function StudioNavbar() {
     return (
-        <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top-4 duration-500">
+        <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
             <div className="flex items-center gap-1 p-1.5 bg-white rounded-full shadow-island border border-zinc-100 ring-1 ring-zinc-50/50">
+
+                {/* Home / Dashboard */}
+                <Link
+                    href="/dashboard"
+                    className="p-2 text-ink-muted hover:text-ink-primary rounded-full hover:bg-zinc-50 transition-colors"
+                    title="返回主页"
+                >
+                    <Home className="w-4 h-4" />
+                </Link>
+
+                <div className="w-px h-4 bg-zinc-200 mx-1" />
 
                 {/* Logo / Home */}
                 <button className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2 shadow-sm hover:bg-zinc-800 transition-colors">
                     <Sparkles className="w-4 h-4" />
-                    <span className="font-serif tracking-wide">Studio</span>
+                    <span className="font-serif tracking-wide">{UI_TEXT.nav.studio}</span>
                 </button>
 
                 {/* Nav Links */}
-                <NavPill label="Knowledge" icon={BookOpen} />
-                <NavPill label="Agents" icon={Bot} />
+                <NavPill label={UI_TEXT.nav.knowledge} icon={BookOpen} href="/knowledge" />
+                <NavPill label={UI_TEXT.nav.agents} icon={Bot} href="/agents" />
 
                 <div className="w-px h-4 bg-zinc-200 mx-1" />
 
@@ -35,11 +48,16 @@ export function StudioNavbar() {
     );
 }
 
-function NavPill({ label, icon: Icon }: { label: string, icon: any }) {
-    return (
-        <button className="px-4 py-2 text-ink-muted hover:text-ink-primary hover:bg-zinc-50 rounded-full text-sm font-medium transition-colors flex items-center gap-2">
-            {/* <Icon className="w-3.5 h-3.5 opacity-70" /> */}
+function NavPill({ label, icon: Icon, href }: { label: string, icon: any, href?: string }) {
+    const content = (
+        <span className="px-4 py-2 text-ink-muted hover:text-ink-primary hover:bg-zinc-50 rounded-full text-sm font-medium transition-colors flex items-center gap-2">
             {label}
-        </button>
-    )
+        </span>
+    );
+
+    if (href) {
+        return <Link href={href}>{content}</Link>;
+    }
+    return <button className="px-4 py-2 text-ink-muted hover:text-ink-primary hover:bg-zinc-50 rounded-full text-sm font-medium transition-colors flex items-center gap-2">{label}</button>;
 }
+

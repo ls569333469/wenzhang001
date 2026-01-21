@@ -26,7 +26,7 @@ export default function SettingsPage() {
     async function loadSettings() {
       setIsLoading(true);
 
-      // 1. Try to load from backend first
+      // 1. Try to load API keys from backend
       try {
         const res = await fetch(`${API_BASE_URL}/config/keys`);
         if (res.ok) {
@@ -36,7 +36,6 @@ export default function SettingsPage() {
           if (data.base_url) setBaseUrl(data.base_url);
         }
       } catch {
-        // Backend unavailable, fall back to localStorage
         console.log('[Settings] Backend unavailable, using localStorage');
       }
 
@@ -48,16 +47,28 @@ export default function SettingsPage() {
       if (storedModel) setModel(storedModel);
       if (storedUrl) setBaseUrl(storedUrl);
 
-      // Load Prompts (always from localStorage)
-      const pStrat = localStorage.getItem('qs_prompt_strategist');
-      const pWriter = localStorage.getItem('qs_prompt_writer');
-      const pCritic = localStorage.getItem('qs_prompt_critic');
-
-      setPrompts({
-        strategist: pStrat || DEFAULTS.strategist,
-        writer: pWriter || DEFAULTS.writer,
-        critic: pCritic || DEFAULTS.critic
-      });
+      // 3. Load Prompts from backend first, then localStorage fallback
+      try {
+        const promptRes = await fetch(`${API_BASE_URL}/config/prompts`);
+        if (promptRes.ok) {
+          const promptData = await promptRes.json();
+          setPrompts({
+            strategist: promptData.strategist || DEFAULTS.strategist,
+            writer: promptData.writer || DEFAULTS.writer,
+            critic: promptData.critic || DEFAULTS.critic
+          });
+        }
+      } catch {
+        // Fallback to localStorage
+        const pStrat = localStorage.getItem('qs_prompt_strategist');
+        const pWriter = localStorage.getItem('qs_prompt_writer');
+        const pCritic = localStorage.getItem('qs_prompt_critic');
+        setPrompts({
+          strategist: pStrat || DEFAULTS.strategist,
+          writer: pWriter || DEFAULTS.writer,
+          critic: pCritic || DEFAULTS.critic
+        });
+      }
 
       setIsLoading(false);
     }
@@ -76,7 +87,7 @@ export default function SettingsPage() {
       localStorage.setItem('qs_prompt_writer', prompts.writer);
       localStorage.setItem('qs_prompt_critic', prompts.critic);
 
-      // 2. Sync to backend
+      // 2. Sync API keys to backend
       const res = await fetch(`${API_BASE_URL}/config/keys`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -87,17 +98,32 @@ export default function SettingsPage() {
         })
       });
 
+      // 3. Sync prompts to backend
+      const promptAgents = ['strategist', 'writer', 'critic'] as const;
+      const promptValues = [prompts.strategist, prompts.writer, prompts.critic];
+
+      await Promise.all(
+        promptAgents.map((agent, i) =>
+          fetch(`${API_BASE_URL}/config/prompts/${agent}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: promptValues[i] })
+          }).catch(() => { }) // Ignore individual failures
+        )
+      );
+
       if (res.ok) {
-        toast.success('Configuration saved to server');
+        toast.success('配置已保存到服务器');
       } else {
-        toast.success('Saved locally (server sync failed)');
+        toast.success('已保存到本地 (服务器同步失败)');
       }
     } catch {
-      toast.success('Saved locally (server unavailable)');
+      toast.success('已保存到本地 (服务器不可用)');
     } finally {
       setIsSaving(false);
     }
   };
+
 
   return (
     <div className="flex flex-col h-full bg-canvas overflow-y-auto">
@@ -108,8 +134,8 @@ export default function SettingsPage() {
             <Settings className="w-5 h-5 text-ink-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-serif font-medium text-ink-primary">System Settings</h1>
-            <p className="text-sm text-ink-muted">Configure your Quantum Studio environment</p>
+            <h1 className="text-2xl font-serif font-medium text-ink-primary">系统设置</h1>
+            <p className="text-sm text-ink-muted">配置您的 Quantum Studio 环境</p>
           </div>
         </div>
 
@@ -120,14 +146,14 @@ export default function SettingsPage() {
               <Key className="w-4 h-4 text-indigo-600" />
             </div>
             <div className="flex-1 space-y-1">
-              <h3 className="font-medium text-ink-primary">Model Provider</h3>
-              <p className="text-xs text-ink-muted">Configure connection to LLM provider</p>
+              <h3 className="font-medium text-ink-primary">模型提供商</h3>
+              <p className="text-xs text-ink-muted">配置 LLM 提供商连接</p>
             </div>
           </div>
 
           <div className="space-y-4 pl-11">
             <div className="grid gap-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">API Key</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">API 密钥</label>
               <input
                 type="password"
                 value={apiKey}
@@ -137,12 +163,12 @@ export default function SettingsPage() {
               />
               <p className="text-[10px] text-ink-muted flex items-center gap-1">
                 <AlertCircle className="w-3 h-3" />
-                Stored locally in your browser. Never synced to server.
+                存储在本地浏览器中，不会上传到服务器
               </p>
             </div>
 
             <div className="grid gap-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Base URL (Optional)</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">基础 URL (可选)</label>
               <input
                 type="text"
                 value={baseUrl}
@@ -153,7 +179,7 @@ export default function SettingsPage() {
             </div>
 
             <div className="grid gap-2">
-              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Model Name</label>
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">模型名称</label>
               <select
                 value={model}
                 onChange={(e) => setModel(e.target.value)}
@@ -172,40 +198,40 @@ export default function SettingsPage() {
         <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
           <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-purple-500" />
-            Agent Process Configuration
+            智能体提示词配置
           </h3>
 
           <div className="grid grid-cols-1 gap-6">
             {/* Strategist Prompt */}
             <div className="space-y-2">
-              <label className="text-xs font-medium text-ink-muted uppercase">Strategist Prompt (Analysis)</label>
+              <label className="text-xs font-medium text-ink-muted uppercase">策略师提示词 (分析阶段)</label>
               <textarea
                 value={prompts.strategist}
                 onChange={(e) => setPrompts({ ...prompts, strategist: e.target.value })}
                 className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
-                placeholder="Enter system prompt for Strategist..."
+                placeholder="输入策略师的系统提示词..."
               />
             </div>
 
             {/* Writer Prompt */}
             <div className="space-y-2">
-              <label className="text-xs font-medium text-ink-muted uppercase">Writer Prompt (Drafting)</label>
+              <label className="text-xs font-medium text-ink-muted uppercase">写手提示词 (撰写阶段)</label>
               <textarea
                 value={prompts.writer}
                 onChange={(e) => setPrompts({ ...prompts, writer: e.target.value })}
                 className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
-                placeholder="Enter system prompt for Writer..."
+                placeholder="输入写手的系统提示词..."
               />
             </div>
 
             {/* Critic Prompt */}
             <div className="space-y-2">
-              <label className="text-xs font-medium text-ink-muted uppercase">Critic Prompt (Review)</label>
+              <label className="text-xs font-medium text-ink-muted uppercase">评论家提示词 (审核阶段)</label>
               <textarea
                 value={prompts.critic}
                 onChange={(e) => setPrompts({ ...prompts, critic: e.target.value })}
                 className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
-                placeholder="Enter system prompt for Critic..."
+                placeholder="输入评论家的系统提示词..."
               />
             </div>
           </div>
@@ -223,10 +249,11 @@ export default function SettingsPage() {
             ) : (
               <Check className="w-4 h-4 mr-2" />
             )}
-            {isSaving ? 'Saving...' : 'Save Configuration'}
+            {isSaving ? '保存中...' : '保存配置'}
           </Button>
         </div>
       </div>
     </div>
   );
 }
+

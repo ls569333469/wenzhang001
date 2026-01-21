@@ -16,10 +16,10 @@ export function StrategySelector() {
         <div className="w-full max-w-4xl mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-500">
             <div className="text-center space-y-2">
                 <h2 className="text-2xl font-serif font-bold text-ink-primary">
-                    Choose Your Angle
+                    选择您的角度
                 </h2>
                 <p className="text-ink-muted">
-                    The Strategist has identified three potential narrative directions. Select one to proceed.
+                    策略师已识别出三个叙事方向，请选择其一继续。
                 </p>
             </div>
 
@@ -40,7 +40,7 @@ export function StrategySelector() {
                         <div className="mb-4 space-y-2">
                             <div className="flex items-center gap-2">
                                 <span className="bg-zinc-100 text-zinc-600 text-xs font-mono px-2 py-0.5 rounded uppercase tracking-wider">
-                                    Option {idx + 1}
+                                    方案 {idx + 1}
                                 </span>
                             </div>
                             <h3 className="font-serif font-bold text-lg leading-tight text-ink-primary group-hover:text-black">
@@ -66,7 +66,7 @@ export function StrategySelector() {
 
                         {/* Outline Preview */}
                         <div className="mt-4 pt-4 border-t border-zinc-100">
-                            <p className="text-xs font-semibold text-zinc-400 mb-2 uppercase">Outline Preview</p>
+                            <p className="text-xs font-semibold text-zinc-400 mb-2 uppercase">大纲预览</p>
                             <ul className="space-y-1">
                                 {option.outline?.slice(0, 3).map((point: string, i: number) => (
                                     <li key={i} className="text-xs text-zinc-500 truncate flex items-center gap-1.5">
@@ -76,7 +76,7 @@ export function StrategySelector() {
                                 ))}
                                 {(option.outline?.length || 0) > 3 && (
                                     <li className="text-xs text-zinc-400 italic pl-2.5">
-                                        + {(option.outline?.length || 0) - 3} more...
+                                        + {(option.outline?.length || 0) - 3} 个更多...
                                     </li>
                                 )}
                             </ul>
