@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
 import { ALL_STYLES, getStyleById } from '@/lib/styles';
-import { CREATION_MODES, ARTICLE_LENGTHS, WEB3_KNOWLEDGE_BASES, UI_TEXT } from '@/config/constants';
+import { CREATION_MODES, ARTICLE_LENGTHS, HOOK_INTENSITIES, WEB3_KNOWLEDGE_BASES, UI_TEXT } from '@/config/constants';
 
 /**
  * ConfigPanel - 创作配置面板
@@ -64,9 +64,11 @@ export function ConfigPanel() {
         serialize: (v) => v.join(',')
     });
 
-    // Input - No longer needed here, moved to HeroInput (but kept for now to avoid breaking build until HeroInput is ready)
-    // Actually, we can remove it as we will delete the input area next.
-    // const [input, setInput] = React.useState(''); // REMOVED for Phase 6 Hero Input migration
+    // P10-3: Hook Intensity
+    const [hookIntensity, setHookIntensity] = useQueryState('hook', {
+        defaultValue: 'standard',
+        parse: (v) => ['gentle', 'standard', 'strong', 'explosive'].includes(v) ? v : 'standard'
+    });
 
     return (
         <div className="flex flex-col h-full bg-white">
@@ -135,6 +137,33 @@ export function ConfigPanel() {
                                             )}
                                         >
                                             {l.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            </section>
+
+                            {/* P10-3: Hook Intensity Selection */}
+                            <section className="space-y-3">
+                                <Label icon={Zap} title={UI_TEXT.labels.hookIntensity} />
+                                <div className="grid grid-cols-2 gap-2">
+                                    {HOOK_INTENSITIES.map((h) => (
+                                        <button
+                                            key={h.id}
+                                            onClick={() => setHookIntensity(h.id)}
+                                            className={cn(
+                                                "py-2.5 px-3 rounded-xl border transition-all text-left",
+                                                hookIntensity === h.id
+                                                    ? "bg-gradient-to-br from-amber-500 to-orange-500 text-white border-amber-500 shadow-lg shadow-amber-500/20"
+                                                    : "bg-white text-ink-secondary border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50"
+                                            )}
+                                        >
+                                            <div className="text-xs font-semibold">{h.label}</div>
+                                            <div className={cn(
+                                                "text-[10px] mt-0.5",
+                                                hookIntensity === h.id ? "text-white/80" : "text-zinc-400"
+                                            )}>
+                                                {h.desc}
+                                            </div>
                                         </button>
                                     ))}
                                 </div>

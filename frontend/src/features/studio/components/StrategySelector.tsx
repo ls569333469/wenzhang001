@@ -6,11 +6,25 @@ import { useAgentStore } from '@/features/agent/stores/useAgentStore';
 import { ArrowRight, Target, Lightbulb, Users } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { ContextPanel } from "./ContextPanel";
+import { TitleSelector } from "./TitleSelector";
+import { ViralScoreDisplay } from "./ViralScoreDisplay";
 
 export function StrategySelector() {
-    const { strategyOptions, confirmStrategy } = useAgentStore();
+    const {
+        strategyOptions,
+        confirmStrategy,
+        // P10-1: Title AB Testing
+        titleCandidates,
+        selectedTitle,
+        setSelectedTitle
+    } = useAgentStore();
 
     if (!strategyOptions || strategyOptions.length === 0) return null;
+
+    const handleConfirmStrategy = (option: any) => {
+        // Pass selected title to confirmStrategy
+        confirmStrategy(option, selectedTitle);
+    };
 
     return (
         <div className="w-full max-w-4xl mx-auto space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-500">
@@ -19,9 +33,20 @@ export function StrategySelector() {
                     选择您的角度
                 </h2>
                 <p className="text-ink-muted">
-                    策略师已识别出三个叙事方向，请选择其一继续。
+                    策略师已识别出三个叙事方向，请选择标题和角度继续。
                 </p>
             </div>
+
+            {/* P10-1: Title Selector */}
+            {titleCandidates && titleCandidates.length > 0 && (
+                <div className="bg-white rounded-xl border border-zinc-200 p-4">
+                    <TitleSelector
+                        candidates={titleCandidates}
+                        selectedTitle={selectedTitle}
+                        onSelectTitle={setSelectedTitle}
+                    />
+                </div>
+            )}
 
             {/* Context Panel (Data & Style) */}
             <ContextPanel />
@@ -30,7 +55,7 @@ export function StrategySelector() {
                 {strategyOptions.map((option: any, idx: number) => (
                     <div
                         key={option.id || idx}
-                        onClick={() => confirmStrategy(option)}
+                        onClick={() => handleConfirmStrategy(option)}
                         className={cn(
                             "group relative overflow-hidden bg-white hover:bg-zinc-50 border-2 border-zinc-100 hover:border-zinc-900 rounded-xl p-6 cursor-pointer transition-all duration-300",
                             "hover:shadow-xl hover:-translate-y-1"
@@ -82,6 +107,13 @@ export function StrategySelector() {
                             </ul>
                         </div>
 
+                        {/* P10-2: Viral Score Display */}
+                        {option.viral_score && (
+                            <div className="mt-4 pt-4 border-t border-zinc-100">
+                                <ViralScoreDisplay score={option.viral_score} compact={false} />
+                            </div>
+                        )}
+
                         {/* Hover Action */}
                         <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
                             <div className="bg-zinc-900 text-white p-2 rounded-full shadow-lg">
@@ -94,3 +126,4 @@ export function StrategySelector() {
         </div>
     );
 }
+

@@ -32,6 +32,14 @@ export const ARTICLE_LENGTHS: { id: ArticleLength; label: string }[] = [
     { id: 'long', label: '长文 (~3k字)' }
 ];
 
+// P10-3: 开头Hook强度配置
+export const HOOK_INTENSITIES = [
+    { id: 'gentle', label: '温和开头', desc: '平稳叙述，娓娓道来', value: 1 },
+    { id: 'standard', label: '标准开头', desc: '有力开场，引人入胜', value: 2 },
+    { id: 'strong', label: '强力Hook', desc: '制造悬念，情绪渲染', value: 3 },
+    { id: 'explosive', label: '爆款开场', desc: '冲击性开局，极度抓眼球', value: 4 },
+];
+
 // Web3 知识库配置
 export const WEB3_KNOWLEDGE_BASES = [
     { id: 'auto', name: '✨ 智能匹配 (Auto)', count: 0 },
@@ -71,6 +79,7 @@ export const UI_TEXT = {
         mode: '创作模式',
         style: '写作风格',
         length: '篇幅长度',
+        hookIntensity: '开头吸引力',
         temperature: '创意程度 (随机性)',
         topP: '思维发散度 (Top P)',
         maxTokens: '最大长度 (Tokens)',

@@ -38,6 +38,14 @@ export function mapStatusToPhase(status: SessionStatus): StudioPhase {
 }
 
 
+// P10-1: Title Candidate Type
+export interface TitleCandidate {
+    title: string;
+    formula_tags: string[];
+    hook_score: number;
+    rationale?: string;
+}
+
 interface AgentState {
     status: SessionStatus;
     error: string | null;
@@ -60,13 +68,17 @@ interface AgentState {
     // Phase 10: Multi-turn dialogue state
     lastGeneratedContent: string;
     lastSelectedOption: any | null;
+    // P10-1: Title AB Testing
+    titleCandidates: TitleCandidate[];
+    selectedTitle: string;
 
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
-    confirmStrategy: (option: any) => Promise<void>; // Step 2 Trigger
+    confirmStrategy: (option: any, selectedTitle?: string) => Promise<void>; // Step 2 Trigger
     regenerate: () => Promise<void>; // Re-run with same settings
     stopSession: () => void;
     resetSession: () => void;
+    setSelectedTitle: (title: string) => void; // P10-1
 }
 
 // --- Initial Data ---
@@ -112,6 +124,9 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     lastRequestPayload: null,
     lastGeneratedContent: '',
     lastSelectedOption: null,
+    // P10-1: Title AB Testing
+    titleCandidates: [],
+    selectedTitle: '',
 
     startSession: async ({ input, config }) => {
         // 1. Reset State
@@ -282,8 +297,16 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             strategyOptions: null,
             isWaitingForSelection: false,
             lastGeneratedContent: '',
-            lastSelectedOption: null
+            lastSelectedOption: null,
+            // P10-1: Reset title state
+            titleCandidates: [],
+            selectedTitle: ''
         });
+    },
+
+    // P10-1: Set selected title
+    setSelectedTitle: (title: string) => {
+        set({ selectedTitle: title });
     }
 }));
 
@@ -383,7 +406,8 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
         }
         case 'analysis_result': {
             // Phase 6 & 8: Receive Options AND Info Anchors
-            const payload = event.payload; // { info_anchors, options, style_notes }
+            // P10-1: Now also receives title_candidates
+            const payload = event.payload; // { info_anchors, options, style_notes, title_candidates }
             if (payload && payload.options) {
                 set({
                     strategyOptions: payload.options,
@@ -391,10 +415,13 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
                         info_anchors: payload.info_anchors,
                         style_notes: payload.style_notes
                     },
+                    // P10-1: Title Candidates
+                    titleCandidates: payload.title_candidates || [],
+                    selectedTitle: payload.title_candidates?.[0]?.title || '',
                     isWaitingForSelection: true,
                     status: 'listening'
                 });
-                toast.success("Strategy Analysis Complete. Please Choose an Angle.");
+                toast.success("策略分析完成，请选择标题和角度");
             }
             break;
         }
