@@ -6,14 +6,15 @@ import { useAgentStore } from "@/features/agent/stores/useAgentStore";
 import { useDetailPanel } from "../DetailPanel";
 
 /**
- * AgentIsland v3 - 简化进度视图
+ * AgentIsland v3.1 - P10-4 Enhanced
  * 
- * 只显示:
+ * 显示:
  * 1. 智能体进度时间轴 (4步)
- * 2. "[查看思维链→]" 链接
+ * 2. 可展开的子步骤和日志
+ * 3. "[查看思维链→]" 链接
  */
 export function AgentIsland() {
-    const { steps } = useAgentStore();
+    const { steps, agentLogs } = useAgentStore();
 
     // Connect to DetailPanel
     let detailPanel: ReturnType<typeof useDetailPanel> | null = null;
@@ -38,8 +39,12 @@ export function AgentIsland() {
                 </div>
 
                 {/* 时间轴 */}
-                <div className="flex-1">
-                    <AgentTimeline steps={steps} />
+                <div className="flex-1 overflow-y-auto">
+                    <AgentTimeline
+                        steps={steps}
+                        agentLogs={agentLogs}
+                        onViewThinking={handleViewThinking}
+                    />
                 </div>
 
                 {/* 查看思维链链接 */}

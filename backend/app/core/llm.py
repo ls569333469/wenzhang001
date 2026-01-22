@@ -25,7 +25,7 @@ PROVIDER_CONFIGS = {
         "base_url": "https://ark.cn-beijing.volces.com/api/v3",
         "env_key": "ARK_API_KEY",
         "config_key": "doubao",
-        "default_model": "deepseek-v3-2-251201",  # 使用火山引擎托管的 DeepSeek V3
+        "default_model": "doubao-seed-1-8-251228",  # 豆包最新模型 (自动匹配)
         "available_models": [
             "deepseek-v3-2-251201",
             "doubao-seed-1-8-251228",
@@ -59,7 +59,7 @@ PROVIDER_CONFIGS = {
     "google": {
         "env_key": "GOOGLE_GENAI_API_KEY",
         "config_key": "gemini",
-        "default_model": "gemini-3-flash-preview",  # 更新到 Gemini 3.x
+        "default_model": "gemini-3-pro-preview",  # Gemini 3 Pro (最强)
         "available_models": [
             "gemini-3-pro-preview",
             "gemini-3-flash-preview",

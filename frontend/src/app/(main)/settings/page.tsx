@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
 import { API_BASE_URL } from '@/config/api';
+import { PromptEditor } from '@/components/PromptEditor';
 
 export default function SettingsPage() {
   const [apiKey, setApiKey] = useState('');
@@ -194,46 +195,45 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        {/* Prompt Configuration (New Phase 6) */}
+        {/* Prompt Configuration (P10-6 Enhanced) */}
         <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
-          <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-purple-500" />
-            智能体提示词配置
-          </h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-purple-500" />
+              智能体提示词配置
+            </h3>
+            <span className="text-[10px] text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">
+              P10-6 Enhanced
+            </span>
+          </div>
 
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 gap-8">
             {/* Strategist Prompt */}
-            <div className="space-y-2">
-              <label className="text-xs font-medium text-ink-muted uppercase">策略师提示词 (分析阶段)</label>
-              <textarea
-                value={prompts.strategist}
-                onChange={(e) => setPrompts({ ...prompts, strategist: e.target.value })}
-                className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
-                placeholder="输入策略师的系统提示词..."
-              />
-            </div>
+            <PromptEditor
+              label="策略师 (分析阶段)"
+              agent="strategist"
+              value={prompts.strategist}
+              onChange={(v) => setPrompts({ ...prompts, strategist: v })}
+              defaultValue={DEFAULTS.strategist}
+            />
 
             {/* Writer Prompt */}
-            <div className="space-y-2">
-              <label className="text-xs font-medium text-ink-muted uppercase">写手提示词 (撰写阶段)</label>
-              <textarea
-                value={prompts.writer}
-                onChange={(e) => setPrompts({ ...prompts, writer: e.target.value })}
-                className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
-                placeholder="输入写手的系统提示词..."
-              />
-            </div>
+            <PromptEditor
+              label="写手 (撰写阶段)"
+              agent="writer"
+              value={prompts.writer}
+              onChange={(v) => setPrompts({ ...prompts, writer: v })}
+              defaultValue={DEFAULTS.writer}
+            />
 
             {/* Critic Prompt */}
-            <div className="space-y-2">
-              <label className="text-xs font-medium text-ink-muted uppercase">评论家提示词 (审核阶段)</label>
-              <textarea
-                value={prompts.critic}
-                onChange={(e) => setPrompts({ ...prompts, critic: e.target.value })}
-                className="w-full h-32 p-3 text-xs bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary font-mono leading-relaxed resize-y"
-                placeholder="输入评论家的系统提示词..."
-              />
-            </div>
+            <PromptEditor
+              label="评论家 (审核阶段)"
+              agent="critic"
+              value={prompts.critic}
+              onChange={(v) => setPrompts({ ...prompts, critic: v })}
+              defaultValue={DEFAULTS.critic}
+            />
           </div>
         </section>
 

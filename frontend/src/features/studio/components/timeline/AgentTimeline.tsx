@@ -1,12 +1,20 @@
 'use client';
 
-import { Check, Loader2, Sparkles, AlertCircle } from "lucide-react";
+import { useState } from 'react';
+import { Check, Loader2, Sparkles, AlertCircle, ChevronDown, ChevronRight, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UI_TEXT } from "@/config/constants";
 
 // 临时定义，后续从 schema 或 types 导入
 export type TimelineStepStatus = 'idle' | 'thinking' | 'active' | 'completed' | 'error';
-export type AgentType = 'strategist' | 'researcher' | 'writer' | 'critic';
+export type AgentType = 'strategist' | 'researcher' | 'writer' | 'critic' | 'polisher';
+
+// P10-4: Sub-step for detailed progress
+export interface SubStep {
+    id: string;
+    text: string;
+    timestamp?: string;
+}
 
 export interface TimelineStep {
     id: string;
@@ -15,44 +23,66 @@ export interface TimelineStep {
     status: TimelineStepStatus;
     message?: string;
     duration?: string;
+    // P10-4: Enhanced fields
+    subSteps?: SubStep[];
+    logs?: string[];
 }
 
 interface AgentTimelineProps {
     steps: TimelineStep[];
+    agentLogs?: string[];  // Global logs from store
     onViewThinking?: () => void; // P10-9: Trigger detail panel
 }
 
 /**
  * AgentTimeline - 智能体协作时间轴
  * 
- * 视觉风格: 
- * - 连接线 (Timeline thread)
- * - 脉冲节点 (Pulsing dots for active state)
- * - 极简排版
+ * P10-4 Enhanced:
+ * - 可展开的子步骤显示
+ * - 实时日志流
+ * - 思考过程摘要
  */
-export function AgentTimeline({ steps, onViewThinking }: AgentTimelineProps) {
+export function AgentTimeline({ steps, agentLogs = [], onViewThinking }: AgentTimelineProps) {
     return (
-        <div className="relative pl-2 space-y-8 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-zinc-100">
+        <div className="relative pl-2 space-y-6 before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-zinc-100">
             {steps.map((step, index) => (
                 <TimelineItem
                     key={step.id}
                     step={step}
                     isLast={index === steps.length - 1}
                     onViewThinking={onViewThinking}
+                    logs={agentLogs.filter(log => log.toLowerCase().includes(step.agent))}
                 />
             ))}
         </div>
     );
 }
 
-function TimelineItem({ step, isLast, onViewThinking }: { step: TimelineStep, isLast: boolean, onViewThinking?: () => void }) {
+interface TimelineItemProps {
+    step: TimelineStep;
+    isLast: boolean;
+    onViewThinking?: () => void;
+    logs?: string[];
+}
+
+function TimelineItem({ step, isLast, onViewThinking, logs = [] }: TimelineItemProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     const isActive = step.status === 'active' || step.status === 'thinking';
     const isCompleted = step.status === 'completed';
     const isError = step.status === 'error';
     const isStrategist = step.agent === 'strategist';
 
+    const hasDetails = (step.subSteps && step.subSteps.length > 0) ||
+        (step.logs && step.logs.length > 0) ||
+        logs.length > 0;
+
     return (
-        <div className={cn("relative flex gap-4 group", isActive && "opacity-100", !isActive && !isCompleted && "opacity-50")}>
+        <div className={cn(
+            "relative flex gap-4 group",
+            isActive && "opacity-100",
+            !isActive && !isCompleted && "opacity-50"
+        )}>
 
             {/* 1. Node Icon */}
             <div className={cn(
@@ -70,12 +100,30 @@ function TimelineItem({ step, isLast, onViewThinking }: { step: TimelineStep, is
             {/* 2. Content */}
             <div className="flex-1 pt-0.5">
                 <div className="flex items-center justify-between mb-1">
-                    <span className={cn(
-                        "text-xs font-semibold tracking-wide uppercase transition-colors",
-                        isActive ? "text-primary" : "text-ink-secondary"
-                    )}>
-                        {step.label}
-                    </span>
+                    <div className="flex items-center gap-2">
+                        <span className={cn(
+                            "text-xs font-semibold tracking-wide uppercase transition-colors",
+                            isActive ? "text-primary" : "text-ink-secondary"
+                        )}>
+                            {step.label}
+                        </span>
+
+                        {/* P10-4: Expand/Collapse button */}
+                        {(isCompleted || isActive) && hasDetails && (
+                            <button
+                                onClick={() => setIsExpanded(!isExpanded)}
+                                className="p-0.5 text-zinc-400 hover:text-zinc-600 transition-colors"
+                                title={isExpanded ? "收起详情" : "展开详情"}
+                            >
+                                {isExpanded ? (
+                                    <ChevronDown className="w-3.5 h-3.5" />
+                                ) : (
+                                    <ChevronRight className="w-3.5 h-3.5" />
+                                )}
+                            </button>
+                        )}
+                    </div>
+
                     {step.duration && (
                         <span className="text-[10px] font-mono text-ink-muted">{step.duration}</span>
                     )}
@@ -103,6 +151,41 @@ function TimelineItem({ step, isLast, onViewThinking }: { step: TimelineStep, is
                     )}
                 </div>
 
+                {/* P10-4: Expanded Details Section */}
+                {isExpanded && (
+                    <div className="mt-3 space-y-2 animate-in slide-in-from-top-2 duration-200">
+                        {/* Sub-steps */}
+                        {step.subSteps && step.subSteps.length > 0 && (
+                            <div className="pl-2 border-l-2 border-zinc-100 space-y-1">
+                                {step.subSteps.map((sub, idx) => (
+                                    <div key={sub.id || idx} className="flex items-center gap-2 text-xs text-zinc-500">
+                                        <div className="w-1 h-1 rounded-full bg-zinc-300" />
+                                        <span>{sub.text}</span>
+                                        {sub.timestamp && (
+                                            <span className="text-zinc-400 font-mono">{sub.timestamp}</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+
+                        {/* Logs */}
+                        {(step.logs && step.logs.length > 0) || logs.length > 0 ? (
+                            <div className="bg-zinc-50 rounded-lg p-2 space-y-1 max-h-32 overflow-y-auto">
+                                <div className="flex items-center gap-1.5 text-xs font-medium text-zinc-500 mb-1.5">
+                                    <MessageSquare className="w-3 h-3" />
+                                    <span>执行日志</span>
+                                </div>
+                                {(step.logs || logs).map((log, idx) => (
+                                    <div key={idx} className="text-[11px] font-mono text-zinc-600 leading-relaxed">
+                                        {log}
+                                    </div>
+                                ))}
+                            </div>
+                        ) : null}
+                    </div>
+                )}
+
                 {/* P10-9: View Thinking Chain Link (only for completed strategist) */}
                 {isCompleted && isStrategist && onViewThinking && (
                     <button
@@ -117,4 +200,5 @@ function TimelineItem({ step, isLast, onViewThinking }: { step: TimelineStep, is
         </div>
     );
 }
+
 

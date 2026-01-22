@@ -88,21 +88,24 @@ class AsyncLLMProvider:
     def connect(self) -> tuple:
         """连接到指定的 LLM 提供商 (异步客户端)"""
         if self.name == "doubao":
+            # 火山引擎豆包 - 豆包最新模型
             api_key = self._get_api_key("VOLC_API_KEY", "doubao")
             base_url = "https://ark.cn-beijing.volces.com/api/v3"
-            self.model_name = os.getenv("VOLC_MODEL_ENDPOINT", "deepseek-v3-2-251201")
+            self.model_name = os.getenv("VOLC_MODEL_ENDPOINT", "doubao-seed-1-8-251228")
             self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
             
         elif self.name == "deepseek":
+            # DeepSeek 官方 - V3.2
             api_key = self._get_api_key("DEEPSEEK_API_KEY", "deepseek")
             base_url = "https://api.deepseek.com"
             self.model_name = "deepseek-chat"
             self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
             
         elif self.name == "gemini":
+            # Google Gemini 3 Pro
             api_key = self._get_api_key("GOOGLE_API_KEY", "gemini")
             base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
-            self.model_name = "gemini-2.0-flash"
+            self.model_name = "gemini-3-pro-preview"
             self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
         else:
             raise ValueError(f"不支持的模型提供商: {self.name}")
@@ -419,13 +422,23 @@ async def check_exists_in_lark_async(content_hash: str) -> bool:
     except Exception:
         return False
 
-async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str) -> bool:
-    """异步上传到 Lark (带去重和重试)"""
+async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str, source_category: str = "Shell") -> bool:
+    """异步上传到 Lark (带去重和重试)
+    
+    根据 source_category 选择不同的表：
+    - Shell (风格素材/血) → LARK_TABLE_ID (Style_Repo)
+    - Kernel (Web3知识/肉) → LARK_KNOWLEDGE_TABLE_ID (Knowledge_Repo)
+    """
     try:
         from app.core.lark_client import lark_client
         
         app_token = os.getenv("LARK_BASE_TOKEN")
-        table_id = os.getenv("LARK_TABLE_ID")
+        
+        # 根据 source_category 选择目标表
+        if source_category.lower() == "kernel":
+            table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")  # Knowledge_Repo (肉)
+        else:
+            table_id = os.getenv("LARK_TABLE_ID")  # Style_Repo (血)
         
         if not app_token or not table_id:
             return False
@@ -435,16 +448,26 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str)
         if await check_exists_in_lark_async(content_hash):
             return False
 
-        # 统一中文字段名 - 匹配 Style_Repo 新表结构
-        fields = {
-            "内容": snippet.clean_text,
-            "博主": author,  # 原"作者"/"风格"合并为"博主"
-            "片段类型": snippet.snippet_type,  # 原"类型"
-            "情绪": snippet.emotional_valence,
-            "质量评分": snippet.quality_score,  # 原"质量分"
-            "状态": "待处理",
-            "内容指纹": content_hash  # 原"content_hash"
-        }
+        # 根据 source_category 使用不同的字段结构
+        if source_category.lower() == "kernel":
+            # Knowledge_Repo 表结构 (Web3 知识/肉)
+            # 实际字段: 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
+            fields = {
+                "核心摘要": snippet.clean_text,
+                "事实类型": snippet.snippet_type,  # Hook/Body/Quote/Hard_Fact
+                "来源文件": author,
+                "状态": "待审核",
+                "内容指纹": content_hash
+            }
+        else:
+            # Style_Repo 表结构 (风格素材/血)
+            # 实际字段: 内容, 博主, 片段类型, 状态
+            fields = {
+                "内容": snippet.clean_text,
+                "博主": author,
+                "片段类型": snippet.snippet_type,
+                "状态": "待处理"
+            }
         
         # 在线程池中运行同步代码
         loop = asyncio.get_event_loop()
@@ -535,7 +558,7 @@ async def process_file(
         if dry_run:
             uploaded += 1
         else:
-            if await upload_to_lark_async(s, author, style):
+            if await upload_to_lark_async(s, author, style, source_category):
                 uploaded += 1
             else:
                 filtered_by_lark += 1
