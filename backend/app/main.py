@@ -11,9 +11,13 @@ from fastapi.responses import StreamingResponse
 import json
 from .core.config import ensure_config_dir, load_config, save_config
 from .core.lark_client import lark_client
+from .api.cleaner import router as cleaner_router
 import os
 
 app = FastAPI(title="Web3 Consensus Engine API", version="5.0")
+
+# Register routers
+app.include_router(cleaner_router)
 
 @app.on_event("startup")
 async def startup_event():

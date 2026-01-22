@@ -89,16 +89,16 @@ class AsyncLLMProvider:
         """连接到指定的 LLM 提供商 (异步客户端)"""
         if self.name == "doubao":
             # 火山引擎豆包 - 豆包最新模型
-            api_key = self._get_api_key("VOLC_API_KEY", "doubao")
+            api_key = self._get_api_key("ARK_API_KEY", "doubao")
             base_url = "https://ark.cn-beijing.volces.com/api/v3"
-            self.model_name = os.getenv("VOLC_MODEL_ENDPOINT", "doubao-seed-1-8-251228")
+            self.model_name = "doubao-seed-1-8-251228"
             self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
             
-        elif self.name == "deepseek":
-            # DeepSeek 官方 - V3.2
-            api_key = self._get_api_key("DEEPSEEK_API_KEY", "deepseek")
-            base_url = "https://api.deepseek.com"
-            self.model_name = "deepseek-chat"
+        elif self.name == "deepseek" or self.name == "deepseek-ark":
+            # 火山引擎 DeepSeek V3.2 - 数据清洗推荐 (更便宜)
+            api_key = self._get_api_key("ARK_API_KEY", "deepseek")
+            base_url = "https://ark.cn-beijing.volces.com/api/v3"
+            self.model_name = "deepseek-v3-2-251201"
             self.client = AsyncOpenAI(api_key=api_key, base_url=base_url)
             
         elif self.name == "gemini":
