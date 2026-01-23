@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from "@/lib/utils";
-import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2 } from 'lucide-react';
+import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2, FlaskConical } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
@@ -22,6 +22,9 @@ export default function SettingsPage() {
     writer: DEFAULTS.writer,
     critic: DEFAULTS.critic
   });
+
+  // Phase 12: Feature Flags
+  const [useKnowledgeRepo, setUseKnowledgeRepo] = useState(false);
 
   useEffect(() => {
     async function loadSettings() {
@@ -48,7 +51,6 @@ export default function SettingsPage() {
       if (storedModel) setModel(storedModel);
       if (storedUrl) setBaseUrl(storedUrl);
 
-      // 3. Load Prompts from backend first, then localStorage fallback
       try {
         const promptRes = await fetch(`${API_BASE_URL}/config/prompts`);
         if (promptRes.ok) {
@@ -69,6 +71,17 @@ export default function SettingsPage() {
           writer: pWriter || DEFAULTS.writer,
           critic: pCritic || DEFAULTS.critic
         });
+      }
+
+      // 4. Load Feature Flags
+      try {
+        const flagRes = await fetch(`${API_BASE_URL}/config/feature-flags`);
+        if (flagRes.ok) {
+          const flagData = await flagRes.json();
+          setUseKnowledgeRepo(flagData.use_knowledge_repo || false);
+        }
+      } catch {
+        console.log('[Settings] Feature flags unavailable');
       }
 
       setIsLoading(false);
@@ -112,6 +125,15 @@ export default function SettingsPage() {
           }).catch(() => { }) // Ignore individual failures
         )
       );
+
+      // 4. Sync feature flags to backend
+      await fetch(`${API_BASE_URL}/config/feature-flags`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          use_knowledge_repo: useKnowledgeRepo
+        })
+      }).catch(() => { });
 
       if (res.ok) {
         toast.success('配置已保存到服务器');
@@ -234,6 +256,47 @@ export default function SettingsPage() {
               onChange={(v) => setPrompts({ ...prompts, critic: v })}
               defaultValue={DEFAULTS.critic}
             />
+          </div>
+        </section>
+
+        {/* Experimental Features (P12) */}
+        <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
+              <FlaskConical className="w-4 h-4 text-amber-500" />
+              实验性功能
+            </h3>
+            <span className="text-[10px] text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full">
+              Feature Flags
+            </span>
+          </div>
+
+          <div className="pl-6 space-y-4">
+            {/* Knowledge Repo Toggle */}
+            <div className="flex items-center justify-between p-4 bg-zinc-50 rounded-xl">
+              <div className="flex-1">
+                <label className="text-sm font-medium text-ink-primary">
+                  启用 Knowledge_Repo 知识检索
+                </label>
+                <p className="text-xs text-ink-muted mt-1">
+                  策略师将从 Web3 知识库检索相关背景，提升内容专业性
+                </p>
+              </div>
+              <button
+                onClick={() => setUseKnowledgeRepo(!useKnowledgeRepo)}
+                className={cn(
+                  "relative inline-flex h-6 w-11 items-center rounded-full transition-colors",
+                  useKnowledgeRepo ? "bg-primary" : "bg-zinc-200"
+                )}
+              >
+                <span
+                  className={cn(
+                    "inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm",
+                    useKnowledgeRepo ? "translate-x-6" : "translate-x-1"
+                  )}
+                />
+              </button>
+            </div>
           </div>
         </section>
 

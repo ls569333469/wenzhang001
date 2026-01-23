@@ -375,3 +375,38 @@ async def get_lark_status():
         "count": count,
         "last_sync": last_sync
     }
+
+
+# ============================================
+# Feature Flags API (P12)
+# ============================================
+
+class FeatureFlagsRequest(BaseModel):
+    use_knowledge_repo: Optional[bool] = None
+
+
+@app.get("/config/feature-flags")
+async def get_feature_flags():
+    """获取 Feature Flags 配置"""
+    config = load_config()
+    flags = config.get("feature_flags", {})
+    return {
+        "use_knowledge_repo": flags.get("use_knowledge_repo", False)
+    }
+
+
+@app.post("/config/feature-flags")
+async def save_feature_flags(flags: FeatureFlagsRequest):
+    """保存 Feature Flags 配置"""
+    config = load_config()
+    if "feature_flags" not in config:
+        config["feature_flags"] = {}
+    
+    # 只更新提供的 flags
+    flags_dict = flags.dict(exclude_none=True)
+    for k, v in flags_dict.items():
+        config["feature_flags"][k] = v
+    
+    save_config(config)
+    return {"status": "success", "updated": flags_dict}
+

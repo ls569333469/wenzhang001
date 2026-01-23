@@ -4,6 +4,10 @@ import random
 from pathlib import Path
 from ..core.llm import generate_text
 from ..core.prompts import render_prompt
+from ..core.config import get_feature_flag, get_logger
+from ..services.knowledge_retriever import retrieve_web3_knowledge
+
+logger = get_logger("strategist")
 
 # 模式到目录的映射
 MODE_TO_DIR = {
@@ -85,13 +89,25 @@ def build_strategist_context(state: dict) -> dict:
         "chengshian": "程十安体 - 生活干货、通俗易懂"
     }
 
+    # [Feature Flag] Knowledge_Repo 集成
+    web3_knowledge = ""
+    if get_feature_flag("use_knowledge_repo"):
+        topic = state.get("raw_input", "")
+        logger.info(f"[Strategist] Knowledge_Repo 已启用，检索主题: {topic[:50]}...")
+        web3_knowledge = retrieve_web3_knowledge(topic)
+        if web3_knowledge:
+            logger.info(f"[Strategist] 检索到 Web3 知识背景")
+        else:
+            logger.info(f"[Strategist] 未检索到相关 Web3 知识")
+    
     context = {
         "current_time_str": current_time_str,
         "narrative_type": narrative_type,
         "mode": mode,
         "mode_description": mode_descriptions.get(mode, mode),
         "narrative_desc": narrative_desc,
-        "rag_context": rag_context
+        "rag_context": rag_context,
+        "web3_knowledge": web3_knowledge  # 传递给 Writer
     }
     return context
 

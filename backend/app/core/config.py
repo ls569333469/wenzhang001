@@ -71,3 +71,34 @@ def get_logger(name: str) -> logging.Logger:
         logger.addHandler(handler)
         logger.setLevel(logging.INFO)
     return logger
+
+
+def get_feature_flag(flag_name: str, default: bool = False) -> bool:
+    """
+    获取 Feature Flag 配置
+    
+    Args:
+        flag_name: Feature flag 名称
+        default: 默认值
+        
+    Returns:
+        Feature flag 的值
+    """
+    config = load_config()
+    flags = config.get("feature_flags", {})
+    return flags.get(flag_name, default)
+
+
+def set_feature_flag(flag_name: str, value: bool):
+    """
+    设置 Feature Flag 配置
+    
+    Args:
+        flag_name: Feature flag 名称
+        value: 要设置的值
+    """
+    config = load_config()
+    if "feature_flags" not in config:
+        config["feature_flags"] = {}
+    config["feature_flags"][flag_name] = value
+    save_config(config)
