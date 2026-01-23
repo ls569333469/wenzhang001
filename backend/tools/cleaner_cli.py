@@ -451,36 +451,42 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
 
         # 根据 source_category 使用不同的字段结构
         if source_category.lower() == "kernel":
-            # Knowledge_Repo 表结构 (Web3 知识/肉) - 完整 11 字段
-            # 字段: 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
+            # Knowledge_Repo 表结构 - 与 ingest_knowledge.py 完全对齐
+            # 字段: 标题, 内容, 赛道分类, 内容类型, 来源文件, 来源链接, 发布日期, 内容指纹, 质量评分, 状态
             
-            # 英文到中文的映射 (后备方案)
-            snippet_type_map = {
-                "Hard_Fact": "快讯",
-                "Quote": "资讯",
-                "Hook": "资讯",
-                "Body": "研报",
-                "CTA": "资讯",
+            # 内容类型映射 (与 ingest_knowledge.py 的 FACT_TYPE_LABELS 对齐)
+            content_type_map = {
+                # 英文 → 中文
+                "Hard_Fact": "硬数据",
+                "Quote": "观点评论",
+                "Hook": "快讯资讯",
+                "Body": "深度分析",
+                "CTA": "快讯资讯",
+                # 中文直接映射
+                "快讯": "快讯资讯",
+                "研报": "深度分析",
+                "分析": "深度分析",
+                "资讯": "快讯资讯",
+                "深度": "深度分析",
             }
-            # 如果已经是中文就直接用，否则映射
-            fact_type = snippet.snippet_type
-            if fact_type in snippet_type_map:
-                fact_type = snippet_type_map[fact_type]
-            elif fact_type not in ["快讯", "研报", "分析", "资讯", "深度", "教程", "里程碑", "融资"]:
-                fact_type = "资讯"  # 默认值
+            
+            # 确定内容类型
+            content_type = snippet.snippet_type
+            if content_type in content_type_map:
+                content_type = content_type_map[content_type]
+            elif content_type not in ["硬数据", "深度分析", "观点评论", "梗_黑话", "快讯资讯"]:
+                content_type = "快讯资讯"  # 默认值
             
             fields = {
                 "标题": snippet.clean_text[:50] if len(snippet.clean_text) > 50 else snippet.clean_text,
-                "核心摘要": snippet.clean_text,
-                "正文原文": snippet.original_text,
-                "事实类型": fact_type,
-                "信息深度": "中",
-                "关键词": snippet.logic_pattern,
-                "来源文件": author,
-                "发布日期": "",
+                "内容": snippet.clean_text,  # 对齐 ingest_knowledge.py
                 "赛道分类": style if style else "其他",
-                "状态": "待审核",
-                "内容指纹": content_hash
+                "内容类型": content_type,  # 对齐 ingest_knowledge.py
+                "来源文件": author,
+                "来源链接": "",  # TXT 文件无链接
+                "内容指纹": content_hash,
+                "质量评分": snippet.quality_score,  # 使用 AI 评分
+                "状态": "待处理"  # 对齐 ingest_knowledge.py
             }
         else:
             # Style_Repo 表结构 (风格素材/血)
