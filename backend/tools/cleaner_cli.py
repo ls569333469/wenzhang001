@@ -191,6 +191,7 @@ KERNEL_FILTER_PROMPT = """
 1. **丢弃**: "战略升级"、"治理提案"等无实质内容
 2. **保留**: TVL变动、大额转账、融资、黑客攻击、里程碑
 3. **Logic_Pattern**: 统一填"数据背书"或"事件驱动"
+4. **snippet_type 必须是中文**: 快讯 / 研报 / 分析 / 资讯 / 深度 (不要用英文)
 
 # Output (JSON Only)
 {{
@@ -198,7 +199,7 @@ KERNEL_FILTER_PROMPT = """
     {{
       "original_text": "原文...",
       "clean_text": "精简事实...",
-      "snippet_type": "Hard_Fact",
+      "snippet_type": "快讯",
       "logic_pattern": "数据背书",
       "emotional_valence": "Neutral",
       "quality_score": 5
@@ -452,16 +453,32 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
         if source_category.lower() == "kernel":
             # Knowledge_Repo 表结构 (Web3 知识/肉) - 完整 11 字段
             # 字段: 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
+            
+            # 英文到中文的映射 (后备方案)
+            snippet_type_map = {
+                "Hard_Fact": "快讯",
+                "Quote": "资讯",
+                "Hook": "资讯",
+                "Body": "研报",
+                "CTA": "资讯",
+            }
+            # 如果已经是中文就直接用，否则映射
+            fact_type = snippet.snippet_type
+            if fact_type in snippet_type_map:
+                fact_type = snippet_type_map[fact_type]
+            elif fact_type not in ["快讯", "研报", "分析", "资讯", "深度", "教程", "里程碑", "融资"]:
+                fact_type = "资讯"  # 默认值
+            
             fields = {
-                "标题": snippet.clean_text[:50] if len(snippet.clean_text) > 50 else snippet.clean_text,  # 从内容提取标题
+                "标题": snippet.clean_text[:50] if len(snippet.clean_text) > 50 else snippet.clean_text,
                 "核心摘要": snippet.clean_text,
-                "正文原文": snippet.original_text,  # 保留原文
-                "事实类型": "快讯" if snippet.snippet_type == "Hard_Fact" else "研报",  # 映射类型
+                "正文原文": snippet.original_text,
+                "事实类型": fact_type,
                 "信息深度": "中",
-                "关键词": snippet.logic_pattern,  # 用逻辑公式作为关键词
+                "关键词": snippet.logic_pattern,
                 "来源文件": author,
                 "发布日期": "",
-                "赛道分类": style if style else "其他",  # 用 style 参数作为赛道
+                "赛道分类": style if style else "其他",
                 "状态": "待审核",
                 "内容指纹": content_hash
             }
