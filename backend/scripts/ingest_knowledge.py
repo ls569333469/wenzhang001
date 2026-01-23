@@ -236,16 +236,19 @@ async def upload_record_async(
     """上传单条记录到 Knowledge_Repo"""
     
     fields = {
-        "标题": title,           # 新增
+        "标题": title,
         "内容": content,
         "赛道分类": topic,
         "内容类型": fact_type,
         "来源文件": source_file,
-        "来源链接": source_url,   # 新增
         "内容指纹": content_hash,
         "质量评分": quality_score,
         "状态": "待处理"
     }
+    
+    # URL 字段特殊处理 - Lark 需要对象格式或者完全不传
+    if source_url and source_url.strip():
+        fields["来源链接"] = {"link": source_url, "text": source_url}
     
     # 日期字段特殊处理
     if publish_date:
