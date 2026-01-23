@@ -233,22 +233,22 @@ async def upload_record_async(
     app_token: str,
     table_id: str
 ) -> bool:
-    """上传单条记录到 Knowledge_Repo"""
+    """上传单条记录到 Knowledge_Repo - 字段与 Lark 表完全匹配"""
     
+    # Lark Knowledge_Repo 表实际字段:
+    # 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
     fields = {
         "标题": title,
-        "内容": content,
+        "核心摘要": content[:500] if len(content) > 500 else content,  # 摘要截断
+        "正文原文": content,
         "赛道分类": topic,
-        "内容类型": fact_type,
+        "事实类型": fact_type,
+        "信息深度": "中",  # 默认值
+        "关键词": "",  # 可后续补充
         "来源文件": source_file,
         "内容指纹": content_hash,
-        "质量评分": quality_score,
         "状态": "待处理"
     }
-    
-    # URL 字段特殊处理 - Lark 需要对象格式或者完全不传
-    if source_url and source_url.strip():
-        fields["来源链接"] = {"link": source_url, "text": source_url}
     
     # 日期字段特殊处理
     if publish_date:
