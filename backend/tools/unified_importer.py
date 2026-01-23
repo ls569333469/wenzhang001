@@ -208,27 +208,33 @@ def clear_checkpoint():
 # ==========================================
 
 async def import_json_file(file_path: Path, target: str) -> Optional[Dict[str, Any]]:
-    """直接导入 JSON 文件 (无需 AI)"""
+    """直接导入 JSON 文件 (无需 AI) - 与 ingest_knowledge.py 对齐"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
         
-        # 映射字段到 Knowledge_Repo
+        # 映射字段到 Knowledge_Repo - 与 ingest_knowledge.py 完全对齐
         record = {
             "标题": data.get("title", file_path.stem),
-            "核心摘要": data.get("summary", data.get("content", "")[:200]),
-            "正文原文": data.get("content", ""),
-            "事实类型": data.get("fact_type", "研报"),
-            "信息深度": data.get("info_depth", "中"),
-            "关键词": ", ".join(data.get("keywords", [])) if isinstance(data.get("keywords"), list) else "",
-            "发布日期": data.get("published_at", ""),
-            "来源文件": file_path.name,
+            "内容": data.get("content", ""),  # 对齐 ingest_knowledge.py
             "赛道分类": data.get("track", file_path.parent.name),
-            "状态": "待审核",
-            "内容指纹": get_content_hash(data.get("content", ""))
+            "内容类型": "快讯资讯",  # 默认值，与 ingest_knowledge.py 对齐
+            "来源文件": file_path.name,
+            "来源链接": data.get("url", ""),  # 对齐 ingest_knowledge.py
+            "内容指纹": get_content_hash(data.get("content", "")),
+            "质量评分": 5.0,  # 默认中等分数
+            "状态": "待处理"  # 对齐 ingest_knowledge.py
         }
         
+        # 日期字段特殊处理
+        published_at = data.get("published_at", "")
+        if published_at:
+            record["发布日期"] = published_at
+        
         return record
+    except Exception as e:
+        console.print(f"[red]JSON 解析错误: {file_path.name} - {e}[/red]")
+        return None
     except Exception as e:
         console.print(f"[red]JSON 解析错误: {file_path.name} - {e}[/red]")
         return None
@@ -275,16 +281,14 @@ async def process_txt_with_ai(
                 
                 record = {
                     "标题": data.get("title", ""),
-                    "核心摘要": data.get("summary", ""),
-                    "正文原文": chunk,
-                    "事实类型": data.get("fact_type", "快讯"),
-                    "信息深度": data.get("info_depth", "中"),
-                    "关键词": ", ".join(data.get("keywords", [])),
-                    "发布日期": "",
-                    "来源文件": file_path.name,
+                    "内容": data.get("summary", chunk),  # 对齐 ingest_knowledge.py
                     "赛道分类": data.get("track", file_path.parent.name),
-                    "状态": "待审核",
-                    "内容指纹": get_content_hash(chunk)
+                    "内容类型": "快讯资讯",  # 默认值
+                    "来源文件": file_path.name,
+                    "来源链接": "",
+                    "内容指纹": get_content_hash(chunk),
+                    "质量评分": 5.0,
+                    "状态": "待处理"  # 对齐 ingest_knowledge.py
                 }
                 results.append(record)
                 
