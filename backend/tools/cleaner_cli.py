@@ -450,12 +450,18 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
 
         # 根据 source_category 使用不同的字段结构
         if source_category.lower() == "kernel":
-            # Knowledge_Repo 表结构 (Web3 知识/肉)
-            # 实际字段: 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
+            # Knowledge_Repo 表结构 (Web3 知识/肉) - 完整 11 字段
+            # 字段: 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
             fields = {
+                "标题": snippet.clean_text[:50] if len(snippet.clean_text) > 50 else snippet.clean_text,  # 从内容提取标题
                 "核心摘要": snippet.clean_text,
-                "事实类型": snippet.snippet_type,  # Hook/Body/Quote/Hard_Fact
+                "正文原文": snippet.original_text,  # 保留原文
+                "事实类型": "快讯" if snippet.snippet_type == "Hard_Fact" else "研报",  # 映射类型
+                "信息深度": "中",
+                "关键词": snippet.logic_pattern,  # 用逻辑公式作为关键词
                 "来源文件": author,
+                "发布日期": "",
+                "赛道分类": style if style else "其他",  # 用 style 参数作为赛道
                 "状态": "待审核",
                 "内容指纹": content_hash
             }
