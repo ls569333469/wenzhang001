@@ -154,4 +154,44 @@ class LarkClient:
             logger.error(f"Failed to create Lark field: {str(e)}")
             raise
 
+    def batch_create_records(self, app_token: str, table_id: str, records: List[Dict[str, Any]], timeout: int = 60) -> Dict:
+        """
+        Batch create records in a Bitable table (max 500 per call).
+        Docs: https://open.larksuite.com/document/server-docs/docs/bitable-v1/app-table-record/batch_create
+        
+        Args:
+            app_token: The app token of the Bitable
+            table_id: The table ID
+            records: List of field dictionaries, e.g. [{"标题": "xxx", "内容": "yyy"}, ...]
+            timeout: Request timeout in seconds
+            
+        Returns:
+            API response dict with created records
+        """
+        token = self._get_token()
+        url = f"{self.base_url}/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_create"
+        
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        }
+        
+        # Lark API requires records in {fields: {...}} format
+        payload = {
+            "records": [{"fields": r} for r in records]
+        }
+        
+        try:
+            resp = requests.post(url, headers=headers, json=payload, timeout=timeout)
+            result = resp.json()
+            if result.get("code") == 0:
+                created_count = len(result.get("data", {}).get("records", []))
+                logger.info(f"Successfully batch created {created_count} records")
+            else:
+                logger.error(f"Failed to batch create records: {result.get('msg')}")
+            return result
+        except Exception as e:
+            logger.error(f"Failed to batch create Lark records: {str(e)}")
+            raise
+
 lark_client = LarkClient()

@@ -1,264 +1,232 @@
-# Web3 批量清洗优化方案 v2.0 (合并版)
+# Web3 批量清洗优化方案 v4.0 (A/B 测试版)
 
 > **创建日期**: 2026-01-24  
+> **版本**: v4.0 (A/B 测试 + LLM 摘要)  
 > **目标**: 优化 5,806 条 Web3 素材的清洗入库流程  
-> **预期效果**: 费用 ¥16 → ¥5 (省 69%)，无人值守
+> **策略**: 保留旧脚本兜底，新脚本渐进验证  
+> **v4.0 更新**: 新增 LLM 生成的一句话摘要，替代简单截取
 
 ---
 
-## 一、核心问题诊断
+## 一、A/B 测试架构
 
-### 1.1 "算"与"存"的本质区别
+### 1.1 架构图
 
-| 维度 | 火山引擎批量推理 | Lark 批量 API |
-|------|-----------------|---------------|
-| **核心作用** | 算 (Compute) | 存 (Storage/IO) |
-| **操作对象** | 处理 LLM Token | 写入数据库记录 |
-| **典型场景** | "1万篇文章需要提取摘要" | "100条结果一次性存入表格" |
-| **时间特性** | 高延迟 (1-24h 异步) | 低延迟 (毫秒级同步) |
-| **成本影响** | 省钱 50% | 省时间 99% |
-
-### 1.2 现状诊断
-
-> 🕵️ **关键发现**: 当前代码使用的是火山引擎**实时接口** + `asyncio` 并发，而非真正的"批量推理"。
-
-| 误区 | 实际情况 |
-|------|----------|
-| "我用了批量推理" | ❌ 只是并发调用实时 API |
-| "每条 3-5秒正常" | ❌ 真批量推理是整体等待，非逐条返回 |
-
-**真正的批量推理流程**:
 ```
-上传文件 → 排队 → 离线计算(1-24h) → 下载文件
+                     ┌─────────────────────────────────────┐
+                     │   命令行参数 / Feature Flag          │
+                     │   --use-optimized / user_config     │
+                     └─────────────────┬───────────────────┘
+                                       │
+           ┌───────────────────────────┴───────────────────────────┐
+           ▼                                                       ▼
+┌─────────────────────────┐                         ┌─────────────────────────┐
+│    旧脚本 (A - 兜底)     │                         │   新脚本 (B - 优化版)    │
+│ ingest_knowledge.py     │                         │ ingest_optimized.py     │
+├─────────────────────────┤                         ├─────────────────────────┤
+│ ✗ 2 次 LLM 调用/条      │                         │ ✓ 1 次 LLM 调用/条      │
+│ ✗ 单条 Lark 上传        │                         │ ✓ 批量 Lark 上传        │
+│ ✗ Lark API 查重         │                         │ ✓ 本地 Hash 缓存        │
+├─────────────────────────┤                         ├─────────────────────────┤
+│ 费用: ¥16 / 5806 条     │                         │ 费用: ¥8 / 5806 条      │
+│ 时间: 5-6h              │                         │ 时间: 2h                │
+│ 稳定性: ⭐⭐⭐⭐⭐         │                         │ 稳定性: ⭐⭐⭐ (待验证)   │
+└─────────────────────────┘                         └─────────────────────────┘
+```
+
+### 1.2 文件结构
+
+```
+backend/scripts/
+├── ingest_knowledge.py      # 旧脚本 (A - 兜底，不改动)
+├── ingest_optimized.py      # 新脚本 (B - 优化版) [新增]
+├── batch/                   # 批量处理工具 [新增目录]
+│   ├── lark_batch.py        # Lark 批量上传封装
+│   └── hash_cache.py        # 本地 Hash 缓存
+└── ...
 ```
 
 ---
 
-## 二、优化策略 (按 ROI 排序)
+## 二、优化内容对比
 
-### 2.1 合并 LLM 调用 ⭐ 效果最佳
+| 优化项 | 旧脚本 (A) | 新脚本 (B) | 节省 |
+|--------|-----------|-----------|------|
+| LLM 调用 | 2 次/条 | 1 次/条 | 50% Token |
+| Lark 上传 | 单条 | 批量 (500条/次) | 99% 网络时间 |
+| 查重方式 | Lark API | 本地 Hash 缓存 | 99% 查重时间 |
+| **总费用** | ¥16 | ¥8 | **50%** |
+| **总时间** | 5-6h | 2h | **60%** |
 
-| 当前 | 优化后 |
-|------|--------|
-| 2 次调用/条 | **1 次调用/条** |
-| 读取内容 2 遍 | 读取内容 1 遍 |
-| 3.5M + 3.5M = 7M Token | **3.5M Token** |
+---
 
-**合并后的 Prompt**:
+## 三、详细执行计划
+
+### Phase 1: 开发新脚本 (2h)
+
+| Step | 任务 | 文件 | 预计时间 |
+|------|------|------|----------|
+| 1.1 | 添加 Lark 批量上传方法 | `lark_client.py` | 20min |
+| 1.2 | 创建本地 Hash 缓存模块 | `batch/hash_cache.py` | 20min |
+| 1.3 | 创建合并 LLM Prompt | `ingest_optimized.py` | 40min |
+| 1.4 | 集成批量上传逻辑 | `ingest_optimized.py` | 30min |
+| 1.5 | 添加 Feature Flag 支持 | `user_config.json` | 10min |
+
+### Phase 2: 小批量测试 (1h)
+
+| Step | 任务 | 验证点 |
+|------|------|--------|
+| 2.1 | 测试合并 Prompt | JSON 解析成功率 |
+| 2.2 | 测试批量上传 | 500 条/批无报错 |
+| 2.3 | 测试 Hash 缓存 | 重复记录正确跳过 |
+| 2.4 | 对比新旧脚本 | 费用和时间差异 |
+
+### Phase 3: 全量执行 (可选)
+
+| 条件 | 操作 |
+|------|------|
+| Phase 2 成功 | 使用新脚本全量入库 |
+| Phase 2 有问题 | 切回旧脚本兜底 |
+
+---
+
+## 四、新脚本核心代码设计
+
+### 4.1 合并 LLM Prompt (v4.1 - 新增摘要)
+
 ```python
 MERGED_PROMPT = """
 分析以下 Web3 内容，返回 JSON:
 
 标题: {title}
 内容: {content[:2000]}
+赛道: {topic}
 
-返回格式 (严格 JSON):
-{
+返回格式 (严格 JSON，无其他文字):
+{{
   "quality_score": 1-10,
-  "entities": ["项目1", "人名1"],
-  "keywords": ["关键词1", "关键词2"],
+  "summary": "一句话概括核心观点 (30字以内)",
+  "entities": ["项目/人名/代币", ...],
+  "keywords": ["关键词1", "关键词2", ...],
   "fact_type": "硬数据/深度分析/观点评论/梗_黑话/快讯资讯"
-}
+}}
+
+评分标准:
+- 信息密度(30%): 具体数据、项目名称、技术细节
+- 时效性(20%): 最新事件或趋势
+- 专业性(30%): 深度分析或独特见解
+- 可读性(20%): 语言清晰流畅
 """
 ```
 
-### 2.2 规则替代评分 💰 最省钱
+> 📌 **v4.1 更新**: 新增 `summary` 字段，由 LLM 生成一句话核心摘要，替代简单截取的前 500 字。
 
-> 用 LLM 做简单数学打分是"杀鸡用牛刀"
-
-| 可规则化指标 | 公式 |
-|-------------|------|
-| 信息密度 | `len(content) / 1000 * 2` |
-| 关键词数量 | `count(entities) * 1` |
-| 链接数量 | `count(urls) * 0.5` |
-
-**建议**: 仅在需要"内容深度判定"时才用 LLM
-
-### 2.3 Lark 批量 API 🚀 提速网络
-
-**现状**:
-```python
-for record in records:
-    create_record(...)  # 每条 1-2秒 (DNS → TCP → SSL → 发送 → 等待)
-```
-
-**优化后**:
-```python
-batch_create_records(records[:500])  # 500条只需 1 次握手
-```
-
-| 指标 | 单条 API | 批量 API |
-|------|----------|----------|
-| 5806 条耗时 | ~2.5 小时 | **~2 分钟** |
-| 平均每条 | 1.5 秒 | **20 毫秒** |
-
----
-
-## 三、方案选择
-
-### 方案 A: 实时处理流 (追求快速可见)
-
-```mermaid
-graph LR
-    A[JSON 文件] --> B[本地 Hash 查重]
-    B --> C[合并 LLM 调用]
-    C --> D[推入缓冲队列]
-    D --> E{队列满 50 条?}
-    E -->|是| F[Lark 批量写入]
-    E -->|否| C
-```
-
-**适用**: 需要实时看到处理结果
-
-### 方案 B: 离线批处理流 (追求极致成本) ⭐ 推荐
-
-```mermaid
-graph LR
-    A[5806 JSON] --> B[生成 JSONL]
-    B --> C[火山批量推理]
-    C --> D[等待 1-24h]
-    D --> E[下载结果]
-    E --> F[Lark 批量写入]
-```
-
-**适用**: 不急，追求最低成本和无人值守
-
----
-
-## 四、成本对比 (5,806 条)
-
-### 4.1 费用明细
-
-**DeepSeek V3.2 定价**:
-- 输入: ¥2.0-4.0/M Token (取 ¥3.0)
-- 输出: ¥3.0-6.0/M Token (取 ¥4.5)
-- 批量推理: 50% 折扣
-
-| 方案 | 输入 Token | 输出 Token | 在线费用 | 批量费用 |
-|------|-----------|-----------|---------|---------|
-| 旧方案 (2次/条) | 7M | 0.58M | ¥16 | ¥8 |
-| **新方案 (1次/条)** | 3.5M | 0.58M | ¥8 | **¥5** |
-
-### 4.2 综合对比
-
-| 指标 | 旧方案 | 方案 A | 方案 B |
-|------|--------|--------|--------|
-| **LLM 费用** | ¥16 | ¥8 | **¥5** |
-| **执行时间** | 5-6h | 1-2h | 1-24h (无人值守) |
-| **网络稳定性** | 低 (8.5%失败) | 中 | **高** |
-| **人工成本** | 需值守 | 需值守 | **无** |
-
----
-
-## 五、技术实现
-
-### 5.1 文件结构
-
-```
-backend/scripts/batch/
-├── prepare_batch.py       # 生成 JSONL 输入
-├── submit_batch_job.py    # 提交火山任务
-├── fetch_batch_results.py # 获取结果
-├── batch_upload_lark.py   # 批量上传 Lark
-└── run_all.py             # 一键执行
-```
-
-### 5.2 核心代码
-
-#### 5.2.1 生成批量输入
-
-```python
-def prepare_batch_input(folder_path: Path) -> list:
-    """生成 JSONL 格式的批量输入"""
-    records = []
-    for json_file in folder_path.glob("*.json"):
-        data = json.load(open(json_file))
-        prompt = MERGED_PROMPT.format(
-            title=data.get("title", ""),
-            content=data.get("content", "")[:2000]
-        )
-        records.append({
-            "custom_id": json_file.stem,
-            "body": {
-                "model": "deepseek-v3-2-251201",
-                "messages": [{"role": "user", "content": prompt}],
-                "response_format": {"type": "json_object"}
-            }
-        })
-    return records
-```
-
-#### 5.2.2 Lark 批量上传
+### 4.2 Lark 批量上传
 
 ```python
 async def batch_upload_lark(records: list, batch_size=500):
     """批量上传到 Lark (每批最多 500 条)"""
-    base_url = "https://open.larksuite.com/open-apis"
-    url = f"{base_url}/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_create"
+    results = {"success": 0, "failed": 0}
     
     for i in range(0, len(records), batch_size):
         batch = records[i:i+batch_size]
         payload = {"records": [{"fields": r} for r in batch]}
-        resp = await session.post(url, json=payload, headers=headers)
-        print(f"批次 {i//batch_size + 1}: 上传 {len(batch)} 条")
+        
+        try:
+            resp = await lark_client.batch_create_records(app_token, table_id, payload)
+            if resp.get("code") == 0:
+                results["success"] += len(batch)
+            else:
+                results["failed"] += len(batch)
+        except Exception as e:
+            results["failed"] += len(batch)
+            
+    return results
+```
+
+### 4.3 本地 Hash 缓存
+
+```python
+class HashCache:
+    def __init__(self, cache_file="processed_hashes.json"):
+        self.cache_file = Path(cache_file)
+        self.hashes = self._load()
+    
+    def _load(self):
+        if self.cache_file.exists():
+            return set(json.load(open(self.cache_file)))
+        return set()
+    
+    def contains(self, content_hash: str) -> bool:
+        return content_hash in self.hashes
+    
+    def add(self, content_hash: str):
+        self.hashes.add(content_hash)
+        
+    def save(self):
+        json.dump(list(self.hashes), open(self.cache_file, "w"))
 ```
 
 ---
 
-## 六、执行计划
+## 五、切换方式
 
-### 6.1 分阶段实施
-
-| Phase | 任务 | 耗时 | 交付物 |
-|-------|------|------|--------|
-| **P1** | 开发 4 个脚本 | 2h | `scripts/batch/*.py` |
-| **P2** | 配置火山 TOS + IAM | 30min | 权限配置 |
-| **P3** | 小批量测试 (100条) | 1h | 验证报告 |
-| **P4** | 全量执行 (5806条) | 1-24h | Lark 表数据 |
-
-### 6.2 一键执行命令
+### 5.1 命令行切换
 
 ```bash
-# 完整流程
-python -m scripts.batch.run_all --all
+# 使用旧脚本 (兜底)
+python -m scripts.ingest_knowledge --all --limit 10
 
-# 或分步执行
-python -m scripts.batch.prepare_batch --all           # Step 1: 准备
-python -m scripts.batch.submit_batch_job              # Step 2: 提交
-# ... 等待 1-24h ...
-python -m scripts.batch.fetch_batch_results --job-id xxx  # Step 3: 获取
-python -m scripts.batch.batch_upload_lark             # Step 4: 上传
+# 使用新脚本 (优化版)
+python -m scripts.ingest_optimized --all --limit 10
+```
+
+### 5.2 配置文件切换
+
+```json
+// config/user_config.json
+{
+  "feature_flags": {
+    "use_knowledge_repo": true,
+    "use_optimized_ingest": false  // true = 新脚本，false = 旧脚本
+  }
+}
 ```
 
 ---
 
-## 七、风险与应对
+## 六、风险与回滚
 
-| 风险 | 概率 | 应对措施 |
-|------|------|----------|
-| 批量任务超时 | 低 | 设置 24h 窗口 |
-| TOS 权限问题 | 中 | 提前配置 IAM |
-| JSON 解析失败 | 低 | 本地验证格式 |
-| Lark 限流 | 低 | 控制 QPS ≤ 50 |
+| 风险 | 概率 | 应对 |
+|------|------|------|
+| 合并 Prompt 解析失败 | 中 | 添加 JSON 修复逻辑 |
+| 批量上传部分失败 | 低 | 记录失败记录，单条重试 |
+| Hash 缓存损坏 | 低 | 重建缓存 |
 
----
+### 回滚步骤
 
-## 八、总结
-
-| 维度 | 改进效果 |
-|------|----------|
-| **费用** | ¥16 → ¥5 (省 69%) |
-| **时间** | 5h 值守 → 无人值守 |
-| **成功率** | 91.5% → 99%+ |
-| **可维护性** | 4 个独立脚本，职责清晰 |
-
-**推荐方案**: **方案 B (离线批处理)**
+```bash
+# 如果新脚本有问题，直接使用旧脚本
+python -m scripts.ingest_knowledge --all
+```
 
 ---
 
-## 附录: 相关文档
+## 七、成功标准
 
-| 文档 | 说明 |
+| 指标 | 旧脚本 | 新脚本目标 | 验收 |
+|------|--------|-----------|------|
+| 费用 | ¥16 | ≤ ¥8 | 省 50%+ |
+| 时间 | 5h | ≤ 2h | 省 60%+ |
+| 成功率 | 91.5% | ≥ 95% | 稳定性提升 |
+| 数据一致性 | 基准 | 100% 一致 | 无数据丢失 |
+
+---
+
+## 附录：相关文档
+
+| 文档 | 用途 |
 |------|------|
-| [Web3数据清洗成本分析.md](file:///d:/AI_Projects/2026001/reports/design_docs/历史文档/Web3数据清洗成本分析.md) | 详细费用计算 |
-| [12-3_Manual_Lark数据清洗工具手册.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/12-3_Manual_Lark数据清洗工具手册.md) | 现有工具说明 |
+| [13-2_Report_Knowledge字段调用流程分析.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/13-2_Report_Knowledge字段调用流程分析.md) | 字段调用分析 |
+| [Web3数据清洗成本分析.md](file:///d:/AI_Projects/2026001/reports/design_docs/历史文档/Web3数据清洗成本分析.md) | 费用计算 |
+| [12-3_Manual_Lark数据清洗工具手册.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/12-3_Manual_Lark数据清洗工具手册.md) | 工具说明 |
