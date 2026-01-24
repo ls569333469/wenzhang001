@@ -19,7 +19,7 @@ KNOWLEDGE_TABLE_ID = os.getenv("LARK_KNOWLEDGE_TABLE_ID", "")
 def retrieve_web3_knowledge(
     topic: str, 
     max_results: int = 5,
-    min_quality_score: float = 5.0
+    min_quality_score: float = 0  # 默认不过滤，因为现有数据大多未评分
 ) -> str:
     """
     从 Knowledge_Repo 检索与主题相关的 Web3 知识
@@ -38,10 +38,10 @@ def retrieve_web3_knowledge(
     
     try:
         client = LarkClient()
-        app_token = os.getenv("LARK_APP_TOKEN", "")
+        app_token = os.getenv("LARK_BASE_TOKEN", "")
         
         if not app_token:
-            logger.warning("LARK_APP_TOKEN 未配置，跳过知识检索")
+            logger.warning("LARK_BASE_TOKEN 未配置，跳过知识检索")
             return ""
         
         # 提取关键词用于检索
@@ -49,22 +49,33 @@ def retrieve_web3_knowledge(
         logger.info(f"[Knowledge Retriever] 检索关键词: {keywords}")
         
         # 获取所有记录
-        records = client.list_records(app_token, KNOWLEDGE_TABLE_ID)
+        response = client.list_records(app_token, KNOWLEDGE_TABLE_ID)
+        
+        # 正确提取 records：API 返回格式是 {data: {items: [...]}}
+        records = []
+        if isinstance(response, dict):
+            data = response.get("data", {})
+            if isinstance(data, dict):
+                records = data.get("items", [])
         
         if not records:
             logger.info("[Knowledge Retriever] Knowledge_Repo 无记录")
             return ""
         
-        # 过滤和排序
+        # 过滤和排序 (优化版: 实体>关键词>赛道>全文)
         matched_records = []
         for record in records:
             fields = record.get("fields", {})
             
             # 获取字段值
-            content = get_text_value(fields.get("正文内容", ""))
-            record_topic = get_text_value(fields.get("主题", ""))
+            content = get_text_value(fields.get("正文原文", fields.get("正文内容", "")))
+            record_topic = get_text_value(fields.get("赛道分类", fields.get("主题", "")))
             title = get_text_value(fields.get("标题", ""))
             quality_score = fields.get("质量评分", 0)
+            
+            # 新增字段 (适配 v4 规范: "项目/人名/代币")
+            entities = get_text_value(fields.get("项目/人名/代币", fields.get("核心实体", "")))
+            record_keywords = get_text_value(fields.get("关键词", ""))
             
             # 确保质量评分是数字
             if isinstance(quality_score, str):
@@ -77,19 +88,31 @@ def retrieve_web3_knowledge(
             if quality_score < min_quality_score:
                 continue
             
-            # 关键词匹配
-            match_score = calculate_match_score(
-                keywords, 
-                f"{title} {record_topic} {content}"
-            )
+            # 分层匹配计算 (优先级权重)
+            # 1. 核心实体匹配 (权重 10)
+            entity_score = calculate_match_score(keywords, entities) * 10
             
-            if match_score > 0:
+            # 2. 关键词匹配 (权重 5)
+            keyword_score = calculate_match_score(keywords, record_keywords) * 5
+            
+            # 3. 标题+赛道匹配 (权重 2)
+            title_score = calculate_match_score(keywords, f"{title} {record_topic}") * 2
+            
+            # 4. 全文匹配 (权重 1)
+            content_score = calculate_match_score(keywords, content)
+            
+            # 综合得分
+            total_score = entity_score + keyword_score + title_score + content_score
+            
+            if total_score > 0:
                 matched_records.append({
                     "title": title,
                     "topic": record_topic,
-                    "content": content[:1500],  # 限制长度
+                    "content": content[:1500],
                     "quality_score": quality_score,
-                    "match_score": match_score
+                    "match_score": total_score,
+                    "entities": entities,
+                    "keywords": record_keywords
                 })
         
         # 按匹配度和质量评分排序

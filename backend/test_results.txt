@@ -1,0 +1,74 @@
+﻿python : 2026-01-24 08:55:27,063 - knowledge_retriever - INFO - [
+Knowledge Retriever] 检索关键词: ['Vitalik', '我们需要更多', '更好的', 'DAO', '
+而非仅由代币投票控制的金库']
+所在位置 行:1 字符: 1
++ python test_5_topics.py 2>&1 | Out-File -Encoding utf8 test_res
+ults.t ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-01-24 08:5..   
+ .而非仅由代币投票控制的金库']:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-01-24 08:55:28,061 - lark_client - INFO - Successfully refre
+shed Lark Tenant Access Token
+2026-01-24 08:55:32,981 - knowledge_retriever - INFO - [Knowledge
+ Retriever] 检索到 5 条相关知识
+2026-01-24 08:55:32,981 - knowledge_retriever - INFO - [Knowledge
+ Retriever] 检索关键词: ['SEC', '撤销对', 'Gemini', 'Earn', '的诉讼']
+2026-01-24 08:55:33,954 - lark_client - INFO - Successfully refre
+shed Lark Tenant Access Token
+2026-01-24 08:55:38,433 - knowledge_retriever - INFO - [Knowledge
+ Retriever] 未找到与 '美 SEC 撤销对 Gemini Earn 的诉讼' 相关的知识
+
+============================================================
+【话题 1】Vitalik：我们需要更多、更好的 DAO，而非仅由代币投票控制的金库...
+============================================================
+===== Web3 知识背景 (5 条相关记录) =====
+
+--- [Web3背景 1] Vitalik：DAO不是公司，去中心化至关重要 ---
+主题: 
+质量评分: 0.0
+内容摘要:
+...
+
+
+--- [Web3背景 2] 为什么DAO是更好的公司？ ---
+主题: 
+质量评分: 0.0
+内容摘要:
+...
+
+
+--- [Web3背景 3] 5分钟读懂去中心化自治组织DXdao的投资潜力 ---
+主题: 
+质量评分: 0.0
+内容摘要:
+...
+
+
+--- [Web3背景 4] 7 O'Clock Capital：DAO的昨天、今天与明天 ---
+主题: 
+质量评分: 0.0
+内容摘要:
+...
+
+
+--- [Web3背景 5] a16z推荐的59篇DAO入门读物 ---
+主题: 
+质量评分: 0.0
+内容摘要:
+...
+
+==================================================
+
+
+============================================================
+【话题 2】美 SEC 撤销对 Gemini Earn 的诉讼...
+============================================================
+Traceback (most recent call last):
+  File "D:\AI_Projects\2026001\backend\test_5_topics.py", line 27
+, in <module>
+    print("\u274c 未检索到相关内容")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u274c' i
+n position 0: illegal multibyte sequence

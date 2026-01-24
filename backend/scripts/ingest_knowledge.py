@@ -144,6 +144,48 @@ async def score_content_async(content: str, topic: str) -> float:
         console.print(f"[yellow]⚠️ 评分失败: {e}[/yellow]")
         return 5.0
 
+async def extract_entities_keywords(content: str, title: str) -> dict:
+    """使用 LLM 提取核心实体和关键词"""
+    try:
+        from app.core.llm import generate_text
+        
+        prompt = f"""分析以下 Web3 内容，提取核心信息。
+
+标题: {title}
+内容: {content[:2000]}
+
+请提取：
+1. 核心实体（项目名、人名、代币名、公司名，最多 5 个，如 Uniswap, Vitalik, $ETH, a16z）
+2. 关键词（主题关键词，最多 5 个，如 DEX, 流动性挖矿, 治理, 黑客攻击）
+
+严格按以下 JSON 格式返回，不要有其他文字：
+{{"entities": ["实体1", "实体2"], "keywords": ["关键词1", "关键词2"]}}"""
+        
+        result = await asyncio.to_thread(
+            lambda: generate_text(
+                prompt=prompt,
+                provider="volcengine",
+                temperature=0.1,
+                max_tokens=200
+            )
+        )
+        
+        # 提取 JSON
+        import json
+        # 尝试找到 JSON 块
+        json_match = re.search(r'\{[^{}]*\}', result.replace('\n', ''))
+        if json_match:
+            data = json.loads(json_match.group())
+            return {
+                "entities": data.get("entities", [])[:5],
+                "keywords": data.get("keywords", [])[:5]
+            }
+        
+        return {"entities": [], "keywords": []}
+    except Exception as e:
+        console.print(f"[yellow]⚠️ 实体提取失败: {e}[/yellow]")
+        return {"entities": [], "keywords": []}
+
 def parse_date(date_str: str) -> Optional[str]:
     """解析日期格式，返回 Lark 接受的时间戳（毫秒）"""
     if not date_str:
@@ -228,26 +270,29 @@ async def upload_record_async(
     source_file: str,
     content_hash: str,
     quality_score: float,
-    title: str,        # 新增：文章标题
-    source_url: str,   # 新增：来源链接
+    title: str,
+    source_url: str,
+    entities: list,    # 新增：核心实体
+    keywords: list,    # 新增：关键词
     app_token: str,
     table_id: str
 ) -> bool:
-    """上传单条记录到 Knowledge_Repo - 字段与 Lark 表完全匹配"""
+    """上传单条记录到 Knowledge_Repo - 最终字段配置 v4"""
     
-    # Lark Knowledge_Repo 表实际字段:
-    # 标题, 核心摘要, 正文原文, 事实类型, 信息深度, 关键词, 内容指纹, 发布日期, 来源文件, 状态, 赛道分类
+    # Lark Knowledge_Repo 表字段 v4 (最终版):
+    # 保留: 标题, 核心摘要, 正文原文, 赛道分类, 关键词, 项目/人名/代币, 事实类型, 质量评分, 发布日期, 内容指纹
+    # 删除: 来源链接, 信息深度, 时效性, 状态, 来源文件
+    
     fields = {
         "标题": title,
-        "核心摘要": content[:500] if len(content) > 500 else content,  # 摘要截断
+        "核心摘要": content[:500] if len(content) > 500 else content,
         "正文原文": content,
         "赛道分类": topic,
+        "关键词": ", ".join(keywords) if keywords else "",
+        "项目/人名/代币": ", ".join(entities) if entities else "",
         "事实类型": fact_type,
-        "信息深度": "中",  # 默认值
-        "关键词": "",  # 可后续补充
-        "来源文件": source_file,
-        "内容指纹": content_hash,
-        "状态": "待处理"
+        "质量评分": quality_score,
+        "内容指纹": content_hash,  # 用于查重
     }
     
     # 日期字段特殊处理
@@ -310,7 +355,10 @@ async def process_json_file(
             # LLM 评分
             quality_score = await score_content_async(content, topic)
             
-            # 上传 (包含新增的 title 和 source_url)
+            # LLM 提取核心实体和关键词
+            extracted = await extract_entities_keywords(content, title)
+            
+            # 上传 (包含核心实体和关键词)
             success = await upload_record_async(
                 content=content,
                 topic=topic,
@@ -319,8 +367,10 @@ async def process_json_file(
                 source_file=file_path.name,
                 content_hash=content_hash,
                 quality_score=quality_score,
-                title=title,           # 新增
-                source_url=source_url, # 新增
+                title=title,
+                source_url=source_url,
+                entities=extracted["entities"],    # LLM 提取
+                keywords=extracted["keywords"],    # LLM 提取
                 app_token=app_token,
                 table_id=table_id
             )

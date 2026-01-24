@@ -123,4 +123,35 @@ class LarkClient:
             logger.error(f"Failed to create Lark record: {str(e)}")
             raise
 
+    def create_field(self, app_token: str, table_id: str, field_name: str, field_type: int = 1) -> Dict:
+        """
+        Create a new field in a Bitable table.
+        field_type: 1=文本, 2=数字, 3=单选, 4=多选, 5=日期, 7=复选框, 11=人员, 13=电话, 15=URL
+        Docs: https://open.larksuite.com/document/server-docs/docs/bitable-v1/app-table-field/create
+        """
+        token = self._get_token()
+        url = f"{self.base_url}/bitable/v1/apps/{app_token}/tables/{table_id}/fields"
+        
+        headers = {
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "field_name": field_name,
+            "type": field_type
+        }
+        
+        try:
+            resp = requests.post(url, headers=headers, json=payload, timeout=10)
+            result = resp.json()
+            if result.get("code") == 0:
+                logger.info(f"Successfully created field: {field_name}")
+            else:
+                logger.error(f"Failed to create field {field_name}: {result.get('msg')}")
+            return result
+        except Exception as e:
+            logger.error(f"Failed to create Lark field: {str(e)}")
+            raise
+
 lark_client = LarkClient()
