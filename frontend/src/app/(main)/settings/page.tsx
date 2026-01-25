@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from "@/lib/utils";
-import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2, FlaskConical, Database, Trash2, RefreshCw } from 'lucide-react';
+import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2, FlaskConical } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
@@ -25,14 +25,6 @@ export default function SettingsPage() {
 
   // Phase 12: Feature Flags
   const [useKnowledgeRepo, setUseKnowledgeRepo] = useState(false);
-
-  // Phase 13: Ingest Status
-  const [ingestStatus, setIngestStatus] = useState<{
-    hash_cache_count: number;
-    lark_record_count: number;
-    status: string;
-  } | null>(null);
-  const [isClearing, setIsClearing] = useState(false);
 
   useEffect(() => {
     async function loadSettings() {
@@ -92,52 +84,11 @@ export default function SettingsPage() {
         console.log('[Settings] Feature flags unavailable');
       }
 
-      // 5. Load Ingest Status (P13)
-      try {
-        const ingestRes = await fetch(`${API_BASE_URL}/ingest/status`);
-        if (ingestRes.ok) {
-          setIngestStatus(await ingestRes.json());
-        }
-      } catch {
-        console.log('[Settings] Ingest status unavailable');
-      }
-
       setIsLoading(false);
     }
 
     loadSettings();
   }, []);
-
-  // Phase 13: Ingest handlers
-  const handleRefreshStatus = async () => {
-    try {
-      const res = await fetch(`${API_BASE_URL}/ingest/status`);
-      if (res.ok) {
-        setIngestStatus(await res.json());
-        toast.success('状态已刷新');
-      }
-    } catch {
-      toast.error('无法获取状态');
-    }
-  };
-
-  const handleClearCache = async () => {
-    if (!confirm('确定要清空 Hash 缓存吗？清空后重新入库将处理所有文件。')) return;
-    setIsClearing(true);
-    try {
-      const res = await fetch(`${API_BASE_URL}/ingest/cache/clear`, { method: 'POST' });
-      if (res.ok) {
-        toast.success('缓存已清空');
-        handleRefreshStatus();
-      } else {
-        toast.error('清空失败');
-      }
-    } catch {
-      toast.error('请求失败');
-    } finally {
-      setIsClearing(false);
-    }
-  };
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -345,53 +296,6 @@ export default function SettingsPage() {
                   )}
                 />
               </button>
-            </div>
-          </div>
-        </section>
-
-        {/* Data Management (P13) */}
-        <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
-              <Database className="w-4 h-4 text-emerald-500" />
-              数据管理
-            </h3>
-            <span className="text-[10px] text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-              Knowledge_Repo
-            </span>
-          </div>
-
-          <div className="pl-6 space-y-4">
-            {/* Status Display */}
-            <div className="p-4 bg-zinc-50 rounded-xl space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-ink-primary">Hash 缓存</span>
-                <span className="text-sm font-mono text-ink-muted">
-                  {ingestStatus?.hash_cache_count?.toLocaleString() ?? '-'} 条
-                </span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-ink-primary">Lark 记录</span>
-                <span className="text-sm font-mono text-ink-muted">
-                  {ingestStatus?.lark_record_count?.toLocaleString() ?? '-'} 条
-                </span>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" onClick={handleClearCache} disabled={isClearing}>
-                {isClearing ? (
-                  <Loader2 className="w-4 h-4 mr-1 animate-spin" />
-                ) : (
-                  <Trash2 className="w-4 h-4 mr-1" />
-                )}
-                清空缓存
-              </Button>
-              <Button variant="outline" size="sm" onClick={handleRefreshStatus}>
-                <RefreshCw className="w-4 h-4 mr-1" />
-                刷新状态
-              </Button>
             </div>
           </div>
         </section>

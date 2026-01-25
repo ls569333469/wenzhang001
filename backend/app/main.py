@@ -470,3 +470,108 @@ async def clear_ingest_cache():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
+@app.get("/ingest/folders")
+async def get_ingest_folders():
+    """获取所有文件夹及其状态"""
+    from pathlib import Path
+    import sys
+    
+    # 动态导入 hash_cache
+    scripts_path = Path(__file__).parent.parent / "scripts"
+    if str(scripts_path) not in sys.path:
+        sys.path.insert(0, str(scripts_path))
+    
+    try:
+        from batch.hash_cache import get_hash_cache
+        hash_cache = get_hash_cache()
+    except Exception:
+        hash_cache = None
+    
+    web3_dir = Path(__file__).parent.parent / "data" / "Web3素材"
+    folders = []
+    
+    if web3_dir.exists():
+        for folder in sorted(web3_dir.iterdir()):
+            if folder.is_dir():
+                # 统计文件数量
+                json_files = list(folder.glob("*.json"))
+                file_count = len(json_files)
+                
+                # 简单判断状态 (基于 hash_cache 是否包含该文件夹的文件)
+                status = "pending"
+                if hash_cache and file_count > 0:
+                    # 检查第一个文件是否在缓存中
+                    if json_files:
+                        try:
+                            import json
+                            with open(json_files[0], 'r', encoding='utf-8') as f:
+                                content = json.load(f).get('content', '')
+                            import hashlib
+                            h = hashlib.md5(content.encode()).hexdigest()
+                            if h in hash_cache:
+                                status = "completed"
+                        except Exception:
+                            pass
+                
+                folders.append({
+                    "name": folder.name,
+                    "file_count": file_count,
+                    "status": status
+                })
+    
+    return {"folders": folders, "total": len(folders)}
+
+
+class IngestStartRequest(BaseModel):
+    mode: str = "optimized"  # optimized | legacy
+    source: str = "web3"     # web3 | web2
+
+
+@app.post("/ingest/start")
+async def start_ingest(request: IngestStartRequest):
+    """启动入库任务 (后台运行)"""
+    import subprocess
+    from pathlib import Path
+    
+    backend_dir = Path(__file__).parent.parent
+    
+    # 选择脚本
+    if request.mode == "optimized":
+        script = "scripts.ingest_optimized"
+    else:
+        script = "scripts.ingest_knowledge"
+    
+    # 构建命令
+    cmd = [
+        str(backend_dir / "venv" / "Scripts" / "python.exe"),
+        "-m", script,
+        "--all"
+    ]
+    
+    try:
+        # 使用 subprocess.Popen 在后台运行
+        process = subprocess.Popen(
+            cmd,
+            cwd=str(backend_dir),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0
+        )
+        
+        return {
+            "status": "started",
+            "pid": process.pid,
+            "script": script,
+            "message": f"入库任务已启动 (PID: {process.pid})"
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/ingest/pause")
+async def pause_ingest():
+    """暂停入库任务 (占位符)"""
+    # 实际暂停需要更复杂的进程管理，这里仅返回成功
+    return {"status": "paused", "message": "暂停功能待实现"}
+
