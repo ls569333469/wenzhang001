@@ -289,7 +289,7 @@ async def process_single_file(
             return {"status": "failed", "data": None}
 
 
-async def process_folder(folder_path: Path, topic: str, limit: int = 0) -> Dict[str, int]:
+async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: str = "web3") -> Dict[str, int]:
     """处理单个文件夹，使用并发 LLM 调用"""
     
     json_files = list(folder_path.glob("*.json"))
@@ -303,12 +303,17 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0) -> Dict[
     console.print(f"   找到 {len(json_files)} 个 JSON 文件")
     console.print(f"   [cyan]🚀 并发模式: {LLM_CONCURRENCY} 个并行 LLM 调用[/cyan]")
     
-    # 获取环境变量
+    # 根据 target 选择表格 ID
     app_token = os.getenv("LARK_BASE_TOKEN")
-    table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
+    if target == "web2":
+        table_id = os.getenv("LARK_WEB2_TABLE_ID") or os.getenv("LARK_TABLE_ID")
+        console.print(f"   [cyan]目标表格: Web2 Style[/cyan]")
+    else:
+        table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
+        console.print(f"   [cyan]目标表格: Web3 Knowledge[/cyan]")
     
     if not app_token or not table_id:
-        console.print("[red]❌ 缺少 LARK_BASE_TOKEN 或 LARK_KNOWLEDGE_TABLE_ID[/red]")
+        console.print("[red][ERROR] 缺少 LARK_BASE_TOKEN 或表格 ID[/red]")
         return {"success": 0, "skipped": 0, "failed": len(json_files)}
     
     # 获取 Hash 缓存
@@ -377,6 +382,7 @@ async def main():
     parser.add_argument("--folder", type=str, help="指定处理的文件夹名称")
     parser.add_argument("--all", action="store_true", help="处理所有文件夹")
     parser.add_argument("--path", type=str, help="指定自定义目录路径 (支持任意本地目录)")
+    parser.add_argument("--target", type=str, default="web3", choices=["web3", "web2"], help="目标表格 (web3 | web2)")
     parser.add_argument("--limit", type=int, default=0, help="每个文件夹处理的最大文件数 (0=不限制)")
     args = parser.parse_args()
     
@@ -417,7 +423,7 @@ async def main():
         
         # 使用目录名作为 topic
         topic = custom_path.name
-        total_stats = await process_folder(custom_path, topic, args.limit)
+        total_stats = await process_folder(custom_path, topic, args.limit, args.target)
         
     elif args.all:
         folders = sorted([f for f in WEB3_DATA_DIR.iterdir() if f.is_dir()])
@@ -425,7 +431,7 @@ async def main():
         
         for folder in folders:
             console.print(f"[FOLDER] 处理文件夹: {folder.name}")
-            stats = await process_folder(folder, folder.name, args.limit)
+            stats = await process_folder(folder, folder.name, args.limit, args.target)
             for key in total_stats:
                 total_stats[key] += stats[key]
             console.print()
@@ -436,7 +442,7 @@ async def main():
             return
         
         console.print(f"[FOLDER] 处理文件夹: {args.folder}")
-        total_stats = await process_folder(folder_path, args.folder, args.limit)
+        total_stats = await process_folder(folder_path, args.folder, args.limit, args.target)
     
     console.print("=" * 60)
     console.print("[DONE] 入库完成!")

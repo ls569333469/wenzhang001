@@ -30,6 +30,7 @@ export default function KnowledgePage() {
   const [ingestMode, setIngestMode] = useState<'optimized' | 'legacy'>('optimized');
   const [dataSource, setDataSource] = useState<'web3' | 'web2' | 'custom'>('web3');
   const [customPath, setCustomPath] = useState<string>('');
+  const [targetTable, setTargetTable] = useState<'web3' | 'web2'>('web3');
   const [showBrowser, setShowBrowser] = useState(false);
   const [browserItems, setBrowserItems] = useState<{ name: string; path: string; children_count: number }[]>([]);
   const [browserFiles, setBrowserFiles] = useState<{ name: string; path: string; size: number; ext: string }[]>([]);
@@ -121,7 +122,8 @@ export default function KnowledgePage() {
         body: JSON.stringify({
           mode: ingestMode,
           source: dataSource,
-          custom_path: dataSource === 'custom' ? customPath : null
+          custom_path: dataSource === 'custom' ? customPath : null,
+          target_table: dataSource === 'custom' ? targetTable : dataSource
         })
       });
       if (res.ok) {
@@ -264,9 +266,34 @@ export default function KnowledgePage() {
                 </Button>
               </div>
               {dataSource === 'custom' && customPath && (
-                <p className="text-xs text-ink-muted pl-5 truncate">
-                  └ {customPath.split('\\').pop()}
-                </p>
+                <div className="pl-5 space-y-2">
+                  <p className="text-xs text-ink-muted truncate">
+                    └ {customPath.split('\\').pop()}
+                  </p>
+                  <div className="flex items-center gap-4 text-xs">
+                    <span className="text-ink-muted">目标表格:</span>
+                    <label className="flex items-center gap-1 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="targetTable"
+                        checked={targetTable === 'web3'}
+                        onChange={() => setTargetTable('web3')}
+                        className="text-primary w-3 h-3"
+                      />
+                      <span>Web3 Knowledge</span>
+                    </label>
+                    <label className="flex items-center gap-1 cursor-pointer">
+                      <input
+                        type="radio"
+                        name="targetTable"
+                        checked={targetTable === 'web2'}
+                        onChange={() => setTargetTable('web2')}
+                        className="text-primary w-3 h-3"
+                      />
+                      <span>Web2 Style</span>
+                    </label>
+                  </div>
+                </div>
               )}
             </div>
           </div>

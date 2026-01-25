@@ -558,6 +558,7 @@ class IngestStartRequest(BaseModel):
     mode: str = "optimized"  # optimized | legacy
     source: str = "web3"     # web3 | web2 | custom
     custom_path: Optional[str] = None  # 自定义目录路径
+    target_table: str = "web3"  # web3 | web2 目标表格
 
 
 @app.post("/ingest/start")
@@ -590,6 +591,7 @@ async def start_ingest(request: IngestStartRequest):
     if request.source == "custom" and request.custom_path:
         # 自定义目录
         cmd.extend(["--path", request.custom_path])
+        cmd.extend(["--target", request.target_table])
     else:
         # 使用默认目录
         cmd.append("--all")
