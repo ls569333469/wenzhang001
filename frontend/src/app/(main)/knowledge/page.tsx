@@ -118,10 +118,18 @@ export default function KnowledgePage() {
       const res = await fetch(`${API_BASE_URL}/ingest/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mode: ingestMode, source: dataSource })
+        body: JSON.stringify({
+          mode: ingestMode,
+          source: dataSource,
+          custom_path: dataSource === 'custom' ? customPath : null
+        })
       });
       if (res.ok) {
-        toast.success('入库任务已启动');
+        const data = await res.json();
+        toast.success(`入库任务已启动 (PID: ${data.pid})`);
+        if (data.log_file) {
+          console.log('日志文件:', data.log_file);
+        }
         // Refresh status after a delay
         setTimeout(fetchStatus, 2000);
       } else {

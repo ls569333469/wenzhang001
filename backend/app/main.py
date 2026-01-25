@@ -556,7 +556,8 @@ async def get_ingest_folders(source: str = "web3"):
 
 class IngestStartRequest(BaseModel):
     mode: str = "optimized"  # optimized | legacy
-    source: str = "web3"     # web3 | web2
+    source: str = "web3"     # web3 | web2 | custom
+    custom_path: Optional[str] = None  # 自定义目录路径
 
 
 @app.post("/ingest/start")
@@ -564,8 +565,14 @@ async def start_ingest(request: IngestStartRequest):
     """启动入库任务 (后台运行)"""
     import subprocess
     from pathlib import Path
+    from datetime import datetime
     
     backend_dir = Path(__file__).parent.parent
+    
+    # 创建日志目录
+    log_dir = backend_dir / "logs"
+    log_dir.mkdir(exist_ok=True)
+    log_file = log_dir / f"ingest_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
     
     # 选择脚本
     if request.mode == "optimized":
@@ -577,23 +584,55 @@ async def start_ingest(request: IngestStartRequest):
     cmd = [
         str(backend_dir / "venv" / "Scripts" / "python.exe"),
         "-m", script,
-        "--all"
     ]
     
+    # 根据数据源添加参数
+    if request.source == "custom" and request.custom_path:
+        # 自定义目录
+        cmd.extend(["--path", request.custom_path])
+    else:
+        # 使用默认目录
+        cmd.append("--all")
+    
     try:
-        # 使用 subprocess.Popen 在后台运行
+        # 使用 subprocess.Popen 在后台运行，输出到日志文件
+        with open(log_file, 'w', encoding='utf-8') as f:
+            f.write(f"=== 入库任务启动 ===\n")
+            f.write(f"时间: {datetime.now().isoformat()}\n")
+            f.write(f"命令: {' '.join(cmd)}\n")
+            f.write(f"模式: {request.mode}\n")
+            f.write(f"数据源: {request.source}\n")
+            if request.custom_path:
+                f.write(f"自定义路径: {request.custom_path}\n")
+            f.write(f"===================\n\n")
+        
         process = subprocess.Popen(
             cmd,
             cwd=str(backend_dir),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stdout=open(log_file, 'a', encoding='utf-8'),
+            stderr=subprocess.STDOUT,
             creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0
         )
+        
+        # 记录到历史
+        config = load_config()
+        if "ingest_history" not in config:
+            config["ingest_history"] = []
+        config["ingest_history"].append({
+            "timestamp": datetime.now().isoformat(),
+            "pid": process.pid,
+            "source": request.source,
+            "custom_path": request.custom_path,
+            "log_file": str(log_file),
+            "status": "running"
+        })
+        save_config(config)
         
         return {
             "status": "started",
             "pid": process.pid,
             "script": script,
+            "log_file": str(log_file),
             "message": f"入库任务已启动 (PID: {process.pid})"
         }
     except Exception as e:
