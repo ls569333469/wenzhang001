@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Database, FolderOpen, Play, Pause, RefreshCw, AlertCircle, CheckCircle2, Clock, Loader2, ChevronRight, ArrowLeft, X } from 'lucide-react';
+import { Database, FolderOpen, Play, Pause, RefreshCw, AlertCircle, CheckCircle2, Clock, Loader2, ChevronRight, ArrowLeft, X, FileText } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -32,6 +32,7 @@ export default function KnowledgePage() {
   const [customPath, setCustomPath] = useState<string>('');
   const [showBrowser, setShowBrowser] = useState(false);
   const [browserItems, setBrowserItems] = useState<{ name: string; path: string; children_count: number }[]>([]);
+  const [browserFiles, setBrowserFiles] = useState<{ name: string; path: string; size: number; ext: string }[]>([]);
   const [browserPath, setBrowserPath] = useState('');
   const [browserParent, setBrowserParent] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -90,6 +91,7 @@ export default function KnowledgePage() {
       if (res.ok) {
         const data = await res.json();
         setBrowserItems(data.items || []);
+        setBrowserFiles(data.files || []);
         setBrowserPath(data.current_path || '');
         setBrowserParent(data.parent_path);
       }
@@ -459,6 +461,27 @@ export default function KnowledgePage() {
                     </Button>
                   </div>
                 ))
+              )}
+
+              {/* 文件列表 */}
+              {browserFiles.length > 0 && (
+                <>
+                  <div className="px-4 py-2 bg-zinc-100 text-xs text-ink-muted font-medium">
+                    文件 ({browserFiles.length} 个)
+                  </div>
+                  {browserFiles.map((file) => (
+                    <div
+                      key={file.path}
+                      className="flex items-center gap-3 px-4 py-2 text-ink-muted border-b border-zinc-100"
+                    >
+                      <FileText className="w-4 h-4 text-zinc-400 shrink-0" />
+                      <span className="text-sm truncate">{file.name}</span>
+                      <span className="text-xs text-zinc-400 shrink-0">
+                        {file.size > 1024 ? `${(file.size / 1024).toFixed(1)} KB` : `${file.size} B`}
+                      </span>
+                    </div>
+                  ))}
+                </>
               )}
             </div>
 

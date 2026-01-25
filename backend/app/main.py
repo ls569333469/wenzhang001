@@ -699,12 +699,14 @@ async def browse_directory(path: str = ""):
         return {"items": [], "current_path": str(target_path), "parent_path": None, "error": "目录不存在"}
     
     items = []
+    files = []
     try:
         for item in sorted(target_path.iterdir()):
+            # 跳过系统隐藏项
+            if item.name.startswith('$') or item.name.startswith('.'):
+                continue
+            
             if item.is_dir():
-                # 跳过系统隐藏目录
-                if item.name.startswith('$') or item.name.startswith('.'):
-                    continue
                 try:
                     children_count = len(list(item.iterdir()))
                 except (PermissionError, OSError):
@@ -716,6 +718,20 @@ async def browse_directory(path: str = ""):
                     "is_dir": True,
                     "children_count": children_count
                 })
+            else:
+                # 返回文件信息
+                try:
+                    size = item.stat().st_size
+                except Exception:
+                    size = 0
+                
+                files.append({
+                    "name": item.name,
+                    "path": str(item),
+                    "is_dir": False,
+                    "size": size,
+                    "ext": item.suffix.lower()
+                })
     except PermissionError:
         return {"items": [], "current_path": str(target_path), "parent_path": str(target_path.parent), "error": "无访问权限"}
     
@@ -726,6 +742,7 @@ async def browse_directory(path: str = ""):
     
     return {
         "items": items,
+        "files": files,
         "current_path": str(target_path),
         "parent_path": parent_path
     }
