@@ -218,11 +218,78 @@ async def analyze_content_merged(content: str, title: str, topic: str) -> Dict[s
 
 
 # ==========================================
-# 主处理逻辑
+# 主处理逻辑 (并发优化版)
 # ==========================================
 
+# 并发控制：限制同时进行的 LLM 调用数量
+LLM_CONCURRENCY = 5  # 降低到 5 个，减少网络压力和费用 (原为 10)
+
+
+async def process_single_file(
+    json_file: Path, 
+    topic: str, 
+    hash_cache,
+    semaphore: asyncio.Semaphore
+) -> Optional[Dict]:
+    """处理单个文件，返回待上传的记录或 None"""
+    async with semaphore:  # 控制并发数
+        try:
+            with open(json_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            title = data.get("title", "")
+            content = data.get("content", "")
+            publish_date = data.get("published_at", "")
+            
+            if not content or len(content) < 50:
+                return {"status": "skipped", "data": None}
+            
+            # 清洗内容
+            cleaned_content = clean_content(content)
+            content_hash = compute_hash(cleaned_content)
+            
+            # 本地 Hash 缓存查重 (比 Lark API 快 100 倍)
+            if hash_cache.contains(content_hash):
+                return {"status": "skipped", "data": None}
+            
+            # 合并 LLM 调用 (1 次替代 2 次)
+            analysis = await analyze_content_merged(cleaned_content, title, topic)
+            
+            # 上传时间戳
+            upload_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            # 构建字段
+            fields = {
+                "上传时间": upload_time,  # 利用无法删除的主字段记录上传时间
+                "标题": title,
+                "核心摘要": analysis["summary"],  # LLM 生成的一句话摘要
+                "正文原文": cleaned_content,
+                "赛道分类": topic,
+                "关键词": ", ".join(analysis["keywords"]) if analysis["keywords"] else "",
+                "项目/人名/代币": ", ".join(analysis["entities"]) if analysis["entities"] else "",
+                "事实类型": analysis["fact_type"],
+                "质量评分": analysis["quality_score"],
+                "内容指纹": content_hash,
+            }
+            
+            # 日期字段特殊处理
+            if publish_date:
+                parsed_date = parse_date(publish_date)
+                if parsed_date:
+                    fields["发布日期"] = parsed_date
+            
+            # 添加到缓存
+            hash_cache.add(content_hash)
+            
+            return {"status": "success", "data": fields}
+            
+        except Exception as e:
+            console.print(f"[red]❌ 处理失败 {json_file.name}: {e}[/red]")
+            return {"status": "failed", "data": None}
+
+
 async def process_folder(folder_path: Path, topic: str, limit: int = 0) -> Dict[str, int]:
-    """处理单个文件夹，返回统计信息"""
+    """处理单个文件夹，使用并发 LLM 调用"""
     
     json_files = list(folder_path.glob("*.json"))
     if limit > 0:
@@ -233,6 +300,7 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0) -> Dict[
         return {"success": 0, "skipped": 0, "failed": 0}
     
     console.print(f"   找到 {len(json_files)} 个 JSON 文件")
+    console.print(f"   [cyan]🚀 并发模式: {LLM_CONCURRENCY} 个并行 LLM 调用[/cyan]")
     
     # 获取环境变量
     app_token = os.getenv("LARK_BASE_TOKEN")
@@ -245,78 +313,38 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0) -> Dict[
     # 获取 Hash 缓存
     hash_cache = get_hash_cache()
     
-    # 收集待上传的记录
-    records_to_upload = []
-    stats = {"success": 0, "skipped": 0, "failed": 0}
+    # 创建并发控制信号量
+    semaphore = asyncio.Semaphore(LLM_CONCURRENCY)
     
-    with Progress(
-        SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
-        BarColumn(),
-        TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-        console=console
-    ) as progress:
-        task = progress.add_task("入库中...", total=len(json_files))
-        
-        for json_file in json_files:
-            try:
-                with open(json_file, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                
-                title = data.get("title", "")
-                content = data.get("content", "")
-                publish_date = data.get("published_at", "")
-                
-                if not content or len(content) < 50:
-                    stats["skipped"] += 1
-                    progress.advance(task)
-                    continue
-                
-                # 清洗内容
-                cleaned_content = clean_content(content)
-                content_hash = compute_hash(cleaned_content)
-                
-                # 本地 Hash 缓存查重 (比 Lark API 快 100 倍)
-                if hash_cache.contains(content_hash):
-                    stats["skipped"] += 1
-                    progress.advance(task)
-                    continue
-                
-                # 合并 LLM 调用 (1 次替代 2 次)
-                analysis = await analyze_content_merged(cleaned_content, title, topic)
-                
-                # 上传时间戳
-                upload_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                
-                # 构建字段
-                fields = {
-                    "上传时间": upload_time,  # 利用无法删除的主字段记录上传时间
-                    "标题": title,
-                    "核心摘要": analysis["summary"],  # LLM 生成的一句话摘要
-                    "正文原文": cleaned_content,
-                    "赛道分类": topic,
-                    "关键词": ", ".join(analysis["keywords"]) if analysis["keywords"] else "",
-                    "项目/人名/代币": ", ".join(analysis["entities"]) if analysis["entities"] else "",
-                    "事实类型": analysis["fact_type"],
-                    "质量评分": analysis["quality_score"],
-                    "内容指纹": content_hash,
-                }
-                
-                # 日期字段特殊处理
-                if publish_date:
-                    parsed_date = parse_date(publish_date)
-                    if parsed_date:
-                        fields["发布日期"] = parsed_date
-                
-                records_to_upload.append(fields)
-                hash_cache.add(content_hash)
-                
-                progress.advance(task)
-                
-            except Exception as e:
-                console.print(f"[red]❌ 处理失败 {json_file.name}: {e}[/red]")
-                stats["failed"] += 1
-                progress.advance(task)
+    # 并发处理所有文件
+    console.print(f"   [yellow]⏳ 并发处理中...[/yellow]")
+    start_time = datetime.now()
+    
+    tasks = [
+        process_single_file(json_file, topic, hash_cache, semaphore)
+        for json_file in json_files
+    ]
+    
+    results = await asyncio.gather(*tasks)
+    
+    elapsed = (datetime.now() - start_time).total_seconds()
+    console.print(f"   [green]✅ LLM 处理完成! 耗时: {elapsed:.1f}s ({len(json_files)/elapsed:.1f} 条/秒)[/green]")
+    
+    # 统计结果
+    stats = {"success": 0, "skipped": 0, "failed": 0}
+    records_to_upload = []
+    
+    for result in results:
+        if result is None:
+            stats["failed"] += 1
+        elif result["status"] == "success":
+            stats["success"] += 1
+            records_to_upload.append(result["data"])
+        elif result["status"] == "skipped":
+            stats["skipped"] += 1
+        else:
+            stats["failed"] += 1
+
     
     # 批量上传到 Lark (500 条/批)
     if records_to_upload:
