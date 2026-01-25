@@ -1,7 +1,7 @@
-# Quantum Studio v6.2 - 项目手册
+# Quantum Studio v6.3 - 项目手册
 
-> **更新日期**: 2026-01-21  
-> **版本**: v6.2 (E2E Verified Edition)  
+> **更新日期**: 2026-01-25  
+> **版本**: v6.3 (Knowledge Integration Edition)  
 > **维护者**: AI 开发团队
 
 ---
@@ -210,6 +210,7 @@ api_key = os.getenv('ARK_API_KEY')  # 613f595c-xxxx
 - **P7**: 项目全盘体检与治理 ✅
 - **P8**: 智能素材熔炉 (Lark Integrated) ✅
 - **P12**: Lark 数据清洗工具 (v2.2) ✅
+- **P13**: Knowledge 页面前端集成 (v7.0) ✅ 🆕
 
 ---
 
