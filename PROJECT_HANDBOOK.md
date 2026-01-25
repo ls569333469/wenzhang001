@@ -31,6 +31,14 @@
 ### 核心价值主张
 > 不只是 AI 写作，而是 **专门帮你打造爆款**。
 
+### 📐 系统架构文档
+
+| 文档 | 链接 |
+|------|------|
+| **系统架构流程图** | [00_Arch_Quantum_Studio系统架构流程图.md](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/00_Arch_Quantum_Studio系统架构流程图.md) |
+| **数据清洗架构图** | [14-1_Arch_数据清洗工具架构流程图.md](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/frontend_design/14-1_Arch_数据清洗工具架构流程图.md) |
+| **数据清洗手册** | [12-3_Manual_Lark数据清洗工具手册.md](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/frontend_design/12-3_Manual_Lark数据清洗工具手册.md) |
+
 ---
 
 ## 🩸🥩 核心理念：血与肉
