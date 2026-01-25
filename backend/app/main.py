@@ -473,9 +473,11 @@ async def clear_ingest_cache():
 
 @app.get("/ingest/folders")
 async def get_ingest_folders():
-    """获取所有文件夹及其状态"""
+    """获取所有文件夹及其状态 (已入库/总数)"""
     from pathlib import Path
     import sys
+    import json
+    import hashlib
     
     # 动态导入 hash_cache
     scripts_path = Path(__file__).parent.parent / "scripts"
@@ -486,41 +488,60 @@ async def get_ingest_folders():
         from batch.hash_cache import get_hash_cache
         hash_cache = get_hash_cache()
     except Exception:
-        hash_cache = None
+        hash_cache = set()
     
     web3_dir = Path(__file__).parent.parent / "data" / "Web3素材"
     folders = []
+    total_processed = 0
+    total_pending = 0
     
     if web3_dir.exists():
         for folder in sorted(web3_dir.iterdir()):
             if folder.is_dir():
-                # 统计文件数量
                 json_files = list(folder.glob("*.json"))
-                file_count = len(json_files)
+                total_count = len(json_files)
+                processed_count = 0
                 
-                # 简单判断状态 (基于 hash_cache 是否包含该文件夹的文件)
-                status = "pending"
-                if hash_cache and file_count > 0:
-                    # 检查第一个文件是否在缓存中
-                    if json_files:
-                        try:
-                            import json
-                            with open(json_files[0], 'r', encoding='utf-8') as f:
-                                content = json.load(f).get('content', '')
-                            import hashlib
-                            h = hashlib.md5(content.encode()).hexdigest()
-                            if h in hash_cache:
-                                status = "completed"
-                        except Exception:
-                            pass
+                # 遍历每个文件检查是否在 hash_cache 中
+                for json_file in json_files:
+                    try:
+                        with open(json_file, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                        content = data.get('content', '')
+                        h = hashlib.md5(content.encode()).hexdigest()
+                        if h in hash_cache:
+                            processed_count += 1
+                    except Exception:
+                        pass
+                
+                pending_count = total_count - processed_count
+                total_processed += processed_count
+                total_pending += pending_count
+                
+                # 判断状态
+                if total_count == 0:
+                    status = "empty"
+                elif processed_count == total_count:
+                    status = "completed"
+                elif processed_count > 0:
+                    status = "partial"
+                else:
+                    status = "pending"
                 
                 folders.append({
                     "name": folder.name,
-                    "file_count": file_count,
+                    "total_count": total_count,
+                    "processed_count": processed_count,
+                    "pending_count": pending_count,
                     "status": status
                 })
     
-    return {"folders": folders, "total": len(folders)}
+    return {
+        "folders": folders, 
+        "total": len(folders),
+        "total_processed": total_processed,
+        "total_pending": total_pending
+    }
 
 
 class IngestStartRequest(BaseModel):

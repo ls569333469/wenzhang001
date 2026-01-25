@@ -15,9 +15,10 @@ interface IngestStatus {
 
 interface FolderInfo {
   name: string;
-  file_count: number;
-  status: 'completed' | 'processing' | 'pending';
-  processed_count?: number;
+  total_count: number;
+  processed_count: number;
+  pending_count: number;
+  status: 'completed' | 'partial' | 'pending' | 'empty';
 }
 
 export default function KnowledgePage() {
@@ -57,21 +58,10 @@ export default function KnowledgePage() {
         const data = await res.json();
         setFolders(data.folders || []);
       } else {
-        // Mock data for demo
-        setFolders([
-          { name: 'AI_x_Crypto_动态研究', file_count: 156, status: 'completed', processed_count: 156 },
-          { name: 'DAO与社区治理', file_count: 89, status: 'completed', processed_count: 89 },
-          { name: 'DEX市场动态与研究', file_count: 124, status: 'pending' },
-          { name: 'DeFi进展与分析', file_count: 210, status: 'pending' },
-        ]);
+        setFolders([]);
       }
     } catch {
-      // Use mock data on error
-      setFolders([
-        { name: 'AI_x_Crypto_动态研究', file_count: 156, status: 'completed', processed_count: 156 },
-        { name: 'DAO与社区治理', file_count: 89, status: 'completed', processed_count: 89 },
-        { name: 'DEX市场动态与研究', file_count: 124, status: 'pending' },
-      ]);
+      setFolders([]);
     }
   }
 
@@ -114,7 +104,8 @@ export default function KnowledgePage() {
     fetchFolders();
   }, []);
 
-  const pendingCount = folders.filter(f => f.status === 'pending').reduce((sum, f) => sum + f.file_count, 0);
+  const pendingCount = folders.reduce((sum, f) => sum + f.pending_count, 0);
+  const processedCount = folders.reduce((sum, f) => sum + f.processed_count, 0);
   const estimatedCost = (pendingCount * COST_PER_RECORD).toFixed(2);
 
   return (
@@ -251,17 +242,20 @@ export default function KnowledgePage() {
                   <span className="text-sm text-ink-primary truncate max-w-[200px]">{folder.name}</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="text-xs text-ink-muted">{folder.file_count} 条</span>
+                  {/* 显示 已入库/总数 */}
+                  <span className="text-xs font-mono text-ink-muted">
+                    {folder.processed_count}/{folder.total_count}
+                  </span>
                   {folder.status === 'completed' && (
                     <span className="flex items-center gap-1 text-xs text-emerald-600">
                       <CheckCircle2 className="w-3 h-3" />
-                      已完成
+                      全部完成
                     </span>
                   )}
-                  {folder.status === 'processing' && (
-                    <span className="flex items-center gap-1 text-xs text-blue-600">
-                      <Loader2 className="w-3 h-3 animate-spin" />
-                      处理中
+                  {folder.status === 'partial' && (
+                    <span className="flex items-center gap-1 text-xs text-amber-600">
+                      <Clock className="w-3 h-3" />
+                      +{folder.pending_count} 新增
                     </span>
                   )}
                   {folder.status === 'pending' && (
