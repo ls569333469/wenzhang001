@@ -323,7 +323,7 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: 
     semaphore = asyncio.Semaphore(LLM_CONCURRENCY)
     
     # 并发处理所有文件
-    console.print(f"   [yellow]⏳ 并发处理中...[/yellow]")
+    console.print(f"   [yellow][PROCESSING] 并发处理中...[/yellow]")
     start_time = datetime.now()
     
     tasks = [
@@ -354,7 +354,7 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: 
     
     # 批量上传到 Lark (500 条/批)
     if records_to_upload:
-        console.print(f"   📤 批量上传 {len(records_to_upload)} 条记录...")
+        console.print(f"   [UPLOAD] 批量上传 {len(records_to_upload)} 条记录...")
         
         for i in range(0, len(records_to_upload), BATCH_SIZE):
             batch = records_to_upload[i:i+BATCH_SIZE]
@@ -363,16 +363,16 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: 
                 if result.get("code") == 0:
                     stats["success"] += len(batch)
                 else:
-                    console.print(f"[red]❌ 批量上传失败: {result.get('msg')}[/red]")
+                    console.print(f"[red][ERROR] 批量上传失败: {result.get('msg')}[/red]")
                     stats["failed"] += len(batch)
             except Exception as e:
-                console.print(f"[red]❌ 批量上传异常: {e}[/red]")
+                console.print(f"[red][ERROR] 批量上传异常: {e}[/red]")
                 stats["failed"] += len(batch)
     
     # 保存 Hash 缓存
     hash_cache.save()
     
-    console.print(f"   ✅ 成功: {stats['success']} | ⚠️ 跳过: {stats['skipped']} | ❌ 失败: {stats['failed']}")
+    console.print(f"   [OK] 成功: {stats['success']} | [SKIP] 跳过: {stats['skipped']} | [FAIL] 失败: {stats['failed']}")
     
     return stats
 

@@ -1,0 +1,67 @@
+=== å…¥åº“ä»»åŠ¡å¯åŠ¨ ===
+æ—¶é—´: 2026-01-25T20:32:34.193720
+å‘½ä»¤: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m scripts.ingest_optimized --path D:\æµ‹è¯•222 --target web3
+æ¨¡å¼: optimized
+æ•°æ®æº: custom
+è‡ªå®šä¹‰è·¯å¾„: D:\æµ‹è¯•222
+===================
+
+============================================================
+[INFO] Quantum Studio v5.2 - Knowledge_Repo ÓÅ»¯°æÈë¿â
+============================================================
+[CONFIG] Base Token: CSfdbzErqay4bnsISxEuuVais3g
+[CONFIG] Knowledge Table ID: tblkvQK9aKxP0wsk
+[CONFIG] ÓÅ»¯ÌØĞÔ: ºÏ²¢LLMµ÷ÓÃ + ÅúÁ¿ÉÏ´« + ±¾µØHash»º´æ
+
+[FOLDER] ×Ô¶¨ÒåÄ¿Â¼Ä£Ê½: D:\²âÊÔ222
+ÕÒµ½ 3 ¸öÎÄ¼ş (JSON: 1, TXT: 1, MD: 1)
+   ÕÒµ½ 1 ¸ö JSON ÎÄ¼ş
+   [ASYNC] ²¢·¢Ä£Ê½: 5 ¸ö²¢ĞĞ LLM µ÷ÓÃ
+   Ä¿±ê±í¸ñ: Web3 Knowledge
+2026-01-25 20:32:34,505 - hash_cache - INFO - Loaded 5791 hashes from cache
+   Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\AI_Projects\2026001\backend\scripts\ingest_optimized.py", line 456, in <module>
+    asyncio.run(main())
+    ~~~~~~~~~~~^^^^^^^^
+  File "E:\python\Lib\asyncio\runners.py", line 194, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "E:\python\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "E:\python\Lib\asyncio\base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\AI_Projects\2026001\backend\scripts\ingest_optimized.py", line 426, in main
+    total_stats = await process_folder(custom_path, topic, args.limit, args.target)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AI_Projects\2026001\backend\scripts\ingest_optimized.py", line 326, in process_folder
+    console.print(f"   [yellow]\u23f3 ²¢·¢´¦ÀíÖĞ...[/yellow]")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py", line 1697, in print
+    with self:
+         ^^^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py", line 870, in __exit__
+    self._exit_buffer()
+    ~~~~~~~~~~~~~~~~~^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py", line 826, in _exit_buffer
+    self._check_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py", line 2038, in _check_buffer
+    self._write_buffer()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py", line 2074, in _write_buffer
+    legacy_windows_render(buffer, LegacyWindowsTerm(self.file))
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\_windows_renderer.py", line 17, in legacy_windows_render
+    term.write_styled(text, style)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\_win32_console.py", line 441, in write_styled
+    self.write_text(text)
+    ~~~~~~~~~~~~~~~^^^^^^
+  File "D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\_win32_console.py", line 402, in write_text
+    self.write(text)
+    ~~~~~~~~~~^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u23f3' in position 0: illegal multibyte sequence
