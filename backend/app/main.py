@@ -682,47 +682,47 @@ async def add_ingest_history():
 
 @app.get("/ingest/browse")
 async def browse_directory(path: str = ""):
-    """浏览本地目录 (限制在 data 目录下)"""
+    """浏览任意本地目录"""
     from pathlib import Path
     
-    # 安全边界: 默认只能浏览 data 目录
-    base_dir = Path(__file__).parent.parent / "data"
-    
-    if path:
-        target_path = Path(path)
-        # 安全检查: 必须在 data 目录下
-        try:
-            target_path.resolve().relative_to(base_dir.resolve())
-        except ValueError:
-            raise HTTPException(status_code=400, detail="只能浏览 data 目录下的内容")
+    # 默认从 D 盘开始（可配置）
+    if not path:
+        # 尝试 D 盘，如果不存在则用 C 盘
+        if Path("D:/").exists():
+            target_path = Path("D:/")
+        else:
+            target_path = Path("C:/")
     else:
-        target_path = base_dir
+        target_path = Path(path)
     
     if not target_path.exists() or not target_path.is_dir():
-        return {"items": [], "current_path": str(base_dir), "parent_path": None}
+        return {"items": [], "current_path": str(target_path), "parent_path": None, "error": "目录不存在"}
     
     items = []
-    for item in sorted(target_path.iterdir()):
-        if item.is_dir():
-            # 统计子项数量
-            try:
-                children_count = len(list(item.iterdir()))
-            except Exception:
-                children_count = 0
-            
-            items.append({
-                "name": item.name,
-                "path": str(item),
-                "is_dir": True,
-                "children_count": children_count
-            })
+    try:
+        for item in sorted(target_path.iterdir()):
+            if item.is_dir():
+                # 跳过系统隐藏目录
+                if item.name.startswith('$') or item.name.startswith('.'):
+                    continue
+                try:
+                    children_count = len(list(item.iterdir()))
+                except (PermissionError, OSError):
+                    children_count = 0
+                
+                items.append({
+                    "name": item.name,
+                    "path": str(item),
+                    "is_dir": True,
+                    "children_count": children_count
+                })
+    except PermissionError:
+        return {"items": [], "current_path": str(target_path), "parent_path": str(target_path.parent), "error": "无访问权限"}
     
-    # 判断是否可以返回上级
+    # 返回上级（根目录除外）
     parent_path = None
-    if target_path.resolve() != base_dir.resolve():
-        parent = target_path.parent
-        if parent.resolve() >= base_dir.resolve():
-            parent_path = str(parent)
+    if target_path.parent != target_path:  # 不是根目录
+        parent_path = str(target_path.parent)
     
     return {
         "items": items,
