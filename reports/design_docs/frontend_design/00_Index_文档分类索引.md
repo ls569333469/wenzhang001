@@ -1,129 +1,89 @@
 # Frontend Design 文档索引与分类
 
-> **版本**: v1.0 | **更新日期**: 2026-01-25
+> **版本**: v1.1 | **更新日期**: 2026-01-25
 
 ---
 
-## 📁 文档命名规范
+## 📁 新文档命名规范
 
 ```
-[序号]-[子序号]_[类型]_[主题].md
+[主题序号]-[子序号]_[类型]_[主题].md
 ```
 
-| 类型代码 | 含义 | 示例 |
-|----------|------|------|
-| `Plan` | 规划方案 | 10-0_Plan_爆款能力升级.md |
-| `Design` | 设计文档 | 3-1_Design_岛屿架构.md |
-| `Task` | 任务清单 | 4-3_Task_逻辑接入.md |
-| `Report` | 测试/分析报告 | 12-2_Report_Knowledge集成测试报告.md |
-| `Summary` | 阶段总结 | 10-0_Summary_中场交付总结.md |
-| `Manual` | 使用手册 | 12-3_Manual_Lark数据清洗工具手册.md |
-| `Arch` | 架构图 | 14-1_Arch_数据清洗工具架构流程图.md |
-| `Guide` | 指南 | 5-4_Guide_控制台检查.md |
-| `Demo` | 演示文件 | 10-9_Demo_滑出面板.html |
-| `Global` | 全局规范 | 00_Global_开发规范.md |
-| `Walkthrough` | 交付演示 | 5-9_Walkthrough_扩展交付.md |
-| `Delivery` | 交付物 | 6-3_Delivery_界面体验修复.md |
-| `Issue_Log` | 问题日志 | 9-3_Issue_Log_全链路验证.md |
-| `Analysis` | 分析文档 | 5-5_Analysis_差距分析.md |
+### 主题序号分配
+
+| 序号 | 主题 | 说明 |
+|:----:|------|------|
+| **00** | 全局规范 | 开发规范、设计规范 |
+| **01** | 前端基建 | 拆迁净化、视觉验证 |
+| **02** | Island 架构 | 岛屿架构设计 |
+| **03** | 逻辑接入 | 后端对接、SSE 集成 |
+| **04** | UI/UX 优化 | 打磨优化、界面修复 |
+| **05** | 测试验证 | E2E 测试、DOM 测试 |
+| **06** | 爆款能力 | 标题 AB、评分、Hook |
+| **07** | 数据管线 | 统一导入器、/cleaner |
+| **08** | 数据清洗 | **Lark 入库、Knowledge** |
+
+### 类型代码
+
+| 类型 | 含义 | 示例 |
+|------|------|------|
+| `Plan` | 规划方案 | 08-1_Plan_Knowledge集成.md |
+| `Design` | 设计文档 | 02-1_Design_岛屿架构.md |
+| `Manual` | 使用手册 | 08-3_Manual_Lark数据清洗工具手册.md |
+| `Arch` | 架构图 | 08-6_Arch_数据清洗工具架构流程图.md |
+| `Report` | 报告 | 08-4_Report_Knowledge字段调用流程分析.md |
+| `Task` | 任务清单 | 03-3_Task_逻辑接入.md |
+| `Summary` | 阶段总结 | 06-0_Summary_中场交付总结.md |
+| `Demo` | 演示文件 | 06-9_Demo_滑出面板.html |
+| `Guide` | 指南 | 04-4_Guide_控制台检查.md |
 
 ---
 
-## 📊 按主题分类
+## 📊 文件重命名对照表
 
-### 🔧 A. 数据清洗工具 (12-14)
+### 08. 数据清洗 (原 12-14)
 
-> 核心主题：Lark 数据入库、Knowledge_Repo、数据清洗
+| 原文件名 | 新文件名 |
+|----------|----------|
+| 12-1_Plan_Knowledge集成.md | **08-1_Plan_Knowledge集成.md** |
+| 12-2_Report_Knowledge集成测试报告.md | **08-2_Report_Knowledge集成测试报告.md** |
+| 12-3_Manual_Lark数据清洗工具手册.md | **08-3_Manual_Lark数据清洗工具手册.md** |
+| 13-1_Plan_Web3批量清洗优化方案.md | **08-4_Plan_Web3批量清洗优化方案.md** |
+| 13-2_Report_Knowledge字段调用流程分析.md | **08-5_Report_Knowledge字段调用流程分析.md** |
+| 14-1_Arch_数据清洗工具架构流程图.md | **08-6_Arch_数据清洗工具架构流程图.md** |
 
-| 序号 | 文件名 | 类型 | 说明 |
-|------|--------|------|------|
-| 12-1 | Plan_Knowledge集成.md | Plan | Strategist 集成 Knowledge_Repo |
-| 12-2 | Report_Knowledge集成测试报告.md | Report | A/B 测试结果 |
-| 12-3 | Manual_Lark数据清洗工具手册.md | **Manual** | ⭐ 核心手册 v7.0 |
-| 13-1 | Plan_Web3批量清洗优化方案.md | Plan | 优化版入库方案 |
-| 13-2 | Report_Knowledge字段调用流程分析.md | Report | 字段规范 v4 分析 |
-| 14-1 | Arch_数据清洗工具架构流程图.md | **Arch** | ⭐ Mermaid 流程图 |
+### 07. 数据管线 (原 11)
 
----
+| 原文件名 | 新文件名 |
+|----------|----------|
+| 11-0_Plan_风格库完善与内容生产.md | **07-1_Plan_企业级数据管线.md** |
+| 11-1_Report_P11技术交付报告.md | **07-2_Report_P11技术交付报告.md** |
 
-### 🚀 B. 爆款能力升级 (10)
+### 06. 爆款能力 (原 10)
 
-> 核心主题：标题 AB 测试、爆款评分、Hook 设置、自适应布局
+| 原文件名 | 新文件名 |
+|----------|----------|
+| 10-0_Plan_爆款能力升级.md | **06-1_Plan_爆款能力升级.md** |
+| 10-0_Summary_中场交付总结.md | **06-2_Summary_中场交付总结.md** |
+| 10-7_Design_新博主入库流程.md | **06-3_Design_新博主入库流程.md** |
+| 10-7_Report_风格库健康报告.md | **06-4_Report_风格库健康报告.md** |
+| 10-9_Design_自适应布局.md | **06-5_Design_自适应布局.md** |
+| 10-9_Demo_最终布局.html | **06-6_Demo_最终布局.html** |
+| 10-9_Demo_滑出面板.html | **06-7_Demo_滑出面板.html** |
 
-| 序号 | 文件名 | 类型 | 说明 |
-|------|--------|------|------|
-| 10-0 | Plan_爆款能力升级.md | Plan | P10 主计划 |
-| 10-0 | Summary_中场交付总结.md | Summary | 阶段总结 |
-| 10-7 | Design_新博主入库流程.md | Design | 风格库扩展 |
-| 10-7 | Report_风格库健康报告.md | Report | 素材库状态 |
-| 10-9 | Design_自适应布局.md | Design | A+ 方案设计 |
-| 10-9 | Demo_最终布局.html | Demo | HTML 演示 |
-| 10-9 | Demo_滑出面板.html | Demo | HTML 演示 |
+### 05. 测试验证 (原 7-9)
 
----
-
-### 📦 C. 数据管线 (11)
-
-> 核心主题：企业级数据管线、批量推理、前端管理
-
-| 序号 | 文件名 | 类型 | 说明 |
-|------|--------|------|------|
-| 11-0 | Plan_风格库完善与内容生产.md | Plan | P11 v7.1 主计划 |
-| 11-1 | Report_P11技术交付报告.md | Report | 交付报告 |
-
----
-
-### 🏝️ D. 前端架构 (3-6)
-
-> 核心主题：Island 架构、逻辑接入、界面优化
-
-| 序号 | 文件名 | 类型 | 说明 |
-|------|--------|------|------|
-| 3-1 | Design_岛屿架构.md | Design | Island 架构设计 |
-| 3-2 | Demo_岛屿架构.md | Demo | 演示说明 |
-| 4-1 | Plan_逻辑接入.md | Plan | 后端对接计划 |
-| 4-2 | Design_逻辑接入.md | Design | 接入设计 |
-| 4-3 | Task_逻辑接入.md | Task | 任务清单 |
-| 4-4 | Summary_逻辑接入.md | Summary | 阶段总结 |
-| 5-1 | Plan_打磨优化.md | Plan | UI/UX 优化 |
-| 5-2 | Task_打磨优化.md | Task | 任务清单 |
-| 5-4 | Guide_控制台检查.md | Guide | 调试指南 |
-| 5-5 | Analysis_差距分析.md | Analysis | 问题分析 |
-| 5-6 | Plan_扩展计划.md | Plan | 功能扩展 |
-| 5-7 | Task_扩展任务.md | Task | 任务清单 |
-| 5-9 | Walkthrough_扩展交付.md | Walkthrough | 交付演示 |
-| 5-10 | Report_盲审差异.md | Report | 审查报告 |
-| 5-11 | Plan_本地化对齐.md | Plan | 本地化 |
-| 6-1 | Plan_界面体验修复.md | Plan | UX 修复 |
-| 6-2 | Task_界面体验修复.md | Task | 任务清单 |
-| 6-3 | Delivery_界面体验修复.md | Delivery | 交付物 |
-
----
-
-### ✅ E. 测试验证 (7-9)
-
-> 核心主题：E2E 测试、全链路验证、DOM 测试
-
-| 序号 | 文件名 | 类型 | 说明 |
-|------|--------|------|------|
-| 7-1 | Report_深度系统验证.md | Report | 系统验证 |
-| 8-1 | Plan_规模化测试.md | Plan | 压力测试 |
-| 8-2 | Plan_深度协同测试.md | Plan | 协同测试 |
-| 8-3 | Delivery_深度协同测试.md | Delivery | 交付物 |
-| 9-1 | Plan_全链路验证.md | Plan | E2E 验证 |
-| 9-2 | Task_全链路验证.md | Task | 任务清单 |
-| 9-3 | Issue_Log_全链路验证.md | Issue_Log | 问题日志 |
-| 9-4 | Report_DOM测试.md | Report | DOM 测试报告 |
-
----
-
-### 📐 F. 全局规范 (00-02)
-
-| 序号 | 文件名 | 类型 | 说明 |
-|------|--------|------|------|
-| 00 | Global_开发规范.md | Global | 开发规范 |
-| 01 | Global_重构总计划.md | Global | 重构计划 |
-| 02 | Global_设计规范_v2.1.md | Global | 设计规范 |
+| 原文件名 | 新文件名 |
+|----------|----------|
+| 7-1_Report_深度系统验证.md | **05-1_Report_深度系统验证.md** |
+| 8-1_Plan_规模化测试.md | **05-2_Plan_规模化测试.md** |
+| 8-2_Plan_深度协同测试.md | **05-3_Plan_深度协同测试.md** |
+| 8-3_Delivery_深度协同测试.md | **05-4_Delivery_深度协同测试.md** |
+| 9-1_Plan_全链路验证.md | **05-5_Plan_全链路验证.md** |
+| 9-2_Task_全链路验证.md | **05-6_Task_全链路验证.md** |
+| 9-3_Issue_Log_全链路验证.md | **05-7_Issue_Log_全链路验证.md** |
+| 9-4_Report_DOM测试.md | **05-8_Report_DOM测试.md** |
 
 ---
 
