@@ -674,10 +674,16 @@ Get-ChildItem D:\AI_Projects\2026001\backend\logs\ |
 
 | 文档 | 路径 |
 |------|------|
+| ⭐ **架构流程图** | [`14-1_Arch_数据清洗工具架构流程图.md`](14-1_Arch_数据清洗工具架构流程图.md) |
 | 优化方案详解 | `reports/design_docs/frontend_design/13-1_Plan_Web3批量清洗优化方案.md` |
 | 字段调用分析 | `reports/design_docs/frontend_design/13-2_Report_Knowledge字段调用流程分析.md` |
 | 费用计算明细 | `reports/design_docs/历史文档/Web3数据清洗成本分析.md` |
 | 项目手册 | `PROJECT_HANDBOOK.md` |
+
+### Mermaid 图表在线预览
+
+- **GitHub 在线查看**: [14-1_Arch_数据清洗工具架构流程图](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/frontend_design/14-1_Arch_数据清洗工具架构流程图.md)
+- **Mermaid 在线编辑器**: https://mermaid.live/
 
 ---
 
