@@ -4,6 +4,21 @@
 
 ---
 
+## 查看方法
+
+1. **GitHub 上查看**:
+   https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/00_Arch_Quantum_Studio系统架构流程图.md
+
+2. **VS Code 安装插件**:
+   ```
+   ext install bierner.markdown-mermaid
+   ```
+   然后用 `Ctrl+Shift+V` 预览
+
+3. **在线预览**: https://mermaid.live/
+
+---
+
 ## 1. 系统总体架构
 
 ```mermaid
