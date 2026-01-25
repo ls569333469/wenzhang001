@@ -1,0 +1,10 @@
+=== 入库任务启动 ===
+时间: 2026-01-25T19:32:14.922486
+命令: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m scripts.ingest_optimized --path D:\测试222
+模式: optimized
+数据源: custom
+自定义路径: D:\测试222
+===================
+
+usage: ingest_optimized.py [-h] [--folder FOLDER] [--all] [--limit LIMIT]
+ingest_optimized.py: error: unrecognized arguments: --path D:\����222

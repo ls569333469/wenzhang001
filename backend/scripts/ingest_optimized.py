@@ -375,10 +375,11 @@ async def main():
     parser = argparse.ArgumentParser(description="Knowledge_Repo 优化版入库脚本 (A/B 测试)")
     parser.add_argument("--folder", type=str, help="指定处理的文件夹名称")
     parser.add_argument("--all", action="store_true", help="处理所有文件夹")
+    parser.add_argument("--path", type=str, help="指定自定义目录路径 (支持任意本地目录)")
     parser.add_argument("--limit", type=int, default=0, help="每个文件夹处理的最大文件数 (0=不限制)")
     args = parser.parse_args()
     
-    if not args.folder and not args.all:
+    if not args.folder and not args.all and not args.path:
         parser.print_help()
         return
     
@@ -392,7 +393,32 @@ async def main():
     
     total_stats = {"success": 0, "skipped": 0, "failed": 0}
     
-    if args.all:
+    if args.path:
+        # 自定义路径模式
+        custom_path = Path(args.path)
+        if not custom_path.exists():
+            console.print(f"[red]❌ 自定义目录不存在: {custom_path}[/red]")
+            return
+        
+        console.print(f"📂 自定义目录模式: {custom_path}")
+        
+        # 处理目录下的所有 JSON/TXT 文件
+        json_files = list(custom_path.glob("*.json"))
+        txt_files = list(custom_path.glob("*.txt"))
+        md_files = list(custom_path.glob("*.md"))
+        all_files = json_files + txt_files + md_files
+        
+        if not all_files:
+            console.print(f"[yellow]⚠️ 目录中没有找到 JSON/TXT/MD 文件[/yellow]")
+            return
+        
+        console.print(f"找到 {len(all_files)} 个文件 (JSON: {len(json_files)}, TXT: {len(txt_files)}, MD: {len(md_files)})")
+        
+        # 使用目录名作为 topic
+        topic = custom_path.name
+        total_stats = await process_folder(custom_path, topic, args.limit)
+        
+    elif args.all:
         folders = sorted([f for f in WEB3_DATA_DIR.iterdir() if f.is_dir()])
         console.print(f"找到 {len(folders)} 个赛道文件夹\n")
         
