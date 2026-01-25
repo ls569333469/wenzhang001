@@ -675,3 +675,58 @@ async def add_ingest_history():
     save_config(config)
     return {"status": "success"}
 
+
+# ============================================
+# P5: Directory Browse API
+# ============================================
+
+@app.get("/ingest/browse")
+async def browse_directory(path: str = ""):
+    """浏览本地目录 (限制在 data 目录下)"""
+    from pathlib import Path
+    
+    # 安全边界: 默认只能浏览 data 目录
+    base_dir = Path(__file__).parent.parent / "data"
+    
+    if path:
+        target_path = Path(path)
+        # 安全检查: 必须在 data 目录下
+        try:
+            target_path.resolve().relative_to(base_dir.resolve())
+        except ValueError:
+            raise HTTPException(status_code=400, detail="只能浏览 data 目录下的内容")
+    else:
+        target_path = base_dir
+    
+    if not target_path.exists() or not target_path.is_dir():
+        return {"items": [], "current_path": str(base_dir), "parent_path": None}
+    
+    items = []
+    for item in sorted(target_path.iterdir()):
+        if item.is_dir():
+            # 统计子项数量
+            try:
+                children_count = len(list(item.iterdir()))
+            except Exception:
+                children_count = 0
+            
+            items.append({
+                "name": item.name,
+                "path": str(item),
+                "is_dir": True,
+                "children_count": children_count
+            })
+    
+    # 判断是否可以返回上级
+    parent_path = None
+    if target_path.resolve() != base_dir.resolve():
+        parent = target_path.parent
+        if parent.resolve() >= base_dir.resolve():
+            parent_path = str(parent)
+    
+    return {
+        "items": items,
+        "current_path": str(target_path),
+        "parent_path": parent_path
+    }
+

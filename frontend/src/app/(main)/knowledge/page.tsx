@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Database, FolderOpen, Play, Pause, RefreshCw, AlertCircle, CheckCircle2, Clock, Loader2 } from 'lucide-react';
+import { Database, FolderOpen, Play, Pause, RefreshCw, AlertCircle, CheckCircle2, Clock, Loader2, ChevronRight, ArrowLeft, X } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -28,7 +28,12 @@ export default function KnowledgePage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
   const [ingestMode, setIngestMode] = useState<'optimized' | 'legacy'>('optimized');
-  const [dataSource, setDataSource] = useState<'web3' | 'web2'>('web3');
+  const [dataSource, setDataSource] = useState<'web3' | 'web2' | 'custom'>('web3');
+  const [customPath, setCustomPath] = useState<string>('');
+  const [showBrowser, setShowBrowser] = useState(false);
+  const [browserItems, setBrowserItems] = useState<{ name: string; path: string; children_count: number }[]>([]);
+  const [browserPath, setBrowserPath] = useState('');
+  const [browserParent, setBrowserParent] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   // 费用计算常量
@@ -76,6 +81,33 @@ export default function KnowledgePage() {
     } catch {
       // ignore
     }
+  }
+
+  async function browsePath(path: string = '') {
+    try {
+      const url = path ? `${API_BASE_URL}/ingest/browse?path=${encodeURIComponent(path)}` : `${API_BASE_URL}/ingest/browse`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        setBrowserItems(data.items || []);
+        setBrowserPath(data.current_path || '');
+        setBrowserParent(data.parent_path);
+      }
+    } catch {
+      toast.error('无法浏览目录');
+    }
+  }
+
+  function openBrowser() {
+    setShowBrowser(true);
+    browsePath();
+  }
+
+  function selectDirectory(path: string) {
+    setCustomPath(path);
+    setDataSource('custom');
+    setShowBrowser(false);
+    toast.success(`已选择: ${path.split('\\').pop()}`);
   }
 
   async function handleStartIngest() {
@@ -206,6 +238,26 @@ export default function KnowledgePage() {
                 />
                 <span className="text-sm">Web2风格</span>
               </label>
+              <div className="flex items-center gap-2">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="source"
+                    checked={dataSource === 'custom'}
+                    onChange={() => { }}
+                    className="text-primary"
+                  />
+                  <span className="text-sm">自定义目录</span>
+                </label>
+                <Button variant="outline" size="sm" onClick={openBrowser} className="h-6 text-xs">
+                  浏览...
+                </Button>
+              </div>
+              {dataSource === 'custom' && customPath && (
+                <p className="text-xs text-ink-muted pl-5 truncate">
+                  └ {customPath.split('\\').pop()}
+                </p>
+              )}
             </div>
           </div>
 
@@ -314,6 +366,75 @@ export default function KnowledgePage() {
           <p className="mt-1">📊 增量更新: 系统自动检测新文件，已处理文件会跳过</p>
         </div>
       </div>
+
+      {/* Directory Browser Modal */}
+      {showBrowser && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-xl w-[480px] max-h-[500px] flex flex-col">
+            {/* Header */}
+            <div className="flex items-center justify-between p-4 border-b">
+              <h3 className="font-semibold text-ink-primary">选择数据目录</h3>
+              <button onClick={() => setShowBrowser(false)} className="text-ink-muted hover:text-ink-primary">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Current Path */}
+            <div className="px-4 py-2 bg-zinc-50 text-xs text-ink-muted truncate">
+              {browserPath}
+            </div>
+
+            {/* Parent Button */}
+            {browserParent && (
+              <button
+                onClick={() => browsePath(browserParent)}
+                className="flex items-center gap-2 px-4 py-2 text-sm text-ink-muted hover:bg-zinc-50 border-b"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                返回上级
+              </button>
+            )}
+
+            {/* Directory List */}
+            <div className="flex-1 overflow-y-auto">
+              {browserItems.length === 0 ? (
+                <div className="p-8 text-center text-ink-muted text-sm">没有子目录</div>
+              ) : (
+                browserItems.map((item) => (
+                  <div key={item.path} className="flex items-center justify-between px-4 py-3 hover:bg-zinc-50 border-b border-zinc-100">
+                    <button
+                      onClick={() => browsePath(item.path)}
+                      className="flex items-center gap-3 text-left flex-1"
+                    >
+                      <FolderOpen className="w-4 h-4 text-amber-500" />
+                      <span className="text-sm text-ink-primary">{item.name}</span>
+                      <span className="text-xs text-ink-muted">({item.children_count})</span>
+                    </button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => selectDirectory(item.path)}
+                      className="h-7 text-xs"
+                    >
+                      选择
+                    </Button>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="p-4 border-t flex justify-end gap-2">
+              <Button variant="outline" onClick={() => setShowBrowser(false)}>
+                取消
+              </Button>
+              <Button onClick={() => selectDirectory(browserPath)}>
+                选择当前目录
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
