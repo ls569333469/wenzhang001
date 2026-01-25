@@ -369,54 +369,93 @@ export default function KnowledgePage() {
 
       {/* Directory Browser Modal */}
       {showBrowser && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl shadow-xl w-[480px] max-h-[500px] flex flex-col">
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-[100]" onClick={() => setShowBrowser(false)}>
+          <div
+            className="bg-white rounded-2xl shadow-2xl w-[600px] h-[600px] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b">
-              <h3 className="font-semibold text-ink-primary">选择数据目录</h3>
-              <button onClick={() => setShowBrowser(false)} className="text-ink-muted hover:text-ink-primary">
+            <div className="flex items-center justify-between p-4 border-b bg-zinc-50 rounded-t-2xl">
+              <h3 className="font-semibold text-ink-primary text-lg">选择数据目录</h3>
+              <button onClick={() => setShowBrowser(false)} className="text-ink-muted hover:text-ink-primary p-1">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Current Path */}
-            <div className="px-4 py-2 bg-zinc-50 text-xs text-ink-muted truncate">
-              {browserPath}
+            {/* Path Input */}
+            <div className="p-3 border-b bg-white">
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={browserPath}
+                  onChange={(e) => setBrowserPath(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && browsePath(browserPath)}
+                  className="flex-1 px-3 py-2 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  placeholder="输入路径，如：D:\测试222"
+                />
+                <Button size="sm" onClick={() => browsePath(browserPath)}>
+                  前往
+                </Button>
+              </div>
+            </div>
+
+            {/* Breadcrumb Navigation */}
+            <div className="px-4 py-2 bg-zinc-50 border-b flex items-center gap-1 text-sm overflow-x-auto">
+              {browserPath.split('\\').filter(Boolean).map((part, index, arr) => {
+                const fullPath = arr.slice(0, index + 1).join('\\');
+                return (
+                  <span key={index} className="flex items-center">
+                    {index > 0 && <ChevronRight className="w-3 h-3 text-zinc-400 mx-1" />}
+                    <button
+                      onClick={() => browsePath(fullPath.includes(':') ? fullPath : fullPath + '\\')}
+                      className="text-primary hover:underline"
+                    >
+                      {part}
+                    </button>
+                  </span>
+                );
+              })}
             </div>
 
             {/* Parent Button */}
             {browserParent && (
               <button
                 onClick={() => browsePath(browserParent)}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-ink-muted hover:bg-zinc-50 border-b"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-ink-muted hover:bg-zinc-100 border-b"
               >
                 <ArrowLeft className="w-4 h-4" />
-                返回上级
+                返回上级目录
               </button>
             )}
 
             {/* Directory List */}
             <div className="flex-1 overflow-y-auto">
               {browserItems.length === 0 ? (
-                <div className="p-8 text-center text-ink-muted text-sm">没有子目录</div>
+                <div className="p-8 text-center text-ink-muted text-sm">
+                  <FolderOpen className="w-12 h-12 mx-auto mb-2 text-zinc-300" />
+                  此目录为空或无访问权限
+                </div>
               ) : (
                 browserItems.map((item) => (
-                  <div key={item.path} className="flex items-center justify-between px-4 py-3 hover:bg-zinc-50 border-b border-zinc-100">
+                  <div
+                    key={item.path}
+                    className="flex items-center justify-between px-4 py-3 hover:bg-zinc-50 border-b border-zinc-100 group"
+                  >
                     <button
                       onClick={() => browsePath(item.path)}
-                      className="flex items-center gap-3 text-left flex-1"
+                      className="flex items-center gap-3 text-left flex-1 min-w-0"
                     >
-                      <FolderOpen className="w-4 h-4 text-amber-500" />
-                      <span className="text-sm text-ink-primary">{item.name}</span>
-                      <span className="text-xs text-ink-muted">({item.children_count})</span>
+                      <FolderOpen className="w-5 h-5 text-amber-500 shrink-0" />
+                      <span className="text-sm text-ink-primary truncate">{item.name}</span>
+                      <span className="text-xs text-ink-muted shrink-0">({item.children_count} 项)</span>
                     </button>
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => selectDirectory(item.path)}
-                      className="h-7 text-xs"
+                      onClick={(e) => { e.stopPropagation(); selectDirectory(item.path); }}
+                      className="h-7 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
                     >
-                      选择
+                      选择此目录
                     </Button>
                   </div>
                 ))
@@ -424,13 +463,18 @@ export default function KnowledgePage() {
             </div>
 
             {/* Footer */}
-            <div className="p-4 border-t flex justify-end gap-2">
-              <Button variant="outline" onClick={() => setShowBrowser(false)}>
-                取消
-              </Button>
-              <Button onClick={() => selectDirectory(browserPath)}>
-                选择当前目录
-              </Button>
+            <div className="p-4 border-t bg-zinc-50 rounded-b-2xl flex justify-between items-center">
+              <span className="text-xs text-ink-muted truncate max-w-[300px]">
+                当前: {browserPath}
+              </span>
+              <div className="flex gap-2">
+                <Button variant="outline" onClick={() => setShowBrowser(false)}>
+                  取消
+                </Button>
+                <Button onClick={() => selectDirectory(browserPath)}>
+                  选择当前目录
+                </Button>
+              </div>
             </div>
           </div>
         </div>
