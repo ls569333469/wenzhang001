@@ -42,7 +42,8 @@ except ImportError:
 from app.core.lark_client import lark_client
 from scripts.batch.hash_cache import get_hash_cache, compute_content_hash
 
-console = Console()
+# Windows 编码兼容：禁用 emoji，避免 GBK 编码错误
+console = Console(force_terminal=True, emoji=False)
 
 # ==========================================
 # 配置区
@@ -384,11 +385,11 @@ async def main():
         return
     
     console.print("=" * 60)
-    console.print("🚀 Quantum Studio v5.2 - Knowledge_Repo 优化版入库")
+    console.print("[INFO] Quantum Studio v5.2 - Knowledge_Repo 优化版入库")
     console.print("=" * 60)
-    console.print(f"📋 Base Token: {os.getenv('LARK_BASE_TOKEN', 'NOT SET')}")
-    console.print(f"📋 Knowledge Table ID: {os.getenv('LARK_KNOWLEDGE_TABLE_ID', 'NOT SET')}")
-    console.print(f"📋 优化特性: 合并LLM调用 + 批量上传 + 本地Hash缓存")
+    console.print(f"[CONFIG] Base Token: {os.getenv('LARK_BASE_TOKEN', 'NOT SET')}")
+    console.print(f"[CONFIG] Knowledge Table ID: {os.getenv('LARK_KNOWLEDGE_TABLE_ID', 'NOT SET')}")
+    console.print(f"[CONFIG] 优化特性: 合并LLM调用 + 批量上传 + 本地Hash缓存")
     console.print()
     
     total_stats = {"success": 0, "skipped": 0, "failed": 0}
@@ -397,10 +398,10 @@ async def main():
         # 自定义路径模式
         custom_path = Path(args.path)
         if not custom_path.exists():
-            console.print(f"[red]❌ 自定义目录不存在: {custom_path}[/red]")
+            console.print(f"[red][ERROR] 自定义目录不存在: {custom_path}[/red]")
             return
         
-        console.print(f"📂 自定义目录模式: {custom_path}")
+        console.print(f"[FOLDER] 自定义目录模式: {custom_path}")
         
         # 处理目录下的所有 JSON/TXT 文件
         json_files = list(custom_path.glob("*.json"))
@@ -409,7 +410,7 @@ async def main():
         all_files = json_files + txt_files + md_files
         
         if not all_files:
-            console.print(f"[yellow]⚠️ 目录中没有找到 JSON/TXT/MD 文件[/yellow]")
+            console.print(f"[yellow][WARN] 目录中没有找到 JSON/TXT/MD 文件[/yellow]")
             return
         
         console.print(f"找到 {len(all_files)} 个文件 (JSON: {len(json_files)}, TXT: {len(txt_files)}, MD: {len(md_files)})")
@@ -423,7 +424,7 @@ async def main():
         console.print(f"找到 {len(folders)} 个赛道文件夹\n")
         
         for folder in folders:
-            console.print(f"📂 处理文件夹: {folder.name}")
+            console.print(f"[FOLDER] 处理文件夹: {folder.name}")
             stats = await process_folder(folder, folder.name, args.limit)
             for key in total_stats:
                 total_stats[key] += stats[key]
@@ -431,18 +432,18 @@ async def main():
     else:
         folder_path = WEB3_DATA_DIR / args.folder
         if not folder_path.exists():
-            console.print(f"[red]❌ 文件夹不存在: {folder_path}[/red]")
+            console.print(f"[red][ERROR] 文件夹不存在: {folder_path}[/red]")
             return
         
-        console.print(f"📂 处理文件夹: {args.folder}")
+        console.print(f"[FOLDER] 处理文件夹: {args.folder}")
         total_stats = await process_folder(folder_path, args.folder, args.limit)
     
     console.print("=" * 60)
-    console.print("📊 入库完成!")
+    console.print("[DONE] 入库完成!")
     console.print("=" * 60)
-    console.print(f"  ✅ 成功入库: {total_stats['success']}")
-    console.print(f"  ⚠️ 重复跳过: {total_stats['skipped']}")
-    console.print(f"  ❌ 失败: {total_stats['failed']}")
+    console.print(f"  [OK] 成功入库: {total_stats['success']}")
+    console.print(f"  [SKIP] 重复跳过: {total_stats['skipped']}")
+    console.print(f"  [FAIL] 失败: {total_stats['failed']}")
 
 
 if __name__ == "__main__":
