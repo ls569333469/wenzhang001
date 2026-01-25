@@ -472,7 +472,7 @@ async def clear_ingest_cache():
 
 
 @app.get("/ingest/folders")
-async def get_ingest_folders():
+async def get_ingest_folders(source: str = "web3"):
     """获取所有文件夹及其状态 (已入库/总数)"""
     from pathlib import Path
     import sys
@@ -490,24 +490,34 @@ async def get_ingest_folders():
     except Exception:
         hash_cache = set()
     
-    web3_dir = Path(__file__).parent.parent / "data" / "Web3素材"
+    # 根据 source 选择数据目录
+    if source == "web2":
+        data_dir = Path(__file__).parent.parent / "data" / "Web2风格"
+        file_pattern = "*.txt"  # Web2 使用 TXT 文件
+    else:
+        data_dir = Path(__file__).parent.parent / "data" / "Web3素材"
+        file_pattern = "*.json"
+    
     folders = []
     total_processed = 0
     total_pending = 0
     
-    if web3_dir.exists():
-        for folder in sorted(web3_dir.iterdir()):
+    if data_dir.exists():
+        for folder in sorted(data_dir.iterdir()):
             if folder.is_dir():
-                json_files = list(folder.glob("*.json"))
-                total_count = len(json_files)
+                files = list(folder.glob(file_pattern))
+                total_count = len(files)
                 processed_count = 0
                 
                 # 遍历每个文件检查是否在 hash_cache 中
-                for json_file in json_files:
+                for file in files:
                     try:
-                        with open(json_file, 'r', encoding='utf-8') as f:
-                            data = json.load(f)
-                        content = data.get('content', '')
+                        with open(file, 'r', encoding='utf-8') as f:
+                            if file.suffix == '.json':
+                                data = json.load(f)
+                                content = data.get('content', '')
+                            else:
+                                content = f.read()
                         h = hashlib.md5(content.encode()).hexdigest()
                         if h in hash_cache:
                             processed_count += 1
@@ -595,4 +605,73 @@ async def pause_ingest():
     """暂停入库任务 (占位符)"""
     # 实际暂停需要更复杂的进程管理，这里仅返回成功
     return {"status": "paused", "message": "暂停功能待实现"}
+
+
+# ============================================
+# P2: Ingest Configuration API
+# ============================================
+
+class IngestConfigRequest(BaseModel):
+    data_source: str = "web3"  # web3 | web2
+    custom_path: Optional[str] = None
+
+
+@app.get("/ingest/config")
+async def get_ingest_config():
+    """获取入库配置"""
+    config = load_config()
+    ingest_config = config.get("ingest_config", {})
+    return {
+        "data_source": ingest_config.get("data_source", "web3"),
+        "custom_path": ingest_config.get("custom_path", None),
+        "available_sources": [
+            {"id": "web3", "name": "Web3素材", "path": "data/Web3素材", "enabled": True},
+            {"id": "web2", "name": "Web2风格", "path": "data/Web2风格", "enabled": True}
+        ]
+    }
+
+
+@app.post("/ingest/config")
+async def save_ingest_config(request: IngestConfigRequest):
+    """保存入库配置"""
+    config = load_config()
+    if "ingest_config" not in config:
+        config["ingest_config"] = {}
+    
+    config["ingest_config"]["data_source"] = request.data_source
+    if request.custom_path:
+        config["ingest_config"]["custom_path"] = request.custom_path
+    
+    save_config(config)
+    return {"status": "success", "updated": config["ingest_config"]}
+
+
+# ============================================
+# P3: Ingest History API
+# ============================================
+
+@app.get("/ingest/history")
+async def get_ingest_history():
+    """获取入库历史记录"""
+    config = load_config()
+    history = config.get("ingest_history", [])
+    return {"history": history[-10:]}  # 返回最近 10 条
+
+
+@app.post("/ingest/history")
+async def add_ingest_history():
+    """添加入库历史记录 (由入库脚本调用)"""
+    from datetime import datetime
+    
+    config = load_config()
+    if "ingest_history" not in config:
+        config["ingest_history"] = []
+    
+    config["ingest_history"].append({
+        "timestamp": datetime.now().isoformat(),
+        "status": "started"
+    })
+    
+    save_config(config)
+    return {"status": "success"}
 

@@ -24,6 +24,7 @@ interface FolderInfo {
 export default function KnowledgePage() {
   const [ingestStatus, setIngestStatus] = useState<IngestStatus | null>(null);
   const [folders, setFolders] = useState<FolderInfo[]>([]);
+  const [history, setHistory] = useState<{ timestamp: string; status: string }[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
   const [ingestMode, setIngestMode] = useState<'optimized' | 'legacy'>('optimized');
@@ -53,7 +54,7 @@ export default function KnowledgePage() {
 
   async function fetchFolders() {
     try {
-      const res = await fetch(`${API_BASE_URL}/ingest/folders`);
+      const res = await fetch(`${API_BASE_URL}/ingest/folders?source=${dataSource}`);
       if (res.ok) {
         const data = await res.json();
         setFolders(data.folders || []);
@@ -62,6 +63,18 @@ export default function KnowledgePage() {
       }
     } catch {
       setFolders([]);
+    }
+  }
+
+  async function fetchHistory() {
+    try {
+      const res = await fetch(`${API_BASE_URL}/ingest/history`);
+      if (res.ok) {
+        const data = await res.json();
+        setHistory(data.history || []);
+      }
+    } catch {
+      // ignore
     }
   }
 
@@ -102,7 +115,8 @@ export default function KnowledgePage() {
   useEffect(() => {
     fetchStatus();
     fetchFolders();
-  }, []);
+    fetchHistory();
+  }, [dataSource]);
 
   const pendingCount = folders.reduce((sum, f) => sum + f.pending_count, 0);
   const processedCount = folders.reduce((sum, f) => sum + f.processed_count, 0);
@@ -182,16 +196,15 @@ export default function KnowledgePage() {
                 />
                 <span className="text-sm">Web3素材 (41 文件夹)</span>
               </label>
-              <label className="flex items-center gap-2 cursor-pointer opacity-50">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name="source"
                   checked={dataSource === 'web2'}
                   onChange={() => setDataSource('web2')}
                   className="text-primary"
-                  disabled
                 />
-                <span className="text-sm">Web2风格 (待开发)</span>
+                <span className="text-sm">Web2风格</span>
               </label>
             </div>
           </div>
