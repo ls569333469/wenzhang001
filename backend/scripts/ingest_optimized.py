@@ -301,7 +301,7 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: 
         return {"success": 0, "skipped": 0, "failed": 0}
     
     console.print(f"   找到 {len(json_files)} 个 JSON 文件")
-    console.print(f"   [cyan]🚀 并发模式: {LLM_CONCURRENCY} 个并行 LLM 调用[/cyan]")
+    console.print(f"   [cyan][ASYNC] 并发模式: {LLM_CONCURRENCY} 个并行 LLM 调用[/cyan]")
     
     # 根据 target 选择表格 ID
     app_token = os.getenv("LARK_BASE_TOKEN")
