@@ -788,3 +788,68 @@ async def browse_directory(path: str = ""):
         "parent_path": parent_path
     }
 
+
+# ============================================
+# 配置管理 API
+# ============================================
+
+@app.get("/config/ingest")
+async def get_ingest_config():
+    """获取数据清洗配置"""
+    import os
+    return {
+        "web3_table_id": os.getenv("LARK_KNOWLEDGE_TABLE_ID", ""),
+        "web2_table_id": os.getenv("LARK_WEB2_TABLE_ID", "") or os.getenv("LARK_TABLE_ID", ""),
+        "score_threshold": 6  # 默认阈值
+    }
+
+
+class IngestConfigRequest(BaseModel):
+    web3_table_id: Optional[str] = None
+    web2_table_id: Optional[str] = None
+    score_threshold: int = 6
+
+
+@app.put("/config/ingest")
+async def update_ingest_config(config: IngestConfigRequest):
+    """更新数据清洗配置 (保存到 .env 文件)"""
+    from pathlib import Path
+    
+    env_path = Path(__file__).parent.parent / ".env"
+    
+    try:
+        # 读取现有 .env 内容
+        if env_path.exists():
+            with open(env_path, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+        else:
+            lines = []
+        
+        # 更新或添加配置
+        updated = {}
+        if config.web3_table_id:
+            updated["LARK_KNOWLEDGE_TABLE_ID"] = config.web3_table_id
+        if config.web2_table_id:
+            updated["LARK_WEB2_TABLE_ID"] = config.web2_table_id
+        
+        # 更新行
+        new_lines = []
+        for line in lines:
+            key = line.split("=")[0].strip() if "=" in line else ""
+            if key in updated:
+                new_lines.append(f"{key}={updated[key]}\n")
+                del updated[key]
+            else:
+                new_lines.append(line)
+        
+        # 添加新的配置
+        for key, value in updated.items():
+            new_lines.append(f"{key}={value}\n")
+        
+        # 写回 .env
+        with open(env_path, 'w', encoding='utf-8') as f:
+            f.writelines(new_lines)
+        
+        return {"status": "success", "message": "配置已保存"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

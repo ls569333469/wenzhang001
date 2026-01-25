@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { cn } from "@/lib/utils";
-import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2, FlaskConical } from 'lucide-react';
+import { Settings, Key, Globe, Layout, Check, AlertCircle, Sparkles, Loader2, FlaskConical, Database, FolderOpen } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
@@ -25,6 +25,13 @@ export default function SettingsPage() {
 
   // Phase 12: Feature Flags
   const [useKnowledgeRepo, setUseKnowledgeRepo] = useState(false);
+
+  // Phase 14: 数据清洗配置
+  const [ingestConfig, setIngestConfig] = useState({
+    web3TableId: '',
+    web2TableId: '',
+    scoreThreshold: 6
+  });
 
   useEffect(() => {
     async function loadSettings() {
@@ -84,6 +91,21 @@ export default function SettingsPage() {
         console.log('[Settings] Feature flags unavailable');
       }
 
+      // 5. Load Ingest Config
+      try {
+        const ingestRes = await fetch(`${API_BASE_URL}/config/ingest`);
+        if (ingestRes.ok) {
+          const ingestData = await ingestRes.json();
+          setIngestConfig({
+            web3TableId: ingestData.web3_table_id || '',
+            web2TableId: ingestData.web2_table_id || '',
+            scoreThreshold: ingestData.score_threshold || 6
+          });
+        }
+      } catch {
+        console.log('[Settings] Ingest config unavailable');
+      }
+
       setIsLoading(false);
     }
 
@@ -132,6 +154,17 @@ export default function SettingsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           use_knowledge_repo: useKnowledgeRepo
+        })
+      }).catch(() => { });
+
+      // 5. Save ingest config to backend
+      await fetch(`${API_BASE_URL}/config/ingest`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          web3_table_id: ingestConfig.web3TableId,
+          web2_table_id: ingestConfig.web2TableId,
+          score_threshold: ingestConfig.scoreThreshold
         })
       }).catch(() => { });
 
@@ -256,6 +289,68 @@ export default function SettingsPage() {
               onChange={(v) => setPrompts({ ...prompts, critic: v })}
               defaultValue={DEFAULTS.critic}
             />
+          </div>
+        </section>
+
+        {/* Data Ingest Configuration (P14) */}
+        <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
+          <div className="flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center shrink-0">
+              <Database className="w-4 h-4 text-emerald-600" />
+            </div>
+            <div className="flex-1 space-y-1">
+              <h3 className="font-medium text-ink-primary">数据清洗配置</h3>
+              <p className="text-xs text-ink-muted">配置 Lark 表格和入库参数</p>
+            </div>
+          </div>
+
+          <div className="space-y-4 pl-11">
+            {/* Web3 Table ID */}
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Web3 Knowledge 表格 ID</label>
+              <input
+                type="text"
+                value={ingestConfig.web3TableId}
+                onChange={(e) => setIngestConfig({ ...ingestConfig, web3TableId: e.target.value })}
+                placeholder="tblkvQK9aKxP0wsk"
+                className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono"
+              />
+            </div>
+
+            {/* Web2 Table ID */}
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">Web2 Style 表格 ID</label>
+              <input
+                type="text"
+                value={ingestConfig.web2TableId}
+                onChange={(e) => setIngestConfig({ ...ingestConfig, web2TableId: e.target.value })}
+                placeholder="tblXXXXXXXX (可选)"
+                className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono"
+              />
+            </div>
+
+            {/* Score Threshold */}
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-ink-muted">
+                LLM 评分阈值 (低于此分数不入库)
+              </label>
+              <div className="flex items-center gap-4">
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={ingestConfig.scoreThreshold}
+                  onChange={(e) => setIngestConfig({ ...ingestConfig, scoreThreshold: parseInt(e.target.value) })}
+                  className="flex-1 h-2 bg-zinc-200 rounded-lg appearance-none cursor-pointer"
+                />
+                <span className="w-12 text-center text-sm font-mono bg-zinc-100 rounded-lg py-1">
+                  {ingestConfig.scoreThreshold} 分
+                </span>
+              </div>
+              <p className="text-[10px] text-ink-muted">
+                推荐值: 6 分 (过滤低质量内容)
+              </p>
+            </div>
           </div>
         </section>
 
