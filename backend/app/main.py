@@ -410,3 +410,63 @@ async def save_feature_flags(flags: FeatureFlagsRequest):
     save_config(config)
     return {"status": "success", "updated": flags_dict}
 
+
+# ============================================
+# Ingest Management API (P13)
+# ============================================
+
+@app.get("/ingest/status")
+async def get_ingest_status():
+    """获取入库状态 (Hash 缓存和 Lark 记录数)"""
+    import sys
+    from pathlib import Path
+    
+    # 动态导入 hash_cache (避免启动时依赖)
+    scripts_path = Path(__file__).parent.parent / "scripts"
+    if str(scripts_path) not in sys.path:
+        sys.path.insert(0, str(scripts_path))
+    
+    hash_count = 0
+    try:
+        from batch.hash_cache import get_hash_cache
+        hash_cache = get_hash_cache()
+        hash_count = len(hash_cache)
+    except Exception as e:
+        print(f"[Ingest API] Hash cache error: {e}")
+    
+    # 获取 Lark 表记录数
+    lark_count = 0
+    try:
+        base_token = os.getenv("LARK_BASE_TOKEN")
+        table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
+        if base_token and table_id:
+            resp = lark_client.list_records(base_token, table_id, page_size=1)
+            lark_count = resp.get("data", {}).get("total", 0)
+    except Exception as e:
+        print(f"[Ingest API] Lark count error: {e}")
+    
+    return {
+        "hash_cache_count": hash_count,
+        "lark_record_count": lark_count,
+        "status": "ready"
+    }
+
+
+@app.post("/ingest/cache/clear")
+async def clear_ingest_cache():
+    """清空 Hash 缓存"""
+    import sys
+    from pathlib import Path
+    
+    scripts_path = Path(__file__).parent.parent / "scripts"
+    if str(scripts_path) not in sys.path:
+        sys.path.insert(0, str(scripts_path))
+    
+    try:
+        from batch.hash_cache import get_hash_cache
+        cache = get_hash_cache()
+        cache.clear()
+        return {"status": "success", "message": "Hash 缓存已清空"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
