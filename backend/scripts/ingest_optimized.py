@@ -42,8 +42,16 @@ except ImportError:
 from app.core.lark_client import lark_client
 from scripts.batch.hash_cache import get_hash_cache, compute_content_hash
 
-# Windows 编码兼容：禁用 emoji，避免 GBK 编码错误
-console = Console(force_terminal=True, emoji=False)
+# Windows 编码兼容：禁用所有格式化，避免 GBK 编码错误
+import io
+import sys
+
+# 强制 stdout 使用 UTF-8
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
+console = Console(force_terminal=True, emoji=False, no_color=True, legacy_windows=True)
 
 # ==========================================
 # 配置区
