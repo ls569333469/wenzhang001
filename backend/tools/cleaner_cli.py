@@ -490,17 +490,20 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
             }
         else:
             # Style_Repo 表结构 (风格素材/血)
-            # 实际字段映射 (与 Lark 表格字段名完全对应)
+            # 完整 9 字段映射 (已验证格式 2026-01-26)
+            # 字段类型: 内容(Text), 博主(SingleSelect), 片段类型(SingleSelect), 
+            #          情绪(SingleSelect), 内容指纹(Text), 质量评分(Number),
+            #          状态(SingleSelect), 逻辑公式(Text), 风格标签(MultiSelect)
             fields = {
                 "内容": snippet.clean_text,
                 "博主": author,
                 "片段类型": snippet.snippet_type,
-                "情绪": snippet.emotional_valence,
-                "AI 内容指纹": content_hash,
+                "情绪": snippet.emotional_valence if snippet.emotional_valence else "Neutral",
+                "内容指纹": content_hash,
                 "质量评分": float(snippet.quality_score),
                 "状态": "待处理",
-                "AI 逻辑公式": snippet.logic_pattern,
-                "风格标签": style if style else author
+                "逻辑公式": snippet.logic_pattern if snippet.logic_pattern else "",
+                "风格标签": [style] if style else [author]  # MultiSelect 需要数组格式
             }
         
         # 在线程池中运行同步代码
@@ -511,7 +514,10 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
         )
         return True
         
-    except Exception:
+    except Exception as e:
+        import traceback
+        print(f"❌ Lark上传失败: {e}")
+        traceback.print_exc()
         return False
 
 async def process_file(

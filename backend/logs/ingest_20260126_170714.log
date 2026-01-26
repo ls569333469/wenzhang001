@@ -54,3 +54,30 @@ banfo --source-category Shell --provider deepseek --min-score 3
   LLM返回: 30 条
   ✓ 2023-01-04_大学生活费一个月1万，合理吗？.txt: 提取 30 → 入库 29
   LLM返回: 7 条
+  LLM返回: 29 条
+  LLM返回: 1 条
+  ❌ JSON解析失败: Unterminated string starting at: line 260 column 2
+  LLM返回: 26 条
+2026-01-26 17:29:56,737 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-05_要装X，还得研究雷克萨斯.txt: 提取 63 → 入库 62
+  LLM返回: 1 条
+  LLM返回: 5 条
+  LLM返回: 28 条
+  ✓ 2023-01-06_多抓鱼简直在做慈善.txt: 提取 34 → 入库 31
+  LLM返回: 1 条
+  LLM返回: 2 条
+  LLM返回: 19 条
+  ✓ 2023-01-07_特斯拉降价，抢跑同行.txt: 提取 22 → 入库 21
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 28 条
+  ✓ 2023-01-09_农夫山泉在火锅店大杀特杀.txt: 提取 33 → 入库 29
+  LLM返回: 1 条
+  LLM返回: 21 条
+  LLM返回: 33 条
+  ✓ 2023-01-10_梦想和饼一样，先咬一口才能饱.txt: 提取 55 → 入库 53
+  LLM返回: 1 条
+  LLM返回: 27 条
+  LLM返回: 9 条
+  ✓ 2023-01-11_今麦郎凉白开，稳中带骚.txt: 提取 37 → 入库 33
+  LLM返回: 1 条
