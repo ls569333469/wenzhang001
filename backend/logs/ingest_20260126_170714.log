@@ -139,3 +139,41 @@ banfo --source-category Shell --provider deepseek --min-score 3
   ✓ 2023-01-26_为什么工地塔吊下永远有冰红茶.txt: 提取 53 → 入库 52
   LLM返回: 30 条
   ✓ 2023-01-28_看了后台问题，恨不得给你磕头.txt: 提取 30 → 入库 29
+  LLM返回: 22 条
+  LLM返回: 1 条
+  LLM返回: 21 条
+  ❌ JSON解析失败: Unterminated string starting at: line 262 column 2
+  ✓ 2023-01-29_席梦思被投资者当球踢.txt: 提取 44 → 入库 35
+  LLM返回: 25 条
+  ❌ JSON解析失败: Unterminated string starting at: line 335 column 2
+  LLM返回: 1 条
+  ❌ JSON解析失败: Unterminated string starting at: line 292 column 2
+  LLM返回: 39 条
+  LLM返回: 22 条
+2026-01-26 19:45:48,718 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-30_外国父母逃不过的“孩之宝税”.txt: 提取 87 → 入库 86
+  LLM返回: 16 条
+  LLM返回: 33 条
+  LLM返回: 1 条
+  ❌ JSON解析失败: Unterminated string starting at: line 262 column 2
+  LLM返回: 10 条
+  LLM返回: 32 条
+2026-01-26 20:01:04,601 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-26 20:02:01,270 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-26 20:03:17,094 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-31_好利来蛋糕，如同梦一场.txt: 提取 92 → 入库 87
+  LLM返回: 23 条
+  ✓ 2023-02-01_学会目光短浅，小心延迟满足.txt: 提取 23 → 入库 22
+  LLM返回: 1 条
+  LLM返回: 9 条
+  LLM返回: 30 条
+  ✓ 2023-02-02_不要苛责穷人没有延迟满足.txt: 提取 40 → 入库 39
+  LLM返回: 2 条
+  LLM返回: 5 条
+  LLM返回: 16 条
+  ✓ 2023-02-03_低质量感情戏拖了《狂飙》后腿.txt: 提取 23 → 入库 18
+  LLM返回: 14 条
+  ✓ 2023-02-04_张译在《狂飙》里的表现够好了.txt: 提取 14 → 入库 12
+  LLM返回: 22 条
+2026-01-26 20:28:16,241 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-02-05_消费主义被社会毒打了.txt: 提取 22 → 入库 21

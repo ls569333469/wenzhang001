@@ -129,6 +129,39 @@ class CleanedSnippet(BaseModel):
     quality_score: int = Field(default=3, description="评分 1-5")
 
 # ==========================================
+# 4.1 字段值映射 (英文 → 中文)
+# ==========================================
+
+SNIPPET_TYPE_MAP = {
+    # 英文 → 中文
+    "Hook": "开头金句",
+    "Body": "正文段落",
+    "Quote": "金句语录",
+    "CTA": "行动号召",
+    "Hard_Fact": "硬数据",
+    # 中文直接通过
+    "开头金句": "开头金句",
+    "正文段落": "正文段落",
+    "金句语录": "金句语录",
+    "行动号召": "行动号召",
+    "硬数据": "硬数据",
+}
+
+EMOTION_MAP = {
+    # 英文 → 中文
+    "Positive": "积极",
+    "Negative": "消极",
+    "Neutral": "中性",
+    "High Arousal": "激昂",
+    # 中文直接通过
+    "积极": "积极",
+    "消极": "消极",
+    "中性": "中性",
+    "激昂": "激昂",
+    "共情": "共情",
+}
+
+# ==========================================
 # 5. Prompt 模板
 # ==========================================
 
@@ -490,15 +523,20 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
             }
         else:
             # Style_Repo 表结构 (风格素材/血)
-            # 完整 9 字段映射 (已验证格式 2026-01-26)
+            # 完整 9 字段映射 (P12.3 更新: 字段值统一为中文)
             # 字段类型: 内容(Text), 博主(SingleSelect), 片段类型(SingleSelect), 
             #          情绪(SingleSelect), 内容指纹(Text), 质量评分(Number),
             #          状态(SingleSelect), 逻辑公式(Text), 风格标签(MultiSelect)
+            
+            # 应用中文映射转换
+            snippet_type_cn = SNIPPET_TYPE_MAP.get(snippet.snippet_type, "金句语录")
+            emotion_cn = EMOTION_MAP.get(snippet.emotional_valence, "中性") if snippet.emotional_valence else "中性"
+            
             fields = {
                 "内容": snippet.clean_text,
                 "博主": author,
-                "片段类型": snippet.snippet_type,
-                "情绪": snippet.emotional_valence if snippet.emotional_valence else "Neutral",
+                "片段类型": snippet_type_cn,  # 使用中文值
+                "情绪": emotion_cn,           # 使用中文值
                 "内容指纹": content_hash,
                 "质量评分": float(snippet.quality_score),
                 "状态": "待处理",

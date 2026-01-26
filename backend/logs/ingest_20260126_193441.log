@@ -44,3 +44,8 @@ banfo --source-category Shell --provider deepseek --min-score 3
    🔢 总分片数: 1308 块
    ⏱️ 预计耗时: 87 分 12 秒
 
+  LLM返回: 1 条
+  LLM返回: 16 条
+  LLM返回: 25 条
+  LLM返回: 30 条
+2026-01-26 19:36:40,475 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token

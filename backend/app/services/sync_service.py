@@ -10,26 +10,33 @@ import os
 logger = get_logger("services.sync")
 
 # Mapping from Lark Chinese field names to Internal keys
-# Updated for P12: Added logic_pattern, quality_score; updated type -> snippet_type, emotion -> emotional_valence
+# P12.3 更新: 添加实际 Lark 表格字段名映射 (博主、片段类型、风格标签、质量评分)
 FIELD_MAPPING = {
     "内容": "content",
     "Content": "content",
+    # 博主 (Lark 实际字段名) 和 作者 (兼容)
+    "博主": "author",
     "作者": "author",
     "Author": "author",
+    # 风格标签 (Lark 实际字段名) 和 风格 (兼容)
+    "风格标签": "style",
     "风格": "style",
     "Style": "style",
-    # P12 更新: 类型映射到 snippet_type (Hook/Body/CTA/Quote/Hard_Fact)
+    # 片段类型 (Lark 实际字段名) 和 类型 (兼容)
+    "片段类型": "snippet_type",
     "类型": "snippet_type",
     "Type": "snippet_type",
-    # P12 更新: 情绪映射到 emotional_valence (High Arousal/Positive/Negative/Neutral)
+    # 情绪
     "情绪": "emotional_valence",
     "Emotion": "emotional_valence",
-    # P12 新增: 逻辑公式
+    # 逻辑公式
     "逻辑公式": "logic_pattern",
     "Logic Pattern": "logic_pattern",
-    # P12 新增: 质量分
+    # 质量评分 (Lark 实际字段名) 和 质量分 (兼容)
+    "质量评分": "quality_score",
     "质量分": "quality_score",
     "Quality Score": "quality_score",
+    # 状态
     "状态": "status",
     "Status": "status"
 }
