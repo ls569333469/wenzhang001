@@ -492,7 +492,7 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
             # Style_Repo 表结构 (风格素材/血)
             # 实际字段映射 (与 Lark 表格字段名完全对应)
             fields = {
-                "AI 内容": snippet.clean_text,
+                "内容": snippet.clean_text,
                 "博主": author,
                 "片段类型": snippet.snippet_type,
                 "情绪": snippet.emotional_valence,
