@@ -177,3 +177,12 @@ banfo --source-category Shell --provider deepseek --min-score 3
   LLM返回: 22 条
 2026-01-26 20:28:16,241 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
   ✓ 2023-02-05_消费主义被社会毒打了.txt: 提取 22 → 入库 21
+  LLM返回: 29 条
+  ✓ 2023-02-06_在县城开车，被老头乐毒打.txt: 提取 29 → 入库 28
+  LLM返回: 1 条
+  LLM返回: 18 条
+  LLM返回: 20 条
+  ✓ 2023-02-07_自如被迫成了家政卷王.txt: 提取 39 → 入库 36
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 36 条

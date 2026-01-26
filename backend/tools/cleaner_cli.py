@@ -532,6 +532,27 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
             snippet_type_cn = SNIPPET_TYPE_MAP.get(snippet.snippet_type, "金句语录")
             emotion_cn = EMOTION_MAP.get(snippet.emotional_valence, "中性") if snippet.emotional_valence else "中性"
             
+            # 从 logic_pattern 推断风格标签
+            style_tags = []
+            lp = snippet.logic_pattern.lower() if snippet.logic_pattern else ""
+            if "毒舌" in lp or "讽刺" in lp or "嘲讽" in lp:
+                style_tags.append("毒舌")
+            if "焦虑" in lp or "恐惧" in lp or "制造焦虑" in lp:
+                style_tags.append("焦虑")
+            if "逻辑" in lp or "推理" in lp or "分析" in lp:
+                style_tags.append("逻辑")
+            if "共情" in lp or "共鸣" in lp or "同理" in lp:
+                style_tags.append("共情")
+            if "对比" in lp or "反差" in lp or "转折" in lp:
+                style_tags.append("对比")
+            if "煽情" in lp or "情感" in lp or "感人" in lp:
+                style_tags.append("煽情")
+            if "数据" in lp or "事实" in lp:
+                style_tags.append("数据流")
+            # 默认至少有一个标签
+            if not style_tags:
+                style_tags.append("逻辑")
+            
             fields = {
                 "内容": snippet.clean_text,
                 "博主": author,
@@ -541,7 +562,7 @@ async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str,
                 "质量评分": float(snippet.quality_score),
                 "状态": "待处理",
                 "逻辑公式": snippet.logic_pattern if snippet.logic_pattern else "",
-                "风格标签": [style] if style else [author]  # MultiSelect 需要数组格式
+                "风格标签": style_tags  # 从 logic_pattern 推断
             }
         
         # 在线程池中运行同步代码
