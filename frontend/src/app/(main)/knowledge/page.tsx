@@ -37,6 +37,9 @@ export default function KnowledgePage() {
   const [browserPath, setBrowserPath] = useState('');
   const [browserParent, setBrowserParent] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Web2 专用状态
+  const [web2Author, setWeb2Author] = useState<string>('');
+  const [web2Style, setWeb2Style] = useState<string>('mimeng');
 
   // 费用计算常量
   const COST_PER_RECORD = 0.012; // ¥0.012/条
@@ -122,8 +125,11 @@ export default function KnowledgePage() {
         body: JSON.stringify({
           mode: ingestMode,
           source: dataSource,
-          custom_path: dataSource === 'custom' ? customPath : null,
-          target_table: dataSource === 'custom' ? targetTable : dataSource
+          custom_path: (dataSource === 'custom' || dataSource === 'web2') ? customPath : null,
+          target_table: dataSource === 'custom' ? targetTable : dataSource,
+          // Web2 专用参数
+          web2_author: dataSource === 'web2' ? web2Author : null,
+          web2_style: dataSource === 'web2' ? web2Style : null
         })
       });
       if (res.ok) {
@@ -250,6 +256,36 @@ export default function KnowledgePage() {
                 />
                 <span className="text-sm">Web2风格</span>
               </label>
+              {/* Web2 专用配置 */}
+              {dataSource === 'web2' && (
+                <div className="mt-2 space-y-2 pl-6 border-l-2 border-zinc-200">
+                  <div>
+                    <label className="text-xs text-ink-muted">博主名称</label>
+                    <input
+                      type="text"
+                      value={web2Author}
+                      onChange={(e) => setWeb2Author(e.target.value)}
+                      placeholder="例如: 咪蒙"
+                      className="w-full px-3 py-1.5 text-sm border border-zinc-200 rounded-lg mt-1"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-ink-muted">风格标签</label>
+                    <select
+                      value={web2Style}
+                      onChange={(e) => setWeb2Style(e.target.value)}
+                      className="w-full px-3 py-1.5 text-sm border border-zinc-200 rounded-lg mt-1"
+                    >
+                      <option value="mimeng">mimeng</option>
+                      <option value="banfo">banfo</option>
+                      <option value="lianbushou">lianbushou</option>
+                    </select>
+                  </div>
+                  <p className="text-xs text-ink-muted">
+                    ℹ️ 请先选择“自定义目录”并浏览选择博主的数据文件夹
+                  </p>
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input

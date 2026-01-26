@@ -23,6 +23,7 @@ import json
 import asyncio
 import hashlib
 import re
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from typing import Optional, List, Dict, Any
@@ -392,6 +393,9 @@ async def main():
     parser.add_argument("--path", type=str, help="指定自定义目录路径 (支持任意本地目录)")
     parser.add_argument("--target", type=str, default="web3", choices=["web3", "web2"], help="目标表格 (web3 | web2)")
     parser.add_argument("--limit", type=int, default=0, help="每个文件夹处理的最大文件数 (0=不限制)")
+    # Web2 专用参数
+    parser.add_argument("--author", type=str, default="", help="[Web2] 博主名称")
+    parser.add_argument("--style", type=str, default="", help="[Web2] 风格标签 (mimeng/banfo 等)")
     args = parser.parse_args()
     
     if not args.folder and not args.all and not args.path:
@@ -429,6 +433,46 @@ async def main():
         
         console.print(f"找到 {len(all_files)} 个文件 (JSON: {len(json_files)}, TXT: {len(txt_files)}, MD: {len(md_files)})")
         
+        # =====================================
+        # Web2 模式：委托给 cleaner_cli.py
+        # =====================================
+        if args.target == "web2":
+            console.print("[cyan]检测到 Web2 模式，委托给 cleaner_cli.py 处理...[/cyan]")
+            
+            # 确定 author 和 style
+            author = args.author if args.author else custom_path.name
+            style = args.style if args.style else custom_path.name.lower()
+            
+            console.print(f"[CONFIG] 博主: {author}")
+            console.print(f"[CONFIG] 风格: {style}")
+            
+            # 构建 cleaner_cli 命令
+            backend_dir = Path(__file__).parent.parent
+            cleaner_cmd = [
+                sys.executable, "-m", "tools.cleaner_cli", "clean",
+                "--input", str(custom_path),
+                "--author", author,
+                "--style", style,
+                "--source-category", "Shell",
+                "--provider", "deepseek",
+                "--min-score", "3"
+            ]
+            
+            console.print(f"[dim]执行: {' '.join(cleaner_cmd)}[/dim]")
+            console.print()
+            
+            result = subprocess.run(cleaner_cmd, cwd=str(backend_dir))
+            
+            if result.returncode == 0:
+                console.print("[green]✅ Web2 清洗完成[/green]")
+            else:
+                console.print(f"[red]❌ cleaner_cli 返回错误码: {result.returncode}[/red]")
+            
+            return  # 提前返回，不执行 Web3 逻辑
+        
+        # =====================================
+        # Web3 模式：现有逻辑
+        # =====================================
         # 使用目录名作为 topic
         topic = custom_path.name
         total_stats = await process_folder(custom_path, topic, args.limit, args.target)

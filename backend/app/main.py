@@ -559,6 +559,9 @@ class IngestStartRequest(BaseModel):
     source: str = "web3"     # web3 | web2 | custom
     custom_path: Optional[str] = None  # 自定义目录路径
     target_table: str = "web3"  # web3 | web2 目标表格
+    # Web2 专用参数
+    web2_author: Optional[str] = None  # 博主名称
+    web2_style: Optional[str] = None   # 风格标签
 
 
 @app.post("/ingest/start")
@@ -592,6 +595,20 @@ async def start_ingest(request: IngestStartRequest):
         # 自定义目录
         cmd.extend(["--path", request.custom_path])
         cmd.extend(["--target", request.target_table])
+        # Web2 专用参数
+        if request.target_table == "web2":
+            if request.web2_author:
+                cmd.extend(["--author", request.web2_author])
+            if request.web2_style:
+                cmd.extend(["--style", request.web2_style])
+    elif request.source == "web2" and request.custom_path:
+        # Web2 数据源 + 自定义路径
+        cmd.extend(["--path", request.custom_path])
+        cmd.extend(["--target", "web2"])
+        if request.web2_author:
+            cmd.extend(["--author", request.web2_author])
+        if request.web2_style:
+            cmd.extend(["--style", request.web2_style])
     else:
         # 使用默认目录
         cmd.append("--all")
