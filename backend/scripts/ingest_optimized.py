@@ -461,7 +461,10 @@ async def main():
             console.print(f"[dim]执行: {' '.join(cleaner_cmd)}[/dim]")
             console.print()
             
-            result = subprocess.run(cleaner_cmd, cwd=str(backend_dir))
+            # 设置 UTF-8 编码环境，避免 Windows 编码问题
+            env = os.environ.copy()
+            env["PYTHONIOENCODING"] = "utf-8"
+            result = subprocess.run(cleaner_cmd, cwd=str(backend_dir), env=env)
             
             if result.returncode == 0:
                 console.print("[green]✅ Web2 清洗完成[/green]")

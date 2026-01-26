@@ -1,0 +1,522 @@
+=== ÂÖ•Â∫ì‰ªªÂä°ÂêØÂä® ===
+Êó∂Èó¥: 2026-01-26T16:47:36.703352
+ÂëΩ‰ª§: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m scripts.ingest_optimized --path D:\AI_Projects\2026001\backend\data\Web2È£éÊ†º\Âçä‰Ωõ‰ªô‰∫∫ --target web2
+Ê®°Âºè: optimized
+Êï∞ÊçÆÊ∫ê: custom
+Ëá™ÂÆö‰πâË∑ØÂæÑ: D:\AI_Projects\2026001\backend\data\Web2È£éÊ†º\Âçä‰Ωõ‰ªô‰∫∫
+===================
+
+============================================================
+[INFO] Quantum Studio v5.2 - Knowledge_Repo ‰ºòÂåñÁâàÂÖ•Â∫ì
+============================================================
+[CONFIG] Base Token: CSfdbzErqay4bnsISxEuuVais3g
+[CONFIG] Knowledge Table ID: tblkvQK9aKxP0wsk
+[CONFIG] ‰ºòÂåñÁâπÊÄß: ÂêàÂπ∂LLMË∞ÉÁî® + ÊâπÈáè‰∏ä‰º† + Êú¨Âú∞HashÁºìÂ≠ò
+
+[FOLDER] Ëá™ÂÆö‰πâÁõÆÂΩïÊ®°Âºè: D:\AI_Projects\2026001\backend\data\Web2È£éÊ†º\Âçä‰Ωõ‰ªô‰∫∫
+ÊâæÂà∞ 832 ‰∏™Êñá‰ª∂ (JSON: 0, TXT: 832, MD: 0)
+Ê£ÄÊµãÂà∞ Web2 Ê®°ÂºèÔºåÂßîÊâòÁªô cleaner_cli.py Â§ÑÁêÜ...
+[CONFIG] Âçö‰∏ª: Âçä‰Ωõ‰ªô‰∫∫
+[CONFIG] È£éÊ†º: Âçä‰Ωõ‰ªô‰∫∫
+ÊâßË°å: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m 
+tools.cleaner_cli clean --input 
+D:\AI_Projects\2026001\backend\data\Web2È£éÊ†º\Âçä‰Ωõ‰ªô‰∫∫ --author Âçä‰Ωõ‰ªô‰∫∫ --style
+Âçä‰Ωõ‰ªô‰∫∫ --source-category Shell --provider deepseek --min-score 3
+
++--------------------- Traceback (most recent call last) ---------------------+
+| D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:751 in clean            |
+|                                                                             |
+|   748     - \U0001f504 MD5 »•÷ÿ (±‹√‚÷ÿ∏¥»Îø‚)                                      |
+|   749     - \U0001f4c2 ÷«ƒ‹ ∂± (÷ß≥÷µ•Œƒº˛ªÚŒƒº˛º–)                                |
+|   750     """                                                               |
+| > 751     asyncio.run(main_async(input_path, author, style, source_category |
+|   752                                                                       |
+|   753 @app.command()                                                        |
+|   754 def reset_checkpoint():                                               |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |          author = '∞Î∑œ…»À'                                            | |
+| |         dry_run = False                                                 | |
+| |      input_path = 'D:\\AI_Projects\\2026001\\backend\\data\\Web2∑Á∏Ò\\°≠ | |
+| |       min_score = 3                                                     | |
+| |        provider = 'deepseek'                                            | |
+| | source_category = 'Shell'                                               | |
+| |           style = '∞Î∑œ…»À'                                            | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| E:\python\Lib\asyncio\runners.py:194 in run                                 |
+|                                                                             |
+|   191             "asyncio.run() cannot be called from a running event loop |
+|   192                                                                       |
+|   193     with Runner(debug=debug, loop_factory=loop_factory) as runner:    |
+| > 194         return runner.run(main)                                       |
+|   195                                                                       |
+|   196                                                                       |
+|   197 def _cancel_all_tasks(loop):                                          |
+|                                                                             |
+| +------------------------------- locals -------------------------------+    |
+| |        debug = None                                                  |    |
+| | loop_factory = None                                                  |    |
+| |         main = <coroutine object main_async at 0x00000236F2532320>   |    |
+| |       runner = <asyncio.runners.Runner object at 0x00000236F2DF8D70> |    |
+| +----------------------------------------------------------------------+    |
+|                                                                             |
+| E:\python\Lib\asyncio\runners.py:118 in run                                 |
+|                                                                             |
+|   115                                                                       |
+|   116         self._interrupt_count = 0                                     |
+|   117         try:                                                          |
+| > 118             return self._loop.run_until_complete(task)                |
+|   119         except exceptions.CancelledError:                             |
+|   120             if self._interrupt_count > 0:                             |
+|   121                 uncancel = getattr(task, "uncancel", None)            |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |        context = <_contextvars.Context object at 0x00000236F2D9EB00>    | |
+| |           coro = <coroutine object main_async at 0x00000236F2532320>    | |
+| |           self = <asyncio.runners.Runner object at 0x00000236F2DF8D70>  | |
+| | sigint_handler = functools.partial(<bound method Runner._on_sigint of   | |
+| |                  <asyncio.runners.Runner object at                      | |
+| |                  0x00000236F2DF8D70>>, main_task=<Task finished         | |
+| |                  name='Task-1' coro=<main_async() done, defined at      | |
+| |                  D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:6°≠ | |
+| |                  exception=UnicodeEncodeError('gbk', '\U0001f680 P12.', 0, 1,   | |
+| |                  'illegal multibyte sequence')>)                        | |
+| |           task = <Task finished name='Task-1' coro=<main_async() done,  | |
+| |                  defined at                                             | |
+| |                  D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:6°≠ | |
+| |                  exception=UnicodeEncodeError('gbk', '\U0001f680 P12.', 0, 1,   | |
+| |                  'illegal multibyte sequence')>                         | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| E:\python\Lib\asyncio\base_events.py:720 in run_until_complete              |
+|                                                                             |
+|    717         if not future.done():                                        |
+|    718             raise RuntimeError('Event loop stopped before Future com |
+|    719                                                                      |
+| >  720         return future.result()                                       |
+|    721                                                                      |
+|    722     def stop(self):                                                  |
+|    723         """Stop running the event loop.                              |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |   future = <Task finished name='Task-1' coro=<main_async() done,        | |
+| |            defined at                                                   | |
+| |            D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:610>     | |
+| |            exception=UnicodeEncodeError('gbk', '\U0001f680 P12.', 0, 1,         | |
+| |            'illegal multibyte sequence')>                               | |
+| | new_task = False                                                        | |
+| |     self = <ProactorEventLoop running=False closed=True debug=False>    | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:621 in main_async       |
+|                                                                             |
+|   618 ):                                                                    |
+|   619     """÷˜“Ï≤Ω¥¶¿Ì¡˜≥Ã"""                                              |
+|   620                                                                       |
+| > 621     console.print(f"[bold green]\U0001f680 P12.2 π§“µº∂«Âœ¥π§æﬂ v2.2[/bold gr |
+|   622     console.print(f"   \U0001f4c1  ‰»Î: {input_path}")                        |
+|   623     console.print(f"   \U0001f464 ◊˜’ﬂ: {author}")                            |
+|   624     console.print(f"   \U0001f3a8 ∑Á∏Ò: {style}")                             |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |          author = '∞Î∑œ…»À'                                            | |
+| |         dry_run = False                                                 | |
+| |      input_path = 'D:\\AI_Projects\\2026001\\backend\\data\\Web2∑Á∏Ò\\°≠ | |
+| |       min_score = 3                                                     | |
+| |        provider = 'deepseek'                                            | |
+| | source_category = 'Shell'                                               | |
+| |           style = '∞Î∑œ…»À'                                            | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py:1697  |
+| in print                                                                    |
+|                                                                             |
+|   1694                 overflow = "ignore"                                  |
+|   1695             crop = False                                             |
+|   1696         render_hooks = self._render_hooks[:]                         |
+| > 1697         with self:                                                   |
+|   1698             renderables = self._collect_renderables(                 |
+|   1699                 objects,                                             |
+|   1700                 sep,                                                 |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |  buffer_extend = <built-in method extend of list object at              | |
+| |                  0x00000236F2DA6F40>                                    | |
+| |           crop = True                                                   | |
+| |          emoji = None                                                   | |
+| |            end = '\n'                                                   | |
+| |         extend = <built-in method extend of list object at              | |
+| |                  0x00000236F2E13B00>                                    | |
+| |         height = None                                                   | |
+| |      highlight = None                                                   | |
+| |        justify = None                                                   | |
+| |           line = [                                                      | |
+| |                      Segment(                                           | |
+| |                          '\U0001f680 P12.',                                     | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True                                  | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(                                           | |
+| |                          '2',                                           | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True,                                 | |
+| |                              italic=False                               | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(                                           | |
+| |                          ' π§“µº∂«Âœ¥π§æﬂ v2.',                         | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True                                  | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(                                           | |
+| |                          '2',                                           | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True,                                 | |
+| |                              italic=False                               | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment('\n')                                      | |
+| |                  ]                                                      | |
+| |         markup = None                                                   | |
+| | new_line_start = False                                                  | |
+| |   new_segments = [                                                      | |
+| |                      Segment(                                           | |
+| |                          '\U0001f680 P12.',                                     | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True                                  | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(                                           | |
+| |                          '2',                                           | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True,                                 | |
+| |                              italic=False                               | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(                                           | |
+| |                          ' π§“µº∂«Âœ¥π§æﬂ v2.',                         | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True                                  | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment(                                           | |
+| |                          '2',                                           | |
+| |                          Style(                                         | |
+| |                              color=Color(                               | |
+| |                                  'green',                               | |
+| |                                  ColorType.STANDARD,                    | |
+| |                                  number=2                               | |
+| |                              ),                                         | |
+| |                              bold=True,                                 | |
+| |                              italic=False                               | |
+| |                          )                                              | |
+| |                      ),                                                 | |
+| |                      Segment('\n')                                      | |
+| |                  ]                                                      | |
+| |        no_wrap = None                                                   | |
+| |        objects = (                                                      | |
+| |                      '[bold green]\U0001f680 P12.2 π§“µº∂«Âœ¥π§æﬂ v2.2[/bold    | |
+| |                  green]',                                               | |
+| |                  )                                                      | |
+| |       overflow = None                                                   | |
+| |         render = <bound method Console.render of <console width=79      | |
+| |                  None>>                                                 | |
+| |   render_hooks = []                                                     | |
+| | render_options = ConsoleOptions(                                        | |
+| |                      size=ConsoleDimensions(width=79, height=25),       | |
+| |                      legacy_windows=True,                               | |
+| |                      min_width=1,                                       | |
+| |                      max_width=79,                                      | |
+| |                      is_terminal=False,                                 | |
+| |                      encoding='gbk',                                    | |
+| |                      max_height=25,                                     | |
+| |                      justify=None,                                      | |
+| |                      overflow=None,                                     | |
+| |                      no_wrap=None,                                      | |
+| |                      highlight=None,                                    | |
+| |                      markup=None,                                       | |
+| |                      height=None                                        | |
+| |                  )                                                      | |
+| |     renderable = <text '\U0001f680 P12.2 π§“µº∂«Âœ¥π§æﬂ v2.2' [Span(6, 7,       | |
+| |                  'repr.number'), Span(19, 20, 'repr.number'), Span(0,   | |
+| |                  20, 'bold green')] ''>                                 | |
+| |    renderables = [                                                      | |
+| |                      <text '\U0001f680 P12.2 π§“µº∂«Âœ¥π§æﬂ v2.2' [Span(6, 7,   | |
+| |                  'repr.number'), Span(19, 20, 'repr.number'), Span(0,   | |
+| |                  20, 'bold green')] ''>                                 | |
+| |                  ]                                                      | |
+| |           self = <console width=79 None>                                | |
+| |            sep = ' '                                                    | |
+| |      soft_wrap = False                                                  | |
+| |          style = None                                                   | |
+| |          width = None                                                   | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py:870   |
+| in __exit__                                                                 |
+|                                                                             |
+|    867                                                                      |
+|    868     def __exit__(self, exc_type: Any, exc_value: Any, traceback: Any |
+|    869         """Exit buffer context."""                                   |
+| >  870         self._exit_buffer()                                          |
+|    871                                                                      |
+|    872     def begin_capture(self) -> None:                                 |
+|    873         """Begin capturing console output. Call :meth:`end_capture`  |
+|                                                                             |
+| +-------------- locals ---------------+                                     |
+| |  exc_type = None                    |                                     |
+| | exc_value = None                    |                                     |
+| |      self = <console width=79 None> |                                     |
+| | traceback = None                    |                                     |
+| +-------------------------------------+                                     |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py:826   |
+| in _exit_buffer                                                             |
+|                                                                             |
+|    823     def _exit_buffer(self) -> None:                                  |
+|    824         """Leave buffer context, and render content if required."""  |
+|    825         self._buffer_index -= 1                                      |
+| >  826         self._check_buffer()                                         |
+|    827                                                                      |
+|    828     def set_live(self, live: "Live") -> bool:                        |
+|    829         """Set Live instance. Used by Live context manager (no need  |
+|                                                                             |
+| +------------ locals ------------+                                          |
+| | self = <console width=79 None> |                                          |
+| +--------------------------------+                                          |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py:2038  |
+| in _check_buffer                                                            |
+|                                                                             |
+|   2035             return                                                   |
+|   2036                                                                      |
+|   2037         try:                                                         |
+| > 2038             self._write_buffer()                                     |
+|   2039         except BrokenPipeError:                                      |
+|   2040             self.on_broken_pipe()                                    |
+|   2041                                                                      |
+|                                                                             |
+| +------------ locals ------------+                                          |
+| | self = <console width=79 None> |                                          |
+| +--------------------------------+                                          |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\console.py:2074  |
+| in _write_buffer                                                            |
+|                                                                             |
+|   2071                             if self.no_color and self._color_system: |
+|   2072                                 buffer = list(Segment.remove_color(b |
+|   2073                                                                      |
+| > 2074                             legacy_windows_render(buffer, LegacyWind |
+|   2075                         else:                                        |
+|   2076                             # Either a non-std stream on legacy Wind |
+|   2077                             text = self._render_buffer(self._buffer[ |
+|                                                                             |
+| +---------------------------- locals -----------------------------+         |
+| |                    buffer = [                                   |         |
+| |                                 Segment(                        |         |
+| |                                     '\U0001f680 P12.',                  |         |
+| |                                     Style(                      |         |
+| |                                         color=Color(            |         |
+| |                                             'green',            |         |
+| |                                             ColorType.STANDARD, |         |
+| |                                             number=2            |         |
+| |                                         ),                      |         |
+| |                                         bold=True               |         |
+| |                                     )                           |         |
+| |                                 ),                              |         |
+| |                                 Segment(                        |         |
+| |                                     '2',                        |         |
+| |                                     Style(                      |         |
+| |                                         color=Color(            |         |
+| |                                             'green',            |         |
+| |                                             ColorType.STANDARD, |         |
+| |                                             number=2            |         |
+| |                                         ),                      |         |
+| |                                         bold=True,              |         |
+| |                                         italic=False            |         |
+| |                                     )                           |         |
+| |                                 ),                              |         |
+| |                                 Segment(                        |         |
+| |                                     ' π§“µº∂«Âœ¥π§æﬂ v2.',      |         |
+| |                                     Style(                      |         |
+| |                                         color=Color(            |         |
+| |                                             'green',            |         |
+| |                                             ColorType.STANDARD, |         |
+| |                                             number=2            |         |
+| |                                         ),                      |         |
+| |                                         bold=True               |         |
+| |                                     )                           |         |
+| |                                 ),                              |         |
+| |                                 Segment(                        |         |
+| |                                     '2',                        |         |
+| |                                     Style(                      |         |
+| |                                         color=Color(            |         |
+| |                                             'green',            |         |
+| |                                             ColorType.STANDARD, |         |
+| |                                             number=2            |         |
+| |                                         ),                      |         |
+| |                                         bold=True,              |         |
+| |                                         italic=False            |         |
+| |                                     )                           |         |
+| |                                 ),                              |         |
+| |                                 Segment('\n')                   |         |
+| |                             ]                                   |         |
+| |                    fileno = 1                                   |         |
+| |                      self = <console width=79 None>             |         |
+| | use_legacy_windows_render = True                                |         |
+| +-----------------------------------------------------------------+         |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\_windows_rendere |
+| r.py:17 in legacy_windows_render                                            |
+|                                                                             |
+|   14     for text, style, control in buffer:                                |
+|   15         if not control:                                                |
+|   16             if style:                                                  |
+| > 17                 term.write_styled(text, style)                         |
+|   18             else:                                                      |
+|   19                 term.write_text(text)                                  |
+|   20         else:                                                          |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |  buffer = [                                                             | |
+| |               Segment(                                                  | |
+| |                   '\U0001f680 P12.',                                            | |
+| |                   Style(                                                | |
+| |                       color=Color(                                      | |
+| |                           'green',                                      | |
+| |                           ColorType.STANDARD,                           | |
+| |                           number=2                                      | |
+| |                       ),                                                | |
+| |                       bold=True                                         | |
+| |                   )                                                     | |
+| |               ),                                                        | |
+| |               Segment(                                                  | |
+| |                   '2',                                                  | |
+| |                   Style(                                                | |
+| |                       color=Color(                                      | |
+| |                           'green',                                      | |
+| |                           ColorType.STANDARD,                           | |
+| |                           number=2                                      | |
+| |                       ),                                                | |
+| |                       bold=True,                                        | |
+| |                       italic=False                                      | |
+| |                   )                                                     | |
+| |               ),                                                        | |
+| |               Segment(                                                  | |
+| |                   ' π§“µº∂«Âœ¥π§æﬂ v2.',                                | |
+| |                   Style(                                                | |
+| |                       color=Color(                                      | |
+| |                           'green',                                      | |
+| |                           ColorType.STANDARD,                           | |
+| |                           number=2                                      | |
+| |                       ),                                                | |
+| |                       bold=True                                         | |
+| |                   )                                                     | |
+| |               ),                                                        | |
+| |               Segment(                                                  | |
+| |                   '2',                                                  | |
+| |                   Style(                                                | |
+| |                       color=Color(                                      | |
+| |                           'green',                                      | |
+| |                           ColorType.STANDARD,                           | |
+| |                           number=2                                      | |
+| |                       ),                                                | |
+| |                       bold=True,                                        | |
+| |                       italic=False                                      | |
+| |                   )                                                     | |
+| |               ),                                                        | |
+| |               Segment('\n')                                             | |
+| |           ]                                                             | |
+| | control = None                                                          | |
+| |   style = Style(                                                        | |
+| |               color=Color('green', ColorType.STANDARD, number=2),       | |
+| |               bold=True                                                 | |
+| |           )                                                             | |
+| |    term = <rich._win32_console.LegacyWindowsTerm object at              | |
+| |           0x00000236F2DF92B0>                                           | |
+| |    text = '\U0001f680 P12.'                                                     | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\_win32_console.p |
+| y:441 in write_styled                                                       |
+|                                                                             |
+|   438         SetConsoleTextAttribute(                                      |
+|   439             self._handle, attributes=ctypes.c_ushort(fore | (back <<  |
+|   440         )                                                             |
+| > 441         self.write_text(text)                                         |
+|   442         SetConsoleTextAttribute(self._handle, attributes=self._defaul |
+|   443                                                                       |
+|   444     def move_cursor_to(self, new_position: WindowsCoordinates) -> Non |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| |    back = 0                                                             | |
+| | bgcolor = None                                                          | |
+| |   color = Color('green', ColorType.STANDARD, number=2)                  | |
+| |    fore = 10                                                            | |
+| |    self = <rich._win32_console.LegacyWindowsTerm object at              | |
+| |           0x00000236F2DF92B0>                                           | |
+| |   style = Style(                                                        | |
+| |               color=Color('green', ColorType.STANDARD, number=2),       | |
+| |               bold=True                                                 | |
+| |           )                                                             | |
+| |    text = '\U0001f680 P12.'                                                     | |
+| +-------------------------------------------------------------------------+ |
+|                                                                             |
+| D:\AI_Projects\2026001\backend\venv\Lib\site-packages\rich\_win32_console.p |
+| y:402 in write_text                                                         |
+|                                                                             |
+|   399         Args:                                                         |
+|   400             text (str): The text to write to the console              |
+|   401         """                                                           |
+| > 402         self.write(text)                                              |
+|   403         self.flush()                                                  |
+|   404                                                                       |
+|   405     def write_styled(self, text: str, style: Style) -> None:          |
+|                                                                             |
+| +-------------------------------- locals ---------------------------------+ |
+| | self = <rich._win32_console.LegacyWindowsTerm object at                 | |
+| |        0x00000236F2DF92B0>                                              | |
+| | text = '\U0001f680 P12.'                                                        | |
+| +-------------------------------------------------------------------------+ |
++-----------------------------------------------------------------------------+
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f680' in position
+0: illegal multibyte sequence
+‚ùå cleaner_cli ËøîÂõûÈîôËØØÁ†Å: 1
