@@ -126,7 +126,7 @@ class CleanedSnippet(BaseModel):
     snippet_type: str = Field(default="Quote", description="Hook/Body/CTA/Quote/Hard_Fact")
     logic_pattern: str = Field(default="", description="逻辑公式")
     emotional_valence: str = Field(default="Neutral", description="情绪效价")
-    quality_score: int = Field(default=3, description="评分 1-5")
+    quality_score: int = Field(default=5, description="评分 1-10")
 
 # ==========================================
 # 4.1 字段值映射 (英文 → 中文)
@@ -187,6 +187,13 @@ SHELL_MINER_PROMPT = """
 4. **时效性过滤**: 含节日/具体日期的内容 quality_score=1
 5. **PS 内容降权**: "PS:"开头的广告 quality_score=2
 
+# Quality Score 评分标准 (1-10分)
+- 9-10分: 顶级金句，可直接复用，具有病毒传播潜力
+- 7-8分: 优质内容，观点独特，有较强感染力
+- 5-6分: 普通内容，有参考价值但不突出
+- 3-4分: 质量一般，缺乏亮点
+- 1-2分: 低质量，时效性内容或广告
+
 # Output (JSON Only, 尽可能提取多条)
 {{
   "snippets": [
@@ -196,7 +203,7 @@ SHELL_MINER_PROMPT = """
       "snippet_type": "Hook/Body/CTA/Quote",
       "logic_pattern": "逻辑公式",
       "emotional_valence": "High Arousal",
-      "quality_score": 5
+      "quality_score": 8
     }},
     {{
       "original_text": "原文片段2...",
@@ -204,7 +211,7 @@ SHELL_MINER_PROMPT = """
       "snippet_type": "Quote",
       "logic_pattern": "情感共鸣",
       "emotional_valence": "Positive",
-      "quality_score": 4
+      "quality_score": 6
     }}
   ]
 }}

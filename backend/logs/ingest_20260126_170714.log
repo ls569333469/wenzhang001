@@ -186,3 +186,23 @@ banfo --source-category Shell --provider deepseek --min-score 3
   LLM返回: 1 条
   LLM返回: 4 条
   LLM返回: 36 条
+  ✓ 2023-02-08_开工没有回头钱.txt: 提取 41 → 入库 38
+  LLM返回: 1 条
+  LLM返回: 7 条
+  ❌ JSON解析失败: Expecting ',' delimiter: line 266 column 4 (char 9
+  ✓ 2023-02-10_理想L7，男人收割机.txt: 提取 8 → 入库 4
+  LLM返回: 1 条
+  LLM返回: 11 条
+  ❌ JSON解析失败: Unterminated string starting at: line 295 column 2
+  ❌ JSON解析失败: Unterminated string starting at: line 252 column 2
+2026-01-26 20:52:50,471 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-12_婚庆公司，能坑你多少钱？.txt: 提取 12 → 入库 9
+  LLM返回: 1 条
+  LLM返回: 17 条
+  ❌ JSON解析失败: Unterminated string starting at: line 260 column 2
+  ✓ 2023-02-13_营养快线，网吧之王.txt: 提取 18 → 入库 17
+  LLM返回: 2 条
+  LLM返回: 1 条
+  LLM返回: 37 条
+  ❌ JSON解析失败: Unterminated string starting at: line 284 column 2
+2026-01-26 21:01:42,340 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
