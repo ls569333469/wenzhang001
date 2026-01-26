@@ -892,3 +892,5 @@ requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='open.feishu.cn', port
 ❌ Lark上传失败: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=30)
   ✓ 2023-03-06_拼多多你几个意思.txt: 提取 33 → 入库 29
   LLM返回: 1 条
+  LLM返回: 27 条
+  ❌ JSON解析失败: Unterminated string starting at: line 276 column 2

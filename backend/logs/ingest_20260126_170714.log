@@ -301,3 +301,22 @@ banfo --source-category Shell --provider deepseek --min-score 3
   ✓ 2023-03-09_销售会跑路，朋友不会.txt: 提取 13 → 入库 11
   LLM返回: 1 条
   LLM返回: 29 条
+  ❌ JSON解析失败: Unterminated string starting at: line 277 column 2
+2026-01-26 22:55:37,774 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-03-10_没有人比闲鱼更懂开挂.txt: 提取 30 → 入库 30
+  LLM返回: 1 条
+  LLM返回: 22 条
+  LLM返回: 32 条
+  ⏳ 分片 3/4 超时
+2026-01-26 23:04:52,027 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-26 23:10:42,777 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-03-13_外卖平台，开始悔改？.txt: 提取 55 → 入库 51
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 23 条
+  ✓ 2023-03-14_为了收购暴雪，微软反击索尼.txt: 提取 28 → 入库 27
+  LLM返回: 32 条
+  ✓ 2023-03-16_自媒体这个活儿，能干一辈子吗？.txt: 提取 32 → 入库 31
+  LLM返回: 1 条
+  LLM返回: 24 条
+  LLM返回: 26 条

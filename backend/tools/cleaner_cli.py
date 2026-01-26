@@ -19,7 +19,7 @@ import json
 import asyncio
 import hashlib
 from pathlib import Path
-from typing import List, Optional, Set
+from typing import List, Optional, Set, Dict
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
 
