@@ -111,7 +111,7 @@ export default function KnowledgePage() {
 
   function selectDirectory(path: string) {
     setCustomPath(path);
-    setDataSource('custom');
+    setDataSource(dataSource === 'web2' ? 'web2' : 'custom');
     setShowBrowser(false);
     toast.success(`已选择: ${path.split('\\').pop()}`);
   }
