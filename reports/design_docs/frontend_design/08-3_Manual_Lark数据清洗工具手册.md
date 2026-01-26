@@ -687,11 +687,203 @@ Get-ChildItem D:\AI_Projects\2026001\backend\logs\ |
 
 ---
 
-## 14. 更新日志
+## 14. Web2 清洗规则 (cleaner_cli.py)
+
+> 📁 工具路径: `backend/tools/cleaner_cli.py`
+> **版本**: P12.2 工业级清洗工具 v2.2
+> **更新日期**: 2026-01-26
+
+### 14.1 工具概述
+
+`cleaner_cli.py` 是专门用于 **Web2 风格素材** 清洗的 CLI 工具，使用 LLM 从长文本中提取有价值的写作素材片段。
+
+### 14.2 使用命令
+
+```bash
+cd backend
+
+# 清洗单个文件
+python -m tools.cleaner_cli clean \
+  --input "data/Web2风格/半佛仙人/文章.txt" \
+  --author banfo \
+  --style banfo \
+  --source-category Shell \
+  --provider deepseek \
+  --min-score 3
+
+# 清洗整个文件夹
+python -m tools.cleaner_cli clean \
+  --input "data/Web2风格/半佛仙人" \
+  --author banfo \
+  --style banfo \
+  --source-category Shell \
+  --provider deepseek \
+  --min-score 3
+
+# 重置断点记录
+python -m tools.cleaner_cli reset-checkpoint
+```
+
+### 14.3 参数说明
+
+| 参数 | 必填 | 说明 | 示例 |
+|------|:----:|------|------|
+| `--input` | ✅ | 输入文件或目录 | `data/Web2风格/半佛仙人` |
+| `--author` | ✅ | 博主名称 (Lark 单选字段) | `banfo`, `mimeng` |
+| `--style` | ✅ | 风格标签 (Lark 多选字段) | `banfo`, `毒舌` |
+| `--source-category` | ✅ | 清洗模式: Shell (风格) / Kernel (知识) | `Shell` |
+| `--provider` | ❌ | LLM 提供商: deepseek / gemini | `deepseek` |
+| `--min-score` | ❌ | 最低质量评分 (1-5)，低于此分不入库 | `3` |
+| `--dry-run` | ❌ | 仅测试不入库 | 无值 |
+
+### 14.4 清洗模式
+
+| 模式 | 参数值 | 目标表 | 用途 |
+|------|--------|--------|------|
+| **Shell** | `--source-category Shell` | Style_Repo (风格库) | Web2 风格素材 |
+| **Kernel** | `--source-category Kernel` | Knowledge_Repo (知识库) | Web3 知识素材 |
+
+### 14.5 LLM 清洗规则 (Shell 模式)
+
+#### 14.5.1 核心任务
+
+从文章中提取 **所有有价值的写作素材片段**：金句、观点、故事、情感共鸣内容。
+
+#### 14.5.2 清洗规则
+
+| 规则 | 说明 | 示例/效果 |
+|------|------|-----------|
+| **去名化** | 将具体人名替换为通用代词 | "咪蒙" → "我/她" |
+| **逻辑公式** | 分析写作套路 | "先抑后扬 + 制造焦虑" |
+| **情绪效价** | 识别情感类型 | Positive / Negative / Neutral / High Arousal |
+| **时效性过滤** | 含节日/日期的内容降权 | quality_score=1 |
+| **广告过滤** | "PS:" 开头的广告降权 | quality_score=2 |
+| **长度控制** | 每个片段 50-300 字符 | 自动分片 |
+
+#### 14.5.3 质量评分标准
+
+| 评分 | 含义 | 处理方式 |
+|:----:|------|----------|
+| 5 | 精华金句，极具价值 | 优先入库 |
+| 4 | 有独特洞察或情感共鸣 | 正常入库 |
+| 3 | 一般性内容 | 默认阈值 |
+| 2 | PS/广告内容 | 可跳过 |
+| 1 | 时效性内容 (节日/日期) | 建议跳过 |
+
+### 14.6 输出字段 (Style_Repo 9 字段)
+
+| # | Lark 字段 | 类型 | 数据来源 | 说明 |
+|---|-----------|------|----------|------|
+| 1 | 内容 | Text | LLM `clean_text` | 去名化后的通用内容 |
+| 2 | 博主 | SingleSelect | `--author` | 原作者标识 |
+| 3 | 片段类型 | SingleSelect | LLM `snippet_type` | Hook/Body/CTA/Quote/Hard_Fact |
+| 4 | 情绪 | SingleSelect | LLM `emotional_valence` | 积极/消极/中性/激昂/共情/Neutral |
+| 5 | 内容指纹 | Text | MD5(clean_text) | 去重用 |
+| 6 | 质量评分 | Number | LLM `quality_score` | 1-5 分 |
+| 7 | 状态 | SingleSelect | 固定值 | "待处理" |
+| 8 | 逻辑公式 | Text | LLM `logic_pattern` | 写作套路分析 |
+| 9 | 风格标签 | MultiSelect | `--style` | **数组格式** (重要!) |
+
+> [!IMPORTANT]
+> `风格标签` 是 **MultiSelect** 类型，必须传入数组格式如 `["banfo"]`，否则 Lark API 会报错。
+
+### 14.7 片段类型说明
+
+| 类型 | 英文 | 说明 |
+|------|------|------|
+| 开头金句 | Hook | 吸引注意力的开篇 |
+| 正文段落 | Body | 核心论述内容 |
+| 结尾升华 | CTA | 行动号召或情感升华 |
+| 金句语录 | Quote | 独立的金句 |
+| 硬数据 | Hard_Fact | 数据支撑的事实 |
+
+### 14.8 情绪效价说明
+
+| 情绪 | 说明 |
+|------|------|
+| 积极 / Positive | 正向情感 |
+| 消极 / Negative | 负向情感 |
+| 中性 / Neutral | 客观陈述 |
+| 激昂 / High Arousal | 高情绪唤起 |
+| 共情 | 引发共鸣 |
+
+### 14.9 处理流程
+
+```mermaid
+flowchart TD
+    A[读取 TXT 文件] --> B[智能分片 3000 字符/片]
+    B --> C[并发 LLM 调用 Max 3]
+    C --> D[JSON 解析提取 snippets]
+    D --> E[质量评分过滤]
+    E --> F{评分 >= min_score?}
+    F -->|是| G[计算 MD5 指纹]
+    F -->|否| H[跳过]
+    G --> I{本地 Hash 去重}
+    I -->|已存在| J[跳过]
+    I -->|不存在| K[上传 Lark]
+    K --> L[更新断点记录]
+```
+
+### 14.10 并发与分片
+
+| 配置 | 值 | 说明 |
+|------|:----:|------|
+| 并发限制 | 3 | 同时处理的 LLM 请求数 |
+| 分片大小 | 3000 字符 | 超长文件自动分片 |
+| 断点续传 | ✅ | 支持中断后继续 |
+
+### 14.11 输出示例
+
+```
+🚀 P12.2 工业级清洗工具 v2.2
+   📁 输入: data/Web2风格/半佛仙人
+   👤 作者: banfo
+   🎨 风格: banfo
+   📂 模式: Shell
+   🤖 模型: deepseek
+   ⭐ 最低分: 3
+   🔄 并发数: 3
+   📄 分片大小: 3000 字符
+
+📊 预处理分析结果:
+   📁 文件数量: 832 个
+   📝 总字符数: 2,850,970 字符
+   🔢 总分片数: 1353 块
+   ⏱️ 预计耗时: 90 分 12 秒
+
+🚀 并发处理中 (Max 3)... ━━━━━━━━━━━━━━━━━━━━ 100%
+
+🎉 完成!
+   📊 提取总数: 26
+   📤 入库总数: 25
+   🔄 去重过滤: 1 条
+```
+
+### 14.12 常见问题
+
+#### Q1: 风格标签字段报错 `MultiSelectFieldConvFail`
+
+**原因**: 风格标签是多选字段，需要数组格式
+**解决**: 代码中使用 `[style]` 而不是 `style`
+
+#### Q2: 片段类型显示英文 (Hook/Body) 而非中文
+
+**原因**: 当前 LLM 提示词输出英文类型
+**解决**: Lark 表格已添加英文选项，两者均可使用
+
+#### Q3: JSON 解析失败
+
+**原因**: LLM 返回格式不规范
+**解决**: 工具会自动跳过并继续处理其他内容
+
+---
+
+## 15. 更新日志
 
 | 日期 | 版本 | 变更 |
 |------|------|------|
-| 2026-01-25 | **v7.0** | 前端集成完成：Knowledge 页面入库管理、自定义目录、目标表格选择、Settings 配置 |
+| 2026-01-26 | **v8.0** | 新增 Web2 清洗规则章节 (cleaner_cli.py)；修复 Style_Repo 9 字段完整映射；风格标签多选格式修复 |
+| 2026-01-25 | v7.0 | 前端集成完成：Knowledge 页面入库管理、自定义目录、目标表格选择、Settings 配置 |
 | 2026-01-24 | v6.1 | 新增分批执行工具 (batch_ingest.py)，前端集成规划 |
 | 2026-01-24 | v6.0 | 新增 A/B 测试方案，优化版脚本，LLM 摘要，上传时间字段 |
 | 2026-01-24 | v5.0 | 整合所有 Lark 清洗工具，新增字段审计工具 |

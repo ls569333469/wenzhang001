@@ -81,3 +81,61 @@ banfo --source-category Shell --provider deepseek --min-score 3
   LLM返回: 9 条
   ✓ 2023-01-11_今麦郎凉白开，稳中带骚.txt: 提取 37 → 入库 33
   LLM返回: 1 条
+  LLM返回: 26 条
+  LLM返回: 31 条
+  ❌ JSON解析失败: Expecting ',' delimiter: line 298 column 1 (char 1
+  ✓ 2023-01-12_名创优品才是版本答案.txt: 提取 58 → 入库 57
+  LLM返回: 1 条
+  LLM返回: 9 条
+  LLM返回: 21 条
+2026-01-26 18:16:01,403 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-13_完美日记什么都没做错.txt: 提取 31 → 入库 26
+  LLM返回: 24 条
+  ✓ 2023-01-14_钻石商家申请破产，因为消费者不花钱？.txt: 提取 24 → 入库 23
+  LLM返回: 1 条
+  LLM返回: 5 条
+  LLM返回: 24 条
+  ✓ 2023-01-15_在美团上，点一份团圆.txt: 提取 30 → 入库 24
+  LLM返回: 1 条
+  LLM返回: 9 条
+  LLM返回: 24 条
+2026-01-26 18:29:33,724 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-16_消费主义的BUG，是信用卡.txt: 提取 34 → 入库 29
+  LLM返回: 1 条
+  LLM返回: 16 条
+  LLM返回: 31 条
+  LLM返回: 32 条
+  ✓ 2023-01-17_维达纸业，赌徒的梦幻.txt: 提取 80 → 入库 78
+  LLM返回: 1 条
+  LLM返回: 27 条
+  LLM返回: 24 条
+2026-01-26 18:47:35,305 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-18_加满Jeep的油，是自由.txt: 提取 52 → 入库 50
+  LLM返回: 1 条
+  LLM返回: 23 条
+  ❌ JSON解析失败: Unterminated string starting at: line 273 column 7
+2026-01-26 18:55:01,131 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-19_快手晚会，把人间搬上舞台.txt: 提取 24 → 入库 22
+  LLM返回: 25 条
+2026-01-26 18:59:59,146 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-01-20_问界这个车，魔幻又特别.txt: 提取 25 → 入库 23
+  LLM返回: 1 条
+  LLM返回: 9 条
+  LLM返回: 23 条
+  ✓ 2023-01-21_《中国奇谭》的核心，是不听劝.txt: 提取 33 → 入库 29
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 20 条
+  LLM返回: 29 条
+2026-01-26 19:08:13,669 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+2026-01-26 19:09:04,468 - lark_client - ERROR - Failed to create Lark record: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=30)
+2026-01-26 19:09:46,520 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-01-23_今年的鞭炮生意，混乱与暴利的游戏.txt: 提取 69 → 入库 65
+  LLM返回: 22 条
+  ✓ 2023-01-24_《流浪地球2》，人类可以选择躺吗？.txt: 提取 22 → 入库 22
+  LLM返回: 1 条
+  LLM返回: 20 条
+  LLM返回: 32 条
+  ✓ 2023-01-26_为什么工地塔吊下永远有冰红茶.txt: 提取 53 → 入库 52
+  LLM返回: 30 条
+  ✓ 2023-01-28_看了后台问题，恨不得给你磕头.txt: 提取 30 → 入库 29
