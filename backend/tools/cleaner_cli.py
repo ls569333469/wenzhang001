@@ -463,6 +463,87 @@ async def check_exists_in_lark_async(content_hash: str) -> bool:
     except Exception:
         return False
 
+# ==========================================
+# 6.1 批量上传功能 (性能优化)
+# ==========================================
+
+BATCH_SIZE = 200  # 批量上传大小
+
+async def batch_upload_to_lark_async(
+    records: List[Dict],
+    source_category: str,
+    max_retries: int = 3
+) -> int:
+    """批量上传记录到 Lark（带重试机制），返回成功上传数"""
+    if not records:
+        return 0
+        
+    try:
+        from app.core.lark_client import lark_client
+        
+        app_token = os.getenv("LARK_BASE_TOKEN")
+        if source_category.lower() == "kernel":
+            table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
+        else:
+            table_id = os.getenv("LARK_TABLE_ID")
+        
+        if not app_token or not table_id:
+            return 0
+        
+        for attempt in range(max_retries):
+            try:
+                loop = asyncio.get_event_loop()
+                result = await loop.run_in_executor(
+                    None,
+                    lambda: lark_client.batch_create_records(app_token, table_id, records, timeout=120)
+                )
+                if result.get("code") == 0:
+                    return len(result.get("data", {}).get("records", []))
+                else:
+                    print(f"  ⚠️ 批量上传失败: {result.get('msg')}")
+            except Exception as e:
+                wait_time = 2 ** attempt
+                print(f"  ⚠️ 批量上传异常 (重试 {attempt+1}/{max_retries}): {e}")
+                if attempt < max_retries - 1:
+                    await asyncio.sleep(wait_time)
+        return 0
+    except Exception as e:
+        print(f"❌ 批量上传初始化失败: {e}")
+        return 0
+
+
+def prepare_lark_fields(snippet: CleanedSnippet, author: str, style: str, source_category: str) -> Dict:
+    """准备 Lark 字段数据（不上传，只返回字段字典）"""
+    content_hash = get_content_hash(snippet.clean_text)
+    
+    if source_category.lower() == "kernel":
+        content_type_map = {"Hard_Fact": "硬数据", "Quote": "观点评论", "Hook": "快讯资讯", "Body": "深度分析", "CTA": "快讯资讯"}
+        content_type = content_type_map.get(snippet.snippet_type, "快讯资讯")
+        return {
+            "标题": snippet.clean_text[:50], "内容": snippet.clean_text, "赛道分类": style or "其他",
+            "内容类型": content_type, "来源文件": author, "来源链接": "", "内容指纹": content_hash,
+            "质量评分": snippet.quality_score, "状态": "待处理"
+        }
+    else:
+        snippet_type_cn = SNIPPET_TYPE_MAP.get(snippet.snippet_type, "金句语录")
+        emotion_cn = EMOTION_MAP.get(snippet.emotional_valence, "中性") if snippet.emotional_valence else "中性"
+        lp = snippet.logic_pattern.lower() if snippet.logic_pattern else ""
+        style_tags = []
+        if "毒舌" in lp or "讽刺" in lp: style_tags.append("毒舌")
+        if "焦虑" in lp or "恐惧" in lp: style_tags.append("焦虑")
+        if "逻辑" in lp or "推理" in lp or "分析" in lp: style_tags.append("逻辑")
+        if "共情" in lp or "共鸣" in lp: style_tags.append("共情")
+        if "对比" in lp or "反差" in lp: style_tags.append("对比")
+        if "煽情" in lp or "情感" in lp: style_tags.append("煽情")
+        if "数据" in lp or "事实" in lp: style_tags.append("数据流")
+        if not style_tags: style_tags.append("逻辑")
+        return {
+            "内容": snippet.clean_text, "博主": author, "片段类型": snippet_type_cn, "情绪": emotion_cn,
+            "内容指纹": content_hash, "质量评分": float(snippet.quality_score), "状态": "待处理",
+            "逻辑公式": snippet.logic_pattern or "", "风格标签": style_tags
+        }
+
+
 async def upload_to_lark_async(snippet: CleanedSnippet, author: str, style: str, source_category: str = "Shell") -> bool:
     """异步上传到 Lark (带去重和重试)
     
@@ -646,6 +727,7 @@ async def process_file(
     filtered_by_score = 0
     filtered_by_local_hash = 0
     filtered_by_lark = 0
+    pending_fields = []  # 待上传的字段列表
     
     for s in all_snippets:
         # 1. 分数过滤
@@ -660,20 +742,24 @@ async def process_file(
             continue
         seen_hashes.add(h)
         
-        # 3. 上传到 Lark
+        # 3. 准备上传字段
         if dry_run:
             uploaded += 1
         else:
-            if await upload_to_lark_async(s, author, style, source_category):
-                uploaded += 1
-            else:
+            # Lark 端去重检查
+            if await check_exists_in_lark_async(h):
                 filtered_by_lark += 1
+                continue
+            # 准备字段而非直接上传
+            fields = prepare_lark_fields(s, author, style, source_category)
+            pending_fields.append(fields)
+            uploaded += 1
 
     # 输出详细过滤统计
     if total_chunks > 10:
         console.print(f"  [dim]📊 过滤统计: 分数淘汰={filtered_by_score}, 本地去重={filtered_by_local_hash}, Lark去重={filtered_by_lark}[/dim]")
 
-    return file_path.name, len(all_snippets), uploaded
+    return file_path.name, len(all_snippets), uploaded, pending_fields
 
 # ==========================================
 # 8. 主异步函数
@@ -756,9 +842,10 @@ async def main_async(
     # 5. 全局去重集合
     seen_hashes: Set[str] = set()
 
-    # 6. 处理文件
+    # 6. 处理文件 (批量上传优化)
     total_extracted = 0
     total_uploaded = 0
+    upload_buffer: List[Dict] = []  # 批量上传缓冲区
 
     with Progress(
         SpinnerColumn(),
@@ -773,22 +860,39 @@ async def main_async(
         )
 
         for file_path in files_to_process:
-            filename, extracted, uploaded = await process_file(
+            filename, extracted, uploaded, pending_fields = await process_file(
                 file_path, author, style, source_category,
                 client, model_name, semaphore, seen_hashes, min_score, dry_run, console
             )
             
             total_extracted += extracted
-            total_uploaded += uploaded
+            
+            if not dry_run and pending_fields:
+                upload_buffer.extend(pending_fields)
+                
+                # 达到批量大小则上传
+                if len(upload_buffer) >= BATCH_SIZE:
+                    batch_uploaded = await batch_upload_to_lark_async(upload_buffer, source_category)
+                    total_uploaded += batch_uploaded
+                    progress.console.print(f"  [blue]📤 批量上传: {batch_uploaded} 条[/blue]")
+                    upload_buffer = []
+            else:
+                total_uploaded += uploaded
             
             # 记录进度
             processed_files.add(filename)
             save_checkpoint(processed_files)
             
             progress.console.print(
-                f"  [green]✓[/green] {filename}: 提取 {extracted} → 入库 {uploaded}"
+                f"  [green]✓[/green] {filename}: 提取 {extracted} → 待入库 {len(pending_fields) if not dry_run else uploaded}"
             )
             progress.advance(task_id, 1)
+
+        # 上传剩余缓冲区
+        if upload_buffer:
+            batch_uploaded = await batch_upload_to_lark_async(upload_buffer, source_category)
+            total_uploaded += batch_uploaded
+            progress.console.print(f"  [blue]📤 最终批量上传: {batch_uploaded} 条[/blue]")
 
     console.print("")
     console.print(f"[bold green]🎉 完成![/bold green]")

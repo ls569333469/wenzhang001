@@ -222,3 +222,82 @@ banfo --source-category Shell --provider deepseek --min-score 3
   ❌ JSON解析失败: Unterminated string starting at: line 260 column 2
   ✓ 2023-02-17_数学题刺客，孩子世界的BUG.txt: 提取 12 → 入库 9
   LLM返回: 22 条
+2026-01-26 21:19:57,626 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-19_记得给新消费菩萨上柱香.txt: 提取 22 → 入库 20
+  LLM返回: 1 条
+  LLM返回: 13 条
+  LLM返回: 24 条
+2026-01-26 21:26:42,233 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-20_阿萨姆奶茶，一直闷声发大财.txt: 提取 38 → 入库 34
+  LLM返回: 23 条
+  LLM返回: 9 条
+  ❌ JSON解析失败: Expecting value: line 265 column 24 (char 9877)
+  ❌ JSON解析失败: Unterminated string starting at: line 256 column 7
+  LLM返回: 1 条
+  ❌ JSON解析失败: Unterminated string starting at: line 300 column 2
+  ❌ JSON解析失败: Expecting value: line 326 column 22 (char 10915)
+2026-01-26 21:33:50,217 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-21_詹姆斯·卡梅隆，昨日的电影救世主.txt: 提取 33 → 入库 27
+  LLM返回: 18 条
+2026-01-26 21:37:32,734 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-22_为了收购动视暴雪，微软已经急眼了.txt: 提取 18 → 入库 17
+  LLM返回: 22 条
+2026-01-26 21:41:46,797 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-23_西贝的王牌是儿童餐.txt: 提取 22 → 入库 20
+  LLM返回: 1 条
+  LLM返回: 31 条
+  ❌ JSON解析失败: Unterminated string starting at: line 277 column 2
+2026-01-26 21:46:06,167 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-24_疯批塔斯汀，比疯狂星期四更疯狂.txt: 提取 32 → 入库 30
+  LLM返回: 1 条
+  LLM返回: 5 条
+  LLM返回: 23 条
+2026-01-26 21:53:27,619 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-02-26_比亚迪仰望卖百万还是太保守了.txt: 提取 29 → 入库 24
+  LLM返回: 5 条
+  LLM返回: 1 条
+  LLM返回: 19 条
+  ❌ JSON解析失败: Expecting value: line 285 column 20 (char 10234)
+  ✓ 2023-02-27_名创优品会是下一个“超级品牌”吗？.txt: 提取 25 → 入库 20
+  LLM返回: 23 条
+  ✓ 2023-02-28_始祖鸟的核心竞争力是性价比.txt: 提取 23 → 入库 23
+  LLM返回: 1 条
+  LLM返回: 20 条
+  LLM返回: 29 条
+2026-01-26 22:10:33,845 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-03-01_或许丁太升才是最爱李荣浩的人.txt: 提取 50 → 入库 46
+  LLM返回: 21 条
+2026-01-26 22:13:31,687 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-03-02_全聚德的白酒，酱香信仰不够.txt: 提取 21 → 入库 21
+  LLM返回: 1 条
+  LLM返回: 18 条
+  ❌ JSON解析失败: Expecting value: line 300 column 4 (char 10618)
+  ✓ 2023-03-03_罗永浩想狂飙，沃尔沃笑了.txt: 提取 19 → 入库 18
+  LLM返回: 39 条
+2026-01-26 22:24:50,990 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-26 22:25:45,932 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Max retries exceeded with url: /open-apis/bitable/v1/apps/CSfdbzErqay4bnsISxEuuVais3g/tables/tblbJx7Tsoyb5C5q/records?page_size=1&filter=CurrentValue.%5B%E5%86%85%E5%AE%B9%E6%8C%87%E7%BA%B9%5D+%3D+%22038156ecbbed8614fa6ee695de741a05%22 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1018)')))
+  ✓ 2023-03-05_《霍格沃兹之遗》，赢在过于简单.txt: 提取 39 → 入库 38
+  LLM返回: 16 条
+  ✓ 2023-03-05_【记得看】大红包流程更改通知.txt: 提取 16 → 入库 16
+  LLM返回: 1 条
+  LLM返回: 8 条
+  LLM返回: 27 条
+  ✓ 2023-03-06_拼多多你几个意思.txt: 提取 36 → 入库 31
+  LLM返回: 1 条
+  LLM返回: 27 条
+  ❌ JSON解析失败: Expecting value: line 307 column 4 (char 10443)
+2026-01-26 22:39:51,137 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+2026-01-26 22:40:33,035 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-26 22:40:38,053 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-26 22:40:43,077 - lark_client - ERROR - Failed to create Lark record: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-03-07_蕉下，这波装到了.txt: 提取 28 → 入库 26
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 32 条
+  ✓ 2023-03-08_房东即将暴打华尔街.txt: 提取 44 → 入库 42
+  LLM返回: 1 条
+  LLM返回: 12 条
+  ❌ JSON解析失败: Expecting property name enclosed in double quotes:
+  ✓ 2023-03-09_销售会跑路，朋友不会.txt: 提取 13 → 入库 11
+  LLM返回: 1 条
+  LLM返回: 29 条
