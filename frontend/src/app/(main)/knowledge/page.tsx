@@ -39,7 +39,22 @@ export default function KnowledgePage() {
   const [error, setError] = useState<string | null>(null);
   // Web2 专用状态
   const [web2Author, setWeb2Author] = useState<string>('');
-  const [web2Style, setWeb2Style] = useState<string>('mimeng');
+  const [web2Style, setWeb2Style] = useState<string>('');
+  const [web2Authors, setWeb2Authors] = useState<string[]>([]);
+
+  // 获取 Web2 博主列表
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/web2-authors`)
+      .then(res => res.json())
+      .then(data => {
+        const authors = data.authors || [];
+        setWeb2Authors(authors);
+        if (authors.length > 0 && !web2Style) {
+          setWeb2Style(authors[0]);
+        }
+      })
+      .catch(err => console.error('获取博主列表失败:', err));
+  }, []);
 
   // 费用计算常量
   const COST_PER_RECORD = 0.012; // ¥0.012/条
@@ -276,9 +291,9 @@ export default function KnowledgePage() {
                       onChange={(e) => setWeb2Style(e.target.value)}
                       className="w-full px-3 py-1.5 text-sm border border-zinc-200 rounded-lg mt-1"
                     >
-                      <option value="mimeng">mimeng</option>
-                      <option value="banfo">banfo</option>
-                      <option value="lianbushou">lianbushou</option>
+                      {web2Authors.map(author => (
+                        <option key={author} value={author}>{author}</option>
+                      ))}
                     </select>
                   </div>
                   <p className="text-xs text-ink-muted">

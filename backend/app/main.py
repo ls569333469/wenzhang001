@@ -13,8 +13,19 @@ from .core.config import ensure_config_dir, load_config, save_config
 from .core.lark_client import lark_client
 from .api.cleaner import router as cleaner_router
 import os
+from pathlib import Path
 
 app = FastAPI(title="Web3 Consensus Engine API", version="5.0")
+
+@app.get("/api/web2-authors")
+async def get_web2_authors():
+    """获取 Web2 风格目录下的所有博主"""
+    web2_dir = Path(__file__).parent.parent / "data" / "Web2风格"
+    if not web2_dir.exists():
+        return {"authors": []}
+    # 过滤隐藏文件夹
+    authors = [d.name for d in web2_dir.iterdir() if d.is_dir() and not d.name.startswith('.')]
+    return {"authors": sorted(authors)}
 
 # Register routers
 app.include_router(cleaner_router)

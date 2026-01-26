@@ -206,3 +206,19 @@ banfo --source-category Shell --provider deepseek --min-score 3
   LLM返回: 37 条
   ❌ JSON解析失败: Unterminated string starting at: line 284 column 2
 2026-01-26 21:01:42,340 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-02-14_打游戏？你打它有啥用.txt: 提取 40 → 入库 38
+  LLM返回: 1 条
+  LLM返回: 13 条
+  ❌ JSON解析失败: Unterminated string starting at: line 277 column 2
+2026-01-26 21:07:16,685 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+  ✓ 2023-02-15_“神童”裸跑，满身钞票.txt: 提取 14 → 入库 10
+  LLM返回: 1 条
+  LLM返回: 2 条
+  LLM返回: 26 条
+  ❌ JSON解析失败: Unterminated string starting at: line 316 column 7
+  ✓ 2023-02-16_米哈游到了最危险的时候.txt: 提取 29 → 入库 26
+  LLM返回: 1 条
+  LLM返回: 11 条
+  ❌ JSON解析失败: Unterminated string starting at: line 260 column 2
+  ✓ 2023-02-17_数学题刺客，孩子世界的BUG.txt: 提取 12 → 入库 9
+  LLM返回: 22 条
