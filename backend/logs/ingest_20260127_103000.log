@@ -1,0 +1,645 @@
+=== 入库任务启动 ===
+时间: 2026-01-27T10:30:00.198086
+命令: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m scripts.ingest_optimized --path D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人 --target web2 --author banfo --style 半佛仙人
+模式: optimized
+数据源: web2
+自定义路径: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人
+===================
+
+============================================================
+[INFO] Quantum Studio v5.2 - Knowledge_Repo 优化版入库
+============================================================
+[CONFIG] Base Token: CSfdbzErqay4bnsISxEuuVais3g
+[CONFIG] Knowledge Table ID: tblkvQK9aKxP0wsk
+[CONFIG] 优化特性: 合并LLM调用 + 批量上传 + 本地Hash缓存
+
+[FOLDER] 自定义目录模式: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人
+找到 832 个文件 (JSON: 0, TXT: 832, MD: 0)
+检测到 Web2 模式，委托给 cleaner_cli.py 处理...
+[CONFIG] 博主: banfo
+[CONFIG] 风格: 半佛仙人
+执行: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m 
+tools.cleaner_cli clean --input 
+D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人 --author banfo --style 
+半佛仙人 --source-category Shell --provider deepseek --min-score 3
+
+🚀 P12.2 工业级清洗工具 v2.2
+   📁 输入: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人
+   👤 作者: banfo
+   🎨 风格: 半佛仙人
+   📂 模式: Shell
+   🤖 模型: deepseek
+   ⭐ 最低分: 3
+   🔄 并发数: 3
+   📄 分片大小: 3000 字符
+
+使用模型: deepseek-v3-2-251201
+📂 文件夹模式: 832 个文件
+📦 检测到断点记录，已跳过 69 个文件
+待处理: 764 个文件
+
+📊 预处理分析结果:
+   📁 文件数量: 764 个
+   📝 总字符数: 2,551,622 字符
+   🔢 总分片数: 1216 块
+   ⏱️ 预计耗时: 81 分 4 秒
+
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 30 条
+2026-01-27 10:31:42,718 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+  ✓ 2023-03-23_赛百味为了【便宜】，导致不便宜。.txt: 提取 42 → 待入库 38
+  LLM返回: 1 条
+  LLM返回: 5 条
+  LLM返回: 22 条
+2026-01-27 10:37:30,382 - lark_client - INFO - Successfully batch created 61 records
+  📤 批量上传: 61 条
+  ✓ 2023-03-24_没有打工人逃得过东鹏特饮.txt: 提取 28 → 待入库 23
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 25 条
+  ✓ 2023-03-25_海澜之家包了张颂文的衣柜.txt: 提取 37 → 待入库 34
+  LLM返回: 11 条
+  ✓ 2023-03-26_【注意看】实体京东E卡流程通知.txt: 提取 11 → 待入库 11
+  LLM返回: 1 条
+  LLM返回: 6 条
+  LLM返回: 18 条
+2026-01-27 10:45:06,594 - lark_client - INFO - Successfully batch created 64 records
+  📤 批量上传: 64 条
+  ✓ 2023-03-26_戈登摩尔与半导体黑暗森林.txt: 提取 25 → 待入库 19
+  LLM返回: 14 条
+  LLM返回: 23 条
+  LLM返回: 23 条
+  LLM返回: 1 条
+  LLM返回: 22 条
+  LLM返回: 32 条
+2026-01-27 10:53:19,782 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 10:55:41,575 - lark_client - INFO - Successfully batch created 113 records
+  📤 批量上传: 113 条
+  ✓ 2023-03-27_《生化危机》，恐怖又精彩的梦.txt: 提取 115 → 待入库 113
+  LLM返回: 30 条
+  ✓ 2023-03-28_广东的感情，在养乐多里.txt: 提取 30 → 待入库 30
+  LLM返回: 1 条
+  LLM返回: 26 条
+  LLM返回: 25 条
+2026-01-27 11:04:12,832 - lark_client - INFO - Successfully batch created 77 records
+  📤 批量上传: 77 条
+  ✓ 2023-03-29_韩国车打断自己的腿.txt: 提取 52 → 待入库 47
+  LLM返回: 1 条
+  LLM返回: 29 条
+  LLM返回: 29 条
+2026-01-27 11:10:04,699 - lark_client - INFO - Successfully batch created 59 records
+  📤 批量上传: 59 条
+  ✓ 2023-03-30_蹲过闲鱼，才理解什么叫缘分.txt: 提取 59 → 待入库 59
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 17 条
+  ✓ 2023-03-31_三得利乌龙茶，把乾坤大挪移玩明白了.txt: 提取 25 → 待入库 20
+  LLM返回: 1 条
+  LLM返回: 33 条
+  LLM返回: 27 条
+2026-01-27 11:18:27,938 - lark_client - INFO - Successfully batch created 81 records
+  📤 批量上传: 81 条
+  ✓ 2023-04-01_魅族救了车里的人工智障.txt: 提取 61 → 待入库 61
+  LLM返回: 1 条
+  LLM返回: 21 条
+  ❌ JSON解析失败: Unterminated string starting at: line 245 column 2
+  ✓ 2023-04-02_歪嘴龙王瑞幸！爽文一败涂地.txt: 提取 22 → 待入库 22
+  LLM返回: 1 条
+  LLM返回: 18 条
+  LLM返回: 23 条
+2026-01-27 11:26:26,398 - lark_client - INFO - Successfully batch created 63 records
+  📤 批量上传: 63 条
+  ✓ 2023-04-03_你来人间一趟，你要看看太阳.txt: 提取 42 → 待入库 41
+  LLM返回: 1 条
+  LLM返回: 15 条
+  ❌ JSON解析失败: Unterminated string starting at: line 293 column 2
+2026-01-27 11:29:27,643 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-04-04_游戏里的男人缘，妙不可言.txt: 提取 16 → 待入库 13
+  LLM返回: 1 条
+  LLM返回: 5 条
+  LLM返回: 29 条
+  ✓ 2023-04-05_拼多多一步也不会退.txt: 提取 35 → 待入库 32
+  LLM返回: 41 条
+2026-01-27 11:38:06,426 - lark_client - INFO - Successfully batch created 85 records
+  📤 批量上传: 85 条
+  ✓ 2023-04-06_健身房总跑路？因为没赚家长钱.txt: 提取 41 → 待入库 40
+  LLM返回: 1 条
+  LLM返回: 19 条
+  ❌ JSON解析失败: Unterminated string starting at: line 229 column 2
+  ❌ JSON解析失败: Unterminated string starting at: line 300 column 2
+  ✓ 2023-04-07_真没想到，这么能洗！？.txt: 提取 20 → 待入库 20
+  LLM返回: 26 条
+  ✓ 2023-04-09_新能源车卷烂了，救命稻草找到了.txt: 提取 26 → 待入库 26
+  LLM返回: 1 条
+  LLM返回: 20 条
+  LLM返回: 26 条
+2026-01-27 11:48:40,918 - lark_client - INFO - Successfully batch created 87 records
+  📤 批量上传: 87 条
+  ✓ 2023-04-10_谁才是真正的风口大师？.txt: 提取 47 → 待入库 41
+  LLM返回: 16 条
+  ✓ 2023-04-11_新消费做梦，都是绿的.txt: 提取 16 → 待入库 16
+  LLM返回: 1 条
+  LLM返回: 12 条
+  LLM返回: 33 条
+2026-01-27 11:56:03,894 - lark_client - INFO - Successfully batch created 58 records
+  📤 批量上传: 58 条
+  ✓ 2023-04-12_豪华又紧凑，又卷又秀.txt: 提取 46 → 待入库 42
+  LLM返回: 1 条
+  LLM返回: 23 条
+  LLM返回: 20 条
+  ✓ 2023-04-13_2023了，谁能给生意确定性增长开个挂？.txt: 提取 44 → 待入库 42
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 26 条
+2026-01-27 12:03:49,063 - lark_client - INFO - Successfully batch created 73 records
+  📤 批量上传: 73 条
+  ✓ 2023-04-14_薇诺娜的尽头，是医院.txt: 提取 34 → 待入库 31
+  LLM返回: 1 条
+  LLM返回: 3 条
+  LLM返回: 31 条
+2026-01-27 12:06:12,088 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 12:07:26,170 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+  ✓ 2023-04-16_《龙马精神》，谁还愿意卖命？.txt: 提取 35 → 待入库 30
+  LLM返回: 1 条
+  LLM返回: 8 条
+  ❌ JSON解析失败: Unterminated string starting at: line 287 column 2
+  ✓ 2023-04-17_年轻人的音乐梦，谁在乎？.txt: 提取 9 → 待入库 3
+  LLM返回: 1 条
+  LLM返回: 23 条
+  ❌ JSON解析失败: Unterminated string starting at: line 245 column 2
+2026-01-27 12:14:01,014 - lark_client - INFO - Successfully batch created 52 records
+  📤 批量上传: 52 条
+  ✓ 2023-04-18_不野，旅什么游？.txt: 提取 24 → 待入库 19
+  LLM返回: 28 条
+  ✓ 2023-04-19_《宇宙探索编辑部》，神经病的行为艺术.txt: 提取 28 → 待入库 26
+  LLM返回: 1 条
+  LLM返回: 17 条
+  LLM返回: 18 条
+2026-01-27 12:20:31,762 - lark_client - INFO - Successfully batch created 58 records
+  📤 批量上传: 58 条
+  ✓ 2023-04-20_松弛感就是伪命题.txt: 提取 36 → 待入库 32
+  LLM返回: 21 条
+  ✓ 2023-04-21_拼多多又在搞事了.txt: 提取 21 → 待入库 19
+⠧ 🚀 并发处理中 (Max 3)... -                                        29/764
+┌───────────────────── Traceback (most recent call last) ─────────────────────┐
+│ D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:927 in clean            │
+│                                                                             │
+│   924 │   - 🔄 MD5 去重 (避免重复入库)                                      │
+│   925 │   - 📂 智能识别 (支持单文件或文件夹)                                │
+│   926 │   """                                                               │
+│ > 927 │   asyncio.run(main_async(input_path, author, style, source_category │
+│   928                                                                       │
+│   929 @app.command()                                                        │
+│   930 def reset_checkpoint():                                               │
+│                                                                             │
+│ ┌──────────────────────────────── locals ─────────────────────────────────┐ │
+│ │          author = 'banfo'                                               │ │
+│ │         dry_run = False                                                 │ │
+│ │      input_path = 'D:\\AI_Projects\\2026001\\backend\\data\\Web2风格\\… │ │
+│ │       min_score = 3                                                     │ │
+│ │        provider = 'deepseek'                                            │ │
+│ │ source_category = 'Shell'                                               │ │
+│ │           style = '半佛仙人'                                            │ │
+│ └─────────────────────────────────────────────────────────────────────────┘ │
+│                                                                             │
+│ E:\python\Lib\asyncio\runners.py:194 in run                                 │
+│                                                                             │
+│   191 │   │   │   "asyncio.run() cannot be called from a running event loop │
+│   192 │                                                                     │
+│   193 │   with Runner(debug=debug, loop_factory=loop_factory) as runner:    │
+│ > 194 │   │   return runner.run(main)                                       │
+│   195                                                                       │
+│   196                                                                       │
+│   197 def _cancel_all_tasks(loop):                                          │
+│                                                                             │
+│ ┌─────────────────────────────── locals ───────────────────────────────┐    │
+│ │        debug = None                                                  │    │
+│ │ loop_factory = None                                                  │    │
+│ │         main = <coroutine object main_async at 0x000001AE38D37040>   │    │
+│ │       runner = <asyncio.runners.Runner object at 0x000001AE38F68EC0> │    │
+│ └──────────────────────────────────────────────────────────────────────┘    │
+│                                                                             │
+│ E:\python\Lib\asyncio\runners.py:118 in run                                 │
+│                                                                             │
+│   115 │   │                                                                 │
+│   116 │   │   self._interrupt_count = 0                                     │
+│   117 │   │   try:                                                          │
+│ > 118 │   │   │   return self._loop.run_until_complete(task)                │
+│   119 │   │   except exceptions.CancelledError:                             │
+│   120 │   │   │   if self._interrupt_count > 0:                             │
+│   121 │   │   │   │   uncancel = getattr(task, "uncancel", None)            │
+│                                                                             │
+│ ┌──────────────────────────────── locals ─────────────────────────────────┐ │
+│ │        context = <_contextvars.Context object at 0x000001AE38DC5080>    │ │
+│ │           coro = <coroutine object main_async at 0x000001AE38D37040>    │ │
+│ │           self = <asyncio.runners.Runner object at 0x000001AE38F68EC0>  │ │
+│ │ sigint_handler = functools.partial(<bound method Runner._on_sigint of   │ │
+│ │                  <asyncio.runners.Runner object at                      │ │
+│ │                  0x000001AE38F68EC0>>, main_task=<Task finished         │ │
+│ │                  name='Task-1' coro=<main_async() done, defined at      │ │
+│ │                  D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:7… │ │
+│ │                  exception=ValueError('not enough values to unpack      │ │
+│ │                  (expected 4, got 3)')>)                                │ │
+│ │           task = <Task finished name='Task-1' coro=<main_async() done,  │ │
+│ │                  defined at                                             │ │
+│ │                  D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:7… │ │
+│ │                  exception=ValueError('not enough values to unpack      │ │
+│ │                  (expected 4, got 3)')>                                 │ │
+│ └─────────────────────────────────────────────────────────────────────────┘ │
+│                                                                             │
+│ E:\python\Lib\asyncio\base_events.py:720 in run_until_complete              │
+│                                                                             │
+│    717 │   │   if not future.done():                                        │
+│    718 │   │   │   raise RuntimeError('Event loop stopped before Future com │
+│    719 │   │                                                                │
+│ >  720 │   │   return future.result()                                       │
+│    721 │                                                                    │
+│    722 │   def stop(self):                                                  │
+│    723 │   │   """Stop running the event loop.                              │
+│                                                                             │
+│ ┌──────────────────────────────── locals ─────────────────────────────────┐ │
+│ │   future = <Task finished name='Task-1' coro=<main_async() done,        │ │
+│ │            defined at                                                   │ │
+│ │            D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:768>     │ │
+│ │            exception=ValueError('not enough values to unpack (expected  │ │
+│ │            4, got 3)')>                                                 │ │
+│ │ new_task = False                                                        │ │
+│ │     self = <ProactorEventLoop running=False closed=True debug=False>    │ │
+│ └─────────────────────────────────────────────────────────────────────────┘ │
+│                                                                             │
+│ D:\AI_Projects\2026001\backend\tools\cleaner_cli.py:863 in main_async       │
+│                                                                             │
+│   860 │   │   )                                                             │
+│   861 │   │                                                                 │
+│   862 │   │   for file_path in files_to_process:                            │
+│ > 863 │   │   │   filename, extracted, uploaded, pending_fields = await pro │
+│   864 │   │   │   │   file_path, author, style, source_category,            │
+│   865 │   │   │   │   client, model_name, semaphore, seen_hashes, min_score │
+│   866 │   │   │   )                                                         │
+│                                                                             │
+│ ┌──────────────────────────────── locals ─────────────────────────────────┐ │
+│ │        all_files = [                                                    │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │   ... +822                                         │ │
+│ │                    ]                                                    │ │
+│ │           author = 'banfo'                                              │ │
+│ │   batch_uploaded = 58                                                   │ │
+│ │           client = <openai.AsyncOpenAI object at 0x000001AE38F69550>    │ │
+│ │          dry_run = False                                                │ │
+│ │        extracted = 21                                                   │ │
+│ │        file_path = WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │         filename = '2023-04-21_拼多多又在搞事了.txt'                    │ │
+│ │ files_to_process = [                                                    │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │                                                    │ │
+│ │                    WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │                    │   ... +754                                         │ │
+│ │                    ]                                                    │ │
+│ │          input_p = WindowsPath('D:/AI_Projects/2026001/backend/data/We… │ │
+│ │       input_path = 'D:\\AI_Projects\\2026001\\backend\\data\\Web2风格\… │ │
+│ │              llm = <__main__.AsyncLLMProvider object at                 │ │
+│ │                    0x000001AE38F69400>                                  │ │
+│ │        min_score = 3                                                    │ │
+│ │       model_name = 'deepseek-v3-2-251201'                               │ │
+│ │   pending_fields = [                                                    │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '电商平台的定期大促，已经变成了和调休一样荒诞的存在… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '开头金句',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'c4f95788e27cfee784e975fcffcc7e44',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '类比讽刺',                      │ │
+│ │                    │   │   '风格标签': ['毒舌']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '你知道商家为了大促有降价的空间，平时会刻意涨价。你… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'd4f4d4cd9756d0ab6be98bd3aa1f6871',                  │ │
+│ │                    │   │   '质量评分': 9.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '无限套娃 + 揭露本质',           │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '消费者平时根本就不买，自然也谈不上大促能占到什么便… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '18400f2e836d2304126dd9830defd6a9',                  │ │
+│ │                    │   │   '质量评分': 7.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '双输局面分析',                  │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '本质上，这和我们小时候把所有暑假作业堆到开学前最后… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'd1f5d37742e35c1784a49135eea4355b',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '童年经历类比',                  │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '大促的日子是死的，人是活的。我自己也不知道我的手机… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'b0f0d889a98d6b11803e5e15bab0ab7c',                  │ │
+│ │                    │   │   '质量评分': 7.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '制造需求与时机错位的矛盾',      │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '于是你只能拿着碎屏的手机继续用，等啊等，等啊等。要… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '激昂',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '67e586482020c25747009a6a487cb407',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '夸张比喻 + 制造焦虑',           │ │
+│ │                    │   │   '风格标签': ['焦虑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '正是想清楚了这一点，我决定日常做好价。从4月开始， … │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '积极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'f2ada208091350291f18782edb0c11a7',                  │ │
+│ │                    │   │   '质量评分': 6.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '提出解决方案',                  │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '等来的便宜不是真便宜，那都是用日复一日的煎熬换的。… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '金句语录',                      │ │
+│ │                    │   │   '情绪': '积极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '5d82054ae1261b00a4ac8ecca5ddf626',                  │ │
+│ │                    │   │   '质量评分': 9.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '金句对比',                      │ │
+│ │                    │   │   '风格标签': ['对比']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '虽然小米一直是懂性价比的，但我帮他们顿悟了。',      │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '积极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '4c4af9da1349ce3f883b4bee7ac256c5',                  │ │
+│ │                    │   │   '质量评分': 7.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '幽默调侃',                      │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容': '钱包都说没见过这么猛的神医。',      │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '金句语录',                      │ │
+│ │                    │   │   '情绪': '激昂',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'bf1307fdc0ce083c32884e4b379339e5',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '拟人化幽默',                    │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   ... +9                                           │ │
+│ │                    ]                                                    │ │
+│ │  processed_files = {                                                    │ │
+│ │                    │   '2023-03-05_《霍格沃兹之遗》，赢在过于简单.txt', │ │
+│ │                    │   '2023-02-04_张译在《狂飙》里的表现够好了.txt',   │ │
+│ │                    │   '2023-01-13_完美日记什么都没做错.txt',           │ │
+│ │                    │   '2023-01-06_多抓鱼简直在做慈善.txt',             │ │
+│ │                    │   '2023-03-30_蹲过闲鱼，才理解什么叫缘分.txt',     │ │
+│ │                    │   '2023-02-14_打游戏？你打它有啥用.txt',           │ │
+│ │                    │   '2023-01-01_C罗选择沙特，中年的折磨.txt',        │ │
+│ │                    │   '2023-04-01_魅族救了车里的人工智障.txt',         │ │
+│ │                    │   '2023-01-12_名创优品才是版本答案.txt',           │ │
+│ │                    │   '2023-02-10_理想L7，男人收割机.txt',             │ │
+│ │                    │   ... +88                                          │ │
+│ │                    }                                                    │ │
+│ │         progress = <rich.progress.Progress object at                    │ │
+│ │                    0x000001AE39048980>                                  │ │
+│ │         provider = 'deepseek'                                           │ │
+│ │      seen_hashes = {                                                    │ │
+│ │                    │   'f75b2220739ff684561f61ea46eed1a1',              │ │
+│ │                    │   '39a7599fbf7f177a508a3358126a2885',              │ │
+│ │                    │   'ec8b3a6c7f97faccfd905fe0f1532fdf',              │ │
+│ │                    │   'f524d35840cec5393ac97ce5cd693b87',              │ │
+│ │                    │   '411367bcd60094971885f55e02d38013',              │ │
+│ │                    │   '5fe5b7646400b421788eabbac305eb4f',              │ │
+│ │                    │   '31ef53f0221d5a150730c62e4e87c6d0',              │ │
+│ │                    │   'ada9570ad3a1748a6a54c6d14bb1630b',              │ │
+│ │                    │   '214955c9fe54ff9a4a339ef6f029a8c1',              │ │
+│ │                    │   '14a05ce62f28eeae5cfa6f1898497d7e',              │ │
+│ │                    │   ... +946                                         │ │
+│ │                    }                                                    │ │
+│ │        semaphore = <asyncio.locks.Semaphore object at                   │ │
+│ │                    0x000001AE38F69D30 [unlocked, value:3]>              │ │
+│ │  source_category = 'Shell'                                              │ │
+│ │            style = '半佛仙人'                                           │ │
+│ │          task_id = 0                                                    │ │
+│ │  total_extracted = 1027                                                 │ │
+│ │   total_uploaded = 931                                                  │ │
+│ │    upload_buffer = [                                                    │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '电商平台的定期大促，已经变成了和调休一样荒诞的存在… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '开头金句',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'c4f95788e27cfee784e975fcffcc7e44',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '类比讽刺',                      │ │
+│ │                    │   │   '风格标签': ['毒舌']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '你知道商家为了大促有降价的空间，平时会刻意涨价。你… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'd4f4d4cd9756d0ab6be98bd3aa1f6871',                  │ │
+│ │                    │   │   '质量评分': 9.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '无限套娃 + 揭露本质',           │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '消费者平时根本就不买，自然也谈不上大促能占到什么便… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '18400f2e836d2304126dd9830defd6a9',                  │ │
+│ │                    │   │   '质量评分': 7.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '双输局面分析',                  │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '本质上，这和我们小时候把所有暑假作业堆到开学前最后… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'd1f5d37742e35c1784a49135eea4355b',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '童年经历类比',                  │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '大促的日子是死的，人是活的。我自己也不知道我的手机… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '消极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'b0f0d889a98d6b11803e5e15bab0ab7c',                  │ │
+│ │                    │   │   '质量评分': 7.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '制造需求与时机错位的矛盾',      │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '于是你只能拿着碎屏的手机继续用，等啊等，等啊等。要… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '激昂',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '67e586482020c25747009a6a487cb407',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '夸张比喻 + 制造焦虑',           │ │
+│ │                    │   │   '风格标签': ['焦虑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '正是想清楚了这一点，我决定日常做好价。从4月开始， … │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '积极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'f2ada208091350291f18782edb0c11a7',                  │ │
+│ │                    │   │   '质量评分': 6.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '提出解决方案',                  │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '等来的便宜不是真便宜，那都是用日复一日的煎熬换的。… │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '金句语录',                      │ │
+│ │                    │   │   '情绪': '积极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '5d82054ae1261b00a4ac8ecca5ddf626',                  │ │
+│ │                    │   │   '质量评分': 9.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '金句对比',                      │ │
+│ │                    │   │   '风格标签': ['对比']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容':                                      │ │
+│ │                    '虽然小米一直是懂性价比的，但我帮他们顿悟了。',      │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '正文段落',                      │ │
+│ │                    │   │   '情绪': '积极',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    '4c4af9da1349ce3f883b4bee7ac256c5',                  │ │
+│ │                    │   │   '质量评分': 7.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '幽默调侃',                      │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   {                                                │ │
+│ │                    │   │   '内容': '钱包都说没见过这么猛的神医。',      │ │
+│ │                    │   │   '博主': 'banfo',                             │ │
+│ │                    │   │   '片段类型': '金句语录',                      │ │
+│ │                    │   │   '情绪': '激昂',                              │ │
+│ │                    │   │   '内容指纹':                                  │ │
+│ │                    'bf1307fdc0ce083c32884e4b379339e5',                  │ │
+│ │                    │   │   '质量评分': 8.0,                             │ │
+│ │                    │   │   '状态': '待处理',                            │ │
+│ │                    │   │   '逻辑公式': '拟人化幽默',                    │ │
+│ │                    │   │   '风格标签': ['逻辑']                         │ │
+│ │                    │   },                                               │ │
+│ │                    │   ... +9                                           │ │
+│ │                    ]                                                    │ │
+│ │         uploaded = 19                                                   │ │
+│ └─────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+ValueError: not enough values to unpack (expected 4, got 3)
+❌ cleaner_cli 返回错误码: 1

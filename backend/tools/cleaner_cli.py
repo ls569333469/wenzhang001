@@ -45,7 +45,7 @@ app = typer.Typer(help="Lark 数据清洗工具 v2.0 - 工业级异步版")
 # ==========================================
 # 1. 配置区 (Configuration)
 # ==========================================
-CONCURRENCY_LIMIT = 3  # 同时并发多少个请求 (降低以提高稳定性)
+CONCURRENCY_LIMIT = 10  # 同时并发多少个请求 (提高以加速清洗)
 CHECKPOINT_FILE = Path(__file__).parent / "processed_log.json"
 CHUNK_SIZE = 3000  # 每个分片的最大字符数
 
@@ -474,7 +474,10 @@ async def batch_upload_to_lark_async(
     source_category: str,
     max_retries: int = 3
 ) -> int:
-    """批量上传记录到 Lark（带重试机制），返回成功上传数"""
+    """批量上传记录到 Lark（带重试机制），返回成功上传数
+    
+    当 API 配额用尽时，自动保存到 CSV 文件供手动导入
+    """
     if not records:
         return 0
         
@@ -500,16 +503,66 @@ async def batch_upload_to_lark_async(
                 if result.get("code") == 0:
                     return len(result.get("data", {}).get("records", []))
                 else:
-                    print(f"  ⚠️ 批量上传失败: {result.get('msg')}")
+                    error_msg = result.get('msg', '')
+                    print(f"  ⚠️ 批量上传失败: {error_msg}")
+                    
+                    # 检测配额用尽，自动保存到 CSV
+                    if "quota" in error_msg.lower() or "exceeded" in error_msg.lower():
+                        await save_records_to_csv(records, source_category)
+                        return 0
+                        
             except Exception as e:
                 wait_time = 2 ** attempt
                 print(f"  ⚠️ 批量上传异常 (重试 {attempt+1}/{max_retries}): {e}")
                 if attempt < max_retries - 1:
                     await asyncio.sleep(wait_time)
+        
+        # 所有重试失败，保存到 CSV
+        await save_records_to_csv(records, source_category)
         return 0
     except Exception as e:
         print(f"❌ 批量上传初始化失败: {e}")
+        await save_records_to_csv(records, source_category)
         return 0
+
+
+async def save_records_to_csv(records: List[Dict], source_category: str):
+    """将记录保存到 CSV 文件（用于手动导入 Lark）"""
+    import csv
+    from datetime import datetime
+    
+    if not records:
+        return
+    
+    output_dir = Path(__file__).parent.parent / "output"
+    output_dir.mkdir(exist_ok=True)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    csv_path = output_dir / f"lark_backup_{source_category}_{timestamp}.csv"
+    
+    # 确定字段名
+    if source_category.lower() == "kernel":
+        fieldnames = ["标题", "内容", "赛道分类", "内容类型", "来源文件", "来源链接", "内容指纹", "质量评分", "状态"]
+    else:
+        fieldnames = ["内容", "博主", "片段类型", "情绪", "内容指纹", "质量评分", "状态", "逻辑公式", "风格标签"]
+    
+    try:
+        with open(csv_path, "a", encoding="utf-8-sig", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
+            
+            # 如果文件为空，写入表头
+            if f.tell() == 0:
+                writer.writeheader()
+            
+            for record in records:
+                # 处理列表类型字段
+                if "风格标签" in record and isinstance(record["风格标签"], list):
+                    record["风格标签"] = ",".join(record["风格标签"])
+                writer.writerow(record)
+        
+        print(f"  💾 已备份 {len(records)} 条记录到: {csv_path}")
+    except Exception as e:
+        print(f"  ❌ CSV 保存失败: {e}")
 
 
 def prepare_lark_fields(snippet: CleanedSnippet, author: str, style: str, source_category: str) -> Dict:

@@ -1,6 +1,6 @@
 # Lark 数据清洗工具手册
 
-> **版本**: v7.0 (前端集成版) | **更新日期**: 2026-01-25
+> **版本**: v9.0 (工业级批量清洗版) | **更新日期**: 2026-01-27
 
 ---
 
@@ -878,10 +878,131 @@ flowchart TD
 
 ---
 
-## 15. 更新日志
+## 15. CSV 实时备份机制 (v8.1 新增)
+
+> 📁 输出目录: `backend/output/lark_backup_*.csv`
+
+### 15.1 功能概述
+
+当 Lark API 配额用尽或上传失败时，系统自动将清洗结果保存到 CSV 文件，确保数据不丢失。
+
+### 15.2 触发条件
+
+| 条件 | 处理方式 |
+|------|----------|
+| Lark API 返回 `quota exceeded` | 自动保存到 CSV |
+| 网络超时/连接失败 | 重试 3 次后保存到 CSV |
+| 批量上传部分失败 | 失败记录保存到 CSV |
+
+### 15.3 CSV 文件格式
+
+**Shell 模式 (Web2 风格)**:
+```csv
+内容,博主,片段类型,情绪,内容指纹,质量评分,状态,逻辑公式,风格标签
+"去名化后的内容...",banfo,金句语录,积极,abc123...,5,待处理,"先抑后扬",毒舌
+```
+
+**Kernel 模式 (Web3 知识)**:
+```csv
+标题,内容,赛道分类,内容类型,来源文件,来源链接,内容指纹,质量评分,状态
+```
+
+### 15.4 手动导入 Lark
+
+1. 打开 Lark 多维表格
+2. 点击 **导入** → **CSV 文件**
+3. 选择 `backend/output/lark_backup_*.csv`
+4. 字段映射确认后导入
+
+> [!TIP]
+> CSV 文件使用 UTF-8-BOM 编码，Excel 和 Lark 均可正确识别中文
+
+### 15.5 代码实现
+
+```python
+async def save_records_to_csv(records: List[Dict], source_category: str):
+    """将记录保存到 CSV 文件（用于手动导入 Lark）"""
+    output_dir = Path(__file__).parent.parent / "output"
+    output_dir.mkdir(exist_ok=True)
+    
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    csv_path = output_dir / f"lark_backup_{source_category}_{timestamp}.csv"
+    # ... 写入逻辑
+```
+
+---
+
+## 16. 并行窗口清洗指南 (v9.0 新增)
+
+> 🏭 工业级批量清洗：5 窗口并行处理，3小时完成 392 文件
+
+### 16.1 操作流程
+
+```mermaid
+flowchart LR
+    A[打开 5 个浏览器窗口] --> B[每个窗口访问 /knowledge]
+    B --> C[每个窗口选择不同子文件夹]
+    C --> D[同时启动清洗]
+    D --> E[共享 processed_log.json 防重复]
+    E --> F[CSV 实时备份]
+```
+
+### 16.2 推荐配置
+
+| 配置项 | 推荐值 | 说明 |
+|--------|--------|------|
+| 并行窗口数 | 5 | 平衡 LLM 并发和系统资源 |
+| 每窗口子文件夹 | 1 个 | 避免冲突 |
+| 并发上限 | 10 | `CONCURRENCY_LIMIT = 10` |
+
+### 16.3 文件夹分配示例
+
+| 窗口 | 文件夹 | 文件数 |
+|------|--------|--------|
+| 窗口1 | 半佛仙人/2 | 85 |
+| 窗口2 | 半佛仙人/3 | 86 |
+| 窗口3 | 半佛仙人/4 | 86 |
+| 窗口4 | 半佛仙人/5 | 73 |
+| 窗口5 | 半佛仙人/6 | 62 |
+| **合计** | | **392** |
+
+### 16.4 进度验证
+
+```powershell
+# 检查 CSV 增长
+Get-ChildItem -Path ".\output" -Filter "*.csv" | 
+    Measure-Object -Property Length -Sum | 
+    ForEach-Object { Write-Host "CSV: $([math]::Round($_.Sum/1MB,2)) MB" }
+
+# 检查断点记录
+$checkpoint = Get-Content ".\tools\processed_log.json" | ConvertFrom-Json
+Write-Host "已处理: $($checkpoint.Count) 个文件"
+
+# 验证文件夹完成状态
+2..6 | ForEach-Object {
+    $lastFile = Get-ChildItem ".\data\Web2风格\半佛仙人\$_\*.txt" | 
+        Sort-Object Name | Select-Object -Last 1
+    $found = $checkpoint -contains $lastFile.Name
+    Write-Host "文件夹 $_`: 完成=$found"
+}
+```
+
+### 16.5 注意事项
+
+| 问题 | 解决方案 |
+|------|----------|
+| 同一文件被多窗口处理 | `processed_log.json` 共享锁防止 |
+| Lark 配额用尽 | CSV 备份自动启用 |
+| 窗口意外关闭 | 刷新后断点续传 |
+
+---
+
+## 17. 更新日志
 
 | 日期 | 版本 | 变更 |
 |------|------|------|
+| 2026-01-27 | **v9.0** | 🏭 工业级并行清洗：完成半佛仙人文件夹 2-6 共 392 文件清洗；新增实时 CSV 备份机制；5 窗口并行清洗流程验证；CSV 输出达 3.15 MB / 205 文件 |
+| 2026-01-27 | v8.1 | 新增 `save_records_to_csv` 函数，当 Lark API 配额用尽时自动备份到 `output/lark_backup_*.csv`；支持手动导入 Lark |
 | 2026-01-26 | **v8.0** | 新增 Web2 清洗规则章节 (cleaner_cli.py)；修复 Style_Repo 9 字段完整映射；风格标签多选格式修复 |
 | 2026-01-25 | v7.0 | 前端集成完成：Knowledge 页面入库管理、自定义目录、目标表格选择、Settings 配置 |
 | 2026-01-24 | v6.1 | 新增分批执行工具 (batch_ingest.py)，前端集成规划 |

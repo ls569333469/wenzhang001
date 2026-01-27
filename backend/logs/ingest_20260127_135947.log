@@ -1,0 +1,348 @@
+=== 入库任务启动 ===
+时间: 2026-01-27T13:59:47.884154
+命令: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m scripts.ingest_optimized --path D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\7 --target web2 --author banfo --style 半佛仙人
+模式: optimized
+数据源: web2
+自定义路径: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\7
+===================
+
+============================================================
+[INFO] Quantum Studio v5.2 - Knowledge_Repo 优化版入库
+============================================================
+[CONFIG] Base Token: CSfdbzErqay4bnsISxEuuVais3g
+[CONFIG] Knowledge Table ID: tblkvQK9aKxP0wsk
+[CONFIG] 优化特性: 合并LLM调用 + 批量上传 + 本地Hash缓存
+
+[FOLDER] 自定义目录模式: 
+D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\7
+找到 65 个文件 (JSON: 0, TXT: 65, MD: 0)
+检测到 Web2 模式，委托给 cleaner_cli.py 处理...
+[CONFIG] 博主: banfo
+[CONFIG] 风格: 半佛仙人
+执行: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m 
+tools.cleaner_cli clean --input 
+D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\7 --author banfo --style 
+半佛仙人 --source-category Shell --provider deepseek --min-score 3
+
+🚀 P12.2 工业级清洗工具 v2.2
+   📁 输入: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\7
+   👤 作者: banfo
+   🎨 风格: 半佛仙人
+   📂 模式: Shell
+   🤖 模型: deepseek
+   ⭐ 最低分: 3
+   🔄 并发数: 10
+   📄 分片大小: 3000 字符
+
+使用模型: deepseek-v3-2-251201
+📂 文件夹模式: 65 个文件
+📦 检测到断点记录，已跳过 126 个文件
+待处理: 65 个文件
+
+📊 预处理分析结果:
+   📁 文件数量: 65 个
+   📝 总字符数: 179,189 字符
+   🔢 总分片数: 88 块
+   ⏱️ 预计耗时: 5 分 52 秒
+
+  LLM返回: 31 条
+2026-01-27 14:01:15,712 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+2026-01-27 14:02:17,094 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2024-07-02_文石电纸书，天克小学生.txt: 提取 31 → 待入库 31
+  LLM返回: 18 条
+  ✓ 2024-07-04_只有比亚迪和特斯拉真的赌自动驾驶.txt: 提取 18 → 待入库 18
+  LLM返回: 15 条
+2026-01-27 14:05:58,830 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 64 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_140558.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-05_西贝不怕挨骂，只怕降价.txt: 提取 15 → 待入库 15
+  LLM返回: 19 条
+  ✓ 2024-07-07_拍立得相机，人间后悔药.txt: 提取 19 → 待入库 19
+  LLM返回: 30 条
+  ✓ 2024-07-09_《绝区零》被骂，不是米哈游的问题.txt: 提取 30 → 待入库 30
+  LLM返回: 1 条
+  LLM返回: 8 条
+  LLM返回: 17 条
+2026-01-27 14:13:04,744 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 74 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_141304.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-10_打枪不止靠武力，更靠智力.txt: 提取 26 → 待入库 25
+  LLM返回: 21 条
+  ✓ 2024-07-11_上班这事儿，真没人不“疯”.txt: 提取 21 → 待入库 21
+  LLM返回: 21 条
+  ✓ 2024-07-13_买个萝卜快跑无人出租赚钱？别太离谱.txt: 提取 21 → 待入库 21
+  LLM返回: 19 条
+2026-01-27 14:18:39,273 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 61 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_141839.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-14_蔚来APP把送礼玩明白了.txt: 提取 19 → 待入库 19
+  LLM返回: 31 条
+  ✓ 2024-07-15_《默杀》过于刻意，但不是电影的问题.txt: 提取 31 → 待入库 31
+  LLM返回: 1 条
+  LLM返回: 10 条
+  LLM返回: 23 条
+2026-01-27 14:23:53,199 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 61 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_142353.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-16_是时候去支付宝上搞点钱了.txt: 提取 34 → 待入库 30
+  LLM返回: 21 条
+  ✓ 2024-07-17_《抓娃娃》简直该算恐怖片.txt: 提取 21 → 待入库 21
+  LLM返回: 1 条
+  LLM返回: 9 条
+  LLM返回: 30 条
+2026-01-27 14:29:13,597 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 58 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_142913.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-19_宁夏的那一天，越过了两千年.txt: 提取 40 → 待入库 37
+  LLM返回: 1 条
+  LLM返回: 3 条
+  LLM返回: 30 条
+  ✓ 2024-07-20_初音开演唱会，老宅男破防了.txt: 提取 34 → 待入库 32
+  LLM返回: 1 条
+  LLM返回: 14 条
+  LLM返回: 34 条
+2026-01-27 14:36:09,693 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 79 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_143609.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-21_打工已经够累了，就别再负重了.txt: 提取 49 → 待入库 47
+  LLM返回: 1 条
+  LLM返回: 6 条
+  ❌ JSON解析失败: Expecting property name enclosed in double quotes:
+  ✓ 2024-07-22_民以食为天，酵母一拳打开了天.txt: 提取 7 → 待入库 4
+  LLM返回: 1 条
+  LLM返回: 6 条
+  ❌ JSON解析失败: Expecting property name enclosed in double quotes:
+  ✓ 2024-07-23_职场新人，怎么拿捏老油子？.txt: 提取 7 → 待入库 3
+  LLM返回: 20 条
+  ✓ 2024-07-24_卖手表的得给三星指环磕个头.txt: 提取 20 → 待入库 20
+  LLM返回: 1 条
+  LLM返回: 21 条
+  LLM返回: 27 条
+2026-01-27 14:46:24,705 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 14:46:35,503 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 76 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_144635.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-25_小红书里到底谁在赚钱呀？.txt: 提取 49 → 待入库 49
+  LLM返回: 1 条
+  LLM返回: 20 条
+  LLM返回: 18 条
+  ✓ 2024-07-27_这个世界，热点就是热钱.txt: 提取 39 → 待入库 37
+  LLM返回: 17 条
+2026-01-27 14:51:17,521 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 52 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_145117.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-28_邻居靠钻充电桩空子当上了资本大鳄.txt: 提取 17 → 待入库 15
+  LLM返回: 23 条
+2026-01-27 14:54:01,808 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2024-07-29_我感觉自己得了数据癌.txt: 提取 23 → 待入库 23
+  LLM返回: 1 条
+  LLM返回: 3 条
+  LLM返回: 19 条
+2026-01-27 14:55:43,035 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2024-07-30_百事，你咋不上天呢？.txt: 提取 23 → 待入库 20
+  LLM返回: 24 条
+2026-01-27 14:58:48,353 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 66 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_145848.csv
+  📤 批量上传: 0 条
+  ✓ 2024-07-31_《异人之下》简直是印度宝莱坞电影的神.txt: 提取 24 → 待入库 23
+  LLM返回: 27 条
+  ✓ 2024-08-02_九阳榨汁机，厕所的守护神.txt: 提取 27 → 待入库 27
+  LLM返回: 17 条
+  ✓ 2024-08-04_极米投影仪正确的用法是带娃.txt: 提取 17 → 待入库 17
+  LLM返回: 28 条
+2026-01-27 15:06:35,545 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 70 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_150635.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-05_《从21世纪安全撤离》，简直是电影见手青.txt: 提取 28 → 待入库 26
+  LLM返回: 17 条
+  ✓ 2024-08-06_月子中心真的是个倒霉生意.txt: 提取 17 → 待入库 14
+  LLM返回: 1 条
+  ✓ 2024-08-07_安慕希，到底在搞什么？.txt: 提取 1 → 待入库 1
+  LLM返回: 1 条
+  LLM返回: 9 条
+  LLM返回: 33 条
+2026-01-27 15:12:04,830 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 54 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_151204.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-08_赛博时代，纸笔依旧为王.txt: 提取 43 → 待入库 39
+  LLM返回: 1 条
+  LLM返回: 23 条
+  ❌ JSON解析失败: Unterminated string starting at: line 301 column 7
+  ✓ 2024-08-09_再大的事，最后都得看朋友圈.txt: 提取 24 → 待入库 24
+  LLM返回: 26 条
+2026-01-27 15:17:15,832 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 15:17:25,322 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2024-08-10_支付宝才是最好的恋爱游戏.txt: 提取 26 → 待入库 23
+  LLM返回: 1 条
+  LLM返回: 14 条
+  LLM返回: 30 条
+2026-01-27 15:21:03,603 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 15:21:07,940 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 89 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_152107.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-11_“国产玛莎”，出海爆杀.txt: 提取 45 → 待入库 42
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 30 条
+2026-01-27 15:23:11,384 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 15:23:27,139 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 15:23:32,156 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 15:24:17,170 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2024-08-12_互联网最大的瓜，是被闲鱼偷了家.txt: 提取 50 → 待入库 49
+  LLM返回: 22 条
+2026-01-27 15:27:23,079 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 70 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_152723.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-13_星巴克的优惠券，本质上是给房东看.txt: 提取 22 → 待入库 21
+  LLM返回: 1 条
+  LLM返回: 13 条
+  ❌ JSON解析失败: Unterminated string starting at: line 285 column 2
+  ✓ 2024-08-14_极氪009，买椅子送车.txt: 提取 14 → 待入库 11
+  LLM返回: 1 条
+  LLM返回: 6 条
+  ❌ JSON解析失败: Unterminated string starting at: line 249 column 7
+  ✓ 2024-08-16_瑞幸做奶茶，我嘴角上扬了.txt: 提取 7 → 待入库 2
+  LLM返回: 24 条
+  ✓ 2024-08-18_Apple pencil得给游戏磕头.txt: 提取 24 → 待入库 24
+  LLM返回: 22 条
+2026-01-27 15:37:01,836 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 56 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_153701.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-20_《异形：夺命舰》生怕家长不骂它.txt: 提取 22 → 待入库 19
+  LLM返回: 34 条
+  ✓ 2024-08-21_不要把拯救中国游戏的担子压在《黑神话悟空》头上.txt: 提取 34 → 
+待入库 34
+  LLM返回: 14 条
+  ✓ 2024-08-22_《黑神话：悟空》员工被疯狂挖角，不是因为其他公司需要.txt: 提取 
+14 → 待入库 14
+  LLM返回: 1 条
+  LLM返回: 21 条
+  LLM返回: 32 条
+2026-01-27 15:44:22,222 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+2026-01-27 15:46:11,903 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 102 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_154611.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-23_上新之前，先上小红书.txt: 提取 54 → 待入库 54
+  LLM返回: 37 条
+  ✓ 2024-08-25_空调五级能耗，社畜哭房东笑.txt: 提取 37 → 待入库 33
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 26 条
+2026-01-27 15:52:02,822 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 15:52:32,142 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 64 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_155232.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-26_拼多多让我浑身鸡皮疙瘩.txt: 提取 34 → 待入库 31
+  LLM返回: 20 条
+  ✓ 2024-08-27_《王者荣耀》应该抓紧联名《黑神话》.txt: 提取 20 → 待入库 16
+  LLM返回: 25 条
+  ✓ 2024-08-28_微信步数藏了多少人情世故.txt: 提取 25 → 待入库 25
+  LLM返回: 16 条
+2026-01-27 15:58:16,877 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 57 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_155816.csv
+  📤 批量上传: 0 条
+  ✓ 2024-08-29_多少人因为塑料袋选择了山姆极速达？.txt: 提取 16 → 待入库 16
+  LLM返回: 1 条
+  LLM返回: 6 条
+  LLM返回: 11 条
+2026-01-27 15:59:22,894 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2024-09-01_【注意】实体京东E卡7月～8月发货信息更新.txt: 提取 18 → 待入库 11
+  LLM返回: 20 条
+  ✓ 2024-09-01_世界上最讨厌仅退款的，其实是丰巢.txt: 提取 20 → 待入库 17
+  LLM返回: 26 条
+2026-01-27 16:03:33,321 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 53 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_160333.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-03_喝山姆矿泉水能生男孩？生物学都傻眼了.txt: 提取 26 → 待入库 25
+  LLM返回: 22 条
+2026-01-27 16:05:29,416 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2024-09-04_「转」美心月饼的跳，血糖嗷嗷叫.txt: 提取 22 → 待入库 22
+  LLM返回: 1 条
+  LLM返回: 16 条
+  LLM返回: 18 条
+2026-01-27 16:08:36,070 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 57 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_160836.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-05_要是能一天吃十根巧乐兹就好了.txt: 提取 35 → 待入库 35
+  LLM返回: 25 条
+  ✓ 2024-09-08_多邻国最好玩的用法是学汉语.txt: 提取 25 → 待入库 22
+  LLM返回: 28 条
+2026-01-27 16:13:23,273 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 50 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_161323.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-10_京东京造延长了我的生命.txt: 提取 28 → 待入库 28
+  LLM返回: 19 条
+  ✓ 2024-09-11_华为三折叠手机，卖的算贵吗？.txt: 提取 19 → 待入库 19
+  LLM返回: 23 条
+  ✓ 2024-09-13_橘朵活的好，因为拿钱少.txt: 提取 23 → 待入库 23
+  LLM返回: 19 条
+2026-01-27 16:19:12,988 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 61 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_161912.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-16_农夫山泉NFC果汁有点过于离谱.txt: 提取 19 → 待入库 19
+  LLM返回: 21 条
+  ✓ 2024-09-19_爱情会背叛你，理光相机不会.txt: 提取 21 → 待入库 20
+  LLM返回: 16 条
+  ✓ 2024-09-20_南航随心飞把计算器都按冒烟了.txt: 提取 16 → 待入库 16
+  LLM返回: 18 条
+2026-01-27 16:24:39,652 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 54 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_162439.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-22_网易云音乐，姥姥的赛博替身.txt: 提取 18 → 待入库 18
+  LLM返回: 1 条
+  LLM返回: 17 条
+  LLM返回: 17 条
+  ✓ 2024-09-25_京东让我爸破防了.txt: 提取 35 → 待入库 31
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 29 条
+2026-01-27 16:29:53,563 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 67 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_162953.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-26_开抖音小店也太无聊了.txt: 提取 41 → 待入库 36
+  LLM返回: 26 条
+  ✓ 2024-09-27_我是胖东来我也不玩了.txt: 提取 26 → 待入库 22
+  LLM返回: 1 条
+  LLM返回: 15 条
+  LLM返回: 23 条
+2026-01-27 16:34:59,929 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 58 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_163459.csv
+  📤 批量上传: 0 条
+  ✓ 2024-09-29_神州租车暴打自由行.txt: 提取 39 → 待入库 36
+  LLM返回: 18 条
+  ✓ 2024-09-30_拼多多胆子太大了.txt: 提取 18 → 待入库 18
+2026-01-27 16:37:04,119 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  💾 已备份 18 条记录到: D:\AI_Projects\2026001\backend\output\lark_backup_Shell_20260127_163704.csv
+  📤 最终批量上传: 0 条
+  🚀 并发处理中 (Max 10)... ---------------------------------------- 65/65
+
+🎉 完成!
+   📊 提取总数: 1668
+   📤 入库总数: 0
+   🔄 去重过滤: 1668 条
+✅ Web2 清洗完成

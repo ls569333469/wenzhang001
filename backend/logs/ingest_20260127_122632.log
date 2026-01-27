@@ -1,0 +1,646 @@
+=== 入库任务启动 ===
+时间: 2026-01-27T12:26:32.216949
+命令: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m scripts.ingest_optimized --path D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\3 --target web2 --author banfo --style 半佛仙人
+模式: optimized
+数据源: web2
+自定义路径: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\3
+===================
+
+============================================================
+[INFO] Quantum Studio v5.2 - Knowledge_Repo 优化版入库
+============================================================
+[CONFIG] Base Token: CSfdbzErqay4bnsISxEuuVais3g
+[CONFIG] Knowledge Table ID: tblkvQK9aKxP0wsk
+[CONFIG] 优化特性: 合并LLM调用 + 批量上传 + 本地Hash缓存
+
+[FOLDER] 自定义目录模式: 
+D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\3
+找到 86 个文件 (JSON: 0, TXT: 86, MD: 0)
+检测到 Web2 模式，委托给 cleaner_cli.py 处理...
+[CONFIG] 博主: banfo
+[CONFIG] 风格: 半佛仙人
+执行: D:\AI_Projects\2026001\backend\venv\Scripts\python.exe -m 
+tools.cleaner_cli clean --input 
+D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\3 --author banfo --style 
+半佛仙人 --source-category Shell --provider deepseek --min-score 3
+
+🚀 P12.2 工业级清洗工具 v2.2
+   📁 输入: D:\AI_Projects\2026001\backend\data\Web2风格\半佛仙人\3
+   👤 作者: banfo
+   🎨 风格: 半佛仙人
+   📂 模式: Shell
+   🤖 模型: deepseek
+   ⭐ 最低分: 3
+   🔄 并发数: 10
+   📄 分片大小: 3000 字符
+
+使用模型: deepseek-v3-2-251201
+📂 文件夹模式: 86 个文件
+📦 检测到断点记录，已跳过 98 个文件
+待处理: 86 个文件
+
+📊 预处理分析结果:
+   📁 文件数量: 86 个
+   📝 总字符数: 352,219 字符
+   🔢 总分片数: 159 块
+   ⏱️ 预计耗时: 10 分 36 秒
+
+  LLM返回: 10 条
+2026-01-27 12:27:09,676 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+  ✓ 2023-07-01_【注意】实体京东E卡6月发货信息更新.txt: 提取 10 → 待入库 7
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 37 条
+  LLM返回: 28 条
+  LLM返回: 32 条
+2026-01-27 12:36:54,763 - lark_client - INFO - Successfully batch created 118 records
+  📤 批量上传: 118 条
+  ✓ 2023-07-02_阿斯巴甜致癌？代糖和糖的百年战争。.txt: 提取 117 → 待入库 111
+  LLM返回: 1 条
+  LLM返回: 6 条
+  LLM返回: 32 条
+  ✓ 2023-07-03_中年男人消费不如狗？比音勒芬笑了.txt: 提取 39 → 待入库 34
+  LLM返回: 30 条
+2026-01-27 12:44:30,515 - lark_client - INFO - Successfully batch created 61 records
+  📤 批量上传: 61 条
+  ✓ 2023-07-04_味千拉面看着预制菜，牙都咬碎了.txt: 提取 30 → 待入库 27
+  LLM返回: 1 条
+  LLM返回: 20 条
+  LLM返回: 31 条
+2026-01-27 12:47:20,379 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-07-05_河北，人生何处不江河.txt: 提取 52 → 待入库 48
+  LLM返回: 1 条
+  LLM返回: 27 条
+  LLM返回: 23 条
+2026-01-27 12:53:48,183 - lark_client - INFO - Successfully batch created 99 records
+  📤 批量上传: 99 条
+  ✓ 2023-07-06_喜茶越卷，同行越开心.txt: 提取 51 → 待入库 51
+  LLM返回: 1 条
+  LLM返回: 15 条
+  LLM返回: 31 条
+  ❌ JSON解析失败: Unterminated string starting at: line 269 column 2
+  ✓ 2023-07-07_梦幻西游的诅咒，赛季服能解吗？.txt: 提取 47 → 待入库 46
+  LLM返回: 1 条
+  LLM返回: 22 条
+  LLM返回: 34 条
+2026-01-27 13:03:36,071 - lark_client - INFO - Successfully batch created 103 records
+  📤 批量上传: 103 条
+  ✓ 2023-07-09_闲鱼，音乐节的精神坐标.txt: 提取 57 → 待入库 57
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 29 条
+2026-01-27 13:06:27,752 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-07-10_大窑汽水，走了啤酒的后门.txt: 提取 34 → 待入库 30
+  LLM返回: 1 条
+  LLM返回: 27 条
+  LLM返回: 22 条
+2026-01-27 13:10:31,108 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:10:33,194 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:10:35,540 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-11_理想汽车的快刀，斩了谁的乱麻？.txt: 提取 50 → 待入库 49
+  LLM返回: 1 条
+  LLM返回: 2 条
+  LLM返回: 18 条
+  ✓ 2023-07-12_窑鸡王的烧，社畜逃不掉.txt: 提取 21 → 待入库 16
+  LLM返回: 1 条
+  LLM返回: 21 条
+  LLM返回: 20 条
+  LLM返回: 17 条
+2026-01-27 13:15:07,967 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 13:15:48,637 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:15:50,524 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:15:52,398 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-13_拳皇火了几十年，背后公司过于魔幻.txt: 提取 59 → 待入库 59
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 27 条
+  ✓ 2023-07-14_吉利汽车让中年人傻眼了.txt: 提取 32 → 待入库 28
+  LLM返回: 1 条
+  LLM返回: 27 条
+  LLM返回: 26 条
+2026-01-27 13:22:22,407 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:22:24,276 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:22:26,138 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-16_蔡依林的美，快手最清楚.txt: 提取 54 → 待入库 52
+  LLM返回: 1 条
+  LLM返回: 17 条
+  LLM返回: 14 条
+  LLM返回: 22 条
+2026-01-27 13:25:44,778 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 13:26:11,042 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:26:13,202 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:26:15,317 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-17_发现“新石油” ？沙特开始“乾坤一掷”.txt: 提取 54 → 待入库 53
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 28 条
+2026-01-27 13:28:14,094 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-07-18_尊宝披萨，外卖活菩萨.txt: 提取 40 → 待入库 38
+  LLM返回: 26 条
+2026-01-27 13:31:42,060 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:31:43,619 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:31:45,487 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-19_不能让车主赚钱的行车记录仪都是垃圾.txt: 提取 26 → 待入库 23
+  LLM返回: 1 条
+  LLM返回: 24 条
+  LLM返回: 36 条
+2026-01-27 13:34:54,355 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 13:35:52,896 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:35:54,741 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:35:56,526 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-20_谁教物业用企业微信赚钱的.txt: 提取 61 → 待入库 61
+  LLM返回: 36 条
+2026-01-27 13:38:51,125 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-07-21_建议奥迪抓紧收购高合，闪瞎世界的眼.txt: 提取 36 → 待入库 36
+  LLM返回: 1 条
+  LLM返回: 22 条
+  LLM返回: 21 条
+  LLM返回: 22 条
+  LLM返回: 23 条
+  ❌ JSON解析失败: Unterminated string starting at: line 260 column 2
+2026-01-27 13:43:21,030 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 13:44:07,678 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:44:09,589 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:44:11,544 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-23_靠梦幻西游赚到一千万，你信吗？.txt: 提取 89 → 待入库 89
+  LLM返回: 1 条
+  LLM返回: 31 条
+  LLM返回: 31 条
+2026-01-27 13:48:01,748 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:48:03,639 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:48:05,477 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-24_玩了三天快手，差点给自己找了个班上.txt: 提取 63 → 待入库 63
+  LLM返回: 24 条
+  ✓ 2023-07-25_妙鸭相机的代价，贵到超乎想象.txt: 提取 24 → 待入库 24
+  LLM返回: 22 条
+  ✓ 2023-07-26_新东方做文旅，把中年人的钱包看透了.txt: 提取 22 → 待入库 20
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 28 条
+2026-01-27 13:55:23,836 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:55:26,269 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 13:55:28,742 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-27_有友泡椒凤爪，rapper看了都要傻.txt: 提取 40 → 待入库 36
+  LLM返回: 1 条
+  LLM返回: 3 条
+  LLM返回: 15 条
+  ✓ 2023-07-28_整个医美行业加起来，都没敷尔佳运气好.txt: 提取 19 → 待入库 15
+  LLM返回: 9 条
+2026-01-27 13:57:44,872 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+  ✓ 2023-07-29_【注意】实体京东E卡7月发货信息更新.txt: 提取 9 → 待入库 7
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 27 条
+2026-01-27 14:00:30,591 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 14:01:05,267 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:01:07,556 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:01:09,997 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-07-30_品牌搞环保营销，别只会吓唬人了.txt: 提取 47 → 待入库 47
+  LLM返回: 1 条
+  LLM返回: 12 条
+  LLM返回: 36 条
+2026-01-27 14:03:29,427 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-07-31_东方甄选，真正的赌徒.txt: 提取 49 → 待入库 49
+  LLM返回: 1 条
+  LLM返回: 15 条
+  ❌ JSON解析失败: Unterminated string starting at: line 284 column 7
+2026-01-27 14:07:22,261 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+2026-01-27 14:07:44,515 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:07:46,603 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:07:48,670 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-01_《封神》的宣发，好像和电影有仇。.txt: 提取 16 → 待入库 9
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 23 条
+  ✓ 2023-08-02_水溶C100是怎么成为小红书神药的.txt: 提取 31 → 待入库 26
+  LLM返回: 1 条
+  LLM返回: 24 条
+  ❌ JSON解析失败: Unterminated string starting at: line 261 column 2
+2026-01-27 14:13:52,241 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:13:53,788 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:13:55,796 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-03_企业微信掏空了男人的私房钱？.txt: 提取 25 → 待入库 24
+  LLM返回: 1 条
+  LLM返回: 26 条
+  LLM返回: 21 条
+  ✓ 2023-08-04_鸿蒙的科技，华为的狠活.txt: 提取 48 → 待入库 48
+  LLM返回: 1 条
+  LLM返回: 20 条
+  LLM返回: 24 条
+2026-01-27 14:20:24,864 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:20:26,924 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:20:29,310 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-05_成年人的爱情，只筛选不改变.txt: 提取 45 → 待入库 45
+  LLM返回: 1 条
+  LLM返回: 3 条
+  LLM返回: 34 条
+  ✓ 2023-08-06_仙剑4 重制，要割老玩家韭菜吗？.txt: 提取 38 → 待入库 33
+  LLM返回: 1 条
+  LLM返回: 17 条
+  ❌ JSON解析失败: Unterminated string starting at: line 292 column 7
+2026-01-27 14:27:01,391 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:27:03,596 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:27:05,781 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-07_小红书给我看笑了.txt: 提取 18 → 待入库 17
+  LLM返回: 1 条
+  LLM返回: 16 条
+  ❌ JSON解析失败: Unterminated string starting at: line 324 column 7
+  ✓ 2023-08-08_游戏行业的暴利成了笑话.txt: 提取 17 → 待入库 15
+  LLM返回: 37 条
+2026-01-27 14:32:37,231 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:32:39,173 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:32:41,198 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-09_晨光卖的不只文具，更是人情世故.txt: 提取 37 → 待入库 35
+  LLM返回: 1 条
+  LLM返回: 15 条
+  LLM返回: 20 条
+  LLM返回: 34 条
+2026-01-27 14:37:12,081 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:37:15,216 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:37:17,323 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-10_给牙刷装智能屏，疯了吗？.txt: 提取 70 → 待入库 64
+  LLM返回: 1 条
+  LLM返回: 17 条
+  LLM返回: 24 条
+  ✓ 2023-08-11_生意要赚钱，最高的秘诀是简单.txt: 提取 42 → 待入库 42
+  LLM返回: 1 条
+  LLM返回: 18 条
+  LLM返回: 15 条
+2026-01-27 14:42:42,188 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:42:44,529 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:42:46,559 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-13_恋爱这件事，还是要趁早.txt: 提取 34 → 待入库 34
+  LLM返回: 1 条
+  LLM返回: 7 条
+  ❌ JSON解析失败: Unterminated string starting at: line 252 column 2
+  ✓ 2023-08-14_三只松鼠最大的问题，是没给门店装儿童摇摇车.txt: 提取 8 → 待入库 
+1
+  LLM返回: 21 条
+  ✓ 2023-08-15_特斯拉这次降价，打的是4S店.txt: 提取 21 → 待入库 18
+  LLM返回: 21 条
+  ✓ 2023-08-16_家长逃不出泰兰尼斯儿童鞋的拿捏.txt: 提取 21 → 待入库 21
+  LLM返回: 18 条
+2026-01-27 14:51:05,172 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:51:07,575 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:51:09,690 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-17_酒店价格涨疯了背后，是极端的理智算计.txt: 提取 18 → 待入库 16
+  LLM返回: 1 条
+  LLM返回: 13 条
+  LLM返回: 27 条
+  ✓ 2023-08-18_没有夜市逛的我要死了.txt: 提取 41 → 待入库 38
+  LLM返回: 1 条
+  LLM返回: 33 条
+  LLM返回: 37 条
+2026-01-27 14:59:26,561 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:59:28,804 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 14:59:31,047 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-19_白天自己努力，夜里慕思拼命.txt: 提取 71 → 待入库 71
+  LLM返回: 1 条
+  LLM返回: 12 条
+  LLM返回: 23 条
+  ✓ 2023-08-20_《黑神话悟空》试玩细节，国产大作的希望还是吹牛？.txt: 提取 36 → 
+待入库 33
+  LLM返回: 22 条
+2026-01-27 15:03:59,618 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 15:04:26,499 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:04:28,558 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:04:30,927 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-21_芙丽芳丝洗面奶，社畜最后的倔强.txt: 提取 22 → 待入库 20
+  LLM返回: 1 条
+  LLM返回: 14 条
+  LLM返回: 21 条
+  ✓ 2023-08-22_溜溜梅看起来魔幻，其实非常聪明.txt: 提取 36 → 待入库 29
+  LLM返回: 1 条
+  LLM返回: 13 条
+  ❌ JSON解析失败: Expecting property name enclosed in double quotes:
+  ✓ 2023-08-23_佳得乐，卷王的充电宝.txt: 提取 14 → 待入库 10
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 32 条
+2026-01-27 15:12:53,766 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:12:56,107 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:12:58,132 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-24_玩了这个游戏，我感觉自己变卑鄙了.txt: 提取 40 → 待入库 37
+  LLM返回: 1 条
+  LLM返回: 5 条
+  LLM返回: 29 条
+  ✓ 2023-08-25_汤臣倍健，社畜熬夜的赎罪券.txt: 提取 35 → 待入库 31
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 20 条
+2026-01-27 15:18:40,037 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:18:42,129 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:18:44,408 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-26_李跳跳停更，摇一摇广告的户口本飞升.txt: 提取 25 → 待入库 21
+  LLM返回: 1 条
+  LLM返回: 15 条
+  LLM返回: 22 条
+2026-01-27 15:21:28,326 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-08-27_人在阿那亚，先打开了闲鱼.txt: 提取 38 → 待入库 38
+  LLM返回: 1 条
+  LLM返回: 28 条
+  LLM返回: 32 条
+2026-01-27 15:26:39,119 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:26:41,104 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:26:45,865 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-28_认养一头牛的卷法，一般人学不来.txt: 提取 61 → 待入库 61
+  LLM返回: 16 条
+  ✓ 2023-08-29_老乡鸡是时候成为大肌霸了.txt: 提取 16 → 待入库 16
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 13 条
+  ✓ 2023-08-30_我在京东下单100箱水，免了3000块邮费.txt: 提取 25 → 待入库 25
+  LLM返回: 25 条
+2026-01-27 15:32:28,470 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:32:30,238 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:32:32,361 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-08-31_华尔街算不出拼多多的命.txt: 提取 25 → 待入库 25
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 28 条
+  ✓ 2023-09-01_高价抢华为手机，是傻吗？.txt: 提取 48 → 待入库 48
+  LLM返回: 1 条
+  LLM返回: 23 条
+  LLM返回: 25 条
+2026-01-27 15:38:28,013 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+2026-01-27 15:39:30,501 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:39:32,515 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:39:34,639 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-03_别整天智商税了，智商税这东西很薛定谔.txt: 提取 49 → 待入库 48
+  LLM返回: 1 条
+  LLM返回: 4 条
+  LLM返回: 38 条
+2026-01-27 15:42:53,954 - lark_client - INFO - Successfully refreshed Lark Tenant Access Token
+  ✓ 2023-09-04_瑞幸加茅台，华尔街跪下来.txt: 提取 43 → 待入库 40
+  LLM返回: 1 条
+  LLM返回: 12 条
+  LLM返回: 19 条
+2026-01-27 15:45:36,402 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 15:46:05,327 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:46:07,442 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:46:09,354 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-05_瑞幸用酱香风味乳，才能确保喝到正宗茅台.txt: 提取 32 → 待入库 29
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 21 条
+2026-01-27 15:48:55,760 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-09-06_《奥本海默》，生活的致命魔术.txt: 提取 41 → 待入库 39
+  LLM返回: 1 条
+  LLM返回: 25 条
+  LLM返回: 27 条
+2026-01-27 15:52:47,680 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:52:49,441 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:52:51,368 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-07_二手车的脏水，要被抽干了.txt: 提取 53 → 待入库 53
+  LLM返回: 37 条
+  ✓ 2023-09-08_「转」下雨天点外卖怪消费者？有病吗？.txt: 提取 37 → 待入库 37
+  LLM返回: 20 条
+2026-01-27 15:57:39,677 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:57:41,593 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 15:57:43,499 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-09_巴奴火锅赔800多万，火锅行业都傻眼了.txt: 提取 20 → 待入库 17
+  LLM返回: 1 条
+  LLM返回: 1 条
+  LLM返回: 10 条
+  ✓ 2023-09-10_【注意】实体京东E卡8月发货信息更新.txt: 提取 12 → 待入库 9
+  LLM返回: 3 条
+  LLM返回: 1 条
+  ❌ JSON解析失败: Unterminated string starting at: line 292 column 2
+  ✓ 2023-09-10_库迪看着瑞幸和华尔街，牙都咬碎了.txt: 提取 4 → 待入库 2
+  LLM返回: 1 条
+  LLM返回: 24 条
+  LLM返回: 32 条
+2026-01-27 16:03:53,571 - lark_client - ERROR - Failed to list Lark records: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))
+2026-01-27 16:05:06,100 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:05:08,178 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:05:09,851 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-11_理想汽车把消费主义忽悠瘸了.txt: 提取 57 → 待入库 57
+  LLM返回: 1 条
+  LLM返回: 16 条
+  LLM返回: 31 条
+  ✓ 2023-09-12_给床加科技，卷王兴奋剂.txt: 提取 48 → 待入库 48
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 27 条
+2026-01-27 16:11:27,245 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:11:29,256 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:11:32,188 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-13_你那个打游戏的朋友，可能正在守护长江.txt: 提取 35 → 待入库 29
+  LLM返回: 19 条
+  ✓ 2023-09-14_小鹿妈妈到了最辉煌，也最危险的时候.txt: 提取 19 → 待入库 19
+  LLM返回: 25 条
+  ✓ 2023-09-15_茅台配德芙，人类都迷糊.txt: 提取 25 → 待入库 22
+  LLM返回: 23 条
+2026-01-27 16:17:41,495 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:17:43,160 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:17:45,327 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-17_外卖柜开始向外卖员收费，疯了吗？.txt: 提取 23 → 待入库 22
+  LLM返回: 1 条
+  LLM返回: 6 条
+  LLM返回: 34 条
+2026-01-27 16:20:00,126 - lark_client - ERROR - Failed to list Lark records: HTTPSConnectionPool(host='open.feishu.cn', port=443): Read timed out. (read timeout=15)
+  ✓ 2023-09-18_旺仔牛奶，让小红书彻底疯狂.txt: 提取 41 → 待入库 36
+  LLM返回: 17 条
+2026-01-27 16:22:42,702 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:22:44,413 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:22:46,205 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-19_蜂花热闹背后，有潜藏的担忧.txt: 提取 17 → 待入库 17
+  LLM返回: 20 条
+  ✓ 2023-09-20_花西子的公关并不蠢.txt: 提取 20 → 待入库 17
+  LLM返回: 29 条
+  ✓ 2023-09-21_从下手到上头，没有一个老外能绕过支付宝.txt: 提取 29 → 待入库 25
+  LLM返回: 1 条
+  LLM返回: 7 条
+  LLM返回: 30 条
+2026-01-27 16:30:42,487 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:30:44,559 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:30:46,556 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-22_没有嫚熙暖不到的女人心.txt: 提取 38 → 待入库 35
+  LLM返回: 1 条
+  LLM返回: 6 条
+  LLM返回: 26 条
+  ✓ 2023-09-23_成年人最后的情绪稳定剂.txt: 提取 33 → 待入库 28
+  LLM返回: 1 条
+  LLM返回: 13 条
+  LLM返回: 29 条
+2026-01-27 16:36:24,055 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:36:25,943 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:36:27,906 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-24_甲醇点火炬，地球谢谢你.txt: 提取 43 → 待入库 43
+  LLM返回: 1 条
+  LLM返回: 26 条
+  ❌ JSON解析失败: Expecting value: line 297 column 24 (char 10675)
+  ✓ 2023-09-25_越想赚钱，越要专业.txt: 提取 27 → 待入库 27
+  LLM返回: 1 条
+  LLM返回: 3 条
+  LLM返回: 17 条
+  ✓ 2023-09-26_华为卖2W多的大金表，主打的就是性价比.txt: 提取 21 → 待入库 18
+  LLM返回: 1 条
+  LLM返回: 18 条
+  LLM返回: 19 条
+2026-01-27 16:44:10,130 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:44:12,047 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:44:14,476 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-28_别人上新都赌命，凭什么你有确定性.txt: 提取 38 → 待入库 38
+  LLM返回: 1 条
+  LLM返回: 11 条
+  LLM返回: 32 条
+  ✓ 2023-09-29_商业上，无聊也是一种打法.txt: 提取 44 → 待入库 44
+  LLM返回: 1 条
+  LLM返回: 19 条
+  LLM返回: 22 条
+2026-01-27 16:50:21,219 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:50:23,408 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+2026-01-27 16:50:25,396 - lark_client - ERROR - Failed to batch create records: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  ⚠️ 批量上传失败: This month's API call quota has been exceeded
+  📤 批量上传: 0 条
+  ✓ 2023-09-30_羽绒服行业的话语权，波司登在米兰抢到了.txt: 提取 42 → 待入库 42
+  🚀 并发处理中 (Max 10)... ---------------------------------------- 86/86
+
+🎉 完成!
+   📊 提取总数: 3145
+   📤 入库总数: 381
+   🔄 去重过滤: 2764 条
+✅ Web2 清洗完成
