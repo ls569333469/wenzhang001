@@ -467,7 +467,7 @@ async def check_exists_in_lark_async(content_hash: str) -> bool:
 # 6.1 批量上传功能 (性能优化)
 # ==========================================
 
-BATCH_SIZE = 200  # 批量上传大小
+BATCH_SIZE = 50  # 批量上传大小 (降低以便更快触发)
 
 async def batch_upload_to_lark_async(
     records: List[Dict],

@@ -320,3 +320,4 @@ banfo --source-category Shell --provider deepseek --min-score 3
   LLM返回: 1 条
   LLM返回: 24 条
   LLM返回: 26 条
+❌ cleaner_cli 返回错误码: 4294967295
