@@ -1,0 +1,15 @@
+{
+  "console": [
+    {
+      "type": "info",
+      "text": "%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold",
+      "time": "20:41:03"
+    },
+    {
+      "type": "log",
+      "text": "[HMR] connected",
+      "time": "20:41:03"
+    }
+  ],
+  "network": []
+}

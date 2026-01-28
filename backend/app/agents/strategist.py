@@ -133,7 +133,8 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
     user_prompt = f"""{combined_input}
 
 Please analyze the above materials (Core Instruction + References) and generate a content strategy in JSON format.
-If references are provided, identify common themes or contrast them with the core instruction."""
+If references are provided, identify common themes or contrast them with the core instruction.
+IMPORTANT: Generate 3 DISTINCT and CREATIVE options with different angles. Avoid repetitive titles."""
 
     return system_prompt, user_prompt
 
@@ -151,7 +152,7 @@ def execute_strategist_analysis(user_prompt: str, system_prompt: str, api_config
             api_key=api_key,
             model_id=model_id,
             provider=provider,
-            temperature=0.2,
+            temperature=0.7,
             system_prompt=system_prompt
         )
         
@@ -172,9 +173,17 @@ def execute_strategist_analysis(user_prompt: str, system_prompt: str, api_config
 
 def strategist_agent(state: dict) -> dict:
     """
-    Legacy Wrapper: Maintains backward compatibility for graph execution.
+    Step 1: Strategist Agent
+    Generates a content strategy plan based on the input and context.
+    Returns: {"plan": str, "web3_knowledge": str}
     """
     context = build_strategist_context(state)
     system_prompt, user_prompt = build_strategist_prompt(context, state)
     api_config = state.get("api_config", {})
-    return execute_strategist_analysis(user_prompt, system_prompt, api_config)
+    
+    plan_text = execute_strategist_analysis(user_prompt, system_prompt, api_config)
+    
+    return {
+        "plan": plan_text,
+        "web3_knowledge": context.get("web3_knowledge", "")
+    }

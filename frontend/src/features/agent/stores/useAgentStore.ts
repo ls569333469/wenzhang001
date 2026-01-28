@@ -153,10 +153,13 @@ export const useAgentStore = create<AgentState>((set, get) => ({
 
         try {
             // 2. Initiate Request to /analyze (Step 1)
-            // Backend expects: { input, mode, narrative_type, references, api_config }
+            // Backend expects: { input, mode, style, length, narrative_type, references, api_config }
             const requestBody = {
                 input: finalInput,
                 mode: config.mode || 'deep_analysis',
+                style: config.style || 'mimeng',
+                length: config.length || 'medium',
+                temperature: config.temperature || 0.7,
                 narrative_type: 'project_review',
                 references: [],
             };
@@ -330,10 +333,20 @@ async function processStream(body: ReadableStream<Uint8Array>, set: any, get: an
             if (line.startsWith('data: ')) {
                 try {
                     const event = JSON.parse(line.slice(6));
+                    console.log('[SSE] Event received:', event.type, event);
                     handleEvent(event, set, get);
-                } catch (e) { console.warn('SSE Parse Error', e); }
+                } catch (e) { console.warn('SSE Parse Error', e, line); }
             }
         }
+    }
+
+    // Process any remaining buffer content
+    if (buffer.startsWith('data: ')) {
+        try {
+            const event = JSON.parse(buffer.slice(6));
+            console.log('[SSE] Final buffer event:', event.type, event);
+            handleEvent(event, set, get);
+        } catch (e) { console.warn('SSE Final Parse Error', e, buffer); }
     }
 }
 
@@ -363,8 +376,21 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
             const agentName = event.agent?.toLowerCase();
             const stepIndex = steps.findIndex(s => s.agent === agentName);
             if (stepIndex !== -1) {
+                // Update status and main message
                 steps[stepIndex].status = 'thinking';
                 steps[stepIndex].message = event.detail;
+
+                // P10-4: Append to subSteps for detailed view
+                const newSubStep = {
+                    id: `step-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+                    text: event.detail || '',
+                    timestamp: new Date().toLocaleTimeString('zh-CN', { hour12: false })
+                };
+
+                // Ensure subSteps array exists and append
+                const currentSubSteps = steps[stepIndex].subSteps || [];
+                steps[stepIndex].subSteps = [...currentSubSteps, newSubStep];
+
                 set({ steps });
             }
             break;

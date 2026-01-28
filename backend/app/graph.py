@@ -15,6 +15,7 @@ class AgentState(TypedDict):
     agent_config: Dict[str, Dict[str, Any]]  # 新增：每个 Agent 的特定配置
     strategy_plan: str
     strategy_json: str  # 新增：策略 JSON（用于传递给 writer）
+    web3_knowledge: str # [P12] 新增：Web3 知识上下文 (from Strategist -> Writer)
     info_anchors: Dict[str, Any]  # 信息锚点
     draft_v1: str
     critique_feedback: str
@@ -56,6 +57,7 @@ def node_strategist(state: AgentState):
         return {
             "strategy_plan": plan_json,
             "strategy_json": plan_json,
+            "web3_knowledge": "", # 选中方案模式下暂不回溯检索 (未来可优化)
             "logs": [f"[{datetime.now().isoformat()}] Strategist used selected option."],
             "thinking_steps": [{"agent": "strategist", "steps": steps, "status": "completed"}]
         }
@@ -80,10 +82,19 @@ def node_strategist(state: AgentState):
     
     # 传递 state 给 agent
     try:
-        plan = strategist_agent(agent_state)
+        # [P12 Refactor] strategist_agent now returns a dict: {"plan": str, "web3_knowledge": str}
+        result = strategist_agent(agent_state)
+        if isinstance(result, dict) and "plan" in result:
+             plan = result["plan"]
+             web3_knowledge = result.get("web3_knowledge", "")
+        else:
+             # Backward compatibility fallback
+             plan = str(result)
+             web3_knowledge = ""
     except Exception as e:
          steps.append({"step": "error", "content": f"Strategist Error: {str(e)}"})
          plan = "{}"
+         web3_knowledge = ""
     
     # 尝试解析策略计划中的信息
     try:
@@ -97,11 +108,15 @@ def node_strategist(state: AgentState):
     except:
         steps.append({"step": "planning", "content": "生成内容策略计划..."})
     
+    if web3_knowledge:
+        steps.append({"step": "knowledge", "content": f"已检索 Web3 知识库"})
+
     steps.append({"step": "completed", "content": "策略规划完成"})
     
     return {
         "strategy_plan": plan,
         "strategy_json": plan,  # 保存原始 JSON 供 writer 使用
+        "web3_knowledge": web3_knowledge, # 传递给 Writer
         "logs": [f"[{datetime.now().isoformat()}] Strategist generated plan."],
         "thinking_steps": [{"agent": "strategist", "steps": steps, "status": "completed"}]
     }

@@ -1,0 +1,13 @@
+{
+    "api_keys": {
+        "gemini": "YOUR_GEMINI_API_KEY",
+        "doubao": "YOUR_DOUBAO_API_KEY",
+        "deepseek": "YOUR_DEEPSEEK_API_KEY",
+        "openai": "YOUR_OPENAI_API_KEY"
+    },
+    "feature_flags": {
+        "use_knowledge_repo": true,
+        "use_optimized_ingest": true
+    },
+    "ingest_history": []
+}

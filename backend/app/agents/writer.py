@@ -163,13 +163,19 @@ def writer_agent(state: dict) -> dict:
     print(">>> [Writer Debug] Rendering prompt")
     system_prompt = render_prompt("writer", context)
 
-    user_prompt = f"""Strategist's Plan:
+    # [P12] Inject Web3 Knowledge
+    web3_knowledge = state.get("web3_knowledge", "")
+    knowledge_section = ""
+    if web3_knowledge:
+        knowledge_section = f"\n\n{web3_knowledge}\n"
+
+    user_prompt = f"""策略规划：
 {strategy_json}
 
-Source Material:
-{raw_input}
+原始素材：
+{raw_input}{knowledge_section}
 
-Please write the article now."""
+请现在开始撰写文章。【重要：必须使用中文撰写！】"""
 
     print(">>> [Writer Debug] Calling generate_text...")
     try:
