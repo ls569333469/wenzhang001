@@ -1,0 +1,93 @@
+# ===================================
+# 敏感文件 - 绝对不能提交
+# ===================================
+.env
+.env.*
+*.env
+backend/config/user_config.json
+**/user_config.json
+**/api_keys.json
+**/*secret*
+**/*credentials*
+
+# ===================================
+# Python
+# ===================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.venv/
+ENV/
+env/
+
+# ===================================
+# Node.js / Frontend
+# ===================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.next/
+out/
+.nuxt/
+dist/
+.cache/
+
+# ===================================
+# IDE / Editor
+# ===================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===================================
+# Logs & Debug
+# ===================================
+*.log
+logs/
+backend/logs/
+debug_*.png
+feature_test_*.png
+e2e_*.png
+*_results.json
+
+# ===================================
+# Database & Cache
+# ===================================
+*.db
+*.sqlite
+*.sqlite3
+.cache/
+backend/data/vector_db/
+backend/data/cache/
+
+# ===================================
+# Temporary Files
+# ===================================
+*.tmp
+*.temp
+.tmp/
+tmp/
+temp/
