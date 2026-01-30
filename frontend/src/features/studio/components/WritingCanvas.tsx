@@ -25,6 +25,10 @@ export function WritingCanvas() {
         setTimeout(() => setCopied(false), 2000);
     };
 
+    const handleRegenerate = () => {
+        regenerate();
+    };
+
     const handleExportMD = () => {
         const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
         const url = URL.createObjectURL(blob);

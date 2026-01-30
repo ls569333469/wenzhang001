@@ -1,26 +1,28 @@
 
 import { CreationMode, ArticleLength, WritingStyle } from "@/features/studio/schema";
 
-// 创作模式配置
+// 创作模式配置 (P10 简化版)
 export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; compact?: boolean }[] = [
     {
         id: 'deep_analysis',
         title: '深度分析',
-        desc: '全面调研，逻辑严密，适合研报'
+        desc: '全面深度分析，长文结构，多角度论证'
     },
     {
         id: 'quick_summary',
-        title: '快速摘要',
-        desc: '提炼核心观点，适合早报'
+        title: '快讯速评',
+        desc: '快速产出，要点突出，适合热点追踪'
     },
     {
         id: 'rewrite',
         title: '改写润色',
+        desc: '基于原文改写，保持核心信息',
         compact: true
     },
     {
         id: 'translate',
-        title: '专业翻译',
+        title: '教程指南',
+        desc: '步骤清晰，可操作性强',
         compact: true
     }
 ];

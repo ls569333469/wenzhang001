@@ -1,7 +1,0 @@
-{
-  "title": "AIRWA 合约被攻击者利用，损失约 3.4 万美元",
-  "url": "https://www.chaincatcher.com/article/2175599",
-  "content": "ChainCatcher 消息，据 CertiK Alert 监测，今晨 AIRWA 在 BSC 网络上遭到攻击，损失约 3.4 万美元。该合约具有公开的 setBurnRate() 函数，攻击者利用该函数修改了燃烧 AIRWA 代币的参数并从中获利。",
-  "published_at": "2025-04-04",
-  "downloaded_at": "2026-01-17 17:12:06"
-}

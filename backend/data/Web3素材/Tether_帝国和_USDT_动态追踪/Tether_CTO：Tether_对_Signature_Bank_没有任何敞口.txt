@@ -1,9 +1,0 @@
-标题: Tether CTO：Tether 对 Signature Bank 没有任何敞口
-链接: https://www.chaincatcher.com/article/2089128
-发布时间: 2023-03-13
-
-==================================================
-
-ChainCatcher 消息，Tether 首席技术官 Paolo Ardoino 推特发文称，Tether 对 Signature Bank 没有任何敞口。
-
-据此前消息，Signature Bank 周日被纽约州监管机构关闭。美联储、FDIC 和美国财政部发布联合声明称，所有使用 Signature 的储户都将获得补偿。

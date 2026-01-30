@@ -1,7 +1,0 @@
-{
-  "title": "以太坊 Pectra 升级将于 2 月底开启测试，预计 4 月上线主网",
-  "url": "https://www.chaincatcher.com/article/2166158",
-  "content": "ChainCatcher 消息，据 Coindesk 报道，以太坊开发者已正式确定 Pectra 升级的测试日期。该升级将于 2 月 26 日在 Holesky 测试网上开始测试，随后于 3 月 5 日在 Sepolia 测试网进行第二轮测试。如果测试顺利，开发者将于 3 月 6 日召开会议确定正式上线日期，预计将于 4 月初在主网上线。\n\nPectra 升级（由 Prague 和 Electra 两个升级组合而成）包含 8 项重要改进，主要聚焦于钱包和验证者。其中，EIP-7702 将改善加密钱包的用户体验；EIP-7251 则允许验证者将质押额度从 32 ETH 提升至 2,048 ETH。",
-  "published_at": "2025-02-07\n           \n              以太坊\n            \n              Pectra 升级\n            \n              主网上线",
-  "downloaded_at": "2026-01-16 23:50:58"
-}

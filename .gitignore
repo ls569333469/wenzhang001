@@ -5,10 +5,12 @@
 .env.*
 *.env
 backend/config/user_config.json
+backend/config/google_service_account.json
 **/user_config.json
 **/api_keys.json
 **/*secret*
 **/*credentials*
+**/google_service_account.json
 
 # ===================================
 # Python
@@ -91,3 +93,15 @@ backend/data/cache/
 .tmp/
 tmp/
 temp/
+
+# ===================================
+# Test Artifacts (screenshots, results)
+# ===================================
+reports/test_artifacts/
+*_results.json
+debug_*.png
+feature_test_*.png
+strategy_test_*.png
+e2e_*.png
+full_flow_*.png
+

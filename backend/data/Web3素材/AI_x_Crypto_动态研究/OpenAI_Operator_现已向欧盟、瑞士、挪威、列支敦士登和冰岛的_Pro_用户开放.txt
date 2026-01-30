@@ -1,7 +1,0 @@
-标题: OpenAI Operator 现已向欧盟、瑞士、挪威、列支敦士登和冰岛的 Pro 用户开放
-链接: https://www.chaincatcher.com/article/2172324
-发布时间: 2025-03-13
-
-==================================================
-
-ChainCatcher 消息，据 OpenAI 官方公告，Operator 功能现已全面向欧盟、瑞士、挪威、列支敦士登和冰岛的 Pro 用户开放。

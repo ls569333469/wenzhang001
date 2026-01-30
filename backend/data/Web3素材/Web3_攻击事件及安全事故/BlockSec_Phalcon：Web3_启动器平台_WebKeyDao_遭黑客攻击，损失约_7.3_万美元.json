@@ -1,7 +1,0 @@
-{
-  "title": "BlockSec Phalcon：Web3 启动器平台 WebKeyDao 遭黑客攻击，损失约 7.3 万美元",
-  "url": "https://www.chaincatcher.com/article/2172668",
-  "content": "ChainCatcher 消息，据 BlockSec Phalcon 监测，Web3 启动器平台 WebKeyDao 遭受黑客攻击，造成约 7.3 万美元损失。攻击者利用一个未受保护的函数以低价购买 wkeyDao 代币，并在去中心化交易所上出售这些代币获利。\n\n具体而言，攻击者利用脆弱合约中的购买功能，使用 1,159 BUSD 购买了 230 个 wkeyDao 代币，随后在去中心化交易所以 13,167 BUSD 的价格出售这些代币，获得约 10 倍的利润。",
-  "published_at": "2025-03-15",
-  "downloaded_at": "2026-01-17 17:12:15"
-}

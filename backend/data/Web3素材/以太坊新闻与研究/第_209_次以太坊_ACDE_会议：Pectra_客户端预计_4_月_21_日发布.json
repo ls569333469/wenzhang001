@@ -1,7 +1,0 @@
-{
-  "title": "第 209 次以太坊 ACDE 会议：Pectra 客户端预计 4 月 21 日发布",
-  "url": "https://www.chaincatcher.com/article/2176721",
-  "content": "ChainCatcher 消息，据 Tim Beiko 汇总，第 209 次以太坊执行层核心开发者会议（ACDE）重点讨论即将到来的 Pectra 与 Fusaka 升级。Pectra 客户端预计 4 月 21 日发布，新增 EIP-7702 委托状态至 JSON-RPC。\n\nFusaka 方面，明确将纳入EIP-7823（限制 MODEXP 复杂度）、EIP-7825（交易燃气上限）及 EIP-7907（合约代码大小度量与限制提升）；EIP-7762 与 EIP-7918 则将在 blob 费用机制中择一采纳，以平衡资源利用与市场供需。",
-  "published_at": "2025-04-11\n           \n              以太坊 ACDE 会议\n            \n              Pectra 客户端",
-  "downloaded_at": "2026-01-16 23:49:14"
-}

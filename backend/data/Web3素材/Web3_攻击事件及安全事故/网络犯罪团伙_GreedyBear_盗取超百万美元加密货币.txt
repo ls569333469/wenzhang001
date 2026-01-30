@@ -1,9 +1,0 @@
-标题: 网络犯罪团伙 GreedyBear 盗取超百万美元加密货币
-链接: https://www.chaincatcher.com/article/2196085
-发布时间: 2025-08-08
-
-==================================================
-
-ChainCatcher 消息，据 Cointelegraph 报道，安全公司 Koi Security 披露，网络犯罪团伙 GreedyBear 通过数百个假钱包扩展程序、恶意软件及诈骗网站，累计盗取超 100 万美元的加密货币。
-
-Koi Security 发现，该团伙在火狐浏览器应用商店发布了超 150 个恶意扩展程序，伪装成 MetaMask、TronLink、Exodus 和 Rabby Wallet 等加密钱包。攻击者采用 Extension Hollowing 技术，先创建合法扩展通过市场审核，再将其改造为恶意程序。

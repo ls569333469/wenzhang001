@@ -1,7 +1,0 @@
-{
-  "title": "新型 Crocodilus 恶意软件窃取安卓用户加密钱包密钥",
-  "url": "https://www.chaincatcher.com/article/2174874",
-  "content": "ChainCatcher 消息，安全公司 ThreatFabric 旗下研究人员表示，新型恶意软件 Crocodilus 可窃取安卓用户的钱包助记词。该恶意软件通过专有的驱动程序传播，并绕过 Android 13（及更高版本）的安全保护，用户安装恶意软件时不会触发 Play Protect。\n\n该恶意软件通过屏幕叠加虚假警告用户“在 12 小时内备份设置中的钱包助记词”，否则就有可能失去对钱包的访问权限。",
-  "published_at": "2025-03-31",
-  "downloaded_at": "2026-01-17 17:12:07"
-}

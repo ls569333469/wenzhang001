@@ -1,7 +1,0 @@
-标题: Aave V3 已上线 Aptos 测试网，为其首次非 EVM 部署
-链接: https://www.chaincatcher.com/article/2161305
-发布时间: 2025-01-08
-
-==================================================
-
-ChainCatcher 消息，据官方消息，Aave V3 已在 Aptos 测试网上部署，为 Aave 协议的首次非 EVM 部署。该测试网阶段将在潜在主网启动之前验证 Aave V3 在 Aptos 上的安全性、稳定性和性能。

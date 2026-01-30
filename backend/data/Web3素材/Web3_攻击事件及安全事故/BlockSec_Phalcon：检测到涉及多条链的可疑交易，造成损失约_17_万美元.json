@@ -1,7 +1,0 @@
-{
-  "title": "BlockSec Phalcon：检测到涉及多条链的可疑交易，造成损失约 17 万美元",
-  "url": "https://www.chaincatcher.com/article/2167565",
-  "content": "ChainCatcher 消息，据 BlockSec Phalcon 监测，其已检测到涉及多条链的可疑交易，造成损失约 17 万美元，这些交易由同一地址发起。\n\n分析表明，由于访问控制不足，攻击者能够将资金强行注入欺诈性的 Uni-V3 池中并从中牟利。",
-  "published_at": "2025-02-14",
-  "downloaded_at": "2026-01-17 17:12:32"
-}

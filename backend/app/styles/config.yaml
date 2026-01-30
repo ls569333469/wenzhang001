@@ -1,8 +1,8 @@
 # 风格库配置文件
-# 8 个写作风格 + 5 个预设组合
+# P10: 仅保留有实际样本数据的风格
 
 styles:
-  # ========== 核心风格 (4个) ==========
+  # ========== 有数据的风格 (2个) ==========
   mimeng:
     id: "mimeng"
     name: "咪蒙体"
@@ -33,98 +33,7 @@ styles:
     forbidden_words: ["delve", "tapestry"]
     temperature: 0.6
 
-  xinshixiang:
-    id: "xinshixiang"
-    name: "新世相体"
-    icon: "💜"
-    color: "#8b5cf6"
-    description: "情感叙事、UGC故事、共鸣升华"
-    data_dir: "data/xinshixiang"
-    max_samples: 3
-    traits:
-      tone: "温柔、感性、共鸣、治愈"
-      structure: "场景描写→故事叙述→情感递进→留白升华"
-      sentence_style: "长句叙述，有文学感，多用对话体"
-    forbidden_words: []
-    temperature: 0.75
-
-  shijuezhi:
-    id: "shijuezhi"
-    name: "视觉志体"
-    icon: "✨"
-    color: "#f59e0b"
-    description: "图文并茂、短句金句、美学呈现"
-    data_dir: "data/shijuezhi"
-    max_samples: 3
-    traits:
-      tone: "温暖、正能量、暖心/扎心"
-      structure: "金句开场→图片+短文案循环→暖心收尾"
-      sentence_style: "短句为主，七言格式，多用emoji"
-    forbidden_words: []
-    temperature: 0.7
-
-  # ========== 扩展风格 (4个) ==========
-  lianbushou:
-    id: "lianbushou"
-    name: "链捕手体"
-    icon: "🔗"
-    color: "#3b82f6"
-    description: "Web3深度报道、专业分析"
-    data_dir: "data/lianbushou"
-    max_samples: 3
-    traits:
-      tone: "专业、客观、深度、洞察"
-      structure: "行业背景→项目分析→投资逻辑→趋势判断"
-      sentence_style: "专业术语适度，数据支撑，逻辑严谨"
-    forbidden_words: []
-    temperature: 0.5
-
-  lingongzi:
-    id: "lingongzi"
-    name: "临公子体"
-    icon: "📊"
-    color: "#78716c"
-    description: "投资干货、实用建议、可落地"
-    data_dir: "data/lingongzi"
-    max_samples: 3
-    traits:
-      tone: "理性、实用、接地气、可操作"
-      structure: "问题引入→方法论→案例→行动清单"
-      sentence_style: "条理清晰，多用列表，避免空泛"
-    forbidden_words: []
-    temperature: 0.55
-
-  fengqiongzi:
-    id: "fengqiongzi"
-    name: "风茕子体"
-    icon: "🔮"
-    color: "#ec4899"
-    description: "人性剖析、职场观察、深度洞察"
-    data_dir: "data/fengqiongzi"
-    max_samples: 3
-    traits:
-      tone: "犀利、深刻、人性洞察、社会观察"
-      structure: "现象切入→人性剖析→观点输出→价值升华"
-      sentence_style: "观点鲜明，逻辑缜密，金句收尾"
-    forbidden_words: []
-    temperature: 0.65
-
-  chengshian:
-    id: "chengshian"
-    name: "程十安体"
-    icon: "🌸"
-    color: "#06b6d4"
-    description: "生活干货、通俗专业、亲和易懂"
-    data_dir: "data/chengshian"
-    max_samples: 3
-    traits:
-      tone: "亲和、专业、通俗、实用"
-      structure: "问题共鸣→知识科普→实操步骤→效果展示"
-      sentence_style: "通俗易懂，避免术语，多用比喻"
-    forbidden_words: []
-    temperature: 0.65
-
-# ========== 预设组合 ==========
+# ========== 预设组合 (仅保留有效的) ==========
 combinations:
   project_review:
     id: "project_review"
@@ -135,38 +44,3 @@ combinations:
       - { id: "mimeng", weight: 40 }
     recommended_for: ["项目评测", "骗局揭秘", "避坑指南"]
 
-  story:
-    id: "story"
-    name: "人物故事"
-    description: "新世相式共鸣 + 链捕手式专业"
-    styles:
-      - { id: "xinshixiang", weight: 60 }
-      - { id: "lianbushou", weight: 40 }
-    recommended_for: ["人物故事", "创业经历", "行业人物"]
-
-  nft_art:
-    id: "nft_art"
-    name: "NFT解读"
-    description: "视觉志式图文 + 程十安式干货"
-    styles:
-      - { id: "shijuezhi", weight: 60 }
-      - { id: "chengshian", weight: 40 }
-    recommended_for: ["NFT艺术", "收藏指南", "艺术解读"]
-
-  investment:
-    id: "investment"
-    name: "投资避坑"
-    description: "半佛式分析 + 临公子式干货"
-    styles:
-      - { id: "banfo", weight: 55 }
-      - { id: "lingongzi", weight: 45 }
-    recommended_for: ["投资入门", "避坑指南", "理财建议"]
-
-  criticism:
-    id: "criticism"
-    name: "行业批判"
-    description: "咪蒙式愤怒 + 风茕子式洞察"
-    styles:
-      - { id: "mimeng", weight: 50 }
-      - { id: "fengqiongzi", weight: 50 }
-    recommended_for: ["行业批判", "监管分析", "社会观察"]

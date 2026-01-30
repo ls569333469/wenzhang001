@@ -1,7 +1,0 @@
-标题: Huobi：将于近期上线 CNHT (Tether CNH)
-链接: https://www.chaincatcher.com/article/2084180
-发布时间: 2022-12-07
-
-==================================================
-
-ChainCatcher 消息，Huobi 官网发布公告称，将于近期上线 CNHT (Tether CNH)，优先开放 CNHT/USDD 的现货交易。待交易量达标后，开放 CNHT/USDT 交易对。

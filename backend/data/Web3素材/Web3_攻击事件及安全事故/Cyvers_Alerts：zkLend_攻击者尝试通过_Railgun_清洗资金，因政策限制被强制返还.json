@@ -1,7 +1,0 @@
-{
-  "title": "Cyvers Alerts：zkLend 攻击者尝试通过 Railgun 清洗资金，因政策限制被强制返还",
-  "url": "https://www.chaincatcher.com/article/2167124",
-  "content": "ChainCatcher 消息，据 Cyvers Alerts 监测，借贷协议 zkLend 在 Starknet 网络上遭遇漏洞攻击损失 490 万美元。攻击者将窃取资金跨链至以太坊并通过隐私协议 Railgun 进行清洗，但因 Railgun 协议政策限制，资金被强制返还至原地址。\n\n此前消息，zkLend 已通过链上消息向攻击者提出 10% 白帽黑客赏金，相关交易已在以太坊区块链上确认。",
-  "published_at": "2025-02-12",
-  "downloaded_at": "2026-01-17 17:12:34"
-}

@@ -1,7 +1,0 @@
-标题: 伪造的 Microsoft Teams 网站正传播恶意软件，警惕钱包盗取风险
-链接: https://www.chaincatcher.com/article/2173393
-发布时间: 2025-03-20
-
-==================================================
-
-ChainCatcher 消息，Scam Sniffer 在 X 平台发布钓鱼警报称，检测到伪造的 Microsoft Teams 网站正在传播恶意软件。风险包括数据泄露、凭证盗窃、会话劫持和钱包盗取。安装前请核实来源。

@@ -1,7 +1,7 @@
 # Quantum Studio v6.3 - 项目手册
 
-> **更新日期**: 2026-01-27  
-> **版本**: v6.4 (Industrial Cleaning Edition)  
+> **更新日期**: 2026-01-29  
+> **版本**: v7.1 (P10 Workflow Redesign)  
 > **维护者**: AI 开发团队
 
 ---
@@ -219,10 +219,14 @@ api_key = os.getenv('ARK_API_KEY')  # 613f595c-xxxx
 - **P8**: 智能素材熔炉 (Lark Integrated) ✅
 - **P12**: Lark 数据清洗工具 (v2.2) ✅
 - **P13**: Knowledge 页面前端集成 (v7.0) ✅
-- **P14**: 工业级并行清洗 (v9.0) ✅ 🆕
+- **P14**: 工业级并行清洗 (v9.0) ✅
   - 5 窗口并行处理半佛仙人文件夹 2-6 (392 文件)
   - CSV 实时备份机制 (当 Lark 配额用尽自动保存)
   - CSV 输出: 3.15 MB / 205 文件
+- **P10**: 创作工作流重构 (v7.1) ✅ 🆕
+  - Phase 1-5: Style/Length/Retention 参数链打通
+  - Phase 6: Google Sheets A/B 测试数据源集成
+  - 详见: [10-1_Exec_P10执行计划.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/10-1_Exec_P10执行计划.md)
 
 ---
 
@@ -307,6 +311,86 @@ api_key = os.getenv('ARK_API_KEY')  # 613f595c-xxxx
      - 方案A: 移除装饰性标签，简化界面
      - 方案B: 将"AI 增强"改为可点击的功能入口（如打开高级AI设置面板）
 
+3. **浏览器子系统云端故障** � (已规避)
+   - *Issue*: Antigravity 浏览器工具 (browser_subagent) 持续报错 `ERR_CONNECTION_REFUSED`
+   - *根因*: 云端浏览器服务故障，非本地问题
+   - *规避方案*: 使用 Python 脚本 + `Invoke-RestMethod` 进行本地测试
+   - *详见*: [20260128_浏览器子系统故障报告.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/20260128_浏览器子系统故障报告.md)
+
+4. **Lark API 配额耗尽** 🟢 (已解决)
+   - *Issue*: 错误 `99991403: This month's API call quota has been exceeded`
+   - *解决*: 实现 Google Sheets A/B 测试数据源作为备用
+   - *详见*: [20260129_Google_Sheets迁移方案.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/20260129_Google_Sheets迁移方案.md)
+
+---
+
+## 🔐 安全规范
+
+> **更新日期**: 2026-01-28
+
+### API 密钥保护
+
+| 措施 | 状态 | 说明 |
+|------|:----:|------|
+| `.gitignore` 规则 | ✅ | 已包含 `user_config.json`、`.env` |
+| Pre-commit Hook | ✅ | 自动检测 `AIzaS`、`sk-` 等敏感模式 |
+| 模板文件 | ✅ | `backend/config/user_config.example.json` |
+
+### 敏感文件清单
+
+**绝对不能提交到 Git：**
+- `backend/config/user_config.json` - API 密钥配置
+- `.env` / `.env.local` - 环境变量
+- `backend/venv/` - Python 虚拟环境
+
+### 密钥轮换建议
+
+- 每季度轮换一次 API 密钥
+- 发现泄露后立即轮换
+- 详见：[11_Plan_API密钥安全防护.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/11_Plan_API密钥安全防护.md)
+
+### Google Sheets 数据源配置 (P10.6)
+
+> **添加日期**: 2026-01-29
+
+| 环境变量 | 值 | 说明 |
+|----------|-----|------|
+| `SAMPLE_SOURCE` | `ab_test` | A/B 测试模式 |
+| `AB_TEST_GOOGLE_RATIO` | `0.5` | 50% 使用 Google Sheets |
+| `GOOGLE_SHEETS_SPREADSHEET` | Spreadsheet ID | 从 URL 提取 |
+| `GOOGLE_SHEETS_CREDENTIALS` | `config/google_service_account.json` | Service Account 密钥 |
+
+**数据源切换**:
+- `lark` - 仅使用 Lark 本地缓存
+- `google_sheets` - 仅使用 Google Sheets
+- `ab_test` - 随机分流 (推荐)
+
+**相关文件**:
+- `backend/app/services/google_sheets_source.py`
+- `backend/app/services/sample_service.py`
+- [20260129_Google_Sheets迁移方案.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/20260129_Google_Sheets迁移方案.md)
+
+---
+
+## 📁 文件组织规范
+
+### 目录结构标准
+
+| 目录 | 用途 |
+|------|------|
+| `reports/daily_log/` | 每日交接报告 |
+| `reports/design_docs/` | 设计文档 |
+| `reports/test_artifacts/` | 测试截图和结果 |
+| `backend/scripts/` | 后端测试脚本 |
+
+### 文件命名规范
+
+| 类型 | 格式 | 示例 |
+|------|------|------|
+| 每日报告 | `YYYYMMDD_类型_标题.md` | `20260128_白班_交接报告.md` |
+| 设计文档 | `序号_类型_标题.md` | `10_Plan_创作工作流架构重构.md` |
+| 测试截图 | `描述_日期.png` | `strategy_test_20260128.png` |
+
 ---
 
 ##  快速启动指南
@@ -372,10 +456,11 @@ npm run dev
 
 | 日期 | 版本 | 阶段 | 关键结论 |
 |------|------|------|----------|
+| 2026-01-29 | v7.1 | P10 Verified | 🔄 创作工作流重构 Phase 1-6 完成，Google Sheets A/B 测试集成 |
 | 2026-01-27 | v6.4 | Industrial | 🏭 工业级清洗验证：5窗口并行+CSV备份，半佛仙人2-6完成 |
 | 2026-01-21 | v6.2 | E2E Verified | 全链路打通，需补足"爆款"核心能力 |
 | 2026-01-15 | v5.0 | Alpha | 技术闭环完成，需进行全真长文压力测试 |
 
 ---
 
-*Last updated: 2026-01-27 18:30*
+*Last updated: 2026-01-29 23:17*

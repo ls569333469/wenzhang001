@@ -4,10 +4,26 @@ import operator
 from datetime import datetime
 import json
 
+# P10: 篇幅长度常量映射
+LENGTH_MAP = {
+    "short": {"min": 300, "max": 600, "target": 450},
+    "medium": {"min": 800, "max": 1500, "target": 1000},
+    "long": {"min": 2000, "max": 4000, "target": 2500}
+}
+
+def calculate_length(length_key: str) -> Dict[str, int]:
+    """
+    P10: 根据 length 参数返回字数约束
+    """
+    return LENGTH_MAP.get(length_key, LENGTH_MAP["medium"])
+
 # 定义状态字典
 class AgentState(TypedDict):
     raw_input: str
-    mode: str  # "mimeng", "diary", "insider"
+    mode: str  # "deep_analysis", "quick_take", "tutorial", "rewrite"
+    style: str  # P10: "auto", "mimeng", "banfo", "xinshixiang", "insider"
+    length: str  # P10: "short", "medium", "long"
+    retention_level: int  # P10: 保留度等级 1-5
     narrative_type: str  # 新增：叙事类型
     references: List[str]  # P3: 选题参考列表
     selected_option: Dict[str, Any] # P4: 用户选择的选题方案

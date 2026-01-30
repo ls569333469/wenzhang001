@@ -1,9 +1,0 @@
-标题: Fuzzland 联创：Morpho 前端组件 Bundler3 存在安全漏洞
-链接: https://www.chaincatcher.com/article/2176683
-发布时间: 2025-04-11
-
-==================================================
-
-ChainCatcher 消息，Fuzzland 联合创始人 Chaofan Shou 在 X 平台发文称，借贷协议 Morpho 的前端组件 Bundler3 存在安全漏洞，建议用户避免通过前端进行交互操作。
-
-Shou 强调，仅“Multicall”功能受影响，其余功能安全，若需提取资金建议直接通过合约执行 Withdraw 函数操作。目前用户资金本身未受影响。

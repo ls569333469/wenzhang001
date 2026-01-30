@@ -1,7 +1,0 @@
-标题: PeckShield：GMX 与 MIM Spell 安全事件损失扩大至 1300 万美元
-链接: https://www.chaincatcher.com/article/2174143
-发布时间: 2025-03-25
-
-==================================================
-
-ChainCatcher 消息，区块链安全公司 PeckShield 发布最新数据，显示 GMX 和 MIM Spell 安全漏洞事件的损失金额已经增至约 6260 ETH，按当前市场价格计算约合 1300 万美元。

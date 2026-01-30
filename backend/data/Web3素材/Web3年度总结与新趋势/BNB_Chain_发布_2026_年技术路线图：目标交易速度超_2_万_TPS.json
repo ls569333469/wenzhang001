@@ -1,7 +1,0 @@
-{
-  "title": "BNB Chain 发布 2026 年技术路线图：目标交易速度超 2 万 TPS",
-  "url": "https://www.chaincatcher.com/article/2233681",
-  "content": "ChainCatcher 消息，据官方消息，BNB Chain 2025 年实现了零停机及 3100 万笔日交易量的历史高点，稳定币市值达 140 亿美元。2026 年技术路线图将聚焦性能升级，目标实现超 2 万 TPS 及亚秒级最终确认。\n\n具体规划包括：继续推行基于 Geth 与 Reth 的双客户端策略；通过 EIP-7928 实现无冲突并行执行；推出支持合规隐私的交易框架及 AI Agent 支付抽象层。此外，BNB Chain 正在规划下一代交易链，旨在 2026 至 2028 年间实现约 100 万 TPS 及 150 毫秒的近即时确认。",
-  "published_at": "2025-12-30",
-  "downloaded_at": "2026-01-17 21:47:41"
-}

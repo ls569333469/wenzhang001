@@ -1,7 +1,0 @@
-{
-  "title": "恶意软件伪装成 Office 加载项攻击加密货币用户",
-  "url": "https://www.chaincatcher.com/article/2176339",
-  "content": "ChainCatcher 消息，据 Cointelegraph 报道，Kaspersky 报告表示，一种危险的恶意软件正在 SourceForge 平台上伪装成 Microsoft Office 加载项，专门针对加密货币用户实施攻击。该恶意软件采用剪贴板劫持技术，会自动将用户复制的加密钱包地址替换为攻击者的地址，导致资金直接转入黑客账户。安全专家提醒用户在进行加密货币交易时务必仔细核对钱包地址，确保交易安全。",
-  "published_at": "2025-04-09",
-  "downloaded_at": "2026-01-17 17:12:03"
-}

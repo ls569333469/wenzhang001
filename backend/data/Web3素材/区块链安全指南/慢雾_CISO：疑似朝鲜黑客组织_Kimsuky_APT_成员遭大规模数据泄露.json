@@ -1,7 +1,0 @@
-{
-  "title": "慢雾 CISO：疑似朝鲜黑客组织 Kimsuky APT 成员遭大规模数据泄露",
-  "url": "https://www.chaincatcher.com/article/2197189",
-  "content": "ChainCatcher 消息，慢雾首席信息安全官 23pds 发推表示，“疑似朝鲜黑客组织 Kimsuky APT 一名成员遭遇重大数据泄露，泄露数百 GB 的内部文件和工具。入侵大概发生在 2025 年 6 月初，暴露该组织复杂的后门、网络钓鱼框架和侦察行动，根据对泄露档案的分析，内部转储源自化名为『KIM』的 Kimsuky 操作员的两个受损系统。一个是运行 Deepin 20.9 的 Linux 开发工作站；另一个是用于鱼叉式网络钓鱼活动的面向公众的 VPS。”",
-  "published_at": "2025-08-13",
-  "downloaded_at": "2026-01-17 00:43:30"
-}

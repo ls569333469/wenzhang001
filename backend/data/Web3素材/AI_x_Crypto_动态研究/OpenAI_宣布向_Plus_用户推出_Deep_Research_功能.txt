@@ -1,9 +1,0 @@
-标题: OpenAI 宣布向 Plus 用户推出 Deep Research 功能
-链接: https://www.chaincatcher.com/article/2169525
-发布时间: 2025-02-26
-
-==================================================
-
-ChainCatcher 消息，OpenAI 今天宣布将向所有 ChatGPT Plus、Team、Edu 和 Enterprise 用户推出其 Deep Research 功能，扩展了自 ChatGPT 以来最具变革性的人工智能代理的访问权限。
-
-根据 OpenAI 公告，这些用户最初每月将获得 10 次 Deep Research 查询，而 Pro 级用户每月将获得 120 次查询。

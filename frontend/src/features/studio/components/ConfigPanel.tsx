@@ -70,6 +70,16 @@ export function ConfigPanel() {
         parse: (v) => ['gentle', 'standard', 'strong', 'explosive'].includes(v) ? v : 'standard'
     });
 
+    // P10-6: Retention Level (保留度等级 1-5)
+    const [retentionLevel, setRetentionLevel] = useQueryState('retention', {
+        defaultValue: 3,
+        parse: (v) => {
+            const n = parseInt(v);
+            return n >= 1 && n <= 5 ? n : 3;
+        },
+        serialize: (v) => v.toString()
+    });
+
     return (
         <div className="flex flex-col h-full bg-white">
             {/* Header */}
@@ -184,6 +194,38 @@ export function ConfigPanel() {
                                         />
                                     ))}
                                 </div>
+                            </section>
+
+                            {/* P10-6: Retention Level (保留度等级) */}
+                            <section className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <Label icon={Sliders} title="内容保留度" />
+                                    <span className="text-xs font-mono text-zinc-500 bg-zinc-100 px-2 py-0.5 rounded">
+                                        L{retentionLevel}
+                                    </span>
+                                </div>
+                                <Slider
+                                    value={[retentionLevel]}
+                                    min={1}
+                                    max={5}
+                                    step={1}
+                                    onValueChange={([v]) => setRetentionLevel(v)}
+                                    className="py-2"
+                                />
+                                <div className="flex justify-between text-[10px] text-zinc-400">
+                                    <span>润色优化</span>
+                                    <span>框架保留</span>
+                                    <span>观点继承</span>
+                                    <span>主题借用</span>
+                                    <span>灵感触发</span>
+                                </div>
+                                <p className="text-[10px] text-zinc-400">
+                                    {retentionLevel === 1 && "95% 保留 - 仅语言润色，结构和论点完全保留"}
+                                    {retentionLevel === 2 && "75% 保留 - 保留核心框架，允许表达优化"}
+                                    {retentionLevel === 3 && "50% 保留 - 继承核心观点，重新组织表达"}
+                                    {retentionLevel === 4 && "30% 保留 - 仅借用主题和关键词，大幅再创作"}
+                                    {retentionLevel === 5 && "10% 保留 - 仅作为灵感来源，完全重新创作"}
+                                </p>
                             </section>
                         </AccordionContent>
                     </AccordionItem>
@@ -491,7 +533,7 @@ function KnowledgeSelector({ selectedIds, onChange }: { selectedIds: string[], o
                                 "w-6 h-6 rounded flex items-center justify-center transition-colors text-xs font-mono",
                                 isSelected ? "bg-white/20 text-white" : "bg-zinc-100 text-zinc-500"
                             )}>
-                                {kb.id.split('-')[1].slice(0, 2).toUpperCase()}
+                                {kb.id.includes('-') ? kb.id.split('-')[1].slice(0, 2).toUpperCase() : kb.id.slice(0, 2).toUpperCase()}
                             </div>
                             <span className="font-medium">{kb.name}</span>
                         </div>

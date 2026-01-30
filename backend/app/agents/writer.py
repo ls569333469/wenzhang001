@@ -4,7 +4,7 @@ import json
 from ..core.llm import generate_text
 from ..core.prompts import render_prompt
 
-# 各模式的风格模板
+# 各模式的风格模板 (P10: 仅保留有数据的风格)
 MODE_TEMPLATES = {
     "mimeng": {
         "name": "咪蒙体",
@@ -19,32 +19,6 @@ MODE_TEMPLATES = {
         """,
         "tone": "激进、焦虑、戳心、制造冲突"
     },
-    "diary": {
-        "name": "小红书赚钱博主体",
-        "style": """
-        - 标题用数字+结果：如"3个月从0到100万"
-        - 开头要humble brag，看似谦虚实则炫耀
-        - 内容要有干货感，列点清晰
-        - 穿插个人经历增加可信度
-        - 多用emoji装饰🔥💰✨
-        - 结尾暗示还有更多干货，引导关注
-        - 营造"普通人也能做到"的感觉
-        """,
-        "tone": "亲切、励志、干货、接地气"
-    },
-    "insider": {
-        "name": "金融内幕消息体",
-        "style": """
-        - 开头要有独家信息感或内部消息暗示
-        - 使用专业术语增加可信度
-        - 分析要有逻辑链条，从数据到结论
-        - 适当使用Web3/加密货币黑话
-        - 保持神秘感，不要说得太满
-        - 结尾给出明确但模糊的操作建议
-        - 制造 FOMO 情绪
-        """,
-        "tone": "专业、神秘、内部人士视角、Alpha信号"
-    },
     "banfo": {
         "name": "半佛仙人体",
         "style": """
@@ -56,19 +30,9 @@ MODE_TEMPLATES = {
         - 商业本质拆解
         """,
         "tone": "犀利、幽默、理性、恍然大悟"
-    },
-    "xinshixiang": {
-        "name": "新世相体",
-        "style": """
-        - 场景描写细腻，有画面感
-        - 故事叙述温暖，有文学感
-        - 情感递进，共鸣升华
-        - 多用对话体，增强代入感
-        - 留白处理，引人深思
-        """,
-        "tone": "温柔、感性、共鸣、治愈"
     }
 }
+
 
 
 def writer_agent(state: dict) -> dict:
@@ -79,10 +43,30 @@ def writer_agent(state: dict) -> dict:
     """
     print(">>> [Writer Debug] writer_agent started")
     raw_input = state["raw_input"]
-    mode = state["mode"]
+    mode = state.get("mode", "deep_analysis")  # 创作模式 (控制结构)
     narrative_type = state.get("narrative_type", "project_review")
     api_config = state.get("api_config", {})
     strategy_json = state.get("strategy_json", "{}")
+    
+    # P10: 获取 style 参数，用于风格选择
+    style = state.get("style", "auto")
+    
+    # P10: 如果 style="auto"，尝试使用 Strategist 推荐的 style，否则默认 mimeng
+    if style == "auto":
+        recommended_style = state.get("recommended_style")
+        if recommended_style and recommended_style in MODE_TEMPLATES:
+            style = recommended_style
+            print(f">>> [Writer Debug] Using recommended style: {style}")
+        else:
+            style = "mimeng"  # 默认 fallback
+            print(f">>> [Writer Debug] No recommended style, using default: {style}")
+    
+    # P10: 获取 length 参数并计算字数约束
+    length = state.get("length", "medium")
+    from ..graph import calculate_length
+    length_constraints = calculate_length(length)
+    
+    print(f">>> [Writer Debug] Final style: {style}, mode: {mode}, length: {length} ({length_constraints})")
     
     # 获取提供商配置
     provider = api_config.get("provider", "volcengine")
@@ -91,17 +75,23 @@ def writer_agent(state: dict) -> dict:
     
     print(f">>> [Writer Debug] Config: provider={provider}, model={model_id}, key_exists={bool(api_key)}")
     
-    # 从 MODE_TEMPLATES 获取风格指南
-    template = MODE_TEMPLATES.get(mode, MODE_TEMPLATES["mimeng"])
+    # P10: 从 MODE_TEMPLATES 获取风格指南 (基于 style 而非 mode)
+    template = MODE_TEMPLATES.get(style, MODE_TEMPLATES["mimeng"])
     
-    # [P8] Lark Integration: 获取动态 Few-Shot 样本
-    from ..services.sync_service import sync_service
+    # [P8] Lark Integration: 获取动态 Few-Shot 样本 (基于 style)
+    # [P10.6] A/B Test: 支持 Google Sheets 和 Lark 双数据源
+    from ..services.sample_service import sample_service
     # 尝试匹配 emotion, 如果 state 中没有, 暂时为 None
     emotion = state.get("emotion") 
-    print(f">>> [Writer Debug] Fetching style samples for mode={mode}, emotion={emotion}")
+    print(f">>> [Writer Debug] Fetching style samples for style={style}, emotion={emotion}")
     try:
-        samples = sync_service.get_samples(style=mode, emotion=emotion, count=3)
+        samples = sample_service.get_samples(style=style, emotion=emotion, count=3)
         print(f">>> [Writer Debug] Samples fetched: {len(samples)}")
+        
+        # P10: Fallback 如果获取不到样本
+        if not samples and style != "mimeng":
+            print(f">>> [Writer Debug] No samples for {style}, falling back to mimeng")
+            samples = sample_service.get_samples(style="mimeng", emotion=emotion, count=3)
     except Exception as e:
         print(f">>> [Writer Debug] Error fetching samples: {e}")
         samples = []
@@ -153,12 +143,15 @@ def writer_agent(state: dict) -> dict:
 
     context = {
         "mode": mode,
+        "style": style,  # P10
         "template_name": template['name'],
         "narrative_type": narrative_type,
         "narrative_desc": narrative_desc,
         "must_mention_str": must_mention_str,
         "key_data_str": key_data_str,
-        "rag_context": rag_context
+        "rag_context": rag_context,
+        "length_constraints": length_constraints,  # P10
+        "retention_level": state.get("retention_level", 3)  # P10
     }
     print(">>> [Writer Debug] Rendering prompt")
     system_prompt = render_prompt("writer", context)

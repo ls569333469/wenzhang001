@@ -1,9 +1,0 @@
-标题: 数据：DeepSeek 2 月访问量超 ChatGPT，达 5.25 亿次
-链接: https://www.chaincatcher.com/article/2174889
-发布时间: 2025-03-31
-
-==================================================
-
-ChainCatcher 消息，据金十报道，根据 AI 分析平台 aitools.xyz 数据，DeepSeek 已经成为全球增长最快的AI工具，其每月新增网站访问量已经超过 OpenAI 的 ChatGPT。
-
-报告称，DeepSeek 2025 年 2 月访问量达到 5.25 亿次，超过 ChatGPT 的 5 亿次。目前，DeepSeek 市场份额 6.58%，仅次于 ChatGPT 和 Canva，二者分别占比 43.16% 和 8.27%。

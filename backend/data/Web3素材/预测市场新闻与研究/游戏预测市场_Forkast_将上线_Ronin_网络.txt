@@ -1,9 +1,0 @@
-标题: 游戏预测市场 Forkast 将上线 Ronin 网络
-链接: https://www.chaincatcher.com/article/2158813
-发布时间: 2024-12-23
-
-==================================================
-
-ChainCatcher 消息，据 Decrypt 报道，基于区块链的竞技游戏生态系统和赛事平台 Community Gaming 宣布，其即将推出的以视频游戏为中心的预测市场 Forkast 将在以太坊侧链游戏网络 Ronin 上线。
-
-该平台将允许用户质押代币并赚取奖励，同时对游戏、电子竞技、Web3 和互联网文化事件进行预测。Forkast 是首批集成到 Ronin 网络的消费类应用之一。

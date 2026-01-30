@@ -1,9 +1,0 @@
-标题: Cyvers Alerts ：Nervos Network 被盗 300 万美元加密货币
-链接: https://www.chaincatcher.com/article/2184179
-发布时间: 2025-06-02
-
-==================================================
-
-ChainCatcher 消息，区块链安全公司 Cyvers Alerts 报告称，“已检测到与比特币 Layer 2 解决方案 Nervos Network 相关的多笔可疑交易。一个匿名地址似乎控制了该桥，并窃取了价值约 300 万美元的加密货币。
-
-被盗资产被兑换成以太坊 (ETH)，并转移到加密货币混合协议 TornadoCash (TORN)。Nervos Network 目前正在暂停该协议，并正在采取应对措施。”

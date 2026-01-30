@@ -1,7 +1,0 @@
-{
-  "title": "ParaSwap 宣布集成Chainlink Keepers ，并推出限价单功能",
-  "url": "https://www.chaincatcher.com/article/2063910",
-  "content": "来源：ParaSwap博客\n编译：胡韬，链捕手\n \n今日，DEX聚合器 Paraswap 宣布在以太坊上集成Chainlink Keepers，为其 DEX 聚合器协议带来限价订单功能，这将允许用户设置仅在达到特定价格点时执行交易，例如仅当 ETH 跌至 2000 美元以下时才卖出 10 ETH，或者仅当 ETH 高于 2200 美元时才买入 10 ETH。\n \n据了解，Chainlink Keepers 使用分散且可证明可靠的链下计算来监控用户定义的条件，然后在满足条件后调用链上函数。ParaSwap 将利用 Chainlink Keepers 在资产价格超过预定价格点时触发用户限价单的执行。\n \n“这将使交易者能够更好地管理他们的投资组合并在无需人工干预的情况下对冲波动性，最终帮助他们在晚上睡得更好。”Paraswap 表示。\n \n过去，在 DEX 上集成限价订单功能一直具有挑战性，因为它需要对条件进行链下监控，一旦条件满足，就需要及时在链上进行中继和验证。这种基础设施很重要，因为链上监控成本高昂，不合时宜的交易会导致滑点和错失机会，而且缺乏链上验证会引入新的信任假设，这些假设可能对用户不利。\n \nChainlink Keepers 则提供了一种去中心化的解决方案，该解决方案具有成本效益、可靠，并支持与区块链相同的安全保证。Chainlink Keepers 将用于根据全球资产价格监控用户的链下限价订单，并在达到特定价格点后以可验证的方式在链上执行它们。目前，EthSign、BarnBridge、B.Protocol等多个项目应宣布将集成Chainlink Keepers。\n \n此前，1inch已上线限价单功能多月，上月Sushiswap也已在Polygon版本上线限价单功能，此后将在以太坊主网上线此功能。",
-  "published_at": "2021-08-03",
-  "downloaded_at": "2026-01-17 14:32:08"
-}

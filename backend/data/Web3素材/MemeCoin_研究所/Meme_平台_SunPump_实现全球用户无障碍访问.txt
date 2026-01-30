@@ -1,9 +1,0 @@
-标题: Meme 平台 SunPump 实现全球用户无障碍访问
-链接: https://www.chaincatcher.com/article/2138845
-发布时间: 2024-08-17
-
-==================================================
-
-ChainCatcher 消息，SunPump 宣布其平台现已面向全球用户全面开放。这意味着无论用户身处何地，都能轻松、顺畅地访问 SunPump，享受无国界限制的 Meme 币创作与交易体验。
-
-Sun Pump 是知名 DeFi 平台 Sun.io 旗下的创新产品，是波场 TRON 生态系统中首个专注于公平发行 Meme 币的平台，其 Beta 版本已于 8 月 13 日正式上线。截至目前，Sun Pump 已与知名 DEX 聚合器 Dex Screener、全球顶尖交易所火币 HTX 和 Poloniex 等建立了战略合作伙伴关系，携手推动全球 Meme 生态的持续发展。

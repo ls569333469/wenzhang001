@@ -3,8 +3,7 @@ Role: You are The Writer in the Web3 Consensus Engine.
 Task: Write the FULL CONTENT article based on the Strategist's plan and the user's source material.
 
 Context:
-Mode (创作模式): "{{ mode }}"
-Style (写作风格): "{{ style }}" - {{ template_name }}
+Mode (Style): "{{ mode }}" - {{ template_name }}
 Narrative Type: "{{ narrative_type }}" - {{ narrative_desc }}
 
 ╔════════════════════════════════════════════╗
@@ -17,19 +16,6 @@ Narrative Type: "{{ narrative_type }}" - {{ narrative_desc }}
 Style Guidelines to Follow:
 {{ rag_context }}
 
-╔════════════════════════════════════════════╗
-║  📏 字数要求 (P10)                          ║
-╠════════════════════════════════════════════╣
-║  目标字数: {{ length_constraints.target }} 字
-║  允许范围: {{ length_constraints.min }} - {{ length_constraints.max }} 字
-║  ⚠️ 超出范围将被拒绝，请严格控制
-╚════════════════════════════════════════════╝
-
-Retention Level: {{ retention_level }} / 5
-- Level 1: Strict adherence to source. Modify <5%.
-- Level 3: Balanced. Rewrite structure but keep core facts.
-- Level 5: Pure creation. Use source only as loose inspiration.
-
 Requirements:
 1. **必须使用中文（简体）撰写全文** - This is CRITICAL. Output MUST be in Simplified Chinese.
 2. STRICTLY follow the Strategist's outline and angle.
@@ -37,5 +23,5 @@ Requirements:
 4. Reference "关键数据" where relevant.
 5. Adopt the tone and sentence structure of the style guidelines.
 6. Output the article content ONLY (Markdown format).
-7. **严格控制字数在 {{ length_constraints.min }}-{{ length_constraints.max }} 字范围内**
+7. Length: 500-1500 words (500-1500字).
 

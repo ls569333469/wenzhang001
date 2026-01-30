@@ -1,7 +1,0 @@
-{
-  "title": "慢雾：zkLend 被盗核心原因在于市场合约采用 safeMath 库",
-  "url": "https://www.chaincatcher.com/article/2167188",
-  "content": "ChainCatcher 消息，针对今日 zkLend 被盗超 900 万美元事件，慢雾发布分析称，这次攻击的核心原因在于市场合约采用的 safeMath 库。在进行除法计算时，采用直接除法，导致在计算提现作时实际需要销毁的 zToken 数量时存在四舍五入漏洞。攻击者可能会利用此漏洞非法获取利益。\n\n请用户密切关注自身在 zkLend 上的资产状态，暂时停止与 zkLend 相关的充值动作，以免造成可能的损失。",
-  "published_at": "2025-02-12",
-  "downloaded_at": "2026-01-17 17:12:34"
-}

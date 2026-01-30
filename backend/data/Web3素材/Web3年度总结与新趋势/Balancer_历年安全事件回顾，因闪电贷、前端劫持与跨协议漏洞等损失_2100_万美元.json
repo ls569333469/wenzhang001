@@ -1,7 +1,0 @@
-{
-  "title": "Balancer 历年安全事件回顾，因闪电贷、前端劫持与跨协议漏洞等损失 2100 万美元",
-  "url": "https://www.chaincatcher.com/article/2216930",
-  "content": "ChainCatcher 消息，DeFi 协议 Balancer 目前正遭受攻击，当前在多个链上的损失已超 1.166 亿美元，针对 Balancer 的攻击仍在进行中。\n\n据链上 AI 分析工具 CoinBob 整理，Balancer 历年安全事件如下：\n\n2020 年 6 月闪电贷攻击：攻击者利用通缩型代币（STA/STONK）与 Balancer 智能合约的兼容性问题，通过反复调用 swapExactAmountIn 清空流动性池，最终获利 52.36 万美元。\n\n2023 年 8 月 V2 池漏洞：Balancer V2 池因代码漏洞遭多次闪电贷攻击，总损失达 210 万美元。团队紧急暂停受影响池并建议用户撤资，但部分未及时撤出的资金仍被利用。\n\n2023 年 9 月前端劫持攻击：黑客通过 BGP/DNS 劫持控制 Balancer 前端，诱导用户授权恶意合约，造成 23.8 万美元损失。链上侦探 ZachXBT 追踪到资金流向地址 0x645710Af050E26bB96e295bdfB75B4a878088d7E。\n\n2023 年 Euler 事件波及：因 Euler Finance 漏洞导致 Balancer 的 bbeUSD 池损失 1190 万美元，占该池 TVL 的 65%。团队采取保护措施限制流动性提取。\n\n2024 年 Velocore 攻击关联：Velocore 漏洞利用涉及 Balancer-style CPMM 池，造成 680 万美元损失。Balancer 技术架构因跨协议集成被间接牵连。",
-  "published_at": "2025-11-03",
-  "downloaded_at": "2026-01-17 21:48:15"
-}

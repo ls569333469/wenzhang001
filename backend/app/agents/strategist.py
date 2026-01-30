@@ -1,7 +1,5 @@
 from datetime import datetime
 import json
-import random
-from pathlib import Path
 from ..core.llm import generate_text
 from ..core.prompts import render_prompt
 from ..core.config import get_feature_flag, get_logger
@@ -9,61 +7,28 @@ from ..services.knowledge_retriever import retrieve_web3_knowledge
 
 logger = get_logger("strategist")
 
-# 模式到目录的映射
-MODE_TO_DIR = {
-    "mimeng": "mimeng",
-    "diary": "xiaohongshu",
-    "insider": "insider",
-    "banfo": "banfo",
-    "xinshixiang": "xinshixiang",
-    "shijuezhi": "shijuezhi",
-    "lianbushou": "lianbushou",
-    "lingongzi": "lingongzi",
-    "fengqiongzi": "fengqiongzi",
-    "chengshian": "chengshian"
-}
-
-def load_style_samples(mode: str, max_samples: int = 3, max_chars_per_sample: int = 2000) -> str:
-    """
-    从对应风格目录加载随机样本文档。
-    """
-    current_dir = Path(__file__).parent.parent.parent  # backend/
-    data_dir = current_dir / "data" / MODE_TO_DIR.get(mode, "mimeng")
-    
-    if not data_dir.exists():
-        return f"[风格库目录不存在: {data_dir}]"
-    
-    # 扫描目录下所有 .txt 和 .md 文件（排除 README）
-    style_files = [f for f in (list(data_dir.glob("*.txt")) + list(data_dir.glob("*.md"))) 
-                   if f.name.lower() != "readme.md"]
-    
-    if not style_files:
-        return f"[风格库为空，请在 {data_dir} 目录下添加 .txt 或 .md 文件]"
-    
-    selected_files = random.sample(style_files, min(max_samples, len(style_files)))
-    
-    samples = []
-    for i, file_path in enumerate(selected_files, 1):
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-                if len(content) > max_chars_per_sample:
-                    content = content[:max_chars_per_sample] + "...[截断]"
-                samples.append(f"--- 样本 {i}: {file_path.name} ---\n{content}")
-        except Exception as e:
-            samples.append(f"--- 样本 {i}: {file_path.name} (读取失败: {e}) ---")
-    
-    return "\n\n".join(samples)
 
 
 def build_strategist_context(state: dict) -> dict:
     """
     Step 1.1: Build Context
     """
+    from ..services.sample_service import sample_service  # 使用统一的样本服务
+    
     mode = state["mode"]
+    style = state.get("style", mode)  # P10: style 参数
     narrative_type = state.get("narrative_type", "project_review")
     
-    rag_context = load_style_samples(mode)
+    # 使用 sample_service 获取样本 (支持 Lark/Google Sheets A/B 测试)
+    samples = sample_service.get_samples(style=style, count=3)
+    if samples:
+        rag_context = "\n\n".join([
+            f"--- 样本 {i+1} ---\n{s.get('content', '')[:2000]}" 
+            for i, s in enumerate(samples)
+        ])
+    else:
+        rag_context = f"[未获取到 {style} 风格样本，请检查数据源配置]"
+    
     current_time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # Narrative Type Definitions
@@ -76,18 +41,19 @@ def build_strategist_context(state: dict) -> dict:
     }
     narrative_desc = narrative_descriptions.get(narrative_type, "Standard Review")
     
+    # P10: 仅保留有实际样本数据的风格
     mode_descriptions = {
         "mimeng": "咪蒙体 - 制造焦虑、阶级冲突、情绪爆点",
-        "diary": "小红书赚钱博主体 - 个人经历、干货分享、humble brag",
-        "insider": "金融内幕消息体 - Alpha信号、专业术语、FOMO情绪",
-        "banfo": "半佛仙人体 - 反常识观点、案例轰炸、硬核科普",
-        "xinshixiang": "新世相体 - 情感叙事、UGC故事、共鸣升华",
-        "shijuezhi": "视觉志体 - 图文并茂、短句金句、美学呈现",
-        "lianbushou": "链捕手体 - Web3深度报道、专业分析",
-        "lingongzi": "临公子体 - 投资干货、实用建议",
-        "fengqiongzi": "风茕子体 - 人性剖析、职场洞察",
-        "chengshian": "程十安体 - 生活干货、通俗易懂"
+        "banfo": "半佛仙人体 - 反常识观点、案例轰炸、硬核科普"
     }
+    
+    # 安全检查：未知风格 fallback 到 mimeng
+    VALID_STYLES = {"mimeng", "banfo"}
+    if style not in VALID_STYLES:
+        from ..core.config import get_logger
+        logger = get_logger("agents.strategist")
+        logger.warning(f"Unknown style '{style}', fallback to mimeng")
+        style = "mimeng"
 
     # [Feature Flag] Knowledge_Repo 集成
     web3_knowledge = ""
@@ -107,7 +73,8 @@ def build_strategist_context(state: dict) -> dict:
         "mode_description": mode_descriptions.get(mode, mode),
         "narrative_desc": narrative_desc,
         "rag_context": rag_context,
-        "web3_knowledge": web3_knowledge  # 传递给 Writer
+        "web3_knowledge": web3_knowledge,  # 传递给 Writer
+        "retention_level": state.get("retention_level", 3)  # P10: 内容保留度
     }
     return context
 
@@ -116,6 +83,8 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
     Step 1.2: Build Prompts
     Returns (system_prompt, user_prompt)
     """
+    import random
+    
     system_prompt = render_prompt("strategist", context)
 
     raw_input = state["raw_input"]
@@ -129,12 +98,22 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
             combined_input += f"--- [Ref {i}] ---\n{ref}\n\n"
             
     combined_input += "================================================="
+    
+    # Diversity injection: unique session seed to prevent repetitive outputs
+    random_seed = f"{datetime.now().strftime('%Y%m%d%H%M%S')}-{random.randint(1000, 9999)}"
 
     user_prompt = f"""{combined_input}
 
+[Session: {random_seed}]
 Please analyze the above materials (Core Instruction + References) and generate a content strategy in JSON format.
 If references are provided, identify common themes or contrast them with the core instruction.
-IMPORTANT: Generate 3 DISTINCT and CREATIVE options with different angles. Avoid repetitive titles."""
+
+CRITICAL DIVERSITY REQUIREMENTS:
+1. Generate 3-5 COMPLETELY UNIQUE title candidates with DIFFERENT angles
+2. Each title MUST use a DIFFERENT formula combination (数字法则, 悬念法则, etc.)
+3. Avoid ANY repetition from previous generations
+4. Use the ACTUAL numbers and entities from the source material
+5. Create titles that a reader would see as 4 DISTINCT approaches to the same topic"""
 
     return system_prompt, user_prompt
 
@@ -152,7 +131,7 @@ def execute_strategist_analysis(user_prompt: str, system_prompt: str, api_config
             api_key=api_key,
             model_id=model_id,
             provider=provider,
-            temperature=0.7,
+            temperature=0.85,  # Higher temp for more diverse title generation
             system_prompt=system_prompt
         )
         

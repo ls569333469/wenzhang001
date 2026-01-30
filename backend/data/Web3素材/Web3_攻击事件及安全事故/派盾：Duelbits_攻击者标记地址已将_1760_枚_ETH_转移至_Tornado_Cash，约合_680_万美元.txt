@@ -1,7 +1,0 @@
-标题: 派盾：Duelbits 攻击者标记地址已将 1760 枚 ETH 转移至 Tornado Cash，约合 680 万美元
-链接: https://www.chaincatcher.com/article/2126601
-发布时间: 2024-05-29
-
-==================================================
-
-ChainCatcher 消息，据派盾监测，Duelbits 攻击者标记的地址已将 1,760 枚 ETH（约合 680 万美元）转移至 Tornado Cash。

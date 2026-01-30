@@ -1,7 +1,0 @@
-标题: Arcadia Finance 遭遇黑客攻击，损失约 250 万美元加密货币
-链接: https://www.chaincatcher.com/article/2191484
-发布时间: 2025-07-15
-
-==================================================
-
-ChainCatcher 消息，据 PeckShield 监测，Arcadia Finance 遭到攻击，损失约 250 万美元加密货币。攻击者已将盗取的资金兑换成约 840 枚以太坊，并已从 Base 网络桥接到以太坊主网。

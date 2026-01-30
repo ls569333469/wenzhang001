@@ -59,6 +59,7 @@ export const CreationConfigSchema = z.object({
     temperature: z.number().min(0).max(1).default(0.7),
     topP: z.number().min(0).max(1).default(0.9),
     maxTokens: z.number().positive().default(4096),
+    retention_level: z.number().min(1).max(5).default(3),  // P10: 保留度等级 1-5
 });
 
 // ===== 智能体状态 Schema =====

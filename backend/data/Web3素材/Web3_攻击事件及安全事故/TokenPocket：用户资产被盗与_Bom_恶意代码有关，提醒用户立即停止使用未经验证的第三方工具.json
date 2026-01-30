@@ -1,7 +1,0 @@
-{
-  "title": "TokenPocket：用户资产被盗与 Bom 恶意代码有关，提醒用户立即停止使用未经验证的第三方工具",
-  "url": "https://www.chaincatcher.com/article/2168616",
-  "content": "ChainCatcher 消息，数字资产钱包 TokenPocket 发布声明，针对 2 月 14 日发生的用户资产被黑客归集盗取事件进行回应。经技术分析发现，受影响用户曾下载第三方挖矿软件“Bom”，该软件存在未经授权访问用户相册并上传数据的恶意行为，导致用户助记词或私钥泄露。\n\nTokenPocket 已与慢雾科技、GoPlusSecurity 等安全团队展开合作，并提醒用户立即停止使用未经验证的第三方工具，避免通过截图、社交平台、网盘等方式保存助记词和私钥。",
-  "published_at": "2025-02-20",
-  "downloaded_at": "2026-01-17 17:12:29"
-}

@@ -1,7 +1,0 @@
-{
-  "title": "DeepSeek 宣布开源 DeepGEMM",
-  "url": "https://www.chaincatcher.com/article/2169540",
-  "content": "ChainCatcher 消息，Deepseek 于开源周第三天宣布开源 DeepGEMM。DeepGEMM 是一个专为简洁高效的 FP8 通用矩阵乘法（GEMM）设计的库，具有细粒度缩放功能，如 DeepSeek-V3 中所提出。它支持普通和混合专家（MoE）分组的 GEMM。\n\n该库采用 CUDA 编写，在安装过程中无需编译，通过使用轻量级的即时编译（JIT）模块在运行时编译所有内核。FP8GEMM 库，为 V3/R1 训练和推理提供支持。",
-  "published_at": "2025-02-26",
-  "downloaded_at": "2026-01-17 23:37:12"
-}

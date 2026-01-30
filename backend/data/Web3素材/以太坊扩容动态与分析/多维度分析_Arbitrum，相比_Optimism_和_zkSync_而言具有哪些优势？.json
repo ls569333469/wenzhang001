@@ -1,7 +1,0 @@
-{
-  "title": "多维度分析 Arbitrum，相比 Optimism 和 zkSync 而言具有哪些优势？",
-  "url": "https://www.chaincatcher.com/article/2093092",
-  "content": "原文标题：《What Is The Most Profitable L2?》\n\n撰文：Delphi Digital\n\n原文编译：Kxp，BlockBeats\n\n \n\n通过监控交易数量、总价值锁定、安全成本以及最终利润等使用量度，我们可以发现，L2 区块空间的需求有着明显的上升态势。\n\n毫无疑问，OP 和 ARB 的空投有助于推动它们各自网络的活动增长。然而，持续的使用和增长已经证明，这不仅仅是一时的火爆。\n\n此外，随着 zkSync 的主网（Era）上月的推出，伴随着其预计即将到来的空投，zkSync 也见证了一波活动激增。实际上，zkSync Era 现在有着 Ethereum 上排名第三的 L2 TVL（2.6 亿美元）。\n\n因此，在以 TVL 为基准的前 3 名 L2 中（Arbitrum、Optimism 和 zkSync），哪个最赚钱？为了找出答案，我们只需计算出手续费收入和 L1 调用数据安全成本（加上 zkrollup 的验证成本）之间的差额。\n\n在过去的 12 个月中，Arbitrum 的净利润约为 5200 个 ETH，比 Optimism 高 80%。考虑到 zkSync Era 刚刚推出，将其纳入比较并不合理，但是作为参考，自推出以来，zk 已经创造了约 50 个 ETH 的利润。\n\n因此，从原始利润的角度来看，Arbitrum 显然比 Optimism 更具优势。但是这只是交易量增加的结果吗？是也不是。\n\n虽然 Arbitrum 的利润比 Optimism 高 80%，但它只有 54% 的交易量和 28% 的收入增长。简而言之，Arbitrum 的交易成本更低，这导致每个交易的收入较少。真正的答案在于 L1 安全成本，Arbitrum 仅比 Optimism 高 20% 的安全成本。以每笔交易计算，Optimism 为 L1 调用数据支付的费用几乎是 Arbitrum 的两倍。\n\nRollup 的需求量还将继续增长。随着 L2 生态系统的不断发展，其盈利指标也会随之提高。目前而言，由于吞吐量更高且安全成本更低，Arbitrum 相对于 Optimism 和 zkSync 而言具有更强的盈利能力。",
-  "published_at": "2023-05-15",
-  "downloaded_at": "2026-01-17 14:25:56"
-}

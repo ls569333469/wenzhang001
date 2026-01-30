@@ -208,10 +208,13 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             // Inject prompts again for /generate
             const finalInput = injectPrompts(lastRequestPayload.input || lastRequestPayload.prompt || '');
 
-            // Backend expects: { input, mode, narrative_type, references, selected_option, info_anchors }
+            // Backend expects: { input, mode, style, length, retention_level, narrative_type, references, selected_option, info_anchors }
             const requestBody = {
                 input: finalInput,
-                mode: lastRequestPayload.mode || 'deep_analysis',
+                mode: lastRequestPayload.config?.mode || lastRequestPayload.mode || 'deep_analysis',
+                style: lastRequestPayload.config?.style || 'mimeng',
+                length: lastRequestPayload.config?.length || 'medium',
+                retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
                 selected_option: option,

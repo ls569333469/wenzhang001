@@ -85,24 +85,21 @@ export const NARRATIVE_TYPES: NarrativeType[] = [
     }
 ]
 
-// 核心风格 (已有)
+// 核心风格 (有真实样本数据)
 export const CORE_STYLES: StyleConfig[] = [
     { id: "mimeng", name: "咪蒙体", icon: "🔥", color: "#ef4444", description: "情绪爆点" },
     { id: "banfo", name: "半佛体", icon: "🧠", color: "#8b5cf6", description: "反常识逻辑" },
-    { id: "xinshixiang", name: "新世相体", icon: "💫", color: "#ec4899", description: "情感共鸣" },
-    { id: "shijuezhi", name: "视觉志体", icon: "👁️", color: "#06b6d4", description: "简洁美学" },
 ]
 
-// 扩展风格
+// 扩展风格 (Coming Soon - 占位符)
 export const EXTENDED_STYLES: StyleConfig[] = [
-    { id: "lianbushou", name: "链捕手体", icon: "🔗", color: "#10b981", description: "专业深度" },
-    { id: "lingongzi", name: "临公子体", icon: "💰", color: "#f59e0b", description: "投资干货" },
-    { id: "fengqiongzi", name: "风茕子体", icon: "🌙", color: "#6366f1", description: "人性洞察" },
-    { id: "chengshian", name: "程十安体", icon: "🌸", color: "#f472b6", description: "生活智慧" },
+    { id: "xinshixiang", name: "新世相体", icon: "💫", color: "#ec4899", description: "情感共鸣 (即将开放)" },
+    { id: "lianbushou", name: "链捕手体", icon: "🔗", color: "#10b981", description: "专业深度 (即将开放)" },
 ]
 
-// 所有风格
-export const ALL_STYLES = [...CORE_STYLES, ...EXTENDED_STYLES]
+// 所有风格 (仅显示核心风格)
+export const ALL_STYLES = [...CORE_STYLES]
+
 
 // 预设组合 (叙事+风格)
 export interface CombinationConfig {

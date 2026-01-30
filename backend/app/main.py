@@ -79,7 +79,10 @@ class APIConfig(BaseModel):
 
 class GenerateRequest(BaseModel):
     input: str
-    mode: str
+    mode: str = "deep_analysis"  # P10: 创作模式 (deep_analysis, quick_take, tutorial, rewrite)
+    style: str = "auto"  # P10: 写作风格 (auto, mimeng, banfo, xinshixiang, insider)
+    length: str = "medium"  # P10: 篇幅长度 (short, medium, long)
+    retention_level: int = 3  # P10: 保留度等级 1-5 (1=95%保留, 5=10%保留)
     narrative_type: str = "project_review"
     references: List[str] = [] 
     selected_option: Optional[Dict[str, Any]] = None # P4: 用户选择的选题方案
@@ -101,7 +104,10 @@ async def analyze_narrative(request: GenerateRequest):
 
             inputs = {
                 "raw_input": request.input, 
-                "mode": request.mode, 
+                "mode": request.mode,
+                "style": request.style,  # P10
+                "length": request.length,  # P10
+                "retention_level": request.retention_level,  # P10
                 "narrative_type": request.narrative_type,
                 "references": request.references,
                 "api_config": request.api_config.dict(),
@@ -172,7 +178,10 @@ async def generate_narrative(request: GenerateRequest):
 
         inputs = {
             "raw_input": request.input, 
-            "mode": request.mode, 
+            "mode": request.mode,
+            "style": request.style,  # P10
+            "length": request.length,  # P10
+            "retention_level": request.retention_level,  # P10
             "narrative_type": request.narrative_type,
             "references": request.references,
             "selected_option": request.selected_option, # Pass selected option

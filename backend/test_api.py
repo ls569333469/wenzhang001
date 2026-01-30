@@ -1,31 +1,63 @@
-import os
-import sys
+"""Quick test for /analyze endpoint with longer timeout"""
+from dotenv import load_dotenv
+load_dotenv()
 
-# Add backend directory to sys.path to import app modules
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import requests
+import json
+import time
 
-from backend.app.core.llm import get_client
+url = "http://localhost:8000/analyze"
+payload = {"input": "比特币突破10万美元，创历史新高"}
 
-def test_generation():
-    print("--- Testing Google GenAI SDK (Standard Models) ---")
+print("=" * 60)
+print("Testing /analyze API")
+print("=" * 60)
+print(f"Input: {payload['input']}")
+print("Calling API (timeout: 120s)...")
+print()
+
+start = time.time()
+try:
+    r = requests.post(url, json=payload, timeout=120)
+    elapsed = time.time() - start
     
-    client = get_client()
+    print(f"✅ Status: {r.status_code} (took {elapsed:.1f}s)")
+    print()
     
-    # List of models to try
-    models_to_try = ["gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0-flash-exp"]
-    
-    for model_id in models_to_try:
-        print(f"\nTesting Model: {model_id}...")
-        try:
-            response = client.models.generate_content(
-                model=model_id,
-                contents="Hello World"
-            )
-            print(f"SUCCESS with {model_id}")
-            print(f"Response: {response.text.strip()}")
-            return # Stop on first success
-        except Exception as e:
-             print(f"FAILURE with {model_id}: {e}")
+    if r.status_code == 200:
+        data = r.json()
+        
+        # Check SampleService source
+        if "sample_source" in data:
+            print(f"📊 Sample Source: {data['sample_source']}")
+        
+        # Display titles
+        titles = data.get("title_candidates", [])
+        print(f"📌 Title Candidates: {len(titles)}")
+        for i, t in enumerate(titles[:5], 1):
+            if isinstance(t, dict):
+                print(f"  {i}. {t.get('title', 'N/A')}")
+                if t.get('formula'):
+                    print(f"     Formula: {t.get('formula')}")
+            else:
+                print(f"  {i}. {t}")
+        
+        # Display options
+        options = data.get("options", [])
+        print(f"\n📋 Strategy Options: {len(options)}")
+        for i, opt in enumerate(options[:3], 1):
+            if isinstance(opt, dict):
+                print(f"  {i}. {opt.get('angle', opt.get('title', 'N/A'))}")
+            else:
+                print(f"  {i}. {opt}")
+    else:
+        print(f"Error response: {r.text[:500]}")
+        
+except requests.exceptions.Timeout:
+    elapsed = time.time() - start
+    print(f"❌ Timeout after {elapsed:.1f}s")
+except Exception as e:
+    print(f"❌ Error: {e}")
 
-if __name__ == "__main__":
-    test_generation()
+print()
+print("=" * 60)
