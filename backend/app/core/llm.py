@@ -161,8 +161,8 @@ def _generate_text_impl(
     client = get_client(api_key=api_key, provider=provider)
     model = get_model_id(model_id=model_id, provider=provider)
     
-    # 增加超时设置 (30秒连接，90秒读取)
-    timeout_config = {"timeout": 90.0}
+    # 增加超时设置 (长篇生成可能需要更长时间)
+    timeout_config = {"timeout": 300.0}  # 5分钟超时
     
     # Google Gemini 使用不同的 API 格式
     if provider == "google":

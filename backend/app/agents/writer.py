@@ -10,7 +10,8 @@ MODE_TEMPLATES = {
         "name": "咪蒙体",
         "style": """
         - 标题必须戳中痛点，制造焦虑或共鸣
-        - 开头必须讲一个引人入胜的故事或案例
+        - 🚫 禁止虚构开头：不要编造人物故事（如"凌晨X点，某人..."），必须基于素材事实开头
+        - 开头可用素材中的真实数据、事件或引用吸引读者
         - 使用大量短句，每句话单独成段
         - 多用感叹号和问号制造情绪张力
         - 金句要多，要有转发冲动
@@ -62,7 +63,7 @@ def writer_agent(state: dict) -> dict:
             print(f">>> [Writer Debug] No recommended style, using default: {style}")
     
     # P10: 获取 length 参数并计算字数约束
-    length = state.get("length", "medium")
+    length = state.get("length", "thread")  # P11: 默认 thread
     from ..graph import calculate_length
     length_constraints = calculate_length(length)
     
@@ -171,6 +172,12 @@ def writer_agent(state: dict) -> dict:
 请现在开始撰写文章。【重要：必须使用中文撰写！】"""
 
     print(">>> [Writer Debug] Calling generate_text...")
+    
+    # 根据篇幅动态设置 max_tokens (1中文字 ≈ 2 tokens)
+    max_word_count = length_constraints.get("max", 1500)
+    calculated_max_tokens = min(max_word_count * 3, 16384)  # 留足够余量，最大 16K
+    print(f">>> [Writer Debug] max_tokens={calculated_max_tokens} (for {max_word_count} words)")
+    
     try:
         response_text = generate_text(
             prompt=user_prompt,
@@ -178,7 +185,8 @@ def writer_agent(state: dict) -> dict:
             model_id=model_id,
             provider=provider,
             temperature=0.65,
-            system_prompt=system_prompt
+            system_prompt=system_prompt,
+            max_tokens=calculated_max_tokens  # P10: 动态设置 max_tokens
         )
         print(f">>> [Writer Debug] Success! Response length: {len(response_text)}")
         return {"draft_content": response_text}

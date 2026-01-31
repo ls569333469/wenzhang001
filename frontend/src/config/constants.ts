@@ -27,11 +27,11 @@ export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; c
     }
 ];
 
-// 文章长度配置
+// P11: 文章长度配置 (新篇幅体系)
 export const ARTICLE_LENGTHS: { id: ArticleLength; label: string }[] = [
-    { id: 'short', label: '短篇 (~500字)' },
-    { id: 'medium', label: '中篇 (~1.5k字)' },
-    { id: 'long', label: '长文 (~3k字)' }
+    { id: 'tweet', label: '推文 (~300字)' },
+    { id: 'thread', label: '推文串 (~800字)' },
+    { id: 'post', label: '帖子 (~1.5k字)' }
 ];
 
 // P10-3: 开头Hook强度配置

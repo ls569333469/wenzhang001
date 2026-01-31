@@ -2,11 +2,14 @@ from datetime import datetime
 import json
 from ..core.llm import generate_text
 from ..core.prompts import render_prompt
+from ..graph import calculate_length
 
-def critic_agent(draft: str, mode: str, api_config: dict = None) -> tuple[int, str]:
+def critic_agent(draft: str, mode: str, api_config: dict = None, 
+                 length: str = "thread", style: str = "auto") -> tuple[int, str]:
     """
     Step 3: Critique
     Reviews the draft and provides a score (0-100) and feedback.
+    Now includes mode/length/style constraints for accurate scoring.
     """
     if api_config is None:
         api_config = {}
@@ -15,15 +18,24 @@ def critic_agent(draft: str, mode: str, api_config: dict = None) -> tuple[int, s
     api_key = api_config.get("api_key") or None
     model_id = api_config.get("model_id") or None
     
-    context = {"current_time_str": datetime.now().isoformat()}
+    # 计算字数约束和当前字数
+    length_constraints = calculate_length(length)
+    word_count = len(draft)
+    
+    context = {
+        "current_time_str": datetime.now().isoformat(),
+        "mode": mode,
+        "length": length,
+        "length_constraints": length_constraints,
+        "style": style,
+        "word_count": word_count
+    }
     system_prompt = render_prompt("critic", context)
 
     user_prompt = f"""Draft Content:
 {draft}
 
-Target Mode: {mode}
-
-Please review and score this content."""
+Please review and score this content based on the criteria in your system prompt."""
     
     try:
         response_text = generate_text(

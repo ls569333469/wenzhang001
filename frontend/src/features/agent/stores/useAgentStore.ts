@@ -64,7 +64,7 @@ interface AgentState {
     agentLogs: string[];
     isWaitingForSelection: boolean;
     // Phase 9: Store payload for confirmStrategy
-    lastRequestPayload: { input: string; config: Partial<CreationConfig> } | null;
+    lastRequestPayload: { input: string; config: Partial<CreationConfig>; mode?: string } | null;
     // Phase 10: Multi-turn dialogue state
     lastGeneratedContent: string;
     lastSelectedOption: any | null;
@@ -139,7 +139,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             analysisResult: null,
             agentLogs: [],
             isWaitingForSelection: false,
-            lastRequestPayload: { input, config, mode: config.mode || 'deep_analysis' }
+            lastRequestPayload: { input, config, mode: config.mode || 'deep_analysis' } as { input: string; config: Partial<CreationConfig>; mode?: string }
         });
 
         // Activate Strategist
@@ -158,7 +158,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 input: finalInput,
                 mode: config.mode || 'deep_analysis',
                 style: config.style || 'mimeng',
-                length: config.length || 'medium',
+                length: config.length || 'thread',  // P11: 默认 thread
                 temperature: config.temperature || 0.7,
                 narrative_type: 'project_review',
                 references: [],
@@ -206,14 +206,14 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             }
 
             // Inject prompts again for /generate
-            const finalInput = injectPrompts(lastRequestPayload.input || lastRequestPayload.prompt || '');
+            const finalInput = injectPrompts(lastRequestPayload.input || '');
 
             // Backend expects: { input, mode, style, length, retention_level, narrative_type, references, selected_option, info_anchors }
             const requestBody = {
                 input: finalInput,
                 mode: lastRequestPayload.config?.mode || lastRequestPayload.mode || 'deep_analysis',
                 style: lastRequestPayload.config?.style || 'mimeng',
-                length: lastRequestPayload.config?.length || 'medium',
+                length: lastRequestPayload.config?.length || 'thread',  // P11
                 retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],

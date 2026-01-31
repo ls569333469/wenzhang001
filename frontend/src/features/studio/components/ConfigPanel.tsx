@@ -264,7 +264,7 @@ export function ConfigPanel() {
                                     className="py-2"
                                 />
                                 <p className="text-[10px] text-zinc-400">
-                                    {UI_TEXT.temperatureDesc}
+                                    数值越高创意越强，越低越稳定
                                 </p>
                             </section>
 

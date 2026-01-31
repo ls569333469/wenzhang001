@@ -34,11 +34,11 @@ export const WritingStyleSchema = z.enum([
     'chengshian',      // 程十安体
 ]);
 
-/** 目标字数 */
+/** P11: 目标字数 (新篇幅体系) */
 export const ArticleLengthSchema = z.enum([
-    'short',           // 短文 (~500字)
-    'medium',          // 中篇 (~1500字)
-    'long',            // 长文 (~3000字)
+    'tweet',           // 推文 (~300字)
+    'thread',          // 推文串 (~800字)
+    'post',            // 帖子 (~1.5k字)
 ]);
 
 /** 知识来源 */
@@ -54,7 +54,7 @@ export const KnowledgeSourceSchema = z.object({
 export const CreationConfigSchema = z.object({
     mode: CreationModeSchema.default('deep_analysis'),
     style: WritingStyleSchema.default('professional'),
-    length: ArticleLengthSchema.default('medium'),
+    length: ArticleLengthSchema.default('thread'),  // P11: 默认 thread
     knowledgeSources: z.array(z.string()).default([]),  // source IDs
     temperature: z.number().min(0).max(1).default(0.7),
     topP: z.number().min(0).max(1).default(0.9),

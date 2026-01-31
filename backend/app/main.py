@@ -79,9 +79,9 @@ class APIConfig(BaseModel):
 
 class GenerateRequest(BaseModel):
     input: str
-    mode: str = "deep_analysis"  # P10: 创作模式 (deep_analysis, quick_take, tutorial, rewrite)
+    mode: str = "deep_analysis"  # P11: 创作模式 (deep_analysis, quick_summary, tutorial, rewrite)
     style: str = "auto"  # P10: 写作风格 (auto, mimeng, banfo, xinshixiang, insider)
-    length: str = "medium"  # P10: 篇幅长度 (short, medium, long)
+    length: str = "thread"  # P11: 篇幅长度 (tweet, thread, post)
     retention_level: int = 3  # P10: 保留度等级 1-5 (1=95%保留, 5=10%保留)
     narrative_type: str = "project_review"
     references: List[str] = [] 
@@ -176,11 +176,15 @@ async def generate_narrative(request: GenerateRequest):
         if request.agent_config:
             agent_config_dict = {k: v.dict() for k, v in request.agent_config.items()}
 
+        # P10.A: 强制执行 mode → length 约束
+        from .graph import enforce_mode_length
+        enforced_length = enforce_mode_length(request.mode, request.length)
+        
         inputs = {
             "raw_input": request.input, 
             "mode": request.mode,
             "style": request.style,  # P10
-            "length": request.length,  # P10
+            "length": enforced_length,  # P10.A: 使用强制约束后的 length
             "retention_level": request.retention_level,  # P10
             "narrative_type": request.narrative_type,
             "references": request.references,

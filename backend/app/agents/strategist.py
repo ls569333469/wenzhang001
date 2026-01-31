@@ -50,8 +50,6 @@ def build_strategist_context(state: dict) -> dict:
     # 安全检查：未知风格 fallback 到 mimeng
     VALID_STYLES = {"mimeng", "banfo"}
     if style not in VALID_STYLES:
-        from ..core.config import get_logger
-        logger = get_logger("agents.strategist")
         logger.warning(f"Unknown style '{style}', fallback to mimeng")
         style = "mimeng"
 

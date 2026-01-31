@@ -4,25 +4,49 @@ import operator
 from datetime import datetime
 import json
 
-# P10: 篇幅长度常量映射
+# P11: 新篇幅体系 (tweet/thread/post)
 LENGTH_MAP = {
-    "short": {"min": 300, "max": 600, "target": 450},
-    "medium": {"min": 800, "max": 1500, "target": 1000},
-    "long": {"min": 2000, "max": 4000, "target": 2500}
+    "tweet": {"min": 150, "max": 300, "target": 250},
+    "thread": {"min": 500, "max": 800, "target": 650},
+    "post": {"min": 1000, "max": 1500, "target": 1200},
+    # P11: 兼容旧值 (过渡期)
+    "short": {"min": 150, "max": 300, "target": 250},
+    "medium": {"min": 500, "max": 800, "target": 650},
+    "long": {"min": 1000, "max": 1500, "target": 1200}
 }
+
+# P11: mode → length 强制约束 (quick_take → quick_summary 统一)
+MODE_LENGTH_MAPPING = {
+    "deep_analysis": "post",       # 深度分析 = 帖子
+    "quick_summary": "tweet",      # 快讯速评 = 推文 (前端名称)
+    "tutorial": "thread",          # 教程指南 = 推文串
+    "translate": "thread",         # 翻译 = 推文串
+    "rewrite": None                # 改写模式不限制篇幅
+}
+
+def enforce_mode_length(mode: str, requested_length: str) -> str:
+    """
+    P10.A: 强制执行 mode → length 约束
+    如果 mode 有强制篇幅要求，忽略用户请求的 length
+    """
+    enforced_length = MODE_LENGTH_MAPPING.get(mode)
+    if enforced_length and enforced_length != requested_length:
+        print(f"[P10.A] 强制约束: mode={mode} 要求 length={enforced_length}，忽略请求的 {requested_length}")
+        return enforced_length
+    return requested_length
 
 def calculate_length(length_key: str) -> Dict[str, int]:
     """
-    P10: 根据 length 参数返回字数约束
+    P11: 根据 length 参数返回字数约束
     """
-    return LENGTH_MAP.get(length_key, LENGTH_MAP["medium"])
+    return LENGTH_MAP.get(length_key, LENGTH_MAP["thread"])  # P11: 默认 thread
 
 # 定义状态字典
 class AgentState(TypedDict):
     raw_input: str
-    mode: str  # "deep_analysis", "quick_take", "tutorial", "rewrite"
+    mode: str  # "deep_analysis", "quick_summary", "tutorial", "rewrite"  # P11: quick_take → quick_summary
     style: str  # P10: "auto", "mimeng", "banfo", "xinshixiang", "insider"
-    length: str  # P10: "short", "medium", "long"
+    length: str  # P11: "tweet", "thread", "post"
     retention_level: int  # P10: 保留度等级 1-5
     narrative_type: str  # 新增：叙事类型
     references: List[str]  # P3: 选题参考列表
@@ -209,7 +233,16 @@ def node_critic(state: AgentState):
     
     steps.append({"step": "reviewing", "content": "审核内容质量..."})
     
-    score, feedback = critic_agent(state["draft_v1"], state["mode"], effective_config)
+    # P10: 传递 length 和 style 参数给 Critic
+    length = state.get("length", "medium")
+    style = state.get("style", "auto")
+    score, feedback = critic_agent(
+        draft=state["draft_v1"], 
+        mode=state["mode"], 
+        api_config=effective_config,
+        length=length,
+        style=style
+    )
     
     steps.append({"step": "scored", "content": f"评分: {score}/100"})
     
