@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
 import { API_BASE_URL } from '@/config/api';
 import { PromptEditor } from '@/components/PromptEditor';
+import { AgentModelConfig } from '@/features/settings/AgentModelConfig';
 
 export default function SettingsPage() {
   const [apiKey, setApiKey] = useState('');
@@ -15,6 +16,9 @@ export default function SettingsPage() {
   const [baseUrl, setBaseUrl] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // P14-B: Provider Keys and Agent Config
+  const [providerKeys, setProviderKeys] = useState<Record<string, string>>({});
 
   // Phase 6: Prompt State
   const [prompts, setPrompts] = useState({
@@ -57,6 +61,16 @@ export default function SettingsPage() {
       if (storedKey) setApiKey(storedKey);
       if (storedModel) setModel(storedModel);
       if (storedUrl) setBaseUrl(storedUrl);
+
+      // P14-B: Load Provider Keys
+      try {
+        const storedKeys = localStorage.getItem('qs_provider_keys');
+        if (storedKeys) {
+          setProviderKeys(JSON.parse(storedKeys));
+        }
+      } catch (e) {
+        console.error('Failed to parse provider keys', e);
+      }
 
       try {
         const promptRes = await fetch(`${API_BASE_URL}/config/prompts`);
@@ -123,6 +137,9 @@ export default function SettingsPage() {
       localStorage.setItem('qs_prompt_writer', prompts.writer);
       localStorage.setItem('qs_prompt_critic', prompts.critic);
 
+      // P14-B: Save Provider Keys
+      localStorage.setItem('qs_provider_keys', JSON.stringify(providerKeys));
+
       // 2. Sync API keys to backend
       const res = await fetch(`${API_BASE_URL}/config/keys`, {
         method: 'POST',
@@ -180,6 +197,9 @@ export default function SettingsPage() {
     }
   };
 
+  const updateProviderKey = (provider: string, key: string) => {
+    setProviderKeys(prev => ({ ...prev, [provider]: key }));
+  };
 
   return (
     <div className="flex flex-col h-full bg-canvas overflow-y-auto">
@@ -195,15 +215,52 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* API Configuration */}
+        {/* P14-B: Provider Configuration */}
+        <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
+          <div className="flex items-start gap-3">
+            <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+              <Key className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-lg font-medium text-ink-primary">模型接入配置</h2>
+              <p className="text-sm text-ink-muted">配置各 AI 平台的 API Key，未配置的平台将无法使用。</p>
+            </div>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {[
+              { id: 'volcengine', label: '火山引擎', placeholder: 'ak-...' },
+              { id: 'google', label: 'Google Gemini', placeholder: 'AIza...' },
+            ].map(p => (
+              <div key={p.id} className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">{p.label}</label>
+                <input
+                  type="password"
+                  value={providerKeys[p.id] || ''}
+                  onChange={(e) => updateProviderKey(p.id, e.target.value)}
+                  className="w-full px-3 py-2 bg-zinc-50 border border-zinc-200 rounded-lg text-sm"
+                  placeholder={p.placeholder}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* P14-B: Agent Model Allocation (includes P14-C Mode Writer config) */}
+        <section>
+          <AgentModelConfig apiKeys={providerKeys} />
+        </section>
+
+        {/* Existing API Configuration (Legacy/Global) */}
+        {/* Legacy API Configuration - 保留用于全局兼容 */}
         <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
           <div className="flex items-start gap-3">
             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center shrink-0">
               <Key className="w-4 h-4 text-indigo-600" />
             </div>
             <div className="flex-1 space-y-1">
-              <h3 className="font-medium text-ink-primary">模型提供商</h3>
-              <p className="text-xs text-ink-muted">配置 LLM 提供商连接</p>
+              <h3 className="font-medium text-ink-primary">全局 API 配置 (Legacy)</h3>
+              <p className="text-xs text-ink-muted">兼容旧版流程，建议使用上方"模型接入配置"</p>
             </div>
           </div>
 
@@ -214,7 +271,7 @@ export default function SettingsPage() {
                 type="password"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder="sk-..."
+                placeholder="ak-... 或 AIza..."
                 className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono"
               />
               <p className="text-[10px] text-ink-muted flex items-center gap-1">
@@ -229,7 +286,7 @@ export default function SettingsPage() {
                 type="text"
                 value={baseUrl}
                 onChange={(e) => setBaseUrl(e.target.value)}
-                placeholder="https://api.openai.com/v1"
+                placeholder="https://ark.cn-beijing.volces.com/api/v3"
                 className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none font-mono"
               />
             </div>
@@ -241,10 +298,10 @@ export default function SettingsPage() {
                 onChange={(e) => setModel(e.target.value)}
                 className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none cursor-pointer"
               >
-                <option value="gpt-4-turbo">GPT-4 Turbo</option>
-                <option value="gpt-4o">GPT-4o</option>
-                <option value="claude-3-opus-20240229">Claude 3 Opus</option>
-                <option value="deepseek-chat">DeepSeek V3</option>
+                <option value="doubao-seed-1-8-251228">豆包 Seed 1.8 (推荐)</option>
+                <option value="deepseek-v3-2-251201">DeepSeek V3.2</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                <option value="gemini-3-pro-preview">Gemini 3 Pro Preview</option>
               </select>
             </div>
           </div>
@@ -410,8 +467,8 @@ export default function SettingsPage() {
             {isSaving ? '保存中...' : '保存配置'}
           </Button>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

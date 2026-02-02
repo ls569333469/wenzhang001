@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Toaster } from "sonner";
+import { StoreHydration } from "@/components/StoreHydration";
 import "./globals.css";
 
 /**
@@ -51,6 +52,7 @@ export default function RootLayout({
         `}
         suppressHydrationWarning
       >
+        <StoreHydration />
         <NuqsAdapter>
           {children}
         </NuqsAdapter>
@@ -59,3 +61,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -4,6 +4,9 @@ import operator
 from datetime import datetime
 import json
 
+# P14: 导入模式配置
+from .core.mode_configs import get_mode_config, MODE_CONFIGS
+
 # P11: 新篇幅体系 (tweet/thread/post)
 LENGTH_MAP = {
     "tweet": {"min": 150, "max": 300, "target": 250},
@@ -236,7 +239,9 @@ def node_critic(state: AgentState):
     # P10: 传递 length 和 style 参数给 Critic
     length = state.get("length", "medium")
     style = state.get("style", "auto")
-    score, feedback = critic_agent(
+    
+    # P12: critic_agent 现在返回 dict，不再是 tuple
+    critic_result = critic_agent(
         draft=state["draft_v1"], 
         mode=state["mode"], 
         api_config=effective_config,
@@ -244,18 +249,35 @@ def node_critic(state: AgentState):
         style=style
     )
     
-    steps.append({"step": "scored", "content": f"评分: {score}/100"})
-    
-    if score < 90:
-        steps.append({"step": "feedback", "content": f"反馈: {feedback[:50]}..." if len(feedback) > 50 else f"反馈: {feedback}"})
-        steps.append({"step": "decision", "content": "需要修改，打回重写"})
+    # P12: 从 dict 中提取结果
+    if isinstance(critic_result, dict):
+        score = critic_result.get("score", 0)
+        verdict = critic_result.get("verdict", "REFINE")
+        suggestions = critic_result.get("suggestions", [])
+        # 将 suggestions 转为字符串传给 Polisher
+        feedback = verdict + ": " + "; ".join(suggestions) if suggestions else verdict
     else:
-        steps.append({"step": "approved", "content": "质量达标，通过审核"})
+        # 兼容旧代码 (如果回滚)
+        score, feedback = critic_result
+        verdict = "PASS" if score >= 85 else "REFINE" if score >= 70 else "REWRITE"
+    
+    steps.append({"step": "scored", "content": f"评分: {score}/100 ({verdict})"})
+    
+    # P12: 阈值从 90 改为 85
+    PASS_THRESHOLD = 85
+    if score < PASS_THRESHOLD:
+        feedback_preview = feedback[:50] + "..." if len(feedback) > 50 else feedback
+        steps.append({"step": "feedback", "content": f"反馈: {feedback_preview}"})
+        steps.append({"step": "decision", "content": f"需要修改 ({verdict})"})
+    else:
+        steps.append({"step": "approved", "content": "质量达标，通过审核 (PASS)"})
     
     return {
         "critique_score": score, 
         "critique_feedback": feedback,
-        "logs": [f"[{datetime.now().isoformat()}] Critic score: {score}."],
+        "critique_verdict": verdict,  # P12: 新增 verdict 字段
+        "critique_result": critic_result if isinstance(critic_result, dict) else {},  # P12: 保存完整结果
+        "logs": [f"[{datetime.now().isoformat()}] Critic score: {score} ({verdict})."],
         "thinking_steps": [{"agent": "critic", "steps": steps, "status": "completed"}]
     }
 
@@ -287,9 +309,22 @@ def node_polisher(state: AgentState):
         "thinking_steps": [{"agent": "polisher", "steps": steps, "status": "completed"}]
     }
 
-# 路由逻辑：Critic 决定是重写还是通过
+# 路由逻辑：Critic 决定是重写还是通过 (P14: 模式感知)
 def router_logic(state: AgentState):
-    if state.get("critique_score", 0) < 90 and state.get("revision_count", 0) < 3:
+    mode = state.get("mode", "deep_analysis")
+    config = get_mode_config(mode)
+    
+    # P14: 如果模式跳过评审，直接进润色
+    if config.get("skip_critic", False):
+        return "polisher"
+    
+    # P14: 获取模式专属阈值
+    scoring = config.get("scoring", {})
+    pass_threshold = scoring.get("pass_threshold", 85)
+    max_revisions = scoring.get("max_revisions", 3)
+    
+    # P14-Fix7: 使用模式专属阈值
+    if state.get("critique_score", 0) < pass_threshold and state.get("revision_count", 0) < max_revisions:
         return "writer"  # 打回重写
     return "polisher"    # 通过
 

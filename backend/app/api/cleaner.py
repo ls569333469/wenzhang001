@@ -38,7 +38,7 @@ class CleanerJobRequest(BaseModel):
     input_path: str
     target: str = "knowledge"  # knowledge / style
     mode: str = "auto"  # auto / json / txt
-    provider: str = "deepseek"
+    provider: str = "volcengine"  # P14: volcengine / google
 
 class CleanerJob(BaseModel):
     """清洗任务"""

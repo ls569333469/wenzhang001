@@ -4,6 +4,11 @@ import { CreationMode, ArticleLength, WritingStyle } from "@/features/studio/sch
 // 创作模式配置 (P10 简化版)
 export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; compact?: boolean }[] = [
     {
+        id: 'hot_take',
+        title: '🔥 锐评',
+        desc: 'P14: 极简短评，3条候选，50-150字'
+    },
+    {
         id: 'deep_analysis',
         title: '深度分析',
         desc: '全面深度分析，长文结构，多角度论证'
@@ -20,7 +25,7 @@ export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; c
         compact: true
     },
     {
-        id: 'translate',
+        id: 'tutorial',
         title: '教程指南',
         desc: '步骤清晰，可操作性强',
         compact: true

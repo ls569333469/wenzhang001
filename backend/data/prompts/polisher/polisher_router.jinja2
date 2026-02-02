@@ -1,0 +1,19 @@
+{# 润色路由 - 根据mode加载配置 #}
+
+{% if mode == "hot_take" %}
+{# 锐评模式不需要润色，直接输出 #}
+{{ content }}
+{% else %}
+
+{% set MODE_POLISH = {
+    "mid_take": "medium",
+    "deep_analysis": "strong",
+    "tutorial": "medium",
+    "rewrite": "strong"
+} %}
+
+{% set polish_level = MODE_POLISH.get(mode, "medium") %}
+
+{% include 'shared/base_polisher.jinja2' %}
+
+{% endif %}

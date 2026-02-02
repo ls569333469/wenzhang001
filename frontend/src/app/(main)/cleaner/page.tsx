@@ -37,7 +37,7 @@ export default function CleanerPage() {
     const [jobs, setJobs] = useState<CleanerJob[]>([]);
     const [selectedPath, setSelectedPath] = useState("");
     const [target, setTarget] = useState("knowledge");
-    const [provider, setProvider] = useState("deepseek");
+    const [provider, setProvider] = useState("volcengine");
     const [loading, setLoading] = useState(false);
 
     const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -113,8 +113,8 @@ export default function CleanerPage() {
                 <button
                     onClick={() => setSelectedPath(item.path)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm w-full text-left transition-colors ${selectedPath === item.path
-                            ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                            : "hover:bg-white/5 text-gray-300"
+                        ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
+                        : "hover:bg-white/5 text-gray-300"
                         }`}
                 >
                     <FolderOpen size={16} className="text-yellow-500" />
@@ -238,8 +238,8 @@ export default function CleanerPage() {
                                     onChange={(e) => setProvider(e.target.value)}
                                     className="w-full bg-black/30 border border-white/10 rounded-lg px-3 py-2 text-sm"
                                 >
-                                    <option value="deepseek">DeepSeek V3.2 (推荐)</option>
-                                    <option value="doubao">豆包 Seed</option>
+                                    <option value="volcengine">火山引擎 (DeepSeek/豆包)</option>
+                                    <option value="google">Google Gemini</option>
                                 </select>
                             </div>
                         </div>
@@ -283,9 +283,9 @@ export default function CleanerPage() {
                                                 <span className="font-medium text-sm">{job.input_path.split('/').pop()}</span>
                                             </div>
                                             <span className={`text-xs px-2 py-1 rounded ${job.status === 'completed' ? 'bg-green-500/20 text-green-400' :
-                                                    job.status === 'failed' ? 'bg-red-500/20 text-red-400' :
-                                                        job.status === 'running' ? 'bg-blue-500/20 text-blue-400' :
-                                                            'bg-gray-500/20 text-gray-400'
+                                                job.status === 'failed' ? 'bg-red-500/20 text-red-400' :
+                                                    job.status === 'running' ? 'bg-blue-500/20 text-blue-400' :
+                                                        'bg-gray-500/20 text-gray-400'
                                                 }`}>
                                                 {job.status}
                                             </span>

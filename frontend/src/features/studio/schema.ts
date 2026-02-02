@@ -13,10 +13,11 @@ import { z } from 'zod';
 
 /** 创作模式 */
 export const CreationModeSchema = z.enum([
+    'hot_take',        // P14: 锐评模式
     'deep_analysis',   // 深度分析
     'quick_summary',   // 快速摘要
     'rewrite',         // 改写润色
-    'translate',       // 翻译
+    'tutorial',        // P13: 教程模式
 ]);
 
 /** 写作风格 */
@@ -61,6 +62,85 @@ export const CreationConfigSchema = z.object({
     maxTokens: z.number().positive().default(4096),
     retention_level: z.number().min(1).max(5).default(3),  // P10: 保留度等级 1-5
 });
+
+// ===== P13: API 配置 Schema =====
+
+/** AI 提供商 */
+export const AIProviderSchema = z.enum(['volcengine', 'google']);
+
+/** 单个 API 配置 */
+export const APIConfigSchema = z.object({
+    provider: AIProviderSchema.default('volcengine'),
+    model_id: z.string().optional(),
+    api_key: z.string().optional(),
+});
+
+// P14-B: Provider ID 常量 (前后端共用，防止拼写错误)
+export const PROVIDER_IDS = {
+    VOLCENGINE: 'volcengine',
+    GOOGLE: 'google',
+} as const;
+
+/** Agent 模型配置项 (必须包含 provider 和 model) */
+export const AgentModelSettingSchema = z.object({
+    provider: AIProviderSchema,
+    model: z.string(),
+});
+
+/** P14-B: 智能体团队模型分配 */
+export const AgentModelsSchema = z.object({
+    strategist: AgentModelSettingSchema,
+    writer: AgentModelSettingSchema,
+    critic: AgentModelSettingSchema,
+    polisher: AgentModelSettingSchema,
+});
+
+/** P14-B: 默认 Agent 模型配置 (默认使用火山引擎豆包模型) */
+export const DEFAULT_AGENT_MODELS: z.infer<typeof AgentModelsSchema> = {
+    strategist: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    writer: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    critic: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    polisher: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+};
+
+export type AgentModels = z.infer<typeof AgentModelsSchema>;
+export type AgentModelSetting = z.infer<typeof AgentModelSettingSchema>;
+
+// ===== P14-C: 模式专属 Writer 配置 =====
+
+/** 可配置 Writer 的模式列表 */
+export const MODE_WRITER_IDS = {
+    HOT_TAKE: 'hot_take',
+    DEEP_ANALYSIS: 'deep_analysis',
+    QUICK_SUMMARY: 'quick_summary',
+    TUTORIAL: 'tutorial',
+    REWRITE: 'rewrite',
+} as const;
+
+/** 模式别名映射 (用于兼容) */
+export const MODE_ALIASES: Record<string, string> = {
+    'mid_take': 'quick_summary',
+};
+
+/** 模式 Writer 配置 Schema */
+export const ModeWriterConfigSchema = z.object({
+    hot_take: AgentModelSettingSchema,
+    deep_analysis: AgentModelSettingSchema,
+    quick_summary: AgentModelSettingSchema,
+    tutorial: AgentModelSettingSchema,
+    rewrite: AgentModelSettingSchema,
+});
+
+/** P14-C: 默认模式 Writer 配置 */
+export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
+    hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    deep_analysis: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
+    quick_summary: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
+    tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
+    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+};
+
+export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
 
 // ===== 智能体状态 Schema =====
 
@@ -143,6 +223,9 @@ export type GenerateRequest = z.infer<typeof GenerateRequestSchema>;
 export type GenerateResult = z.infer<typeof GenerateResultSchema>;
 export type StreamChunk = z.infer<typeof StreamChunkSchema>;
 export type WorkbenchState = z.infer<typeof WorkbenchStateSchema>;
+// P13: API 配置类型
+export type AIProvider = z.infer<typeof AIProviderSchema>;
+export type APIConfig = z.infer<typeof APIConfigSchema>;
 
 // ===== 默认值工厂 =====
 

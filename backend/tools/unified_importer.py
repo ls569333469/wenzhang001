@@ -340,7 +340,7 @@ async def upload_to_lark(record: Dict[str, Any], target: str) -> bool:
 def import_data(
     input_path: str = typer.Option(..., "--input", "-i", help="输入路径 (文件或目录)"),
     target: str = typer.Option("knowledge", "--target", "-t", help="目标库: knowledge / style"),
-    provider: str = typer.Option("deepseek", "--provider", "-p", help="AI 模型: deepseek / doubao"),
+    provider: str = typer.Option("volcengine", "--provider", "-p", help="AI 模型: volcengine / google"),
     dry_run: bool = typer.Option(False, "--dry-run", help="仅测试，不上传")
 ):
     """
@@ -380,7 +380,15 @@ async def _import_async(input_path: str, target: str, provider: str, dry_run: bo
         base_url="https://ark.cn-beijing.volces.com/api/v3",
         api_key=os.getenv("ARK_API_KEY")
     )
-    model_name = "deepseek-v3-2-251201" if provider == "deepseek" else "doubao-seed-1-8-251228"
+    
+    # P14: 统一使用火山引擎，根据 provider 选择不同模型
+    if provider == "google":
+        # Google Gemini 需要单独处理 (暂不支持 cleaner)
+        console.print(f"[yellow]警告: Google 模型暂不支持 cleaner，使用 volcengine 替代[/yellow]")
+        model_name = "doubao-seed-1-8-251228"
+    else:
+        # 默认使用火山引擎 DeepSeek 模型
+        model_name = "deepseek-v3-2-251201"
     
     semaphore = asyncio.Semaphore(CONCURRENCY_LIMIT)
     

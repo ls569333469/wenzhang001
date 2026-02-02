@@ -1,0 +1,85 @@
+﻿data: {"type": "thinking_step", "agent": "strategist", "step": "analyzing", "detail": "正在分析输入素材 (69 字)...", "progress": 25.0}
+
+data: {"type": "thinking_step", "agent": "strategist", "step": "config", "detail": "叙事类型: project_review", "progress": 50.0}
+
+data: {"type": "thinking_step", "agent": "strategist", "step": "options", "detail": "生成了 3 个选题方案", "progress": 75.0}
+
+data: {"type": "thinking_step", "agent": "strategist", "step": "completed", "detail": "策略规划完成", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "strategist", "status": "completed", "logs": ["[2026-01-31T15:43:27.827621] Strategist generated plan."]}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "loading", "detail": "加载风格模板: deep_analysis", "progress": 25.0}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "drafting", "detail": "开始撰写初稿...", "progress": 50.0}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "generated", "detail": "生成内容: 1375 字", "progress": 75.0}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "completed", "detail": "初稿完成，提交主编审核", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "writer", "status": "completed", "logs": ["[2026-01-31T15:45:45.912765] Writer drafted/rewrote version 1."]}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "reviewing", "detail": "审核内容质量...", "progress": 25.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "scored", "detail": "评分: 85/100", "progress": 50.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "feedback", "detail": "反馈: 1. 模式匹配严重扣分：打着深度分析的旗号，实则全是情绪宣泄的口水垃圾！既没拆解机构囤币的宏观逻辑（...", "progress": 75.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "decision", "detail": "需要修改，打回重写", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "critic", "status": "completed", "logs": ["[2026-01-31T15:46:18.058078] Critic score: 85."]}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "rewriting", "detail": "根据主编反馈进行第 2 次修订...", "progress": 33.33333333333333}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "generated", "detail": "生成内容: 965 字", "progress": 66.66666666666666}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "completed", "detail": "初稿完成，提交主编审核", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "writer", "status": "completed", "logs": ["[2026-01-31T15:47:17.536342] Writer drafted/rewrote version 2."]}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "reviewing", "detail": "审核内容质量...", "progress": 25.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "scored", "detail": "评分: 75/100", "progress": 50.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "feedback", "detail": "反馈: 1. 字数仅965字，距最低要求1000字还差35字，连凑够基本字数的能力都没有，懒到离谱！2. 选...", "progress": 75.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "decision", "detail": "需要修改，打回重写", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "critic", "status": "completed", "logs": ["[2026-01-31T15:48:54.828807] Critic score: 75."]}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "rewriting", "detail": "根据主编反馈进行第 3 次修订...", "progress": 33.33333333333333}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "generated", "detail": "生成内容: 1105 字", "progress": 66.66666666666666}
+
+data: {"type": "thinking_step", "agent": "writer", "step": "completed", "detail": "初稿完成，提交主编审核", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "writer", "status": "completed", "logs": ["[2026-01-31T15:50:32.723874] Writer drafted/rewrote version 3."]}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "reviewing", "detail": "审核内容质量...", "progress": 25.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "scored", "detail": "评分: 75/100", "progress": 50.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "feedback", "detail": "反馈: 1. 模式匹配彻底崩盘：选了深度分析模式，结果整篇全是感叹号炸场的垃圾口水文，没有任何多角度论证，既...", "progress": 75.0}
+
+data: {"type": "thinking_step", "agent": "critic", "step": "decision", "detail": "需要修改，打回重写", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "critic", "status": "completed", "logs": ["[2026-01-31T15:51:50.727916] Critic score: 75."]}
+
+data: {"type": "thinking_step", "agent": "polisher", "step": "polishing", "detail": "进行最终润色...", "progress": 25.0}
+
+data: {"type": "thinking_step", "agent": "polisher", "step": "injecting", "detail": "注入 Web3 行业术语...", "progress": 50.0}
+
+data: {"type": "thinking_step", "agent": "polisher", "step": "formatting", "detail": "格式化 Markdown...", "progress": 75.0}
+
+data: {"type": "thinking_step", "agent": "polisher", "step": "completed", "detail": "最终内容: 1028 字", "progress": 100.0}
+
+data: {"type": "agent_update", "step": "polisher", "status": "completed", "logs": ["[2026-01-31T15:52:50.297215] Polisher finished."]}
+
+data: {"type": "final_result", "payload": "# 比特币破10万后：50亿BTC流出背后的囤币潮，聪明钱已经抢先布局\n\n🚀 比特币破10万美元了！历史新高！这不是段子！是真金白银的行情！\n\n更炸的是！过去24小时！超50亿美元的BTC从加密货币交易所疯狂流出！50亿！是5后面跟9个零的数字！你敢信？\n\n不是散户在抛售套现！是聪明钱在疯狂囤币！你没听错！在所有人都喊“太高了”的时候！机构已经悄悄把筹码攥在了自己手里！\n\n你以为到了历史新高，大家都会跑路？错！大错特错！加密货币交易所的BTC流出数据！从来不会骗人！筹码从交易所消失！就是被锁进了私人钱包！就是被囤起来了！这些币不会在短期砸盘！只会让市场的供给越来越紧张！\n\n你知道机构为什么敢在新高点囤币吗？因为他们看的不是明天的涨跌！是三年后！五年后！比特币的价值！2017年BTC破2万的时候！有人喊泡沫！结果2021年破了6万！2024年破了10万！下一次呢？可能是20万！30万！你敢想吗？\n\n再看看散户在干嘛？在朋友圈刷“比特币疯了”！在社群里问“现在追高会不会被套？”在犹豫要不要把手里的零花钱换成BTC！而机构呢？已经花了50亿美元！把BTC装进口袋锁起来了！这就是散户和机构的差距！不是钱多少的差距！是格局的差距！是行动力的差距！\n\n别灰心！散户也能跟上这波囤币潮！给你3个简单到爆的策略！照做就行！\n\n### 第一个：分批买\n别一把梭哈！今天买100块的！明天买200块的！后天跌了买500块的！把成本摊得平平整整！就算接下来跌了！你也不怕！就算涨了！你也赚了！\n\n### 第二个：买了就转走\n别把BTC留在加密货币交易所！交易所是用来交易的！不是用来存币的！转到自己的冷钱包里！把钱包藏好！别天天打开APP看价格！越看越焦虑！越焦虑越想卖！\n\n### 第三个：拿住！\n拿住！拿住！重要的事情说三遍！你见过哪个靠囤BTC暴富的人是拿了一个月就卖的？没有！都是拿了三年五年的狠人！你连三个月都拿不住！你凭什么赚比特币的钱？\n\n💰别再等了！现在不是观望的时候！是行动的时候！错过这波囤币潮！你可能要再等下一个周期！到时候BTC破20万！你再拍大腿喊后悔！有用吗？没用！\n\n财富永远属于敢下手的人！不属于只会说“我要是当时买了就好了”的人！现在！打开你的交易所APP！买一点BTC！转去冷钱包！锁起来！然后该上班上班！该吃饭吃饭！一年后再看！你会感谢现在的自己！\n\n比特币的牛市还在继续！你的财富自由之路！从今天的第一枚BTC开始！冲啊！"}
+
+data: {"type": "thinking_step", "agent": "system", "step": "archiving", "detail": "Archiving to Lark Base..."}
+
+data: {"type": "agent_update", "step": "system", "status": "completed", "logs": ["\u2705 Successfully archived to Lark Base"]}
+
+data: {"type": "end", "payload": "Process Finished"}
+
+

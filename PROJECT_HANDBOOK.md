@@ -1,7 +1,7 @@
-# Quantum Studio v6.3 - 项目手册
+# Quantum Studio v7.2 - 项目手册
 
-> **更新日期**: 2026-01-29  
-> **版本**: v7.1 (P10 Workflow Redesign)  
+> **更新日期**: 2026-01-31  
+> **版本**: v7.2 (P13 Config Sync + P14 Planning)  
 > **维护者**: AI 开发团队
 
 ---
@@ -258,21 +258,38 @@ api_key = os.getenv('ARK_API_KEY')  # 613f595c-xxxx
 
 ### 📌 当前进行中
 
-#### P11 - 数据管线与内容生产体系 🛠️
+#### P13 - 前后端配置同步 ✅ (2026-01-31)
+> **状态**: 已完成 9/11 方案  
+> **详见**: [P13_Plan_前后端配置同步.md](file:///d:/AI_Projects/2026001/reports/设计文档/P13_Plan_前后端配置同步.md)
+
+| 修复项 | 状态 |
+|--------|:----:|
+| retention_level 传递 | ✅ |
+| APIConfig/AgentConfig Schema | ✅ |
+| sanitize_input 输入过滤 | ✅ |
+| /config/agents API | ✅ |
+| critique_update SSE | ✅ |
+| 标题数量 3-5→3 | ✅ |
+| Settings 多 Provider | ⏭️ P14 |
+| CritiquePanel UI | ⏭️ P14 |
+
+#### P14 - UI 重构与评分展示 🛠️
+> **状态**: 规划完成，7 个方案，预估 10.7h  
+> **详见**: [P14_Plan_UI重构与评分展示.md](file:///d:/AI_Projects/2026001/reports/设计文档/P14_Plan_UI重构与评分展示.md)
+
+| # | 任务 | 工时 |
+|---|------|:----:|
+| 1 | Settings 多 Provider 重构 | 3h |
+| 2 | CritiquePanel 评分展示 | 2h |
+| 3 | 锐评模式 (Hot Take) | 2h |
+| 4 | 修复 Polisher 幻觉 | 30min |
+| 5 | 思维链详情展示 | 2h |
+| 6 | 右侧隐藏栏修复 | 1h |
+| 7 | 🔴 Router 阈值 Bug | 10min |
+
+#### P11 - 数据管线与内容生产体系
 > **状态**: 规划完成 v7.1，待执行  
 > **详见**: [11-0_Plan_风格库完善与内容生产.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/11-0_Plan_风格库完善与内容生产.md)
-
-| 阶段 | 任务 | 预估 | 状态 |
-|------|------|------|------|
-| Phase 0 | Smoke Test | 1h | ⏳ |
-| Phase 1 | 统一数据导入器 | 4-5h | ⏳ |
-| Phase 2 | 前端管理页 `/cleaner` | 4-5h | ⏳ |
-| Phase 3 | 批量推理生产化 | 3-4h | ⏳ |
-
-#### P10 遗漏项
-- [ ] **P10-5 导出功能** - 支持导出 Markdown/HTML
-- [ ] **P10-7 风格管理** → 已合并至 P11-B
-- [ ] **P10-8 Web3 创作** → 已合并至 P11-5
 
 ### 📌 远期规划
 
@@ -300,27 +317,37 @@ api_key = os.getenv('ARK_API_KEY')  # 613f595c-xxxx
 
 ### 📋 待处理问题
 
-1. **LLM 时间感知错误**
+1. **🔴 Router 阈值不一致** (2026-01-31 发现)
+   - *Issue*: `graph.py` router_logic 阈值 < 90，但 Critic PASS 阈值 ≥ 85
+   - *现象*: 88分 PASS 后仍被打回重写
+   - *修复*: 将 `< 90` 改为 `< 85`
+   - *状态*: 待 P14 修复
+
+2. **🟡 Polisher 幻觉** (2026-01-31 发现)
+   - *Issue*: Polisher 自行添加未经证实的价格数据 (如 "BTC支撑位42000美元")
+   - *风险*: 可能误导用户
+   - *状态*: 待 P14 修复
+
+3. **🟡 短素材低质量** (2026-01-31 发现)
+   - *Issue*: 输入 < 100 字时，Writer 凑字数、评分低
+   - *建议*: 增加"锐评模式" (50-150 字输出)
+   - *状态*: 待 P14 实现
+
+4. **🟡 思维链详情不足**
+   - *Issue*: 右侧思维链只显示简单状态，无法看各版本差异
+   - *状态*: 待 P14 实现
+
+5. **🟡 前端无历史记录**
+   - *Issue*: 用户无法查看之前生成的内容
+   - *状态*: 待规划
+
+6. **LLM 时间感知错误**
    - *Issue*: 生成的文章中可能出现错误年份
    - *建议*: 在 Prompt 中注入当前日期
 
-2. **HeroInput 装饰性元素缺乏功能**
-   - *Issue*: "AI 增强" 和 "⌘ + Enter 发送" 标签是静态文本，无法点击
-   - *现状*: 键盘快捷键功能有效，但标签本身不可交互
-   - *建议*: 
-     - 方案A: 移除装饰性标签，简化界面
-     - 方案B: 将"AI 增强"改为可点击的功能入口（如打开高级AI设置面板）
-
-3. **浏览器子系统云端故障** � (已规避)
-   - *Issue*: Antigravity 浏览器工具 (browser_subagent) 持续报错 `ERR_CONNECTION_REFUSED`
-   - *根因*: 云端浏览器服务故障，非本地问题
-   - *规避方案*: 使用 Python 脚本 + `Invoke-RestMethod` 进行本地测试
-   - *详见*: [20260128_浏览器子系统故障报告.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/20260128_浏览器子系统故障报告.md)
-
-4. **Lark API 配额耗尽** 🟢 (已解决)
+7. **Lark API 配额耗尽** 🟢 (已解决)
    - *Issue*: 错误 `99991403: This month's API call quota has been exceeded`
    - *解决*: 实现 Google Sheets A/B 测试数据源作为备用
-   - *详见*: [20260129_Google_Sheets迁移方案.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/20260129_Google_Sheets迁移方案.md)
 
 ---
 
@@ -456,6 +483,7 @@ npm run dev
 
 | 日期 | 版本 | 阶段 | 关键结论 |
 |------|------|------|----------|
+| 2026-01-31 | v7.2 | P13 Complete | ✅ 前后端配置同步 9/11 完成，发现 3 个关键 Bug，P14 规划完成 |
 | 2026-01-29 | v7.1 | P10 Verified | 🔄 创作工作流重构 Phase 1-6 完成，Google Sheets A/B 测试集成 |
 | 2026-01-27 | v6.4 | Industrial | 🏭 工业级清洗验证：5窗口并行+CSV备份，半佛仙人2-6完成 |
 | 2026-01-21 | v6.2 | E2E Verified | 全链路打通，需补足"爆款"核心能力 |
@@ -463,4 +491,4 @@ npm run dev
 
 ---
 
-*Last updated: 2026-01-29 23:17*
+*Last updated: 2026-01-31 23:53*

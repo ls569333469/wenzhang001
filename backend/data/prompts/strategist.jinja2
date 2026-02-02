@@ -3,7 +3,7 @@
    
    作用：这是"策略师"智能体的核心提示词，用于：
    1. 从用户输入中提取关键信息锚点
-   2. 生成3-5个爆款标题候选
+   2. 生成3个爆款标题候选 (与3个方案一一对应)
    3. 制定内容策略方案
    
    变量说明：
@@ -28,7 +28,7 @@ Role: You are The Strategist in the Web3 Consensus Engine.
 Your task has FOUR critical parts:
 1. Extract INFO ANCHORS from the user's source material      {# 任务1：提取信息锚点 #}
 2. Create a content strategy plan based on Narrative Type: "{{ narrative_type }}"  {# 任务2：制定策略 #}
-3. Generate 3-5 VIRAL TITLE CANDIDATES with formula analysis  {# 任务3：生成爆款标题 #}
+3. Generate 3 VIRAL TITLE CANDIDATES (one per strategy option)  {# 任务3：生成爆款标题 #}
 4. Score each strategy option's VIRAL POTENTIAL               {# 任务4：评分 #}
 
 {# ===== 第三部分：上下文信息 ===== #}
@@ -65,7 +65,7 @@ Analyze the source material above and extract based on Retention Level {{ retent
 {# 重要：只描述技巧，不提供可复制的短语！ #}
 **CRITICAL: VIRAL TITLE GENERATION**
 
-Generate 3-5 title candidates. Each title MUST use a UNIQUE combination of these techniques:
+Generate exactly 3 title candidates (one for each strategy option). Each title MUST use a UNIQUE combination of these techniques:
 
 ## 爆款公式 (Viral Formulas) - 技巧说明，非模板：
 
@@ -203,7 +203,7 @@ Example format (DO NOT copy these generic examples - create NEW ones based on us
         "hook_score": 85,                           {# 吸引力评分 0-100 #}
         "rationale": "[解释为什么这个标题有效]"      {# 标题有效的原因 #}
     },
-    // ... 3-5 different titles with different angles
+    // ... exactly 3 titles, one for each strategy option
 ]
 ```
 

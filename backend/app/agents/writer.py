@@ -2,7 +2,8 @@ from datetime import datetime
 import json
 import json
 from ..core.llm import generate_text
-from ..core.prompts import render_prompt
+from ..core.prompts import render_prompt, render_modular_prompt, get_writer_template_path
+from ..core.mode_configs import get_mode_config  # P14
 
 # 各模式的风格模板 (P10: 仅保留有数据的风格)
 MODE_TEMPLATES = {
@@ -93,6 +94,8 @@ def writer_agent(state: dict) -> dict:
         if not samples and style != "mimeng":
             print(f">>> [Writer Debug] No samples for {style}, falling back to mimeng")
             samples = sample_service.get_samples(style="mimeng", emotion=emotion, count=3)
+            # P13: 添加 Fallback 提示 (通过 state 返回给前端)
+            state["_fallback_notice"] = f"⚠️ 未找到「{style}」样本，使用咪蒙体"
     except Exception as e:
         print(f">>> [Writer Debug] Error fetching samples: {e}")
         samples = []
@@ -155,7 +158,19 @@ def writer_agent(state: dict) -> dict:
         "retention_level": state.get("retention_level", 3)  # P10
     }
     print(">>> [Writer Debug] Rendering prompt")
-    system_prompt = render_prompt("writer", context)
+    
+    # P14: 使用模式专属模板 (带 fallback)
+    template_path = get_writer_template_path(mode)
+    if template_path.startswith("writer/"):
+        # 新的模块化模板
+        mode_config = get_mode_config(mode)
+        context["length"] = mode_config.get("length", length_constraints)
+        system_prompt = render_modular_prompt(template_path, context)
+        print(f">>> [Writer Debug] Using modular template: {template_path}")
+    else:
+        # Fallback 到旧模板
+        system_prompt = render_prompt("writer", context)
+        print(f">>> [Writer Debug] Using legacy template: writer.jinja2")
 
     # [P12] Inject Web3 Knowledge
     web3_knowledge = state.get("web3_knowledge", "")

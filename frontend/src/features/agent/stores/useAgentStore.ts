@@ -4,6 +4,8 @@ import { create } from 'zustand';
 import { API_BASE_URL } from '@/config/api';
 import { TimelineStep } from '../../studio/components/timeline/AgentTimeline';
 import { toast } from 'sonner';
+import { useAgentModelStore } from './useAgentModelStore';
+import { useModeWriterStore } from './useModeWriterStore';
 
 // --- Types ---
 
@@ -34,6 +36,28 @@ export function mapStatusToPhase(status: SessionStatus): StudioPhase {
             return 'reading'; // Show result even on error
         default:
             return 'idle';
+    }
+}
+
+// P13: 获取 API 配置 (从 localStorage)
+function getAPIConfig() {
+    if (typeof window === 'undefined') return undefined;
+    try {
+        const stored = localStorage.getItem('qs_api_config');
+        return stored ? JSON.parse(stored) : undefined;
+    } catch {
+        return undefined;
+    }
+}
+
+// P13: 获取 Agent 配置 (从 localStorage)
+function getAgentConfig() {
+    if (typeof window === 'undefined') return undefined;
+    try {
+        const stored = localStorage.getItem('qs_agent_config');
+        return stored ? JSON.parse(stored) : undefined;
+    } catch {
+        return undefined;
     }
 }
 
@@ -71,6 +95,14 @@ interface AgentState {
     // P10-1: Title AB Testing
     titleCandidates: TitleCandidate[];
     selectedTitle: string;
+    // P13: Critic 评分结果
+    critiqueResult: {
+        score: number;
+        verdict: string;
+        dimensions: Record<string, { score: number; reason: string }>;
+        penalties: Array<{ item: string; deduction: number; detail: string }>;
+        suggestions: string[];
+    } | null;
 
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
@@ -127,8 +159,106 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     // P10-1: Title AB Testing
     titleCandidates: [],
     selectedTitle: '',
+    // P13: Critic 评分结果
+    critiqueResult: null,
 
     startSession: async ({ input, config }) => {
+        // P14-B: Load Agent Models & Provider Keys
+        const agentModels = useAgentModelStore.getState().models;
+        let providerKeys: Record<string, string> = {};
+        try {
+            const storedKeys = localStorage.getItem('qs_provider_keys');
+            if (storedKeys) providerKeys = JSON.parse(storedKeys);
+        } catch (e) {
+            console.error("Failed to load provider keys", e);
+        }
+
+        const apiConfig = getAPIConfig(); // Legacy global
+
+        // Construct Agent Config Payload
+        const agentConfigPayload: Record<string, any> = {};
+        const roles = ['strategist', 'writer', 'critic', 'polisher'] as const;
+
+        roles.forEach(role => {
+            const modelConfig = agentModels[role];
+            if (modelConfig) {
+                let apiKey = providerKeys[modelConfig.provider];
+                if (!apiKey && apiConfig?.provider === modelConfig.provider) {
+                    apiKey = apiConfig.api_key;
+                }
+                agentConfigPayload[role] = {
+                    provider: modelConfig.provider,
+                    model_id: modelConfig.model,
+                    api_key: apiKey || ''
+                };
+            }
+        });
+
+        // P14: 检查是否为 hot_take 模式 - 使用独立流程
+        if (config.mode === 'hot_take') {
+            // Hot Take 模式: 直接调用 /hot_take，跳过策略师
+            set({
+                status: 'connecting',
+                error: null,
+                content: '',
+                steps: [{ id: 'step-hottake', agent: 'writer', label: '锐评生成', status: 'active', message: '正在生成锐评...' }],
+                strategyOptions: null,
+                analysisResult: null,
+                agentLogs: [],
+                isWaitingForSelection: false,
+                lastRequestPayload: { input, config, mode: 'hot_take' }
+            });
+
+            try {
+                const endpoint = `${API_BASE_URL}/hot_take`;
+
+                // P14-C: 使用模式专属 Writer 配置
+                const modeWriterConfig = useModeWriterStore.getState().getWriterForMode('hot_take');
+                const apiKey = providerKeys[modeWriterConfig.provider] || '';
+
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        input: input.trim(),
+                        api_config: {
+                            provider: modeWriterConfig.provider,
+                            model_id: modeWriterConfig.model,
+                            api_key: apiKey
+                        },
+                        agent_config: agentConfigPayload // P14-B
+                    }),
+                });
+
+                if (!response.ok) throw new Error(`Hot Take 生成失败: ${response.statusText}`);
+
+                const result = await response.json();
+
+                // 解析候选结果
+                const candidates = result.result?.candidates || [];
+
+                // P14-Fix: 直接显示所有锐评结果，不需要选择
+                const contentLines = candidates.map((c: any, i: number) =>
+                    `### 锐评 ${i + 1}\n\n${c.content || c.text || '(无内容)'}\n\n---`
+                ).join('\n\n');
+
+                set({
+                    status: 'completed',
+                    content: contentLines || '未能生成锐评内容',
+                    lastGeneratedContent: contentLines,
+                    isWaitingForSelection: false,
+                    steps: [{ id: 'step-hottake', agent: 'writer', label: '锐评生成', status: 'completed', message: `生成了 ${candidates.length} 条锐评` }]
+                });
+
+                toast.success(`锐评生成完成！共 ${candidates.length} 条`);
+
+            } catch (err: unknown) {
+                handleError(err, set, get);
+            }
+            return;
+        }
+
+        // 其他模式: 走完整策略师流程
         // 1. Reset State
         set({
             status: 'connecting',
@@ -154,14 +284,33 @@ export const useAgentStore = create<AgentState>((set, get) => ({
         try {
             // 2. Initiate Request to /analyze (Step 1)
             // Backend expects: { input, mode, style, length, narrative_type, references, api_config }
+
+            // P14-C: 使用模式专属 Writer 配置覆盖 agent_config.writer
+            const currentMode = config.mode || 'deep_analysis';
+            const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
+            const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
+
+            const finalAgentConfig = {
+                ...agentConfigPayload,
+                writer: {
+                    provider: modeWriterConfig.provider,
+                    model_id: modeWriterConfig.model,
+                    api_key: modeWriterApiKey
+                }
+            };
+
             const requestBody = {
                 input: finalInput,
-                mode: config.mode || 'deep_analysis',
+                mode: currentMode,
                 style: config.style || 'mimeng',
                 length: config.length || 'thread',  // P11: 默认 thread
+                retention_level: config.retention_level || 3,  // P13: 添加保留度
                 temperature: config.temperature || 0.7,
                 narrative_type: 'project_review',
                 references: [],
+                // P13: 添加 API 配置
+                api_config: getAPIConfig(),
+                agent_config: finalAgentConfig, // P14-C: 使用覆盖后的配置
             };
 
             // NOTE: Changing endpoint to /analyze
@@ -187,6 +336,23 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     },
 
     confirmStrategy: async (option: any) => {
+        // P14: hot_take 模式 - 直接使用选中的候选作为最终内容
+        const { lastRequestPayload } = get();
+        if (lastRequestPayload?.mode === 'hot_take') {
+            // 锐评模式: 选中即完成，不需要再调用 /generate
+            set({
+                isWaitingForSelection: false,
+                status: 'completed',
+                content: option.angle || option.content || '',  // 候选内容
+                steps: [{ id: 'step-hottake', agent: 'writer', label: '锐评生成', status: 'completed', message: '已选择候选' }],
+                lastGeneratedContent: option.angle || option.content || '',
+                lastSelectedOption: option
+            });
+            toast.success('锐评已选择！');
+            return;
+        }
+
+        // 其他模式: 走完整 /generate 流程
         // Step 2: User selected an option, now call /generate
         set({ isWaitingForSelection: false, status: 'writing' });
 
@@ -209,16 +375,57 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             const finalInput = injectPrompts(lastRequestPayload.input || '');
 
             // Backend expects: { input, mode, style, length, retention_level, narrative_type, references, selected_option, info_anchors }
+            // P14-B: Reload agent config for generate phase
+            const agentModels = useAgentModelStore.getState().models;
+            let providerKeys: Record<string, string> = {};
+            try {
+                const storedKeys = localStorage.getItem('qs_provider_keys');
+                if (storedKeys) providerKeys = JSON.parse(storedKeys);
+            } catch (e) {
+                console.error("Failed to load provider keys", e);
+            }
+
+            const agentConfigPayload: Record<string, any> = {};
+            const roles = ['strategist', 'writer', 'critic', 'polisher'] as const;
+            roles.forEach(role => {
+                const modelConfig = agentModels[role];
+                if (modelConfig) {
+                    const apiKey = providerKeys[modelConfig.provider] || '';
+                    agentConfigPayload[role] = {
+                        provider: modelConfig.provider,
+                        model_id: modelConfig.model,
+                        api_key: apiKey
+                    };
+                }
+            });
+
+            // P14-C: 使用模式专属 Writer 配置覆盖
+            const currentMode = lastRequestPayload.config?.mode || lastRequestPayload.mode || 'deep_analysis';
+            const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
+            const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
+
+            const finalAgentConfig = {
+                ...agentConfigPayload,
+                writer: {
+                    provider: modeWriterConfig.provider,
+                    model_id: modeWriterConfig.model,
+                    api_key: modeWriterApiKey
+                }
+            };
+
             const requestBody = {
                 input: finalInput,
-                mode: lastRequestPayload.config?.mode || lastRequestPayload.mode || 'deep_analysis',
+                mode: currentMode,
                 style: lastRequestPayload.config?.style || 'mimeng',
                 length: lastRequestPayload.config?.length || 'thread',  // P11
                 retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
                 selected_option: option,
-                info_anchors: analysisResult?.info_anchors
+                info_anchors: analysisResult?.info_anchors,
+                // P14-C: Include Mode Writer override
+                api_config: getAPIConfig(),
+                agent_config: finalAgentConfig
             };
 
             const response = await fetch(`${API_BASE_URL}/generate`, {
@@ -264,13 +471,57 @@ export const useAgentStore = create<AgentState>((set, get) => ({
         try {
             const finalInput = injectPrompts(lastRequestPayload.input || '');
 
+            // P14-B: Reload agent config for regenerate
+            const agentModels = useAgentModelStore.getState().models;
+            let providerKeys: Record<string, string> = {};
+            try {
+                const storedKeys = localStorage.getItem('qs_provider_keys');
+                if (storedKeys) providerKeys = JSON.parse(storedKeys);
+            } catch (e) {
+                console.error("Failed to load provider keys", e);
+            }
+
+            const agentConfigPayload: Record<string, any> = {};
+            const roles = ['strategist', 'writer', 'critic', 'polisher'] as const;
+            roles.forEach(role => {
+                const modelConfig = agentModels[role];
+                if (modelConfig) {
+                    const apiKey = providerKeys[modelConfig.provider] || '';
+                    agentConfigPayload[role] = {
+                        provider: modelConfig.provider,
+                        model_id: modelConfig.model,
+                        api_key: apiKey
+                    };
+                }
+            });
+
+            // P14-C: 使用模式专属 Writer 配置覆盖
+            const currentMode = lastRequestPayload.mode || lastRequestPayload.config?.mode || 'deep_analysis';
+            const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
+            const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
+
+            const finalAgentConfig = {
+                ...agentConfigPayload,
+                writer: {
+                    provider: modeWriterConfig.provider,
+                    model_id: modeWriterConfig.model,
+                    api_key: modeWriterApiKey
+                }
+            };
+
             const requestBody = {
                 input: finalInput,
-                mode: lastRequestPayload.mode || 'deep_analysis',
+                mode: currentMode,
+                style: lastRequestPayload.config?.style || 'mimeng',
+                length: lastRequestPayload.config?.length || 'thread',
+                retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
                 selected_option: lastSelectedOption,
-                info_anchors: analysisResult?.info_anchors
+                info_anchors: analysisResult?.info_anchors,
+                // P14-C: Include Mode Writer override
+                api_config: getAPIConfig(),
+                agent_config: finalAgentConfig
             };
 
             const response = await fetch(`${API_BASE_URL}/generate`, {
@@ -469,12 +720,32 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
             }
             break;
         }
+        case 'critique_update': {
+            // P13: 处理 Critic 评分详情
+            set({
+                critiqueResult: {
+                    score: event.score,
+                    verdict: event.verdict,
+                    dimensions: event.dimensions,
+                    penalties: event.penalties,
+                    suggestions: event.suggestions
+                }
+            });
+            console.log('[P13] Critique update received:', event.score, event.verdict);
+            break;
+        }
     }
 }
 
 // Types needed for compilation (re-declare or import if missing)
 interface BackendEvent {
-    type: 'thinking_step' | 'agent_update' | 'final_result' | 'error' | 'end' | 'analysis_result';
+    type: 'thinking_step' | 'agent_update' | 'final_result' | 'error' | 'end' | 'analysis_result' | 'critique_update';
+    // P13: critique_update 字段
+    score?: number;
+    verdict?: string;
+    dimensions?: Record<string, { score: number; reason: string }>;
+    penalties?: Array<{ item: string; deduction: number; detail: string }>;
+    suggestions?: string[];
     agent?: string;
     step?: string;
     status?: string;

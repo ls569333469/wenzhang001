@@ -14,13 +14,24 @@ interface AgentConfig {
     description: string;
 }
 
-const AGENTS: AgentConfig[] = [
+import { useAgentModelStore } from '@/features/agent/stores/useAgentModelStore';
+import { AgentModels } from '@/features/studio/schema';
+
+interface AgentMetadata {
+    id: keyof AgentModels;
+    name: string;
+    role: string;
+    icon: React.ReactNode;
+    status: 'active' | 'idle';
+    description: string;
+}
+
+const AGENT_METADATA: AgentMetadata[] = [
     {
         id: 'strategist',
         name: '策略师',
         role: 'Strategist',
         icon: <Brain className="w-5 h-5" />,
-        model: 'DeepSeek V3',
         status: 'active',
         description: '分析素材，提取关键信息，制定创作策略和角度建议。'
     },
@@ -29,7 +40,6 @@ const AGENTS: AgentConfig[] = [
         name: '写手',
         role: 'Writer',
         icon: <Pen className="w-5 h-5" />,
-        model: 'DeepSeek V3',
         status: 'active',
         description: '根据选定的策略和风格，撰写初稿内容。'
     },
@@ -38,7 +48,6 @@ const AGENTS: AgentConfig[] = [
         name: '评论家',
         role: 'Critic',
         icon: <Eye className="w-5 h-5" />,
-        model: 'DeepSeek V3',
         status: 'active',
         description: '审核初稿质量，提出修改建议，确保内容符合要求。'
     },
@@ -47,28 +56,28 @@ const AGENTS: AgentConfig[] = [
         name: '润色师',
         role: 'Polisher',
         icon: <Sparkles className="w-5 h-5" />,
-        model: 'DeepSeek V3',
         status: 'idle',
         description: '对终稿进行语言润色，优化表达和可读性。'
     }
 ];
 
 export default function AgentsPage() {
-    const [agents, setAgents] = useState<AgentConfig[]>(AGENTS);
-    const [currentModel, setCurrentModel] = useState<string>('');
+    // P14-B: Use global agent model store
+    const { models } = useAgentModelStore();
+    const [agents, setAgents] = useState<any[]>([]);
 
     useEffect(() => {
-        // Load model from localStorage
-        const storedModel = localStorage.getItem('qs_model');
-        if (storedModel) {
-            setCurrentModel(storedModel);
-            // Update all agents with the stored model
-            setAgents(prev => prev.map(agent => ({
-                ...agent,
-                model: storedModel === 'deepseek-chat' ? 'DeepSeek V3' : storedModel
-            })));
-        }
-    }, []);
+        // Hydrate UI with store data
+        const hydratedAgents = AGENT_METADATA.map(meta => {
+            const config = models[meta.id];
+            return {
+                ...meta,
+                // Display format: "Provider: Model"
+                model: `${config.provider.toUpperCase()} (${config.model || 'Default'})`
+            };
+        });
+        setAgents(hydratedAgents);
+    }, [models]);
 
     return (
         <div className="min-h-screen bg-paper">
@@ -104,8 +113,8 @@ export default function AgentsPage() {
                             <div className="flex items-start justify-between mb-4">
                                 <div className="flex items-center gap-3">
                                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${agent.status === 'active'
-                                            ? 'bg-emerald-50 text-emerald-600'
-                                            : 'bg-zinc-50 text-zinc-400'
+                                        ? 'bg-emerald-50 text-emerald-600'
+                                        : 'bg-zinc-50 text-zinc-400'
                                         }`}>
                                         {agent.icon}
                                     </div>
@@ -117,8 +126,8 @@ export default function AgentsPage() {
                                     </div>
                                 </div>
                                 <span className={`px-2 py-1 rounded-full text-[10px] font-semibold uppercase ${agent.status === 'active'
-                                        ? 'bg-emerald-100 text-emerald-700'
-                                        : 'bg-zinc-100 text-zinc-500'
+                                    ? 'bg-emerald-100 text-emerald-700'
+                                    : 'bg-zinc-100 text-zinc-500'
                                     }`}>
                                     {agent.status === 'active' ? '活跃' : '待命'}
                                 </span>

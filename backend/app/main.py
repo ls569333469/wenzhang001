@@ -10,6 +10,7 @@ import asyncio
 from fastapi.responses import StreamingResponse
 import json
 from .core.config import ensure_config_dir, load_config, save_config
+from .core.mode_configs import get_mode_config, MODE_CONFIGS  # P14: 模式配置
 from .core.lark_client import lark_client
 from .api.cleaner import router as cleaner_router
 import os
@@ -275,6 +276,74 @@ async def generate_narrative(request: GenerateRequest):
             yield f"data: {json.dumps(error_data)}\n\n"
 
     return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+# ============================================
+# P14: Hot Take 独立 API (锐评模式)
+# ============================================
+class HotTakeRequest(BaseModel):
+    input: str
+    api_config: APIConfig = APIConfig()
+
+@app.post("/hot_take")
+async def generate_hot_take(request: HotTakeRequest):
+    """
+    P14: 锐评模式独立API - 不走LangGraph，直接生成3条候选
+    """
+    from .core.llm import generate_text  # 修复: 使用正确的函数名
+    from datetime import datetime
+    from jinja2 import Environment, FileSystemLoader
+    
+    try:
+        # 获取模式配置
+        config = get_mode_config("hot_take")
+        
+        # 加载 hot_take.jinja2 模板
+        prompts_dir = Path(__file__).parent.parent / "data" / "prompts" / "writer"
+        env = Environment(loader=FileSystemLoader(str(prompts_dir)))
+        template = env.get_template("hot_take.jinja2")
+        
+        # 渲染模板
+        system_prompt = template.render(
+            current_time_str=datetime.now().strftime("%Y-%m-%d %H:%M"),
+            raw_input=request.input
+        )
+        
+        # 调用 LLM (使用 generate_text)
+        response = generate_text(
+            prompt="请根据系统提示生成锐评候选，输出JSON格式。",
+            api_key=request.api_config.api_key or None,
+            model_id=request.api_config.model_id or None,
+            provider=request.api_config.provider,
+            temperature=0.8,
+            system_prompt=system_prompt
+        )
+        
+        # 解析 JSON 响应
+        try:
+            # 尝试提取 JSON
+            import re
+            json_match = re.search(r'\{[\s\S]*\}', response)
+            if json_match:
+                result = json.loads(json_match.group())
+            else:
+                result = {"candidates": [{"id": 1, "content": response, "word_count": len(response)}]}
+        except json.JSONDecodeError:
+            result = {"candidates": [{"id": 1, "content": response, "word_count": len(response)}]}
+        
+        return {
+            "status": "success",
+            "mode": "hot_take",
+            "config": {
+                "length": config["length"],
+                "output_count": config["output_count"]
+            },
+            "result": result
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Hot Take 生成失败: {str(e)}")
+
 
 @app.get("/health")
 async def health_check():
