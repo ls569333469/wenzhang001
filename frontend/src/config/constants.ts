@@ -9,14 +9,14 @@ export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; c
         desc: 'P14: 极简短评，3条候选，50-150字'
     },
     {
-        id: 'deep_analysis',
-        title: '深度分析',
-        desc: '全面深度分析，长文结构，多角度论证'
+        id: 'mid_article',
+        title: '中篇',
+        desc: '快速产出，要点突出，适合热点追踪'
     },
     {
-        id: 'quick_summary',
-        title: '快讯速评',
-        desc: '快速产出，要点突出，适合热点追踪'
+        id: 'long_article',
+        title: '长篇',
+        desc: '全面深度分析，长文结构，多角度论证'
     },
     {
         id: 'rewrite',

@@ -12,9 +12,9 @@ describe('Studio Schema', () => {
         it('should have correct default values', () => {
             const result = CreationConfigSchema.parse({});
 
-            expect(result.mode).toBe('deep_analysis');
+            expect(result.mode).toBe('mid_article');  // P16: 默认中篇
             expect(result.style).toBe('professional');
-            expect(result.length).toBe('medium');
+            expect(result.length).toBe('thread');  // P11: 默认 thread
             expect(result.temperature).toBe(0.7);
             expect(result.topP).toBe(0.9);
             expect(result.maxTokens).toBe(4096);
@@ -23,13 +23,19 @@ describe('Studio Schema', () => {
 
     describe('CreationModeSchema', () => {
         it('should accept valid modes', () => {
-            expect(() => CreationModeSchema.parse('deep_analysis')).not.toThrow();
-            expect(() => CreationModeSchema.parse('quick_summary')).not.toThrow();
+            // P16: 新模式名
+            expect(() => CreationModeSchema.parse('hot_take')).not.toThrow();
+            expect(() => CreationModeSchema.parse('mid_article')).not.toThrow();
+            expect(() => CreationModeSchema.parse('long_article')).not.toThrow();
             expect(() => CreationModeSchema.parse('rewrite')).not.toThrow();
+            expect(() => CreationModeSchema.parse('tutorial')).not.toThrow();
         });
 
         it('should reject invalid modes', () => {
             expect(() => CreationModeSchema.parse('invalid')).toThrow();
+            // P16: 旧模式名不再在 schema 中有效 (通过别名处理)
+            expect(() => CreationModeSchema.parse('deep_analysis')).toThrow();
+            expect(() => CreationModeSchema.parse('quick_summary')).toThrow();
         });
     });
 
@@ -55,7 +61,7 @@ describe('Studio Schema', () => {
         it('should validate request with optional fields', () => {
             const validRequest = {
                 prompt: 'Test input',
-                config: { mode: 'deep_analysis', style: 'mimeng' },
+                config: { mode: 'mid_article', style: 'mimeng' },  // P16: 使用新模式名
                 selected_option: {
                     id: 'opt-1',
                     title: 'Test Title',

@@ -42,7 +42,7 @@ export const useModeWriterStore = create<ModeWriterStore>()(
 
             getWriterForMode: (mode: string) => {
                 const state = get();
-                // 处理别名: mid_take → quick_summary
+                // P16: 处理别名 (quick_summary→mid_article, deep_analysis→long_article)
                 const effectiveMode = MODE_ALIASES[mode] || mode;
 
                 // 如果模式存在于配置中，返回配置

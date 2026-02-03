@@ -3,43 +3,30 @@ import json
 import logging
 from ..core.llm import generate_text
 from ..core.prompts import render_prompt
-from ..graph import calculate_length
+# P16: 移除旧的 calculate_length，改用 mode_configs
 from ..core.mode_configs import get_mode_config  # P14
 
 logger = logging.getLogger(__name__)
 
 def critic_agent(draft: str, mode: str, api_config: dict = None, 
-                 length: str = "thread", style: str = "auto") -> dict:
+                 length: str = "thread", style: str = "auto", custom_prompts: dict = None) -> dict:
     """
-    P12: Critic Agent - 5维度评分系统
-    
-    Reviews the draft using 5-dimension scoring:
-    1. 语义保真度/专业准确 (35%)
-    2. 信息价值&深度 (25%)
-    3. 逻辑连贯性&结构完整 (15%)
-    4. 语言流畅度&调性一致 (15%)
-    5. 原创表观度/去AI痕迹 (10%)
-    
-    Returns:
-        dict: {
-            "score": int (0-100),
-            "verdict": str (PASS/REFINE/REWRITE),
-            "dimensions": dict,
-            "penalties": list,
-            "suggestions": list,
-            "cot_analysis": str
-        }
+    P12: Critic Agent - 5维度评分系统 (P15: Support Custom Prompts)
     """
     if api_config is None:
         api_config = {}
+    if custom_prompts is None:
+        custom_prompts = {}
     
     provider = api_config.get("provider", "volcengine")
     api_key = api_config.get("api_key") or None
     model_id = api_config.get("model_id") or None
     
-    # 计算字数约束和当前字数
-    length_constraints = calculate_length(length)
+    # P16: 使用 mode_configs 字数配置 (统一来源)
+    mode_config = get_mode_config(mode)
+    length_constraints = mode_config.get("length", {"min": 400, "max": 800, "target": 500})
     word_count = len(draft)
+    print(f">>> [Critic Debug] Using mode_config length: {length_constraints}")
     
     context = {
         "current_time_str": datetime.now().isoformat(),
@@ -48,9 +35,20 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
         "length_constraints": length_constraints,
         "style": style,
         "word_count": word_count,
-        "draft": draft  # P12: 直接在 context 中传递 draft
+        "draft": draft
     }
-    system_prompt = render_prompt("critic", context)
+    
+    # P15: Custom Prompt Support
+    if custom_prompts.get("critic"):
+        from jinja2 import Environment
+        env = Environment()
+        # Custom prompt expects {{ raw_input }} which corresponds to draft here
+        system_prompt = env.from_string(custom_prompts["critic"]).render(
+            **context,
+            raw_input=draft
+        )
+    else:
+        system_prompt = render_prompt("critic", context)
 
     user_prompt = """请严格按照系统提示中的评审流程和输出格式进行评分，输出纯JSON。"""
     
@@ -93,7 +91,7 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
         return _fallback_result(f"评审错误: {str(e)}")
 
 
-def _calculate_verdict(score: int, mode: str = "deep_analysis") -> str:
+def _calculate_verdict(score: int, mode: str = "mid_article") -> str:  # P16
     """根据分数和模式计算 verdict (P14: 使用 mode_configs 阈值)"""
     config = get_mode_config(mode)
     scoring = config.get("scoring", {})

@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { DEFAULT_PROMPTS as DEFAULTS } from '@/config/constants';
 import { API_BASE_URL } from '@/config/api';
 import { PromptEditor } from '@/components/PromptEditor';
+import { PromptManager } from '@/features/settings/components/PromptManager';
 import { AgentModelConfig } from '@/features/settings/AgentModelConfig';
 
 export default function SettingsPage() {
@@ -20,12 +21,7 @@ export default function SettingsPage() {
   // P14-B: Provider Keys and Agent Config
   const [providerKeys, setProviderKeys] = useState<Record<string, string>>({});
 
-  // Phase 6: Prompt State
-  const [prompts, setPrompts] = useState({
-    strategist: DEFAULTS.strategist,
-    writer: DEFAULTS.writer,
-    critic: DEFAULTS.critic
-  });
+
 
   // Phase 12: Feature Flags
   const [useKnowledgeRepo, setUseKnowledgeRepo] = useState(false);
@@ -72,27 +68,7 @@ export default function SettingsPage() {
         console.error('Failed to parse provider keys', e);
       }
 
-      try {
-        const promptRes = await fetch(`${API_BASE_URL}/config/prompts`);
-        if (promptRes.ok) {
-          const promptData = await promptRes.json();
-          setPrompts({
-            strategist: promptData.strategist || DEFAULTS.strategist,
-            writer: promptData.writer || DEFAULTS.writer,
-            critic: promptData.critic || DEFAULTS.critic
-          });
-        }
-      } catch {
-        // Fallback to localStorage
-        const pStrat = localStorage.getItem('qs_prompt_strategist');
-        const pWriter = localStorage.getItem('qs_prompt_writer');
-        const pCritic = localStorage.getItem('qs_prompt_critic');
-        setPrompts({
-          strategist: pStrat || DEFAULTS.strategist,
-          writer: pWriter || DEFAULTS.writer,
-          critic: pCritic || DEFAULTS.critic
-        });
-      }
+
 
       // 4. Load Feature Flags
       try {
@@ -133,9 +109,7 @@ export default function SettingsPage() {
       localStorage.setItem('qs_api_key', apiKey);
       localStorage.setItem('qs_model', model);
       localStorage.setItem('qs_base_url', baseUrl);
-      localStorage.setItem('qs_prompt_strategist', prompts.strategist);
-      localStorage.setItem('qs_prompt_writer', prompts.writer);
-      localStorage.setItem('qs_prompt_critic', prompts.critic);
+
 
       // P14-B: Save Provider Keys
       localStorage.setItem('qs_provider_keys', JSON.stringify(providerKeys));
@@ -151,19 +125,7 @@ export default function SettingsPage() {
         })
       });
 
-      // 3. Sync prompts to backend
-      const promptAgents = ['strategist', 'writer', 'critic'] as const;
-      const promptValues = [prompts.strategist, prompts.writer, prompts.critic];
 
-      await Promise.all(
-        promptAgents.map((agent, i) =>
-          fetch(`${API_BASE_URL}/config/prompts/${agent}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ content: promptValues[i] })
-          }).catch(() => { }) // Ignore individual failures
-        )
-      );
 
       // 4. Sync feature flags to backend
       await fetch(`${API_BASE_URL}/config/feature-flags`, {
@@ -307,46 +269,19 @@ export default function SettingsPage() {
           </div>
         </section>
 
-        {/* Prompt Configuration (P10-6 Enhanced) */}
+        {/* P15: Full Agent Prompt Editor */}
         <section className="bg-white rounded-2xl shadow-island border border-zinc-100 p-6 space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-semibold text-ink-primary flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-purple-500" />
-              智能体提示词配置
+              智能体提示词配置 (P15)
             </h3>
             <span className="text-[10px] text-zinc-400 bg-zinc-100 px-2 py-0.5 rounded-full">
-              P10-6 Enhanced
+              New
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-8">
-            {/* Strategist Prompt */}
-            <PromptEditor
-              label="策略师 (分析阶段)"
-              agent="strategist"
-              value={prompts.strategist}
-              onChange={(v) => setPrompts({ ...prompts, strategist: v })}
-              defaultValue={DEFAULTS.strategist}
-            />
-
-            {/* Writer Prompt */}
-            <PromptEditor
-              label="写手 (撰写阶段)"
-              agent="writer"
-              value={prompts.writer}
-              onChange={(v) => setPrompts({ ...prompts, writer: v })}
-              defaultValue={DEFAULTS.writer}
-            />
-
-            {/* Critic Prompt */}
-            <PromptEditor
-              label="评论家 (审核阶段)"
-              agent="critic"
-              value={prompts.critic}
-              onChange={(v) => setPrompts({ ...prompts, critic: v })}
-              defaultValue={DEFAULTS.critic}
-            />
-          </div>
+          <PromptManager />
         </section>
 
         {/* Data Ingest Configuration (P14) */}

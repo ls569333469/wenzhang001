@@ -10,8 +10,9 @@ import { ALL_STYLES } from '@/lib/styles';
 import {
     CreationModeSchema,
     WritingStyleSchema,
-    ArticleLengthSchema,
-    defaultConfig
+    LengthTypeSchema,
+    defaultConfig,
+    type LengthType
 } from '@/features/studio/schema';
 
 /**
@@ -37,10 +38,12 @@ export function HeroInput() {
         defaultValue: defaultConfig.style,
         parse: (v) => WritingStyleSchema.safeParse(v).success ? v : defaultConfig.style
     });
-    const [length] = useQueryState('length', {
-        defaultValue: defaultConfig.length,
-        parse: (v) => ArticleLengthSchema.safeParse(v).success ? v : defaultConfig.length
+    // P16: New length type system
+    const [lengthType] = useQueryState('lengthType', {
+        defaultValue: 'auto' as LengthType,
+        parse: (v) => LengthTypeSchema.safeParse(v).success ? v as LengthType : 'auto'
     });
+    const [customLength] = useQueryState('customLength', parseAsFloat.withDefault(0));
     const [temp] = useQueryState('temp', parseAsFloat.withDefault(defaultConfig.temperature));
     const [topP] = useQueryState('topP', parseAsFloat.withDefault(0.9));
     const [maxTokens] = useQueryState('maxTokens', parseAsFloat.withDefault(4096));
@@ -67,12 +70,14 @@ export function HeroInput() {
     const handleStart = () => {
         if (!input.trim()) return;
 
+        // P16: Use new length_type and custom_length fields
         startSession({
             input: input.trim(),
             config: {
                 mode,
                 style,
-                length,
+                length_type: lengthType,
+                custom_length: lengthType === 'custom' && customLength > 0 ? customLength : undefined,
                 temperature: temp,
                 knowledgeSources: knowledgeIds,
                 topP,

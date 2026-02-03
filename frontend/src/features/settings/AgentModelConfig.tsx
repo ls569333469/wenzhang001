@@ -21,8 +21,8 @@ const PROVIDER_MODELS = {
 // P14-C: 模式定义
 const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: React.ReactNode; recommended: string }[] = [
     { id: 'hot_take', name: '锐评', icon: <Zap className="w-4 h-4" />, recommended: '豆包 Seed' },
-    { id: 'deep_analysis', name: '深度分析', icon: <BookOpen className="w-4 h-4" />, recommended: 'DeepSeek' },
-    { id: 'quick_summary', name: '快讯速评', icon: <FileText className="w-4 h-4" />, recommended: 'DeepSeek' },
+    { id: 'mid_article', name: '中篇', icon: <FileText className="w-4 h-4" />, recommended: 'DeepSeek' },
+    { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" />, recommended: 'DeepSeek' },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" />, recommended: 'DeepSeek' },
     { id: 'rewrite', name: '改写润色', icon: <RefreshCcw className="w-4 h-4" />, recommended: '豆包 Seed' },
 ];

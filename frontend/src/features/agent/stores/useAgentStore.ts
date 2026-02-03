@@ -6,6 +6,7 @@ import { TimelineStep } from '../../studio/components/timeline/AgentTimeline';
 import { toast } from 'sonner';
 import { useAgentModelStore } from './useAgentModelStore';
 import { useModeWriterStore } from './useModeWriterStore';
+import { usePromptStore } from '../../settings/stores/usePromptStore';
 
 // --- Types ---
 
@@ -216,6 +217,13 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 const modeWriterConfig = useModeWriterStore.getState().getWriterForMode('hot_take');
                 const apiKey = providerKeys[modeWriterConfig.provider] || '';
 
+                // P15: Custom Prompts
+                const { customPrompts, getAssembledPrompt } = usePromptStore.getState();
+                const customPromptsPayload: any = {};
+                if (customPrompts.enabled) {
+                    customPromptsPayload.writer = getAssembledPrompt('writer', 'hot_take');
+                }
+
                 const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -226,9 +234,11 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                             model_id: modeWriterConfig.model,
                             api_key: apiKey
                         },
-                        agent_config: agentConfigPayload // P14-B
+                        agent_config: agentConfigPayload, // P14-B
+                        custom_prompts: customPrompts.enabled ? customPromptsPayload : undefined // P15
                     }),
                 });
+
 
                 if (!response.ok) throw new Error(`Hot Take 生成失败: ${response.statusText}`);
 
@@ -269,7 +279,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             analysisResult: null,
             agentLogs: [],
             isWaitingForSelection: false,
-            lastRequestPayload: { input, config, mode: config.mode || 'deep_analysis' } as { input: string; config: Partial<CreationConfig>; mode?: string }
+            lastRequestPayload: { input, config, mode: config.mode || 'mid_article' } as { input: string; config: Partial<CreationConfig>; mode?: string }
         });
 
         // Activate Strategist
@@ -286,7 +296,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             // Backend expects: { input, mode, style, length, narrative_type, references, api_config }
 
             // P14-C: 使用模式专属 Writer 配置覆盖 agent_config.writer
-            const currentMode = config.mode || 'deep_analysis';
+            const currentMode = config.mode || 'mid_article';
             const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
             const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
 
@@ -400,7 +410,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             });
 
             // P14-C: 使用模式专属 Writer 配置覆盖
-            const currentMode = lastRequestPayload.config?.mode || lastRequestPayload.mode || 'deep_analysis';
+            const currentMode = lastRequestPayload.config?.mode || lastRequestPayload.mode || 'mid_article';
             const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
             const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
 
@@ -428,11 +438,23 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 agent_config: finalAgentConfig
             };
 
+            // P15: Custom Prompts (Writer/Critic/Polisher)
+            const { customPrompts, getAssembledPrompt } = usePromptStore.getState();
+            const customPromptsPayload: any = {};
+            if (customPrompts.enabled) {
+                // Cast currentMode to valid key or fallback
+                // Note: mode strings match keys in WriterPrompts
+                customPromptsPayload.writer = getAssembledPrompt('writer', currentMode as any);
+                customPromptsPayload.critic = getAssembledPrompt('critic');
+                customPromptsPayload.polisher = getAssembledPrompt('polisher');
+            }
+
             const response = await fetch(`${API_BASE_URL}/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody),
+                body: JSON.stringify({ ...requestBody, custom_prompts: customPrompts.enabled ? customPromptsPayload : undefined }),
             });
+
 
             if (!response.ok) throw new Error(`Failed to generate: ${response.statusText}`);
             if (!response.body) throw new Error('No response body received');
@@ -496,7 +518,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             });
 
             // P14-C: 使用模式专属 Writer 配置覆盖
-            const currentMode = lastRequestPayload.mode || lastRequestPayload.config?.mode || 'deep_analysis';
+            const currentMode = lastRequestPayload.mode || lastRequestPayload.config?.mode || 'mid_article';
             const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
             const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
 

@@ -78,18 +78,27 @@ class APIConfig(BaseModel):
     model_id: str = ""
     provider: str = "volcengine"
 
+class CustomPrompts(BaseModel):
+    writer: Optional[str] = None
+    strategist: Optional[str] = None
+    critic: Optional[str] = None
+    polisher: Optional[str] = None
+
 class GenerateRequest(BaseModel):
     input: str
-    mode: str = "deep_analysis"  # P11: 创作模式 (deep_analysis, quick_summary, tutorial, rewrite)
+    mode: str = "mid_article"  # P16: 创作模式 (hot_take, mid_article, long_article, tutorial, rewrite)
     style: str = "auto"  # P10: 写作风格 (auto, mimeng, banfo, xinshixiang, insider)
-    length: str = "thread"  # P11: 篇幅长度 (tweet, thread, post)
+    length: str = "thread"  # @deprecated P11: 旧篇幅长度 (tweet, thread, post)
+    length_type: str = "auto"  # P16: 篇幅类型 (auto=用模式默认, custom=自定义字数)
+    custom_length: Optional[int] = None  # P16: 自定义字数 (50-5000)
     retention_level: int = 3  # P10: 保留度等级 1-5 (1=95%保留, 5=10%保留)
     narrative_type: str = "project_review"
     references: List[str] = [] 
     selected_option: Optional[Dict[str, Any]] = None # P4: 用户选择的选题方案
     info_anchors: Optional[Any] = None # P4: Global context from analysis (List or Dict)
     api_config: APIConfig = APIConfig()
-    agent_config: Optional[Dict[str, APIConfig]] = None 
+    agent_config: Optional[Dict[str, APIConfig]] = None
+    custom_prompts: Optional[CustomPrompts] = None  # P15: 自定义提示词 
 
 @app.post("/analyze")
 async def analyze_narrative(request: GenerateRequest):
@@ -108,11 +117,13 @@ async def analyze_narrative(request: GenerateRequest):
                 "mode": request.mode,
                 "style": request.style,  # P10
                 "length": request.length,  # P10
+                "custom_length": request.custom_length or 0,  # P16: 自定义字数
                 "retention_level": request.retention_level,  # P10
                 "narrative_type": request.narrative_type,
                 "references": request.references,
                 "api_config": request.api_config.dict(),
                 "agent_config": agent_config_dict,
+                "custom_prompts": request.custom_prompts.dict() if request.custom_prompts else {},  # P15
             }
             
             # --- Step 1: Context & Style Loading ---
@@ -177,15 +188,14 @@ async def generate_narrative(request: GenerateRequest):
         if request.agent_config:
             agent_config_dict = {k: v.dict() for k, v in request.agent_config.items()}
 
-        # P10.A: 强制执行 mode → length 约束
-        from .graph import enforce_mode_length
-        enforced_length = enforce_mode_length(request.mode, request.length)
+        # P16.1: 移除旧的 enforce_mode_length，字数约束现在由 mode_configs 在 Writer/Critic 中处理
         
         inputs = {
             "raw_input": request.input, 
             "mode": request.mode,
             "style": request.style,  # P10
-            "length": enforced_length,  # P10.A: 使用强制约束后的 length
+            "length": request.length,  # P16.1: 仅用于兼容，实际字数由 mode_configs 控制
+            "custom_length": request.custom_length or 0,  # P16: 自定义字数
             "retention_level": request.retention_level,  # P10
             "narrative_type": request.narrative_type,
             "references": request.references,
@@ -193,6 +203,7 @@ async def generate_narrative(request: GenerateRequest):
             "info_anchors": request.info_anchors, # Pass global context
             "api_config": request.api_config.dict(),
             "agent_config": agent_config_dict,
+            "custom_prompts": request.custom_prompts.dict() if request.custom_prompts else {},  # P15
             "revision_count": 0,
             "thinking_steps": []
         }
@@ -284,6 +295,7 @@ async def generate_narrative(request: GenerateRequest):
 class HotTakeRequest(BaseModel):
     input: str
     api_config: APIConfig = APIConfig()
+    custom_prompts: Optional[CustomPrompts] = None
 
 @app.post("/hot_take")
 async def generate_hot_take(request: HotTakeRequest):
@@ -301,7 +313,13 @@ async def generate_hot_take(request: HotTakeRequest):
         # 加载 hot_take.jinja2 模板
         prompts_dir = Path(__file__).parent.parent / "data" / "prompts" / "writer"
         env = Environment(loader=FileSystemLoader(str(prompts_dir)))
-        template = env.get_template("hot_take.jinja2")
+        
+        if request.custom_prompts and request.custom_prompts.writer:
+            # P15: 使用自定义提示词
+            template = env.from_string(request.custom_prompts.writer)
+        else:
+            # 使用默认文件模板
+            template = env.get_template("hot_take.jinja2")
         
         # 渲染模板
         system_prompt = template.render(

@@ -194,11 +194,32 @@ def _generate_text_impl(
         **timeout_config
     }
     
+    # P16.1: 调试输出 max_tokens
+    print(f"[LLM DEBUG] max_tokens={max_tokens} passed to API")
+    
     if extra_body and provider == "volcengine":
         request_params["extra_body"] = extra_body
     
     response = client.chat.completions.create(**request_params)
-    return response.choices[0].message.content
+    result = response.choices[0].message.content
+    
+    # P16.1: 硬性后处理截断 (LLM 可能不严格遵守 max_tokens)
+    # 注意: 只对内容生成 (Writer/Polisher) 进行截断，不对结构化输出 (Critic JSON) 截断
+    # 判断依据: max_tokens < 4096 表示是有意限制长度的内容生成场景
+    max_chars = int(max_tokens * 0.7)
+    if max_tokens < 4096 and len(result) > max_chars:
+        print(f"[LLM DEBUG] ⚠️ Output exceeded max_tokens! Truncating {len(result)} → {max_chars} chars")
+        # 找到最后一个句号/感叹号/问号截断，避免截断在句子中间
+        truncated = result[:max_chars]
+        for end_char in ['。', '！', '？', '\n']:
+            last_pos = truncated.rfind(end_char)
+            if last_pos > max_chars * 0.8:  # 保留至少 80% 的内容
+                result = truncated[:last_pos + 1]
+                break
+        else:
+            result = truncated + '...'
+    
+    return result
 
 def generate_text(
     prompt: str,

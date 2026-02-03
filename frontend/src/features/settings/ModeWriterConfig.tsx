@@ -12,8 +12,8 @@ import { Zap, FileText, BookOpen, GraduationCap, RefreshCcw, PenTool, AlertTrian
 // P14-C: 模式定义
 const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: React.ReactNode; desc: string }[] = [
     { id: 'hot_take', name: '锐评', icon: <Zap className="w-4 h-4" />, desc: '快速锐评，生成3条候选 (50-150字)' },
-    { id: 'deep_analysis', name: '深度分析', icon: <BookOpen className="w-4 h-4" />, desc: '全面深度分析 (1200字左右)' },
-    { id: 'quick_summary', name: '快讯速评', icon: <FileText className="w-4 h-4" />, desc: '快速产出要点 (500字左右)' },
+    { id: 'mid_article', name: '中篇', icon: <FileText className="w-4 h-4" />, desc: '快速产出要点 (500字左右)' },
+    { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" />, desc: '全面深度分析 (1200字左右)' },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" />, desc: '结构化教程，步骤清晰' },
     { id: 'rewrite', name: '改写润色', icon: <RefreshCcw className="w-4 h-4" />, desc: '基于原文改写润色' },
 ];

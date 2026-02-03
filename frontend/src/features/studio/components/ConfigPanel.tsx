@@ -5,9 +5,9 @@ import { useQueryState, parseAsString, parseAsFloat } from 'nuqs';
 import {
     CreationModeSchema,
     WritingStyleSchema,
-    ArticleLengthSchema,
+    LengthTypeSchema,
     defaultConfig,
-    type ArticleLength,
+    type LengthType,
     type CreationMode,
     type WritingStyle
 } from '../schema';
@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/accordion";
 import { Slider } from "@/components/ui/slider";
 import { ALL_STYLES, getStyleById } from '@/lib/styles';
-import { CREATION_MODES, ARTICLE_LENGTHS, HOOK_INTENSITIES, WEB3_KNOWLEDGE_BASES, UI_TEXT } from '@/config/constants';
+import { CREATION_MODES, HOOK_INTENSITIES, WEB3_KNOWLEDGE_BASES, UI_TEXT } from '@/config/constants';
 
 /**
  * ConfigPanel - 创作配置面板
@@ -46,10 +46,12 @@ export function ConfigPanel() {
         parse: (v) => WritingStyleSchema.safeParse(v).success ? v : defaultConfig.style
     });
 
-    const [length, setLength] = useQueryState('length', {
-        defaultValue: defaultConfig.length,
-        parse: (v) => ArticleLengthSchema.safeParse(v).success ? v : defaultConfig.length
+    const [lengthType, setLengthType] = useQueryState('lengthType', {
+        defaultValue: 'auto' as LengthType,
+        parse: (v) => LengthTypeSchema.safeParse(v).success ? v as LengthType : 'auto'
     });
+
+    const [customLength, setCustomLength] = useQueryState('customLength', parseAsFloat.withDefault(0));
 
     const [temp, setTemp] = useQueryState('temp', parseAsFloat.withDefault(defaultConfig.temperature));
 
@@ -131,24 +133,48 @@ export function ConfigPanel() {
                                 </div>
                             </section>
 
-                            {/* Length Selection */}
+                            {/* P16: Length Selection - 默认/自定义 */}
                             <section className="space-y-3">
                                 <Label icon={Clock} title={UI_TEXT.labels.length} />
-                                <div className="grid grid-cols-3 gap-2">
-                                    {ARTICLE_LENGTHS.map((l) => (
+                                <div className="flex items-center gap-2">
+                                    <div className="grid grid-cols-2 gap-2 flex-1">
                                         <button
-                                            key={l.id}
-                                            onClick={() => setLength(l.id)}
+                                            onClick={() => setLengthType('auto')}
                                             className={cn(
                                                 "py-2 px-3 text-xs font-medium rounded-xl border transition-all",
-                                                length === l.id
+                                                lengthType === 'auto'
                                                     ? "bg-zinc-900 text-white border-zinc-900 shadow-sm"
                                                     : "bg-white text-ink-muted border-zinc-200 hover:border-zinc-300"
                                             )}
                                         >
-                                            {l.label}
+                                            默认
                                         </button>
-                                    ))}
+                                        <button
+                                            onClick={() => setLengthType('custom')}
+                                            className={cn(
+                                                "py-2 px-3 text-xs font-medium rounded-xl border transition-all",
+                                                lengthType === 'custom'
+                                                    ? "bg-zinc-900 text-white border-zinc-900 shadow-sm"
+                                                    : "bg-white text-ink-muted border-zinc-200 hover:border-zinc-300"
+                                            )}
+                                        >
+                                            自定义
+                                        </button>
+                                    </div>
+                                    {lengthType === 'custom' && (
+                                        <div className="flex items-center gap-1">
+                                            <input
+                                                type="number"
+                                                min={50}
+                                                max={5000}
+                                                value={customLength || ''}
+                                                onChange={(e) => setCustomLength(parseInt(e.target.value) || 0)}
+                                                placeholder="500"
+                                                className="w-20 py-2 px-2 text-xs font-medium rounded-xl border border-zinc-200 focus:border-zinc-400 focus:outline-none text-center"
+                                            />
+                                            <span className="text-xs text-ink-muted">字</span>
+                                        </div>
+                                    )}
                                 </div>
                             </section>
 
@@ -418,7 +444,8 @@ function StyleCard({ icon, title, active, color, onClick }: StyleCardProps) {
 interface StartButtonProps {
     mode: CreationMode;
     style: WritingStyle;
-    length: ArticleLength;
+    lengthType: LengthType;  // P16: auto or custom
+    customLength: number;    // P16: custom word count (0 if auto)
     temp: number;
     topP: number;
     maxTokens: number;
@@ -426,27 +453,26 @@ interface StartButtonProps {
     input: string;
 }
 
-function StartButton({ mode, style, length, temp, topP, maxTokens, knowledgeIds, input }: StartButtonProps) {
+function StartButton({ mode, style, lengthType, customLength, temp, topP, maxTokens, knowledgeIds, input }: StartButtonProps) {
     const { startSession, status, stopSession } = useAgentStore();
     const isRunning = status === 'thinking' || status === 'writing' || status === 'connecting';
 
     const handleStart = () => {
         if (!input || !input.trim()) return;
 
-        // Construct full creation config
+        // P16: Construct config with new length_type and custom_length fields
         startSession({
             input: input.trim(),
             config: {
                 mode,
                 style,
-                length,
+                length_type: lengthType,
+                custom_length: lengthType === 'custom' && customLength > 0 ? customLength : undefined,
                 temperature: temp,
                 knowledgeSources: knowledgeIds,
-                // These will be ignored by Zod if strict, but passed if schema allows
-                // Ensure Store/API supports them (Phase 5.7 Scope)
                 topP: topP,
                 maxTokens: maxTokens
-            } as any // Temporary cast until store types fully sync, though Schema is updated
+            } as any  // Temporary cast
         });
     };
 

@@ -1,0 +1,20 @@
+{# 评审路由 - 根据mode加载配置 #}
+
+{% if mode == "hot_take" %}
+{"skip": true, "reason": "锐评模式无需评审"}
+{% else %}
+
+{# 从 mode_configs 加载配置 #}
+{% set config = mode_configs[mode] %}
+{% set scoring = config.scoring %}
+
+{# 注入参数到基础模板 #}
+{% set dimensions = scoring.dimensions %}
+{% set penalty_rules = scoring.penalty_rules %}
+{% set penalty_cap = scoring.penalty_cap %}
+{% set pass_threshold = scoring.pass_threshold %}
+{% set refine_threshold = scoring.refine_threshold %}
+
+{% include 'shared/base_critic.jinja2' %}
+
+{% endif %}

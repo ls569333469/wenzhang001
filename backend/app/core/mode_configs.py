@@ -49,9 +49,10 @@ MODE_CONFIGS = {
         "output_count": 3,
         "scoring": None
     },
-    "mid_take": {
-        "name": "中篇点评",
-        "length": {"min": 150, "max": 800, "target": 500},
+    # P16.1: 移除 mid_take 冗余配置，已通过 MODE_ALIASES 映射到 mid_article
+    "mid_article": {  # P16: 中篇 (原 mid_take / quick_summary)
+        "name": "中篇",
+        "length": {"min": 150, "max": 800, "target": 500},  # P14: 中篇字数 150-800
         "length_locked": False,
         "skip_strategist": False,
         "skip_critic": False,
@@ -66,9 +67,9 @@ MODE_CONFIGS = {
             "refine_threshold": 70
         }
     },
-    "deep_analysis": {
-        "name": "深度分析",
-        "length": {"min": 900, "max": 1800, "target": 1200},
+    "long_article": {  # P16: 长篇 (原 deep_analysis)
+        "name": "长篇",
+        "length": {"min": 900, "max": 1800, "target": 1200},  # 深度分析的字数
         "length_locked": False,
         "skip_strategist": False,
         "skip_critic": False,
@@ -119,14 +120,17 @@ MODE_CONFIGS = {
     }
 }
 
-# 模式命名兼容映射
+# P16: 模式命名兼容映射 (向后兼容)
 MODE_ALIASES = {
-    "quick_summary": "mid_take",
-    "quick_take": "mid_take",
+    "quick_summary": "mid_article",   # P16: 快讯速评→中篇
+    "deep_analysis": "long_article",  # P16: 深度分析→长篇
+    "mid_take": "mid_article",        # 历史别名
+    "quick_take": "mid_article",      # 历史别名
 }
 
 
 def get_mode_config(mode: str) -> dict:
     """获取模式配置 (含兼容映射)"""
     mode = MODE_ALIASES.get(mode, mode)
-    return MODE_CONFIGS.get(mode, MODE_CONFIGS["mid_take"])
+    return MODE_CONFIGS.get(mode, MODE_CONFIGS["mid_article"])  # P16: 修复 fallback 到 mid_article
+

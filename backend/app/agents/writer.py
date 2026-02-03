@@ -45,7 +45,7 @@ def writer_agent(state: dict) -> dict:
     """
     print(">>> [Writer Debug] writer_agent started")
     raw_input = state["raw_input"]
-    mode = state.get("mode", "deep_analysis")  # 创作模式 (控制结构)
+    mode = state.get("mode", "mid_article")  # P16: 创作模式 (控制结构)
     narrative_type = state.get("narrative_type", "project_review")
     api_config = state.get("api_config", {})
     strategy_json = state.get("strategy_json", "{}")
@@ -63,12 +63,27 @@ def writer_agent(state: dict) -> dict:
             style = "mimeng"  # 默认 fallback
             print(f">>> [Writer Debug] No recommended style, using default: {style}")
     
-    # P10: 获取 length 参数并计算字数约束
-    length = state.get("length", "thread")  # P11: 默认 thread
-    from ..graph import calculate_length
-    length_constraints = calculate_length(length)
+    # P16: 使用 mode_configs 中的字数配置，支持 custom_length 覆盖
+    from ..core.mode_configs import get_mode_config
+    mode_config = get_mode_config(mode)
     
-    print(f">>> [Writer Debug] Final style: {style}, mode: {mode}, length: {length} ({length_constraints})")
+    # P16: 检查是否有自定义字数覆盖
+    custom_length = state.get("custom_length", 0)
+    if custom_length and custom_length > 0:
+        # 自定义字数：以输入值为中心，±20% 范围
+        margin = int(custom_length * 0.2)
+        length_constraints = {
+            "min": max(50, custom_length - margin),
+            "max": custom_length + margin,
+            "target": custom_length
+        }
+        print(f">>> [Writer Debug] Using CUSTOM length: {length_constraints}")
+    else:
+        # 使用 mode_configs 中的字数配置 (P16: 优先于旧的 LENGTH_MAP)
+        length_constraints = mode_config.get("length", {"min": 400, "max": 800, "target": 500})
+        print(f">>> [Writer Debug] Using mode_config length: {length_constraints}")
+    
+    print(f">>> [Writer Debug] Final style: {style}, mode: {mode}, length_constraints: {length_constraints}")
     
     # 获取提供商配置
     provider = api_config.get("provider", "volcengine")
@@ -178,20 +193,42 @@ def writer_agent(state: dict) -> dict:
     if web3_knowledge:
         knowledge_section = f"\n\n{web3_knowledge}\n"
 
-    user_prompt = f"""策略规划：
+    # Construct full input content (Strategy + Input + Knowledge)
+    full_context_input = f"""策略规划：
 {strategy_json}
 
 原始素材：
-{raw_input}{knowledge_section}
+{raw_input}{knowledge_section}"""
+
+    # P15: Custom Prompt Support
+    custom_prompts = state.get("custom_prompts", {})
+    if custom_prompts.get("writer"):
+        from jinja2 import Environment
+        env = Environment()
+        # Render custom prompt as System Prompt, injecting full content as raw_input
+        system_prompt = env.from_string(custom_prompts["writer"]).render(
+            **context,
+            raw_input=full_context_input
+        )
+        # P16.1: 强制注入中文要求和字数限制到自定义提示词
+        min_words = length_constraints.get("min", 150)
+        max_words = length_constraints.get("max", 800)
+        system_prompt += f"\n\n【系统强制要求】\n1. 必须使用中文撰写，禁止使用英文输出！\n2. 字数必须控制在 {min_words}-{max_words} 字范围内！"
+        # Minimize User Prompt
+        user_prompt = "请现在开始撰写文章。【重要：必须使用中文撰写！】"
+        print(f">>> [Writer Debug] Using CUSTOM PROMPT override")
+    else:
+        # Default Logic
+        user_prompt = f"""{full_context_input}
 
 请现在开始撰写文章。【重要：必须使用中文撰写！】"""
 
     print(">>> [Writer Debug] Calling generate_text...")
     
-    # 根据篇幅动态设置 max_tokens (1中文字 ≈ 2 tokens)
+    # 根据篇幅动态设置 max_tokens (1中文字 ≈ 1.5 tokens, 严格控制)
     max_word_count = length_constraints.get("max", 1500)
-    calculated_max_tokens = min(max_word_count * 3, 16384)  # 留足够余量，最大 16K
-    print(f">>> [Writer Debug] max_tokens={calculated_max_tokens} (for {max_word_count} words)")
+    calculated_max_tokens = min(int(max_word_count * 1.5), 16384)  # P16.1: 收紧 2.2→1.5
+    print(f">>> [Writer Debug] max_tokens={calculated_max_tokens} (for {max_word_count} words, STRICT)")
     
     try:
         response_text = generate_text(

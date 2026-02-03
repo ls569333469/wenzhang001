@@ -7,55 +7,23 @@ import json
 # P14: 导入模式配置
 from .core.mode_configs import get_mode_config, MODE_CONFIGS
 
-# P11: 新篇幅体系 (tweet/thread/post)
-LENGTH_MAP = {
-    "tweet": {"min": 150, "max": 300, "target": 250},
-    "thread": {"min": 500, "max": 800, "target": 650},
-    "post": {"min": 1000, "max": 1500, "target": 1200},
-    # P11: 兼容旧值 (过渡期)
-    "short": {"min": 150, "max": 300, "target": 250},
-    "medium": {"min": 500, "max": 800, "target": 650},
-    "long": {"min": 1000, "max": 1500, "target": 1200}
-}
-
-# P11: mode → length 强制约束 (quick_take → quick_summary 统一)
-MODE_LENGTH_MAPPING = {
-    "deep_analysis": "post",       # 深度分析 = 帖子
-    "quick_summary": "tweet",      # 快讯速评 = 推文 (前端名称)
-    "tutorial": "thread",          # 教程指南 = 推文串
-    "translate": "thread",         # 翻译 = 推文串
-    "rewrite": None                # 改写模式不限制篇幅
-}
-
-def enforce_mode_length(mode: str, requested_length: str) -> str:
-    """
-    P10.A: 强制执行 mode → length 约束
-    如果 mode 有强制篇幅要求，忽略用户请求的 length
-    """
-    enforced_length = MODE_LENGTH_MAPPING.get(mode)
-    if enforced_length and enforced_length != requested_length:
-        print(f"[P10.A] 强制约束: mode={mode} 要求 length={enforced_length}，忽略请求的 {requested_length}")
-        return enforced_length
-    return requested_length
-
-def calculate_length(length_key: str) -> Dict[str, int]:
-    """
-    P11: 根据 length 参数返回字数约束
-    """
-    return LENGTH_MAP.get(length_key, LENGTH_MAP["thread"])  # P11: 默认 thread
+# P16.1: 移除旧的 LENGTH_MAP, MODE_LENGTH_MAPPING, enforce_mode_length, calculate_length
+# 字数约束现在完全由 mode_configs.py 控制，在 Writer/Critic/Polisher 中使用
 
 # 定义状态字典
 class AgentState(TypedDict):
     raw_input: str
-    mode: str  # "deep_analysis", "quick_summary", "tutorial", "rewrite"  # P11: quick_take → quick_summary
+    mode: str  # "hot_take", "mid_article", "long_article", "tutorial", "rewrite"  # P16: 模式改名
     style: str  # P10: "auto", "mimeng", "banfo", "xinshixiang", "insider"
-    length: str  # P11: "tweet", "thread", "post"
+    length: str  # @deprecated P11: "tweet", "thread", "post"
+    custom_length: int  # P16: 自定义字数 (0=使用模式默认)
     retention_level: int  # P10: 保留度等级 1-5
     narrative_type: str  # 新增：叙事类型
     references: List[str]  # P3: 选题参考列表
     selected_option: Dict[str, Any] # P4: 用户选择的选题方案
     api_config: Dict[str, Any]  # 默认/全局 API 配置
     agent_config: Dict[str, Dict[str, Any]]  # 新增：每个 Agent 的特定配置
+    custom_prompts: Dict[str, str]  # P15: 自定义提示词
     strategy_plan: str
     strategy_json: str  # 新增：策略 JSON（用于传递给 writer）
     web3_knowledge: str # [P12] 新增：Web3 知识上下文 (from Strategist -> Writer)
@@ -246,7 +214,8 @@ def node_critic(state: AgentState):
         mode=state["mode"], 
         api_config=effective_config,
         length=length,
-        style=style
+        style=style,
+        custom_prompts=state.get("custom_prompts", {}) # P15
     )
     
     # P12: 从 dict 中提取结果
@@ -298,7 +267,19 @@ def node_polisher(state: AgentState):
     steps.append({"step": "polishing", "content": "进行最终润色..."})
     steps.append({"step": "injecting", "content": "注入 Web3 行业术语..."})
     
-    final = polisher_agent(state["draft_v1"], state["critique_feedback"], effective_config)
+    # P16.1: 获取字数约束传递给 Polisher
+    mode = state.get("mode", "mid_article")
+    mode_config = get_mode_config(mode)
+    length_constraints = mode_config.get("length", {"min": 150, "max": 800, "target": 500})
+    
+    final = polisher_agent(
+        draft=state["draft_v1"], 
+        critique_feedback=state["critique_feedback"], 
+        api_config=effective_config,
+        custom_prompts=state.get("custom_prompts", {}), # P15
+        mode=mode,  # P16.1
+        length_constraints=length_constraints  # P16.1
+    )
     
     steps.append({"step": "formatting", "content": "格式化 Markdown..."})
     steps.append({"step": "completed", "content": f"最终内容: {len(final)} 字"})
@@ -311,7 +292,7 @@ def node_polisher(state: AgentState):
 
 # 路由逻辑：Critic 决定是重写还是通过 (P14: 模式感知)
 def router_logic(state: AgentState):
-    mode = state.get("mode", "deep_analysis")
+    mode = state.get("mode", "mid_article")  # P16: 默认中篇
     config = get_mode_config(mode)
     
     # P14: 如果模式跳过评审，直接进润色

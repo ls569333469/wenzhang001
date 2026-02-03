@@ -14,8 +14,8 @@ import { z } from 'zod';
 /** 创作模式 */
 export const CreationModeSchema = z.enum([
     'hot_take',        // P14: 锐评模式
-    'deep_analysis',   // 深度分析
-    'quick_summary',   // 快速摘要
+    'mid_article',     // P16: 中篇 (原 quick_summary)
+    'long_article',    // P16: 长篇 (原 deep_analysis)
     'rewrite',         // 改写润色
     'tutorial',        // P13: 教程模式
 ]);
@@ -35,7 +35,11 @@ export const WritingStyleSchema = z.enum([
     'chengshian',      // 程十安体
 ]);
 
-/** P11: 目标字数 (新篇幅体系) */
+/** P11/P16: 篇幅类型 (auto=用模式默认, custom=自定义字数) */
+export const LengthTypeSchema = z.enum(['auto', 'custom']);
+export type LengthType = z.infer<typeof LengthTypeSchema>;
+
+/** @deprecated P11: 旧篇幅体系，已过期，保留用于后端兼容 */
 export const ArticleLengthSchema = z.enum([
     'tweet',           // 推文 (~300字)
     'thread',          // 推文串 (~800字)
@@ -53,9 +57,11 @@ export const KnowledgeSourceSchema = z.object({
 
 /** 完整创作配置 */
 export const CreationConfigSchema = z.object({
-    mode: CreationModeSchema.default('deep_analysis'),
+    mode: CreationModeSchema.default('mid_article'),
     style: WritingStyleSchema.default('professional'),
-    length: ArticleLengthSchema.default('thread'),  // P11: 默认 thread
+    length_type: LengthTypeSchema.default('auto'),  // P16: 篇幅类型
+    custom_length: z.number().min(50).max(5000).optional(),  // P16: 自定义字数
+    length: ArticleLengthSchema.default('thread').optional(),  // @deprecated: 旧字段，向后兼容
     knowledgeSources: z.array(z.string()).default([]),  // source IDs
     temperature: z.number().min(0).max(1).default(0.7),
     topP: z.number().min(0).max(1).default(0.9),
@@ -111,22 +117,24 @@ export type AgentModelSetting = z.infer<typeof AgentModelSettingSchema>;
 /** 可配置 Writer 的模式列表 */
 export const MODE_WRITER_IDS = {
     HOT_TAKE: 'hot_take',
-    DEEP_ANALYSIS: 'deep_analysis',
-    QUICK_SUMMARY: 'quick_summary',
+    MID_ARTICLE: 'mid_article',
+    LONG_ARTICLE: 'long_article',
     TUTORIAL: 'tutorial',
     REWRITE: 'rewrite',
 } as const;
 
-/** 模式别名映射 (用于兼容) */
+/** 模式别名映射 (用于兼容旧数据) */
 export const MODE_ALIASES: Record<string, string> = {
-    'mid_take': 'quick_summary',
+    'mid_take': 'mid_article',         // 历史别名
+    'quick_summary': 'mid_article',    // P16: 快讯速评→中篇
+    'deep_analysis': 'long_article',   // P16: 深度分析→长篇
 };
 
 /** 模式 Writer 配置 Schema */
 export const ModeWriterConfigSchema = z.object({
     hot_take: AgentModelSettingSchema,
-    deep_analysis: AgentModelSettingSchema,
-    quick_summary: AgentModelSettingSchema,
+    mid_article: AgentModelSettingSchema,
+    long_article: AgentModelSettingSchema,
     tutorial: AgentModelSettingSchema,
     rewrite: AgentModelSettingSchema,
 });
@@ -134,8 +142,8 @@ export const ModeWriterConfigSchema = z.object({
 /** P14-C: 默认模式 Writer 配置 */
 export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
-    deep_analysis: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
-    quick_summary: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
+    mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
+    long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
 };

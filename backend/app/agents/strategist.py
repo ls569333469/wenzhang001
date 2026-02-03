@@ -82,8 +82,7 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
     Returns (system_prompt, user_prompt)
     """
     import random
-    
-    system_prompt = render_prompt("strategist", context)
+    from jinja2 import Environment
 
     raw_input = state["raw_input"]
     references = state.get("references", [])
@@ -97,10 +96,25 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
             
     combined_input += "================================================="
     
-    # Diversity injection: unique session seed to prevent repetitive outputs
+    # Diversity injection
     random_seed = f"{datetime.now().strftime('%Y%m%d%H%M%S')}-{random.randint(1000, 9999)}"
 
-    user_prompt = f"""{combined_input}
+    # P15: Custom Prompt Support
+    custom_prompts = state.get("custom_prompts", {})
+    if custom_prompts.get("strategist"):
+        # Use custom prompt as template, inject combined_input as raw_input
+        env = Environment()
+        # Render custom prompt with context AND raw_input (which now contains all info)
+        system_prompt = env.from_string(custom_prompts["strategist"]).render(
+            **context,
+            raw_input=combined_input
+        )
+        # Minimize user prompt as info is already in system prompt
+        user_prompt = f"[Session: {random_seed}]\nPlease analyze based on the instructions above."
+    else:
+        # Default Logic
+        system_prompt = render_prompt("strategist", context)
+        user_prompt = f"""{combined_input}
 
 [Session: {random_seed}]
 Please analyze the above materials (Core Instruction + References) and generate a content strategy in JSON format.

@@ -8,7 +8,7 @@ Style (写作风格): "{{ style }}" - {{ template_name }}
 Narrative Type: "{{ narrative_type }}" - {{ narrative_desc }}
 
 ╔════════════════════════════════════════════╗
-║  🎯 信息锚点（内容必须围绕这些展开）        ║
+║  信息锚点（内容必须围绕这些展开）        ║
 ╠════════════════════════════════════════════╣
 ║  必须提及: {{ must_mention_str }}
 ║  关键数据: {{ key_data_str }}
@@ -18,15 +18,15 @@ Style Guidelines to Follow:
 {{ rag_context }}
 
 ╔════════════════════════════════════════════╗
-║  📏 字数要求 (P10)                          ║
+║  字数要求 (P10)                          ║
 ╠════════════════════════════════════════════╣
 ║  目标字数: {{ length_constraints.target }} 字
 ║  允许范围: {{ length_constraints.min }} - {{ length_constraints.max }} 字
-║  ⚠️ 超出范围将被拒绝，请严格控制
+║  超出范围将被拒绝，请严格控制
 ╚════════════════════════════════════════════╝
 
 ╔════════════════════════════════════════════╗
-║  📐 篇幅策略 (方案C)                        ║
+║  篇幅策略 (方案C)                        ║
 ╠════════════════════════════════════════════╣
 {% if length_constraints.target <= 600 %}
 ║  【短篇策略】聚焦单一核心观点
@@ -48,7 +48,7 @@ Style Guidelines to Follow:
 ╚════════════════════════════════════════════╝
 
 ╔════════════════════════════════════════════╗
-║  🎨 P11: Mode 专属写作规则                  ║
+║  P11: Mode 专属写作规则                  ║
 ╠════════════════════════════════════════════╣
 {% if mode == "quick_summary" %}
 ║  【快讯速评模式】
@@ -88,8 +88,8 @@ Requirements:
 5. Adopt the tone and sentence structure of the style guidelines.
 6. Output the article content ONLY (Markdown format).
 7. **严格控制字数在 {{ length_constraints.min }}-{{ length_constraints.max }} 字范围内**
-8. **🛡️ 数据源保护规则**: 涉及数据来源平台（如 ARKHAM、Dune Analytics、Etherscan、DefiLlama、Nansen 等链上分析工具）的描述，必须保持客观陈述，不得进行情绪化改写。例如："ARKHAM 数据显示" ✓，"ARKHAM 爆了大瓜" ✗
-9. **🚫 数据准确性强制规则 (P12)**:
+8. **数据源保护规则**: 涉及数据来源平台（如 ARKHAM、Dune Analytics、Etherscan、DefiLlama、Nansen 等链上分析工具）的描述，必须保持客观陈述，不得进行情绪化改写。例如："ARKHAM 数据显示" (OK)，"ARKHAM 爆了大瓜" (NO)
+9. **数据准确性强制规则 (P12)**:
    - 禁止捏造原文没有的数字（如自行汇总"累计盈利XXX万"）
    - 禁止编造原文没有的场景描述（如"散户疯了"、"亏到删APP"）
    - 所有数字必须直接引用原文，不得自行计算或推断
