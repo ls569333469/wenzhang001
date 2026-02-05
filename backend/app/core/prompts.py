@@ -61,16 +61,12 @@ def render_modular_prompt(template_path: str, context: Dict[str, Any]) -> str:
 def get_writer_template_path(mode: str) -> str:
     """P14/P16: 根据 mode 获取 Writer 模板路径"""
     mode_template_map = {
-        # P16: 新模式名
+        # P18: 标准模式 (指向 Phase 1 新建的专用模板)
         "hot_take": "writer/hot_take.jinja2",
-        "mid_article": "writer/quick_summary.jinja2",   # P16: 中篇 (原 quick_summary)
-        "long_article": "writer/deep_analysis.jinja2",  # P16: 长篇 (原 deep_analysis)
+        "mid_article": "writer/mid_article.jinja2",    # [FIXED] 指向新模板
+        "long_article": "writer/long_article.jinja2",  # [FIXED] 指向新模板
         "tutorial": "writer/tutorial.jinja2",
         "rewrite": "writer/rewrite.jinja2",
-        # P16: 向后兼容旧模式名
-        "quick_summary": "writer/quick_summary.jinja2",
-        "deep_analysis": "writer/deep_analysis.jinja2",
-        "mid_take": "writer/quick_summary.jinja2",
     }
-    return mode_template_map.get(mode, "writer.jinja2")  # fallback 到旧模板
+    return mode_template_map.get(mode, "writer.jinja2")  # fallback
 

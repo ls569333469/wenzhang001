@@ -1,17 +1,23 @@
+"""
+标准 Critic - P18 模块化架构
+适用于: mid_article, long_article, tutorial, rewrite
+"""
 from datetime import datetime
 import json
 import logging
-from ..core.llm import generate_text
-from ..core.prompts import render_prompt
-# P16: 移除旧的 calculate_length，改用 mode_configs
-from ..core.mode_configs import get_mode_config  # P14
+from app.core.llm import generate_text
+from app.core.prompts import render_prompt
+from app.core.mode_configs import get_mode_config
 
 logger = logging.getLogger(__name__)
 
-def critic_agent(draft: str, mode: str, api_config: dict = None, 
-                 length: str = "thread", style: str = "auto", custom_prompts: dict = None) -> dict:
+
+def standard_critic(draft: str, mode: str, api_config: dict = None,
+                    length: str = "thread", style: str = "auto", 
+                    custom_prompts: dict = None) -> dict:
     """
-    P12: Critic Agent - 5维度评分系统 (P15: Support Custom Prompts)
+    标准 Critic - 5维度评分系统
+    约束已烘焙到模板中
     """
     if api_config is None:
         api_config = {}
@@ -22,11 +28,10 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
     api_key = api_config.get("api_key") or None
     model_id = api_config.get("model_id") or None
     
-    # P16: 使用 mode_configs 字数配置 (统一来源)
+    # P16: 使用 mode_configs 字数配置
     mode_config = get_mode_config(mode)
     length_constraints = mode_config.get("length", {"min": 400, "max": 800, "target": 500})
     word_count = len(draft)
-    print(f">>> [Critic Debug] Using mode_config length: {length_constraints}")
     
     context = {
         "current_time_str": datetime.now().isoformat(),
@@ -42,7 +47,6 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
     if custom_prompts.get("critic"):
         from jinja2 import Environment
         env = Environment()
-        # Custom prompt expects {{ raw_input }} which corresponds to draft here
         system_prompt = env.from_string(custom_prompts["critic"]).render(
             **context,
             raw_input=draft
@@ -58,7 +62,7 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
             api_key=api_key,
             model_id=model_id,
             provider=provider,
-            temperature=0.1,  # 低温度保证评分稳定
+            temperature=0.1,
             system_prompt=system_prompt
         )
         
@@ -71,7 +75,6 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
             
         result = json.loads(text)
         
-        # P12: 返回完整的评分结构
         return {
             "score": result.get("final_score", result.get("score", 0)),
             "verdict": result.get("verdict", _calculate_verdict(result.get("final_score", 0), mode)),
@@ -83,7 +86,7 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
         }
         
     except json.JSONDecodeError as e:
-        logger.error(f"Critic JSON parse error: {e}, response: {response_text[:200]}")
+        logger.error(f"Critic JSON parse error: {e}")
         return _fallback_result(f"JSON解析失败: {str(e)}")
         
     except Exception as e:
@@ -91,8 +94,8 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
         return _fallback_result(f"评审错误: {str(e)}")
 
 
-def _calculate_verdict(score: int, mode: str = "mid_article") -> str:  # P16
-    """根据分数和模式计算 verdict (P14: 使用 mode_configs 阈值)"""
+def _calculate_verdict(score: int, mode: str = "mid_article") -> str:
+    """根据分数和模式计算 verdict"""
     config = get_mode_config(mode)
     scoring = config.get("scoring", {})
     pass_threshold = scoring.get("pass_threshold", 85)
@@ -107,9 +110,9 @@ def _calculate_verdict(score: int, mode: str = "mid_article") -> str:  # P16
 
 
 def _fallback_result(error_msg: str) -> dict:
-    """返回兜底结果，避免系统崩溃"""
+    """返回兜底结果"""
     return {
-        "score": 75,  # 兜底分数
+        "score": 75,
         "verdict": "REFINE",
         "dimensions": {},
         "penalties": [],

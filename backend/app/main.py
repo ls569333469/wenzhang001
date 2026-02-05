@@ -13,6 +13,7 @@ from .core.config import ensure_config_dir, load_config, save_config
 from .core.mode_configs import get_mode_config, MODE_CONFIGS  # P14: 模式配置
 from .core.lark_client import lark_client
 from .api.cleaner import router as cleaner_router
+from .api.rewrite import router as rewrite_router
 import os
 from pathlib import Path
 
@@ -30,6 +31,7 @@ async def get_web2_authors():
 
 # Register routers
 app.include_router(cleaner_router)
+app.include_router(rewrite_router)
 
 @app.on_event("startup")
 async def startup_event():
@@ -88,7 +90,7 @@ class GenerateRequest(BaseModel):
     input: str
     mode: str = "mid_article"  # P16: 创作模式 (hot_take, mid_article, long_article, tutorial, rewrite)
     style: str = "auto"  # P10: 写作风格 (auto, mimeng, banfo, xinshixiang, insider)
-    length: str = "thread"  # @deprecated P11: 旧篇幅长度 (tweet, thread, post)
+    length: Optional[str] = None  # @deprecated P11: 旧篇幅长度 (tweet, thread, post)
     length_type: str = "auto"  # P16: 篇幅类型 (auto=用模式默认, custom=自定义字数)
     custom_length: Optional[int] = None  # P16: 自定义字数 (50-5000)
     retention_level: int = 3  # P10: 保留度等级 1-5 (1=95%保留, 5=10%保留)
@@ -161,6 +163,15 @@ async def analyze_narrative(request: GenerateRequest):
             
             try:
                 strategy_data = json.loads(strategy_json_str)
+                
+                # P20: 诊断日志 - 检查 context_card
+                from .core.config import get_logger
+                p20_logger = get_logger("strategist")
+                if "context_card" in strategy_data:
+                    p20_logger.info(f"[P20] ✅ context_card 已生成: {strategy_data['context_card']}")
+                else:
+                    p20_logger.warning("[P20] ⚠️ Strategist 未返回 context_card 字段")
+                
                 # Send the final result as a distinct event type
                 yield f"data: {json.dumps({'type': 'analysis_result', 'payload': strategy_data})}\n\n"
                 
@@ -240,6 +251,16 @@ async def generate_narrative(request: GenerateRequest):
                         "logs": node_state.get("logs", [])
                     }
                     yield f"data: {json.dumps(status_data, ensure_ascii=False)}\n\n"
+                    
+                    # P19: 在 writer 节点完成后，立即推送 draft_v1 作为预览内容
+                    # 这样用户可以在 critique/polish 阶段就看到内容
+                    if "draft_v1" in node_state and node_state["draft_v1"]:
+                        draft_preview = node_state["draft_v1"]
+                        preview_data = {
+                            "type": "content_preview",  # 区分于 final_result
+                            "payload": draft_preview
+                        }
+                        yield f"data: {json.dumps(preview_data, ensure_ascii=False)}\n\n"
                     
                     # 如果有最终内容，推送它
                     if "final_content" in node_state and node_state["final_content"]:

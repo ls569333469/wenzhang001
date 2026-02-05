@@ -15,7 +15,7 @@ class AgentState(TypedDict):
     raw_input: str
     mode: str  # "hot_take", "mid_article", "long_article", "tutorial", "rewrite"  # P16: 模式改名
     style: str  # P10: "auto", "mimeng", "banfo", "xinshixiang", "insider"
-    length: str  # @deprecated P11: "tweet", "thread", "post"
+    length: Union[str, None]  # @deprecated P11: "tweet", "thread", "post"
     custom_length: int  # P16: 自定义字数 (0=使用模式默认)
     retention_level: int  # P10: 保留度等级 1-5
     narrative_type: str  # 新增：叙事类型
@@ -132,9 +132,10 @@ def node_strategist(state: AgentState):
         "thinking_steps": [{"agent": "strategist", "steps": steps, "status": "completed"}]
     }
 
-# 2. 写手节点
+# 2. 写手节点 (P18: 使用模块化路由)
 async def node_writer(state: AgentState):
-    from .agents.writer import writer_agent
+    from .agents.writer import get_writer
+    from .agents.writer import writer_agent  # Fallback for rewrite loops
     import asyncio
     
     print("--- [Step 2] Writer is Drafting ---")
@@ -143,28 +144,32 @@ async def node_writer(state: AgentState):
     steps = []
     current_draft = state.get("draft_v1", "")
     is_rewrite = bool(current_draft and state.get("critique_feedback", ""))
+    mode = state.get("mode", "mid_article")
     
     if is_rewrite:
         steps.append({"step": "rewriting", "content": f"根据主编反馈进行第 {state.get('revision_count', 0) + 1} 次修订..."})
+        # 修订时仍使用旧 writer_agent (保持修订逻辑不变)
+        writer_fn = writer_agent
     else:
-        steps.append({"step": "loading", "content": f"加载风格模板: {state['mode']}"})
+        steps.append({"step": "loading", "content": f"加载模块: writer/{mode}"})
         steps.append({"step": "drafting", "content": "开始撰写初稿..."})
+        # P18: 使用模块化路由获取对应 Writer
+        writer_fn = get_writer(mode)
     
     # 获取配置
     global_config = state.get('api_config', {})
     specific_config = state.get('agent_config', {}).get('writer', {})
     effective_config = specific_config if specific_config.get("provider") else global_config
     
-    print(f"--- [Step 2] Writer Config: {effective_config.get('provider')} ---")
+    print(f"--- [Step 2] Writer Config: {effective_config.get('provider')}, Mode: {mode} ---")
     
     # 传递特定的 agent state
     agent_state = state.copy()
     agent_state['api_config'] = effective_config
     
-    # P12.2 Fix: Run sync writer_agent in thread pool to avoid blocking asyncio loop
-    # This prevents SSE stream from hanging/timing out during long generation
+    # P12.2 Fix: Run sync writer in thread pool to avoid blocking asyncio loop
     try:
-        result = await asyncio.to_thread(writer_agent, agent_state)
+        result = await asyncio.to_thread(writer_fn, agent_state)
     except Exception as e:
         result = {"error": str(e)}
         print(f"--- [Step 2] Writer Error: {e} ---")
@@ -183,10 +188,12 @@ async def node_writer(state: AgentState):
         "thinking_steps": [{"agent": "writer", "steps": steps, "status": "completed"}]
     }
 
-# 3. 毒舌主编节点
+# 3. 毒舌主编节点 (P18: 使用模块化路由)
 def node_critic(state: AgentState):
-    from .agents.critic import critic_agent
+    from .agents.critic import get_critic
     print("--- [Step 3] Critic is Reviewing ---")
+    
+    mode = state.get("mode", "mid_article")
     
     # 记录思考步骤
     steps = []
@@ -200,22 +207,24 @@ def node_critic(state: AgentState):
     else:
         effective_config = global_config
     
-    print(f"--- [Step 3] Critic Config: {effective_config.get('provider')} ---")
+    print(f"--- [Step 3] Critic Config: {effective_config.get('provider')}, Mode: {mode} ---")
     
+    steps.append({"step": "loading", "content": f"加载模块: critic/{mode}"})
     steps.append({"step": "reviewing", "content": "审核内容质量..."})
     
     # P10: 传递 length 和 style 参数给 Critic
     length = state.get("length", "medium")
     style = state.get("style", "auto")
     
-    # P12: critic_agent 现在返回 dict，不再是 tuple
-    critic_result = critic_agent(
+    # P18: 使用模块化路由获取对应 Critic
+    critic_fn = get_critic(mode)
+    critic_result = critic_fn(
         draft=state["draft_v1"], 
-        mode=state["mode"], 
+        mode=mode, 
         api_config=effective_config,
         length=length,
         style=style,
-        custom_prompts=state.get("custom_prompts", {}) # P15
+        custom_prompts=state.get("custom_prompts", {})
     )
     
     # P12: 从 dict 中提取结果
@@ -250,10 +259,12 @@ def node_critic(state: AgentState):
         "thinking_steps": [{"agent": "critic", "steps": steps, "status": "completed"}]
     }
 
-# 4. 润色节点
+# 4. 润色节点 (P18: 使用模块化路由)
 def node_polisher(state: AgentState):
-    from .agents.polisher import polisher_agent
+    from .agents.polisher import get_polisher
     print("--- [Step 4] Polisher is Refining ---")
+    
+    mode = state.get("mode", "mid_article")
     
     # 记录思考步骤
     steps = []
@@ -262,23 +273,25 @@ def node_polisher(state: AgentState):
     specific_config = state.get('agent_config', {}).get('polisher', {})
     effective_config = specific_config if specific_config.get("provider") else global_config
     
-    print(f"--- [Step 4] Polisher Config: {effective_config.get('provider')} ---")
+    print(f"--- [Step 4] Polisher Config: {effective_config.get('provider')}, Mode: {mode} ---")
     
+    steps.append({"step": "loading", "content": f"加载模块: polisher/{mode}"})
     steps.append({"step": "polishing", "content": "进行最终润色..."})
     steps.append({"step": "injecting", "content": "注入 Web3 行业术语..."})
     
     # P16.1: 获取字数约束传递给 Polisher
-    mode = state.get("mode", "mid_article")
     mode_config = get_mode_config(mode)
     length_constraints = mode_config.get("length", {"min": 150, "max": 800, "target": 500})
     
-    final = polisher_agent(
+    # P18: 使用模块化路由获取对应 Polisher
+    polisher_fn = get_polisher(mode)
+    final = polisher_fn(
         draft=state["draft_v1"], 
         critique_feedback=state["critique_feedback"], 
         api_config=effective_config,
-        custom_prompts=state.get("custom_prompts", {}), # P15
-        mode=mode,  # P16.1
-        length_constraints=length_constraints  # P16.1
+        custom_prompts=state.get("custom_prompts", {}),
+        mode=mode,
+        length_constraints=length_constraints
     )
     
     steps.append({"step": "formatting", "content": "格式化 Markdown..."})

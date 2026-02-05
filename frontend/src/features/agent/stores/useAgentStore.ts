@@ -56,7 +56,18 @@ function getAgentConfig() {
     if (typeof window === 'undefined') return undefined;
     try {
         const stored = localStorage.getItem('qs_agent_config');
-        return stored ? JSON.parse(stored) : undefined;
+        if (!stored) return undefined;
+
+        const config = JSON.parse(stored);
+
+        // P18: Frontend Migration Logic (Clean Break)
+        // 自动迁移旧模式名，防止 UI 崩溃
+        if (config.mode === 'quick_summary') config.mode = 'mid_article';     // 快讯 -> 中篇
+        if (config.mode === 'deep_analysis') config.mode = 'long_article';    // 深度 -> 长篇
+        if (config.mode === 'mid_take') config.mode = 'mid_article';          // 别名 -> 中篇
+        if (config.mode === 'quick_take') config.mode = 'mid_article';        // 别名 -> 中篇
+
+        return config;
     } catch {
         return undefined;
     }
@@ -69,6 +80,21 @@ export interface TitleCandidate {
     formula_tags: string[];
     hook_score: number;
     rationale?: string;
+}
+
+// P19 Phase 3: Version History Types
+export interface DraftVersion {
+    id: string;
+    version: number;
+    content: string; // Markdown content
+    critique: {
+        score: number;
+        verdict: 'REWRITE' | 'REFINE' | 'PASS';
+        suggestions: string[];
+    } | null;
+    timestamp: string;
+    source: 'ai' | 'user'; // AI Generated vs User Edit
+    summary?: string; // Optional change summary
 }
 
 interface AgentState {
@@ -85,6 +111,13 @@ interface AgentState {
             can_extend: string[];
         };
         style_notes: string;
+        // P20: Context Card
+        context_card?: {
+            has_event: boolean;
+            summary: string;
+            time_context: 'Today' | 'Recent' | 'Historical' | 'Null';
+            forward_look?: string;
+        };
     } | null;
     agentLogs: string[];
     isWaitingForSelection: boolean;
@@ -105,6 +138,10 @@ interface AgentState {
         suggestions: string[];
     } | null;
 
+    // P19 Phase 3: Version History
+    draftHistory: DraftVersion[];
+    currentVersionId: string | null;
+
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
     confirmStrategy: (option: any, selectedTitle?: string) => Promise<void>; // Step 2 Trigger
@@ -112,6 +149,9 @@ interface AgentState {
     stopSession: () => void;
     resetSession: () => void;
     setSelectedTitle: (title: string) => void; // P10-1
+    updateContent: (content: string) => void; // P19: Manual Content Update
+    saveVersion: (source: 'ai' | 'user', summary?: string) => void; // P19 Phase 3
+    restoreVersion: (versionId: string) => void; // P19 Phase 3
 }
 
 // --- Initial Data ---
@@ -162,6 +202,10 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     selectedTitle: '',
     // P13: Critic 评分结果
     critiqueResult: null,
+
+    // P19 Phase 3
+    draftHistory: [],
+    currentVersionId: null,
 
     startSession: async ({ input, config }) => {
         // P14-B: Load Agent Models & Provider Keys
@@ -313,7 +357,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 input: finalInput,
                 mode: currentMode,
                 style: config.style || 'mimeng',
-                length: config.length || 'thread',  // P11: 默认 thread
+
                 retention_level: config.retention_level || 3,  // P13: 添加保留度
                 temperature: config.temperature || 0.7,
                 narrative_type: 'project_review',
@@ -427,7 +471,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 input: finalInput,
                 mode: currentMode,
                 style: lastRequestPayload.config?.style || 'mimeng',
-                length: lastRequestPayload.config?.length || 'thread',  // P11
+
                 retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
@@ -535,7 +579,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 input: finalInput,
                 mode: currentMode,
                 style: lastRequestPayload.config?.style || 'mimeng',
-                length: lastRequestPayload.config?.length || 'thread',
+
                 retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
@@ -586,6 +630,58 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     // P10-1: Set selected title
     setSelectedTitle: (title: string) => {
         set({ selectedTitle: title });
+    },
+
+    // P19: Manual Content Update
+    updateContent: (content: string) => {
+        // Debounce or manual save handled by UI/Auto-save, but here we just update state
+        set({ content });
+    },
+
+    // P19 Phase 3: Version History Implementation
+    saveVersion: (source: 'ai' | 'user', summary?: string) => {
+        const { content, draftHistory, critiqueResult } = get();
+
+        // Don't save if content is empty or same as last version
+        if (!content.trim()) return;
+        const lastVersion = draftHistory[0];
+        if (lastVersion && lastVersion.content === content) return;
+
+        const newVersion: DraftVersion = {
+            id: crypto.randomUUID(),
+            version: draftHistory.length + 1,
+            content: content,
+            critique: critiqueResult ? {
+                score: critiqueResult.score,
+                verdict: critiqueResult.verdict as any,
+                suggestions: critiqueResult.suggestions
+            } : null,
+            timestamp: new Date().toISOString(),
+            source: source,
+            summary: summary
+        };
+
+        set({
+            draftHistory: [newVersion, ...draftHistory],
+            currentVersionId: newVersion.id
+        });
+
+        toast.success(`已保存版本 v${newVersion.version}`, {
+            description: source === 'ai' ? 'AI 生成结果' : '用户手动编辑'
+        });
+    },
+
+    restoreVersion: (versionId: string) => {
+        const { draftHistory } = get();
+        const targetVersion = draftHistory.find(v => v.id === versionId);
+
+        if (targetVersion) {
+            set({
+                content: targetVersion.content,
+                currentVersionId: targetVersion.id
+            });
+            toast.info(`已恢复至版本 v${targetVersion.version}`);
+        }
     }
 }));
 
@@ -689,12 +785,24 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
                         if (lastLog) steps[stepIndex].message = lastLog;
                     }
 
-                    // Auto-advance logic only if NOT Strategist (because Strategist waits for Selection)
                     if (agentName !== 'strategist' && stepIndex + 1 < steps.length) {
                         steps[stepIndex + 1].status = 'active';
                         steps[stepIndex + 1].message = 'Starting...';
                     }
                     set({ steps });
+
+                    // P19: 自动保存中间版本 (如 Writer 初稿)
+                    // 这样即使 Polisher 随后修改了内容，用户也能对比 Writer vs Polisher
+                    if (agentName === 'writer') {
+                        // 使用 setTimeout 确保 content 已经通过 content_preview 更新到位
+                        setTimeout(() => {
+                            const { saveVersion, content } = get();
+                            // 只有当有内容时才保存
+                            if (content && content.length > 10) {
+                                saveVersion('ai', 'Writer 初稿');
+                            }
+                        }, 0);
+                    }
                 }
             } else if (event.status === 'failed') {
                 // Capture failure logs
@@ -709,13 +817,15 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
         case 'analysis_result': {
             // Phase 6 & 8: Receive Options AND Info Anchors
             // P10-1: Now also receives title_candidates
-            const payload = event.payload; // { info_anchors, options, style_notes, title_candidates }
+            // P20: Now also receives context_card
+            const payload = event.payload; // { info_anchors, options, style_notes, title_candidates, context_card }
             if (payload && payload.options) {
                 set({
                     strategyOptions: payload.options,
                     analysisResult: {
                         info_anchors: payload.info_anchors,
-                        style_notes: payload.style_notes
+                        style_notes: payload.style_notes,
+                        context_card: payload.context_card  // P20
                     },
                     // P10-1: Title Candidates
                     titleCandidates: payload.title_candidates || [],
@@ -727,8 +837,37 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
             }
             break;
         }
-        case 'final_result': {
+        case 'content_preview': {
+            // P19: 在 writer 完成后立即显示预览内容
             set({ content: event.payload, status: 'writing' });
+            break;
+        }
+        case 'final_result': {
+            // P19: 最终内容替换预览内容并更新状态
+            const finalContent = event.payload;
+            const { draftHistory, critiqueResult } = currentState;
+
+            // 自动保存 AI 生成结果到版本历史
+            const newVersion = {
+                id: crypto.randomUUID(),
+                version: draftHistory.length + 1,
+                content: finalContent,
+                critique: critiqueResult ? {
+                    score: critiqueResult.score,
+                    verdict: critiqueResult.verdict as 'REWRITE' | 'REFINE' | 'PASS',
+                    suggestions: critiqueResult.suggestions
+                } : null,
+                timestamp: new Date().toISOString(),
+                source: 'ai' as const,
+                summary: 'AI 生成完成'
+            };
+
+            set({
+                content: finalContent,
+                status: 'completed',
+                draftHistory: [newVersion, ...draftHistory],
+                currentVersionId: newVersion.id
+            });
             break;
         }
         case 'error': {

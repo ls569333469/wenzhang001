@@ -22,7 +22,8 @@ interface StudioLayoutProps {
 export function StudioLayout({ children, leftPanel, rightPanel }: StudioLayoutProps) {
     const { status } = useAgentStore();
     const phase = mapStatusToPhase(status);
-    const hasRightPanel = phase !== 'idle' && rightPanel;
+    // P19: 右侧边栏始终显示，以便查看历史记录
+    const hasRightPanel = !!rightPanel;
 
     return (
         <div className="min-h-screen bg-canvas text-ink-primary font-sans relative selection:bg-zinc-900 selection:text-white">
@@ -72,9 +73,9 @@ export function StudioLayout({ children, leftPanel, rightPanel }: StudioLayoutPr
             )}>
                 {/* 内容容器 - 流体宽度 */}
                 <div className={cn(
-                    "w-full max-w-2xl px-4",
-                    // 活跃状态时扩展宽度
-                    phase !== 'idle' && "max-w-4xl"
+                    "w-full px-4",
+                    // 统一放宽容器限制，由子组件 (WritingCanvas) 自行控制最大宽度 (960px)
+                    "max-w-6xl"
                 )}>
                     {children}
                 </div>

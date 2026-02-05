@@ -11,13 +11,13 @@ import { z } from 'zod';
 
 // ===== 创作配置 Schema =====
 
-/** 创作模式 */
+/** 创作模式 (P18: 全模块独立架构) */
 export const CreationModeSchema = z.enum([
-    'hot_take',        // P14: 锐评模式
-    'mid_article',     // P16: 中篇 (原 quick_summary)
-    'long_article',    // P16: 长篇 (原 deep_analysis)
-    'rewrite',         // 改写润色
-    'tutorial',        // P13: 教程模式
+    'hot_take',        // 锐评 (50-150字)
+    'mid_article',     // 中篇 (150-800字)
+    'long_article',    // 长篇 (900-1800字)
+    'tutorial',        // 教程 (400-1500字)
+    'rewrite',         // 改写 (无限制)
 ]);
 
 /** 写作风格 */
@@ -38,6 +38,17 @@ export const WritingStyleSchema = z.enum([
 /** P11/P16: 篇幅类型 (auto=用模式默认, custom=自定义字数) */
 export const LengthTypeSchema = z.enum(['auto', 'custom']);
 export type LengthType = z.infer<typeof LengthTypeSchema>;
+
+/** P20: 时效性类型 (事件脉络感知) */
+export const TimelinessSchema = z.enum(['realtime', 'recent', 'historical']);
+export type Timeliness = z.infer<typeof TimelinessSchema>;
+
+/** P20: 时效性选项 */
+export const TIMELINESS_OPTIONS = [
+    { value: 'realtime', label: '今天/刚发生', icon: '⚡' },
+    { value: 'recent', label: '近几天', icon: '📅' },
+    { value: 'historical', label: '更早/复盘', icon: '📜' },
+] as const;
 
 /** @deprecated P11: 旧篇幅体系，已过期，保留用于后端兼容 */
 export const ArticleLengthSchema = z.enum([
@@ -61,7 +72,7 @@ export const CreationConfigSchema = z.object({
     style: WritingStyleSchema.default('professional'),
     length_type: LengthTypeSchema.default('auto'),  // P16: 篇幅类型
     custom_length: z.number().min(50).max(5000).optional(),  // P16: 自定义字数
-    length: ArticleLengthSchema.default('thread').optional(),  // @deprecated: 旧字段，向后兼容
+    length: ArticleLengthSchema.optional(),  // @deprecated: P11遗留，P18 P19逐步移除
     knowledgeSources: z.array(z.string()).default([]),  // source IDs
     temperature: z.number().min(0).max(1).default(0.7),
     topP: z.number().min(0).max(1).default(0.9),
@@ -122,13 +133,6 @@ export const MODE_WRITER_IDS = {
     TUTORIAL: 'tutorial',
     REWRITE: 'rewrite',
 } as const;
-
-/** 模式别名映射 (用于兼容旧数据) */
-export const MODE_ALIASES: Record<string, string> = {
-    'mid_take': 'mid_article',         // 历史别名
-    'quick_summary': 'mid_article',    // P16: 快讯速评→中篇
-    'deep_analysis': 'long_article',   // P16: 深度分析→长篇
-};
 
 /** 模式 Writer 配置 Schema */
 export const ModeWriterConfigSchema = z.object({

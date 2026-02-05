@@ -65,11 +65,24 @@ def get_logger(name: str) -> logging.Logger:
     """Get a configured logger instance."""
     logger = logging.getLogger(name)
     if not logger.handlers:
-        handler = logging.StreamHandler()
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
         logger.setLevel(logging.INFO)
+        
+        # 1. Stream Handler (Console)
+        stream_handler = logging.StreamHandler()
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        stream_handler.setFormatter(formatter)
+        logger.addHandler(stream_handler)
+        
+        # 2. File Handler (Monitor Log)
+        try:
+            log_dir = BASE_DIR / "logs"
+            log_dir.mkdir(exist_ok=True)
+            file_handler = logging.FileHandler(log_dir / "app_monitor.log", encoding='utf-8')
+            file_handler.setFormatter(formatter)
+            logger.addHandler(file_handler)
+        except Exception as e:
+            print(f"Failed to setup file logging: {e}")
+            
     return logger
 
 

@@ -9,8 +9,7 @@ import { persist } from 'zustand/middleware';
 import {
     ModeWriterConfig,
     DEFAULT_MODE_WRITERS,
-    AgentModelSetting,
-    MODE_ALIASES
+    AgentModelSetting
 } from '../../studio/schema';
 
 interface ModeWriterStore {
@@ -20,7 +19,7 @@ interface ModeWriterStore {
     /** 更新指定模式的 Writer 配置 */
     updateWriter: (mode: keyof ModeWriterConfig, setting: Partial<AgentModelSetting>) => void;
 
-    /** 获取指定模式的 Writer 配置 (处理别名) */
+    /** 获取指定模式的 Writer 配置 (P18: 直接获取, 无别名) */
     getWriterForMode: (mode: string) => AgentModelSetting;
 
     /** 重置为默认配置 */
@@ -42,12 +41,11 @@ export const useModeWriterStore = create<ModeWriterStore>()(
 
             getWriterForMode: (mode: string) => {
                 const state = get();
-                // P16: 处理别名 (quick_summary→mid_article, deep_analysis→long_article)
-                const effectiveMode = MODE_ALIASES[mode] || mode;
 
+                // P18: 直接使用 mode (Clean Break)
                 // 如果模式存在于配置中，返回配置
-                if (effectiveMode in state.writers) {
-                    return state.writers[effectiveMode as keyof ModeWriterConfig];
+                if (mode in state.writers) {
+                    return state.writers[mode as keyof ModeWriterConfig];
                 }
 
                 // 默认返回 hot_take 配置 (最安全)

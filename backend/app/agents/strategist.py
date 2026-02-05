@@ -31,13 +31,10 @@ def build_strategist_context(state: dict) -> dict:
     
     current_time_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # Narrative Type Definitions
+    # Narrative Type Definitions (P18: 移除 market_news, opinion)
     narrative_descriptions = {
         "project_review": "Deep dive analysis, technical breakdown, pros/cons.",
-        "market_news": "Breaking news style, urgent, market impact focus.",
         "tutorial": "Step-by-step guide, educational, clear instructions.",
-        "opinion": "Strong personal stance, argumentative, thought leadership.",
-        "micro_novel": "Fictionalized narrative, storytelling, dramatic arc."
     }
     narrative_desc = narrative_descriptions.get(narrative_type, "Standard Review")
     
@@ -173,6 +170,16 @@ def strategist_agent(state: dict) -> dict:
     api_config = state.get("api_config", {})
     
     plan_text = execute_strategist_analysis(user_prompt, system_prompt, api_config)
+    
+    # P20: 诊断日志 - 检查 context_card 是否生成
+    try:
+        plan_obj = json.loads(plan_text)
+        if "context_card" in plan_obj:
+            logger.info(f"[P20] ✅ context_card 已生成: {plan_obj['context_card']}")
+        else:
+            logger.warning("[P20] ⚠️ Strategist 未返回 context_card 字段")
+    except:
+        logger.warning("[P20] ⚠️ 无法解析 Strategist JSON 响应")
     
     return {
         "plan": plan_text,

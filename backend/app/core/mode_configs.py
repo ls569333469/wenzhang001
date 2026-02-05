@@ -120,17 +120,12 @@ MODE_CONFIGS = {
     }
 }
 
-# P16: 模式命名兼容映射 (向后兼容)
-MODE_ALIASES = {
-    "quick_summary": "mid_article",   # P16: 快讯速评→中篇
-    "deep_analysis": "long_article",  # P16: 深度分析→长篇
-    "mid_take": "mid_article",        # 历史别名
-    "quick_take": "mid_article",      # 历史别名
-}
+# P18: 移除 MODE_ALIASES - Clean Break 策略
+# 旧模式名不再兼容，前端需同步更新
+# 已移除: quick_summary, deep_analysis, mid_take, quick_take
 
 
 def get_mode_config(mode: str) -> dict:
-    """获取模式配置 (含兼容映射)"""
-    mode = MODE_ALIASES.get(mode, mode)
-    return MODE_CONFIGS.get(mode, MODE_CONFIGS["mid_article"])  # P16: 修复 fallback 到 mid_article
+    """获取模式配置 (P18: 无兼容映射)"""
+    return MODE_CONFIGS.get(mode, MODE_CONFIGS["mid_article"])
 

@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useQueryState, parseAsFloat } from 'nuqs';
-import { Play, Sparkles, FileText, Palette, ChevronDown } from 'lucide-react';
+import { Play, FileText, Palette, ChevronDown } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { useAgentStore, mapStatusToPhase } from '@/features/agent/stores/useAgentStore';
 import { UI_TEXT, CREATION_MODES } from '@/config/constants';
@@ -11,8 +11,11 @@ import {
     CreationModeSchema,
     WritingStyleSchema,
     LengthTypeSchema,
+    TimelinessSchema,
+    TIMELINESS_OPTIONS,
     defaultConfig,
-    type LengthType
+    type LengthType,
+    type Timeliness
 } from '@/features/studio/schema';
 
 /**
@@ -51,10 +54,16 @@ export function HeroInput() {
         defaultValue: ['auto'],
         parse: (v) => v ? v.split(',') : ['auto']
     });
+    // P20: Timeliness for context card
+    const [timeliness, setTimeliness] = useQueryState('timeliness', {
+        defaultValue: 'recent' as Timeliness,
+        parse: (v) => TimelinessSchema.safeParse(v).success ? v as Timeliness : 'recent'
+    });
 
-    // Get current mode and style display names
+    // Get current mode, style, and timeliness display
     const currentMode = CREATION_MODES.find(m => m.id === mode);
     const currentStyle = ALL_STYLES.find(s => s.id === style);
+    const currentTimeliness = TIMELINESS_OPTIONS.find(t => t.value === timeliness);
 
     // Quick mode options for dropdown
     const quickModes = CREATION_MODES.filter(m => !m.compact).slice(0, 3);
@@ -96,7 +105,8 @@ export function HeroInput() {
     return (
         <div className={cn(
             "w-full transition-all duration-500",
-            isIdle ? "max-w-2xl mx-auto" : "max-w-full"
+            // isIdle check removed to allow full width (controlled by parent)
+            "max-w-full"
         )}>
             {/* Main Input Card */}
             <div className={cn(
@@ -168,19 +178,37 @@ export function HeroInput() {
                                 ))}
                             </div>
                         </div>
+
+                        {/* P20: Timeliness Selector */}
+                        <div className="relative group/dropdown">
+                            <button className="flex items-center gap-1.5 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 rounded-lg text-xs font-medium text-zinc-600 transition-colors">
+                                <span>{currentTimeliness?.icon || '📅'}</span>
+                                <span>{currentTimeliness?.label || '近几天'}</span>
+                                <ChevronDown className="w-3 h-3 text-zinc-400" />
+                            </button>
+                            {/* Dropdown */}
+                            <div className="absolute top-full left-0 mt-1 py-1 bg-white border border-zinc-200 rounded-lg shadow-lg opacity-0 invisible group-hover/dropdown:opacity-100 group-hover/dropdown:visible transition-all z-50 min-w-[140px]">
+                                {TIMELINESS_OPTIONS.map(t => (
+                                    <button
+                                        key={t.value}
+                                        onClick={() => setTimeliness(t.value as Timeliness)}
+                                        className={cn(
+                                            "w-full text-left px-3 py-2 text-xs hover:bg-zinc-50 transition-colors",
+                                            timeliness === t.value ? "bg-zinc-50 font-medium" : ""
+                                        )}
+                                    >
+                                        {t.icon} {t.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 )}
 
                 {/* Bottom Bar */}
                 <div className="flex items-center justify-between px-4 pb-3 pt-1">
-                    {/* Left: Hints / Tags */}
-                    <div className="flex items-center gap-2 text-xs text-zinc-400">
-                        <div className="flex items-center gap-1.5 bg-zinc-50 px-2 py-1 rounded-md border border-zinc-100">
-                            <Sparkles className="w-3 h-3 text-indigo-500" />
-                            <span>{UI_TEXT.heroInput?.aiEnhanced || 'AI 增强'}</span>
-                        </div>
-                        <span>{UI_TEXT.heroInput?.keyboardHint || '⌘ + Enter 发送'}</span>
-                    </div>
+                    {/* Left: Spacer (removed AI增强 and keyboard hint) */}
+                    <div className="flex-1" />
 
                     {/* Right: Action Button */}
                     <button

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAgentStore } from '@/features/agent/stores/useAgentStore';
-import { Target, Palette, Database, Sparkles } from 'lucide-react';
+import { Target, Palette, Database, Sparkles, Clock, AlertTriangle, TrendingUp } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 export function ContextPanel() {
@@ -10,7 +10,15 @@ export function ContextPanel() {
 
     if (!analysisResult) return null;
 
-    const { info_anchors, style_notes } = analysisResult;
+    const { info_anchors, style_notes, context_card } = analysisResult;
+
+    // P20: Time context styling
+    const timeContextStyle: Record<string, { label: string; color: string; bg: string }> = {
+        'Today': { label: '今日热点', color: 'text-red-600', bg: 'bg-red-50 border-red-200' },
+        'Recent': { label: '近期事件', color: 'text-amber-600', bg: 'bg-amber-50 border-amber-200' },
+        'Historical': { label: '历史回顾', color: 'text-slate-600', bg: 'bg-slate-50 border-slate-200' },
+        'Null': { label: '无时效性', color: 'text-zinc-500', bg: 'bg-zinc-50 border-zinc-200' }
+    };
 
     return (
         <div className="w-full max-w-4xl mx-auto mb-8 animate-in fade-in slide-in-from-top-4 duration-500">
@@ -19,6 +27,40 @@ export function ContextPanel() {
                     <Sparkles className="w-5 h-5 text-indigo-500" />
                     <h3 className="font-serif font-bold text-lg text-zinc-800">深度分析上下文</h3>
                 </div>
+
+                {/* P20: Context Card Display */}
+                {context_card && (
+                    <div className={cn(
+                        "rounded-lg border p-4 space-y-3 mb-4",
+                        timeContextStyle[context_card.time_context]?.bg || 'bg-zinc-50 border-zinc-200'
+                    )}>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <Clock className={cn("w-4 h-4", timeContextStyle[context_card.time_context]?.color || 'text-zinc-500')} />
+                                <span className={cn("text-sm font-semibold", timeContextStyle[context_card.time_context]?.color || 'text-zinc-500')}>
+                                    {timeContextStyle[context_card.time_context]?.label || context_card.time_context}
+                                </span>
+                            </div>
+                            {context_card.has_event && (
+                                <span className="flex items-center gap-1 text-xs text-red-500 bg-red-100 px-2 py-0.5 rounded-full">
+                                    <AlertTriangle className="w-3 h-3" />
+                                    爆发性事件
+                                </span>
+                            )}
+                        </div>
+
+                        <p className="text-sm text-zinc-700 leading-relaxed">
+                            📝 {context_card.summary}
+                        </p>
+
+                        {context_card.forward_look && (
+                            <div className="flex items-start gap-2 text-xs text-zinc-500 pt-2 border-t border-zinc-200/50">
+                                <TrendingUp className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                                <span>后续展望: {context_card.forward_look}</span>
+                            </div>
+                        )}
+                    </div>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {/* Column 1: Anchors */}
@@ -83,3 +125,4 @@ export function ContextPanel() {
         </div>
     );
 }
+

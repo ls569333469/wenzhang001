@@ -30,6 +30,7 @@ Your task has FOUR critical parts:
 2. Create a content strategy plan based on Narrative Type: "{{ narrative_type }}"  {# 任务2：制定策略 #}
 3. Generate 3 VIRAL TITLE CANDIDATES (one per strategy option)  {# 任务3：生成爆款标题 #}
 4. Score each strategy option's VIRAL POTENTIAL               {# 任务4：评分 #}
+5. Generate CONTEXT CARD (事件脉络卡片) for situational awareness  {# 任务5：生成事件脉络卡片 #}
 
 {# ===== 第三部分：上下文信息 ===== #}
 {# 传递风格模式和叙事方向，让 LLM 理解写作要求 #}
@@ -242,6 +243,14 @@ Output Format (JSON only):
         "can_extend": ["topics the writer can elaborate on"]
         {# can_extend: 写手可以扩展的话题 #}
     },
+    "context_card": {
+        "has_event": true,              {# 是否有具体爆发性事件（科普/教程为false） #}
+        "summary": "一句话脉络摘要（时间+核心事实+当前背景）",
+        "time_context": "Today",       {# Today / Recent / Historical / Null #}
+        "forward_look": "可选：后续发展"  {# 可选字段 #}
+    },
+    "recommended_option_id": "option_1",   {# 推荐的策略方向 #}
+    "risk_notes": ["风险提示1", "风险提示2"],  {# 合规或事实风险列表 #}
     "title_candidates": [
         {
             "title": "[基于用户输入的独特标题]",
