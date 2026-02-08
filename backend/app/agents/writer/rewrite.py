@@ -6,6 +6,7 @@ from datetime import datetime
 from app.core.llm import generate_text
 from app.core.prompts import render_modular_prompt
 from app.core.mode_configs import get_mode_config
+from app.core.forbidden_patterns import load_forbidden_patterns  # P21
 
 # P18: 硬性约束 (自定义提示词时追加)
 HARD_CONSTRAINTS = "\n\n【语言：中文 | 保持原文长度】"
@@ -31,6 +32,7 @@ def rewrite_writer(state: dict) -> dict:
         "original_length": original_length,
         "raw_input": raw_input,
         "retention_level": state.get("retention_level", 3),
+        "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
     
     # P15: 自定义提示词支持

@@ -14,7 +14,8 @@ POLISHER_REGISTRY = {
     "long_article": standard_polisher,
     "tutorial": standard_polisher,
     "rewrite": standard_polisher,
-    "hot_take": skip_polisher,  # 锐评跳过润色
+    "hot_take": skip_polisher,   # 锐评跳过润色
+    "short_article": skip_polisher,  # P22 v4: 连珠炮跳过润色（润色会破坏碎句节奏）
 }
 
 

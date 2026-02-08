@@ -7,11 +7,12 @@
 import React from 'react';
 import { useModeWriterStore } from '../agent/stores/useModeWriterStore';
 import { PROVIDER_IDS, ModeWriterConfig as ModeWriterConfigType } from '../studio/schema';
-import { Zap, FileText, BookOpen, GraduationCap, RefreshCcw, PenTool, AlertTriangle } from 'lucide-react';
+import { Zap, FileText, BookOpen, GraduationCap, RefreshCcw, PenTool, AlertTriangle, MessageSquare } from 'lucide-react';
 
 // P14-C: 模式定义
 const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: React.ReactNode; desc: string }[] = [
     { id: 'hot_take', name: '锐评', icon: <Zap className="w-4 h-4" />, desc: '快速锐评，生成3条候选 (50-150字)' },
+    { id: 'short_article', name: '短篇', icon: <MessageSquare className="w-4 h-4" />, desc: '正常X发文 (200-500字)' },
     { id: 'mid_article', name: '中篇', icon: <FileText className="w-4 h-4" />, desc: '快速产出要点 (500字左右)' },
     { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" />, desc: '全面深度分析 (1200字左右)' },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" />, desc: '结构化教程，步骤清晰' },

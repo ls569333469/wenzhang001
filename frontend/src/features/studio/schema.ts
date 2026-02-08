@@ -14,6 +14,7 @@ import { z } from 'zod';
 /** 创作模式 (P18: 全模块独立架构) */
 export const CreationModeSchema = z.enum([
     'hot_take',        // 锐评 (50-150字)
+    'short_article',   // 短篇 (200-500字) - P21新增
     'mid_article',     // 中篇 (150-800字)
     'long_article',    // 长篇 (900-1800字)
     'tutorial',        // 教程 (400-1500字)
@@ -128,6 +129,7 @@ export type AgentModelSetting = z.infer<typeof AgentModelSettingSchema>;
 /** 可配置 Writer 的模式列表 */
 export const MODE_WRITER_IDS = {
     HOT_TAKE: 'hot_take',
+    SHORT_ARTICLE: 'short_article',
     MID_ARTICLE: 'mid_article',
     LONG_ARTICLE: 'long_article',
     TUTORIAL: 'tutorial',
@@ -137,6 +139,7 @@ export const MODE_WRITER_IDS = {
 /** 模式 Writer 配置 Schema */
 export const ModeWriterConfigSchema = z.object({
     hot_take: AgentModelSettingSchema,
+    short_article: AgentModelSettingSchema,
     mid_article: AgentModelSettingSchema,
     long_article: AgentModelSettingSchema,
     tutorial: AgentModelSettingSchema,
@@ -146,6 +149,7 @@ export const ModeWriterConfigSchema = z.object({
 /** P14-C: 默认模式 Writer 配置 */
 export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },

@@ -6,6 +6,7 @@ from datetime import datetime
 from app.core.llm import generate_text
 from app.core.prompts import render_modular_prompt
 from app.core.mode_configs import get_mode_config
+from app.core.forbidden_patterns import load_forbidden_patterns  # P21
 from app.services.sample_service import sample_service
 from app.services.knowledge_retriever import retrieve_web3_knowledge
 from app.core.config import get_feature_flag
@@ -69,6 +70,7 @@ def long_article_writer(state: dict) -> dict:
         "web3_knowledge": web3_knowledge,
         "rag_context": rag_context,
         "context_card": context_card,  # P20: 事件脉络卡片
+        "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
     
     # P15: 自定义提示词支持

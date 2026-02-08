@@ -900,7 +900,7 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
 
 // Types needed for compilation (re-declare or import if missing)
 interface BackendEvent {
-    type: 'thinking_step' | 'agent_update' | 'final_result' | 'error' | 'end' | 'analysis_result' | 'critique_update';
+    type: 'thinking_step' | 'agent_update' | 'final_result' | 'error' | 'end' | 'analysis_result' | 'critique_update' | 'content_preview';
     // P13: critique_update 字段
     score?: number;
     verdict?: string;

@@ -9,6 +9,11 @@ export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; c
         desc: 'P14: 极简短评，3条候选，50-150字'
     },
     {
+        id: 'short_article',
+        title: '💬 短篇',
+        desc: 'P22: X正常发文，50-300字'
+    },
+    {
         id: 'mid_article',
         title: '中篇',
         desc: '快速产出，要点突出，适合热点追踪'

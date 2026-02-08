@@ -2,6 +2,9 @@ from pathlib import Path
 from jinja2 import Template, Environment, FileSystemLoader
 from typing import Dict, Any
 
+# P21: 禁用词库注入
+from .forbidden_patterns import load_forbidden_patterns
+
 # 定位到 backend/data/prompts
 PROMPTS_DIR = Path(__file__).parent.parent.parent / "data" / "prompts"
 
@@ -25,6 +28,10 @@ def save_template(agent_name: str, content: str):
 
 def render_prompt(agent_name: str, context: Dict[str, Any]) -> str:
     """Load and render the template with the given context."""
+    # P21: 自动注入禁用词库
+    if 'forbidden_patterns' not in context:
+        context['forbidden_patterns'] = load_forbidden_patterns()
+    
     template_str = load_template(agent_name)
     try:
         template = Template(template_str)
@@ -48,6 +55,10 @@ def render_modular_prompt(template_path: str, context: Dict[str, Any]) -> str:
     full_path = PROMPTS_DIR / template_path
     if not full_path.exists():
         return f"Error: Template {template_path} not found."
+    
+    # P21: 自动注入禁用词库
+    if 'forbidden_patterns' not in context:
+        context['forbidden_patterns'] = load_forbidden_patterns()
     
     try:
         # 使用 Jinja2 Environment 支持 include

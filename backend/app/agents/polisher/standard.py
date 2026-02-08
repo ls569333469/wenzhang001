@@ -5,6 +5,7 @@
 from datetime import datetime
 from app.core.llm import generate_text
 from app.core.prompts import render_prompt
+from app.core.forbidden_patterns import load_forbidden_patterns  # P21
 
 
 def standard_polisher(draft: str, critique_feedback: str, api_config: dict = None, 
@@ -27,7 +28,10 @@ def standard_polisher(draft: str, critique_feedback: str, api_config: dict = Non
     
     max_words = length_constraints.get("max", 800)
     
-    context = {"current_time_str": datetime.now().isoformat()}
+    context = {
+        "current_time_str": datetime.now().isoformat(),
+        "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
+    }
 
     # P15: Custom Prompt Support
     if custom_prompts.get("polisher"):
@@ -61,6 +65,13 @@ def standard_polisher(draft: str, critique_feedback: str, api_config: dict = Non
             system_prompt=system_prompt,
             max_tokens=calculated_max_tokens
         )
+        
+        # P22 v4: 后处理 - 清除禁止符号
+        import re
+        if response_text:
+            response_text = re.sub(r'——', '，', response_text)
+            response_text = re.sub(r'—', '，', response_text)
+        
         return response_text
     except Exception as e:
         return f"Error polishing content: {str(e)}"

@@ -10,6 +10,9 @@ export const OUTPUT_FORMATS: Record<string, string> = {
   ]
 }
 \`\`\``,
+    short_article: `
+## 📤 输出
+直接输出完整短文，无需JSON格式。字数贴近目标值 (50-300字)。`,
     mid_article: `
 ## 📤 输出
 直接输出完整文章，包含标题。无需JSON格式。`,

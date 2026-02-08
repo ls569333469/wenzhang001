@@ -3,6 +3,7 @@ import json
 from ..core.llm import generate_text
 from ..core.prompts import render_prompt
 from ..core.config import get_feature_flag, get_logger
+from ..core.forbidden_patterns import load_forbidden_patterns  # P21
 from ..services.knowledge_retriever import retrieve_web3_knowledge
 
 logger = get_logger("strategist")
@@ -69,7 +70,8 @@ def build_strategist_context(state: dict) -> dict:
         "narrative_desc": narrative_desc,
         "rag_context": rag_context,
         "web3_knowledge": web3_knowledge,  # 传递给 Writer
-        "retention_level": state.get("retention_level", 3)  # P10: 内容保留度
+        "retention_level": state.get("retention_level", 3),  # P10: 内容保留度
+        "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
     return context
 

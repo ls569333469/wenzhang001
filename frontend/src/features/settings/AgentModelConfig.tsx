@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAgentModelStore } from '../agent/stores/useAgentModelStore';
 import { useModeWriterStore } from '../agent/stores/useModeWriterStore';
 import { PROVIDER_IDS, AgentModels, ModeWriterConfig as ModeWriterConfigType } from '../studio/schema';
-import { Brain, PenTool, Eye, Sparkles, AlertTriangle, Zap, FileText, BookOpen, GraduationCap, RefreshCcw, Check, ChevronRight, Settings2 } from 'lucide-react';
+import { Brain, PenTool, Eye, Sparkles, AlertTriangle, Zap, FileText, BookOpen, GraduationCap, RefreshCcw, Check, ChevronRight, Settings2, MessageSquare } from 'lucide-react';
 import { ConfigModal } from '@/components/ui/ConfigModal';
 
 // P14-B: 支持的模型列表
@@ -21,6 +21,7 @@ const PROVIDER_MODELS = {
 // P14-C: 模式定义
 const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: React.ReactNode; recommended: string }[] = [
     { id: 'hot_take', name: '锐评', icon: <Zap className="w-4 h-4" />, recommended: '豆包 Seed' },
+    { id: 'short_article', name: '短篇', icon: <MessageSquare className="w-4 h-4" />, recommended: '豆包 Seed' },
     { id: 'mid_article', name: '中篇', icon: <FileText className="w-4 h-4" />, recommended: 'DeepSeek' },
     { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" />, recommended: 'DeepSeek' },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" />, recommended: 'DeepSeek' },

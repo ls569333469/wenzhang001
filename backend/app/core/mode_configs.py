@@ -49,6 +49,23 @@ MODE_CONFIGS = {
         "output_count": 3,
         "scoring": None
     },
+    "short_article": {  # P22: 短篇 (正常X/Twitter发文)
+        "name": "短篇",
+        "length": {"min": 50, "max": 300, "target": 200},
+        "length_locked": False,
+        "skip_strategist": False,
+        "skip_critic": False,
+        "skip_polisher": False,
+        "output_count": 1,
+        "scoring": {
+            "dimensions": SCORING_DIMENSIONS,
+            "penalty_rules": PENALTY_RULES,
+            "penalty_cap": 25,
+            "max_revisions": 1,
+            "pass_threshold": 85,
+            "refine_threshold": 70
+        }
+    },
     # P16.1: 移除 mid_take 冗余配置，已通过 MODE_ALIASES 映射到 mid_article
     "mid_article": {  # P16: 中篇 (原 mid_take / quick_summary)
         "name": "中篇",

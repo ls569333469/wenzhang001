@@ -8,6 +8,7 @@ import logging
 from app.core.llm import generate_text
 from app.core.prompts import render_prompt
 from app.core.mode_configs import get_mode_config
+from app.core.forbidden_patterns import load_forbidden_patterns  # P21
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,8 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         "length_constraints": length_constraints,
         "style": style,
         "word_count": word_count,
-        "draft": draft
+        "draft": draft,
+        "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
     
     # P15: Custom Prompt Support

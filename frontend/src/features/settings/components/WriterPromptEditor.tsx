@@ -9,6 +9,7 @@ import { DEFAULT_PROMPTS } from '../constants/defaultPrompts';
 // Map store keys to display names
 const MODES: { id: keyof WriterPrompts; label: string }[] = [
     { id: 'hot_take', label: '锐评 (Hot Take)' },
+    { id: 'short_article', label: '短篇 (Short Article)' },
     { id: 'mid_article', label: '中篇 (Mid Article)' },
     { id: 'long_article', label: '长篇 (Long Article)' },
     { id: 'tutorial', label: '教程 (Tutorial)' },
@@ -23,7 +24,8 @@ export function WriterPromptEditor() {
     const updateWriterPrompt = usePromptStore((state) => state.updateWriterPrompt);
     const getAssembledPrompt = usePromptStore((state) => state.getAssembledPrompt);
 
-    const currentPrompt = writerPrompts[activeMode];
+    // P22: Defensive fallback - if mode data missing from persisted store, use defaults
+    const currentPrompt = writerPrompts[activeMode] || DEFAULT_PROMPTS.writer[activeMode];
     const outputSchema = OUTPUT_FORMATS[activeMode] || '暂无格式定义';
 
     const handleReset = () => {

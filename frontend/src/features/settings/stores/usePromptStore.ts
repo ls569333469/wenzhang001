@@ -12,6 +12,7 @@ export interface PromptSection {
 
 export interface WriterPrompts {
     hot_take: PromptSection;
+    short_article: PromptSection;
     mid_article: PromptSection;
     long_article: PromptSection;
     tutorial: PromptSection;
@@ -138,7 +139,7 @@ export const usePromptStore = create<CustomPromptsState>()(
         {
             name: 'qs_custom_prompts',
             partialize: (state) => ({ customPrompts: state.customPrompts }),
-            version: 2, // P16: Bump version for new migration
+            version: 3, // P22: Bump version for short_article
             migrate: (persistedState: any, version: number) => {
                 // Version 0→1: mid_take → quick_summary
                 if (version === 0) {
@@ -171,6 +172,14 @@ export const usePromptStore = create<CustomPromptsState>()(
                         if (!persistedState.customPrompts) persistedState.customPrompts = {};
                         if (!persistedState.customPrompts.writer) persistedState.customPrompts.writer = {};
                         persistedState.customPrompts.writer.long_article = DEFAULT_PROMPTS.writer.long_article;
+                    }
+                }
+                // Version 2→3: P22 add short_article
+                if (version < 3) {
+                    if (!persistedState.customPrompts?.writer?.short_article) {
+                        if (!persistedState.customPrompts) persistedState.customPrompts = {};
+                        if (!persistedState.customPrompts.writer) persistedState.customPrompts.writer = {};
+                        persistedState.customPrompts.writer.short_article = DEFAULT_PROMPTS.writer.short_article;
                     }
                 }
                 return persistedState as CustomPromptsState;

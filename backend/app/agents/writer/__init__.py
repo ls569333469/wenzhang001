@@ -8,12 +8,14 @@ P18: 方案 B - 全模块独立架构
 """
 from .mid_article import mid_article_writer
 from .long_article import long_article_writer
+from .short_article import short_article_writer
 from .tutorial import tutorial_writer
 from .rewrite import rewrite_writer
 
 # hot_take 保持独立 (Option A)，不纳入此路由
 
 WRITER_REGISTRY = {
+    "short_article": short_article_writer,
     "mid_article": mid_article_writer,
     "long_article": long_article_writer,
     "tutorial": tutorial_writer,

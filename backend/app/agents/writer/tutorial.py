@@ -6,6 +6,7 @@ from datetime import datetime
 from app.core.llm import generate_text
 from app.core.prompts import render_modular_prompt
 from app.core.mode_configs import get_mode_config
+from app.core.forbidden_patterns import load_forbidden_patterns  # P21
 
 # P18: 硬性约束 (自定义提示词时追加)
 HARD_CONSTRAINTS = "\n\n【字数：400-1500字 | 语言：中文】"
@@ -40,6 +41,7 @@ def tutorial_writer(state: dict) -> dict:
         "length": length_constraints,
         "raw_input": raw_input,
         "strategy_plan": strategy_json,
+        "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
     
     # P15: 自定义提示词支持
