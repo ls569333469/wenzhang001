@@ -115,10 +115,10 @@ export const AgentModelsSchema = z.object({
 
 /** P14-B: 默认 Agent 模型配置 (默认使用火山引擎豆包模型) */
 export const DEFAULT_AGENT_MODELS: z.infer<typeof AgentModelsSchema> = {
-    strategist: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
-    writer: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
-    critic: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
-    polisher: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    strategist: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    writer: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    critic: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    polisher: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 
 export type AgentModels = z.infer<typeof AgentModelsSchema>;
@@ -148,15 +148,71 @@ export const ModeWriterConfigSchema = z.object({
 
 /** P14-C: 默认模式 Writer 配置 */
 export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
-    hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
-    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
-    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-1-8-251228' },
+    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 
 export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
+
+// ===== P24-D: 统一 4 智能体 × 6 模式配置 =====
+
+/** P24-D: 跳过逻辑 — 某些模式不需要特定 agent */
+export const SKIP_MODES = {
+    strategist: [] as string[],
+    writer: [] as string[],
+    critic: ['hot_take'],
+    polisher: ['hot_take', 'short_article'],
+} as const;
+
+/** 完整 6 模式 Schema（4 个 agent 通用） */
+const FullModeConfigSchema = z.object({
+    hot_take: AgentModelSettingSchema,
+    short_article: AgentModelSettingSchema,
+    mid_article: AgentModelSettingSchema,
+    long_article: AgentModelSettingSchema,
+    tutorial: AgentModelSettingSchema,
+    rewrite: AgentModelSettingSchema,
+});
+
+/** P24-D: 模式专属 Strategist 配置 */
+export const ModeStrategistConfigSchema = FullModeConfigSchema;
+export const DEFAULT_MODE_STRATEGISTS: z.infer<typeof ModeStrategistConfigSchema> = {
+    hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+};
+export type ModeStrategistConfig = z.infer<typeof ModeStrategistConfigSchema>;
+
+/** P24-D: 模式专属 Critic 配置（6模式，hot_take 跳过） */
+export const ModeCriticConfigSchema = FullModeConfigSchema;
+export const DEFAULT_MODE_CRITICS: z.infer<typeof ModeCriticConfigSchema> = {
+    hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+};
+export type ModeCriticConfig = z.infer<typeof ModeCriticConfigSchema>;
+
+/** P24-D: 模式专属 Polisher 配置（6模式，hot_take + short_article 跳过） */
+export const ModePolisherConfigSchema = FullModeConfigSchema;
+export const DEFAULT_MODE_POLISHERS: z.infer<typeof ModePolisherConfigSchema> = {
+    hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+};
+export type ModePolisherConfig = z.infer<typeof ModePolisherConfigSchema>;
 
 // ===== 智能体状态 Schema =====
 
@@ -166,6 +222,7 @@ export const AgentRoleSchema = z.enum([
     'researcher',      // 研究员
     'writer',          // 写作者
     'critic',          // 评审员
+    'polisher',        // 润色师 (P24: 补全)
 ]);
 
 /** Agent 状态 */

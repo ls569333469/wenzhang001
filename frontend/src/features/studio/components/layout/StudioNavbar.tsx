@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles, Search, BookOpen, Bot, Home } from "lucide-react";
+import { Sparkles, Search, BookOpen, Bot, Home, Newspaper } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UI_TEXT } from "@/config/constants";
 import Link from "next/link";
@@ -36,6 +36,7 @@ export function StudioNavbar() {
                 {/* Nav Links */}
                 <NavPill label={UI_TEXT.nav.knowledge} icon={BookOpen} href="/knowledge" />
                 <NavPill label={UI_TEXT.nav.agents} icon={Bot} href="/agents" />
+                <NavPill label="素材" icon={Newspaper} href="/studio?view=materials" />
 
                 <div className="w-px h-4 bg-zinc-200 mx-1" />
 

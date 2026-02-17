@@ -88,6 +88,11 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
     
     combined_input = f"===== CORE INSTRUCTION / SOURCE =====\n{raw_input}\n\n"
     
+    # P23: Append material context if provided (from 素材中心 "去创作")
+    material_context = state.get("material_context", "")
+    if material_context:
+        combined_input += f"===== REFERENCE MATERIAL (素材原文) =====\n{material_context[:3000]}\n\n"
+
     if references:
         combined_input += f"===== EXTRA REFERENCES ({len(references)} ITEMS) =====\n"
         for i, ref in enumerate(references, 1):
@@ -111,9 +116,17 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
         # Minimize user prompt as info is already in system prompt
         user_prompt = f"[Session: {random_seed}]\nPlease analyze based on the instructions above."
     else:
-        # Default Logic
-        system_prompt = render_prompt("strategist", context)
-        user_prompt = f"""{combined_input}
+        # P25: 短篇使用专用策略官模板
+        mode = state.get("mode", "mid_article")
+        if mode == "short_article":
+            # 短篇专用模板：素材分析 + 六法框架 + 12种写法
+            context["raw_input"] = combined_input
+            system_prompt = render_prompt("strategist/short_article", context)
+            user_prompt = f"[Session: {random_seed}]\n请分析以上素材，输出3个版本方案的JSON。"
+        else:
+            # Default Logic
+            system_prompt = render_prompt("strategist", context)
+            user_prompt = f"""{combined_input}
 
 [Session: {random_seed}]
 Please analyze the above materials (Core Instruction + References) and generate a content strategy in JSON format.
@@ -125,6 +138,7 @@ CRITICAL DIVERSITY REQUIREMENTS:
 3. Avoid ANY repetition from previous generations
 4. Use the ACTUAL numbers and entities from the source material
 5. Create titles that a reader would see as 4 DISTINCT approaches to the same topic"""
+
 
     return system_prompt, user_prompt
 

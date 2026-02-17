@@ -4,7 +4,7 @@ import { HeroInput } from "./HeroInput";
 import { StrategySelector } from "./StrategySelector";
 import { useAgentStore } from "@/features/agent/stores/useAgentStore";
 import { cn } from "@/lib/utils";
-import { RefreshCw, Copy, Check } from 'lucide-react';
+import { RefreshCw, Copy, Check, FilePlus } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { UI_TEXT } from '@/config/constants';
@@ -12,9 +12,21 @@ import { marked } from 'marked';
 import { RichEditor } from "./editor/RichEditor";
 
 export function WritingCanvas() {
-    const { content, isWaitingForSelection, regenerate, status, updateContent, saveVersion } = useAgentStore();
+    const { content, isWaitingForSelection, regenerate, status, updateContent, saveVersion, resetSession } = useAgentStore();
     const [copied, setCopied] = useState(false);
+    const [showResetConfirm, setShowResetConfirm] = useState(false);
     const isGenerating = status === 'writing' || status === 'thinking';
+
+    // P24-C: New creation handler
+    const handleNewCreation = () => {
+        setShowResetConfirm(true);
+    };
+
+    const confirmNewCreation = () => {
+        resetSession();
+        setShowResetConfirm(false);
+        toast.success('已重置，可以开始新创作');
+    };
 
     // Manual Save (Ctrl+S)
     const handleManualSave = () => {
@@ -150,7 +162,42 @@ ${marked.parse(content)}
                                 <RefreshCw className={cn("w-3 h-3", isGenerating && "animate-spin")} />
                                 {UI_TEXT.actions.regenerate}
                             </button>
+                            <button
+                                onClick={handleNewCreation}
+                                disabled={isGenerating}
+                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors disabled:opacity-50 border border-red-200 shadow-sm"
+                                title="清空当前内容，开始新创作"
+                            >
+                                <FilePlus className="w-3 h-3" />
+                                新建
+                            </button>
                         </div>
+
+                        {/* P24-C: Reset Confirmation Dialog */}
+                        {showResetConfirm && (
+                            <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center" onClick={() => setShowResetConfirm(false)}>
+                                <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm mx-4 space-y-4" onClick={(e) => e.stopPropagation()}>
+                                    <h3 className="text-lg font-semibold text-zinc-900">确认新建创作？</h3>
+                                    <p className="text-sm text-zinc-600">
+                                        当前内容将被清空，包括草稿历史和评审记录。此操作无法撤销。
+                                    </p>
+                                    <div className="flex gap-3 justify-end">
+                                        <button
+                                            onClick={() => setShowResetConfirm(false)}
+                                            className="px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-lg transition-colors"
+                                        >
+                                            取消
+                                        </button>
+                                        <button
+                                            onClick={confirmNewCreation}
+                                            className="px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
+                                        >
+                                            确认清空
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="animate-in fade-in duration-500">
                             <RichEditor

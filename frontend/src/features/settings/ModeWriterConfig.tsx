@@ -22,7 +22,7 @@ const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: Re
 // 复用 AgentModelConfig 的模型列表
 const PROVIDER_MODELS = {
     [PROVIDER_IDS.VOLCENGINE]: [
-        { id: 'doubao-seed-1-8-251228', name: '豆包 Seed 1.8', description: '快速/创意强' },
+        { id: 'doubao-seed-2-0-lite-260215', name: '豆包 Seed 2.0 Lite', description: '快速/创意强' },
         { id: 'deepseek-v3-2-251201', name: 'DeepSeek V3.2', description: '深度推理/联网' },
         { id: 'doubao-1.5-pro-32k-250115', name: '豆包 1.5 Pro 32K', description: '长文本' },
     ],

@@ -260,7 +260,7 @@ export default function SettingsPage() {
                 onChange={(e) => setModel(e.target.value)}
                 className="w-full p-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none cursor-pointer"
               >
-                <option value="doubao-seed-1-8-251228">豆包 Seed 1.8 (推荐)</option>
+                <option value="doubao-seed-2-0-lite-260215">豆包 Seed 2.0 Lite (推荐)</option>
                 <option value="deepseek-v3-2-251201">DeepSeek V3.2</option>
                 <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
                 <option value="gemini-3-pro-preview">Gemini 3 Pro Preview</option>

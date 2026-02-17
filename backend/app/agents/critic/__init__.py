@@ -10,6 +10,7 @@ from .standard import standard_critic
 from .skip import skip_critic
 
 CRITIC_REGISTRY = {
+    "short_article": standard_critic,  # P24: 补注册
     "mid_article": standard_critic,
     "long_article": standard_critic,
     "tutorial": standard_critic,

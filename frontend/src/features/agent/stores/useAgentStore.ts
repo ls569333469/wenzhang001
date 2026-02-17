@@ -6,6 +6,9 @@ import { TimelineStep } from '../../studio/components/timeline/AgentTimeline';
 import { toast } from 'sonner';
 import { useAgentModelStore } from './useAgentModelStore';
 import { useModeWriterStore } from './useModeWriterStore';
+import { useModeStrategistStore } from './useModeStrategistStore';
+import { useModeCriticStore } from './useModeCriticStore';
+import { useModePolisherStore } from './useModePolisherStore';
 import { usePromptStore } from '../../settings/stores/usePromptStore';
 
 // --- Types ---
@@ -142,6 +145,10 @@ interface AgentState {
     draftHistory: DraftVersion[];
     currentVersionId: string | null;
 
+    // P23: Material prefill for "去创作" flow
+    materialPrefill: string | null;
+    materialContext: string | null;  // full article content passed to strategist
+
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
     confirmStrategy: (option: any, selectedTitle?: string) => Promise<void>; // Step 2 Trigger
@@ -152,6 +159,8 @@ interface AgentState {
     updateContent: (content: string) => void; // P19: Manual Content Update
     saveVersion: (source: 'ai' | 'user', summary?: string) => void; // P19 Phase 3
     restoreVersion: (versionId: string) => void; // P19 Phase 3
+    setMaterialPrefill: (text: string | null) => void; // P23
+    setMaterialContext: (text: string | null) => void; // P23
 }
 
 // --- Initial Data ---
@@ -206,6 +215,10 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     // P19 Phase 3
     draftHistory: [],
     currentVersionId: null,
+
+    // P23: Restore from sessionStorage if available
+    materialPrefill: (typeof window !== 'undefined' && sessionStorage.getItem('qs_material_prefill')) || null,
+    materialContext: (typeof window !== 'undefined' && sessionStorage.getItem('qs_material_context')) || null,
 
     startSession: async ({ input, config }) => {
         // P14-B: Load Agent Models & Provider Keys
@@ -339,17 +352,34 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             // 2. Initiate Request to /analyze (Step 1)
             // Backend expects: { input, mode, style, length, narrative_type, references, api_config }
 
-            // P14-C: 使用模式专属 Writer 配置覆盖 agent_config.writer
+            // P24-D: 使用模式专属配置覆盖所有 agent
             const currentMode = config.mode || 'mid_article';
+            const modeStrategistConfig = useModeStrategistStore.getState().getStrategistForMode(currentMode);
             const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
-            const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
+            const modeCriticConfig = useModeCriticStore.getState().getCriticForMode(currentMode);
+            const modePolisherConfig = useModePolisherStore.getState().getPolisherForMode(currentMode);
 
             const finalAgentConfig = {
                 ...agentConfigPayload,
+                strategist: {
+                    provider: modeStrategistConfig.provider,
+                    model_id: modeStrategistConfig.model,
+                    api_key: providerKeys[modeStrategistConfig.provider] || ''
+                },
                 writer: {
                     provider: modeWriterConfig.provider,
                     model_id: modeWriterConfig.model,
-                    api_key: modeWriterApiKey
+                    api_key: providerKeys[modeWriterConfig.provider] || ''
+                },
+                critic: {
+                    provider: modeCriticConfig.provider,
+                    model_id: modeCriticConfig.model,
+                    api_key: providerKeys[modeCriticConfig.provider] || ''
+                },
+                polisher: {
+                    provider: modePolisherConfig.provider,
+                    model_id: modePolisherConfig.model,
+                    api_key: providerKeys[modePolisherConfig.provider] || ''
                 }
             };
 
@@ -365,7 +395,14 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 // P13: 添加 API 配置
                 api_config: getAPIConfig(),
                 agent_config: finalAgentConfig, // P14-C: 使用覆盖后的配置
+                // P23: 素材原文作为参考
+                material_context: get().materialContext || undefined,
             };
+
+            // P23: Clear material context after sending
+            if (get().materialContext) {
+                set({ materialContext: null });
+            }
 
             // NOTE: Changing endpoint to /analyze
             const endpoint = `${API_BASE_URL}/analyze`;
@@ -453,17 +490,34 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 }
             });
 
-            // P14-C: 使用模式专属 Writer 配置覆盖
+            // P24-D: 使用模式专属配置覆盖所有 agent
             const currentMode = lastRequestPayload.config?.mode || lastRequestPayload.mode || 'mid_article';
+            const modeStrategistConfig = useModeStrategistStore.getState().getStrategistForMode(currentMode);
             const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
-            const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
+            const modeCriticConfig = useModeCriticStore.getState().getCriticForMode(currentMode);
+            const modePolisherConfig = useModePolisherStore.getState().getPolisherForMode(currentMode);
 
             const finalAgentConfig = {
                 ...agentConfigPayload,
+                strategist: {
+                    provider: modeStrategistConfig.provider,
+                    model_id: modeStrategistConfig.model,
+                    api_key: providerKeys[modeStrategistConfig.provider] || ''
+                },
                 writer: {
                     provider: modeWriterConfig.provider,
                     model_id: modeWriterConfig.model,
-                    api_key: modeWriterApiKey
+                    api_key: providerKeys[modeWriterConfig.provider] || ''
+                },
+                critic: {
+                    provider: modeCriticConfig.provider,
+                    model_id: modeCriticConfig.model,
+                    api_key: providerKeys[modeCriticConfig.provider] || ''
+                },
+                polisher: {
+                    provider: modePolisherConfig.provider,
+                    model_id: modePolisherConfig.model,
+                    api_key: providerKeys[modePolisherConfig.provider] || ''
                 }
             };
 
@@ -561,17 +615,34 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 }
             });
 
-            // P14-C: 使用模式专属 Writer 配置覆盖
+            // P24-D: 使用模式专属配置覆盖所有 agent
             const currentMode = lastRequestPayload.mode || lastRequestPayload.config?.mode || 'mid_article';
+            const modeStrategistConfig = useModeStrategistStore.getState().getStrategistForMode(currentMode);
             const modeWriterConfig = useModeWriterStore.getState().getWriterForMode(currentMode);
-            const modeWriterApiKey = providerKeys[modeWriterConfig.provider] || '';
+            const modeCriticConfig = useModeCriticStore.getState().getCriticForMode(currentMode);
+            const modePolisherConfig = useModePolisherStore.getState().getPolisherForMode(currentMode);
 
             const finalAgentConfig = {
                 ...agentConfigPayload,
+                strategist: {
+                    provider: modeStrategistConfig.provider,
+                    model_id: modeStrategistConfig.model,
+                    api_key: providerKeys[modeStrategistConfig.provider] || ''
+                },
                 writer: {
                     provider: modeWriterConfig.provider,
                     model_id: modeWriterConfig.model,
-                    api_key: modeWriterApiKey
+                    api_key: providerKeys[modeWriterConfig.provider] || ''
+                },
+                critic: {
+                    provider: modeCriticConfig.provider,
+                    model_id: modeCriticConfig.model,
+                    api_key: providerKeys[modeCriticConfig.provider] || ''
+                },
+                polisher: {
+                    provider: modePolisherConfig.provider,
+                    model_id: modePolisherConfig.model,
+                    api_key: providerKeys[modePolisherConfig.provider] || ''
                 }
             };
 
@@ -621,10 +692,35 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             isWaitingForSelection: false,
             lastGeneratedContent: '',
             lastSelectedOption: null,
+            lastRequestPayload: null,
             // P10-1: Reset title state
             titleCandidates: [],
-            selectedTitle: ''
+            selectedTitle: '',
+            // P19: Reset analysis & critique state
+            analysisResult: null,
+            critiqueResult: null,
+            draftHistory: [],
+            currentVersionId: null,
+            // P23: Clear prefill (don't clear here — it's consumed by HeroInput)
         });
+    },
+
+    // P23: Set material prefill text (persisted to sessionStorage)
+    setMaterialPrefill: (text: string | null) => {
+        set({ materialPrefill: text });
+        if (typeof window !== 'undefined') {
+            if (text) sessionStorage.setItem('qs_material_prefill', text);
+            else sessionStorage.removeItem('qs_material_prefill');
+        }
+    },
+
+    // P23: Set material context (full article for strategist, persisted)
+    setMaterialContext: (text: string | null) => {
+        set({ materialContext: text });
+        if (typeof window !== 'undefined') {
+            if (text) sessionStorage.setItem('qs_material_context', text);
+            else sessionStorage.removeItem('qs_material_context');
+        }
     },
 
     // P10-1: Set selected title
@@ -818,7 +914,27 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
             // Phase 6 & 8: Receive Options AND Info Anchors
             // P10-1: Now also receives title_candidates
             // P20: Now also receives context_card
-            const payload = event.payload; // { info_anchors, options, style_notes, title_candidates, context_card }
+            // P25: Now also receives auto_proceed + plans (short_article mode)
+            const payload = event.payload;
+
+            // P25: 短篇模式 - 自动继续，不需要用户选择方案
+            if (payload && payload.auto_proceed && payload.plans) {
+                console.log('[P25] Auto-proceeding with plans:', payload.plans.length);
+                set({
+                    analysisResult: {
+                        info_anchors: payload.info_anchors,
+                        style_notes: payload.style_notes,
+                        context_card: payload.context_card
+                    },
+                    status: 'writing'
+                });
+                // 自动确认：将完整策略数据作为 selected_option 传入
+                const { confirmStrategy } = get();
+                setTimeout(() => confirmStrategy(payload), 0);
+                break;
+            }
+
+            // 其他模式：显示选题方案让用户选择
             if (payload && payload.options) {
                 set({
                     strategyOptions: payload.options,
@@ -876,7 +992,9 @@ function handleEvent(event: BackendEvent, set: any, get: any) {
             break;
         }
         case 'end': {
-            if (!currentState.isWaitingForSelection) {
+            // P25: 不要在 auto-proceed 期间重置状态
+            // auto-proceed 已将 status 设为 'writing'，end 事件不应覆盖
+            if (!currentState.isWaitingForSelection && currentState.status !== 'writing') {
                 set({ status: 'completed' });
             }
             break;

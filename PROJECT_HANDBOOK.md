@@ -1,43 +1,27 @@
-# Quantum Studio v7.2 - 项目手册
+# Quantum Studio v10.0 - 项目手册
 
-> **更新日期**: 2026-01-31  
-> **版本**: v7.2 (P13 Config Sync + P14 Planning)  
+> **更新日期**: 2026-02-13  
+> **版本**: v10.0 (P24 全模式独立管线)  
 > **维护者**: AI 开发团队
 
 ---
 
-## 📐 文档规范
+##  项目概述
 
-> 本手册是项目的 **Single Source of Truth**，所有重要决策、进度、问题追踪都应记录在此。
-
-### 图标标准
-
-| 图标 | 含义 | 使用场景 |
-|:----:|:-----|:---------|
-| 🟡 | 待处理问题 | 需要关注但未修复的问题 |
-| 🟠 | 低优先级问题 | 可延后处理的问题 |
-| 🟢 | 已修复问题 | 已解决的问题归档 |
-| 📅 | 未来计划 | 短期和中期规划 |
-| ✅ | 已完成 | 标记在 Initiative 标题后 |
-| 🛠️ | 进行中 | 当前正在开发的功能 |
-| ⭐ | 核心短板 | "爆款"核心能力缺失 |
-
----
-
-## 📦 项目概述
-
-**Quantum Studio** 是一个基于多 Agent 协作的 **爆款内容生成引擎**，采用 LangGraph 编排多个专业化 Agent（Strategist、Writer、Critic、Polisher）完成高质量 Web3 内容生成。
+**Quantum Studio** 是一个基于多 Agent 协作的 **爆款内容生成引擎**，采用 LangGraph 编排 4 个专业化 Agent（Strategist → Writer → Critic → Polisher）完成高质量 Web3 内容生成。
 
 ### 核心价值主张
 > 不只是 AI 写作，而是 **专门帮你打造爆款**。
 
-### 📐 系统架构文档
+### 技术栈
 
-| 文档 | 链接 |
-|------|------|
-| **系统架构流程图** | [00_Arch_Quantum_Studio系统架构流程图.md](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/00_Arch_Quantum_Studio系统架构流程图.md) |
-| **数据清洗架构图** | [14-1_Arch_数据清洗工具架构流程图.md](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/frontend_design/14-1_Arch_数据清洗工具架构流程图.md) |
-| **数据清洗手册** | [12-3_Manual_Lark数据清洗工具手册.md](https://github.com/ls569333469/wenzhang001/blob/main/reports/design_docs/frontend_design/12-3_Manual_Lark数据清洗工具手册.md) |
+| 层 | 技术 |
+|---|------|
+| **前端** | Next.js 16 + Tailwind CSS + Shadcn/UI + TipTap 富文本编辑器 |
+| **后端 API** | FastAPI (Python 3.13) |
+| **Agent 编排** | LangGraph (有状态工作流) |
+| **LLM 模型** | 火山引擎 (豆包 Seed / DeepSeek V3.2) |
+| **数据源** | Google Sheets (风格样本 + 知识库 + 素材池) |
 
 ---
 
@@ -74,353 +58,246 @@
 - **血** 决定 "怎么写" → 风格、句式、情绪节奏、爆款公式
 - **肉** 决定 "写什么" → Web3 专业内容、数据、案例
 - **最终产出** = 用 Web2 爆款技巧包装 Web3 专业内容
-- **输出平台** = Twitter + 币安广场
-
-## 📊 项目综合评分：72/100
-
-> **评估日期**: 2026-01-21 (基于全链路 E2E DOM 测试)
-
-| 维度 | 得分 | 说明 |
-|------|------|------|
-| **功能完整性** | 8/10 | 核心创作流程已打通，4阶段Agent协作运行正常 |
-| **技术稳定性** | 7/10 | Schema问题已修复，边缘case仍需测试 |
-| **UI/UX 设计** | 7/10 | 视觉效果不错，交互反馈和加载状态可优化 |
-| **爆款生成能力** | 6/10 | ⭐ **核心短板**，详见下文 |
-| **差异化竞争力** | 7/10 | 多Agent协作是亮点，但未充分展现 |
 
 ---
 
-## ⭐ "爆款内容生成" 核心差距分析
+## 🏗️ 系统架构
 
-> **关键洞察**: 技术骨架已搭好，但"爆款"这个核心价值点体现不足。
+### 创作管线 (4 级 Agent)
 
-### 1. 缺少"爆款要素"提取与显性化 ⭐ 关键
-- **现状**: 策略分析只给了角度选择，没有告诉用户"为什么这个角度更容易爆"
-- **改进**: 应该显示：
-  - 热点关联度评分
-  - 情绪触发点分析（FOMO/焦虑/好奇心）
-  - 预估传播力指数
-  - 目标受众画像匹配度
+```
+用户输入素材
+    ↓
+┌─ Strategist ────────────────────────────────┐
+│  • RAG 检索 (Google Sheets 知识库)            │
+│  • 生成 Context Card (P20 事件脉络感知)       │
+│  • 生成 3 个标题选项                          │
+│  • 推荐创作模式 (P22 智能模式匹配)            │
+└─────────────────────────────────────────────┘
+    ↓ 用户选择标题 + 确认/覆盖模式
+┌─ Writer ────────────────────────────────────┐
+│  • 6 种独立 Writer (per-mode .py + .jinja2)  │
+│  • Anti-AI 禁用词约束 (P21, 250+ 词)         │
+│  • 生成 3 个变体版本供选择                    │
+└─────────────────────────────────────────────┘
+    ↓
+┌─ Critic ────────────────────────────────────┐
+│  • 5 个模式专用模板 (P24 独立化)              │
+│  • 5 维度评分 + AI 痕迹检测                   │
+│  • score < 阈值 → 自动触发重写 (阈值/次数按模式) │
+└─────────────────────────────────────────────┘
+    ↓
+┌─ Polisher ──────────────────────────────────┐
+│  • 4 个模式专用模板 (P24 独立化)              │
+│  • 最终检查清单 (节奏、禁用词、格式)           │
+└─────────────────────────────────────────────┘
+    ↓
+最终文章输出 (TipTap 富文本编辑器, P19)
+```
 
-### 2. 标题优化能力不足 ⭐ 关键
-- **现状**: 生成的标题虽然有吸引力，但没有专门的标题AB测试
-- **改进**: 应该提供：
-  - 3-5个备选标题
-  - 基于爆款公式分析（数字法则、悬念法则等）
-  - 点击率预测对比
+### 6 种创作模式
 
-### 3. 缺少实时热点注入
-- **现状**: 只使用用户输入的主题，没有主动关联近期热点
-- **改进**: 应该：
-  - 接入热点数据源（Twitter/微博趋势）
-  - 自动建议"热点+主题"结合方案
-  - 显示热度时效性
+| 模式 | 字数 | Critic | Polisher | 阈值 | 最多重写 | 定位 |
+|------|:---:|:---:|:---:|:---:|:---:|------|
+| `hot_take` 锐评 | 50-150 | ⏭️ 跳过 | ⏭️ 跳过 | — | — | Twitter 一句话快评 |
+| `short_article` 短篇 | 50-300 | ✅ | ⏭️ 跳过 | 85 | 1 | 每日快评/碎句节奏 |
+| `mid_article` 中篇 | 150-800 | ✅ | ✅ | 85 | 2 | 深度 Thread |
+| `long_article` 长篇 | 900-1800 | ✅ | ✅ | 90 | 3 | 专题研究报告 |
+| `tutorial` 教程 | 400-1500 | ✅ | ✅ | 85 | 2 | 技术教程/指南 |
+| `rewrite` 改写 | 按原文 | ✅ | ✅ | 85 | 1 | 内容改写/调性转换 |
 
-### 4. 内容结构不够"爆款化"
-- **现状**: 生成的内容偏学术/理性分析风格
-- **改进**: 应该支持：
-  - 开头钩子（Hook）强度设置
-  - 故事化程度调节
-  - 金句密度控制
-  - 节奏张力曲线可视化
+### 核心特性
 
-### 5. 缺少发布前优化建议
-- **现状**: 内容生成后直接结束
-- **改进**: 应该提供：
-  - 最佳发布时间建议
-  - 配图/封面建议
-  - SEO关键词优化提示
-  - 社交媒体摘要自动生成
-
-### 6. 用户反馈闭环缺失
-- **现状**: 一次生成即结束
-- **改进**: 应该：
-  - 支持"不够爆"的一键重写
-  - 提供爆款元素自检清单
-  - 历史爆款案例对比学习
+| 特性 | 阶段 | 说明 |
+|------|:---:|------|
+| TipTap 富文本编辑器 | P19 | 流式输出、AI 局部重写、版本历史+Diff对比、统一侧边栏 |
+| Context Card 事件脉络 | P20 | Strategist 自动生成 summary/time_context/forward_look |
+| Anti-AI Trace 痕迹消除 | P21 | 250+ 禁用词库 (YAML) 自动注入所有 Agent |
+| 智能模式匹配 | P22 | Strategist 分析素材后自动推荐 short/mid/long |
+| 每日素材源系统 | P23 | ChainCatcher 爬虫 → AI 预筛选 → Sheets 存储 → 前端素材中心 |
+| 全模式独立管线 | P24 | Critic/Polisher per-mode 独立模板 + 模型配置 |
 
 ---
 
-## 🔄 当前状态
+## 📂 目录结构
+
+```
+├── backend/
+│   └── app/
+│       ├── main.py                     # API 入口
+│       ├── graph.py                    # LangGraph 工作流编排
+│       ├── agents/
+│       │   ├── strategist.py           # 策略师 (mode 变量注入)
+│       │   ├── writer/                 # ✅ 6 模式独立 Writer
+│       │   │   ├── hot_take.py
+│       │   │   ├── short_article.py
+│       │   │   ├── mid_article.py
+│       │   │   ├── long_article.py
+│       │   │   ├── tutorial.py
+│       │   │   └── rewrite.py
+│       │   ├── critic/                 # ✅ P24 独立化
+│       │   │   ├── __init__.py         # CRITIC_REGISTRY (mode→handler)
+│       │   │   ├── standard.py         # per-mode render_prompt
+│       │   │   └── skip.py             # hot_take 跳过
+│       │   └── polisher/               # ✅ P24 独立化
+│       │       ├── __init__.py
+│       │       ├── standard.py
+│       │       └── skip.py
+│       ├── api/
+│       │   ├── materials.py            # P23 素材 CRUD
+│       │   ├── rewrite.py              # P19 AI 局部重写
+│       │   └── cleaner.py              # 数据清洗工具
+│       ├── core/
+│       │   ├── prompts.py              # 模板渲染 + 词库注入
+│       │   └── forbidden_patterns.py   # P21 禁用词加载器
+│       └── services/
+│           ├── material_fetcher/       # P23 爬虫框架
+│           │   ├── base.py             # BaseFetcher 抽象类
+│           │   └── chaincatcher.py     # 链捕手 HTML scraping
+│           ├── material_analyzer.py    # P23 AI 预筛选
+│           ├── material_sheet.py       # P23 Sheets 读写
+│           ├── google_sheets_source.py # 风格样本/知识库数据源
+│           └── sample_service.py       # 样本服务
+│   └── data/
+│       ├── config/
+│       │   └── forbidden_patterns.yaml # P21 禁用词库 (250+)
+│       └── prompts/
+│           ├── strategist.jinja2       # 策略师模板
+│           ├── writer/ (6 个)          # P18 独立模板
+│           ├── critic/ (5 个)          # P24 独立模板
+│           ├── polisher/ (4 个)        # P24 独立模板
+│           └── shared/                 # base_critic / base_polisher
+│
+├── frontend/src/features/
+│   ├── studio/
+│   │   ├── components/
+│   │   │   ├── HeroInput.tsx           # 输入区 + materialPrefill
+│   │   │   ├── WritingCanvas.tsx       # 创作画布 + 新建创作
+│   │   │   ├── MaterialCenter.tsx      # P23 素材中心
+│   │   │   ├── StrategySelector.tsx    # 策略卡片
+│   │   │   ├── TitleSelector.tsx       # 标题选择
+│   │   │   ├── editor/
+│   │   │   │   ├── RichEditor.tsx      # P19 TipTap 编辑器
+│   │   │   │   ├── EditorToolbar.tsx
+│   │   │   │   └── EditorBubbleMenu.tsx # AI 浮动菜单
+│   │   │   └── sidebar/
+│   │   │       ├── UnifiedSidebar.tsx  # 统一右侧面板
+│   │   │       ├── VersionTab.tsx      # 版本历史
+│   │   │       ├── DiffViewer.tsx      # 版本 Diff 对比
+│   │   │       └── ExportTab.tsx       # MD/HTML 导出
+│   │   └── schema.ts                  # Zod Schemas
+│   └── settings/                      # 设置页面
+│       ├── stores/usePromptStore.ts    # P15 提示词管理
+│       └── constants/defaultPrompts.ts # 默认提示词
+│
+├── reports/                            # 项目文档 (6 子目录)
+│   ├── 设计文档/    (80 文件, P00-P24)
+│   ├── 工作日志/    (24 份交接报告)
+│   ├── 测试审计/    (23 份测试报告)
+│   ├── 历史归档/    (早期文档)
+│   ├── 交接报告/    (阶段交接)
+│   └── 评估报告/    (质量评估)
+│
+├── PROJECT_HANDBOOK.md                 # 本文档
+└── PROJECT_STATUS.md                   # 项目状态 (待更新)
+```
+
+---
+
+## � 当前状态
 
 | 指标 | 值 |
 |------|-----|
-| **阶段** | E2E 全链路验证完成，进入功能增强期 |
+| **当前阶段** | P24-D (一致性补全) — 前端工作 |
 | **前端端口** | `localhost:3000` |
-| **后端端口** | `localhost:8000` (`.env.local` 配置) |
-| **已集成模型** | Gemini, DeepSeek, Doubao (火山引擎), OpenAI |
+| **后端端口** | `localhost:8000` |
+| **Git 分支** | `feature/p10-workflow-refactor` (main 待合并) |
 
-### 🤖 火山引擎模型配置 (2026-01-22)
+### 🤖 模型配置
 
 > **详细文档**: [docs/volcengine_models.md](file:///d:/AI_Projects/2026001/docs/volcengine_models.md)
 
-| 模型 | ID | 适用场景 | 成本 |
-|------|-----|----------|------|
-| **豆包 Seed** | `doubao-seed-1-8-251228` | 通用任务/多模态 | 💰 便宜 |
-| **DeepSeek V3.2** | `deepseek-v3-2-251201` | 深度推理/联网搜索 | 💰 便宜 |
+| 模型 | ID | 适用场景 |
+|------|-----|----------|
+| **豆包 Seed** | `doubao-seed-1-8-251228` | 通用任务/多模态 |
+| **DeepSeek V3.2** | `deepseek-v3-2-251201` | 深度推理/联网搜索 |
 
-**API 配置**:
-```python
-base_url = "https://ark.cn-beijing.volces.com/api/v3"
-api_key = os.getenv('ARK_API_KEY')  # 613f595c-xxxx
-```
+### P24-D 待完成事项
 
-**数据清洗推荐**:
-- `model`: `deepseek-v3-2-251201` (更便宜)
-- `temperature`: `0` (无幻觉)
+> 后端 0 改动，纯前端工作 (~12 文件)
 
----
+- Schema: 新增 `ModeStrategistConfigSchema` / `SKIP_MODES`
+- Store: 策略师/评论家/润色师 per-mode store (v2 迁移)
+- UI: Settings 页 4 智能体 × 6 模式统一卡片
+- P15: Strategist/Critic/Polisher 提示词编辑器加 6 模式 sub-tabs
+- API: `useAgentStore.ts` 覆盖 4 agent per-mode 配置下发
 
-## ✅ 已完成功能 (Milestone)
-
-### 🔹 Phase 9 - 全链路验证 (E2E Verified) ✅
-> **完成日期**: 2026-01-21
-
-#### 核心交付
-* **API Schema 修复**:
-  - `/analyze` 请求: `prompt` → `input`
-  - `/generate` 请求: `prompt` → `input`, `config` → `mode`
-  - `lastRequestPayload` 存储: 添加 `mode` 字段
-* **前端渲染修复**:
-  - `WritingCanvas.tsx`: 修复 react-markdown className 渲染崩溃
-* **E2E 验证结果**:
-  - 策略分析 ✅ → 初稿撰写 (v3) ✅ → 质量审核 (78分) ✅ → 润色打磨 ✅
-  - 生成内容正常渲染在画布中
-  - 无任何 console 错误
-
-### 🔹 Phase 3 - Island Architecture (v6.2) ✅
-> **完成日期**: 2026-01-20
-
-* **Design Lab**: 验证了三种布局方案，最终选定 Visual Variant A。
-* **架构升级**:
-  - `IslandContainer`: 统一封装悬浮、阴影、圆角逻辑。
-  - `Z-Stack Layout`: 层叠式后的背景纹理与主体内容。
-* **组件实现**:
-  - `ConfigPanel`: 接入 `nuqs` 实现 URL 状态同步。
-  - `AgentTimeline`: 可视化 Agent 思考过程 (Pulse 动画)。
-
-###  Phase 4 - Deep Research Integration ✅
-> **完成日期**: 2026-01-20
-
-* **Data Layer**:
-  - `useAgentStore`: 基于 Zustand 实现的 SSE 流式客户端。
-  - **Robust State Machine**: Idle → Connecting → Thinking → Writing → Completed。
-* **API Integration**:
-  - 对接后端 `POST /analyze` 和 `POST /generate` SSE 接口。
-  - 实现 `text/event-stream` 解析器。
-
-### � 其他已完成功能
-- **P1**: Agent 独立模型配置 ✅
-- **P2**: 提示词工程系统 ✅
-- **P3**: 选题参考功能 ✅
-- **P4**: 交互式选题 (Human-in-the-Loop) ✅
-- **P6**: 健壮性与持久化优化 ✅
-- **P7**: 项目全盘体检与治理 ✅
-- **P8**: 智能素材熔炉 (Lark Integrated) ✅
-- **P12**: Lark 数据清洗工具 (v2.2) ✅
-- **P13**: Knowledge 页面前端集成 (v7.0) ✅
-- **P14**: 工业级并行清洗 (v9.0) ✅
-  - 5 窗口并行处理半佛仙人文件夹 2-6 (392 文件)
-  - CSV 实时备份机制 (当 Lark 配额用尽自动保存)
-  - CSV 输出: 3.15 MB / 205 文件
-- **P10**: 创作工作流重构 (v7.1) ✅ 🆕
-  - Phase 1-5: Style/Length/Retention 参数链打通
-  - Phase 6: Google Sheets A/B 测试数据源集成
-  - 详见: [10-1_Exec_P10执行计划.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/10-1_Exec_P10执行计划.md)
+详见: [P24_全模式独立管线.md](file:///d:/AI_Projects/2026001/reports/设计文档/P24_全模式独立管线.md)
 
 ---
 
-## 🎯 未来规划 (Roadmap)
+## 📜 版本进度汇总 (P00 → P24)
 
-### ✅ 高优先级 - "爆款"核心能力 (已完成)
-
-| 任务 | 状态 | 实现位置 |
-|------|:----:|----------|
-| 标题AB测试模块 | ✅ | `TitleSelector.tsx` |
-| 爆款要素评分显性化 | ✅ | `ViralScoreDisplay.tsx` |
-| 开头Hook强度设置 | ✅ | `constants.ts` + `PromptEditor.tsx` |
-
-### ✅ 中优先级 - 体验优化 (已完成)
-
-| 任务 | 状态 | 实现位置 |
-|------|:----:|----------|
-| Prompt 精调 | ✅ | `PromptEditor.tsx` + Settings 页面 |
-| 发布前优化建议 | ✅ | PromptEditor 中"传播优化"模板 |
-| 内容后处理 | ✅ | 集成在 DetailPanel 中 |
-| 导出功能 | ✅ | `DetailPanel.tsx` - Markdown/HTML |
-
-### 🟢 低优先级
-
-| 任务 | 状态 | 说明 |
-|------|:----:|------|
-| UI 动画细节 | ✅ | Skeleton 组件 + Tailwind 动画 |
-| 深色模式 | ⚠️ | Tailwind 配置就绪，待添加切换 UI |
-
-### 📌 当前进行中
-
-#### P13 - 前后端配置同步 ✅ (2026-01-31)
-> **状态**: 已完成 9/11 方案  
-> **详见**: [P13_Plan_前后端配置同步.md](file:///d:/AI_Projects/2026001/reports/设计文档/P13_Plan_前后端配置同步.md)
-
-| 修复项 | 状态 |
-|--------|:----:|
-| retention_level 传递 | ✅ |
-| APIConfig/AgentConfig Schema | ✅ |
-| sanitize_input 输入过滤 | ✅ |
-| /config/agents API | ✅ |
-| critique_update SSE | ✅ |
-| 标题数量 3-5→3 | ✅ |
-| Settings 多 Provider | ⏭️ P14 |
-| CritiquePanel UI | ⏭️ P14 |
-
-#### P14 - UI 重构与评分展示 🛠️
-> **状态**: 规划完成，7 个方案，预估 10.7h  
-> **详见**: [P14_Plan_UI重构与评分展示.md](file:///d:/AI_Projects/2026001/reports/设计文档/P14_Plan_UI重构与评分展示.md)
-
-| # | 任务 | 工时 |
-|---|------|:----:|
-| 1 | Settings 多 Provider 重构 | 3h |
-| 2 | CritiquePanel 评分展示 | 2h |
-| 3 | 锐评模式 (Hot Take) | 2h |
-| 4 | 修复 Polisher 幻觉 | 30min |
-| 5 | 思维链详情展示 | 2h |
-| 6 | 右侧隐藏栏修复 | 1h |
-| 7 | 🔴 Router 阈值 Bug | 10min |
-
-#### P11 - 数据管线与内容生产体系
-> **状态**: 规划完成 v7.1，待执行  
-> **详见**: [11-0_Plan_风格库完善与内容生产.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/11-0_Plan_风格库完善与内容生产.md)
-
-### 📌 远期规划
-
-- [ ] 风格微调系统 (上传样本文章学习风格)
-- [ ] 内容历史与版本管理
-- [ ] 多渠道发布 (WordPress, Ghost)
+| 阶段 | 名称 | 状态 |
+|:---:|------|:---:|
+| P00-P04 | 前端基建 + Island 架构 + UI/UX 打磨 | ✅ |
+| P05 | 全链路测试验证 (E2E + DOM) | ✅ |
+| P06 | 爆款能力升级 (标题AB/评分/自适应布局) | ✅ |
+| P07 | 企业级数据管线 | ✅ |
+| P08 | Lark/Knowledge 集成 + Web3 批量清洗 | ✅ |
+| P09 | Strategist 创作流程架构 | ✅ |
+| P10 | Google Sheets 迁移 + 工作流重构 | ✅ |
+| P11 | API 密钥安全防护 + 模式专属指导 | ✅ |
+| P12 | 简化版评分系统 | ✅ |
+| P13 | 前后端配置同步 (9/11 方案) | ✅ |
+| P14 | 模式模块化架构 + Settings UI 重构 | ✅ |
+| P15 | 全智能体提示词编辑器 (可视化 Prompt) | ✅ |
+| P16 | Studio UX + Target-Centric 字数控制 | ✅ |
+| P17 | 统一配置上下文 | ✅ |
+| P18 | 方案B全模块独立架构 (Writer 6模式) | ✅ |
+| P19 | TipTap 富文本编辑器 (流式/重写/版本/导出) | ✅ |
+| P20 | Context Card 事件脉络感知 | ✅ |
+| P21 | Anti-AI Trace 痕迹消除 (250+ 禁用词) | ✅ |
+| P22 | 智能模式匹配 (short_article Writer) | ✅ |
+| P23 | 每日素材源系统 (爬虫+预筛选+素材中心) | ✅ |
+| **P24** | **全模式独立管线 (A/B/C done, D 待完成)** | 🔄 |
 
 ---
 
-## ⚠️ 已知问题与注意事项
+## 🎯 后续规划
 
-### � 已修复问题 (2026-01-21)
-
-1. **API Schema 不匹配 (422 Error)**:
-   - *Issue*: 前端发送 `{prompt, config}` 但后端期望 `{input, mode}`
-   - *Fix*: 更新 `useAgentStore.ts` 中的 `startSession` 和 `confirmStrategy`
-
-2. **ReactMarkdown 渲染崩溃**:
-   - *Issue*: `className` prop 在新版本不再支持
-   - *Fix*: 将 `className` 移至包裹的 `<div>` 上
-
-3. **前端端口配置错误**:
-   - *Issue*: `.env.local` 配置为 8002，后端运行在 8000
-   - *Fix*: 更新 `.env.local` 为 `NEXT_PUBLIC_API_URL=http://localhost:8000`
-
-### 📋 待处理问题
-
-1. **🔴 Router 阈值不一致** (2026-01-31 发现)
-   - *Issue*: `graph.py` router_logic 阈值 < 90，但 Critic PASS 阈值 ≥ 85
-   - *现象*: 88分 PASS 后仍被打回重写
-   - *修复*: 将 `< 90` 改为 `< 85`
-   - *状态*: 待 P14 修复
-
-2. **🟡 Polisher 幻觉** (2026-01-31 发现)
-   - *Issue*: Polisher 自行添加未经证实的价格数据 (如 "BTC支撑位42000美元")
-   - *风险*: 可能误导用户
-   - *状态*: 待 P14 修复
-
-3. **🟡 短素材低质量** (2026-01-31 发现)
-   - *Issue*: 输入 < 100 字时，Writer 凑字数、评分低
-   - *建议*: 增加"锐评模式" (50-150 字输出)
-   - *状态*: 待 P14 实现
-
-4. **🟡 思维链详情不足**
-   - *Issue*: 右侧思维链只显示简单状态，无法看各版本差异
-   - *状态*: 待 P14 实现
-
-5. **🟡 前端无历史记录**
-   - *Issue*: 用户无法查看之前生成的内容
-   - *状态*: 待规划
-
-6. **LLM 时间感知错误**
-   - *Issue*: 生成的文章中可能出现错误年份
-   - *建议*: 在 Prompt 中注入当前日期
-
-7. **Lark API 配额耗尽** 🟢 (已解决)
-   - *Issue*: 错误 `99991403: This month's API call quota has been exceeded`
-   - *解决*: 实现 Google Sheets A/B 测试数据源作为备用
+| 优先级 | 任务 | 说明 |
+|:---:|------|------|
+| 🔴 | P24-D 一致性补全 | 4智能体×6模式前端统一 |
+| � | Git 整理 | 提交未提交变更 + 合并 feature 到 main |
+| 🟡 | 短篇提示词定稿 | 开头/结尾组合写入正式模板 (P23) |
+| 🟡 | 提示词质量迭代 | 基于评估报告优化（融合密度链+结构化钩子） |
+| 🟢 | 扩展数据源 | 吴说区块链 + 深潮 TechFlow fetcher |
+| 🟢 | 定时抓取 | 素材源 cron 自动化 |
+| 🟢 | 深色模式 | Tailwind 配置就绪，待添加切换 UI |
 
 ---
 
 ## 🔐 安全规范
 
-> **更新日期**: 2026-01-28
-
 ### API 密钥保护
 
-| 措施 | 状态 | 说明 |
-|------|:----:|------|
-| `.gitignore` 规则 | ✅ | 已包含 `user_config.json`、`.env` |
-| Pre-commit Hook | ✅ | 自动检测 `AIzaS`、`sk-` 等敏感模式 |
-| 模板文件 | ✅ | `backend/config/user_config.example.json` |
+| 措施 | 状态 |
+|------|:----:|
+| `.gitignore` 规则 (env, config, venv) | ✅ |
+| Pre-commit Hook (自动检测敏感模式) | ✅ |
+| 模板文件 `user_config.example.json` | ✅ |
 
-### 敏感文件清单
+### 敏感文件 (绝对不能提交到 Git)
 
-**绝对不能提交到 Git：**
-- `backend/config/user_config.json` - API 密钥配置
-- `.env` / `.env.local` - 环境变量
-- `backend/venv/` - Python 虚拟环境
-
-### 密钥轮换建议
-
-- 每季度轮换一次 API 密钥
-- 发现泄露后立即轮换
-- 详见：[11_Plan_API密钥安全防护.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/11_Plan_API密钥安全防护.md)
-
-### Google Sheets 数据源配置 (P10.6)
-
-> **添加日期**: 2026-01-29
-
-| 环境变量 | 值 | 说明 |
-|----------|-----|------|
-| `SAMPLE_SOURCE` | `ab_test` | A/B 测试模式 |
-| `AB_TEST_GOOGLE_RATIO` | `0.5` | 50% 使用 Google Sheets |
-| `GOOGLE_SHEETS_SPREADSHEET` | Spreadsheet ID | 从 URL 提取 |
-| `GOOGLE_SHEETS_CREDENTIALS` | `config/google_service_account.json` | Service Account 密钥 |
-
-**数据源切换**:
-- `lark` - 仅使用 Lark 本地缓存
-- `google_sheets` - 仅使用 Google Sheets
-- `ab_test` - 随机分流 (推荐)
-
-**相关文件**:
-- `backend/app/services/google_sheets_source.py`
-- `backend/app/services/sample_service.py`
-- [20260129_Google_Sheets迁移方案.md](file:///d:/AI_Projects/2026001/reports/design_docs/frontend_design/20260129_Google_Sheets迁移方案.md)
+- `backend/config/user_config.json` — API 密钥配置
+- `.env` / `.env.local` — 环境变量
+- `backend/venv/` — Python 虚拟环境
+- `config/google_service_account.json` — Google Sheets 凭证
 
 ---
 
-## 📁 文件组织规范
-
-### 目录结构标准
-
-| 目录 | 用途 |
-|------|------|
-| `reports/daily_log/` | 每日交接报告 |
-| `reports/design_docs/` | 设计文档 |
-| `reports/test_artifacts/` | 测试截图和结果 |
-| `backend/scripts/` | 后端测试脚本 |
-
-### 文件命名规范
-
-| 类型 | 格式 | 示例 |
-|------|------|------|
-| 每日报告 | `YYYYMMDD_类型_标题.md` | `20260128_白班_交接报告.md` |
-| 设计文档 | `序号_类型_标题.md` | `10_Plan_创作工作流架构重构.md` |
-| 测试截图 | `描述_日期.png` | `strategy_test_20260128.png` |
-
----
-
-##  快速启动指南
+## � 快速启动指南
 
 ### 1. 启动后端
 ```bash
@@ -436,8 +313,8 @@ npm run dev
 ```
 
 ### 3. 访问应用
-- 主页: http://localhost:3000
-- Studio: http://localhost:3000/studio
+- 创作工坊: http://localhost:3000/studio
+- 素材中心: http://localhost:3000/studio?view=materials
 - 设置: http://localhost:3000/settings
 - 健康检查: http://localhost:8000/health
 
@@ -445,50 +322,58 @@ npm run dev
 
 ## 📡 API 端点参考
 
+### 核心创作流程
+
 | 方法 | 端点 | 说明 |
 |------|------|------|
-| `POST` | `/analyze` | SSE 流式分析，返回选题选项 |
-| `POST` | `/generate` | SSE 流式生成，执行完整工作流 |
+| `POST` | `/analyze` | SSE 流式分析，返回策略选项 + Context Card + 推荐模式 |
+| `POST` | `/generate` | SSE 流式生成，执行完整 Writer→Critic→Polisher 管线 |
+| `POST` | `/hot-take` | 锐评模式独立 API (不走 LangGraph，直接生成 3 条) |
+
+### 素材系统 (P23)
+
+| 方法 | 端点 | 说明 |
+|------|------|------|
+| `POST` | `/materials/fetch` | 爬取 + AI 预筛选 + 写入 Sheets |
+| `GET` | `/materials/fetch/{job_id}` | 查询抓取任务状态 |
+| `GET` | `/materials/list` | 读取素材列表 (支持筛选+分页) |
+| `GET` | `/materials/stats` | 素材统计数据 |
+| `POST` | `/materials/mark-used?url=` | 标记素材已使用 |
+
+### AI 重写 (P19)
+
+| 方法 | 端点 | 说明 |
+|------|------|------|
+| `POST` | `/api/rewrite` | 选中文字 → AI 重写/扩展/简化 |
+
+### 配置管理
+
+| 方法 | 端点 | 说明 |
+|------|------|------|
 | `GET` | `/health` | 健康检查 |
-| `GET` | `/config/models` | 获取可用模型列表 |
+| `GET` | `/config/models` | 可用模型列表 |
 | `GET/POST` | `/config/keys` | API Key 配置读写 |
-| `GET/POST` | `/config/prompts/{agent}` | Agent Prompt 读写 |
+| `GET/POST` | `/config/prompts/{agent}` | Agent Prompt 模板读写 |
+| `GET` | `/config/styles` | 可用风格列表 |
+| `GET/POST` | `/config/features` | Feature Flags 配置 |
 
 ---
 
-## 📂 目录结构
+## 📈 项目里程碑
 
-```
-├── frontend/                    # Next.js 前端
-│   └── src/
-│       ├── app/                 # 页面路由
-│       │   ├── page.tsx         # Dashboard
-│       │   └── studio/          # Studio (Island Layout)
-│       ├── components/          # UI 组件
-│       └── features/            # 业务模块
-│
-├── backend/                     # FastAPI 后端
-│   └── app/
-│       ├── main.py              # API 入口
-│       ├── graph.py             # LangGraph 工作流
-│       └── agents/              # Agent 实现
-│
-├── reports/                     # 设计文档与报告
-└── PROJECT_HANDBOOK.md          # 本文档
-```
+| 日期 | 版本 | 关键交付 |
+|------|------|----------|
+| 2026-02-10 | v10.0 | P23 素材源系统 Phase 0-3 全交付 |
+| 2026-02-09 | v9.5 | P24 A/B/C 完成 (Critic/Polisher独立化) |
+| 2026-02-08 | v9.0 | P22 智能模式匹配 + P23 短篇提示词 v1 定稿 |
+| 2026-02-06 | v8.5 | P21 Anti-AI 禁用词库 + P20 Context Card |
+| 2026-02-04 | v8.0 | P19 TipTap 富文本编辑器全 5 阶段完成 |
+| 2026-02-03 | v7.5 | P18 方案B全模块独立架构 |
+| 2026-01-31 | v7.2 | P13 前后端配置同步 + P14 规划 |
+| 2026-01-29 | v7.1 | P10 Google Sheets 迁移完成 |
+| 2026-01-21 | v6.2 | E2E 全链路验证通过 |
+| 2026-01-15 | v5.0 | Alpha 技术闭环 |
 
 ---
 
-## 📈 项目复盘 (Project Reviews)
-
-| 日期 | 版本 | 阶段 | 关键结论 |
-|------|------|------|----------|
-| 2026-01-31 | v7.2 | P13 Complete | ✅ 前后端配置同步 9/11 完成，发现 3 个关键 Bug，P14 规划完成 |
-| 2026-01-29 | v7.1 | P10 Verified | 🔄 创作工作流重构 Phase 1-6 完成，Google Sheets A/B 测试集成 |
-| 2026-01-27 | v6.4 | Industrial | 🏭 工业级清洗验证：5窗口并行+CSV备份，半佛仙人2-6完成 |
-| 2026-01-21 | v6.2 | E2E Verified | 全链路打通，需补足"爆款"核心能力 |
-| 2026-01-15 | v5.0 | Alpha | 技术闭环完成，需进行全真长文压力测试 |
-
----
-
-*Last updated: 2026-01-31 23:53*
+*Last updated: 2026-02-13 13:30*

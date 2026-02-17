@@ -25,10 +25,10 @@ PROVIDER_CONFIGS = {
         "base_url": "https://ark.cn-beijing.volces.com/api/v3",
         "env_key": "ARK_API_KEY",
         "config_key": "doubao",
-        "default_model": "doubao-seed-1-8-251228",  # 豆包最新模型 (自动匹配)
+        "default_model": "doubao-seed-2-0-lite-260215",  # 豆包最新模型 (自动匹配)
         "available_models": [
             "deepseek-v3-2-251201",
-            "doubao-seed-1-8-251228",
+            "doubao-seed-2-0-lite-260215",
             "doubao-1.5-pro-256k-250115",
             "doubao-1.5-lite-32k-250115"
         ]

@@ -1,6 +1,7 @@
 """
-标准 Polisher - P18 模块化架构
+标准 Polisher - P24 全模式独立管线
 适用于: mid_article, long_article, tutorial, rewrite
+每个模式使用独立 jinja2 模板（polisher/{mode}.jinja2）
 """
 from datetime import datetime
 from app.core.llm import generate_text
@@ -12,7 +13,7 @@ def standard_polisher(draft: str, critique_feedback: str, api_config: dict = Non
                       custom_prompts: dict = None, mode: str = "mid_article",
                       length_constraints: dict = None) -> str:
     """
-    标准 Polisher - 最终润色和语言风格注入
+    标准 Polisher - P24 模式专用润色
     约束已烘焙到模板中
     """
     if api_config is None:
@@ -31,6 +32,11 @@ def standard_polisher(draft: str, critique_feedback: str, api_config: dict = Non
     context = {
         "current_time_str": datetime.now().isoformat(),
         "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
+        # P24: 注入草稿和反馈到模板上下文
+        "draft": draft,
+        "critique_feedback": critique_feedback,
+        "length_constraints": length_constraints,
+        "mode": mode,
     }
 
     # P15: Custom Prompt Support
@@ -46,12 +52,9 @@ def standard_polisher(draft: str, critique_feedback: str, api_config: dict = Non
         system_prompt += f"\n\n【字数：{max_words}字以内 | 语言：中文】"
         user_prompt = "请现在润色内容。【重要：必须使用中文输出！】"
     else:
-        system_prompt = render_prompt("polisher", context)
-        user_prompt = f"""草稿: {draft}
-
-编辑反馈: {critique_feedback}
-
-请现在润色内容。【重要：必须使用中文输出！字数上限: {max_words}字】"""
+        # P24: 加载模式专用模板 (polisher/mid_article.jinja2 等)
+        system_prompt = render_prompt(f"polisher/{mode}", context)
+        user_prompt = f"请现在润色内容。【重要：必须使用中文输出！字数上限: {max_words}字】"
     
     calculated_max_tokens = min(int(max_words * 1.5), 16384)
     

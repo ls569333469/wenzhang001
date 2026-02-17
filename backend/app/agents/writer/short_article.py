@@ -1,7 +1,7 @@
 """
-短篇 Writer - P23v2 六法重构 + 动态方法选择 + 多版本输出
-字数: 200-500字 (适合X/Twitter正常发文)
-先分析素材特征，再定制3种最佳重构方法，最后生成3个版本
+短篇 Writer - P25 提示词拆分版
+字数: 50-300字 (适合X/Twitter正常发文)
+策略官分析素材 → 写手按方案直接写3个版本
 """
 from datetime import datetime
 from app.core.llm import generate_text
@@ -12,80 +12,24 @@ from app.services.sample_service import sample_service
 import re
 import json
 
-HARD_CONSTRAINTS = "\n\n【字数：200-500字 | 语言：中文】"
-
-# 六法框架定义
-SIX_METHODS = {
-    "结构重构": "改变叙事顺序（结果先行/倒叙/从细节切入），重新分配主次关系",
-    "视角转换": "换叙述主体（受影响方/散户/行业/历史对比），换时空维度",
-    "内容重构": "具体→抽象（提炼规律）或抽象→具体（画面感），补充推断",
-    "逻辑重组": "正向→反向论证，线性→发散思维，因果关系重排",
-    "形式转换": "陈述→设问/反问，直述→比喻，说理→画面感/对话体",
-    "语言优化": "书面→口语化，严谨→轻松，长句→短句，加语气词",
-}
+HARD_CONSTRAINTS = "\n\n【字数：50-300字 | 语言：中文】"
 
 
-def _analyze_material(raw_input: str, api_config: dict) -> list:
+def _extract_plans_from_strategy(strategy_json: str) -> list:
     """
-    P23v2: 轻量分析步骤 - 分析素材特征，推荐3种最佳方法组合
-    返回: [{"label": "版本名", "methods": ["方法1", "方法2"], "instruction": "具体指令"}, ...]
+    P25: 从策略官输出中提取版本方案
+    策略官输出格式: {"material_analysis": {...}, "plans": [...]}
+    不再有兜底方案 — 策略官必须输出有效plans
     """
-    analysis_prompt = f"""你是一个内容策略分析师。现在有一条加密货币素材需要改写成3个不同版本的原创短评。
-
-素材：
-{raw_input}
-
-六种可用的重构方法：
-1. 结构重构：{SIX_METHODS["结构重构"]}
-2. 视角转换：{SIX_METHODS["视角转换"]}
-3. 内容重构：{SIX_METHODS["内容重构"]}
-4. 逻辑重组：{SIX_METHODS["逻辑重组"]}
-5. 形式转换：{SIX_METHODS["形式转换"]}
-6. 语言优化：{SIX_METHODS["语言优化"]}
-
-请分析这条素材的特征，然后为它定制3个版本的重构方案。每个版本选2-3种方法组合。
-3个版本之间的风格和角度要有明显差异。
-
-用JSON格式输出，不要输出其他内容：
-[
-  {{"label": "版本名(3-5字)", "methods": ["方法1", "方法2"], "instruction": "一句话说明这个版本具体怎么写"}},
-  {{"label": "版本名", "methods": ["方法1", "方法2"], "instruction": "一句话说明"}},
-  {{"label": "版本名", "methods": ["方法1", "方法2", "方法3"], "instruction": "一句话说明"}}
-]"""
-
-    provider = api_config.get("provider", "volcengine")
-    api_key = api_config.get("api_key") or None
-    model_id = api_config.get("model_id") or None
-
     try:
-        result = generate_text(
-            prompt=analysis_prompt,
-            api_key=api_key,
-            model_id=model_id,
-            provider=provider,
-            temperature=0.3,  # 低温度保证稳定JSON输出
-            system_prompt="你是内容策略分析师，只输出JSON，不要额外解释。",
-            max_tokens=500,
-        )
-        # 解析JSON
-        result = result.strip()
-        # 处理可能的markdown代码块
-        if result.startswith("```"):
-            result = re.sub(r'^```\w*\n?', '', result)
-            result = re.sub(r'\n?```$', '', result)
-            result = result.strip()
-        plans = json.loads(result)
-        if isinstance(plans, list) and len(plans) >= 3:
+        obj = json.loads(strategy_json) if isinstance(strategy_json, str) else strategy_json
+        plans = obj.get("plans", [])
+        if isinstance(plans, list) and len(plans) > 0:
+            print(f"--- [P25] ✅ 从策略官输出提取到 {len(plans)} 个版本方案 ---")
             return plans[:3]
-    except Exception as e:
-        print(f"--- [P23v2] 分析失败({e})，使用默认方案 ---")
-
-    # 兜底：返回默认方案
-    return [
-        {"label": "换个角度聊", "methods": ["视角转换", "结构重构"], "instruction": "原文站机构/专家角度，你站散户/普通人角度，吐槽或感慨"},
-        {"label": "说透本质", "methods": ["内容重构", "逻辑重组"], "instruction": "别罗列事实，把这事最讽刺/最荒谬的点挖出来，让人恍然大悟"},
-        {"label": "群里聊天", "methods": ["语言优化", "形式转换"], "instruction": "就像在群里看到消息第一反应蹦出来说的话，短句连射"},
-    ]
+        raise ValueError(f"策略官输出plans为空或无效: {plans}")
+    except json.JSONDecodeError as e:
+        raise ValueError(f"策略官JSON解析失败: {e}")
 
 
 def _post_process(text: str) -> str:
@@ -109,21 +53,16 @@ def _generate_variant(
     api_config: dict,
     custom_prompts: dict = None,
 ) -> str:
-    """根据分析结果生成单个版本"""
-    methods = plan.get("methods", [])
-    instruction = plan.get("instruction", "")
+    """P26: 根据策略官方案生成单个版本"""
     label = plan.get("label", "")
+    angle = plan.get("angle", "")
+    hook = plan.get("hook", "")
+    tone = plan.get("tone", "")
+    emotion_arc = plan.get("emotion_arc", "")
+    ending_style = plan.get("ending_style", "")
 
-    # 构建方法说明
-    method_details = []
-    for m in methods:
-        if m in SIX_METHODS:
-            method_details.append(f"- **{m}**：{SIX_METHODS[m]}")
-
-    methods_text = "\n".join(method_details) if method_details else "- 自由发挥"
-
-    # 构建动态 system prompt（不用模板，直接拼接）
-    ctx = {**system_prompt_context, "variant_method": "dynamic"}
+    # 构建动态 system prompt
+    ctx = {**system_prompt_context}
     if custom_prompts and custom_prompts.get("writer"):
         from jinja2 import Environment
         env = Environment()
@@ -132,35 +71,53 @@ def _generate_variant(
     else:
         system_prompt = render_modular_prompt("writer/short_article.jinja2", ctx)
 
-    # user prompt — 极简指令，不做学术分析
+    # P26: user prompt — 给方向 + 情感弧线 + 收尾方式
     user_prompt = f"""素材：
 {raw_input}
 
 你要写的版本：{label}
-风格指令：{instruction}
+角度：{angle}
+第一句的方向：{hook}
+语气：{tone}
+情感走向：{emotion_arc}
+收尾方式：{ending_style}
 
-直接写。{length_constraints['target']}字左右。第一句就带感情，别铺垫。"""
+⚠️ 严禁编造素材中没有的事实、场景、对话、数据。只能基于素材内容进行观点重构和表达重构。
+⚠️ 记住节奏要求：必须有长短句交替，禁止全篇碎片短句。
+直接写。{length_constraints['target']}字左右。第一句就亮出判断。"""
 
     provider = api_config.get("provider", "volcengine")
     api_key = api_config.get("api_key") or None
     model_id = api_config.get("model_id") or None
     max_tokens = min(int(length_constraints.get("max", 500) * 1.5), 2048)
 
-    response_text = generate_text(
-        prompt=user_prompt,
-        api_key=api_key,
-        model_id=model_id,
-        provider=provider,
-        temperature=0.88,
-        system_prompt=system_prompt,
-        max_tokens=max_tokens,
-    )
-    return _post_process(response_text)
+    # P25: 重试机制 — 遇到 Connection error 时最多重试2次
+    import time
+    max_retries = 2
+    for attempt in range(max_retries + 1):
+        try:
+            response_text = generate_text(
+                prompt=user_prompt,
+                api_key=api_key,
+                model_id=model_id,
+                provider=provider,
+                temperature=0.88,
+                system_prompt=system_prompt,
+                max_tokens=max_tokens,
+            )
+            return _post_process(response_text)
+        except Exception as e:
+            if attempt < max_retries and "Connection" in str(e):
+                wait_time = 3 * (attempt + 1)
+                print(f"--- [P25] ⚠️ {label} 第{attempt+1}次重试（{wait_time}s后）: {e} ---")
+                time.sleep(wait_time)
+            else:
+                raise
 
 
 def short_article_writer(state: dict) -> dict:
     """
-    短篇 Writer - P23v2 动态方法选择 + 多版本输出
+    短篇 Writer - P25 提示词拆分版
     """
     raw_input = state["raw_input"]
     api_config = state.get("api_config", {})
@@ -168,7 +125,7 @@ def short_article_writer(state: dict) -> dict:
     style = state.get("style", "mimeng")
 
     mode_config = get_mode_config("short_article")
-    length_constraints = mode_config.get("length", {"min": 200, "max": 500, "target": 350})
+    length_constraints = mode_config.get("length", {"min": 50, "max": 300, "target": 200})
 
     custom_length = state.get("custom_length", 0)
     if custom_length and custom_length > 0:
@@ -205,17 +162,17 @@ def short_article_writer(state: dict) -> dict:
 
     custom_prompts = state.get("custom_prompts", {})
 
-    # P23v2 Step 1: 分析素材，动态推荐3种方法
-    print("--- [P23v2] Step 1: 分析素材特征 ---")
-    plans = _analyze_material(raw_input, api_config)
+    # P25: 从策略官输出中提取版本方案（不再自己调LLM分析）
+    print("--- [P25] 从策略官输出提取版本方案 ---")
+    plans = _extract_plans_from_strategy(strategy_json)
     for i, p in enumerate(plans):
-        print(f"  版本{i+1}: {p['label']} | 方法: {', '.join(p.get('methods',[]))} | {p.get('instruction','')}")
+        print(f"  版本{i+1}: {p['label']} | 语气: {p.get('tone','')} | 情感: {p.get('emotion_arc','')} | 收尾: {p.get('ending_style','')}")
 
-    # P23v2 Step 2: 按推荐方法生成3个版本
+    # P25: 写手按策略官方案生成3个版本
     variants = []
     for i, plan in enumerate(plans):
         try:
-            print(f"--- [P23v2] Step 2: 生成版本 {i+1}/3: {plan['label']} ---")
+            print(f"--- [P26] 写手生成版本 {i+1}/3: {plan['label']} ({plan.get('tone','')}) | {plan.get('ending_style','')} ---")
             content = _generate_variant(
                 raw_input=raw_input,
                 plan=plan,
@@ -233,7 +190,7 @@ def short_article_writer(state: dict) -> dict:
                 "char_count": len(content) if content else 0,
             })
         except Exception as e:
-            print(f"--- [P23v2] ❌ 版本 {i+1} 失败: {e} ---")
+            print(f"--- [P25] ❌ 版本 {i+1} 失败: {e} ---")
             variants.append({
                 "key": f"variant_{i+1}",
                 "label": plan["label"],

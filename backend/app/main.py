@@ -14,6 +14,7 @@ from .core.mode_configs import get_mode_config, MODE_CONFIGS  # P14: 模式配�
 from .core.lark_client import lark_client
 from .api.cleaner import router as cleaner_router
 from .api.rewrite import router as rewrite_router
+from .api.materials import router as materials_router
 import os
 from pathlib import Path
 
@@ -32,6 +33,7 @@ async def get_web2_authors():
 # Register routers
 app.include_router(cleaner_router)
 app.include_router(rewrite_router)
+app.include_router(materials_router)
 
 @app.on_event("startup")
 async def startup_event():
@@ -101,6 +103,7 @@ class GenerateRequest(BaseModel):
     api_config: APIConfig = APIConfig()
     agent_config: Optional[Dict[str, APIConfig]] = None
     custom_prompts: Optional[CustomPrompts] = None  # P15: 自定义提示词 
+    material_context: Optional[str] = None  # P23: 素材原文参考
 
 @app.post("/analyze")
 async def analyze_narrative(request: GenerateRequest):
@@ -126,6 +129,7 @@ async def analyze_narrative(request: GenerateRequest):
                 "api_config": request.api_config.dict(),
                 "agent_config": agent_config_dict,
                 "custom_prompts": request.custom_prompts.dict() if request.custom_prompts else {},  # P15
+                "material_context": request.material_context or "",  # P23: 素材原文
             }
             
             # --- Step 1: Context & Style Loading ---
@@ -171,6 +175,12 @@ async def analyze_narrative(request: GenerateRequest):
                     p20_logger.info(f"[P20] ✅ context_card 已生成: {strategy_data['context_card']}")
                 else:
                     p20_logger.warning("[P20] ⚠️ Strategist 未返回 context_card 字段")
+                
+                # P25: 短篇策略官输出 plans 而非 options
+                # 不需要用户选择，直接标记 auto_proceed 让前端自动继续
+                if "plans" in strategy_data and "options" not in strategy_data:
+                    strategy_data["auto_proceed"] = True
+                    p20_logger.info(f"[P25] ✅ 短篇模式 auto_proceed: {len(strategy_data['plans'])} 个 plans")
                 
                 # Send the final result as a distinct event type
                 yield f"data: {json.dumps({'type': 'analysis_result', 'payload': strategy_data})}\n\n"

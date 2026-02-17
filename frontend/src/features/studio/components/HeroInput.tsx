@@ -27,7 +27,7 @@ import {
 export function HeroInput() {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const [input, setInput] = useState('');
-    const { startSession, status } = useAgentStore();
+    const { startSession, status, materialPrefill, setMaterialPrefill } = useAgentStore();
     const phase = mapStatusToPhase(status);
     const isRunning = status === 'thinking' || status === 'listening' || status === 'connecting';
     const isIdle = phase === 'idle';
@@ -75,6 +75,16 @@ export function HeroInput() {
             textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
         }
     }, [input]);
+
+    // P23: Auto-fill from material prefill
+    useEffect(() => {
+        if (materialPrefill) {
+            setInput(materialPrefill);
+            setMaterialPrefill(null);
+            // Focus the textarea
+            setTimeout(() => textareaRef.current?.focus(), 100);
+        }
+    }, [materialPrefill, setMaterialPrefill]);
 
     const handleStart = () => {
         if (!input.trim()) return;

@@ -53,6 +53,12 @@ def node_strategist(state: AgentState):
         # We start with the option data
         plan_data = option.copy()
         
+        # P25: 如果选项包含 plans（短篇策略官直接传入完整策略数据），
+        # 直接作为 strategy_json 传给 writer，无需转换
+        if "plans" in plan_data:
+            print(f"--- [P25] ✅ 直接使用策略官 plans: {len(plan_data['plans'])} 个版本方案 ---")
+            steps.append({"step": "plans", "content": f"加载 {len(plan_data['plans'])} 个版本方案"})
+        
         # Inject info_anchors from state if available (passed from frontend -> main -> state)
         if state.get("info_anchors"):
             plan_data["info_anchors"] = state["info_anchors"]
@@ -177,6 +183,18 @@ async def node_writer(state: AgentState):
     # 从结果中提取 draft
     draft = result.get("draft_content", "") if isinstance(result, dict) else str(result)
     
+    # P25: 短篇模式下，将多个版本合并为一个展示字符串
+    variants = result.get("variants", []) if isinstance(result, dict) else []
+    if variants and len(variants) > 1:
+        combined_parts = []
+        for i, v in enumerate(variants):
+            label = v.get("label", f"版本{i+1}")
+            content = v.get("content", "")
+            char_count = v.get("char_count", len(content))
+            combined_parts.append(f"## 版本{i+1}：{label}（{char_count}字）\n\n{content}")
+        draft = "\n\n---\n\n".join(combined_parts)
+        print(f"--- [P25] ✅ 合并 {len(variants)} 个版本到 draft_v1 ({len(draft)} 字) ---")
+    
     word_count = len(draft)
     steps.append({"step": "generated", "content": f"生成内容: {word_count} 字"})
     steps.append({"step": "completed", "content": "初稿完成，提交主编审核"})
@@ -194,6 +212,21 @@ def node_critic(state: AgentState):
     print("--- [Step 3] Critic is Reviewing ---")
     
     mode = state.get("mode", "mid_article")
+    config = get_mode_config(mode)
+    
+    # P25: 跳过评审时直接通过，设置 final_content 以备跳过润色
+    if config.get("skip_critic", False):
+        print(f"--- [Step 3] Skipping Critic for mode: {mode} ---")
+        steps = [{"step": "skipped", "content": "评审已跳过（测试模式）"}]
+        return {
+            "critique_score": 100,
+            "critique_feedback": "PASS: 评审已跳过",
+            "critique_verdict": "PASS",
+            "critique_result": {},
+            "final_content": state.get("draft_v1", ""),  # P25: 预设 final_content 以备跳过润色
+            "logs": [f"[{datetime.now().isoformat()}] Critic skipped for {mode}."],
+            "thinking_steps": [{"agent": "critic", "steps": steps, "status": "completed"}]
+        }
     
     # 记录思考步骤
     steps = []
@@ -265,6 +298,17 @@ def node_polisher(state: AgentState):
     print("--- [Step 4] Polisher is Refining ---")
     
     mode = state.get("mode", "mid_article")
+    config = get_mode_config(mode)
+    
+    # P25: 跳过润色时直接返回已有 final_content
+    if config.get("skip_polisher", False):
+        print(f"--- [Step 4] Skipping Polisher for mode: {mode} ---")
+        steps = [{"step": "skipped", "content": "润色已跳过（测试模式）"}]
+        return {
+            "final_content": state.get("final_content", state.get("draft_v1", "")),
+            "logs": [f"[{datetime.now().isoformat()}] Polisher skipped for {mode}."],
+            "thinking_steps": [{"agent": "polisher", "steps": steps, "status": "completed"}]
+        }
     
     # 记录思考步骤
     steps = []
@@ -308,8 +352,11 @@ def router_logic(state: AgentState):
     mode = state.get("mode", "mid_article")  # P16: 默认中篇
     config = get_mode_config(mode)
     
-    # P14: 如果模式跳过评审，直接进润色
+    # P25: 如果跳过评审
     if config.get("skip_critic", False):
+        # 同时跳过润色 → 直接结束
+        if config.get("skip_polisher", False):
+            return "end"
         return "polisher"
     
     # P14: 获取模式专属阈值
@@ -320,6 +367,10 @@ def router_logic(state: AgentState):
     # P14-Fix7: 使用模式专属阈值
     if state.get("critique_score", 0) < pass_threshold and state.get("revision_count", 0) < max_revisions:
         return "writer"  # 打回重写
+    
+    # 通过评审后检查是否跳过润色
+    if config.get("skip_polisher", False):
+        return "end"
     return "polisher"    # 通过
 
 # 构建图
@@ -338,7 +389,8 @@ workflow.add_conditional_edges(
     router_logic,
     {
         "writer": "writer",
-        "polisher": "polisher"
+        "polisher": "polisher",
+        "end": END  # P25: 跳过 critic + polisher 直接结束
     }
 )
 workflow.add_edge("polisher", END)

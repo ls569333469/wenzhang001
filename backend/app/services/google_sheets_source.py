@@ -118,8 +118,8 @@ class GoogleSheetsDataSource:
         Get random samples matching the style.
         Each style has its own worksheet (mimeng, banfo, etc.)
         """
-        # P10.7: 使用 style 作为工作表名称，而不是固定的 self._sheet_name
-        sheet_name = style.lower()
+        # P23: 使用 style_ 前缀作为工作表名称
+        sheet_name = f"style_{style.lower()}"
         
         # Load data if not cached
         if sheet_name not in self._cache:

@@ -1,13 +1,14 @@
 """
-标准 Critic - P18 模块化架构
-适用于: mid_article, long_article, tutorial, rewrite
+标准 Critic - P24 全模式独立管线
+适用于: short_article, mid_article, long_article, tutorial, rewrite
+每个模式使用独立 jinja2 模板（critic/{mode}.jinja2）
 """
 from datetime import datetime
 import json
 import logging
 from app.core.llm import generate_text
 from app.core.prompts import render_prompt
-from app.core.mode_configs import get_mode_config
+from app.core.mode_configs import get_mode_config, SCORING_DIMENSIONS, PENALTY_RULES
 from app.core.forbidden_patterns import load_forbidden_patterns  # P21
 
 logger = logging.getLogger(__name__)
@@ -34,6 +35,9 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
     length_constraints = mode_config.get("length", {"min": 400, "max": 800, "target": 500})
     word_count = len(draft)
     
+    # P24: 注入模式专用评分配置
+    scoring = mode_config.get("scoring", {})
+    
     context = {
         "current_time_str": datetime.now().isoformat(),
         "mode": mode,
@@ -43,6 +47,10 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         "word_count": word_count,
         "draft": draft,
         "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
+        # P24: 模式专用评分参数
+        "penalty_cap": scoring.get("penalty_cap", 30),
+        "pass_threshold": scoring.get("pass_threshold", 85),
+        "refine_threshold": scoring.get("refine_threshold", 70),
     }
     
     # P15: Custom Prompt Support
@@ -54,7 +62,8 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
             raw_input=draft
         )
     else:
-        system_prompt = render_prompt("critic", context)
+        # P24: 加载模式专用模板 (critic/short_article.jinja2 等)
+        system_prompt = render_prompt(f"critic/{mode}", context)
 
     user_prompt = """请严格按照系统提示中的评审流程和输出格式进行评分，输出纯JSON。"""
     
