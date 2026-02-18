@@ -105,3 +105,26 @@ strategy_test_*.png
 e2e_*.png
 full_flow_*.png
 
+# ===================================
+# Build Cache
+# ===================================
+tsconfig.tsbuildinfo
+
+# ===================================
+# Backup / Snapshot files
+# ===================================
+*_backup_*
+*_backup.*
+
+# ===================================
+# Temp scripts (debug, test, benchmark)
+# ===================================
+debug_*.py
+run_test_*.py
+run_benchmark_*.py
+audit_*.py
+
+# ===================================
+# Creations data (P27 local saves)
+# ===================================
+backend/data/creations/

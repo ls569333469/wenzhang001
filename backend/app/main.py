@@ -15,6 +15,7 @@ from .core.lark_client import lark_client
 from .api.cleaner import router as cleaner_router
 from .api.rewrite import router as rewrite_router
 from .api.materials import router as materials_router
+from .api.creations import router as creations_router
 import os
 from pathlib import Path
 
@@ -34,6 +35,7 @@ async def get_web2_authors():
 app.include_router(cleaner_router)
 app.include_router(rewrite_router)
 app.include_router(materials_router)
+app.include_router(creations_router)
 
 @app.on_event("startup")
 async def startup_event():

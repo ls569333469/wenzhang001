@@ -7,6 +7,7 @@ import { ConfigIsland } from "@/features/studio/components/layout/ConfigIsland";
 import { UnifiedSidebar } from "@/features/studio/components/sidebar/UnifiedSidebar";
 import { WritingCanvas } from "@/features/studio/components/WritingCanvas";
 import { MaterialCenter } from "@/features/studio/components/MaterialCenter";
+import { CreationHistory } from "@/features/studio/components/CreationHistory";
 // DetailPanel deprecated in P19 Phase 2
 
 /**
@@ -15,6 +16,7 @@ import { MaterialCenter } from "@/features/studio/components/MaterialCenter";
  * P10-9: DetailPanel replaced by UnifiedSidebar Tabs
  * P14-C: 添加 Suspense 边界以支持 nuqs useSearchParams
  * P23: 素材中心作为 ?view=materials Tab
+ * P27: 创作历史作为 ?view=history Tab
  */
 
 function StudioContent() {
@@ -26,6 +28,15 @@ function StudioContent() {
         return (
             <StudioLayout>
                 <MaterialCenter />
+            </StudioLayout>
+        );
+    }
+
+    // P27: 创作历史视图
+    if (view === 'history') {
+        return (
+            <StudioLayout>
+                <CreationHistory />
             </StudioLayout>
         );
     }

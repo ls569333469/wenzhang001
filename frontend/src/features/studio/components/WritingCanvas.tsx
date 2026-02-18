@@ -4,18 +4,59 @@ import { HeroInput } from "./HeroInput";
 import { StrategySelector } from "./StrategySelector";
 import { useAgentStore } from "@/features/agent/stores/useAgentStore";
 import { cn } from "@/lib/utils";
-import { RefreshCw, Copy, Check, FilePlus } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { RefreshCw, Copy, Check, FilePlus, Save } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { UI_TEXT } from '@/config/constants';
 import { marked } from 'marked';
 import { RichEditor } from "./editor/RichEditor";
+import { API_BASE_URL } from '@/config/api';
 
 export function WritingCanvas() {
-    const { content, isWaitingForSelection, regenerate, status, updateContent, saveVersion, resetSession } = useAgentStore();
+    const { content, isWaitingForSelection, regenerate, status, updateContent, saveVersion, resetSession,
+        lastRequestPayload, selectedTitle, critiqueResult, materialPrefill } = useAgentStore();
     const [copied, setCopied] = useState(false);
     const [showResetConfirm, setShowResetConfirm] = useState(false);
+    const [savedToServer, setSavedToServer] = useState(false);
+    const lastSavedContent = useRef<string>('');
     const isGenerating = status === 'writing' || status === 'thinking';
+
+    // Reset saved state when content changes after save
+    useEffect(() => {
+        if (savedToServer && content !== lastSavedContent.current) {
+            setSavedToServer(false);
+        }
+    }, [content, savedToServer]);
+
+    // P27: Save to server (local file)
+    const handleSaveToServer = async () => {
+        if (!content || isGenerating) return;
+        try {
+            const wordCount = content.replace(/[#\-*>\s]/g, '').length;
+            const resp = await fetch(`${API_BASE_URL}/creations/save`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: selectedTitle || lastRequestPayload?.input?.slice(0, 50) || '无标题',
+                    content,
+                    mode: lastRequestPayload?.config?.mode || lastRequestPayload?.mode || 'unknown',
+                    input_topic: lastRequestPayload?.input || '',
+                    source_material: materialPrefill || undefined,
+                    critic_score: critiqueResult?.score || 0,
+                    critic_verdict: critiqueResult?.verdict || '',
+                    word_count: wordCount,
+                }),
+            });
+            if (!resp.ok) throw new Error('Save failed');
+            const data = await resp.json();
+            setSavedToServer(true);
+            lastSavedContent.current = content;
+            toast.success('已保存到本地', { description: `ID: ${data.id}` });
+        } catch (err) {
+            console.error('Save error:', err);
+            toast.error('保存失败');
+        }
+    };
 
     // P24-C: New creation handler
     const handleNewCreation = () => {
@@ -155,6 +196,20 @@ ${marked.parse(content)}
                                 {copied ? '已复制' : UI_TEXT.actions.copyContent}
                             </button>
                             <button
+                                onClick={handleSaveToServer}
+                                disabled={isGenerating || savedToServer}
+                                className={cn(
+                                    "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors shadow-sm border",
+                                    savedToServer
+                                        ? "text-emerald-600 bg-emerald-50 border-emerald-200 cursor-default"
+                                        : "text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-200 disabled:opacity-50"
+                                )}
+                                title="保存到本地文件"
+                            >
+                                {savedToServer ? <Check className="w-3 h-3" /> : <Save className="w-3 h-3" />}
+                                {savedToServer ? '已保存' : '保存'}
+                            </button>
+                            <button
                                 onClick={handleRegenerate}
                                 disabled={isGenerating}
                                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg transition-colors disabled:opacity-50 shadow-sm"
@@ -219,6 +274,6 @@ ${marked.parse(content)}
                     </div>
                 )}
             </div>
-        </div>
+        </div >
     );
 }
