@@ -1,7 +1,7 @@
 # Quantum Studio v10.0 - 项目手册
 
-> **更新日期**: 2026-02-13  
-> **版本**: v10.0 (P24 全模式独立管线)  
+> **更新日期**: 2026-02-19  
+> **版本**: v11.0 (P27 模式重构规划)  
 > **维护者**: AI 开发团队
 
 ---
@@ -76,7 +76,7 @@
 └─────────────────────────────────────────────┘
     ↓ 用户选择标题 + 确认/覆盖模式
 ┌─ Writer ────────────────────────────────────┐
-│  • 6 种独立 Writer (per-mode .py + .jinja2)  │
+│  • 8 种独立 Writer (per-mode .py + .jinja2)  │
 │  • Anti-AI 禁用词约束 (P21, 250+ 词)         │
 │  • 生成 3 个变体版本供选择                    │
 └─────────────────────────────────────────────┘
@@ -95,16 +95,19 @@
 最终文章输出 (TipTap 富文本编辑器, P19)
 ```
 
-### 6 种创作模式
+### 8 种创作模式 (P27 规划)
 
-| 模式 | 字数 | Critic | Polisher | 阈值 | 最多重写 | 定位 |
-|------|:---:|:---:|:---:|:---:|:---:|------|
-| `hot_take` 锐评 | 50-150 | ⏭️ 跳过 | ⏭️ 跳过 | — | — | Twitter 一句话快评 |
-| `short_article` 短篇 | 50-300 | ✅ | ⏭️ 跳过 | 85 | 1 | 每日快评/碎句节奏 |
-| `mid_article` 中篇 | 150-800 | ✅ | ✅ | 85 | 2 | 深度 Thread |
-| `long_article` 长篇 | 900-1800 | ✅ | ✅ | 90 | 3 | 专题研究报告 |
-| `tutorial` 教程 | 400-1500 | ✅ | ✅ | 85 | 2 | 技术教程/指南 |
-| `rewrite` 改写 | 按原文 | ✅ | ✅ | 85 | 1 | 内容改写/调性转换 |
+| 模式 | 字数 | Critic | Polisher | 状态 | 定位 |
+|------|:---:|:---:|:---:|:---:|------|
+| `hot_take` 🔥 锐评 | 50-150 | ✅ | ✅ | 🔄 改走管线 | Twitter 快评 |
+| `bullish_take` 🌸 吹捧 | 50-500 | ✅ | ✅ | 🆕 P27 | 币安/CZ/何一正面解读 |
+| `kaito_yap` 🎯 Kaito | — | ✅ | ✅ | 🆕 P27 | 项目嘴撸任务 |
+| `short_article` 💎 短篇 | 50-300 | ✅ | ⏭️ | ✅ | 每日快评/碎句节奏 |
+| `mid_article` ⬛ 中篇 | 150-800 | ✅ | ✅ | ✅ | 深度 Thread |
+| `long_article` 📖 长篇 | 900-1800 | ✅ | ✅ | ✅ | 专题研究报告 |
+| `tutorial` 📚 教程 | 400-1500 | ✅ | ✅ | ⏸️ 延后 | 技术教程/指南 |
+| `project_research` 🔬 投研 | — | ✅ | ✅ | 🆕 P27 | 项目速览 + 分析报告 |
+| ~~`rewrite` 改写~~ | — | — | — | ❌ 已删 | ~~占位符~~ |
 
 ### 核心特性
 
@@ -116,6 +119,8 @@
 | 智能模式匹配 | P22 | Strategist 分析素材后自动推荐 short/mid/long |
 | 每日素材源系统 | P23 | ChainCatcher 爬虫 → AI 预筛选 → Sheets 存储 → 前端素材中心 |
 | 全模式独立管线 | P24 | Critic/Polisher per-mode 独立模板 + 模型配置 |
+| 短篇提示词大优化 | P26 | 连珠炮式节奏、4层内容层级、人味化、25篇 benchmark |
+| 创作保存 + 模式重构规划 | P27 | 本地 Markdown 存储、历史浏览、8 模式重构方案 |
 
 ---
 
@@ -128,13 +133,12 @@
 │       ├── graph.py                    # LangGraph 工作流编排
 │       ├── agents/
 │       │   ├── strategist.py           # 策略师 (mode 变量注入)
-│       │   ├── writer/                 # ✅ 6 模式独立 Writer
+│       │   ├── writer/                 # 8 模式独立 Writer (P27)
 │       │   │   ├── hot_take.py
 │       │   │   ├── short_article.py
 │       │   │   ├── mid_article.py
 │       │   │   ├── long_article.py
-│       │   │   ├── tutorial.py
-│       │   │   └── rewrite.py
+│       │   │   └── tutorial.py
 │       │   ├── critic/                 # ✅ P24 独立化
 │       │   │   ├── __init__.py         # CRITIC_REGISTRY (mode→handler)
 │       │   │   ├── standard.py         # per-mode render_prompt
@@ -145,6 +149,7 @@
 │       │       └── skip.py
 │       ├── api/
 │       │   ├── materials.py            # P23 素材 CRUD
+│       │   ├── creations.py            # P27 创作保存 CRUD
 │       │   ├── rewrite.py              # P19 AI 局部重写
 │       │   └── cleaner.py              # 数据清洗工具
 │       ├── core/
@@ -156,6 +161,7 @@
 │           │   └── chaincatcher.py     # 链捕手 HTML scraping
 │           ├── material_analyzer.py    # P23 AI 预筛选
 │           ├── material_sheet.py       # P23 Sheets 读写
+│           ├── creation_store.py       # P27 本地 Markdown 存储
 │           ├── google_sheets_source.py # 风格样本/知识库数据源
 │           └── sample_service.py       # 样本服务
 │   └── data/
@@ -204,14 +210,14 @@
 
 ---
 
-## � 当前状态
+## 📍 当前状态
 
 | 指标 | 值 |
 |------|-----|
-| **当前阶段** | P24-D (一致性补全) — 前端工作 |
+| **当前阶段** | P27 模式重构规划 |
 | **前端端口** | `localhost:3000` |
 | **后端端口** | `localhost:8000` |
-| **Git 分支** | `feature/p10-workflow-refactor` (main 待合并) |
+| **Git 分支** | `feature/p10-workflow-refactor` (`20e831a4`) |
 
 ### 🤖 模型配置
 
@@ -222,17 +228,17 @@
 | **豆包 Seed** | `doubao-seed-1-8-251228` | 通用任务/多模态 |
 | **DeepSeek V3.2** | `deepseek-v3-2-251201` | 深度推理/联网搜索 |
 
-### P24-D 待完成事项
+### P27 当前待执行
 
-> 后端 0 改动，纯前端工作 (~12 文件)
+详见: [P27_模式重构规划.md](file:///d:/AI_Projects/2026001/reports/设计文档/P27_模式重构规划.md)
 
-- Schema: 新增 `ModeStrategistConfigSchema` / `SKIP_MODES`
-- Store: 策略师/评论家/润色师 per-mode store (v2 迁移)
-- UI: Settings 页 4 智能体 × 6 模式统一卡片
-- P15: Strategist/Critic/Polisher 提示词编辑器加 6 模式 sub-tabs
-- API: `useAgentStore.ts` 覆盖 4 agent per-mode 配置下发
-
-详见: [P24_全模式独立管线.md](file:///d:/AI_Projects/2026001/reports/设计文档/P24_全模式独立管线.md)
+| 优先级 | 任务 | 依赖 |
+|--------|------|------|
+| P0 | 删除改写润色 + 开头吸引力控件 | 无 |
+| P1 | Grok API 适配器 + 定时任务基础设施 | Grok API Key |
+| P1 | 锐评改走完整 LangGraph 管线 | 跑测试确定方向 |
+| P1 | 吹捧模式 + Kaito 模式 | Grok 适配器 + Sheet Tab |
+| P2 | 项目投研 | Grok + Gemini / Surf API |
 
 ---
 
@@ -260,7 +266,10 @@
 | P21 | Anti-AI Trace 痕迹消除 (250+ 禁用词) | ✅ |
 | P22 | 智能模式匹配 (short_article Writer) | ✅ |
 | P23 | 每日素材源系统 (爬虫+预筛选+素材中心) | ✅ |
-| **P24** | **全模式独立管线 (A/B/C done, D 待完成)** | 🔄 |
+| P24 | 全模式独立管线 (Critic/Polisher 独立化) | ✅ |
+| P25 | 20 篇 Benchmark 基准测试 | ✅ |
+| P26 | 短篇提示词大优化 (连珠炮式/4层层级/人味化) | ✅ |
+| **P27** | **创作保存 + 模式重构 (8 模式规划)** | 🔄 |
 
 ---
 
@@ -268,12 +277,14 @@
 
 | 优先级 | 任务 | 说明 |
 |:---:|------|------|
-| 🔴 | P24-D 一致性补全 | 4智能体×6模式前端统一 |
-| � | Git 整理 | 提交未提交变更 + 合并 feature 到 main |
-| 🟡 | 短篇提示词定稿 | 开头/结尾组合写入正式模板 (P23) |
-| 🟡 | 提示词质量迭代 | 基于评估报告优化（融合密度链+结构化钩子） |
+| 🔴 | P27 模式清理 | 删除改写润色 + 开头吸引力控件 |
+| 🔴 | Grok API 适配器 | 吹捧/Kaito 数据拉取前置依赖 |
+| 🟠 | 锐评改管线 | 从独立 API 迁移到 LangGraph 完整管线 |
+| 🟠 | 吹捧模式 | 币安/CZ/何一正面解读生成 |
+| 🟠 | Kaito 模式 | 项目嘴撸任务内容生成 |
+| 🟡 | 定时任务基础设施 | 每日自动拉取数据 (cron/scheduler) |
+| 🟡 | 项目投研 | leak.me + Grok/Gemini 分析 |
 | 🟢 | 扩展数据源 | 吴说区块链 + 深潮 TechFlow fetcher |
-| 🟢 | 定时抓取 | 素材源 cron 自动化 |
 | 🟢 | 深色模式 | Tailwind 配置就绪，待添加切换 UI |
 
 ---
@@ -314,6 +325,7 @@ npm run dev
 
 ### 3. 访问应用
 - 创作工坊: http://localhost:3000/studio
+- 创作历史: http://localhost:3000/studio?view=history
 - 素材中心: http://localhost:3000/studio?view=materials
 - 设置: http://localhost:3000/settings
 - 健康检查: http://localhost:8000/health
@@ -340,6 +352,15 @@ npm run dev
 | `GET` | `/materials/stats` | 素材统计数据 |
 | `POST` | `/materials/mark-used?url=` | 标记素材已使用 |
 
+### 创作保存 (P27)
+
+| 方法 | 端点 | 说明 |
+|------|------|------|
+| `POST` | `/creations/save` | 保存创作为本地 Markdown 文件 |
+| `GET` | `/creations/list` | 获取创作历史列表（分页） |
+| `GET` | `/creations/{id}` | 获取单篇创作详情 |
+| `DELETE` | `/creations/{id}` | 删除创作 |
+
 ### AI 重写 (P19)
 
 | 方法 | 端点 | 说明 |
@@ -363,6 +384,8 @@ npm run dev
 
 | 日期 | 版本 | 关键交付 |
 |------|------|----------|
+| 2026-02-19 | v11.0 | P27 创作保存功能 + 8 模式重构规划 |
+| 2026-02-18 | v10.5 | P25 Benchmark (20篇) + P26 短篇提示词大优化 |
 | 2026-02-10 | v10.0 | P23 素材源系统 Phase 0-3 全交付 |
 | 2026-02-09 | v9.5 | P24 A/B/C 完成 (Critic/Polisher独立化) |
 | 2026-02-08 | v9.0 | P22 智能模式匹配 + P23 短篇提示词 v1 定稿 |
@@ -376,4 +399,4 @@ npm run dev
 
 ---
 
-*Last updated: 2026-02-13 13:30*
+*Last updated: 2026-02-19 01:05*

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P27 ConfigPanel — 模式驱动动态面板设计</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
+            background: #0a0a0a;
+            color: #e4e4e7;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* === LAYOUT === */
+        .studio-layout {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .config-panel {
+            width: 340px;
+            min-width: 340px;
+            background: #18181b;
+            border-right: 1px solid #27272a;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #3f3f46 transparent;
+        }
+
+        .main-canvas {
+            flex: 1;
+            background: #0f0f12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .canvas-label {
+            color: #52525b;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        .canvas-label .mode-name {
+            color: #a1a1aa;
+            font-size: 18px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* === PANEL HEADER === */
+        .panel-header {
+            padding: 20px 20px 12px;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .panel-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #fafafa;
+            letter-spacing: -0.02em;
+        }
+
+        .panel-subtitle {
+            font-size: 11px;
+            color: #71717a;
+            margin-top: 2px;
+        }
+
+        /* === MODE SELECTOR === */
+        .mode-section {
+            padding: 16px 20px;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #71717a;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mode-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+        }
+
+        .mode-card {
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1.5px solid #27272a;
+            background: #1c1c1f;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .mode-card:hover {
+            background: #27272a;
+            border-color: #3f3f46;
+        }
+
+        .mode-card.active {
+            border-color: var(--accent);
+            background: var(--accent-bg);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        .mode-card .mode-icon {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .mode-card .mode-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #e4e4e7;
+        }
+
+        .mode-card .mode-desc {
+            font-size: 10px;
+            color: #71717a;
+            margin-top: 1px;
+            line-height: 1.3;
+        }
+
+        .mode-card.active .mode-title {
+            color: #fff;
+        }
+
+        .mode-card.compact {
+            padding: 8px 10px;
+        }
+
+        .mode-card.compact .mode-icon {
+            display: inline;
+            font-size: 13px;
+            margin-right: 4px;
+        }
+
+        .mode-card.compact .mode-title {
+            display: inline;
+            font-size: 11px;
+        }
+
+        .mode-card.compact .mode-desc {
+            display: none;
+        }
+
+        /* === DYNAMIC CONTENT AREA === */
+        .dynamic-area {
+            padding: 16px 20px;
+            flex: 1;
+            animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- Standard Mode (锐评/短/中/长) --- */
+        .style-section {
+            margin-bottom: 16px;
+        }
+
+        .style-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+        }
+
+        .style-pill {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #27272a;
+            background: #1c1c1f;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-size: 11px;
+        }
+
+        .style-pill:hover {
+            border-color: #3f3f46;
+        }
+
+        .style-pill.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.08);
+            color: #4ade80;
+        }
+
+        .style-pill .pill-icon {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .length-bar {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .length-chip {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #27272a;
+            background: #1c1c1f;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .length-chip:hover {
+            border-color: #3f3f46;
+        }
+
+        .length-chip.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.08);
+            color: #4ade80;
+        }
+
+        /* --- Bullish Mode --- */
+        .feed-card {
+            padding: 12px;
+            border-radius: 10px;
+            background: #1c1c1f;
+            border: 1px solid #27272a;
+            margin-bottom: 8px;
+            transition: border-color 0.15s;
+        }
+
+        .feed-card:hover {
+            border-color: #f59e0b40;
+        }
+
+        .feed-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .feed-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #000;
+            flex-shrink: 0;
+        }
+
+        .feed-handle {
+            font-size: 12px;
+            font-weight: 600;
+            color: #e4e4e7;
+        }
+
+        .feed-time {
+            font-size: 10px;
+            color: #52525b;
+            margin-left: auto;
+        }
+
+        .feed-text {
+            font-size: 11px;
+            color: #a1a1aa;
+            line-height: 1.5;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .filter-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .filter-tag.active {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border-color: #f59e0b40;
+        }
+
+        .filter-tag.inactive {
+            background: #27272a;
+            color: #71717a;
+        }
+
+        .refresh-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .refresh-btn {
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: #27272a;
+            border: none;
+            transition: color 0.15s;
+        }
+
+        .refresh-btn:hover {
+            color: #fbbf24;
+        }
+
+        /* --- Kaito Mode --- */
+        .project-list {
+            margin-bottom: 14px;
+        }
+
+        .project-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #27272a;
+            background: #1c1c1f;
+            margin-bottom: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.15s;
+        }
+
+        .project-item:hover {
+            border-color: #3f3f46;
+        }
+
+        .project-item.active {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, 0.06);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.1);
+        }
+
+        .project-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .project-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #e4e4e7;
+        }
+
+        .project-meta {
+            font-size: 10px;
+            color: #52525b;
+        }
+
+        .project-badge {
+            margin-left: auto;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            background: rgba(6, 182, 212, 0.12);
+            color: #22d3ee;
+        }
+
+        .add-project {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px dashed #3f3f46;
+            background: transparent;
+            color: #52525b;
+            font-size: 11px;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+            transition: all 0.15s;
+        }
+
+        .add-project:hover {
+            border-color: #06b6d4;
+            color: #06b6d4;
+        }
+
+        .angle-section {
+            padding: 12px;
+            border-radius: 10px;
+            background: #1c1c1f;
+            border: 1px solid #27272a;
+        }
+
+        .angle-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #a1a1aa;
+            margin-bottom: 8px;
+        }
+
+        .angle-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .angle-tag {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            background: rgba(6, 182, 212, 0.1);
+            color: #67e8f9;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .angle-tag:hover {
+            background: rgba(6, 182, 212, 0.2);
+            border-color: rgba(6, 182, 212, 0.4);
+        }
+
+        .angle-hint {
+            font-size: 10px;
+            color: #52525b;
+            margin-top: 8px;
+        }
+
+        /* --- Research Mode --- */
+        .research-input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1.5px solid #27272a;
+            background: #1c1c1f;
+            color: #e4e4e7;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-bottom: 16px;
+        }
+
+        .research-input:focus {
+            border-color: #8b5cf6;
+        }
+
+        .research-input::placeholder {
+            color: #52525b;
+        }
+
+        .source-card {
+            padding: 12px;
+            border-radius: 10px;
+            border: 1.5px solid #27272a;
+            background: #1c1c1f;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .source-card:hover {
+            border-color: #3f3f46;
+        }
+
+        .source-card.active {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.06);
+        }
+
+        .source-card.disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .source-icon {
+            font-size: 20px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #27272a;
+            flex-shrink: 0;
+        }
+
+        .source-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: #e4e4e7;
+        }
+
+        .source-desc {
+            font-size: 10px;
+            color: #71717a;
+        }
+
+        .source-badge-coming {
+            margin-left: auto;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 600;
+            background: #27272a;
+            color: #71717a;
+        }
+
+        .source-check {
+            margin-left: auto;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #8b5cf6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #a78bfa;
+        }
+
+        .output-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .output-pill {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1.5px solid #27272a;
+            background: #1c1c1f;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .output-pill:hover {
+            border-color: #3f3f46;
+        }
+
+        .output-pill.active {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.08);
+            color: #c4b5fd;
+        }
+
+        /* === ADVANCED SETTINGS (共用) === */
+        .advanced-section {
+            padding: 16px 20px;
+            border-top: 1px solid #27272a;
+        }
+
+        .advanced-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #71717a;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 6px 0;
+        }
+
+        .advanced-toggle:hover {
+            color: #a1a1aa;
+        }
+
+        .advanced-toggle .arrow {
+            transition: transform 0.2s;
+            font-size: 10px;
+        }
+
+        .advanced-toggle .arrow.open {
+            transform: rotate(90deg);
+        }
+
+        .slider-group {
+            margin-top: 12px;
+        }
+
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #a1a1aa;
+            margin-bottom: 4px;
+        }
+
+        .slider-label .val {
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+        .slider-track {
+            width: 100%;
+            height: 4px;
+            border-radius: 2px;
+            background: #27272a;
+            position: relative;
+            margin-bottom: 14px;
+        }
+
+        .slider-fill {
+            height: 100%;
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .slider-thumb {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+            border: 2px solid;
+        }
+
+        /* === START BUTTON === */
+        .start-btn-area {
+            padding: 16px 20px;
+            border-top: 1px solid #27272a;
+            background: #18181b;
+        }
+
+        .start-btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+            border: none;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .start-btn:hover::after {
+            left: 100%;
+        }
+
+        /* Mode-specific colors */
+        [data-mode="hot_take"] .start-btn,
+        [data-mode="short_article"] .start-btn,
+        [data-mode="mid_article"] .start-btn,
+        [data-mode="long_article"] .start-btn {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+        }
+
+        [data-mode="bullish_take"] .start-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+        }
+
+        [data-mode="kaito_yap"] .start-btn {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: #fff;
+        }
+
+        [data-mode="project_research"] .start-btn {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: #fff;
+        }
+
+        /* === DESIGN ANNOTATION OVERLAY === */
+        .annotation-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1c1c1f;
+            border-top: 1px solid #27272a;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 100;
+        }
+
+        .anno-badge {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+        }
+
+        .anno-text {
+            font-size: 12px;
+            color: #71717a;
+        }
+
+        .anno-text strong {
+            color: #a1a1aa;
+        }
+
+        /* Hide all dynamic areas by default */
+        .dynamic-area {
+            display: none;
+        }
+
+        .dynamic-area.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="studio-layout" id="app">
+        <!-- LEFT: CONFIG PANEL -->
+        <div class="config-panel" id="configPanel">
+            <!-- Header -->
+            <div class="panel-header">
+                <div class="panel-title">✨ 创作配置</div>
+                <div class="panel-subtitle">定义 AI 的思考模式与输出风格</div>
+            </div>
+
+            <!-- Mode Selector (always visible) -->
+            <div class="mode-section">
+                <div class="section-label">📝 创作模式</div>
+                <div class="mode-grid">
+                    <div class="mode-card active" data-mode-btn="hot_take" onclick="switchMode('hot_take')">
+                        <span class="mode-icon">🔥</span>
+                        <span class="mode-title">锐评</span>
+                        <div class="mode-desc">极简短评，3条候选</div>
+                    </div>
+                    <div class="mode-card" data-mode-btn="short_article" onclick="switchMode('short_article')">
+                        <span class="mode-icon">💬</span>
+                        <span class="mode-title">短篇</span>
+                        <div class="mode-desc">X正常发文，50-300字</div>
+                    </div>
+                    <div class="mode-card" data-mode-btn="mid_article" onclick="switchMode('mid_article')">
+                        <span class="mode-icon">⬛</span>
+                        <span class="mode-title">中篇</span>
+                        <div class="mode-desc">快速产出，要点突出</div>
+                    </div>
+                    <div class="mode-card" data-mode-btn="long_article" onclick="switchMode('long_article')">
+                        <span class="mode-icon">📖</span>
+                        <span class="mode-title">长篇</span>
+                        <div class="mode-desc">全面深度分析</div>
+                    </div>
+                    <div class="mode-card" data-mode-btn="bullish_take" onclick="switchMode('bullish_take')">
+                        <span class="mode-icon">🌸</span>
+                        <span class="mode-title">吹捧</span>
+                        <div class="mode-desc">币安/CZ/何一正面解读</div>
+                    </div>
+                    <div class="mode-card" data-mode-btn="kaito_yap" onclick="switchMode('kaito_yap')">
+                        <span class="mode-icon">🎯</span>
+                        <span class="mode-title">Kaito</span>
+                        <div class="mode-desc">项目嘴撸任务</div>
+                    </div>
+                    <div class="mode-card" data-mode-btn="project_research" onclick="switchMode('project_research')">
+                        <span class="mode-icon">🔬</span>
+                        <span class="mode-title">投研</span>
+                        <div class="mode-desc">项目速览 + 分析报告</div>
+                    </div>
+                    <div class="mode-card compact" data-mode-btn="tutorial" onclick="switchMode('tutorial')"
+                        style="opacity:0.5; cursor:not-allowed;">
+                        <span class="mode-icon">📚</span>
+                        <span class="mode-title">教程 (延后)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DYNAMIC AREA: Standard Writing ===== -->
+            <div class="dynamic-area active" id="area-standard">
+                <div class="style-section">
+                    <div class="section-label">🎨 写作风格</div>
+                    <div class="style-grid">
+                        <div class="style-pill active">
+                            <span class="pill-icon">🔥</span>
+                            咪蒙体
+                        </div>
+                        <div class="style-pill">
+                            <span class="pill-icon">🧊</span>
+                            半佛体
+                        </div>
+                        <div class="style-pill">
+                            <span class="pill-icon">✍️</span>
+                            专业体
+                        </div>
+                    </div>
+                </div>
+                <div class="style-section">
+                    <div class="section-label">📐 篇幅长度</div>
+                    <div class="length-bar">
+                        <div class="length-chip active">推文 ~300字</div>
+                        <div class="length-chip">推文串 ~800字</div>
+                        <div class="length-chip">帖子 ~1.5k</div>
+                    </div>
+                </div>
+                <div class="style-section">
+                    <div class="section-label" style="color:#52525b;">🧠 知识库选择 <span
+                            style="font-size:9px;background:#27272a;padding:2px 6px;border-radius:4px;margin-left:6px;color:#71717a;">待重构</span>
+                    </div>
+                    <div
+                        style="font-size:11px;color:#52525b;padding:8px 12px;border:1px dashed #27272a;border-radius:8px;text-align:center;">
+                        普通模式下暂时隐藏<br>后续接 Google Sheet 样本库分类
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== DYNAMIC AREA: Bullish ===== -->
+            <div class="dynamic-area" id="area-bullish">
+                <div class="refresh-row">
+                    <div class="section-label" style="margin:0;">🌸 币安生态动态</div>
+                    <button class="refresh-btn">🔄 刷新</button>
+                </div>
+                <div class="filter-tags">
+                    <span class="filter-tag active">CZ</span>
+                    <span class="filter-tag active">何一</span>
+                    <span class="filter-tag active">Binance</span>
+                    <span class="filter-tag inactive">BNB Chain</span>
+                </div>
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <div class="feed-avatar">CZ</div>
+                        <div>
+                            <div class="feed-handle">@cz_binance</div>
+                        </div>
+                        <span class="feed-time">2h ago</span>
+                    </div>
+                    <div class="feed-text">Binance officially partners with Abu Dhabi Global Market for regulatory
+                        compliance framework in the Middle East...</div>
+                </div>
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <div class="feed-avatar" style="background:linear-gradient(135deg,#ec4899,#db2777);">HY</div>
+                        <div>
+                            <div class="feed-handle">@heyibinance</div>
+                        </div>
+                        <span class="feed-time">5h ago</span>
+                    </div>
+                    <div class="feed-text">Community feedback on Binance Square new creator features — "We're always
+                        listening to builders" 🫶</div>
+                </div>
+                <div class="feed-card">
+                    <div class="feed-header">
+                        <div class="feed-avatar" style="background:linear-gradient(135deg,#eab308,#ca8a04);">B</div>
+                        <div>
+                            <div class="feed-handle">@binance</div>
+                        </div>
+                        <span class="feed-time">8h ago</span>
+                    </div>
+                    <div class="feed-text">29th BNB burn completed — 1.68M BNB ($980M) permanently removed from
+                        circulation 🔥</div>
+                </div>
+                <div style="font-size:10px;color:#52525b;text-align:center;margin-top:8px;">
+                    数据源: Grok API → <code style="color:#71717a;">binance_daily</code> Tab
+                </div>
+            </div>
+
+            <!-- ===== DYNAMIC AREA: Kaito ===== -->
+            <div class="dynamic-area" id="area-kaito">
+                <div class="section-label">🎯 项目看板</div>
+                <div class="project-list">
+                    <div class="project-item active">
+                        <div class="project-logo"
+                            style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;">🐻</div>
+                        <div>
+                            <div class="project-name">Berachain</div>
+                            <div class="project-meta">L1 · Proof of Liquidity</div>
+                        </div>
+                        <span class="project-badge">5 条新动态</span>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-logo"
+                            style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;">M</div>
+                        <div>
+                            <div class="project-name">Monad</div>
+                            <div class="project-meta">L1 · 高性能 EVM</div>
+                        </div>
+                        <span class="project-badge">3 条</span>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-logo"
+                            style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;">E</div>
+                        <div>
+                            <div class="project-name">Eigenlayer</div>
+                            <div class="project-meta">Restaking · ETH 生态</div>
+                        </div>
+                        <span class="project-badge">2 条</span>
+                    </div>
+                    <button class="add-project">+ 添加项目</button>
+                </div>
+
+                <div class="angle-section">
+                    <div class="angle-title">💡 推荐角度 — Berachain</div>
+                    <div class="angle-tags">
+                        <span class="angle-tag">生态扩展</span>
+                        <span class="angle-tag">PoL 机制科普</span>
+                        <span class="angle-tag">社区治理</span>
+                        <span class="angle-tag">TVL 增长</span>
+                    </div>
+                    <div class="angle-hint">基于历史内容分析，避免与已发布内容撞角度</div>
+                </div>
+            </div>
+
+            <!-- ===== DYNAMIC AREA: Research ===== -->
+            <div class="dynamic-area" id="area-research">
+                <div class="section-label">🔬 项目投研</div>
+                <div style="margin-bottom:4px;">
+                    <div style="font-size:11px;color:#a1a1aa;margin-bottom:6px;">项目名称 / 合约地址</div>
+                    <input class="research-input" type="text" placeholder="输入项目名称或合约地址..." />
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <div class="section-label">📡 数据源选择</div>
+                    <div class="source-card active">
+                        <div class="source-icon">🤖</div>
+                        <div>
+                            <div class="source-name">Grok API</div>
+                            <div class="source-desc">推特数据 + 项目分析</div>
+                        </div>
+                        <div class="source-check">✓</div>
+                    </div>
+                    <div class="source-card active">
+                        <div class="source-icon">✨</div>
+                        <div>
+                            <div class="source-name">Gemini</div>
+                            <div class="source-desc">深度研究 + 数据交叉验证</div>
+                        </div>
+                        <div class="source-check">✓</div>
+                    </div>
+                    <div class="source-card disabled">
+                        <div class="source-icon">🌊</div>
+                        <div>
+                            <div class="source-name">Surf API</div>
+                            <div class="source-desc">链上数据分析</div>
+                        </div>
+                        <span class="source-badge-coming">即将接入</span>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="section-label">📄 输出格式</div>
+                    <div class="output-row">
+                        <div class="output-pill active">⚡ 一句话 Alpha</div>
+                        <div class="output-pill active">📊 完整分析报告</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Settings (always visible, collapsed) -->
+            <div class="advanced-section">
+                <div class="advanced-toggle" onclick="toggleAdvanced()">
+                    <span class="arrow" id="advArrow">▶</span>
+                    ⚡ 高级模型设置
+                </div>
+                <div id="advContent" style="display:none;">
+                    <div class="slider-group">
+                        <div class="slider-label"><span>创意程度 (Temperature)</span><span class="val">0.7</span></div>
+                        <div class="slider-track">
+                            <div class="slider-fill"
+                                style="width:70%;background:linear-gradient(90deg,#22c55e,#4ade80);border-radius:2px;">
+                            </div>
+                            <div class="slider-thumb"
+                                style="left:calc(70% - 6px);background:#18181b;border-color:#22c55e;"></div>
+                        </div>
+                    </div>
+                    <div class="slider-group">
+                        <div class="slider-label"><span>思维发散度 (Top P)</span><span class="val">0.9</span></div>
+                        <div class="slider-track">
+                            <div class="slider-fill"
+                                style="width:90%;background:linear-gradient(90deg,#3b82f6,#60a5fa);border-radius:2px;">
+                            </div>
+                            <div class="slider-thumb"
+                                style="left:calc(90% - 6px);background:#18181b;border-color:#3b82f6;"></div>
+                        </div>
+                    </div>
+                    <div class="slider-group">
+                        <div class="slider-label"><span>最大长度 (Tokens)</span><span class="val">4096</span></div>
+                        <div class="slider-track">
+                            <div class="slider-fill"
+                                style="width:50%;background:linear-gradient(90deg,#f59e0b,#fbbf24);border-radius:2px;">
+                            </div>
+                            <div class="slider-thumb"
+                                style="left:calc(50% - 6px);background:#18181b;border-color:#f59e0b;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Button -->
+            <div class="start-btn-area">
+                <button class="start-btn" id="startBtn">🚀 开始深度创作</button>
+            </div>
+        </div>
+
+        <!-- RIGHT: MAIN CANVAS (placeholder) -->
+        <div class="main-canvas">
+            <div class="canvas-label" id="canvasLabel">
+                <span class="mode-name" id="canvasModeName">🔥 锐评模式</span>
+                写作画布区域 — WritingCanvas<br>
+                <span style="font-size:12px;">左侧面板根据模式动态变化 ← 点击切换模式试试</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Annotation Bar -->
+    <div class="annotation-bar">
+        <span class="anno-badge">P27 设计稿</span>
+        <span class="anno-text"><strong>交互: </strong>点击左侧模式卡片，观察面板内容切换</span>
+        <span class="anno-text" style="margin-left:auto;"><strong>文件: </strong>ConfigPanel.tsx → switch(mode)
+            渲染子组件</span>
+    </div>
+
+    <script>
+        const MODE_MAP = {
+            hot_take: { area: 'area-standard', label: '🔥 锐评模式', btn: '🚀 开始深度创作', accent: '#22c55e', accentBg: 'rgba(34,197,94,0.08)', accentGlow: 'rgba(34,197,94,0.15)' },
+            short_article: { area: 'area-standard', label: '💬 短篇模式', btn: '🚀 开始深度创作', accent: '#22c55e', accentBg: 'rgba(34,197,94,0.08)', accentGlow: 'rgba(34,197,94,0.15)' },
+            mid_article: { area: 'area-standard', label: '⬛ 中篇模式', btn: '🚀 开始深度创作', accent: '#22c55e', accentBg: 'rgba(34,197,94,0.08)', accentGlow: 'rgba(34,197,94,0.15)' },
+            long_article: { area: 'area-standard', label: '📖 长篇模式', btn: '🚀 开始深度创作', accent: '#22c55e', accentBg: 'rgba(34,197,94,0.08)', accentGlow: 'rgba(34,197,94,0.15)' },
+            bullish_take: { area: 'area-bullish', label: '🌸 吹捧模式', btn: '🌸 开始生成吹捧内容', accent: '#f59e0b', accentBg: 'rgba(245,158,11,0.08)', accentGlow: 'rgba(245,158,11,0.15)' },
+            kaito_yap: { area: 'area-kaito', label: '🎯 Kaito 嘴撸', btn: '🎯 开始生成 Kaito 内容', accent: '#06b6d4', accentBg: 'rgba(6,182,212,0.08)', accentGlow: 'rgba(6,182,212,0.15)' },
+            project_research: { area: 'area-research', label: '🔬 投研模式', btn: '🔬 开始投研分析', accent: '#8b5cf6', accentBg: 'rgba(139,92,246,0.08)', accentGlow: 'rgba(139,92,246,0.15)' },
+        };
+
+        let currentMode = 'hot_take';
+
+        function switchMode(mode) {
+            if (mode === 'tutorial') return;
+            const cfg = MODE_MAP[mode];
+            if (!cfg) return;
+
+            // Update mode cards
+            document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+            const btn = document.querySelector(`[data-mode-btn="${mode}"]`);
+            if (btn) btn.classList.add('active');
+
+            // Update dynamic area
+            document.querySelectorAll('.dynamic-area').forEach(a => a.classList.remove('active'));
+            const area = document.getElementById(cfg.area);
+            if (area) {
+                area.classList.remove('active');
+                // Force reflow for animation
+                void area.offsetWidth;
+                area.classList.add('active');
+            }
+
+            // Update button
+            document.getElementById('startBtn').textContent = cfg.btn;
+
+            // Update canvas
+            document.getElementById('canvasModeName').textContent = cfg.label;
+
+            // Update accent colors
+            document.documentElement.style.setProperty('--accent', cfg.accent);
+            document.documentElement.style.setProperty('--accent-bg', cfg.accentBg);
+            document.documentElement.style.setProperty('--accent-glow', cfg.accentGlow);
+            document.getElementById('configPanel').setAttribute('data-mode', mode);
+
+            currentMode = mode;
+        }
+
+        function toggleAdvanced() {
+            const content = document.getElementById('advContent');
+            const arrow = document.getElementById('advArrow');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.classList.add('open');
+            } else {
+                content.style.display = 'none';
+                arrow.classList.remove('open');
+            }
+        }
+
+        // Init
+        document.documentElement.style.setProperty('--accent', '#22c55e');
+        document.documentElement.style.setProperty('--accent-bg', 'rgba(34,197,94,0.08)');
+        document.documentElement.style.setProperty('--accent-glow', 'rgba(34,197,94,0.15)');
+        document.getElementById('configPanel').setAttribute('data-mode', 'hot_take');
+    </script>
+
+</body>
+
+</html>

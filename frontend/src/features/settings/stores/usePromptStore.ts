@@ -151,7 +151,7 @@ export const usePromptStore = create<CustomPromptsState>()(
         {
             name: 'qs_custom_prompts',
             partialize: (state) => ({ customPrompts: state.customPrompts }),
-            version: 4, // P24-D: Bump v3→v4 for per-mode prompts
+            version: 5, // P26: Bump v4→v5 for P26 prompt sync
             migrate: (persistedState: any, version: number) => {
                 // Version 0→1: mid_take → quick_summary
                 if (version === 0) {
@@ -209,6 +209,17 @@ export const usePromptStore = create<CustomPromptsState>()(
                             } else if (!current) {
                                 // Missing entirely — use defaults
                                 cp[agent] = JSON.parse(JSON.stringify(DEFAULT_PROMPTS[agent]));
+                            }
+                        }
+                    }
+                }
+                // Version 4→5: P26 prompt sync — reset short_article for all agents
+                if (version < 5) {
+                    const cp = persistedState.customPrompts;
+                    if (cp) {
+                        for (const agent of ['writer', 'strategist', 'critic', 'polisher'] as const) {
+                            if (cp[agent] && DEFAULT_PROMPTS[agent]?.short_article) {
+                                cp[agent].short_article = { ...DEFAULT_PROMPTS[agent].short_article };
                             }
                         }
                     }

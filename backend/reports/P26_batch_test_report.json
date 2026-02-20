@@ -1,0 +1,515 @@
+{
+  "test_name": "P26 短篇完整流水线批量测试",
+  "timestamp": "2026-02-18T00:53:04.615832",
+  "config": {
+    "mode": "short_article",
+    "timeout_s": 600,
+    "total_materials": 10
+  },
+  "summary": {
+    "total": 10,
+    "success": 10,
+    "failed": 0,
+    "avg_char_count": 0.0,
+    "min_char_count": 0,
+    "max_char_count": 0,
+    "in_range_rate": "0/10",
+    "avg_total_time_s": 41.1,
+    "avg_strategy_time_s": 35.3,
+    "avg_generate_time_s": 5.8,
+    "forbidden_word_count": 0
+  },
+  "results": [
+    {
+      "id": 1,
+      "input": "BTC 跌破 65,000 美元，截至 2 月 6 日 13:00 (UTC+8)，BTC 报约 64,239.2 美元，24 小时跌幅 9.50%；ETH 跌破 1,900 美元，报约 1,890.17 美元，24 小时下跌 9.80%。24小时内全球清算额达到约17亿美元，其中约15亿美元为多头头寸。",
+      "input_preview": "BTC 跌破 65,000 美元，截至 2 月 6 日 13:00 (UTC+8)，BTC 报约 64,239.2 美元，24 小时跌幅 9.50%；ETH 跌破 1,900 美元，报约 1,890.",
+      "strategy_time_s": 30.5,
+      "strategy_plans": [
+        "吃瓜看戏版",
+        "行业观察版",
+        "交易复盘版"
+      ],
+      "core_fact": "北京时间2月6日比特币单日跌幅近10%跌破65000美元，以太坊同步大跌，24小时全球加密货币总清算额达17亿美元，其中15亿美元为多头头寸",
+      "generate_time_s": 9.0,
+      "total_time_s": 39.5,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:46:43.987532] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:46:49.258641] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:46:50.707042] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:46:51.219248] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 2,
+      "input": "BitMEX 联合创始人 Arthur Hayes 发文称，近期比特币下跌可能主要源于围绕 IBIT 结构性产品的交易商对冲行为。他指出，银行发行的相关结构性产品在市场波动时会触发交易商卖出比特币现货进行对冲。",
+      "input_preview": "BitMEX 联合创始人 Arthur Hayes 发文称，近期比特币下跌可能主要源于围绕 IBIT 结构性产品的交易商对冲行为。他指出，银行发行的相关结构性产品在市场波动时会触发交易商卖出比特币现货",
+      "strategy_time_s": 29.8,
+      "strategy_plans": [
+        "机构拆解版",
+        "散户踩坑版",
+        "行业质变版"
+      ],
+      "core_fact": "BitMEX联合创始人Arthur Hayes提出，本轮比特币下跌的核心原因是IBIT相关结构性产品触发交易商卖出比特币现货对冲，打破了市场原有认知",
+      "generate_time_s": 5.5,
+      "total_time_s": 35.3,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:47:22.825408] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:47:24.581325] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:47:26.026369] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:47:26.554457] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 3,
+      "input": "Crypto.com 创始人 Kris Marszalek 以约 7000 万美元收购域名 AI.com，成为目前公开披露的史上最高价域名交易。",
+      "input_preview": "Crypto.com 创始人 Kris Marszalek 以约 7000 万美元收购域名 AI.com，成为目前公开披露的史上最高价域名交易。",
+      "strategy_time_s": 40.7,
+      "strategy_plans": [
+        "行业观察版",
+        "创业者视角",
+        "资本风向版"
+      ],
+      "core_fact": "Crypto.com创始人Kris Marszalek以7000万美元收购域名AI.com，创下公开披露的史上最高域名交易成交价",
+      "generate_time_s": 5.5,
+      "total_time_s": 46.1,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:08.983929] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:10.740617] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:12.188966] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:12.703240] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 4,
+      "input": "Arkham 表示，Tesla 目前仍持有约 1.15 万枚 BTC，其在 2022 年 LUNA 崩盘期间已出售大部分比特币，仅保留最初购入量约 20%。",
+      "input_preview": "Arkham 表示，Tesla 目前仍持有约 1.15 万枚 BTC，其在 2022 年 LUNA 崩盘期间已出售大部分比特币，仅保留最初购入量约 20%。",
+      "strategy_time_s": 30.7,
+      "strategy_plans": [
+        "毒舌吐槽版",
+        "行业复盘版",
+        "散户共情版"
+      ],
+      "core_fact": "Arkham披露特斯拉在2022年LUNA崩盘期间已出售大部分比特币，目前仅剩余最初购入量约20%，共1.15万枚BTC",
+      "generate_time_s": 5.5,
+      "total_time_s": 36.1,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:45.122005] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:46.877327] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:48.311980] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:48:48.829687] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 5,
+      "input": "彭博 ETF 分析师 Eric Balchunas 发推表示，美东时间 2 月 5 日，iShares Bitcoin Trust（IBIT）在价格单日下跌 13% 的情况下成交额达约 100 亿美元，刷新上市以来成交量纪录。",
+      "input_preview": "彭博 ETF 分析师 Eric Balchunas 发推表示，美东时间 2 月 5 日，iShares Bitcoin Trust（IBIT）在价格单日下跌 13% 的情况下成交额达约 100 亿美元",
+      "strategy_time_s": 33.3,
+      "strategy_plans": [
+        "机构视角版",
+        "吃瓜吐槽版",
+        "趋势观察版"
+      ],
+      "core_fact": "彭博ETF分析师称，比特币现货ETF IBIT单日价格下跌13%，反而创出上市以来100亿美元成交额的新纪录",
+      "generate_time_s": 5.5,
+      "total_time_s": 38.8,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:49:23.886902] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:49:25.645336] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:49:27.104187] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:49:27.620571] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 6,
+      "input": "VanEck 数字资产研究主管 Matthew Sigel 表示，比特币近期下跌并非由单一黑天鹅事件触发，而是五大因素叠加所致：一是高杠杆快速出清，二是关税不确定性，三是ETF资金流向变化，四是矿企抛售压力，五是宏观情绪恶化。",
+      "input_preview": "VanEck 数字资产研究主管 Matthew Sigel 表示，比特币近期下跌并非由单一黑天鹅事件触发，而是五大因素叠加所致：一是高杠杆快速出清，二是关税不确定性，三是ETF资金流向变化，四是矿企抛",
+      "strategy_time_s": 30.7,
+      "strategy_plans": [
+        "业内深析",
+        "散户扎谈",
+        "行业冷思"
+      ],
+      "core_fact": "VanEck数字资产研究主管Matthew Sigel提出，本轮比特币下跌并非单一黑天鹅事件触发，是五大因素叠加导致的结果",
+      "generate_time_s": 5.5,
+      "total_time_s": 36.2,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:00.078813] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:01.841521] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:03.281009] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:03.793167] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 7,
+      "input": "过去 30 天 Solana 价格下跌约 40%，拖累 SOL 财库型公司持仓大幅缩水。数据显示，19 家 SOL treasury 实体合计持有约 1850 万枚 SOL。",
+      "input_preview": "过去 30 天 Solana 价格下跌约 40%，拖累 SOL 财库型公司持仓大幅缩水。数据显示，19 家 SOL treasury 实体合计持有约 1850 万枚 SOL。",
+      "strategy_time_s": 37.0,
+      "strategy_plans": [
+        "行业透视",
+        "散户吐槽",
+        "模式反思"
+      ],
+      "core_fact": "过去30天Solana价格下跌约40%，19家SOL财库型公司合计持有的1850万枚SOL持仓大幅缩水",
+      "generate_time_s": 5.5,
+      "total_time_s": 42.5,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:42.612019] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:44.365772] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:45.808247] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:50:46.331179] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 8,
+      "input": "流行歌手 Justin Bieber 于 2022 年 1 月以 500 ETH（约 130 万美元）购入 Bored Ape Yacht Club NFT（Bored Ape #3001），目前该 NFT 市值已跌至约 1.3 万美元，浮亏接近 99%。",
+      "input_preview": "流行歌手 Justin Bieber 于 2022 年 1 月以 500 ETH（约 130 万美元）购入 Bored Ape Yacht Club NFT（Bored Ape #3001），目前该 ",
+      "strategy_time_s": 43.6,
+      "strategy_plans": [
+        "吃瓜调侃版",
+        "行业反思版",
+        "圈层逻辑版"
+      ],
+      "core_fact": "贾斯汀·比伯2022年以约130万美元购入的无聊猿NFT，浮亏接近99%，当前市值仅约1.3万美元",
+      "generate_time_s": 5.5,
+      "total_time_s": 49.1,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:51:31.721918] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:51:33.480902] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:51:34.928870] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:51:35.443366] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 9,
+      "input": "据 @EmberCN 监测，易理华旗下 Trend Research 已累计将 63.04 万枚 ETH (12.94 亿美元) 转进币安，链上现仅剩 2.13 万枚 ETH (4394 万美元)。",
+      "input_preview": "据 @EmberCN 监测，易理华旗下 Trend Research 已累计将 63.04 万枚 ETH (12.94 亿美元) 转进币安，链上现仅剩 2.13 万枚 ETH (4394 万美元)。",
+      "strategy_time_s": 46.1,
+      "strategy_plans": [
+        "交易预警版",
+        "资本真相版",
+        "吃瓜看戏版"
+      ],
+      "core_fact": "易理华旗下Trend Research累计将63.04万枚合计12.94亿美元的ETH转入币安，链上仅剩余2.13万枚，绝大多数持仓已完成转出",
+      "generate_time_s": 5.5,
+      "total_time_s": 51.6,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:52:23.347352] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:52:25.109717] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:52:26.554967] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:52:27.068520] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    },
+    {
+      "id": 10,
+      "input": "币安官方发推表示，2025 年，币安团队协助全球执法机构追回约 1.31 亿美元非法资产，并响应超过 7.1 万项官方执法请求。",
+      "input_preview": "币安官方发推表示，2025 年，币安团队协助全球执法机构追回约 1.31 亿美元非法资产，并响应超过 7.1 万项官方执法请求。",
+      "strategy_time_s": 30.3,
+      "strategy_plans": [
+        "业内分析版",
+        "吃瓜质疑版",
+        "老币民版"
+      ],
+      "core_fact": "币安官方公开宣布2025年协助全球执法机构追回约1.31亿美元非法资产，响应超过7.1万项官方执法请求",
+      "generate_time_s": 5.5,
+      "total_time_s": 35.8,
+      "output": "",
+      "char_count": 0,
+      "in_range": false,
+      "forbidden_hits": [],
+      "agent_steps": [
+        {
+          "agent": "strategist",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:52:59.150638] Strategist used selected option."
+          ]
+        },
+        {
+          "agent": "writer",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:53:00.906755] Writer drafted/rewrote version 1."
+          ]
+        },
+        {
+          "agent": "critic",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:53:02.354793] Critic skipped for short_article."
+          ]
+        },
+        {
+          "agent": "polisher",
+          "status": "completed",
+          "logs": [
+            "[2026-02-18T00:53:02.869329] Polisher finished."
+          ]
+        }
+      ],
+      "status": "✅ 成功"
+    }
+  ],
+  "errors": []
+}

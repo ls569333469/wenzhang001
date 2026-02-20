@@ -16,7 +16,8 @@ logger = logging.getLogger(__name__)
 
 def standard_critic(draft: str, mode: str, api_config: dict = None,
                     length: str = "thread", style: str = "auto", 
-                    custom_prompts: dict = None) -> dict:
+                    custom_prompts: dict = None,
+                    strategy_json: str = None) -> dict:
     """
     标准 Critic - 5维度评分系统
     约束已烘焙到模板中
@@ -38,6 +39,20 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
     # P24: 注入模式专用评分配置
     scoring = mode_config.get("scoring", {})
     
+    # P26-fix: 从策略官 JSON 提取 emotion_arc 和 ending_style
+    emotion_arc = ""
+    ending_style = ""
+    if strategy_json:
+        try:
+            strategy_obj = json.loads(strategy_json) if isinstance(strategy_json, str) else strategy_json
+            plans = strategy_obj.get("plans", [])
+            if plans and isinstance(plans, list):
+                # 取第一个 plan 的情感走向和收尾方式（供 Critic 对照检查）
+                emotion_arc = plans[0].get("emotion_arc", "")
+                ending_style = plans[0].get("ending_style", "")
+        except (json.JSONDecodeError, TypeError):
+            pass
+    
     context = {
         "current_time_str": datetime.now().isoformat(),
         "mode": mode,
@@ -51,7 +66,11 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         "penalty_cap": scoring.get("penalty_cap", 30),
         "pass_threshold": scoring.get("pass_threshold", 85),
         "refine_threshold": scoring.get("refine_threshold", 70),
+        # P26-fix: 策略官上下文
+        "emotion_arc": emotion_arc,
+        "ending_style": ending_style,
     }
+
     
     # P15: Custom Prompt Support
     if custom_prompts.get("critic"):
@@ -86,9 +105,17 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
             
         result = json.loads(text)
         
+        # P26-fix: 短篇 Critic 模板只返回 verdict/reason/suggestions，不含 score
+        # 从 verdict 推导 score 以确保 router_logic 正常工作
+        raw_score = result.get("final_score", result.get("score", 0))
+        verdict = result.get("verdict", "")
+        if raw_score == 0 and verdict:
+            verdict_score_map = {"PASS": 90, "REFINE": 75, "REWRITE": 50}
+            raw_score = verdict_score_map.get(verdict.upper(), 75)
+        
         return {
-            "score": result.get("final_score", result.get("score", 0)),
-            "verdict": result.get("verdict", _calculate_verdict(result.get("final_score", 0), mode)),
+            "score": raw_score,
+            "verdict": verdict or _calculate_verdict(raw_score, mode),
             "dimensions": result.get("dimensions", {}),
             "penalties": result.get("penalties", []),
             "suggestions": result.get("suggestions", []),

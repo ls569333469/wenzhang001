@@ -6,7 +6,8 @@
 
 def skip_critic(draft: str, mode: str = "hot_take", api_config: dict = None,
                 length: str = "tweet", style: str = "auto", 
-                custom_prompts: dict = None) -> dict:
+                custom_prompts: dict = None,
+                strategy_json: str = None) -> dict:
     """
     跳过 Critic - 锐评模式不需要评分
     直接返回 PASS 状态

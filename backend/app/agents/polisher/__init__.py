@@ -8,6 +8,7 @@ P18: 方案 B - 全模块独立架构
 """
 from .standard import standard_polisher
 from .skip import skip_polisher
+from .short_article import short_article_polisher
 
 POLISHER_REGISTRY = {
     "mid_article": standard_polisher,
@@ -15,7 +16,7 @@ POLISHER_REGISTRY = {
     "tutorial": standard_polisher,
     "rewrite": standard_polisher,
     "hot_take": skip_polisher,   # 锐评跳过润色
-    "short_article": skip_polisher,  # P22 v4: 连珠炮跳过润色（润色会破坏碎句节奏）
+    "short_article": short_article_polisher,  # P26: 代码预扫+LLM最小修复
 }
 
 

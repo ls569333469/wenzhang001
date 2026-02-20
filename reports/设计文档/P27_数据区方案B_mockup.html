@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P27 方案B — 左右分栏 Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
+            background: #f4f4f5;
+            color: #18181b;
+            padding: 24px 32px;
+            min-height: 100vh
+        }
+
+        .hdr {
+            text-align: center;
+            margin-bottom: 28px
+        }
+
+        .hdr h1 {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f59e0b, #0891b2, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px
+        }
+
+        .hdr .sub {
+            font-size: 12px;
+            color: #71717a
+        }
+
+        .mode-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px
+        }
+
+        .mode-tab {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1.5px solid #e4e4e7;
+            background: #fff;
+            color: #71717a;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .mode-tab:hover {
+            border-color: #a1a1aa;
+            color: #18181b
+        }
+
+        .mode-tab.bullish.active {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, .06);
+            color: #ca8a04
+        }
+
+        .mode-tab.kaito.active {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, .06);
+            color: #0891b2
+        }
+
+        /* Full-width studio frame */
+        .studio-frame {
+            margin: 0 auto;
+            border: 2px solid #e4e4e7;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .06)
+        }
+
+        .studio-frame.bullish {
+            border-color: rgba(245, 158, 11, .3)
+        }
+
+        .studio-frame.kaito {
+            border-color: rgba(6, 182, 212, .3)
+        }
+
+        .fr-bar {
+            padding: 8px 14px;
+            background: #fafafa;
+            border-bottom: 1px solid #e4e4e7;
+            font-size: 11px;
+            font-weight: 600;
+            color: #71717a;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .dots {
+            display: flex;
+            gap: 3px
+        }
+
+        .dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .dr {
+            background: #ef4444
+        }
+
+        .dy {
+            background: #eab308
+        }
+
+        .dg {
+            background: #22c55e
+        }
+
+        .studio-body {
+            display: flex;
+            min-height: 580px
+        }
+
+        /* ConfigPanel */
+        .cfg {
+            width: 170px;
+            background: #fafafa;
+            border-right: 1px solid #e4e4e7;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-shrink: 0
+        }
+
+        .cfg-t {
+            font-size: 9px;
+            font-weight: 700;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e4e4e7;
+            margin-bottom: 4px
+        }
+
+        .cfg-s {
+            font-size: 9px;
+            font-weight: 600;
+            color: #a1a1aa;
+            margin-top: 6px
+        }
+
+        .cfg-item {
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            color: #52525b;
+            margin-bottom: 2px
+        }
+
+        .cfg-item.bullish-a {
+            border-color: #f59e0b;
+            color: #ca8a04;
+            background: rgba(245, 158, 11, .04)
+        }
+
+        .cfg-item.kaito-a {
+            border-color: #06b6d4;
+            color: #0891b2;
+            background: rgba(6, 182, 212, .04)
+        }
+
+        .cfg-note {
+            font-size: 9px;
+            color: #16a34a;
+            padding: 5px 8px;
+            border: 1px dashed rgba(34, 197, 94, .3);
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 8px;
+            line-height: 1.5
+        }
+
+        /* Canvas — split into data panel + writing panel */
+        .canvas {
+            flex: 1;
+            display: flex;
+            overflow: hidden
+        }
+
+        /* Data panel (left side of canvas) */
+        .data-panel {
+            width: 42%;
+            min-width: 300px;
+            max-width: 480px;
+            background: #fafafa;
+            border-right: 1px solid #e4e4e7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0
+        }
+
+        .data-panel-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e4e4e7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .data-panel-title {
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .data-panel-title .hint {
+            font-size: 9px;
+            font-weight: 400;
+            color: #a1a1aa
+        }
+
+        .data-filters {
+            padding: 8px 16px;
+            border-bottom: 1px solid #f0f0f1;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .filter-tag {
+            padding: 4px 10px;
+            border-radius: 10px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .filter-tag:hover {
+            border-color: #a1a1aa
+        }
+
+        .filter-tag.active {
+            border-color: #f59e0b;
+            color: #ca8a04;
+            background: rgba(245, 158, 11, .04);
+            font-weight: 600
+        }
+
+        .filter-tag.active-cyan {
+            border-color: #06b6d4;
+            color: #0891b2;
+            background: rgba(6, 182, 212, .04);
+            font-weight: 600
+        }
+
+        .data-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 14px;
+            scrollbar-width: thin;
+            scrollbar-color: #d4d4d8 transparent
+        }
+
+        .data-scroll::-webkit-scrollbar {
+            width: 4px
+        }
+
+        .data-scroll::-webkit-scrollbar-track {
+            background: transparent
+        }
+
+        .data-scroll::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+            border-radius: 2px
+        }
+
+        .refresh-bar {
+            padding: 8px 16px;
+            border-top: 1px solid #e4e4e7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .refresh-btn {
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .refresh-btn:hover {
+            background: #f4f4f5;
+            color: #18181b
+        }
+
+        .source-info {
+            font-size: 9px;
+            color: #a1a1aa
+        }
+
+        /* Feed cards */
+        .feed-card {
+            padding: 12px 14px;
+            border-radius: 10px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .feed-card:hover {
+            border-color: #d4d4d8;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .04)
+        }
+
+        .feed-card.selected {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, .02)
+        }
+
+        .feed-card .top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px
+        }
+
+        .feed-avatar {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .feed-card .handle {
+            font-weight: 600;
+            font-size: 12px;
+            color: #18181b
+        }
+
+        .feed-card .time {
+            font-size: 9px;
+            color: #a1a1aa;
+            margin-left: auto
+        }
+
+        .feed-card .body {
+            font-size: 12px;
+            color: #52525b;
+            line-height: 1.6
+        }
+
+        .feed-card .stats {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+            font-size: 9px;
+            color: #a1a1aa
+        }
+
+        /* Project panel */
+        .proj-section {
+            padding: 10px 0
+        }
+
+        .proj-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            padding: 0 14px;
+            margin-bottom: 12px
+        }
+
+        .proj-chip {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1.5px solid #e4e4e7;
+            background: #fff;
+            font-size: 11px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .proj-chip:hover {
+            border-color: #a1a1aa
+        }
+
+        .proj-chip.active {
+            border-color: #06b6d4;
+            color: #0891b2;
+            background: rgba(6, 182, 212, .04);
+            font-weight: 600;
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, .08)
+        }
+
+        .proj-detail {
+            padding: 0 14px
+        }
+
+        .proj-detail-card {
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            margin-bottom: 8px
+        }
+
+        .proj-detail-card .label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #52525b;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .angle-chips {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap
+        }
+
+        .angle-chip {
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 10px;
+            background: rgba(6, 182, 212, .06);
+            color: #0891b2;
+            border: 1px solid rgba(6, 182, 212, .2);
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .angle-chip:hover {
+            background: rgba(6, 182, 212, .12)
+        }
+
+        .angle-chip.selected {
+            background: #06b6d4;
+            color: #fff;
+            border-color: #06b6d4
+        }
+
+        .recent-posts {
+            margin-top: 6px
+        }
+
+        .recent-post {
+            font-size: 10px;
+            color: #a1a1aa;
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .recent-post .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #d4d4d8
+        }
+
+        .recent-post .date {
+            color: #d4d4d8;
+            font-size: 9px
+        }
+
+        .warn-note {
+            margin-top: 10px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px dashed #fbbf24;
+            background: rgba(251, 191, 36, .04);
+            font-size: 9px;
+            color: #ca8a04;
+            text-align: center
+        }
+
+        /* Writing panel (right side of canvas) */
+        .writing-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0
+        }
+
+        .input-area {
+            padding: 12px 18px;
+            border-bottom: 1px solid #e4e4e7
+        }
+
+        .input-box {
+            background: #f4f4f5;
+            border: 1.5px solid #e4e4e7;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #a1a1aa;
+            transition: border-color .15s
+        }
+
+        .input-box:hover {
+            border-color: #a1a1aa
+        }
+
+        .writing-main {
+            flex: 1;
+            padding: 20px 24px;
+            overflow-y: auto
+        }
+
+        .version-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px
+        }
+
+        .vtab {
+            padding: 5px 14px;
+            border-radius: 6px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 11px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .vtab.active {
+            background: #18181b;
+            color: #fff;
+            border-color: #18181b
+        }
+
+        .writing-content {
+            font-size: 14px;
+            line-height: 1.9;
+            color: #3f3f46
+        }
+
+        .writing-content .title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #18181b;
+            margin-bottom: 12px
+        }
+
+        .writing-content p {
+            margin-bottom: 12px
+        }
+
+        .writing-content .hl {
+            background: linear-gradient(transparent 60%, rgba(245, 158, 11, .15) 40%);
+            padding: 0 2px
+        }
+
+        .toolbar {
+            padding: 8px 18px;
+            border-top: 1px solid #e4e4e7;
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end
+        }
+
+        .tbtn {
+            padding: 5px 14px;
+            border-radius: 6px;
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            font-size: 11px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .tbtn:hover {
+            background: #e4e4e7;
+            color: #18181b
+        }
+
+        .tbtn.primary {
+            background: #18181b;
+            color: #fff;
+            border-color: #18181b
+        }
+
+        .tbtn.primary:hover {
+            background: #27272a
+        }
+
+        /* Resize handle */
+        .resize-handle {
+            width: 5px;
+            background: transparent;
+            cursor: col-resize;
+            position: relative;
+            flex-shrink: 0
+        }
+
+        .resize-handle:hover {
+            background: rgba(0, 0, 0, .06)
+        }
+
+        .resize-handle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 3px;
+            height: 30px;
+            background: #d4d4d8;
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity .15s
+        }
+
+        .resize-handle:hover::after {
+            opacity: 1
+        }
+
+        .info-banner {
+            margin: 24px auto 0;
+            padding: 14px 18px;
+            border-radius: 10px;
+            background: rgba(6, 182, 212, .05);
+            border: 1px solid rgba(6, 182, 212, .15);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px
+        }
+
+        .info-banner .icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .info-banner .text {
+            font-size: 11px;
+            color: #52525b;
+            line-height: 1.6
+        }
+
+        .info-banner b {
+            color: #0891b2
+        }
+
+        .hidden {
+            display: none !important
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hdr">
+        <h1>方案 B — 左右分栏（数据 | 输出 并排）</h1>
+        <div class="sub">充分利用宽屏空间 · 数据参考与创作输出同时可见 · 拖拽调整比例</div>
+    </div>
+
+    <div class="mode-tabs">
+        <div class="mode-tab bullish active" onclick="switchMode('bullish')">🌸 吹捧模式</div>
+        <div class="mode-tab kaito" onclick="switchMode('kaito')">🎯 Kaito 模式</div>
+    </div>
+
+    <!-- ===== BULLISH ===== -->
+    <div id="bullish-view" class="studio-frame bullish">
+        <div class="fr-bar">
+            <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div>
+            <span style="color:#ca8a04">🌸 吹捧模式 — 左侧数据面板 | 右侧创作输出 · 同时可见</span>
+        </div>
+        <div class="studio-body">
+            <div class="cfg">
+                <div class="cfg-t">ConfigPanel</div>
+                <div class="cfg-item bullish-a">🌸 吹捧</div>
+                <div class="cfg-s">🎨 风格</div>
+                <div class="cfg-item">吹捧体</div>
+                <div class="cfg-s">📏 篇幅</div>
+                <div class="cfg-item">50-500字</div>
+                <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+            </div>
+            <div class="canvas">
+                <!-- Data Panel -->
+                <div class="data-panel" id="bullish-data-panel">
+                    <div class="data-panel-header">
+                        <div class="data-panel-title" style="color:#ca8a04">🌸 币安动态 <span class="hint">点选作为参考</span>
+                        </div>
+                    </div>
+                    <div class="data-filters">
+                        <span class="filter-tag active">全部 (8)</span>
+                        <span class="filter-tag">CZ (3)</span>
+                        <span class="filter-tag">何一 (3)</span>
+                        <span class="filter-tag">Binance (2)</span>
+                    </div>
+                    <div class="data-scroll">
+                        <div class="feed-card selected">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                </div>
+                                <span class="handle">@cz_binance</span>
+                                <span class="time">2h</span>
+                            </div>
+                            <div class="body">Binance partners with local exchanges in Southeast Asia to expand crypto
+                                adoption. This is huge for the ecosystem! 🚀</div>
+                            <div class="stats"><span>❤️ 12.4K</span><span>🔁 3.8K</span><span>💬 892</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                </div>
+                                <span class="handle">@heyibinance</span>
+                                <span class="time">5h</span>
+                            </div>
+                            <div class="body">Thank you for your support and feedback. We're building Binance for the
+                                next billion users. Your voice matters to us. ❤️</div>
+                            <div class="stats"><span>❤️ 8.2K</span><span>🔁 2.1K</span><span>💬 654</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                </div>
+                                <span class="handle">@cz_binance</span>
+                                <span class="time">8h</span>
+                            </div>
+                            <div class="body">Education is the key. We launched Binance Academy chapters in 12 new
+                                countries this month. Free crypto education for everyone. 📚🌍</div>
+                            <div class="stats"><span>❤️ 9.7K</span><span>🔁 4.2K</span><span>💬 1.1K</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">BN
+                                </div>
+                                <span class="handle">@binance</span>
+                                <span class="time">12h</span>
+                            </div>
+                            <div class="body">#Binance now supports 15 new trading pairs including $BERA, $MON, and
+                                $EIGEN. Start trading now! 📈</div>
+                            <div class="stats"><span>❤️ 5.3K</span><span>🔁 1.8K</span><span>💬 423</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                </div>
+                                <span class="handle">@heyibinance</span>
+                                <span class="time">1d</span>
+                            </div>
+                            <div class="body">Just finished our quarterly town hall. So proud of the team's progress on
+                                compliance, product innovation, and user experience. ✨</div>
+                            <div class="stats"><span>❤️ 6.8K</span><span>🔁 1.5K</span><span>💬 378</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                </div>
+                                <span class="handle">@cz_binance</span>
+                                <span class="time">1d</span>
+                            </div>
+                            <div class="body">Regulation done right benefits everyone. Proud of the progress in the UAE
+                                and Thailand. Keep building. 💪</div>
+                            <div class="stats"><span>❤️ 15.1K</span><span>🔁 5.6K</span><span>💬 1.3K</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                </div>
+                                <span class="handle">@heyibinance</span>
+                                <span class="time">2d</span>
+                            </div>
+                            <div class="body">Web3 is not just about finance. It's about empowerment. Looking forward to
+                                our next community event in HK. Stay tuned! 🔥</div>
+                            <div class="stats"><span>❤️ 7.4K</span><span>🔁 2.3K</span><span>💬 512</span></div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">BN
+                                </div>
+                                <span class="handle">@binance</span>
+                                <span class="time">2d</span>
+                            </div>
+                            <div class="body">🎉 1B+ registered users! Thank you for being part of our journey. This is
+                                only the beginning. #BinanceTurns7</div>
+                            <div class="stats"><span>❤️ 25.6K</span><span>🔁 8.9K</span><span>💬 2.7K</span></div>
+                        </div>
+                    </div>
+                    <div class="refresh-bar">
+                        <span class="source-info">数据源: Grok → binance_daily · 最近更新 2h</span>
+                        <span class="refresh-btn">🔄 刷新</span>
+                    </div>
+                </div>
+                <div class="resize-handle" title="拖拽调整比例"></div>
+                <!-- Writing Panel -->
+                <div class="writing-panel">
+                    <div class="input-area">
+                        <div class="input-box">基于选中动态生成吹捧文案... ⌘+Enter</div>
+                    </div>
+                    <div class="writing-main">
+                        <div class="version-tabs">
+                            <div class="vtab active">版本 1</div>
+                            <div class="vtab">版本 2</div>
+                            <div class="vtab">版本 3</div>
+                        </div>
+                        <div class="writing-content">
+                            <div class="title">CZ的又一次"降维打击" 🔥</div>
+                            <p>别人还在研究K线图的时候，<span class="hl">CZ已经带着币安杀入了东南亚</span>，跟本地交易所搞联盟了。</p>
+                            <p>什么叫格局？这就叫格局。你以为他在下棋，其实人家在下的是一盘大棋。东南亚几十亿人口的加密市场，一般人看到的是"合作"，CZ看到的是 —— <b>基础设施</b>。</p>
+                            <p>一句话总结：当别人还在讨论"牛市来没来"的时候，币安已经在为下个十亿用户铺路了。这波啊，不是赢在起跑线，是<span class="hl">直接把起跑线给改了</span>。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <div class="tbtn">📋 复制</div>
+                        <div class="tbtn">🔄 重新生成</div>
+                        <div class="tbtn primary">💾 保存</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== KAITO ===== -->
+    <div id="kaito-view" class="studio-frame kaito hidden">
+        <div class="fr-bar">
+            <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div>
+            <span style="color:#0891b2">🎯 Kaito 模式 — 左侧项目看板 | 右侧创作输出 · 同时可见</span>
+        </div>
+        <div class="studio-body">
+            <div class="cfg">
+                <div class="cfg-t">ConfigPanel</div>
+                <div class="cfg-item kaito-a">🎯 Kaito</div>
+                <div class="cfg-s">🎨 风格</div>
+                <div class="cfg-item">嘴撸体</div>
+                <div class="cfg-s">📏 篇幅</div>
+                <div class="cfg-item">50-500字</div>
+                <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+            </div>
+            <div class="canvas">
+                <!-- Data Panel -->
+                <div class="data-panel" id="kaito-data-panel">
+                    <div class="data-panel-header">
+                        <div class="data-panel-title" style="color:#0891b2">🎯 项目看板 <span class="hint">选择项目和角度</span>
+                        </div>
+                    </div>
+                    <div class="data-scroll">
+                        <div class="proj-section">
+                            <div class="proj-chips">
+                                <div class="proj-chip active">🐻 Berachain <b
+                                        style="color:#0891b2;margin-left:2px;font-size:9px">5新</b></div>
+                                <div class="proj-chip">M Monad (3)</div>
+                                <div class="proj-chip">E Eigenlayer (2)</div>
+                                <div class="proj-chip">S Sui (4)</div>
+                                <div class="proj-chip">A Aptos (1)</div>
+                                <div class="proj-chip">Z zkSync (3)</div>
+                                <div class="proj-chip">☁ Celestia (2)</div>
+                                <div class="proj-chip" style="border-style:dashed;color:#a1a1aa">+ 添加</div>
+                            </div>
+                            <div class="proj-detail">
+                                <div class="proj-detail-card">
+                                    <div class="label">💡 推荐角度 — Berachain</div>
+                                    <div class="angle-chips">
+                                        <span class="angle-chip selected">生态扩展</span>
+                                        <span class="angle-chip">PoL科普</span>
+                                        <span class="angle-chip">社区治理</span>
+                                        <span class="angle-chip">TVL增长</span>
+                                        <span class="angle-chip">Berps DEX</span>
+                                        <span class="angle-chip">与 Monad 对比</span>
+                                    </div>
+                                </div>
+                                <div class="proj-detail-card">
+                                    <div class="label">📰 最新情报 — Berachain</div>
+                                    <div class="recent-posts">
+                                        <div class="recent-post"><span class="dot"></span>Berachain Mainnet Phase 2 启动
+                                            <span class="date">2h</span></div>
+                                        <div class="recent-post"><span class="dot"></span>TVL 突破 $3.2B，单周增长 45% <span
+                                                class="date">6h</span></div>
+                                        <div class="recent-post"><span class="dot"></span>Kodiak、Beraborrow 生态爆发 <span
+                                                class="date">12h</span></div>
+                                        <div class="recent-post"><span class="dot"></span>PoL 机制首次大规模验证成功 <span
+                                                class="date">1d</span></div>
+                                        <div class="recent-post"><span class="dot"></span>Binance 上线 $BERA 永续合约 <span
+                                                class="date">2d</span></div>
+                                    </div>
+                                </div>
+                                <div class="warn-note">⚠️ 已发过的角度: 社区治理 (2天前) · TVL增长 (4天前)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="resize-handle" title="拖拽调整比例"></div>
+                <!-- Writing Panel -->
+                <div class="writing-panel">
+                    <div class="input-area">
+                        <div class="input-box">Berachain · 生态扩展 角度生成... ⌘+Enter</div>
+                    </div>
+                    <div class="writing-main">
+                        <div class="version-tabs">
+                            <div class="vtab active">版本 1</div>
+                            <div class="vtab">版本 2</div>
+                            <div class="vtab">版本 3</div>
+                        </div>
+                        <div class="writing-content">
+                            <div class="title">Berachain 的生态扩展正在悄悄改变 L1 的游戏规则 🐻</div>
+                            <p>别睡了兄弟们，Berachain 的 Phase 2 主网刚上线，TVL 一周暴涨 45% 直接冲到 $3.2B。</p>
+                            <p>Kodiak 和 Beraborrow 这波联动堪称教科书级别 —— 一个做 DEX 流动性，一个做借贷，完美的 DeFi 飞轮。而且这还是 <b>PoL
+                                    机制</b>首次大规模跑通！</p>
+                            <p>一句话：当其他 L1 还在讲"我们快主网了"的故事时，Berachain 已经在用 TVL 说话了。实力，才是最好的营销。</p>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <div class="tbtn">📋 复制</div>
+                        <div class="tbtn">🔄 重新生成</div>
+                        <div class="tbtn primary">💾 保存</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info-banner">
+        <div class="icon">💡</div>
+        <div class="text">
+            <b>方案 B 设计要点：</b><br>
+            • 数据面板占 Canvas 的 <b>~42%</b>（min 300px / max 480px），输出面板占剩余空间<br>
+            • 数据和输出 <b>始终同时可见</b>，可以一边参考数据一边看生成结果<br>
+            • 中间有 <b>拖拽调整手柄</b>（灰色竖线），宽屏用户可以给数据更多空间<br>
+            • 吹捧模式：有过滤标签（CZ/何一/Binance） + 点选 Feed 卡片作为参考<br>
+            • Kaito 模式：有项目选择、角度推荐、最新情报、已发角度警告
+        </div>
+    </div>
+
+    <script>
+        function switchMode(mode) {
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.mode-tab.${mode}`).classList.add('active');
+            document.getElementById('bullish-view').classList.toggle('hidden', mode !== 'bullish');
+            document.getElementById('kaito-view').classList.toggle('hidden', mode !== 'kaito');
+        }
+
+        // Simple resize handle
+        document.querySelectorAll('.resize-handle').forEach(handle => {
+            let startX, startWidth, panel;
+
+            handle.addEventListener('mousedown', e => {
+                panel = handle.previousElementSibling;
+                startX = e.clientX;
+                startWidth = panel.offsetWidth;
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+                e.preventDefault();
+            });
+
+            function onMouseMove(e) {
+                const diff = e.clientX - startX;
+                const newWidth = Math.max(260, Math.min(600, startWidth + diff));
+                panel.style.width = newWidth + 'px';
+                panel.style.maxWidth = newWidth + 'px';
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

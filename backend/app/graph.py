@@ -191,7 +191,7 @@ async def node_writer(state: AgentState):
             label = v.get("label", f"版本{i+1}")
             content = v.get("content", "")
             char_count = v.get("char_count", len(content))
-            combined_parts.append(f"## 版本{i+1}：{label}（{char_count}字）\n\n{content}")
+            combined_parts.append(f"## 版本{i+1}：{label}\n\n{content}")
         draft = "\n\n---\n\n".join(combined_parts)
         print(f"--- [P25] ✅ 合并 {len(variants)} 个版本到 draft_v1 ({len(draft)} 字) ---")
     
@@ -257,7 +257,8 @@ def node_critic(state: AgentState):
         api_config=effective_config,
         length=length,
         style=style,
-        custom_prompts=state.get("custom_prompts", {})
+        custom_prompts=state.get("custom_prompts", {}),
+        strategy_json=state.get("strategy_json", "")  # P26-fix: 传策略官上下文
     )
     
     # P12: 从 dict 中提取结果

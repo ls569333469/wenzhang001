@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P27 Canvas 数据区方案对比 (含右侧边栏)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
+            background: #f4f4f5;
+            color: #18181b;
+            padding: 20px 24px;
+            min-height: 100vh
+        }
+
+        .hdr {
+            text-align: center;
+            margin-bottom: 20px
+        }
+
+        .hdr h1 {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f59e0b, #0891b2, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3px
+        }
+
+        .hdr .sub {
+            font-size: 11px;
+            color: #71717a
+        }
+
+        /* Tabs for plan + mode */
+        .top-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 6px
+        }
+
+        .top-tab {
+            padding: 6px 16px;
+            border-radius: 16px;
+            border: 1.5px solid #e4e4e7;
+            background: #fff;
+            color: #71717a;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .top-tab:hover {
+            border-color: #a1a1aa;
+            color: #18181b
+        }
+
+        .top-tab.active {
+            background: #18181b;
+            color: #fff;
+            border-color: #18181b
+        }
+
+        .mode-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 18px
+        }
+
+        .mode-tab {
+            padding: 5px 14px;
+            border-radius: 14px;
+            border: 1.5px solid #e4e4e7;
+            background: #fff;
+            color: #71717a;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s
+        }
+
+        .mode-tab:hover {
+            border-color: #a1a1aa
+        }
+
+        .mode-tab.bullish.active {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, .06);
+            color: #ca8a04
+        }
+
+        .mode-tab.kaito.active {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, .06);
+            color: #0891b2
+        }
+
+        /* Full layout */
+        .full-layout {
+            display: flex;
+            gap: 12px;
+            align-items: stretch
+        }
+
+        .studio-frame {
+            flex: 1;
+            border: 2px solid #e4e4e7;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, .05)
+        }
+
+        .studio-frame.bullish {
+            border-color: rgba(245, 158, 11, .25)
+        }
+
+        .studio-frame.kaito {
+            border-color: rgba(6, 182, 212, .25)
+        }
+
+        .fr-bar {
+            padding: 6px 12px;
+            background: #fafafa;
+            border-bottom: 1px solid #e4e4e7;
+            font-size: 10px;
+            font-weight: 600;
+            color: #71717a;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .dots {
+            display: flex;
+            gap: 3px
+        }
+
+        .dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%
+        }
+
+        .dr {
+            background: #ef4444
+        }
+
+        .dy {
+            background: #eab308
+        }
+
+        .dg {
+            background: #22c55e
+        }
+
+        .studio-body {
+            display: flex;
+            min-height: 520px
+        }
+
+        /* ConfigPanel */
+        .cfg {
+            width: 160px;
+            background: #fafafa;
+            border-right: 1px solid #e4e4e7;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            flex-shrink: 0
+        }
+
+        .cfg-t {
+            font-size: 8px;
+            font-weight: 700;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e4e4e7;
+            margin-bottom: 3px
+        }
+
+        .cfg-s {
+            font-size: 8px;
+            font-weight: 600;
+            color: #a1a1aa;
+            margin-top: 5px
+        }
+
+        .cfg-item {
+            padding: 4px 7px;
+            border-radius: 5px;
+            font-size: 10px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            color: #52525b;
+            margin-bottom: 2px
+        }
+
+        .cfg-item.bull-a {
+            border-color: #f59e0b;
+            color: #ca8a04;
+            background: rgba(245, 158, 11, .04)
+        }
+
+        .cfg-item.kai-a {
+            border-color: #06b6d4;
+            color: #0891b2;
+            background: rgba(6, 182, 212, .04)
+        }
+
+        .cfg-note {
+            font-size: 8px;
+            color: #16a34a;
+            padding: 4px 6px;
+            border: 1px dashed rgba(34, 197, 94, .3);
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 6px;
+            line-height: 1.5
+        }
+
+        /* Canvas */
+        .canvas {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0
+        }
+
+        /* Canvas split for plan B */
+        .canvas.split {
+            flex-direction: row
+        }
+
+        /* ============ RIGHT SIDEBAR ============ */
+        .right-sidebar {
+            width: 200px;
+            background: #fff;
+            border: 1.5px solid #e4e4e7;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, .04);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex-shrink: 0
+        }
+
+        .rs-tabs {
+            display: flex;
+            border-bottom: 1px solid #e4e4e7;
+            background: #fafafa
+        }
+
+        .rs-tab {
+            flex: 1;
+            padding: 7px 2px;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 500;
+            color: #a1a1aa;
+            cursor: pointer;
+            transition: all .15s;
+            border-bottom: 2px solid transparent
+        }
+
+        .rs-tab:hover {
+            color: #52525b
+        }
+
+        .rs-tab.active {
+            color: #18181b;
+            border-bottom-color: #18181b;
+            font-weight: 600
+        }
+
+        .rs-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            scrollbar-width: thin
+        }
+
+        .rs-content::-webkit-scrollbar {
+            width: 3px
+        }
+
+        .rs-content::-webkit-scrollbar-thumb {
+            background: #e4e4e7;
+            border-radius: 2px
+        }
+
+        /* Progress items */
+        .prog-item {
+            display: flex;
+            gap: 8px;
+            padding: 6px 0;
+            position: relative
+        }
+
+        .prog-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 20px;
+            bottom: -6px;
+            width: 1px;
+            background: #e4e4e7
+        }
+
+        .prog-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .prog-dot.done {
+            background: #22c55e
+        }
+
+        .prog-dot.active {
+            background: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, .15)
+        }
+
+        .prog-dot.wait {
+            background: #e4e4e7
+        }
+
+        .prog-info {
+            flex: 1
+        }
+
+        .prog-name {
+            font-size: 10px;
+            font-weight: 600;
+            color: #18181b
+        }
+
+        .prog-time {
+            font-size: 8px;
+            color: #a1a1aa;
+            margin-top: 1px
+        }
+
+        .prog-detail {
+            font-size: 8px;
+            color: #71717a;
+            margin-top: 2px
+        }
+
+        /* ============ PLAN A SPECIFIC ============ */
+        .data-area-a {
+            border-bottom: 1px solid #e4e4e7;
+            background: #fafafa;
+            overflow: hidden;
+            transition: max-height .3s ease, padding .3s ease
+        }
+
+        .data-area-a.expanded {
+            max-height: 200px;
+            padding: 10px 14px
+        }
+
+        .data-area-a.collapsed {
+            max-height: 0;
+            padding: 0 14px
+        }
+
+        .data-hdr {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 6px
+        }
+
+        .data-ttl {
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .data-ttl .hint {
+            font-size: 8px;
+            font-weight: 400;
+            color: #a1a1aa
+        }
+
+        .toggle-btn {
+            font-size: 8px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .toggle-btn:hover {
+            border-color: #a1a1aa
+        }
+
+        .d-scroll {
+            max-height: 150px;
+            overflow-y: auto;
+            scrollbar-width: thin
+        }
+
+        .d-scroll::-webkit-scrollbar {
+            width: 3px
+        }
+
+        .d-scroll::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+            border-radius: 2px
+        }
+
+        .collapse-bar {
+            display: none;
+            padding: 5px 14px;
+            background: #fafafa;
+            border-bottom: 1px solid #e4e4e7;
+            cursor: pointer;
+            transition: background .15s;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .collapse-bar:hover {
+            background: #f0f0f1
+        }
+
+        .collapse-bar.visible {
+            display: flex
+        }
+
+        .collapse-bar .info {
+            font-size: 9px;
+            color: #a1a1aa
+        }
+
+        .collapse-bar .expand-btn {
+            font-size: 8px;
+            color: #71717a
+        }
+
+        /* ============ PLAN B SPECIFIC ============ */
+        .data-panel-b {
+            width: 40%;
+            min-width: 260px;
+            max-width: 420px;
+            background: #fafafa;
+            border-right: 1px solid #e4e4e7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0
+        }
+
+        .dp-header {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e4e4e7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .dp-title {
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .dp-title .hint {
+            font-size: 8px;
+            font-weight: 400;
+            color: #a1a1aa
+        }
+
+        .dp-filters {
+            padding: 6px 12px;
+            border-bottom: 1px solid #f0f0f1;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap
+        }
+
+        .dp-filter {
+            padding: 3px 8px;
+            border-radius: 8px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 9px;
+            color: #71717a;
+            cursor: pointer
+        }
+
+        .dp-filter.active {
+            border-color: #f59e0b;
+            color: #ca8a04;
+            font-weight: 600
+        }
+
+        .dp-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 10px;
+            scrollbar-width: thin
+        }
+
+        .dp-scroll::-webkit-scrollbar {
+            width: 3px
+        }
+
+        .dp-scroll::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+            border-radius: 2px
+        }
+
+        .dp-foot {
+            padding: 6px 12px;
+            border-top: 1px solid #e4e4e7;
+            font-size: 8px;
+            color: #a1a1aa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .dp-refresh {
+            padding: 3px 8px;
+            border-radius: 5px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 8px;
+            color: #71717a;
+            cursor: pointer
+        }
+
+        .resize-h {
+            width: 4px;
+            background: transparent;
+            cursor: col-resize;
+            flex-shrink: 0
+        }
+
+        .resize-h:hover {
+            background: rgba(0, 0, 0, .06)
+        }
+
+        /* Shared components */
+        .fc {
+            padding: 8px 10px;
+            border-radius: 7px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .fc:hover {
+            border-color: #d4d4d8
+        }
+
+        .fc.sel {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, .02)
+        }
+
+        .fc .top {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px
+        }
+
+        .fc-av {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .fc .hd {
+            font-weight: 600;
+            font-size: 10px;
+            color: #18181b
+        }
+
+        .fc .tm {
+            font-size: 8px;
+            color: #a1a1aa;
+            margin-left: auto
+        }
+
+        .fc .bd {
+            font-size: 10px;
+            color: #52525b;
+            line-height: 1.5
+        }
+
+        .fc .st {
+            display: flex;
+            gap: 10px;
+            margin-top: 4px;
+            font-size: 8px;
+            color: #a1a1aa
+        }
+
+        /* Project chips */
+        .pchips {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 8px
+        }
+
+        .pchip {
+            padding: 4px 9px;
+            border-radius: 7px;
+            border: 1.5px solid #e4e4e7;
+            background: #fff;
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer
+        }
+
+        .pchip.active {
+            border-color: #06b6d4;
+            color: #0891b2;
+            font-weight: 600;
+            background: rgba(6, 182, 212, .04)
+        }
+
+        .achips {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap
+        }
+
+        .achip {
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-size: 9px;
+            background: rgba(6, 182, 212, .05);
+            color: #0891b2;
+            border: 1px solid rgba(6, 182, 212, .2)
+        }
+
+        .achip.sel {
+            background: #06b6d4;
+            color: #fff;
+            border-color: #06b6d4
+        }
+
+        .angle-lbl {
+            font-size: 10px;
+            font-weight: 600;
+            color: #52525b;
+            margin-bottom: 5px
+        }
+
+        .intel {
+            font-size: 9px;
+            color: #71717a;
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .intel .dt {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #d4d4d8
+        }
+
+        .warn-n {
+            margin-top: 8px;
+            padding: 6px 8px;
+            border-radius: 5px;
+            border: 1px dashed #fbbf24;
+            background: rgba(251, 191, 36, .04);
+            font-size: 8px;
+            color: #ca8a04;
+            text-align: center
+        }
+
+        .input-area {
+            padding: 8px 14px;
+            border-bottom: 1px solid #e4e4e7
+        }
+
+        .input-box {
+            background: #f4f4f5;
+            border: 1.5px solid #e4e4e7;
+            border-radius: 7px;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: #a1a1aa
+        }
+
+        .input-box:hover {
+            border-color: #a1a1aa
+        }
+
+        .writing-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0
+        }
+
+        .writing-main {
+            flex: 1;
+            padding: 14px 16px;
+            overflow-y: auto
+        }
+
+        .vtabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px
+        }
+
+        .vtab {
+            padding: 3px 10px;
+            border-radius: 5px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer
+        }
+
+        .vtab.active {
+            background: #18181b;
+            color: #fff;
+            border-color: #18181b
+        }
+
+        .wc {
+            font-size: 12px;
+            line-height: 1.8;
+            color: #3f3f46
+        }
+
+        .wc .wt {
+            font-size: 15px;
+            font-weight: 700;
+            color: #18181b;
+            margin-bottom: 10px
+        }
+
+        .wc p {
+            margin-bottom: 10px
+        }
+
+        .wc .hl {
+            background: linear-gradient(transparent 60%, rgba(245, 158, 11, .15) 40%);
+            padding: 0 2px
+        }
+
+        .toolbar {
+            padding: 6px 14px;
+            border-top: 1px solid #e4e4e7;
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end
+        }
+
+        .tbtn {
+            padding: 4px 10px;
+            border-radius: 5px;
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            font-size: 9px;
+            color: #71717a;
+            cursor: pointer
+        }
+
+        .tbtn:hover {
+            background: #e4e4e7
+        }
+
+        .tbtn.pri {
+            background: #18181b;
+            color: #fff;
+            border-color: #18181b
+        }
+
+        .writing-canvas-placeholder {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .wcp {
+            text-align: center
+        }
+
+        .wcp .icon {
+            font-size: 24px;
+            margin-bottom: 6px
+        }
+
+        .wcp .tt {
+            font-size: 12px;
+            font-weight: 600;
+            color: #a1a1aa
+        }
+
+        .wcp .desc {
+            font-size: 9px;
+            color: #d4d4d8
+        }
+
+        .info-banner {
+            margin: 18px auto 0;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: rgba(34, 197, 94, .05);
+            border: 1px solid rgba(34, 197, 94, .15);
+            font-size: 10px;
+            color: #52525b;
+            line-height: 1.6
+        }
+
+        .info-banner b {
+            color: #16a34a
+        }
+
+        .hidden {
+            display: none !important
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hdr">
+        <h1>P27 数据区方案对比（含右侧边栏）</h1>
+        <div class="sub">完整布局：左 ConfigPanel + 中 Canvas + 右 UnifiedSidebar（进度/版本/日志/导出）</div>
+    </div>
+
+    <!-- Plan tabs -->
+    <div class="top-tabs">
+        <div class="top-tab active" onclick="switchPlan('A')">方案 A · 上下折叠</div>
+        <div class="top-tab" onclick="switchPlan('B')">方案 B · 左右分栏</div>
+    </div>
+    <div class="mode-tabs">
+        <div class="mode-tab bullish active" onclick="switchMode('bullish')">🌸 吹捧模式</div>
+        <div class="mode-tab kaito" onclick="switchMode('kaito')">🎯 Kaito 模式</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PLAN A -->
+    <!-- ============================================================ -->
+
+    <!-- Plan A · Bullish -->
+    <div id="A-bullish" class="full-layout">
+        <div class="studio-frame bullish">
+            <div class="fr-bar">
+                <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><span
+                    style="color:#ca8a04">方案A · 🌸 吹捧 — Feed 可折叠 · 固定高度 · 可滚动</span>
+            </div>
+            <div class="studio-body">
+                <div class="cfg">
+                    <div class="cfg-t">ConfigPanel</div>
+                    <div class="cfg-item bull-a">🌸 吹捧</div>
+                    <div class="cfg-s">🎨 风格</div>
+                    <div class="cfg-item">吹捧体</div>
+                    <div class="cfg-s">📏 篇幅</div>
+                    <div class="cfg-item">50-500字</div>
+                    <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+                </div>
+                <div class="canvas">
+                    <div id="ab-data" class="data-area-a expanded">
+                        <div class="data-hdr">
+                            <div class="data-ttl" style="color:#ca8a04">🌸 币安动态 <span class="hint">[CZ] [何一] [🔄]</span>
+                            </div>
+                            <div class="toggle-btn" onclick="toggleA('ab')">▲ 收起</div>
+                        </div>
+                        <div class="d-scroll">
+                            <div class="fc sel">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                    </div><span class="hd">@cz_binance</span><span class="tm">2h</span>
+                                </div>
+                                <div class="bd">Binance partners with local exchanges in Southeast Asia to expand crypto
+                                    adoption 🚀</div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                    </div><span class="hd">@heyibinance</span><span class="tm">5h</span>
+                                </div>
+                                <div class="bd">Thank you for your support and feedback. We're building for the next
+                                    billion users ❤️</div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                    </div><span class="hd">@cz_binance</span><span class="tm">8h</span>
+                                </div>
+                                <div class="bd">Education is the key. Binance Academy in 12 new countries this month
+                                    📚🌍</div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">BN
+                                    </div><span class="hd">@binance</span><span class="tm">12h</span>
+                                </div>
+                                <div class="bd">#Binance now supports 15 new trading pairs including $BERA, $MON 📈
+                                </div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                    </div><span class="hd">@heyibinance</span><span class="tm">1d</span>
+                                </div>
+                                <div class="bd">Just finished our quarterly town hall. Proud of the team's progress ✨
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ab-bar" class="collapse-bar" onclick="toggleA('ab')"><span class="info">🌸 币安动态 · <b
+                                style="color:#ca8a04">5条</b></span><span class="expand-btn">▼ 展开</span></div>
+                    <div class="input-area">
+                        <div class="input-box">基于以上动态生成吹捧文案... ⌘+Enter</div>
+                    </div>
+                    <div class="writing-area">
+                        <div class="writing-canvas-placeholder">
+                            <div class="wcp">
+                                <div class="icon">📝</div>
+                                <div class="tt">WritingCanvas</div>
+                                <div class="desc">吹捧文案输出区 · 始终可见</div>
+                            </div>
+                        </div>
+                        <div class="toolbar">
+                            <div class="tbtn">📋 复制</div>
+                            <div class="tbtn">🔄 重新</div>
+                            <div class="tbtn pri">💾 保存</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- RIGHT SIDEBAR -->
+        <div class="right-sidebar">
+            <div class="rs-tabs">
+                <div class="rs-tab active">📊 进度</div>
+                <div class="rs-tab">📂 版本</div>
+                <div class="rs-tab">📜 日志</div>
+                <div class="rs-tab">💾 导出</div>
+            </div>
+            <div class="rs-content">
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 策略师完成</div>
+                        <div class="prog-time">2026-02-20 · 10:23:31</div>
+                        <div class="prog-detail">Created and selected 3 titles</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 写手完成</div>
+                        <div class="prog-time">2026-02-20 · 10:25:04</div>
+                        <div class="prog-detail">Wrote 3 draft(s) / wardrobe version...</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 审核完成</div>
+                        <div class="prog-time">2026-02-20 · 10:26:12</div>
+                        <div class="prog-detail">0.8.5 (PASS)</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot active"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">⏳ 润色中...</div>
+                        <div class="prog-time">2026-02-20 · 10:26:45</div>
+                        <div class="prog-detail">Polisher: processing version 1/3</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot wait"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">⬜ 等待完成</div>
+                        <div class="prog-time">—</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plan A · Kaito -->
+    <div id="A-kaito" class="full-layout hidden">
+        <div class="studio-frame kaito">
+            <div class="fr-bar">
+                <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><span
+                    style="color:#0891b2">方案A · 🎯 Kaito — 看板可折叠 · 固定高度 · 可滚动</span>
+            </div>
+            <div class="studio-body">
+                <div class="cfg">
+                    <div class="cfg-t">ConfigPanel</div>
+                    <div class="cfg-item kai-a">🎯 Kaito</div>
+                    <div class="cfg-s">🎨 风格</div>
+                    <div class="cfg-item">嘴撸体</div>
+                    <div class="cfg-s">📏 篇幅</div>
+                    <div class="cfg-item">50-500字</div>
+                    <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+                </div>
+                <div class="canvas">
+                    <div id="ak-data" class="data-area-a expanded">
+                        <div class="data-hdr">
+                            <div class="data-ttl" style="color:#0891b2">🎯 项目看板 <span class="hint">[+添加]</span></div>
+                            <div class="toggle-btn" onclick="toggleA('ak')">▲ 收起</div>
+                        </div>
+                        <div class="d-scroll">
+                            <div class="pchips">
+                                <div class="pchip active">🐻 Berachain <b style="color:#0891b2;font-size:8px">5新</b>
+                                </div>
+                                <div class="pchip">M Monad (3)</div>
+                                <div class="pchip">E Eigen (2)</div>
+                                <div class="pchip">S Sui (4)</div>
+                                <div class="pchip">Z zkSync (3)</div>
+                            </div>
+                            <div class="angle-lbl">💡 推荐角度 — Berachain</div>
+                            <div class="achips"><span class="achip sel">生态扩展</span><span class="achip">PoL科普</span><span
+                                    class="achip">社区治理</span><span class="achip">TVL增长</span><span class="achip">Berps
+                                    DEX</span></div>
+                            <div class="warn-n">⚠️ 已发过: 社区治理 (2天前) · TVL增长 (4天前)</div>
+                        </div>
+                    </div>
+                    <div id="ak-bar" class="collapse-bar" onclick="toggleA('ak')"><span class="info">🎯 项目看板 · <b
+                                style="color:#0891b2">5个项目</b> · Berachain</span><span class="expand-btn">▼ 展开</span>
+                    </div>
+                    <div class="input-area">
+                        <div class="input-box">Berachain · 生态扩展 角度生成... ⌘+Enter</div>
+                    </div>
+                    <div class="writing-area">
+                        <div class="writing-canvas-placeholder">
+                            <div class="wcp">
+                                <div class="icon">📝</div>
+                                <div class="tt">WritingCanvas</div>
+                                <div class="desc">Kaito 文案输出区 · 始终可见</div>
+                            </div>
+                        </div>
+                        <div class="toolbar">
+                            <div class="tbtn">📋 复制</div>
+                            <div class="tbtn">🔄 重新</div>
+                            <div class="tbtn pri">💾 保存</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-sidebar">
+            <div class="rs-tabs">
+                <div class="rs-tab active">📊 进度</div>
+                <div class="rs-tab">📂 版本</div>
+                <div class="rs-tab">📜 日志</div>
+                <div class="rs-tab">💾 导出</div>
+            </div>
+            <div class="rs-content">
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 策略师完成</div>
+                        <div class="prog-time">2026-02-20 · 10:23:31</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 写手完成</div>
+                        <div class="prog-time">2026-02-20 · 10:25:04</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot active"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">⏳ 审核中...</div>
+                        <div class="prog-time">2026-02-20 · 10:26:12</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot wait"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">⬜ 润色</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PLAN B -->
+    <!-- ============================================================ -->
+
+    <!-- Plan B · Bullish -->
+    <div id="B-bullish" class="full-layout hidden">
+        <div class="studio-frame bullish">
+            <div class="fr-bar">
+                <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><span
+                    style="color:#ca8a04">方案B · 🌸 吹捧 — 左右分栏 · 数据与输出并排</span>
+            </div>
+            <div class="studio-body">
+                <div class="cfg">
+                    <div class="cfg-t">ConfigPanel</div>
+                    <div class="cfg-item bull-a">🌸 吹捧</div>
+                    <div class="cfg-s">🎨 风格</div>
+                    <div class="cfg-item">吹捧体</div>
+                    <div class="cfg-s">📏 篇幅</div>
+                    <div class="cfg-item">50-500字</div>
+                    <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+                </div>
+                <div class="canvas split">
+                    <div class="data-panel-b" id="bb-panel">
+                        <div class="dp-header">
+                            <div class="dp-title" style="color:#ca8a04">🌸 币安动态 <span class="hint">点选参考</span></div>
+                        </div>
+                        <div class="dp-filters"><span class="dp-filter active">全部(8)</span><span
+                                class="dp-filter">CZ(3)</span><span class="dp-filter">何一(3)</span><span
+                                class="dp-filter">Binance(2)</span></div>
+                        <div class="dp-scroll">
+                            <div class="fc sel">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                    </div><span class="hd">@cz_binance</span><span class="tm">2h</span>
+                                </div>
+                                <div class="bd">Binance partners with local exchanges in Southeast Asia to expand crypto
+                                    adoption 🚀</div>
+                                <div class="st"><span>❤️ 12.4K</span><span>🔁 3.8K</span></div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                    </div><span class="hd">@heyibinance</span><span class="tm">5h</span>
+                                </div>
+                                <div class="bd">Thank you for your support. Building for the next billion users ❤️</div>
+                                <div class="st"><span>❤️ 8.2K</span><span>🔁 2.1K</span></div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                    </div><span class="hd">@cz_binance</span><span class="tm">8h</span>
+                                </div>
+                                <div class="bd">Education is the key. Binance Academy in 12 new countries 📚🌍</div>
+                                <div class="st"><span>❤️ 9.7K</span><span>🔁 4.2K</span></div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">BN
+                                    </div><span class="hd">@binance</span><span class="tm">12h</span>
+                                </div>
+                                <div class="bd">15 new trading pairs including $BERA, $MON, $EIGEN 📈</div>
+                                <div class="st"><span>❤️ 5.3K</span><span>🔁 1.8K</span></div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                    </div><span class="hd">@heyibinance</span><span class="tm">1d</span>
+                                </div>
+                                <div class="bd">Quarterly town hall done. Proud of progress on compliance and innovation
+                                    ✨</div>
+                                <div class="st"><span>❤️ 6.8K</span><span>🔁 1.5K</span></div>
+                            </div>
+                            <div class="fc">
+                                <div class="top">
+                                    <div class="fc-av" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                    </div><span class="hd">@cz_binance</span><span class="tm">1d</span>
+                                </div>
+                                <div class="bd">Regulation done right benefits everyone. Proud of UAE & Thailand
+                                    progress 💪</div>
+                                <div class="st"><span>❤️ 15.1K</span><span>🔁 5.6K</span></div>
+                            </div>
+                        </div>
+                        <div class="dp-foot"><span>数据源: Grok → binance_daily</span><span class="dp-refresh">🔄 刷新</span>
+                        </div>
+                    </div>
+                    <div class="resize-h" id="bb-resize"></div>
+                    <div class="writing-area">
+                        <div class="input-area">
+                            <div class="input-box">基于选中动态生成吹捧文案... ⌘+Enter</div>
+                        </div>
+                        <div class="writing-main">
+                            <div class="vtabs">
+                                <div class="vtab active">版本 1</div>
+                                <div class="vtab">版本 2</div>
+                                <div class="vtab">版本 3</div>
+                            </div>
+                            <div class="wc">
+                                <div class="wt">CZ的又一次"降维打击" 🔥</div>
+                                <p>别人还在研究K线图的时候，<span class="hl">CZ已经带着币安杀入了东南亚</span>，跟本地交易所搞联盟了。</p>
+                                <p>什么叫格局？这就叫格局。东南亚几十亿人口的加密市场，一般人看到的是"合作"，CZ看到的是 —— <b>基础设施</b>。</p>
+                                <p>一句话总结：当别人还在讨论"牛市来没来"的时候，币安已经在为下个十亿用户铺路了。这波啊，<span class="hl">直接把起跑线给改了</span>。</p>
+                            </div>
+                        </div>
+                        <div class="toolbar">
+                            <div class="tbtn">📋 复制</div>
+                            <div class="tbtn">🔄 重新</div>
+                            <div class="tbtn pri">💾 保存</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-sidebar">
+            <div class="rs-tabs">
+                <div class="rs-tab active">📊 进度</div>
+                <div class="rs-tab">📂 版本</div>
+                <div class="rs-tab">📜 日志</div>
+                <div class="rs-tab">💾 导出</div>
+            </div>
+            <div class="rs-content">
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 策略师完成</div>
+                        <div class="prog-time">2026-02-20 · 10:23:31</div>
+                        <div class="prog-detail">Created and selected 3 titles</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 写手完成</div>
+                        <div class="prog-time">2026-02-20 · 10:25:04</div>
+                        <div class="prog-detail">Wrote 3 draft(s)</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 审核完成</div>
+                        <div class="prog-time">2026-02-20 · 10:26:12</div>
+                        <div class="prog-detail">Score: 0.85 (PASS)</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 润色完成</div>
+                        <div class="prog-time">2026-02-20 · 10:28:07</div>
+                        <div class="prog-detail">Polisher finished</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Plan B · Kaito -->
+    <div id="B-kaito" class="full-layout hidden">
+        <div class="studio-frame kaito">
+            <div class="fr-bar">
+                <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div><span
+                    style="color:#0891b2">方案B · 🎯 Kaito — 左右分栏 · 看板与输出并排</span>
+            </div>
+            <div class="studio-body">
+                <div class="cfg">
+                    <div class="cfg-t">ConfigPanel</div>
+                    <div class="cfg-item kai-a">🎯 Kaito</div>
+                    <div class="cfg-s">🎨 风格</div>
+                    <div class="cfg-item">嘴撸体</div>
+                    <div class="cfg-s">📏 篇幅</div>
+                    <div class="cfg-item">50-500字</div>
+                    <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+                </div>
+                <div class="canvas split">
+                    <div class="data-panel-b" id="bk-panel">
+                        <div class="dp-header">
+                            <div class="dp-title" style="color:#0891b2">🎯 项目看板 <span class="hint">选择项目+角度</span></div>
+                        </div>
+                        <div class="dp-scroll">
+                            <div class="pchips">
+                                <div class="pchip active">🐻 Berachain <b style="color:#0891b2;font-size:8px">5新</b>
+                                </div>
+                                <div class="pchip">M Monad (3)</div>
+                                <div class="pchip">E Eigen (2)</div>
+                                <div class="pchip">S Sui (4)</div>
+                                <div class="pchip">A Aptos (1)</div>
+                                <div class="pchip">Z zkSync (3)</div>
+                                <div class="pchip" style="border-style:dashed;color:#a1a1aa">+ 添加</div>
+                            </div>
+                            <div style="padding:0 14px">
+                                <div
+                                    style="padding:10px;border-radius:7px;background:#fff;border:1px solid #e4e4e7;margin-bottom:8px">
+                                    <div class="angle-lbl">💡 推荐角度 — Berachain</div>
+                                    <div class="achips"><span class="achip sel">生态扩展</span><span
+                                            class="achip">PoL科普</span><span class="achip">社区治理</span><span
+                                            class="achip">TVL增长</span><span class="achip">Berps DEX</span><span
+                                            class="achip">与 Monad 对比</span></div>
+                                </div>
+                                <div
+                                    style="padding:10px;border-radius:7px;background:#fff;border:1px solid #e4e4e7;margin-bottom:8px">
+                                    <div class="angle-lbl">📰 最新情报</div>
+                                    <div class="intel"><span class="dt"></span>Mainnet Phase 2 启动 <span
+                                            style="font-size:8px;color:#d4d4d8;margin-left:auto">2h</span></div>
+                                    <div class="intel"><span class="dt"></span>TVL 突破 $3.2B，单周+45% <span
+                                            style="font-size:8px;color:#d4d4d8;margin-left:auto">6h</span></div>
+                                    <div class="intel"><span class="dt"></span>Kodiak、Beraborrow 爆发 <span
+                                            style="font-size:8px;color:#d4d4d8;margin-left:auto">12h</span></div>
+                                    <div class="intel"><span class="dt"></span>PoL 机制首次大规模验证 <span
+                                            style="font-size:8px;color:#d4d4d8;margin-left:auto">1d</span></div>
+                                    <div class="intel"><span class="dt"></span>Binance 上线 $BERA 永续 <span
+                                            style="font-size:8px;color:#d4d4d8;margin-left:auto">2d</span></div>
+                                </div>
+                                <div class="warn-n">⚠️ 已发过: 社区治理 (2天前) · TVL增长 (4天前)</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resize-h" id="bk-resize"></div>
+                    <div class="writing-area">
+                        <div class="input-area">
+                            <div class="input-box">Berachain · 生态扩展 角度生成... ⌘+Enter</div>
+                        </div>
+                        <div class="writing-main">
+                            <div class="vtabs">
+                                <div class="vtab active">版本 1</div>
+                                <div class="vtab">版本 2</div>
+                                <div class="vtab">版本 3</div>
+                            </div>
+                            <div class="wc">
+                                <div class="wt">Berachain 正在悄悄改变 L1 的游戏规则 🐻</div>
+                                <p>别睡了兄弟们，Berachain 的 Phase 2 主网刚上线，TVL 一周暴涨 45% 直接冲到 $3.2B。</p>
+                                <p>Kodiak 和 Beraborrow 这波联动堪称教科书级别 —— 完美的 DeFi 飞轮。而且这还是 <b>PoL 机制</b>首次大规模跑通！</p>
+                                <p>一句话：当其他 L1 还在讲"快主网了"的故事时，Berachain 已经在用 TVL 说话了。</p>
+                            </div>
+                        </div>
+                        <div class="toolbar">
+                            <div class="tbtn">📋 复制</div>
+                            <div class="tbtn">🔄 重新</div>
+                            <div class="tbtn pri">💾 保存</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-sidebar">
+            <div class="rs-tabs">
+                <div class="rs-tab active">📊 进度</div>
+                <div class="rs-tab">📂 版本</div>
+                <div class="rs-tab">📜 日志</div>
+                <div class="rs-tab">💾 导出</div>
+            </div>
+            <div class="rs-content">
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 策略师完成</div>
+                        <div class="prog-time">2026-02-20 · 10:23:31</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot done"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">✅ 写手完成</div>
+                        <div class="prog-time">2026-02-20 · 10:25:04</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot active"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">⏳ 审核中...</div>
+                        <div class="prog-time">2026-02-20 · 10:26:12</div>
+                    </div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-dot wait"></div>
+                    <div class="prog-info">
+                        <div class="prog-name">⬜ 润色</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-banner">
+        <b>完整布局</b>：左 ConfigPanel (160px) + 中 Canvas (弹性) + 右 UnifiedSidebar (200px) ·
+        方案A 数据在 Canvas 顶部可折叠 · 方案B 数据在 Canvas 左侧分栏 ·
+        右侧边栏始终显示 <b>进度/版本/日志/导出</b> 4个Tab
+    </div>
+
+    <script>
+        let curPlan = 'A', curMode = 'bullish';
+
+        function switchPlan(plan) {
+            curPlan = plan;
+            document.querySelectorAll('.top-tab').forEach((t, i) => t.classList.toggle('active', i === (plan === 'A' ? 0 : 1)));
+            render();
+        }
+        function switchMode(mode) {
+            curMode = mode;
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.mode-tab.${mode}`).classList.add('active');
+            render();
+        }
+        function render() {
+            ['A-bullish', 'A-kaito', 'B-bullish', 'B-kaito'].forEach(id => {
+                document.getElementById(id).classList.toggle('hidden', id !== `${curPlan}-${curMode}`);
+            });
+        }
+
+        function toggleA(prefix) {
+            const data = document.getElementById(`${prefix}-data`);
+            const bar = document.getElementById(`${prefix}-bar`);
+            const isExpanded = data.classList.contains('expanded');
+            if (isExpanded) { data.classList.remove('expanded'); data.classList.add('collapsed'); bar.classList.add('visible'); }
+            else { data.classList.remove('collapsed'); data.classList.add('expanded'); bar.classList.remove('visible'); }
+        }
+
+        // Resize handles for Plan B
+        document.querySelectorAll('.resize-h').forEach(handle => {
+            let startX, startWidth, panel;
+            handle.addEventListener('mousedown', e => {
+                panel = handle.previousElementSibling;
+                startX = e.clientX;
+                startWidth = panel.offsetWidth;
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+                e.preventDefault();
+            });
+            function onMove(e) { const w = Math.max(220, Math.min(500, startWidth + e.clientX - startX)); panel.style.width = w + 'px'; panel.style.maxWidth = w + 'px'; }
+            function onUp() { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp); }
+        });
+    </script>
+
+</body>
+
+</html>

@@ -60,7 +60,7 @@ class MaterialSheetService:
         # P23: TTL cache to avoid repeated Sheets API calls
         self._cache_records = None
         self._cache_time = 0
-        self._cache_ttl = 60  # seconds
+        self._cache_ttl = 300  # seconds (5 min – material data changes infrequently)
 
     def _init(self):
         """懒初始化 Sheets 连接"""
@@ -87,6 +87,13 @@ class MaterialSheetService:
             self._worksheet = spreadsheet.worksheet("materials")
             self._initialized = True
             print("[MaterialSheet] Connected to materials worksheet")
+            # Pre-warm cache to avoid cold start delay on first request
+            try:
+                self._cache_records = self._worksheet.get_all_records()
+                self._cache_time = time.time()
+                print(f"[MaterialSheet] Cache pre-warmed: {len(self._cache_records)} records")
+            except Exception:
+                pass
             return True
 
         except Exception as e:
@@ -203,7 +210,7 @@ class MaterialSheetService:
                 continue
             if min_score and int(record.get("质量评分", 0)) < min_score:
                 continue
-            if content_type and record.get("内容类型", "") != content_type:
+            if content_type and record.get("内容类型", "").strip() != content_type:
                 continue
             if status and record.get("状态", "") != status:
                 continue

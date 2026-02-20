@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import {
     Newspaper, RefreshCw, ExternalLink, Star, Clock,
     Filter, Loader2, ArrowRight, Tag, Zap, FileText, ChevronDown
@@ -208,10 +208,16 @@ function MaterialCard({ item, onUseForCreation }: {
 // Main Component
 // ==========================================
 
+// Module-level cache — persists across route navigation
+let _cachedItems: MaterialItem[] | null = null;
+let _cachedStats: MaterialStats | null = null;
+let _cachedTotal = 0;
+let _cacheFilter = '';  // serialized filter key
+
 export function MaterialCenter() {
-    const [items, setItems] = useState<MaterialItem[]>([]);
-    const [stats, setStats] = useState<MaterialStats | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [items, setItems] = useState<MaterialItem[]>(_cachedItems || []);
+    const [stats, setStats] = useState<MaterialStats | null>(_cachedStats);
+    const [loading, setLoading] = useState(!_cachedItems);
     const [fetching, setFetching] = useState(false);
     const [filter, setFilter] = useState({
         content_type: '',
@@ -219,46 +225,80 @@ export function MaterialCenter() {
         timeliness: '',
     });
     const [page, setPage] = useState(1);
-    const [total, setTotal] = useState(0);
+    const [total, setTotal] = useState(_cachedTotal);
     const router = useRouter();
     const { resetSession, setMaterialPrefill, setMaterialContext } = useAgentStore();
 
-    const loadMaterials = useCallback(async () => {
-        try {
-            setLoading(true);
-            const params = new URLSearchParams();
-            params.set('page', page.toString());
-            params.set('page_size', '20');
-            if (filter.content_type) params.set('content_type', filter.content_type);
-            if (filter.min_score) params.set('min_score', filter.min_score.toString());
-            if (filter.timeliness) params.set('timeliness', filter.timeliness);
+    // Load materials with AbortController to prevent race conditions
+    useEffect(() => {
+        const abortController = new AbortController();
 
-            const resp = await fetch(`${API_BASE_URL}/materials/list?${params}`);
-            const data = await resp.json();
+        const load = async () => {
+            const filterKey = JSON.stringify({ ...filter, page });
+            // Skip if cache matches current filter
+            if (_cachedItems && _cacheFilter === filterKey) {
+                setItems(_cachedItems);
+                setTotal(_cachedTotal);
+                setLoading(false);
+                return;
+            }
 
-            setItems(data.items || []);
-            setTotal(data.total || 0);
-        } catch (err) {
-            console.error('Failed to load materials:', err);
-        } finally {
-            setLoading(false);
-        }
+            try {
+                setLoading(true);
+                const params = new URLSearchParams();
+                params.set('page', page.toString());
+                params.set('page_size', '20');
+                if (filter.content_type) params.set('content_type', filter.content_type);
+                if (filter.min_score) params.set('min_score', filter.min_score.toString());
+                if (filter.timeliness) params.set('timeliness', filter.timeliness);
+
+                const resp = await fetch(`${API_BASE_URL}/materials/list?${params}`, {
+                    signal: abortController.signal,
+                });
+                const data = await resp.json();
+
+                if (!abortController.signal.aborted) {
+                    const newItems = data.items || [];
+                    const newTotal = data.total || 0;
+                    setItems(newItems);
+                    setTotal(newTotal);
+                    _cachedItems = newItems;
+                    _cachedTotal = newTotal;
+                    _cacheFilter = filterKey;
+                }
+            } catch (err: unknown) {
+                if (err instanceof Error && err.name !== 'AbortError') {
+                    console.error('Failed to load materials:', err);
+                }
+            } finally {
+                if (!abortController.signal.aborted) {
+                    setLoading(false);
+                }
+            }
+        };
+
+        load();
+        return () => abortController.abort();
     }, [page, filter]);
 
-    const loadStats = useCallback(async () => {
-        try {
-            const resp = await fetch(`${API_BASE_URL}/materials/stats`);
-            const data = await resp.json();
-            setStats(data);
-        } catch (err) {
-            console.error('Failed to load stats:', err);
-        }
-    }, []);
-
+    // Stats loaded once, independent of filter
     useEffect(() => {
-        loadMaterials();
-        loadStats();
-    }, [loadMaterials, loadStats]);
+        if (_cachedStats) {
+            setStats(_cachedStats);
+            return;
+        }
+        const load = async () => {
+            try {
+                const resp = await fetch(`${API_BASE_URL}/materials/stats`);
+                const data = await resp.json();
+                _cachedStats = data;
+                setStats(data);
+            } catch (err) {
+                console.error('Failed to load stats:', err);
+            }
+        };
+        load();
+    }, []);
 
     const handleFetch = async () => {
         setFetching(true);
@@ -279,8 +319,19 @@ export function MaterialCenter() {
                     if (statusData.status === 'completed' || statusData.status === 'failed') {
                         clearInterval(pollInterval);
                         setFetching(false);
-                        loadMaterials();
-                        loadStats();
+                        // Invalidate caches to force fresh load
+                        _cachedItems = null;
+                        _cachedStats = null;
+                        _cacheFilter = '';
+                        // Refresh stats inline
+                        try {
+                            const statsResp = await fetch(`${API_BASE_URL}/materials/stats`);
+                            const statsData = await statsResp.json();
+                            _cachedStats = statsData;
+                            setStats(statsData);
+                        } catch { /* ignore */ }
+                        // Trigger materials re-fetch by creating new filter ref
+                        setFilter(f => ({ ...f }));
                     }
                 }, 3000);
             }
@@ -432,7 +483,7 @@ export function MaterialCenter() {
                 <div className="space-y-3">
                     {items.map((item, i) => (
                         <MaterialCard
-                            key={item.fingerprint || i}
+                            key={item.url || `material-${i}`}
                             item={item}
                             onUseForCreation={handleUseForCreation}
                         />

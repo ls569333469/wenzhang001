@@ -25,7 +25,8 @@ def get_critic(mode: str):
 
 
 def critic_agent(draft: str, mode: str, api_config: dict = None, 
-                 length: str = "thread", style: str = "auto", custom_prompts: dict = None) -> dict:
+                 length: str = "thread", style: str = "auto", custom_prompts: dict = None,
+                 strategy_json: str = None) -> dict:
     """
     旧版统一 Critic - 向后兼容
     @deprecated 将在 P18 Phase 4 被替换为模块化调用
@@ -37,5 +38,6 @@ def critic_agent(draft: str, mode: str, api_config: dict = None,
         api_config=api_config or {},
         length=length,
         style=style,
-        custom_prompts=custom_prompts or {}
+        custom_prompts=custom_prompts or {},
+        strategy_json=strategy_json
     )

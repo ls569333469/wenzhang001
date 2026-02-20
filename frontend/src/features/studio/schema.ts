@@ -165,7 +165,7 @@ export const SKIP_MODES = {
     strategist: [] as string[],
     writer: [] as string[],
     critic: ['hot_take'],
-    polisher: ['hot_take', 'short_article'],
+    polisher: ['hot_take'],
 } as const;
 
 /** 完整 6 模式 Schema（4 个 agent 通用） */
@@ -206,7 +206,7 @@ export type ModeCriticConfig = z.infer<typeof ModeCriticConfigSchema>;
 export const ModePolisherConfigSchema = FullModeConfigSchema;
 export const DEFAULT_MODE_POLISHERS: z.infer<typeof ModePolisherConfigSchema> = {
     hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
-    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    short_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },  // P26: enabled
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },

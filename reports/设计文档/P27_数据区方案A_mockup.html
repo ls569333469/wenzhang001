@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P27 方案A — 可折叠数据区 Mockup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
+            background: #f4f4f5;
+            color: #18181b;
+            padding: 24px 32px;
+            min-height: 100vh
+        }
+
+        .hdr {
+            text-align: center;
+            margin-bottom: 28px
+        }
+
+        .hdr h1 {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #16a34a, #0891b2, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px
+        }
+
+        .hdr .sub {
+            font-size: 12px;
+            color: #71717a
+        }
+
+        /* Mode tabs */
+        .mode-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px
+        }
+
+        .mode-tab {
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 1.5px solid #e4e4e7;
+            background: #fff;
+            color: #71717a;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .2s;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .mode-tab:hover {
+            border-color: #a1a1aa;
+            color: #18181b
+        }
+
+        .mode-tab.active {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, .06);
+            color: #16a34a
+        }
+
+        .mode-tab.bullish.active {
+            border-color: #f59e0b;
+            background: rgba(245, 158, 11, .06);
+            color: #ca8a04
+        }
+
+        .mode-tab.kaito.active {
+            border-color: #06b6d4;
+            background: rgba(6, 182, 212, .06);
+            color: #0891b2
+        }
+
+        /* Studio frame */
+        .studio-frame {
+            max-width: 960px;
+            margin: 0 auto;
+            border: 2px solid #e4e4e7;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .06)
+        }
+
+        .studio-frame.bullish {
+            border-color: rgba(245, 158, 11, .4)
+        }
+
+        .studio-frame.kaito {
+            border-color: rgba(6, 182, 212, .4)
+        }
+
+        .fr-bar {
+            padding: 8px 14px;
+            background: #fafafa;
+            border-bottom: 1px solid #e4e4e7;
+            font-size: 11px;
+            font-weight: 600;
+            color: #71717a;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .dots {
+            display: flex;
+            gap: 3px
+        }
+
+        .dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%
+        }
+
+        .dr {
+            background: #ef4444
+        }
+
+        .dy {
+            background: #eab308
+        }
+
+        .dg {
+            background: #22c55e
+        }
+
+        /* Layout: ConfigPanel + Canvas */
+        .studio-body {
+            display: flex;
+            min-height: 520px
+        }
+
+        /* ConfigPanel */
+        .cfg {
+            width: 180px;
+            background: #fafafa;
+            border-right: 1px solid #e4e4e7;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-shrink: 0
+        }
+
+        .cfg-t {
+            font-size: 9px;
+            font-weight: 700;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e4e4e7;
+            margin-bottom: 4px
+        }
+
+        .cfg-s {
+            font-size: 9px;
+            font-weight: 600;
+            color: #a1a1aa;
+            margin-top: 6px
+        }
+
+        .cfg-item {
+            padding: 5px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            color: #52525b;
+            margin-bottom: 2px
+        }
+
+        .cfg-item.active {
+            border-color: #22c55e;
+            color: #16a34a;
+            background: rgba(34, 197, 94, .04)
+        }
+
+        .cfg-item.bullish-active {
+            border-color: #f59e0b;
+            color: #ca8a04;
+            background: rgba(245, 158, 11, .04)
+        }
+
+        .cfg-item.kaito-active {
+            border-color: #06b6d4;
+            color: #0891b2;
+            background: rgba(6, 182, 212, .04)
+        }
+
+        .cfg-note {
+            font-size: 9px;
+            color: #16a34a;
+            padding: 5px 8px;
+            border: 1px dashed rgba(34, 197, 94, .3);
+            border-radius: 6px;
+            text-align: center;
+            margin-top: 8px;
+            line-height: 1.5
+        }
+
+        /* Canvas */
+        .canvas {
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        /* Data area (collapsible) */
+        .data-area {
+            border-bottom: 1px solid #e4e4e7;
+            background: #fafafa;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s ease
+        }
+
+        .data-area.expanded {
+            max-height: 220px;
+            padding: 12px 16px
+        }
+
+        .data-area.collapsed {
+            max-height: 0;
+            padding: 0 16px
+        }
+
+        .data-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px
+        }
+
+        .data-title {
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .data-title .filters {
+            font-size: 9px;
+            font-weight: 400;
+            color: #a1a1aa
+        }
+
+        .data-toggle {
+            font-size: 9px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            gap: 4px
+        }
+
+        .data-toggle:hover {
+            border-color: #a1a1aa;
+            color: #18181b
+        }
+
+        .data-scroll {
+            max-height: 160px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #d4d4d8 transparent
+        }
+
+        .data-scroll::-webkit-scrollbar {
+            width: 4px
+        }
+
+        .data-scroll::-webkit-scrollbar-track {
+            background: transparent
+        }
+
+        .data-scroll::-webkit-scrollbar-thumb {
+            background: #d4d4d8;
+            border-radius: 2px
+        }
+
+        /* Collapse bar (shown when collapsed) */
+        .collapse-bar {
+            display: none;
+            padding: 6px 16px;
+            background: #fafafa;
+            border-bottom: 1px solid #e4e4e7;
+            cursor: pointer;
+            transition: background .15s
+        }
+
+        .collapse-bar:hover {
+            background: #f0f0f1
+        }
+
+        .collapse-bar.visible {
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .collapse-bar .info {
+            font-size: 10px;
+            color: #a1a1aa;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .collapse-bar .expand-btn {
+            font-size: 9px;
+            color: #71717a;
+            display: flex;
+            align-items: center;
+            gap: 3px
+        }
+
+        /* Feed cards */
+        .feed-card {
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            margin-bottom: 6px
+        }
+
+        .feed-card .top {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px
+        }
+
+        .feed-avatar {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .feed-card .handle {
+            font-weight: 600;
+            font-size: 11px;
+            color: #18181b
+        }
+
+        .feed-card .time {
+            font-size: 9px;
+            color: #a1a1aa;
+            margin-left: auto
+        }
+
+        .feed-card .body {
+            font-size: 11px;
+            color: #52525b;
+            line-height: 1.5
+        }
+
+        /* Project chips */
+        .proj-chips {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 10px
+        }
+
+        .proj-chip {
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid #e4e4e7;
+            background: #fff;
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .proj-chip:hover {
+            border-color: #a1a1aa
+        }
+
+        .proj-chip.active {
+            border-color: #06b6d4;
+            color: #0891b2;
+            background: rgba(6, 182, 212, .04);
+            font-weight: 600
+        }
+
+        .angle-chips {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap
+        }
+
+        .angle-chip {
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 9px;
+            background: rgba(6, 182, 212, .06);
+            color: #0891b2;
+            border: 1px solid rgba(6, 182, 212, .2)
+        }
+
+        .angle-section {
+            margin-top: 8px
+        }
+
+        .angle-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #52525b;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        /* Input box */
+        .input-area {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e4e4e7
+        }
+
+        .input-box {
+            background: #f4f4f5;
+            border: 1.5px solid #e4e4e7;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #a1a1aa;
+            transition: border-color .15s
+        }
+
+        .input-box:hover {
+            border-color: #a1a1aa
+        }
+
+        /* Writing canvas */
+        .writing-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .writing-canvas {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px
+        }
+
+        .writing-canvas .placeholder {
+            text-align: center
+        }
+
+        .writing-canvas .icon {
+            font-size: 28px;
+            margin-bottom: 8px
+        }
+
+        .writing-canvas .title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #a1a1aa;
+            margin-bottom: 3px
+        }
+
+        .writing-canvas .desc {
+            font-size: 10px;
+            color: #d4d4d8
+        }
+
+        .toolbar {
+            padding: 8px 16px;
+            border-top: 1px solid #e4e4e7;
+            display: flex;
+            gap: 6px;
+            justify-content: center
+        }
+
+        .tbtn {
+            padding: 4px 12px;
+            border-radius: 6px;
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            font-size: 10px;
+            color: #71717a;
+            cursor: pointer;
+            transition: all .15s
+        }
+
+        .tbtn:hover {
+            background: #e4e4e7;
+            color: #18181b
+        }
+
+        /* Info banner */
+        .info-banner {
+            margin: 24px auto 0;
+            max-width: 960px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: rgba(34, 197, 94, .06);
+            border: 1px solid rgba(34, 197, 94, .2);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px
+        }
+
+        .info-banner .icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .info-banner .text {
+            font-size: 11px;
+            color: #52525b;
+            line-height: 1.6
+        }
+
+        .info-banner b {
+            color: #16a34a
+        }
+
+        .hidden {
+            display: none !important
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="hdr">
+        <h1>方案 A — 可折叠数据区</h1>
+        <div class="sub">数据区固定最大高度 220px · 内部可滚动 · 可一键折叠/展开 · WritingCanvas 始终可见</div>
+    </div>
+
+    <!-- Mode tabs -->
+    <div class="mode-tabs">
+        <div class="mode-tab bullish active" onclick="switchMode('bullish')">🌸 吹捧模式</div>
+        <div class="mode-tab kaito" onclick="switchMode('kaito')">🎯 Kaito 模式</div>
+    </div>
+
+    <!-- ===== BULLISH MODE ===== -->
+    <div id="bullish-view" class="studio-frame bullish">
+        <div class="fr-bar">
+            <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div>
+            <span style="color:#ca8a04">🌸 吹捧模式 — Feed 可折叠 · 固定高度 · 可滚动</span>
+        </div>
+        <div class="studio-body">
+            <!-- ConfigPanel -->
+            <div class="cfg">
+                <div class="cfg-t">ConfigPanel</div>
+                <div class="cfg-item bullish-active">🌸 吹捧</div>
+                <div class="cfg-s">🎨 风格</div>
+                <div class="cfg-item">吹捧体</div>
+                <div class="cfg-s">📏 篇幅</div>
+                <div class="cfg-item">50-500字</div>
+                <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+            </div>
+            <!-- Canvas -->
+            <div class="canvas">
+                <!-- Collapsible data area -->
+                <div id="bullish-data" class="data-area expanded">
+                    <div class="data-header">
+                        <div class="data-title" style="color:#ca8a04">🌸 币安动态 <span class="filters">[CZ] [何一]
+                                [🔄]</span></div>
+                        <div class="data-toggle" onclick="toggleData('bullish')">▲ 收起</div>
+                    </div>
+                    <div class="data-scroll">
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                </div>
+                                <span class="handle">@cz_binance</span>
+                                <span class="time">2h</span>
+                            </div>
+                            <div class="body">Binance partners with local exchanges in Southeast Asia to expand crypto
+                                adoption. This is huge for the ecosystem! 🚀</div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                </div>
+                                <span class="handle">@heyibinance</span>
+                                <span class="time">5h</span>
+                            </div>
+                            <div class="body">Thank you for your support and feedback. We're building Binance for the
+                                next billion users. Your voice matters to us. ❤️</div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">CZ
+                                </div>
+                                <span class="handle">@cz_binance</span>
+                                <span class="time">8h</span>
+                            </div>
+                            <div class="body">Education is the key. We launched Binance Academy chapters in 12 new
+                                countries this month. Free crypto education for everyone.</div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">BN
+                                </div>
+                                <span class="handle">@binance</span>
+                                <span class="time">12h</span>
+                            </div>
+                            <div class="body">#Binance now supports 15 new trading pairs including $BERA, $MON, and
+                                $EIGEN. Start trading now! 📈</div>
+                        </div>
+                        <div class="feed-card">
+                            <div class="top">
+                                <div class="feed-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d)">HY
+                                </div>
+                                <span class="handle">@heyibinance</span>
+                                <span class="time">1d</span>
+                            </div>
+                            <div class="body">Just finished our quarterly town hall. So proud of the team's progress on
+                                compliance, product innovation, and user experience. The future is bright! ✨</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Collapse bar (shown when collapsed) -->
+                <div id="bullish-collapse-bar" class="collapse-bar" onclick="toggleData('bullish')">
+                    <span class="info">🌸 币安动态 · <b style="color:#ca8a04">5条</b></span>
+                    <span class="expand-btn">▼ 展开</span>
+                </div>
+                <!-- Input -->
+                <div class="input-area">
+                    <div class="input-box">基于以上动态生成吹捧文案... ⌘+Enter</div>
+                </div>
+                <!-- WritingCanvas -->
+                <div class="writing-area">
+                    <div class="writing-canvas">
+                        <div class="placeholder">
+                            <div class="icon">📝</div>
+                            <div class="title">WritingCanvas</div>
+                            <div class="desc">吹捧文案输出区 · 始终可见</div>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <div class="tbtn">💾 保存</div>
+                        <div class="tbtn">📋 复制</div>
+                        <div class="tbtn">🔄 重新生成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== KAITO MODE ===== -->
+    <div id="kaito-view" class="studio-frame kaito hidden">
+        <div class="fr-bar">
+            <div class="dots"><span class="dr"></span><span class="dy"></span><span class="dg"></span></div>
+            <span style="color:#0891b2">🎯 Kaito 模式 — 项目看板可折叠 · 固定高度 · 可滚动</span>
+        </div>
+        <div class="studio-body">
+            <!-- ConfigPanel -->
+            <div class="cfg">
+                <div class="cfg-t">ConfigPanel</div>
+                <div class="cfg-item kaito-active">🎯 Kaito</div>
+                <div class="cfg-s">🎨 风格</div>
+                <div class="cfg-item">嘴撸体</div>
+                <div class="cfg-s">📏 篇幅</div>
+                <div class="cfg-item">50-500字</div>
+                <div class="cfg-note">✅ 只有配置<br>数据在右侧 →</div>
+            </div>
+            <!-- Canvas -->
+            <div class="canvas">
+                <!-- Collapsible data area -->
+                <div id="kaito-data" class="data-area expanded">
+                    <div class="data-header">
+                        <div class="data-title" style="color:#0891b2">🎯 项目看板 <span class="filters">[+ 添加项目]</span>
+                        </div>
+                        <div class="data-toggle" onclick="toggleData('kaito')">▲ 收起</div>
+                    </div>
+                    <div class="data-scroll">
+                        <div class="proj-chips">
+                            <div class="proj-chip active">🐻 Berachain <b style="color:#0891b2;margin-left:3px">5新</b>
+                            </div>
+                            <div class="proj-chip">M Monad (3)</div>
+                            <div class="proj-chip">E Eigenlayer (2)</div>
+                            <div class="proj-chip">S Sui (4)</div>
+                            <div class="proj-chip">A Aptos (1)</div>
+                            <div class="proj-chip">Z zkSync (3)</div>
+                            <div class="proj-chip">☁ Celestia (2)</div>
+                        </div>
+                        <div class="angle-section">
+                            <div class="angle-label">💡 推荐角度 — Berachain</div>
+                            <div class="angle-chips">
+                                <span class="angle-chip">生态扩展</span>
+                                <span class="angle-chip">PoL科普</span>
+                                <span class="angle-chip">社区治理</span>
+                                <span class="angle-chip">TVL增长</span>
+                                <span class="angle-chip">Berps DEX</span>
+                            </div>
+                        </div>
+                        <div
+                            style="margin-top:8px;padding:6px 10px;border-radius:6px;border:1px dashed #e4e4e7;font-size:9px;color:#a1a1aa;text-align:center">
+                            ⚠️ 避免近期已发角度 · 上次发布: 社区治理 (2天前)
+                        </div>
+                    </div>
+                </div>
+                <!-- Collapse bar -->
+                <div id="kaito-collapse-bar" class="collapse-bar" onclick="toggleData('kaito')">
+                    <span class="info">🎯 项目看板 · <b style="color:#0891b2">7个项目</b> · 选中: Berachain</span>
+                    <span class="expand-btn">▼ 展开</span>
+                </div>
+                <!-- Input -->
+                <div class="input-area">
+                    <div class="input-box">Berachain · 生态扩展 角度生成... ⌘+Enter</div>
+                </div>
+                <!-- WritingCanvas -->
+                <div class="writing-area">
+                    <div class="writing-canvas">
+                        <div class="placeholder">
+                            <div class="icon">📝</div>
+                            <div class="title">WritingCanvas</div>
+                            <div class="desc">Kaito 文案输出区 · 始终可见</div>
+                        </div>
+                    </div>
+                    <div class="toolbar">
+                        <div class="tbtn">💾 保存</div>
+                        <div class="tbtn">📋 复制</div>
+                        <div class="tbtn">🔄 重新生成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info -->
+    <div class="info-banner">
+        <div class="icon">💡</div>
+        <div class="text">
+            <b>方案 A 设计要点：</b><br>
+            • 数据区固定 <b>max-height: 220px</b>，内容超出时自动出现滚动条<br>
+            • 一键 <b>▲收起/▼展开</b>，折叠后显示摘要条（条数/选中项目），点击即可重新展开<br>
+            • <b>WritingCanvas 始终可见</b>，不会被数据区推到屏幕外<br>
+            • 改动量最小，不影响现有 ConfigPanel + Canvas 布局结构
+        </div>
+    </div>
+
+    <script>
+        function switchMode(mode) {
+            document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`.mode-tab.${mode}`).classList.add('active');
+            document.getElementById('bullish-view').classList.toggle('hidden', mode !== 'bullish');
+            document.getElementById('kaito-view').classList.toggle('hidden', mode !== 'kaito');
+        }
+
+        function toggleData(mode) {
+            const data = document.getElementById(`${mode}-data`);
+            const bar = document.getElementById(`${mode}-collapse-bar`);
+            const isExpanded = data.classList.contains('expanded');
+
+            if (isExpanded) {
+                data.classList.remove('expanded');
+                data.classList.add('collapsed');
+                bar.classList.add('visible');
+                data.querySelector('.data-toggle').textContent = '▼ 展开';
+            } else {
+                data.classList.remove('collapsed');
+                data.classList.add('expanded');
+                bar.classList.remove('visible');
+                data.querySelector('.data-toggle').textContent = '▲ 收起';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -54,8 +54,8 @@ MODE_CONFIGS = {
         "length": {"min": 50, "max": 300, "target": 200},
         "length_locked": False,
         "skip_strategist": False,
-        "skip_critic": True,   # P25: 暂跳过，短篇暂无专属审核提示词
-        "skip_polisher": True,  # P25: 暂跳过，短篇暂无专属润色提示词
+        "skip_critic": False,  # P26: 审核已开启，作为发布前最终把关
+        "skip_polisher": False,  # P26: 开启润色（代码预扫+LLM最小修复）
         "output_count": 1,
         "scoring": {
             "dimensions": SCORING_DIMENSIONS,
