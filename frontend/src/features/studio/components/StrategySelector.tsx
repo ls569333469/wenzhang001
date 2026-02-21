@@ -5,9 +5,7 @@ import React from 'react';
 import { useAgentStore } from '@/features/agent/stores/useAgentStore';
 import { ArrowRight, Target, Lightbulb, Users } from 'lucide-react';
 import { cn } from "@/lib/utils";
-import { ContextPanel } from "./ContextPanel";
 import { TitleSelector } from "./TitleSelector";
-import { ViralScoreDisplay } from "./ViralScoreDisplay";
 
 export function StrategySelector() {
     const {
@@ -47,9 +45,6 @@ export function StrategySelector() {
                     />
                 </div>
             )}
-
-            {/* Context Panel (Data & Style) */}
-            <ContextPanel />
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {strategyOptions.map((option: any, idx: number) => (
@@ -103,12 +98,7 @@ export function StrategySelector() {
                             </ul>
                         </div>
 
-                        {/* P10-2: Viral Score Display */}
-                        {option.viral_score && (
-                            <div className="mt-4 pt-4 border-t border-zinc-100">
-                                <ViralScoreDisplay score={option.viral_score} compact={false} />
-                            </div>
-                        )}
+
 
                         {/* Hover Action */}
                         <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">

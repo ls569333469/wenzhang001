@@ -3,9 +3,8 @@
 import { useState, useEffect } from 'react';
 import { IslandContainer } from "./IslandContainer";
 import { ConfigPanel } from "../ConfigPanel";
-import { useDetailPanel } from "../DetailPanel";
 import { cn } from "@/lib/utils";
-import { Settings2, FileText, Palette, Database, Clock, ImageIcon, Download, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Settings2, Clock, ImageIcon, Download, ChevronLeft, ChevronRight } from 'lucide-react';
 
 /**
  * ConfigIsland v3.1 - 可展开图标栏
@@ -28,20 +27,6 @@ export function ConfigIsland() {
         document.documentElement.setAttribute('data-config-expanded', String(isExpanded));
         return () => document.documentElement.removeAttribute('data-config-expanded');
     }, [isExpanded]);
-
-    // Connect to DetailPanel
-    let detailPanel: ReturnType<typeof useDetailPanel> | null = null;
-    try {
-        detailPanel = useDetailPanel();
-    } catch {
-        // Context not available
-    }
-
-    const handlePanelOpen = (tab: 'thinking' | 'history' | 'image' | 'export') => {
-        if (detailPanel) {
-            detailPanel.openPanel(tab);
-        }
-    };
 
     return (
         <IslandContainer position="left">
@@ -80,12 +65,11 @@ export function ConfigIsland() {
                         {BOTTOM_ICONS.map((item) => (
                             <button
                                 key={item.id}
-                                onClick={() => handlePanelOpen(item.panelTab)}
+                                onClick={() => { /* TODO: reconnect to sidebar tabs */ }}
                                 className={cn(
                                     "w-9 h-9 rounded-lg flex items-center justify-center",
                                     "text-zinc-400 hover:text-white hover:bg-zinc-800",
-                                    "transition-colors group relative",
-                                    detailPanel?.activeTab === item.panelTab && detailPanel?.isOpen && "bg-zinc-800 text-green-400"
+                                    "transition-colors group relative"
                                 )}
                                 title={item.label}
                             >
