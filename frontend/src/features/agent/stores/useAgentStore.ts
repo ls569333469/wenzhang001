@@ -243,80 +243,9 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             }
         });
 
-        // P14: 检查是否为 hot_take 模式 - 使用独立流程
-        if (config.mode === 'hot_take') {
-            // Hot Take 模式: 直接调用 /hot_take，跳过策略师
-            set({
-                status: 'connecting',
-                error: null,
-                content: '',
-                steps: [{ id: 'step-hottake', agent: 'writer', label: '锐评生成', status: 'active', message: '正在生成锐评...' }],
-                strategyOptions: null,
-                analysisResult: null,
-                agentLogs: [],
-                isWaitingForSelection: false,
-                lastRequestPayload: { input, config, mode: 'hot_take' }
-            });
+        // P27: hot_take 已迁入标准管线，与其他模式走同一流程
 
-            try {
-                const endpoint = `${API_BASE_URL}/hot_take`;
-
-                // P14-C: 使用模式专属 Writer 配置
-                const modeWriterConfig = useModeWriterStore.getState().getWriterForMode('hot_take');
-                const apiKey = providerKeys[modeWriterConfig.provider] || '';
-
-                // P15: Custom Prompts
-                const { customPrompts, getAssembledPrompt } = usePromptStore.getState();
-                const customPromptsPayload: any = {};
-                if (customPrompts.enabled) {
-                    customPromptsPayload.writer = getAssembledPrompt('writer', 'hot_take');
-                }
-
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        input: input.trim(),
-                        api_config: {
-                            provider: modeWriterConfig.provider,
-                            model_id: modeWriterConfig.model,
-                            api_key: apiKey
-                        },
-                        agent_config: agentConfigPayload, // P14-B
-                        custom_prompts: customPrompts.enabled ? customPromptsPayload : undefined // P15
-                    }),
-                });
-
-
-                if (!response.ok) throw new Error(`Hot Take 生成失败: ${response.statusText}`);
-
-                const result = await response.json();
-
-                // 解析候选结果
-                const candidates = result.result?.candidates || [];
-
-                // P14-Fix: 直接显示所有锐评结果，不需要选择
-                const contentLines = candidates.map((c: any, i: number) =>
-                    `### 锐评 ${i + 1}\n\n${c.content || c.text || '(无内容)'}\n\n---`
-                ).join('\n\n');
-
-                set({
-                    status: 'completed',
-                    content: contentLines || '未能生成锐评内容',
-                    lastGeneratedContent: contentLines,
-                    isWaitingForSelection: false,
-                    steps: [{ id: 'step-hottake', agent: 'writer', label: '锐评生成', status: 'completed', message: `生成了 ${candidates.length} 条锐评` }]
-                });
-
-                toast.success(`锐评生成完成！共 ${candidates.length} 条`);
-
-            } catch (err: unknown) {
-                handleError(err, set, get);
-            }
-            return;
-        }
-
-        // 其他模式: 走完整策略师流程
+        // 走完整策略师流程
         // 1. Reset State
         set({
             status: 'connecting',
@@ -415,21 +344,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     },
 
     confirmStrategy: async (option: any) => {
-        // P14: hot_take 模式 - 直接使用选中的候选作为最终内容
-        const { lastRequestPayload } = get();
-        if (lastRequestPayload?.mode === 'hot_take') {
-            // 锐评模式: 选中即完成，不需要再调用 /generate
-            set({
-                isWaitingForSelection: false,
-                status: 'completed',
-                content: option.angle || option.content || '',  // 候选内容
-                steps: [{ id: 'step-hottake', agent: 'writer', label: '锐评生成', status: 'completed', message: '已选择候选' }],
-                lastGeneratedContent: option.angle || option.content || '',
-                lastSelectedOption: option
-            });
-            toast.success('锐评已选择！');
-            return;
-        }
+        // P27: hot_take 已迁入标准管线，无需特殊处理
 
         // 其他模式: 走完整 /generate 流程
         // Step 2: User selected an option, now call /generate

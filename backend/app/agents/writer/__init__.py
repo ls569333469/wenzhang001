@@ -13,10 +13,12 @@ from .tutorial import tutorial_writer
 from .bullish_take import bullish_take_writer
 from .kaito_yap import kaito_yap_writer
 from .project_research import project_research_writer
+from .hot_take import hot_take_writer
 
-# hot_take 保持独立 (Option A)，不纳入此路由
+# P27: hot_take 已迁入标准管线
 
 WRITER_REGISTRY = {
+    "hot_take": hot_take_writer,
     "short_article": short_article_writer,
     "mid_article": mid_article_writer,
     "long_article": long_article_writer,

@@ -326,10 +326,11 @@ class HotTakeRequest(BaseModel):
     api_config: APIConfig = APIConfig()
     custom_prompts: Optional[CustomPrompts] = None
 
-@app.post("/hot_take")
+@app.post("/hot_take", deprecated=True)
 async def generate_hot_take(request: HotTakeRequest):
     """
     P14: 锐评模式独立API - 不走LangGraph，直接生成3条候选
+    @deprecated P27: 锐评已迁入标准 LangGraph 管线，此端点保留兼容
     """
     from .core.llm import generate_text  # 修复: 使用正确的函数名
     from datetime import datetime
