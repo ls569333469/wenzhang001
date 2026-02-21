@@ -155,8 +155,8 @@ export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
-    bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
-    kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
+    bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
+    kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
 };
 
@@ -192,8 +192,8 @@ export const DEFAULT_MODE_STRATEGISTS: z.infer<typeof ModeStrategistConfigSchema
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
-    kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
+    bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
+    kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 export type ModeStrategistConfig = z.infer<typeof ModeStrategistConfigSchema>;

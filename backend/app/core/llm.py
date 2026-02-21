@@ -72,9 +72,15 @@ PROVIDER_CONFIGS = {
         "base_url": "https://api.x.ai/v1",
         "env_key": "GROK_API_KEY",
         "config_key": "grok",
-        "default_model": "grok-4-latest",
+        "default_model": "grok-4-1-fast-reasoning",
         "available_models": [
-            "grok-4-latest"
+            "grok-4-1-fast-reasoning",      # 4.1 高速推理 (2M上下文, $0.20/$0.50)
+            "grok-4-1-fast-non-reasoning",   # 4.1 高速非推理
+            "grok-4-fast-reasoning",         # 4.0 推理 (2M上下文)
+            "grok-4-fast-non-reasoning",     # 4.0 非推理
+            "grok-4-0709",                   # 4.0 旗舰 (256K, $3/$15)
+            "grok-3-mini",                   # 3 轻量 (131K, $0.30/$0.50)
+            "grok-3",                        # 3 标准 (131K, $3/$15)
         ]
     }
 }

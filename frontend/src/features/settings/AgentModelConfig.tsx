@@ -24,8 +24,10 @@ const PROVIDER_MODELS = {
         { id: 'gemini-3-pro-preview', name: 'Gemini 3 Pro Preview', description: '预览版专业模型' },
     ],
     [PROVIDER_IDS.GROK]: [
-        { id: 'grok-beta', name: 'grok-beta', description: 'xAI 快速响应模型' },
-        { id: 'grok-4-latest', name: 'grok-4-latest', description: 'xAI 最新旗舰模型' },
+        { id: 'grok-4-1-fast-reasoning', name: 'Grok 4.1 Fast Reasoning', description: '高速推理 (2M上下文, $0.20/$0.50)' },
+        { id: 'grok-4-1-fast-non-reasoning', name: 'Grok 4.1 Fast', description: '高速非推理 (2M上下文)' },
+        { id: 'grok-4-0709', name: 'Grok 4 旗舰', description: '旗舰推理 (256K, $3/$15)' },
+        { id: 'grok-3-mini', name: 'Grok 3 Mini', description: '轻量快速 (131K, $0.30/$0.50)' },
     ]
 };
 

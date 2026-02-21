@@ -33,8 +33,10 @@ const PROVIDER_MODELS = {
         { id: 'gemini-3-pro-preview', name: 'Gemini 3 Pro', description: '专业' },
     ],
     [PROVIDER_IDS.GROK]: [
-        { id: 'grok-beta', name: 'grok-beta', description: '快速(xAI)' },
-        { id: 'grok-4-latest', name: 'grok-4-latest', description: '旗舰(xAI)' },
+        { id: 'grok-4-1-fast-reasoning', name: 'Grok 4.1 Fast Reasoning', description: '推理(xAI)' },
+        { id: 'grok-4-1-fast-non-reasoning', name: 'Grok 4.1 Fast', description: '非推理(xAI)' },
+        { id: 'grok-4-0709', name: 'Grok 4 旗舰', description: '旗舰(xAI)' },
+        { id: 'grok-3-mini', name: 'Grok 3 Mini', description: '轻量(xAI)' },
     ]
 };
 
