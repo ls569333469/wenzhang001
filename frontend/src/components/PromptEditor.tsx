@@ -40,7 +40,6 @@ const VARIABLE_HINTS: Record<string, string[]> = {
         '{{ selected_option }} - 用户选择的策略方案',
         '{{ info_anchors }} - 必须包含的关键信息',
         '{{ style_notes }} - 风格参考笔记',
-        '{{ hook_intensity }} - 开头吸引力强度 (1-4)',
     ],
     critic: [
         '{{ draft }} - 初稿内容',

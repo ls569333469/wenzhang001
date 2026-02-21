@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { LayoutGrid, FileText, Settings, PenTool, Brain, Users, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutGrid, Settings, PenTool, FolderOpen, PanelLeftClose, PanelLeft } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -29,9 +29,8 @@ export function AdaptiveSidebar() {
 
     const navItems = [
         { href: "/dashboard", icon: LayoutGrid, label: "仪表盘" },
-        { href: "/studio", icon: PenTool, label: "创作工坊" },
-        { href: "/knowledge", icon: Brain, label: "知识库" },
-        { href: "/agents", icon: Users, label: "智能体团队" },
+        { href: "/studio", icon: PenTool, label: "创作中心" },
+        { href: "/data", icon: FolderOpen, label: "数据管理" },
         { href: "/settings", icon: Settings, label: "系统设置" },
     ];
 
@@ -102,22 +101,6 @@ export function AdaptiveSidebar() {
                     ))}
                 </div>
 
-                {/* 最近项目 - 只在展开时显示 */}
-                {!isCollapsed && (
-                    <div className="space-y-1">
-                        <div className="px-2 text-[10px] font-semibold text-ink-muted uppercase tracking-wider mb-2">
-                            最近项目
-                        </div>
-                        <button className="w-full flex items-center gap-3 px-3 py-2 text-sm text-ink-muted hover:bg-zinc-200/50 rounded-sm transition-colors text-left">
-                            <FileText size={16} />
-                            <span className="truncate">DeFi 周报 (草稿)</span>
-                        </button>
-                        <button className="w-full flex items-center gap-3 px-3 py-2 text-sm text-ink-muted hover:bg-zinc-200/50 rounded-sm transition-colors text-left">
-                            <FileText size={16} />
-                            <span className="truncate">Layer 2 深度分析</span>
-                        </button>
-                    </div>
-                )}
             </div>
 
             {/* 底部用户区 */}

@@ -11,14 +11,16 @@ import { z } from 'zod';
 
 // ===== 创作配置 Schema =====
 
-/** 创作模式 (P18: 全模块独立架构) */
+/** 创作模式 (P18: 全模块独立架构, P27: +3 业务模式) */
 export const CreationModeSchema = z.enum([
-    'hot_take',        // 锐评 (50-150字)
-    'short_article',   // 短篇 (200-500字) - P21新增
-    'mid_article',     // 中篇 (150-800字)
-    'long_article',    // 长篇 (900-1800字)
-    'tutorial',        // 教程 (400-1500字)
-    'rewrite',         // 改写 (无限制)
+    'hot_take',           // 锐评 (50-150字)
+    'short_article',      // 短篇 (200-500字)
+    'mid_article',        // 中篇 (150-800字)
+    'long_article',       // 长篇 (900-1800字)
+    'tutorial',           // 教程 (400-1500字)
+    'bullish_take',       // P27: 吹捧 (50-500字)
+    'kaito_yap',          // P27: Kaito 嘴撸 (50-500字)
+    'project_research',   // P27: 项目投研
 ]);
 
 /** 写作风格 */
@@ -73,12 +75,7 @@ export const CreationConfigSchema = z.object({
     style: WritingStyleSchema.default('professional'),
     length_type: LengthTypeSchema.default('auto'),  // P16: 篇幅类型
     custom_length: z.number().min(50).max(5000).optional(),  // P16: 自定义字数
-    length: ArticleLengthSchema.optional(),  // @deprecated: P11遗留，P18 P19逐步移除
     knowledgeSources: z.array(z.string()).default([]),  // source IDs
-    temperature: z.number().min(0).max(1).default(0.7),
-    topP: z.number().min(0).max(1).default(0.9),
-    maxTokens: z.number().positive().default(4096),
-    retention_level: z.number().min(1).max(5).default(3),  // P10: 保留度等级 1-5
 });
 
 // ===== P13: API 配置 Schema =====
@@ -133,7 +130,9 @@ export const MODE_WRITER_IDS = {
     MID_ARTICLE: 'mid_article',
     LONG_ARTICLE: 'long_article',
     TUTORIAL: 'tutorial',
-    REWRITE: 'rewrite',
+    BULLISH_TAKE: 'bullish_take',
+    KAITO_YAP: 'kaito_yap',
+    PROJECT_RESEARCH: 'project_research',
 } as const;
 
 /** 模式 Writer 配置 Schema */
@@ -143,7 +142,9 @@ export const ModeWriterConfigSchema = z.object({
     mid_article: AgentModelSettingSchema,
     long_article: AgentModelSettingSchema,
     tutorial: AgentModelSettingSchema,
-    rewrite: AgentModelSettingSchema,
+    bullish_take: AgentModelSettingSchema,
+    kaito_yap: AgentModelSettingSchema,
+    project_research: AgentModelSettingSchema,
 });
 
 /** P14-C: 默认模式 Writer 配置 */
@@ -153,7 +154,9 @@ export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
-    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
 };
 
 export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
@@ -164,18 +167,20 @@ export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
 export const SKIP_MODES = {
     strategist: [] as string[],
     writer: [] as string[],
-    critic: ['hot_take'],
-    polisher: ['hot_take'],
+    critic: ['hot_take', 'bullish_take', 'kaito_yap'],
+    polisher: ['hot_take', 'bullish_take', 'kaito_yap'],
 } as const;
 
-/** 完整 6 模式 Schema（4 个 agent 通用） */
+/** 完整模式 Schema（4 个 agent 通用, P27: 8 模式） */
 const FullModeConfigSchema = z.object({
     hot_take: AgentModelSettingSchema,
     short_article: AgentModelSettingSchema,
     mid_article: AgentModelSettingSchema,
     long_article: AgentModelSettingSchema,
     tutorial: AgentModelSettingSchema,
-    rewrite: AgentModelSettingSchema,
+    bullish_take: AgentModelSettingSchema,
+    kaito_yap: AgentModelSettingSchema,
+    project_research: AgentModelSettingSchema,
 });
 
 /** P24-D: 模式专属 Strategist 配置 */
@@ -186,11 +191,13 @@ export const DEFAULT_MODE_STRATEGISTS: z.infer<typeof ModeStrategistConfigSchema
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 export type ModeStrategistConfig = z.infer<typeof ModeStrategistConfigSchema>;
 
-/** P24-D: 模式专属 Critic 配置（6模式，hot_take 跳过） */
+/** P24-D: 模式专属 Critic 配置（短内容模式跳过） */
 export const ModeCriticConfigSchema = FullModeConfigSchema;
 export const DEFAULT_MODE_CRITICS: z.infer<typeof ModeCriticConfigSchema> = {
     hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
@@ -198,11 +205,13 @@ export const DEFAULT_MODE_CRITICS: z.infer<typeof ModeCriticConfigSchema> = {
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 export type ModeCriticConfig = z.infer<typeof ModeCriticConfigSchema>;
 
-/** P24-D: 模式专属 Polisher 配置（6模式，hot_take + short_article 跳过） */
+/** P24-D: 模式专属 Polisher 配置（短内容模式跳过） */
 export const ModePolisherConfigSchema = FullModeConfigSchema;
 export const DEFAULT_MODE_POLISHERS: z.infer<typeof ModePolisherConfigSchema> = {
     hot_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
@@ -210,7 +219,9 @@ export const DEFAULT_MODE_POLISHERS: z.infer<typeof ModePolisherConfigSchema> = 
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    rewrite: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
+    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 export type ModePolisherConfig = z.infer<typeof ModePolisherConfigSchema>;
 

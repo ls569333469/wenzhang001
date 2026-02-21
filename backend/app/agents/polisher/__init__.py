@@ -14,7 +14,6 @@ POLISHER_REGISTRY = {
     "mid_article": standard_polisher,
     "long_article": standard_polisher,
     "tutorial": standard_polisher,
-    "rewrite": standard_polisher,
     "hot_take": skip_polisher,   # 锐评跳过润色
     "short_article": short_article_polisher,  # P26: 代码预扫+LLM最小修复
 }

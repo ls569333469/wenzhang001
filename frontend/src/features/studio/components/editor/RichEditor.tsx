@@ -14,16 +14,20 @@ interface RichEditorProps {
     content: string;
     isStreaming?: boolean;
     onUpdate?: (content: string) => void;
+    onSave?: () => void;
     className?: string;
     placeholder?: string;
+    toolbarActions?: React.ReactNode;
 }
 
 export function RichEditor({
     content,
     isStreaming,
     onUpdate,
+    onSave,
     className,
-    placeholder = "开始创作..."
+    placeholder = "开始创作...",
+    toolbarActions
 }: RichEditorProps) {
 
     const editor = useEditor({
@@ -44,13 +48,13 @@ export function RichEditor({
         immediatelyRender: false,
         editorProps: {
             attributes: {
-                class: 'prose prose-zinc max-w-none focus:outline-none min-h-[600px] px-16 py-12',
+                class: 'prose prose-zinc max-w-none focus:outline-none min-h-[600px] px-12 py-8',
             },
         },
         onUpdate: ({ editor }) => {
             if (onUpdate) {
                 try {
-                    const markdown = editor.storage.markdown.getMarkdown();
+                    const markdown = (editor.storage as Record<string, any>).markdown.getMarkdown();
                     onUpdate(markdown);
                 } catch (e) {
                     console.error("Markdown conversion error", e);
@@ -66,12 +70,12 @@ export function RichEditor({
         // Note: getMarkdown might differ slightly from input content (formatting normalization)
         // So stick to simple length check or just trust the store if isStreaming
 
-        const currentMarkdown = editor.storage.markdown.getMarkdown();
+        const currentMarkdown = (editor.storage as Record<string, any>).markdown.getMarkdown();
 
         // Only update if content is definitely different and valid
         if (content !== currentMarkdown) {
             // Use emitUpdate: false to prevent triggering onUpdate loop
-            editor.commands.setContent(content, false);
+            editor.commands.setContent(content, false as any);
 
             // If streaming, move cursor to end?
             if (isStreaming) {
@@ -81,10 +85,12 @@ export function RichEditor({
     }, [content, editor, isStreaming]);
 
     return (
-        <div className={cn("relative w-full border border-zinc-200 rounded-xl bg-white shadow-island transition-all", className)}>
-            <EditorToolbar editor={editor} />
+        <div className={cn("relative w-full border border-zinc-200 rounded-xl bg-white shadow-island transition-all flex flex-col overflow-hidden", className)}>
+            <EditorToolbar editor={editor} actions={toolbarActions} />
             {editor && <EditorBubbleMenu editor={editor} />}
-            <EditorContent editor={editor} />
+            <div className="flex-1 overflow-y-auto scrollbar-hide w-full h-full">
+                <EditorContent editor={editor} />
+            </div>
         </div>
     )
 }

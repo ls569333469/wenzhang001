@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>P27 状态联动演示 — DataPanel ↔ Config ↔ Canvas</title>
+    <style>
+        :root {
+            --bg: #0f1117;
+            --panel: #1a1d27;
+            --border: #2a2d3a;
+            --text: #e0e0e0;
+            --muted: #8b8fa3;
+            --accent: #7c5cfc;
+            --accent-glow: rgba(124, 92, 252, 0.15);
+            --green: #34d399;
+            --orange: #fb923c;
+            --red: #f87171;
+            --blue: #60a5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Layout */
+        .app {
+            display: flex;
+            height: 100vh;
+        }
+
+        .config-panel {
+            width: 200px;
+            border-right: 1px solid var(--border);
+            padding: 20px 16px;
+            flex-shrink: 0;
+            background: var(--panel);
+        }
+
+        .data-panel {
+            width: 320px;
+            border-right: 1px solid var(--border);
+            flex-shrink: 0;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .canvas {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+        }
+
+        .state-monitor {
+            width: 280px;
+            border-left: 1px solid var(--border);
+            background: var(--panel);
+            padding: 16px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        /* Header */
+        .panel-header {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .panel-header .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-purple {
+            background: var(--accent);
+        }
+
+        .dot-green {
+            background: var(--green);
+        }
+
+        .dot-blue {
+            background: var(--blue);
+        }
+
+        .dot-orange {
+            background: var(--orange);
+        }
+
+        /* Config Panel */
+        .config-section {
+            margin-bottom: 20px;
+        }
+
+        .config-label {
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .config-value {
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 12px;
+            background: rgba(124, 92, 252, 0.1);
+            border: 1px solid rgba(124, 92, 252, 0.3);
+            border-radius: 8px;
+        }
+
+        .word-count-display {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            transition: all 0.3s;
+        }
+
+        .word-count-display.changed {
+            color: var(--orange);
+            animation: pulse 0.5s;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .config-badge {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 4px;
+        }
+
+        .badge-active {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--green);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .badge-idle {
+            background: rgba(139, 143, 163, 0.1);
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        /* Data Panel - Feed */
+        .feed-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .feed-header h3 {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .feed-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .feed-tab {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            transition: all 0.2s;
+        }
+
+        .feed-tab.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .feed-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+        }
+
+        .tweet-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .tweet-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(124, 92, 252, 0.1);
+        }
+
+        .tweet-card.selected {
+            border-color: var(--green);
+            background: rgba(52, 211, 153, 0.05);
+        }
+
+        .tweet-source {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .tweet-text {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .tweet-time {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 8px;
+        }
+
+        .tweet-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-cite {
+            font-size: 12px;
+            padding: 5px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .btn-cite-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-cite-primary:hover {
+            background: #6a4ae8;
+        }
+
+        .btn-cite-secondary {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .btn-cite-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Canvas */
+        .canvas-toolbar {
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .canvas-toolbar .status {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .canvas-toolbar .char-count {
+            margin-left: auto;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .canvas-toolbar .char-count span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .editor-area {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .editor-content {
+            min-height: 200px;
+            font-size: 14px;
+            line-height: 1.8;
+            color: var(--text);
+            white-space: pre-wrap;
+        }
+
+        .cited-block {
+            background: rgba(124, 92, 252, 0.08);
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            animation: slideIn 0.3s ease-out;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .cited-block .cite-label {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .generated-text {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* State Monitor */
+        .state-monitor h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .state-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: 'Consolas', 'Fira Code', monospace;
+            font-size: 11px;
+        }
+
+        .state-block .key {
+            color: var(--blue);
+        }
+
+        .state-block .val {
+            color: var(--green);
+        }
+
+        .state-block .val.changed {
+            color: var(--orange);
+            animation: highlight 1s;
+        }
+
+        @keyframes highlight {
+            0% {
+                background: rgba(251, 146, 60, 0.3);
+            }
+
+            100% {
+                background: transparent;
+            }
+        }
+
+        .state-block .line {
+            margin: 3px 0;
+        }
+
+        .log-entry {
+            font-size: 11px;
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+            background: rgba(124, 92, 252, 0.05);
+            animation: slideIn 0.3s;
+        }
+
+        .log-entry .log-time {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .log-entry .log-action {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Instruction banner */
+        .instruction {
+            background: linear-gradient(135deg, rgba(124, 92, 252, 0.15), rgba(96, 165, 250, 0.1));
+            border: 1px solid rgba(124, 92, 252, 0.3);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px;
+        }
+
+        .instruction h2 {
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .instruction p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .instruction .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            font-size: 13px;
+        }
+
+        .instruction .step-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .reset-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 100;
+        }
+
+        .reset-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- ConfigPanel -->
+        <div class="config-panel">
+            <div class="panel-header"><span class="dot dot-purple"></span> ConfigPanel</div>
+
+            <div class="config-section">
+                <div class="config-label">当前模式</div>
+                <div class="config-value">🌸 吹捧</div>
+            </div>
+
+            <div class="config-section">
+                <div class="config-label">写作风格</div>
+                <div class="config-value">吹捧体</div>
+            </div>
+
+            <div class="config-section">
+                <div class="config-label">目标字数</div>
+                <div class="word-count-display" id="wordCountDisplay">300</div>
+                <div class="config-label" style="margin-top: 4px; font-size: 11px;">(推荐范围: 50-500)</div>
+            </div>
+
+            <div class="config-section">
+                <div class="config-label">引用素材</div>
+                <div id="citedMaterialBadge" class="config-badge badge-idle">未选择</div>
+            </div>
+
+            <div class="config-section">
+                <div class="config-label">编辑器状态</div>
+                <div id="editorStatusBadge" class="config-badge badge-idle">空闲</div>
+            </div>
+        </div>
+
+        <!-- DataPanel (Feed) -->
+        <div class="data-panel">
+            <div class="feed-header">
+                <h3>🌸 币安动态</h3>
+                <div class="feed-tabs">
+                    <span class="feed-tab active">全部</span>
+                    <span class="feed-tab">CZ</span>
+                    <span class="feed-tab">何一</span>
+                </div>
+            </div>
+            <div class="feed-list" id="feedList">
+                <!-- Tweet 1 -->
+                <div class="tweet-card" id="tweet1" onclick="citeTweet(1)">
+                    <div class="tweet-source">@cz_binance · Grok</div>
+                    <div class="tweet-text">Binance 与阿布扎比主权基金达成战略合作，将在中东建立全球最大的合规加密货币交易中心。</div>
+                    <div class="tweet-time">2小时前 · binance_daily</div>
+                    <div class="tweet-actions">
+                        <button class="btn-cite btn-cite-primary" onclick="event.stopPropagation(); citeTweet(1)">📎
+                            引用到编辑器</button>
+                        <button class="btn-cite btn-cite-secondary">👁 预览</button>
+                    </div>
+                </div>
+                <!-- Tweet 2 -->
+                <div class="tweet-card" id="tweet2" onclick="citeTweet(2)">
+                    <div class="tweet-source">@heyibinance · Grok</div>
+                    <div class="tweet-text">Thank you for building with us. 2025 is the year we go fully compliant in
+                        20+ jurisdictions. 这是何一最新的战略表态。</div>
+                    <div class="tweet-time">5小时前 · binance_daily</div>
+                    <div class="tweet-actions">
+                        <button class="btn-cite btn-cite-primary" onclick="event.stopPropagation(); citeTweet(2)">📎
+                            引用到编辑器</button>
+                        <button class="btn-cite btn-cite-secondary">👁 预览</button>
+                    </div>
+                </div>
+                <!-- Tweet 3 -->
+                <div class="tweet-card" id="tweet3" onclick="citeTweet(3)">
+                    <div class="tweet-source">@cz_binance · Grok</div>
+                    <div class="tweet-text">BNB Chain 处理速度突破 5000 TPS，超越 Solana 成为最快的 EVM 链。技术团队的努力让我骄傲。</div>
+                    <div class="tweet-time">8小时前 · binance_daily</div>
+                    <div class="tweet-actions">
+                        <button class="btn-cite btn-cite-primary" onclick="event.stopPropagation(); citeTweet(3)">📎
+                            引用到编辑器</button>
+                        <button class="btn-cite btn-cite-secondary">👁 预览</button>
+                    </div>
+                </div>
+
+                <div class="instruction">
+                    <h2>👆 试试点击「引用到编辑器」</h2>
+                    <div class="step"><span class="step-num">1</span> 点击任意推文的「引用」按钮</div>
+                    <div class="step"><span class="step-num">2</span> 观察右侧编辑器自动插入引用块</div>
+                    <div class="step"><span class="step-num">3</span> 观察左侧 Config 的字数和状态自动变化</div>
+                    <div class="step"><span class="step-num">4</span> 观察最右侧 Store 状态面板的实时变化</div>
+                    <p style="margin-top: 10px; color: var(--orange);">⚡ 核心要点：三个面板通过统一的 Zustand Store 联动，不是各自管各自的状态！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- WritingCanvas -->
+        <div class="canvas">
+            <div class="canvas-toolbar">
+                <span class="status">📝 WritingCanvas</span>
+                <span class="char-count">字数: <span id="charCount">0</span> / <span id="targetCount">300</span></span>
+            </div>
+            <div class="editor-area">
+                <div class="editor-content" id="editorContent">
+                    <span style="color: var(--muted);">在左侧 DataPanel 选择素材后，引用内容将出现在这里...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- State Monitor (Developer View) -->
+        <div class="state-monitor">
+            <h3>🔬 useAgentStore 实时状态</h3>
+
+            <div
+                style="font-size: 11px; color: var(--muted); margin-bottom: 12px; padding: 8px; background: rgba(251,146,60,0.1); border-radius: 8px; border: 1px solid rgba(251,146,60,0.2);">
+                这是 Zustand Store 的开发者视图。<br>所有面板共享同一个 Store，<br>任何一处修改都会同步到所有面板。
+            </div>
+
+            <div class="state-block">
+                <div class="line"><span class="key">mode:</span> <span class="val">"bullish_take"</span></div>
+                <div class="line"><span class="key">style:</span> <span class="val">"吹捧体"</span></div>
+                <div class="line"><span class="key">wordCount:</span> <span class="val" id="storeWordCount">300</span>
+                </div>
+                <div class="line"><span class="key">selectedMaterial:</span> <span class="val"
+                        id="storeMaterial">null</span></div>
+                <div class="line"><span class="key">editorContent:</span> <span class="val" id="storeEditor">""</span>
+                </div>
+                <div class="line"><span class="key">isDirty:</span> <span class="val" id="storeDirty">false</span></div>
+            </div>
+
+            <h3 style="margin-top: 16px;">📋 状态变更日志</h3>
+            <div id="stateLog"></div>
+        </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetAll()">🔄 重置演示</button>
+
+    <script>
+        // ========== Unified Store (simulating Zustand) ==========
+        const store = {
+            mode: 'bullish_take',
+            style: '吹捧体',
+            wordCount: 300,
+            selectedMaterial: null,
+            editorContent: '',
+            isDirty: false
+        };
+
+        const tweets = {
+            1: { source: '@cz_binance', text: 'Binance 与阿布扎比主权基金达成战略合作，将在中东建立全球最大的合规加密货币交易中心。' },
+            2: { source: '@heyibinance', text: 'Thank you for building with us. 2025 is the year we go fully compliant in 20+ jurisdictions. 这是何一最新的战略表态。' },
+            3: { source: '@cz_binance', text: 'BNB Chain 处理速度突破 5000 TPS，超越 Solana 成为最快的 EVM 链。技术团队的努力让我骄傲。' }
+        };
+
+        let logEntries = [];
+
+        function addLog(action, detail) {
+            const now = new Date();
+            const time = now.toLocaleTimeString('zh-CN', { hour12: false });
+            logEntries.unshift({ time, action, detail });
+            if (logEntries.length > 8) logEntries.pop();
+
+            const logEl = document.getElementById('stateLog');
+            logEl.innerHTML = logEntries.map(e => `
+      <div class="log-entry">
+        <span class="log-time">${e.time}</span>
+        <span class="log-action"> ${e.action}</span>
+        <div style="color: var(--text); margin-top: 2px;">${e.detail}</div>
+      </div>
+    `).join('');
+        }
+
+        function updateUI() {
+            // Update Store monitor
+            const wcEl = document.getElementById('storeWordCount');
+            wcEl.textContent = store.wordCount;
+            wcEl.classList.add('changed');
+            setTimeout(() => wcEl.classList.remove('changed'), 1000);
+
+            const matEl = document.getElementById('storeMaterial');
+            matEl.textContent = store.selectedMaterial ? `"${store.selectedMaterial.source}"` : 'null';
+            if (store.selectedMaterial) { matEl.classList.add('changed'); setTimeout(() => matEl.classList.remove('changed'), 1000); }
+
+            const edEl = document.getElementById('storeEditor');
+            edEl.textContent = store.editorContent ? `"${store.editorContent.substring(0, 20)}..."` : '""';
+
+            const dirtyEl = document.getElementById('storeDirty');
+            dirtyEl.textContent = store.isDirty;
+            if (store.isDirty) { dirtyEl.classList.add('changed'); setTimeout(() => dirtyEl.classList.remove('changed'), 1000); }
+
+            // Update ConfigPanel
+            const wordDisplay = document.getElementById('wordCountDisplay');
+            wordDisplay.textContent = store.wordCount;
+            wordDisplay.classList.add('changed');
+            setTimeout(() => wordDisplay.classList.remove('changed'), 600);
+
+            const badge = document.getElementById('citedMaterialBadge');
+            if (store.selectedMaterial) {
+                badge.textContent = '✅ ' + store.selectedMaterial.source;
+                badge.className = 'config-badge badge-active';
+            } else {
+                badge.textContent = '未选择';
+                badge.className = 'config-badge badge-idle';
+            }
+
+            const editorBadge = document.getElementById('editorStatusBadge');
+            if (store.isDirty) {
+                editorBadge.textContent = '⚡ 有内容';
+                editorBadge.className = 'config-badge badge-active';
+            } else {
+                editorBadge.textContent = '空闲';
+                editorBadge.className = 'config-badge badge-idle';
+            }
+
+            // Update Canvas
+            document.getElementById('charCount').textContent = store.editorContent.length;
+            document.getElementById('targetCount').textContent = store.wordCount;
+        }
+
+        // ========== Core Action: Cite Tweet ==========
+        function citeTweet(id) {
+            const tweet = tweets[id];
+
+            // 1. Update selected material in store
+            store.selectedMaterial = { id, source: tweet.source, text: tweet.text };
+            addLog('SET selectedMaterial', `从 DataPanel 选中 ${tweet.source} 的推文`);
+
+            // 2. Auto-adjust word count based on material length
+            const oldCount = store.wordCount;
+            if (tweet.text.length < 50) {
+                store.wordCount = 150;  // Short material → suggest shorter output
+            } else {
+                store.wordCount = 300;  // Normal material
+            }
+            if (oldCount !== store.wordCount) {
+                addLog('AUTO wordCount', `${oldCount} → ${store.wordCount} (根据素材长度自动调整)`);
+            }
+
+            // 3. Insert into editor
+            const citedHtml = `
+      <div class="cited-block">
+        <div class="cite-label">📎 引用素材 · ${tweet.source}</div>
+        ${tweet.text}
+      </div>
+      <div class="generated-text" style="margin-top: 16px; color: var(--muted); font-style: italic;">
+        [点击生成后，AI 将基于以上引用素材生成吹捧文案...]
+      </div>
+    `;
+            document.getElementById('editorContent').innerHTML = citedHtml;
+            store.editorContent = tweet.text;
+            store.isDirty = true;
+            addLog('SET editorContent', `引用文本已插入 WritingCanvas`);
+            addLog('SET isDirty', `false → true (编辑器有未保存内容)`);
+
+            // 4. Update tweet card styles
+            document.querySelectorAll('.tweet-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('tweet' + id).classList.add('selected');
+
+            // 5. Sync all UI
+            updateUI();
+        }
+
+        function resetAll() {
+            store.selectedMaterial = null;
+            store.editorContent = '';
+            store.isDirty = false;
+            store.wordCount = 300;
+
+            document.getElementById('editorContent').innerHTML = '<span style="color: var(--muted);">在左侧 DataPanel 选择素材后，引用内容将出现在这里...</span>';
+            document.querySelectorAll('.tweet-card').forEach(c => c.classList.remove('selected'));
+
+            logEntries = [];
+            document.getElementById('stateLog').innerHTML = '';
+            addLog('RESET', '所有状态已重置');
+            updateUI();
+        }
+    </script>
+</body>
+
+</html>

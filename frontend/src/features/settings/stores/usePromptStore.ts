@@ -17,7 +17,9 @@ export interface WriterPrompts {
     mid_article: PromptSection;
     long_article: PromptSection;
     tutorial: PromptSection;
-    rewrite: PromptSection;
+    bullish_take: PromptSection;
+    kaito_yap: PromptSection;
+    project_research: PromptSection;
 }
 
 export interface CustomPromptsState {
@@ -151,7 +153,7 @@ export const usePromptStore = create<CustomPromptsState>()(
         {
             name: 'qs_custom_prompts',
             partialize: (state) => ({ customPrompts: state.customPrompts }),
-            version: 5, // P26: Bump v4→v5 for P26 prompt sync
+            version: 6, // P27: Bump v5→v6 for 3 new modes
             migrate: (persistedState: any, version: number) => {
                 // Version 0→1: mid_take → quick_summary
                 if (version === 0) {
@@ -195,7 +197,7 @@ export const usePromptStore = create<CustomPromptsState>()(
                 if (version < 4) {
                     const cp = persistedState.customPrompts;
                     if (cp) {
-                        const modes = ['hot_take', 'short_article', 'mid_article', 'long_article', 'tutorial', 'rewrite'] as const;
+                        const modes = ['hot_take', 'short_article', 'mid_article', 'long_article', 'tutorial'] as const;
                         // Migrate each agent: if it's a flat object (has 'role' key), expand to per-mode
                         for (const agent of ['strategist', 'critic', 'polisher'] as const) {
                             const current = cp[agent];
@@ -220,6 +222,25 @@ export const usePromptStore = create<CustomPromptsState>()(
                         for (const agent of ['writer', 'strategist', 'critic', 'polisher'] as const) {
                             if (cp[agent] && DEFAULT_PROMPTS[agent]?.short_article) {
                                 cp[agent].short_article = { ...DEFAULT_PROMPTS[agent].short_article };
+                            }
+                        }
+                    }
+                }
+                // Version 5→6: P27 add bullish_take, kaito_yap, project_research defaults for all agents
+                if (version < 6) {
+                    const cp = persistedState.customPrompts;
+                    if (cp) {
+                        for (const agent of ['writer', 'strategist', 'critic', 'polisher'] as const) {
+                            if (cp[agent]) {
+                                if (!cp[agent].bullish_take && DEFAULT_PROMPTS[agent]?.bullish_take) {
+                                    cp[agent].bullish_take = { ...DEFAULT_PROMPTS[agent].bullish_take };
+                                }
+                                if (!cp[agent].kaito_yap && DEFAULT_PROMPTS[agent]?.kaito_yap) {
+                                    cp[agent].kaito_yap = { ...DEFAULT_PROMPTS[agent].kaito_yap };
+                                }
+                                if (!cp[agent].project_research && DEFAULT_PROMPTS[agent]?.project_research) {
+                                    cp[agent].project_research = { ...DEFAULT_PROMPTS[agent].project_research };
+                                }
                             }
                         }
                     }

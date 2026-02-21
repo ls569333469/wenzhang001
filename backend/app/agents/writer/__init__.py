@@ -10,7 +10,9 @@ from .mid_article import mid_article_writer
 from .long_article import long_article_writer
 from .short_article import short_article_writer
 from .tutorial import tutorial_writer
-from .rewrite import rewrite_writer
+from .bullish_take import bullish_take_writer
+from .kaito_yap import kaito_yap_writer
+from .project_research import project_research_writer
 
 # hot_take 保持独立 (Option A)，不纳入此路由
 
@@ -19,7 +21,9 @@ WRITER_REGISTRY = {
     "mid_article": mid_article_writer,
     "long_article": long_article_writer,
     "tutorial": tutorial_writer,
-    "rewrite": rewrite_writer,
+    "bullish_take": bullish_take_writer,
+    "kaito_yap": kaito_yap_writer,
+    "project_research": project_research_writer,
 }
 
 

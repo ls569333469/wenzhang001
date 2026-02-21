@@ -1,6 +1,6 @@
 """
 标准 Critic - P24 全模式独立管线
-适用于: short_article, mid_article, long_article, tutorial, rewrite
+适用于: short_article, mid_article, long_article, tutorial
 每个模式使用独立 jinja2 模板（critic/{mode}.jinja2）
 """
 from datetime import datetime

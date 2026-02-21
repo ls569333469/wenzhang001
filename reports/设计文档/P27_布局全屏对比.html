@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>P27 布局全屏 1:1 对比</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* ===== Floating Control Panel ===== */
+        .control-bar {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            display: flex;
+            gap: 6px;
+            padding: 6px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .ctrl-btn {
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .ctrl-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .ctrl-btn.active {
+            background: #fff;
+            color: #000;
+            font-weight: 600;
+        }
+
+        .ctrl-sep {
+            width: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 4px 2px;
+        }
+
+        .ctrl-btn.mode-btn {
+            font-size: 12px;
+            padding: 6px 14px;
+        }
+
+        .ctrl-btn.mode-btn.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        /* Spec overlay */
+        .spec-overlay {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9998;
+            padding: 10px 24px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 12px;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .spec-label {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-value {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .spec-tag {
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .spec-tag.rec {
+            background: #22c55e;
+            color: #fff;
+        }
+
+        .spec-tag.ok {
+            background: #f59e0b;
+            color: #fff;
+        }
+
+        /* ===== Full viewport layer ===== */
+        .viewport-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+        }
+
+        .viewport-layer.active {
+            display: block;
+        }
+
+        /* ===== Actual Page Mockup ===== */
+        .page-bg {
+            width: 100%;
+            height: 100%;
+            background: #fafaf8;
+            position: relative;
+        }
+
+        /* Top Nav */
+        .top-nav {
+            height: 52px;
+            background: #fff;
+            border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            font-size: 14px;
+            color: #999;
+            position: relative;
+            z-index: 10;
+        }
+
+        .top-nav .nav-active {
+            background: #111;
+            color: #fff;
+            padding: 7px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .top-nav .nav-item {
+            cursor: default;
+            padding: 7px 12px;
+        }
+
+        .top-nav .nav-icon {
+            font-size: 16px;
+        }
+
+        /* Left Config Panel */
+        .left-panel {
+            position: absolute;
+            left: 0;
+            top: 52px;
+            bottom: 0;
+            background: #fff;
+            border-right: 1px solid #eee;
+            padding: 20px 14px;
+            overflow-y: auto;
+        }
+
+        .lp-header {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .lp-sub {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 16px;
+        }
+
+        .lp-section {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+            margin: 16px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lp-section::before {
+            content: '✨';
+            font-size: 12px;
+        }
+
+        .lp-label {
+            font-size: 11px;
+            color: #aaa;
+            margin: 16px 0 8px;
+        }
+
+        .mode-item {
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            font-size: 13px;
+            color: #555;
+            cursor: default;
+            border: 1px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .mode-item .mode-desc {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 2px;
+        }
+
+        .mode-item.selected {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .mode-item.selected .mode-desc {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .mode-compact-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mode-compact {
+            flex: 1;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #666;
+            background: #fafafa;
+            border: 1px solid #eee;
+            text-align: center;
+        }
+
+        /* Style cards */
+        .style-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .style-card {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        .style-card .style-icon {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .style-card.selected {
+            border-color: #111;
+            background: #f8f8f8;
+        }
+
+        /* Length toggle */
+        .length-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .length-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #eee;
+            color: #666;
+        }
+
+        .length-btn.selected {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        /* Right Sidebar */
+        .right-panel {
+            position: absolute;
+            right: 0;
+            top: 52px;
+            bottom: 0;
+            width: 260px;
+            background: #fff;
+            border-left: 1px solid #eee;
+            padding: 16px;
+        }
+
+        .rp-tabs {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: #bbb;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .rp-tabs .active {
+            color: #111;
+            font-weight: 600;
+        }
+
+        .rp-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 16px;
+        }
+
+        .rp-step {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rp-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        .rp-step-name {
+            font-size: 13px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .rp-step-status {
+            font-size: 11px;
+            color: #ccc;
+        }
+
+        /* ===== Center Content Area ===== */
+        .center-area {
+            position: absolute;
+            top: 52px;
+            bottom: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+
+        /* Content wrapper */
+        .content-wrap {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        /* DataPanel */
+        .data-panel {
+            flex-shrink: 0;
+            background: #fff;
+            border-radius: 14px;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            max-height: calc(100vh - 180px);
+            overflow-y: auto;
+        }
+
+        .dp-head {
+            padding: 14px 16px 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #222;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dp-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 10px 16px;
+            font-size: 12px;
+        }
+
+        .dp-tab {
+            padding: 4px 12px;
+            border-radius: 14px;
+            background: #f5f5f5;
+            color: #888;
+        }
+
+        .dp-tab.active {
+            background: #fce7e7;
+            color: #d33;
+            font-weight: 500;
+        }
+
+        .dp-tweet {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f8f8f8;
+        }
+
+        .dp-author {
+            font-size: 13px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .dp-time {
+            font-size: 11px;
+            color: #bbb;
+            margin-left: 8px;
+        }
+
+        .dp-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .dp-source {
+            padding: 10px 16px;
+            font-size: 10px;
+            color: #ccc;
+            text-align: center;
+        }
+
+        /* Input Card */
+        .input-card {
+            background: #fff;
+            border-radius: 18px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .ic-textarea {
+            padding: 18px 20px 12px;
+            font-size: 15px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .ic-shortcuts {
+            display: flex;
+            gap: 8px;
+            padding: 4px 20px 8px;
+            flex-wrap: wrap;
+        }
+
+        .ic-chip {
+            padding: 5px 12px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ic-action {
+            display: flex;
+            justify-content: flex-end;
+            padding: 8px 20px 14px;
+        }
+
+        .ic-btn {
+            padding: 8px 20px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ic-hint {
+            text-align: center;
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 16px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Dimension marker */
+        .dim-marker {
+            position: absolute;
+            font-size: 11px;
+            font-weight: 600;
+            color: #f97316;
+            background: rgba(249, 115, 22, 0.08);
+            padding: 3px 8px;
+            border-radius: 6px;
+            pointer-events: none;
+            border: 1px dashed rgba(249, 115, 22, 0.3);
+        }
+
+        /* Keyboard hint */
+        .key-hint {
+            position: fixed;
+            top: 16px;
+            right: 20px;
+            z-index: 9999;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .key-hint kbd {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            margin: 0 2px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Controls -->
+    <div class="control-bar">
+        <button class="ctrl-btn active" onclick="switchOption('a', this)">A · 聚焦写作</button>
+        <button class="ctrl-btn" onclick="switchOption('b', this)">B · 均衡布局 ⭐</button>
+        <button class="ctrl-btn" onclick="switchOption('c', this)">C · 宽敞工作台</button>
+        <div class="ctrl-sep"></div>
+        <button class="ctrl-btn mode-btn active" onclick="switchMode('standard', this)">标准模式</button>
+        <button class="ctrl-btn mode-btn" onclick="switchMode('datapanel', this)">DataPanel 模式</button>
+    </div>
+
+    <div class="key-hint">
+        <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> 切换方案 · <kbd>空格</kbd> 切换模式
+    </div>
+
+    <!-- Bottom Spec Bar -->
+    <div class="spec-overlay" id="spec-bar">
+        <!-- Dynamic content -->
+    </div>
+
+    <!-- =============== OPTION A: STANDARD =============== -->
+    <div class="viewport-layer active" id="a-standard">
+        <div class="page-bg">
+            <!-- Nav -->
+            <div class="top-nav">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-active">✨ 创作中心</span>
+                <span class="nav-item">数据管理</span>
+                <span class="nav-item">素材</span>
+                <span class="nav-item">历史</span>
+                <span class="nav-item">🔍</span>
+            </div>
+            <!-- Left: 340px expanded -->
+            <div class="left-panel" style="width: 340px;">
+                <div class="lp-header">⚙️ 创作配置</div>
+                <div class="lp-sub">定义 AI 的思考模式与输出风格</div>
+                <div class="lp-section">核心配置</div>
+                <div class="lp-label">⚡ 创作模式</div>
+                <div class="mode-item">🔥 锐评<div class="mode-desc">极简短评，3条候选，50-150字</div>
+                </div>
+                <div class="mode-item">🌸 吹捧<div class="mode-desc">正面解读，短评吹捧</div>
+                </div>
+                <div class="mode-item">💬 短篇<div class="mode-desc">X正常发文，50-300字</div>
+                </div>
+                <div class="mode-item selected">📝 中篇<div class="mode-desc">快速产出，要点突出，适合热点追踪</div>
+                </div>
+                <div class="mode-item">📖 长篇<div class="mode-desc">全面深度分析，长文结构</div>
+                </div>
+                <div class="mode-item">🎯 嘴撸<div class="mode-desc">项目嘴撸，Mindshare 提升</div>
+                </div>
+                <div class="mode-compact-row">
+                    <div class="mode-compact">📚 教程</div>
+                    <div class="mode-compact">🔬 投研</div>
+                </div>
+                <div class="lp-label">⏱ 篇幅长度</div>
+                <div class="length-row">
+                    <div class="length-btn selected">默认</div>
+                    <div class="length-btn">自定义</div>
+                </div>
+                <div class="lp-label">🎨 写作风格</div>
+                <div class="style-row">
+                    <div class="style-card selected">
+                        <div class="style-icon">🔥</div>咪蒙体
+                    </div>
+                    <div class="style-card">
+                        <div class="style-icon">🌸</div>半佛体
+                    </div>
+                </div>
+            </div>
+            <!-- Right -->
+            <div class="right-panel">
+                <div class="rp-tabs"><span class="active">⚡ 进度</span><span>🕐 版本</span><span>📋 日志</span><span>📥
+                        导出</span></div>
+                <div class="rp-title">智能体执行进度</div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">策略分析</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">初稿撰写</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">质量审核</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">润色打磨</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Center: left=340, right=260 -->
+            <div class="center-area" style="left: 340px; right: 260px;">
+                <div style="width: 100%; max-width: 640px;">
+                    <div class="input-card">
+                        <div class="ic-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                        <div class="ic-shortcuts">
+                            <span class="ic-chip">📄 🌸 中篇 ▾</span>
+                            <span class="ic-chip">🎨 咪蒙体 ▾</span>
+                            <span class="ic-chip">🗓 近几天 ▾</span>
+                        </div>
+                        <div class="ic-action"><span class="ic-btn">开始深度创作 ▶</span></div>
+                    </div>
+                    <div class="ic-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"</div>
+                </div>
+                <div class="dim-marker" style="bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    ↔ 输入框 640px · 中心区域可用 ≈ 1960px · 两侧留白 ≈ 660px/侧
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== OPTION A: DATAPANEL =============== -->
+    <div class="viewport-layer" id="a-datapanel">
+        <div class="page-bg">
+            <div class="top-nav">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-active">✨ 创作中心</span>
+                <span class="nav-item">数据管理</span>
+                <span class="nav-item">素材</span>
+                <span class="nav-item">历史</span>
+                <span class="nav-item">🔍</span>
+            </div>
+            <div class="left-panel" style="width: 340px;">
+                <div class="lp-header">⚙️ 创作配置</div>
+                <div class="lp-sub">定义 AI 的思考模式与输出风格</div>
+                <div class="lp-section">核心配置</div>
+                <div class="lp-label">⚡ 创作模式</div>
+                <div class="mode-item">🔥 锐评<div class="mode-desc">极简短评，3条候选</div>
+                </div>
+                <div class="mode-item selected">🌸 吹捧<div class="mode-desc">正面解读，短评吹捧</div>
+                </div>
+                <div class="mode-item">💬 短篇</div>
+                <div class="mode-item">📝 中篇</div>
+                <div class="mode-item">📖 长篇</div>
+                <div class="mode-item">🎯 嘴撸</div>
+                <div class="mode-compact-row">
+                    <div class="mode-compact">📚 教程</div>
+                    <div class="mode-compact">🔬 投研</div>
+                </div>
+                <div class="lp-label">❤️ 写作风格</div>
+                <div class="style-row">
+                    <div class="style-card selected" style="border-color:#f472b6;background:#fdf2f8;">
+                        <div class="style-icon">🌸</div>吹捧体<div style="font-size:10px;color:#ec4899;">正面解读·积极肯定</div>
+                    </div>
+                </div>
+                <div class="lp-label">⏱ 篇幅长度</div>
+                <div class="length-row">
+                    <div class="length-btn selected">默认 (50-500字)</div>
+                    <div class="length-btn">自定义</div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="rp-tabs"><span class="active">⚡ 进度</span><span>🕐 版本</span><span>📋 日志</span><span>📥
+                        导出</span></div>
+                <div class="rp-title">智能体执行进度</div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">策略分析</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">初稿撰写</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">质量审核</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-area" style="left: 340px; right: 260px;">
+                <div class="content-wrap" style="max-width: 960px; width: 100%;">
+                    <div class="data-panel" style="width: 280px;">
+                        <div class="dp-head">🌸 币安动态</div>
+                        <div class="dp-tabs">
+                            <span class="dp-tab active">全部</span><span class="dp-tab">CZ</span><span
+                                class="dp-tab">何一</span><span class="dp-tab">官方</span>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@cz_binance</span><span class="dp-time">2h</span></div>
+                            <div class="dp-text">Binance has processed over $100B in trading volume this month. Thank
+                                you for your support!</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@haborofficial</span><span class="dp-time">5h</span></div>
+                            <div class="dp-text">Web3 education is the key to mass adoption. We are building bridges,
+                                not walls.</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@binance</span><span class="dp-time">8h</span></div>
+                            <div class="dp-text">New listing announcement: $KAITO Token now on Binance Spot.</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@cz_binance</span><span class="dp-time">12h</span></div>
+                            <div class="dp-text">Building in bear market, shipping in bull. Stay focused, stay building.
+                            </div>
+                        </div>
+                        <div class="dp-source">⚡ 数据来源: Grok → binance_daily</div>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div class="input-card">
+                            <div class="ic-textarea">请输入您的研究主题或指令…</div>
+                            <div class="ic-shortcuts">
+                                <span class="ic-chip">📄 🌸 吹捧 ▾</span>
+                                <span class="ic-chip">🎨 咪蒙体 ▾</span>
+                                <span class="ic-chip">🗓 近几天 ▾</span>
+                            </div>
+                            <div class="ic-action"><span class="ic-btn">开始深度创作 ▶</span></div>
+                        </div>
+                        <div class="ic-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局"</div>
+                    </div>
+                </div>
+                <div class="dim-marker" style="bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    ↔ DataPanel 280 + 输入区 flex-1 ≈ 560px · 总宽 960px · 两侧留白 ≈ 500px/侧
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== OPTION B: STANDARD =============== -->
+    <div class="viewport-layer" id="b-standard">
+        <div class="page-bg">
+            <div class="top-nav">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-active">✨ 创作中心</span>
+                <span class="nav-item">数据管理</span>
+                <span class="nav-item">素材</span>
+                <span class="nav-item">历史</span>
+                <span class="nav-item">🔍</span>
+            </div>
+            <div class="left-panel" style="width: 340px;">
+                <div class="lp-header">⚙️ 创作配置</div>
+                <div class="lp-sub">定义 AI 的思考模式与输出风格</div>
+                <div class="lp-section">核心配置</div>
+                <div class="lp-label">⚡ 创作模式</div>
+                <div class="mode-item">🔥 锐评<div class="mode-desc">极简短评，3条候选，50-150字</div>
+                </div>
+                <div class="mode-item">🌸 吹捧<div class="mode-desc">正面解读，短评吹捧</div>
+                </div>
+                <div class="mode-item">💬 短篇<div class="mode-desc">X正常发文，50-300字</div>
+                </div>
+                <div class="mode-item selected">📝 中篇<div class="mode-desc">快速产出，要点突出，适合热点追踪</div>
+                </div>
+                <div class="mode-item">📖 长篇<div class="mode-desc">全面深度分析，长文结构</div>
+                </div>
+                <div class="mode-item">🎯 嘴撸<div class="mode-desc">项目嘴撸，Mindshare 提升</div>
+                </div>
+                <div class="mode-compact-row">
+                    <div class="mode-compact">📚 教程</div>
+                    <div class="mode-compact">🔬 投研</div>
+                </div>
+                <div class="lp-label">⏱ 篇幅长度</div>
+                <div class="length-row">
+                    <div class="length-btn selected">默认</div>
+                    <div class="length-btn">自定义</div>
+                </div>
+                <div class="lp-label">🎨 写作风格</div>
+                <div class="style-row">
+                    <div class="style-card selected">
+                        <div class="style-icon">🔥</div>咪蒙体
+                    </div>
+                    <div class="style-card">
+                        <div class="style-icon">🌸</div>半佛体
+                    </div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="rp-tabs"><span class="active">⚡ 进度</span><span>🕐 版本</span><span>📋 日志</span><span>📥
+                        导出</span></div>
+                <div class="rp-title">智能体执行进度</div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">策略分析</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">初稿撰写</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">质量审核</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">润色打磨</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-area" style="left: 340px; right: 260px;">
+                <div style="width: 100%; max-width: 720px;">
+                    <div class="input-card">
+                        <div class="ic-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                        <div class="ic-shortcuts">
+                            <span class="ic-chip">📄 🌸 中篇 ▾</span>
+                            <span class="ic-chip">🎨 咪蒙体 ▾</span>
+                            <span class="ic-chip">🗓 近几天 ▾</span>
+                        </div>
+                        <div class="ic-action"><span class="ic-btn">开始深度创作 ▶</span></div>
+                    </div>
+                    <div class="ic-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"</div>
+                </div>
+                <div class="dim-marker" style="bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    ↔ 输入框 720px · 中心区域可用 ≈ 1960px · 两侧留白 ≈ 620px/侧
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== OPTION B: DATAPANEL =============== -->
+    <div class="viewport-layer" id="b-datapanel">
+        <div class="page-bg">
+            <div class="top-nav">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-active">✨ 创作中心</span>
+                <span class="nav-item">数据管理</span>
+                <span class="nav-item">素材</span>
+                <span class="nav-item">历史</span>
+                <span class="nav-item">🔍</span>
+            </div>
+            <div class="left-panel" style="width: 340px;">
+                <div class="lp-header">⚙️ 创作配置</div>
+                <div class="lp-sub">定义 AI 的思考模式与输出风格</div>
+                <div class="lp-section">核心配置</div>
+                <div class="lp-label">⚡ 创作模式</div>
+                <div class="mode-item">🔥 锐评</div>
+                <div class="mode-item selected">🌸 吹捧<div class="mode-desc">正面解读，短评吹捧</div>
+                </div>
+                <div class="mode-item">💬 短篇</div>
+                <div class="mode-item">📝 中篇</div>
+                <div class="mode-item">📖 长篇</div>
+                <div class="mode-item">🎯 嘴撸</div>
+                <div class="mode-compact-row">
+                    <div class="mode-compact">📚 教程</div>
+                    <div class="mode-compact">🔬 投研</div>
+                </div>
+                <div class="lp-label">❤️ 写作风格</div>
+                <div class="style-row">
+                    <div class="style-card selected" style="border-color:#f472b6;background:#fdf2f8;">
+                        <div class="style-icon">🌸</div>吹捧体<div style="font-size:10px;color:#ec4899;">正面解读·积极肯定</div>
+                    </div>
+                </div>
+                <div class="lp-label">⏱ 篇幅长度</div>
+                <div class="length-row">
+                    <div class="length-btn selected">默认 (50-500字)</div>
+                    <div class="length-btn">自定义</div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="rp-tabs"><span class="active">⚡ 进度</span><span>🕐 版本</span><span>📋 日志</span><span>📥
+                        导出</span></div>
+                <div class="rp-title">智能体执行进度</div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">策略分析</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">初稿撰写</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">质量审核</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-area" style="left: 340px; right: 260px;">
+                <div class="content-wrap" style="max-width: 1080px; width: 100%;">
+                    <div class="data-panel" style="width: 320px;">
+                        <div class="dp-head">🌸 币安动态</div>
+                        <div class="dp-tabs">
+                            <span class="dp-tab active">全部</span><span class="dp-tab">CZ</span><span
+                                class="dp-tab">何一</span><span class="dp-tab">官方</span>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@cz_binance</span><span class="dp-time">2h</span></div>
+                            <div class="dp-text">Binance has processed over $100B in trading volume this month. Thank
+                                you for your support!</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@haborofficial</span><span class="dp-time">5h</span></div>
+                            <div class="dp-text">Web3 education is the key to mass adoption. We are building bridges,
+                                not walls.</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@binance</span><span class="dp-time">8h</span></div>
+                            <div class="dp-text">New listing announcement: $KAITO Token is now available on Binance
+                                Spot. Trade now!</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@cz_binance</span><span class="dp-time">12h</span></div>
+                            <div class="dp-text">Building in bear market, shipping in bull market. The cycle continues.
+                                Stay focused, stay building.</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@haborofficial</span><span class="dp-time">1d</span></div>
+                            <div class="dp-text">刚参加完 Consensus 大会回来，行业的能量前所未有，大量传统金融机构正在积极布局。</div>
+                        </div>
+                        <div class="dp-source">⚡ 数据来源: Grok → binance_daily</div>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div class="input-card">
+                            <div class="ic-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                            <div class="ic-shortcuts">
+                                <span class="ic-chip">📄 🌸 吹捧 ▾</span>
+                                <span class="ic-chip">🎨 咪蒙体 ▾</span>
+                                <span class="ic-chip">🗓 近几天 ▾</span>
+                            </div>
+                            <div class="ic-action"><span class="ic-btn">开始深度创作 ▶</span></div>
+                        </div>
+                        <div class="ic-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局"</div>
+                    </div>
+                </div>
+                <div class="dim-marker" style="bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    ↔ DataPanel 320 + gap 24 + 输入区 flex-1 ≈ 700px · 总宽 1080px · 两侧留白 ≈ 440px/侧
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== OPTION C: STANDARD =============== -->
+    <div class="viewport-layer" id="c-standard">
+        <div class="page-bg">
+            <div class="top-nav">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-active">✨ 创作中心</span>
+                <span class="nav-item">数据管理</span>
+                <span class="nav-item">素材</span>
+                <span class="nav-item">历史</span>
+                <span class="nav-item">🔍</span>
+            </div>
+            <div class="left-panel" style="width: 340px;">
+                <div class="lp-header">⚙️ 创作配置</div>
+                <div class="lp-sub">定义 AI 的思考模式与输出风格</div>
+                <div class="lp-section">核心配置</div>
+                <div class="lp-label">⚡ 创作模式</div>
+                <div class="mode-item">🔥 锐评<div class="mode-desc">极简短评，3条候选，50-150字</div>
+                </div>
+                <div class="mode-item">🌸 吹捧<div class="mode-desc">正面解读，短评吹捧</div>
+                </div>
+                <div class="mode-item">💬 短篇<div class="mode-desc">X正常发文，50-300字</div>
+                </div>
+                <div class="mode-item selected">📝 中篇<div class="mode-desc">快速产出，要点突出，适合热点追踪</div>
+                </div>
+                <div class="mode-item">📖 长篇<div class="mode-desc">全面深度分析，长文结构</div>
+                </div>
+                <div class="mode-item">🎯 嘴撸<div class="mode-desc">项目嘴撸，Mindshare 提升</div>
+                </div>
+                <div class="mode-compact-row">
+                    <div class="mode-compact">📚 教程</div>
+                    <div class="mode-compact">🔬 投研</div>
+                </div>
+                <div class="lp-label">⏱ 篇幅长度</div>
+                <div class="length-row">
+                    <div class="length-btn selected">默认</div>
+                    <div class="length-btn">自定义</div>
+                </div>
+                <div class="lp-label">🎨 写作风格</div>
+                <div class="style-row">
+                    <div class="style-card selected">
+                        <div class="style-icon">🔥</div>咪蒙体
+                    </div>
+                    <div class="style-card">
+                        <div class="style-icon">🌸</div>半佛体
+                    </div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="rp-tabs"><span class="active">⚡ 进度</span><span>🕐 版本</span><span>📋 日志</span><span>📥
+                        导出</span></div>
+                <div class="rp-title">智能体执行进度</div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">策略分析</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">初稿撰写</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">质量审核</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">润色打磨</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-area" style="left: 340px; right: 260px;">
+                <div style="width: 100%; max-width: 800px;">
+                    <div class="input-card">
+                        <div class="ic-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                        <div class="ic-shortcuts">
+                            <span class="ic-chip">📄 🌸 中篇 ▾</span>
+                            <span class="ic-chip">🎨 咪蒙体 ▾</span>
+                            <span class="ic-chip">🗓 近几天 ▾</span>
+                        </div>
+                        <div class="ic-action"><span class="ic-btn">开始深度创作 ▶</span></div>
+                    </div>
+                    <div class="ic-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"</div>
+                </div>
+                <div class="dim-marker" style="bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    ↔ 输入框 800px · 中心区域可用 ≈ 1960px · 两侧留白 ≈ 580px/侧
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =============== OPTION C: DATAPANEL =============== -->
+    <div class="viewport-layer" id="c-datapanel">
+        <div class="page-bg">
+            <div class="top-nav">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-active">✨ 创作中心</span>
+                <span class="nav-item">数据管理</span>
+                <span class="nav-item">素材</span>
+                <span class="nav-item">历史</span>
+                <span class="nav-item">🔍</span>
+            </div>
+            <div class="left-panel" style="width: 340px;">
+                <div class="lp-header">⚙️ 创作配置</div>
+                <div class="lp-sub">定义 AI 的思考模式与输出风格</div>
+                <div class="lp-section">核心配置</div>
+                <div class="lp-label">⚡ 创作模式</div>
+                <div class="mode-item">🔥 锐评</div>
+                <div class="mode-item selected">🌸 吹捧<div class="mode-desc">正面解读，短评吹捧</div>
+                </div>
+                <div class="mode-item">💬 短篇</div>
+                <div class="mode-item">📝 中篇</div>
+                <div class="mode-item">📖 长篇</div>
+                <div class="mode-item">🎯 嘴撸</div>
+                <div class="mode-compact-row">
+                    <div class="mode-compact">📚 教程</div>
+                    <div class="mode-compact">🔬 投研</div>
+                </div>
+                <div class="lp-label">❤️ 写作风格</div>
+                <div class="style-row">
+                    <div class="style-card selected" style="border-color:#f472b6;background:#fdf2f8;">
+                        <div class="style-icon">🌸</div>吹捧体<div style="font-size:10px;color:#ec4899;">正面解读·积极肯定</div>
+                    </div>
+                </div>
+                <div class="lp-label">⏱ 篇幅长度</div>
+                <div class="length-row">
+                    <div class="length-btn selected">默认 (50-500字)</div>
+                    <div class="length-btn">自定义</div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="rp-tabs"><span class="active">⚡ 进度</span><span>🕐 版本</span><span>📋 日志</span><span>📥
+                        导出</span></div>
+                <div class="rp-title">智能体执行进度</div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">策略分析</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">初稿撰写</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+                <div class="rp-step">
+                    <div class="rp-dot"></div>
+                    <div>
+                        <div class="rp-step-name">质量审核</div>
+                        <div class="rp-step-status">等待开始</div>
+                    </div>
+                </div>
+            </div>
+            <div class="center-area" style="left: 340px; right: 260px;">
+                <div class="content-wrap" style="max-width: 1320px; width: 100%;">
+                    <div class="data-panel" style="width: 380px;">
+                        <div class="dp-head">🌸 币安动态</div>
+                        <div class="dp-tabs">
+                            <span class="dp-tab active">全部</span><span class="dp-tab">CZ</span><span
+                                class="dp-tab">何一</span><span class="dp-tab">官方</span>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@cz_binance</span><span class="dp-time">2h</span></div>
+                            <div class="dp-text">Binance has processed over $100B in trading volume this month. Thank
+                                you for your support!</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@haborofficial</span><span class="dp-time">5h</span></div>
+                            <div class="dp-text">Web3 education is the key to mass adoption. We are building bridges,
+                                not walls.</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@binance</span><span class="dp-time">8h</span></div>
+                            <div class="dp-text">New listing announcement: $KAITO Token is now available on Binance
+                                Spot. Trade now!</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@cz_binance</span><span class="dp-time">12h</span></div>
+                            <div class="dp-text">Building in bear market, shipping in bull market. The cycle continues.
+                                Stay focused, stay building.</div>
+                        </div>
+                        <div class="dp-tweet">
+                            <div><span class="dp-author">@haborofficial</span><span class="dp-time">1d</span></div>
+                            <div class="dp-text">刚参加完 Consensus 大会回来，行业的能量前所未有，大量传统金融机构正在积极布局。</div>
+                        </div>
+                        <div class="dp-source">⚡ 数据来源: Grok → binance_daily</div>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <div class="input-card">
+                            <div class="ic-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                            <div class="ic-shortcuts">
+                                <span class="ic-chip">📄 🌸 吹捧 ▾</span>
+                                <span class="ic-chip">🎨 咪蒙体 ▾</span>
+                                <span class="ic-chip">🗓 近几天 ▾</span>
+                            </div>
+                            <div class="ic-action"><span class="ic-btn">开始深度创作 ▶</span></div>
+                        </div>
+                        <div class="ic-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局"</div>
+                    </div>
+                </div>
+                <div class="dim-marker" style="bottom: 30px; left: 50%; transform: translateX(-50%);">
+                    ↔ DataPanel 380 + gap 24 + 输入区 flex-1 ≈ 880px · 总宽 1320px · 两侧留白 ≈ 320px/侧
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentOption = 'a';
+        let currentMode = 'standard';
+
+        const SPECS = {
+            a: { name: '方案 A · 聚焦写作', content: '800px', input: '640px', dp: '280px', dpTotal: '960px', tag: 'ok', tagText: '简洁' },
+            b: { name: '方案 B · 均衡布局', content: '1080px', input: '720px', dp: '320px', dpTotal: '1080px', tag: 'rec', tagText: '推荐 ⭐' },
+            c: { name: '方案 C · 宽敞工作台', content: '1320px', input: '800px', dp: '380px', dpTotal: '1320px', tag: 'ok', tagText: '高效' },
+        };
+
+        function updateView() {
+            document.querySelectorAll('.viewport-layer').forEach(l => l.classList.remove('active'));
+            const target = document.getElementById(`${currentOption}-${currentMode}`);
+            if (target) target.classList.add('active');
+
+            const spec = SPECS[currentOption];
+            const isDP = currentMode === 'datapanel';
+            document.getElementById('spec-bar').innerHTML = `
+    <div class="spec-item"><div class="spec-label">方案</div><div class="spec-value">${spec.name}</div></div>
+    <div class="spec-item"><div class="spec-label">内容区</div><div class="spec-value">${isDP ? spec.dpTotal : spec.content}</div></div>
+    <div class="spec-item"><div class="spec-label">${isDP ? 'DataPanel' : '输入框'}</div><div class="spec-value">${isDP ? spec.dp : spec.input}</div></div>
+    <div class="spec-item"><div class="spec-label">模式</div><div class="spec-value">${isDP ? 'DataPanel 分栏' : '标准居中'}</div></div>
+    <span class="spec-tag ${spec.tag}">${spec.tagText}</span>
+  `;
+        }
+
+        function switchOption(opt, btn) {
+            currentOption = opt;
+            document.querySelectorAll('.ctrl-btn:not(.mode-btn)').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateView();
+        }
+
+        function switchMode(mode, btn) {
+            currentMode = mode;
+            document.querySelectorAll('.ctrl-btn.mode-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateView();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '1' || e.key === '2' || e.key === '3') {
+                const opts = ['a', 'b', 'c'];
+                currentOption = opts[parseInt(e.key) - 1];
+                document.querySelectorAll('.ctrl-btn:not(.mode-btn)').forEach((b, i) => {
+                    b.classList.toggle('active', i === parseInt(e.key) - 1);
+                });
+                updateView();
+            }
+            if (e.key === ' ') {
+                e.preventDefault();
+                currentMode = currentMode === 'standard' ? 'datapanel' : 'standard';
+                document.querySelectorAll('.ctrl-btn.mode-btn').forEach((b, i) => {
+                    b.classList.toggle('active', (currentMode === 'standard' && i === 0) || (currentMode === 'datapanel' && i === 1));
+                });
+                updateView();
+            }
+        });
+
+        updateView();
+    </script>
+
+</body>
+
+</html>

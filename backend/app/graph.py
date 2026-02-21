@@ -13,7 +13,7 @@ from .core.mode_configs import get_mode_config, MODE_CONFIGS
 # 定义状态字典
 class AgentState(TypedDict):
     raw_input: str
-    mode: str  # "hot_take", "mid_article", "long_article", "tutorial", "rewrite"  # P16: 模式改名
+    mode: str  # "hot_take", "mid_article", "long_article", "tutorial"  # P16: 模式改名
     style: str  # P10: "auto", "mimeng", "banfo", "xinshixiang", "insider"
     length: Union[str, None]  # @deprecated P11: "tweet", "thread", "post"
     custom_length: int  # P16: 自定义字数 (0=使用模式默认)
@@ -67,7 +67,6 @@ def node_strategist(state: AgentState):
         plan_json = json.dumps(plan_data, ensure_ascii=False)
         
         steps.append({"step": "identified", "content": f"识别痛点: {plan_data.get('pain_point', '已选定')}"})
-        steps.append({"step": "angle", "content": f"切入角度: {plan_data.get('hook_angle', '已选定')}"})
         steps.append({"step": "outline", "content": f"加载大纲: {len(plan_data.get('outline', []))} 个要点"})
         steps.append({"step": "completed", "content": "策略规划加载完成"})
         
@@ -121,7 +120,6 @@ def node_strategist(state: AgentState):
              steps.append({"step": "options", "content": f"生成了 {len(plan_data['options'])} 个选题方案"})
         else:
             steps.append({"step": "identified", "content": f"识别痛点: {plan_data.get('pain_point', '分析中')}"})
-            steps.append({"step": "angle", "content": f"切入角度: {plan_data.get('hook_angle', '构思中')}"})
     except:
         steps.append({"step": "planning", "content": "生成内容策略计划..."})
     

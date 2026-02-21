@@ -76,10 +76,6 @@ export function StrategySelector() {
                         {/* Details */}
                         <div className="space-y-3 text-sm text-ink-secondary">
                             <div className="flex items-start gap-2">
-                                <Lightbulb className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                                <span>{option.hook_angle}</span>
-                            </div>
-                            <div className="flex items-start gap-2">
                                 <Target className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
                                 <span>{option.pain_point}</span>
                             </div>

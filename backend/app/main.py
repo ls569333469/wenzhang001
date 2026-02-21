@@ -13,7 +13,6 @@ from .core.config import ensure_config_dir, load_config, save_config
 from .core.mode_configs import get_mode_config, MODE_CONFIGS  # P14: 模式配置
 from .core.lark_client import lark_client
 from .api.cleaner import router as cleaner_router
-from .api.rewrite import router as rewrite_router
 from .api.materials import router as materials_router
 from .api.creations import router as creations_router
 import os
@@ -33,7 +32,6 @@ async def get_web2_authors():
 
 # Register routers
 app.include_router(cleaner_router)
-app.include_router(rewrite_router)
 app.include_router(materials_router)
 app.include_router(creations_router)
 
@@ -92,7 +90,7 @@ class CustomPrompts(BaseModel):
 
 class GenerateRequest(BaseModel):
     input: str
-    mode: str = "mid_article"  # P16: 创作模式 (hot_take, mid_article, long_article, tutorial, rewrite)
+    mode: str = "mid_article"  # P16: 创作模式 (hot_take, mid_article, long_article, tutorial)
     style: str = "auto"  # P10: 写作风格 (auto, mimeng, banfo, xinshixiang, insider)
     length: Optional[str] = None  # @deprecated P11: 旧篇幅长度 (tweet, thread, post)
     length_type: str = "auto"  # P16: 篇幅类型 (auto=用模式默认, custom=自定义字数)

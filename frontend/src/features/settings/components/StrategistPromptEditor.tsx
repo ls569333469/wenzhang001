@@ -12,7 +12,7 @@ const MODES: { id: keyof WriterPrompts; label: string }[] = [
     { id: 'mid_article', label: '中篇' },
     { id: 'long_article', label: '长篇' },
     { id: 'tutorial', label: '教程' },
-    { id: 'rewrite', label: '改写' },
+
 ];
 
 export function StrategistPromptEditor() {

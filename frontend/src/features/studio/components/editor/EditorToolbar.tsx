@@ -6,15 +6,16 @@ import { cn } from '@/lib/utils'; // Assuming this exists, based on other files
 
 interface EditorToolbarProps {
     editor: Editor | null;
+    actions?: React.ReactNode;
 }
 
-export function EditorToolbar({ editor }: EditorToolbarProps) {
+export function EditorToolbar({ editor, actions }: EditorToolbarProps) {
     if (!editor) {
         return null;
     }
 
     return (
-        <div className="border-b border-zinc-200 bg-zinc-50 p-2 flex items-center gap-1 flex-wrap sticky top-0 z-10 rounded-t-xl">
+        <div className="border-b border-zinc-200 bg-zinc-50 p-2 flex items-center gap-1 flex-wrap shrink-0 rounded-t-xl z-10 relative">
             <ToolbarButton
                 onClick={() => editor.chain().focus().toggleBold().run()}
                 isActive={editor.isActive('bold')}
@@ -73,6 +74,13 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
             />
 
             <div className="flex-1" />
+
+            {actions && (
+                <div className="flex items-center gap-1.5 mr-2">
+                    {actions}
+                    <div className="w-px h-4 bg-zinc-300 mx-1" />
+                </div>
+            )}
 
             <ToolbarButton
                 onClick={() => editor.chain().focus().undo().run()}

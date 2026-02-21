@@ -44,10 +44,17 @@ MODE_CONFIGS = {
         "length": {"min": 50, "max": 150, "target": 80},
         "length_locked": True,
         "skip_strategist": True,
-        "skip_critic": True,
-        "skip_polisher": True,
+        "skip_critic": False,
+        "skip_polisher": False,
         "output_count": 3,
-        "scoring": None
+        "scoring": {
+            "dimensions": SCORING_DIMENSIONS,
+            "penalty_rules": PENALTY_RULES,
+            "penalty_cap": 25,
+            "max_revisions": 1,
+            "pass_threshold": 80,
+            "refine_threshold": 65
+        }
     },
     "short_article": {  # P22: 短篇 (正常X/Twitter发文)
         "name": "短篇",
@@ -118,9 +125,9 @@ MODE_CONFIGS = {
             "refine_threshold": 70
         }
     },
-    "rewrite": {
-        "name": "改写润色",
-        "length": None,
+    "bullish_take": {
+        "name": "吹捧模式",
+        "length": {"min": 100, "max": 300, "target": 200},
         "length_locked": False,
         "skip_strategist": True,
         "skip_critic": False,
@@ -129,10 +136,44 @@ MODE_CONFIGS = {
         "scoring": {
             "dimensions": SCORING_DIMENSIONS,
             "penalty_rules": PENALTY_RULES,
-            "penalty_cap": 20,
+            "penalty_cap": 25,
             "max_revisions": 1,
             "pass_threshold": 85,
             "refine_threshold": 70
+        }
+    },
+    "kaito_yap": {
+        "name": "Kaito 嘴撸模式",
+        "length": {"min": 150, "max": 400, "target": 250},
+        "length_locked": False,
+        "skip_strategist": True,
+        "skip_critic": False,
+        "skip_polisher": False,
+        "output_count": 1,
+        "scoring": {
+            "dimensions": SCORING_DIMENSIONS,
+            "penalty_rules": PENALTY_RULES,
+            "penalty_cap": 25,
+            "max_revisions": 1,
+            "pass_threshold": 85,
+            "refine_threshold": 70
+        }
+    },
+    "project_research": {
+        "name": "投研分析",
+        "length": {"min": 800, "max": 1500, "target": 1000},
+        "length_locked": False,
+        "skip_strategist": False,
+        "skip_critic": False,
+        "skip_polisher": False,
+        "output_count": 1,
+        "scoring": {
+            "dimensions": SCORING_DIMENSIONS,
+            "penalty_rules": PENALTY_RULES,
+            "penalty_cap": 35,
+            "max_revisions": 2,
+            "pass_threshold": 85,
+            "refine_threshold": 75
         }
     }
 }

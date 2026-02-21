@@ -14,7 +14,6 @@ CRITIC_REGISTRY = {
     "mid_article": standard_critic,
     "long_article": standard_critic,
     "tutorial": standard_critic,
-    "rewrite": standard_critic,
     "hot_take": skip_critic,  # 锐评跳过评分
 }
 

@@ -81,7 +81,6 @@ function getAgentConfig() {
 export interface TitleCandidate {
     title: string;
     formula_tags: string[];
-    hook_score: number;
     rationale?: string;
 }
 
@@ -149,6 +148,10 @@ interface AgentState {
     materialPrefill: string | null;
     materialContext: string | null;  // full article content passed to strategist
 
+    // P27: DataPanel Selection Linkage & Dirty State
+    selectedMaterial: any | null;    // DataPanel selected item to pass to HeroInput
+    isDirty: boolean;                // Tracks if there are unsaved changes in the editor
+
     // Actions
     startSession: (payload: { input: string, config: Partial<CreationConfig> }) => Promise<void>;
     confirmStrategy: (option: any, selectedTitle?: string) => Promise<void>; // Step 2 Trigger
@@ -161,6 +164,9 @@ interface AgentState {
     restoreVersion: (versionId: string) => void; // P19 Phase 3
     setMaterialPrefill: (text: string | null) => void; // P23
     setMaterialContext: (text: string | null) => void; // P23
+    setSelectedMaterial: (item: any | null) => void; // P27
+    setIsDirty: (dirty: boolean) => void; // P27
+    saveToServer: () => Promise<boolean>; // P27
 }
 
 // --- Initial Data ---
@@ -219,6 +225,10 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     // P23: Restore from sessionStorage if available
     materialPrefill: (typeof window !== 'undefined' && sessionStorage.getItem('qs_material_prefill')) || null,
     materialContext: (typeof window !== 'undefined' && sessionStorage.getItem('qs_material_context')) || null,
+
+    // P27
+    selectedMaterial: null,
+    isDirty: false,
 
     startSession: async ({ input, config }) => {
         // P14-B: Load Agent Models & Provider Keys
@@ -388,8 +398,6 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 mode: currentMode,
                 style: config.style || 'mimeng',
 
-                retention_level: config.retention_level || 3,  // P13: 添加保留度
-                temperature: config.temperature || 0.7,
                 narrative_type: 'project_review',
                 references: [],
                 // P13: 添加 API 配置
@@ -526,7 +534,6 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 mode: currentMode,
                 style: lastRequestPayload.config?.style || 'mimeng',
 
-                retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
                 selected_option: option,
@@ -651,7 +658,6 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 mode: currentMode,
                 style: lastRequestPayload.config?.style || 'mimeng',
 
-                retention_level: lastRequestPayload.config?.retention_level || 3,
                 narrative_type: 'project_review',
                 references: [],
                 selected_option: lastSelectedOption,
@@ -702,6 +708,9 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             draftHistory: [],
             currentVersionId: null,
             // P23: Clear prefill (don't clear here — it's consumed by HeroInput)
+            // P27: Also clear material selection and dirty state
+            selectedMaterial: null,
+            isDirty: false,
         });
     },
 
@@ -723,6 +732,16 @@ export const useAgentStore = create<AgentState>((set, get) => ({
         }
     },
 
+    // P27: Selected material linkage
+    setSelectedMaterial: (item: any | null) => {
+        set({ selectedMaterial: item });
+    },
+
+    // P27: Dirty state
+    setIsDirty: (dirty: boolean) => {
+        set({ isDirty: dirty });
+    },
+
     // P10-1: Set selected title
     setSelectedTitle: (title: string) => {
         set({ selectedTitle: title });
@@ -731,7 +750,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
     // P19: Manual Content Update
     updateContent: (content: string) => {
         // Debounce or manual save handled by UI/Auto-save, but here we just update state
-        set({ content });
+        set({ content, isDirty: true });
     },
 
     // P19 Phase 3: Version History Implementation
@@ -759,7 +778,8 @@ export const useAgentStore = create<AgentState>((set, get) => ({
 
         set({
             draftHistory: [newVersion, ...draftHistory],
-            currentVersionId: newVersion.id
+            currentVersionId: newVersion.id,
+            isDirty: false
         });
 
         toast.success(`已保存版本 v${newVersion.version}`, {
@@ -774,9 +794,41 @@ export const useAgentStore = create<AgentState>((set, get) => ({
         if (targetVersion) {
             set({
                 content: targetVersion.content,
-                currentVersionId: targetVersion.id
+                currentVersionId: targetVersion.id,
+                isDirty: false
             });
             toast.info(`已恢复至版本 v${targetVersion.version}`);
+        }
+    },
+
+    saveToServer: async () => {
+        const { content, status, selectedTitle, lastRequestPayload, materialPrefill, critiqueResult } = get();
+        const isGenerating = status === 'writing' || status === 'thinking';
+        if (!content || isGenerating) return false;
+
+        try {
+            const wordCount = content.replace(/[#\-*>\s]/g, '').length;
+            const resp = await fetch(`${API_BASE_URL}/creations/save`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: selectedTitle || lastRequestPayload?.input?.slice(0, 50) || '无标题',
+                    content,
+                    mode: lastRequestPayload?.config?.mode || lastRequestPayload?.mode || 'unknown',
+                    input_topic: lastRequestPayload?.input || '',
+                    source_material: materialPrefill || undefined,
+                    critic_score: critiqueResult?.score || 0,
+                    critic_verdict: critiqueResult?.verdict || '',
+                    word_count: wordCount,
+                }),
+            });
+            if (!resp.ok) throw new Error('Save failed');
+            const data = await resp.json();
+            set({ isDirty: false });
+            return true;
+        } catch (err) {
+            console.error('Save error:', err);
+            return false;
         }
     }
 }));

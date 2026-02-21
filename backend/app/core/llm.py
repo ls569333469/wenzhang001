@@ -17,7 +17,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # 支持的提供商类型
-ProviderType = Literal["google", "volcengine", "openai", "deepseek"]
+ProviderType = Literal["google", "volcengine", "openai", "deepseek", "grok"]
 
 # 提供商配置
 PROVIDER_CONFIGS = {
@@ -67,9 +67,17 @@ PROVIDER_CONFIGS = {
             "gemini-2.5-flash",
             "gemini-2.5-flash-lite"
         ]
+    },
+    "grok": {
+        "base_url": "https://api.x.ai/v1",
+        "env_key": "GROK_API_KEY",
+        "config_key": "grok",
+        "default_model": "grok-4-latest",
+        "available_models": [
+            "grok-4-latest"
+        ]
     }
 }
-
 
 def get_client(api_key: Optional[str] = None, provider: str = "volcengine"):
     """
@@ -180,7 +188,7 @@ def _generate_text_impl(
         )
         return response.text
     
-    # OpenAI 兼容格式 (volcengine, openai, deepseek)
+    # OpenAI 兼容格式 (volcengine, openai, deepseek, grok)
     messages = []
     if system_prompt:
         messages.append({"role": "system", "content": system_prompt})

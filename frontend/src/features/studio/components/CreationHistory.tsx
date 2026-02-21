@@ -27,7 +27,7 @@ const MODE_LABELS: Record<string, string> = {
     long_article: '长篇',
     hot_take: '锐评',
     tutorial: '教程',
-    rewrite: '改写',
+
     unknown: '未知',
 };
 

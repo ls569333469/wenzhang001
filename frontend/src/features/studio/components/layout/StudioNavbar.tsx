@@ -1,6 +1,6 @@
 'use client';
 
-import { Sparkles, Search, BookOpen, Bot, Home, Newspaper, History } from "lucide-react";
+import { Sparkles, Search, FolderOpen, Home, Newspaper, History } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { UI_TEXT } from "@/config/constants";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import Link from "next/link";
  * 
  * 形态: Pill Shape (胶囊)
  * 位置: Top Center Fixed
+ * P27: [🏠] | [✨创作中心] [📁数据管理] [素材] [历史] [🔍]
  */
 export function StudioNavbar() {
     return (
@@ -27,15 +28,14 @@ export function StudioNavbar() {
 
                 <div className="w-px h-4 bg-zinc-200 mx-1" />
 
-                {/* Logo / Home */}
+                {/* 创作中心 (active) */}
                 <button className="px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-medium flex items-center gap-2 shadow-sm hover:bg-zinc-800 transition-colors">
                     <Sparkles className="w-4 h-4" />
                     <span className="font-serif tracking-wide">{UI_TEXT.nav.studio}</span>
                 </button>
 
-                {/* Nav Links */}
-                <NavPill label={UI_TEXT.nav.knowledge} icon={BookOpen} href="/knowledge" />
-                <NavPill label={UI_TEXT.nav.agents} icon={Bot} href="/agents" />
+                {/* Nav Links — P27: 知识库+清洗 → 数据管理 */}
+                <NavPill label="数据管理" icon={FolderOpen} href="/data" />
                 <NavPill label="素材" icon={Newspaper} href="/studio?view=materials" />
                 <NavPill label="历史" icon={History} href="/studio?view=history" />
 

@@ -22,9 +22,6 @@ export const OUTPUT_FORMATS: Record<string, string> = {
     tutorial: `
 ## 📤 输出
 直接输出完整教程，包含标题。请确保步骤清晰，代码块格式正确。`,
-    rewrite: `
-## 📤 输出
-直接输出改写后的内容。`,
     strategist: `
 ## 📤 Output Format (JSON only)
 \`\`\`json
@@ -38,7 +35,6 @@ export const OUTPUT_FORMATS: Record<string, string> = {
         {
             "title": "[Unique Title 1]",
             "formula_tags": ["Formula Name"],
-            "hook_score": 85,
             "rationale": "[Why it works]"
         }
         // ... exactly 3 titles
@@ -47,7 +43,6 @@ export const OUTPUT_FORMATS: Record<string, string> = {
         {
             "id": "option_1",
             "title": "Strategy Title 1",
-            "hook_angle": "Angle 1",
             "pain_point": "Target Pain Point",
             "target_audience": "Audience",
             "outline": ["Point 1", "Point 2", "Point 3"],

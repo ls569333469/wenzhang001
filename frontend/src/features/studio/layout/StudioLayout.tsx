@@ -1,9 +1,13 @@
 'use client';
 
-import { ReactNode } from "react";
+import { ReactNode, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { StudioNavbar } from "@/features/studio/components/layout/StudioNavbar";
 import { useAgentStore, mapStatusToPhase, StudioPhase } from "@/features/agent/stores/useAgentStore";
 import { cn } from "@/lib/utils";
+import { DataPanel } from "@/features/studio/components/DataPanel";
+import { MODES_WITH_DATA_PANEL } from "@/config/constants";
+import { CreationModeSchema, type CreationMode } from "@/features/studio/schema";
 
 interface StudioLayoutProps {
     children: ReactNode;
@@ -12,81 +16,83 @@ interface StudioLayoutProps {
 }
 
 /**
- * StudioLayout v4 - 响应式 Flexbox + Margin 方案
+ * StudioLayout v5 - P27 DataPanel 分栏
  * 
  * 核心策略:
  * 1. 左右面板使用 fixed 定位，固定在屏幕两侧
- * 2. 中间 main 使用 margin 避让侧边栏
- * 3. 响应式断点自动调整
+ * 2. 中间 main 使用 margin 避让侧边栏 (P27: 动态感知 ConfigIsland 展开/收起)
+ * 3. P27: 根据模式渲染 DataPanel，与 WritingCanvas 左右并排
  */
 export function StudioLayout({ children, leftPanel, rightPanel }: StudioLayoutProps) {
     const { status } = useAgentStore();
     const phase = mapStatusToPhase(status);
-    // P19: 右侧边栏始终显示，以便查看历史记录
     const hasRightPanel = !!rightPanel;
+    const hasLeftPanel = !!leftPanel;
+
+    // P27: 监听 ConfigIsland 展开/收起状态
+    const [configExpanded, setConfigExpanded] = useState(true);
+
+    useEffect(() => {
+        const checkExpanded = () => {
+            const val = document.documentElement.getAttribute('data-config-expanded');
+            setConfigExpanded(val !== 'false');
+        };
+        checkExpanded();
+        const observer = new MutationObserver(checkExpanded);
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-config-expanded'] });
+        return () => observer.disconnect();
+    }, []);
+
+    // P27: 读取当前模式，判断是否需要 DataPanel
+    const searchParams = useSearchParams();
+    const modeParam = searchParams.get('mode') || 'mid_article';
+    const currentMode = CreationModeSchema.safeParse(modeParam).success
+        ? (modeParam as CreationMode)
+        : 'mid_article';
+    const hasDataPanel = hasLeftPanel && MODES_WITH_DATA_PANEL.includes(currentMode);
 
     return (
-        <div className="min-h-screen bg-canvas text-ink-primary font-sans relative selection:bg-zinc-900 selection:text-white">
+        <div className="flex flex-col h-screen overflow-hidden bg-canvas text-ink-primary font-sans relative selection:bg-zinc-900 selection:text-white">
 
             {/* Layer 0: Background Texture */}
-            <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-0"
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none z-0"
                 style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
 
             {/* Layer 1: Navbar */}
-            <StudioNavbar />
-
-            {/* Left Sidebar - Fixed Position */}
-            {leftPanel && (
-                <aside className={cn(
-                    "fixed top-16 left-0 h-[calc(100vh-64px)] z-30",
-                    // 响应式: lg以下隐藏，lg以上显示
-                    "hidden lg:block"
-                )}>
-                    {leftPanel}
-                </aside>
-            )}
-
-            {/* Right Sidebar - Fixed Position (仅活跃状态) */}
-            {hasRightPanel && (
-                <aside className={cn(
-                    "fixed top-16 right-0 h-[calc(100vh-64px)] z-30",
-                    "w-[280px]",
-                    // 响应式: xl以下隐藏
-                    "hidden xl:block"
-                )}>
-                    {rightPanel}
-                </aside>
-            )}
-
-            {/* Main Content - 使用 margin 避让侧边栏 */}
-            <main className={cn(
-                "min-h-screen pt-16",
-                // lg 以下: 全宽
-                "ml-0 mr-0",
-                // lg 以上: 避让左侧栏 (320px)
-                "lg:ml-[320px]",
-                // xl 以上 + 活跃状态: 同时避让右侧栏 (280px)
-                hasRightPanel && "xl:mr-[280px]",
-                // 居中和填充
-                "flex flex-col items-center justify-start",
-                "p-6 pt-24"
-            )}>
-                {/* 内容容器 - 流体宽度 */}
-                <div className={cn(
-                    "w-full px-4",
-                    // 统一放宽容器限制，由子组件 (WritingCanvas) 自行控制最大宽度 (960px)
-                    "max-w-6xl"
-                )}>
-                    {children}
-                </div>
-            </main>
-
-            {/* 移动端菜单按钮 (lg 以下可见) */}
-            <div className="fixed bottom-4 left-4 z-50 lg:hidden">
-                <button className="w-12 h-12 bg-zinc-900 text-white rounded-full shadow-lg flex items-center justify-center">
-                    ⚙️
-                </button>
+            <div className="z-50 flex-shrink-0 relative">
+                <StudioNavbar />
             </div>
+
+            {/* Main Body - Flex Row */}
+            <div className="flex flex-1 overflow-hidden relative z-10">
+
+                {/* Left Sidebar - 360px fixed width */}
+                {leftPanel && (
+                    <aside className="w-[360px] flex-shrink-0 border-r border-zinc-200 bg-white hidden lg:flex flex-col overflow-hidden z-20 shadow-[2px_0_8px_rgba(0,0,0,0.02)]">
+                        {leftPanel}
+                    </aside>
+                )}
+
+                {/* Data Panel - conditionally rendered, 360px fixed width */}
+                {hasDataPanel && (
+                    <div className="w-[360px] flex-shrink-0 border-r border-zinc-200 bg-[#fafafa] hidden xl:flex flex-col overflow-hidden z-10 shadow-[2px_0_8px_rgba(0,0,0,0.02)]">
+                        <DataPanel mode={currentMode} />
+                    </div>
+                )}
+
+                {/* Main Workspace - Flexible central area */}
+                <main className="flex-1 flex flex-col relative bg-[#f4f4f5] overflow-hidden min-w-0 z-0">
+                    {children}
+                </main>
+
+                {/* Right Sidebar - 360px fixed width */}
+                {hasRightPanel && (
+                    <aside className="w-[360px] flex-shrink-0 border-l border-zinc-200 bg-[#fafafa] hidden 2xl:flex flex-col overflow-hidden z-20 shadow-[-2px_0_8px_rgba(0,0,0,0.02)]">
+                        {rightPanel}
+                    </aside>
+                )}
+            </div>
+
         </div>
     );
 }

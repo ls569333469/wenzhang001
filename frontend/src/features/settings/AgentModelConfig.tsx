@@ -9,7 +9,7 @@ import {
     ModeStrategistConfig, ModeCriticConfig, ModePolisherConfig,
     SKIP_MODES, AgentModelSetting
 } from '../studio/schema';
-import { Brain, PenTool, Eye, Sparkles, AlertTriangle, Zap, FileText, BookOpen, GraduationCap, RefreshCcw, Check, ChevronRight, Settings2, MessageSquare, SkipForward } from 'lucide-react';
+import { Brain, PenTool, Eye, Sparkles, AlertTriangle, Zap, FileText, BookOpen, GraduationCap, RefreshCcw, Check, ChevronRight, Settings2, MessageSquare, SkipForward, Heart, Target, Search } from 'lucide-react';
 import { ConfigModal } from '@/components/ui/ConfigModal';
 
 // P14-B: 支持的模型列表
@@ -25,22 +25,23 @@ const PROVIDER_MODELS = {
     ]
 };
 
-// P24-D: 统一 6 模式定义
+// P27: 统一 8 模式定义
 const MODE_DEFINITIONS: { id: string; name: string; icon: React.ReactNode }[] = [
     { id: 'hot_take', name: '锐评', icon: <Zap className="w-4 h-4" /> },
+    { id: 'bullish_take', name: '吹捧', icon: <Heart className="w-4 h-4" /> },
+    { id: 'kaito_yap', name: 'Kaito', icon: <Target className="w-4 h-4" /> },
     { id: 'short_article', name: '短篇', icon: <MessageSquare className="w-4 h-4" /> },
     { id: 'mid_article', name: '中篇', icon: <FileText className="w-4 h-4" /> },
     { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" /> },
-    { id: 'rewrite', name: '改写润色', icon: <RefreshCcw className="w-4 h-4" /> },
+    { id: 'project_research', name: '投研', icon: <Search className="w-4 h-4" /> },
 ];
 
-// P24-D: 统一 agent 角色定义
 const AGENT_ROLES: { id: keyof AgentModels; label: string; icon: React.ReactNode; desc: string; color: string; accentBg: string; accentText: string; accentIcon: React.ReactNode }[] = [
-    { id: 'strategist', label: '策略师', icon: <Brain className="w-5 h-5" />, desc: 'P24-D: 按 6 种模式独立配置', color: 'text-purple-600 bg-purple-50', accentBg: 'bg-purple-50', accentText: 'text-purple-700', accentIcon: <Brain className="w-3.5 h-3.5" /> },
-    { id: 'writer', label: '写手', icon: <PenTool className="w-5 h-5" />, desc: 'P24-D: 按 6 种模式独立配置', color: 'text-orange-600 bg-orange-50', accentBg: 'bg-orange-50', accentText: 'text-orange-700', accentIcon: <PenTool className="w-3.5 h-3.5" /> },
-    { id: 'critic', label: '评论家', icon: <Eye className="w-5 h-5" />, desc: 'P24-D: 按 6 种模式独立配置', color: 'text-blue-600 bg-blue-50', accentBg: 'bg-blue-50', accentText: 'text-blue-700', accentIcon: <Eye className="w-3.5 h-3.5" /> },
-    { id: 'polisher', label: '润色师', icon: <Sparkles className="w-5 h-5" />, desc: 'P24-D: 按 6 种模式独立配置', color: 'text-pink-600 bg-pink-50', accentBg: 'bg-pink-50', accentText: 'text-pink-700', accentIcon: <Sparkles className="w-3.5 h-3.5" /> },
+    { id: 'strategist', label: '策略师', icon: <Brain className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-purple-600 bg-purple-50', accentBg: 'bg-purple-50', accentText: 'text-purple-700', accentIcon: <Brain className="w-3.5 h-3.5" /> },
+    { id: 'writer', label: '写手', icon: <PenTool className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-orange-600 bg-orange-50', accentBg: 'bg-orange-50', accentText: 'text-orange-700', accentIcon: <PenTool className="w-3.5 h-3.5" /> },
+    { id: 'critic', label: '评论家', icon: <Eye className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-blue-600 bg-blue-50', accentBg: 'bg-blue-50', accentText: 'text-blue-700', accentIcon: <Eye className="w-3.5 h-3.5" /> },
+    { id: 'polisher', label: '润色师', icon: <Sparkles className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-pink-600 bg-pink-50', accentBg: 'bg-pink-50', accentText: 'text-pink-700', accentIcon: <Sparkles className="w-3.5 h-3.5" /> },
 ];
 
 const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
@@ -202,7 +203,7 @@ export const AgentModelConfig: React.FC<AgentModelConfigProps> = ({ apiKeys }) =
             <div className="grid gap-4 md:grid-cols-2">
                 {AGENT_ROLES.map(role => {
                     const skipCount = (SKIP_MODES[role.id] || []).length;
-                    const activeCount = 6 - skipCount;
+                    const activeCount = 8 - skipCount;
                     const currentModelName = `按 ${activeCount} 种模式独立配置${skipCount > 0 ? ` (${skipCount} 种跳过)` : ''}`;
 
                     return (

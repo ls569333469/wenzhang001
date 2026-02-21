@@ -14,7 +14,7 @@ import { API_BASE_URL } from '@/config/api';
 
 export function WritingCanvas() {
     const { content, isWaitingForSelection, regenerate, status, updateContent, saveVersion, resetSession,
-        lastRequestPayload, selectedTitle, critiqueResult, materialPrefill } = useAgentStore();
+        lastRequestPayload, selectedTitle, critiqueResult, materialPrefill, saveToServer } = useAgentStore();
     const [copied, setCopied] = useState(false);
     const [showResetConfirm, setShowResetConfirm] = useState(false);
     const [savedToServer, setSavedToServer] = useState(false);
@@ -31,29 +31,12 @@ export function WritingCanvas() {
     // P27: Save to server (local file)
     const handleSaveToServer = async () => {
         if (!content || isGenerating) return;
-        try {
-            const wordCount = content.replace(/[#\-*>\s]/g, '').length;
-            const resp = await fetch(`${API_BASE_URL}/creations/save`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    title: selectedTitle || lastRequestPayload?.input?.slice(0, 50) || '无标题',
-                    content,
-                    mode: lastRequestPayload?.config?.mode || lastRequestPayload?.mode || 'unknown',
-                    input_topic: lastRequestPayload?.input || '',
-                    source_material: materialPrefill || undefined,
-                    critic_score: critiqueResult?.score || 0,
-                    critic_verdict: critiqueResult?.verdict || '',
-                    word_count: wordCount,
-                }),
-            });
-            if (!resp.ok) throw new Error('Save failed');
-            const data = await resp.json();
+        const success = await saveToServer();
+        if (success) {
             setSavedToServer(true);
             lastSavedContent.current = content;
-            toast.success('已保存到本地', { description: `ID: ${data.id}` });
-        } catch (err) {
-            console.error('Save error:', err);
+            toast.success('已保存到本地');
+        } else {
             toast.error('保存失败');
         }
     };
@@ -155,125 +138,134 @@ ${marked.parse(content)}
     };
 
     return (
-        <div className="w-full max-w-[960px] mx-auto space-y-8">
-            {/* Paper Sheet (拟物化容器) */}
-            <div className={cn(
-                "min-h-[800px] rounded-xl shadow-sm transition-all duration-500 relative",
-                // Remove padding and styles when content exists, as RichEditor handles them
-                content ? "bg-transparent" : "bg-transparent border-none p-0"
-            )}>
-                {content ? (
-                    <>
-                        {/* Floating Action Bar - Positioned relative to the container */}
-                        <div className="absolute top-4 right-4 flex items-center gap-2 z-20">
-                            {/* Export Group */}
-                            <div className="flex items-center bg-zinc-50 rounded-lg border border-zinc-200 p-1 mr-2 shadow-sm">
-                                <button
-                                    onClick={handleExportMD}
-                                    disabled={isGenerating}
-                                    className="px-2 py-1 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 rounded transition-colors"
-                                    title="导出 Markdown"
-                                >
-                                    MD
-                                </button>
-                                <div className="w-px h-3 bg-zinc-300 mx-1"></div>
-                                <button
-                                    onClick={handleExportHTML}
-                                    disabled={isGenerating}
-                                    className="px-2 py-1 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 rounded transition-colors"
-                                    title="导出 HTML"
-                                >
-                                    HTML
-                                </button>
-                            </div>
+        <div className="flex flex-col h-full w-full relative">
 
-                            <button
-                                onClick={handleCopy}
-                                disabled={isGenerating}
-                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-ink-muted bg-zinc-50 hover:bg-zinc-100 rounded-lg transition-colors disabled:opacity-50 border border-zinc-200 shadow-sm"
-                            >
-                                {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                                {copied ? '已复制' : UI_TEXT.actions.copyContent}
-                            </button>
-                            <button
-                                onClick={handleSaveToServer}
-                                disabled={isGenerating || savedToServer}
-                                className={cn(
-                                    "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors shadow-sm border",
-                                    savedToServer
-                                        ? "text-emerald-600 bg-emerald-50 border-emerald-200 cursor-default"
-                                        : "text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-200 disabled:opacity-50"
-                                )}
-                                title="保存到本地文件"
-                            >
-                                {savedToServer ? <Check className="w-3 h-3" /> : <Save className="w-3 h-3" />}
-                                {savedToServer ? '已保存' : '保存'}
-                            </button>
-                            <button
-                                onClick={handleRegenerate}
-                                disabled={isGenerating}
-                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg transition-colors disabled:opacity-50 shadow-sm"
-                            >
-                                <RefreshCw className={cn("w-3 h-3", isGenerating && "animate-spin")} />
-                                {UI_TEXT.actions.regenerate}
-                            </button>
-                            <button
-                                onClick={handleNewCreation}
-                                disabled={isGenerating}
-                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors disabled:opacity-50 border border-red-200 shadow-sm"
-                                title="清空当前内容，开始新创作"
-                            >
-                                <FilePlus className="w-3 h-3" />
-                                新建
-                            </button>
-                        </div>
-
-                        {/* P24-C: Reset Confirmation Dialog */}
-                        {showResetConfirm && (
-                            <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center" onClick={() => setShowResetConfirm(false)}>
-                                <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm mx-4 space-y-4" onClick={(e) => e.stopPropagation()}>
-                                    <h3 className="text-lg font-semibold text-zinc-900">确认新建创作？</h3>
-                                    <p className="text-sm text-zinc-600">
-                                        当前内容将被清空，包括草稿历史和评审记录。此操作无法撤销。
-                                    </p>
-                                    <div className="flex gap-3 justify-end">
-                                        <button
-                                            onClick={() => setShowResetConfirm(false)}
-                                            className="px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-lg transition-colors"
-                                        >
-                                            取消
-                                        </button>
-                                        <button
-                                            onClick={confirmNewCreation}
-                                            className="px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
-                                        >
-                                            确认清空
-                                        </button>
+            {/* Fixed Canvas Area */}
+            <div className="flex-1 flex flex-col overflow-hidden px-6 pt-24 pb-12">
+                <div className="w-full h-full mx-auto max-w-4xl flex flex-col space-y-8">
+                    {/* Paper Sheet (拟物化容器) */}
+                    <div className={cn(
+                        "flex-1 w-full flex flex-col rounded-xl transition-all duration-500 relative min-h-0",
+                        content ? "bg-transparent" : "bg-transparent border-none p-0"
+                    )}>
+                        {content ? (
+                            <>
+                                {/* P24-C: Reset Confirmation Dialog */}
+                                {showResetConfirm && (
+                                    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center" onClick={() => setShowResetConfirm(false)}>
+                                        <div className="bg-white rounded-2xl p-6 shadow-xl max-w-sm mx-4 space-y-4" onClick={(e) => e.stopPropagation()}>
+                                            <h3 className="text-lg font-semibold text-zinc-900">确认新建创作？</h3>
+                                            <p className="text-sm text-zinc-600">
+                                                当前内容将被清空，包括草稿历史和评审记录。此操作无法撤销。
+                                            </p>
+                                            <div className="flex gap-3 justify-end">
+                                                <button
+                                                    onClick={() => setShowResetConfirm(false)}
+                                                    className="px-4 py-2 text-sm font-medium text-zinc-600 bg-zinc-100 hover:bg-zinc-200 rounded-lg transition-colors"
+                                                >
+                                                    取消
+                                                </button>
+                                                <button
+                                                    onClick={confirmNewCreation}
+                                                    className="px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
+                                                >
+                                                    确认清空
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
+                                )}
+
+                                <div className="animate-in fade-in duration-500 flex-1 flex flex-col min-h-0 relative h-full">
+                                    <RichEditor
+                                        content={content}
+                                        isStreaming={status === 'writing'}
+                                        onUpdate={updateContent}
+                                        onSave={handleManualSave}
+                                        className="flex-1 min-h-0 h-full"
+                                        toolbarActions={
+                                            <>
+                                                {/* Export Group */}
+                                                <div className="flex items-center bg-zinc-50 rounded-lg border border-zinc-200 p-1 shadow-sm">
+                                                    <button
+                                                        onClick={handleExportMD}
+                                                        disabled={isGenerating}
+                                                        className="px-2 py-1 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 rounded transition-colors"
+                                                        title="导出 Markdown"
+                                                    >
+                                                        MD
+                                                    </button>
+                                                    <div className="w-px h-3 bg-zinc-300 mx-1"></div>
+                                                    <button
+                                                        onClick={handleExportHTML}
+                                                        disabled={isGenerating}
+                                                        className="px-2 py-1 text-xs font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 rounded transition-colors"
+                                                        title="导出 HTML"
+                                                    >
+                                                        HTML
+                                                    </button>
+                                                </div>
+
+                                                <button
+                                                    onClick={handleCopy}
+                                                    disabled={isGenerating}
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium text-ink-muted bg-white hover:bg-zinc-100 rounded-md transition-colors disabled:opacity-50 border border-zinc-200 shadow-sm leading-none"
+                                                >
+                                                    {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                                                    {copied ? '已复制' : UI_TEXT.actions.copyContent}
+                                                </button>
+
+                                                <button
+                                                    onClick={handleSaveToServer}
+                                                    disabled={isGenerating || savedToServer}
+                                                    className={cn(
+                                                        "flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-md transition-colors shadow-sm border leading-none",
+                                                        savedToServer
+                                                            ? "text-emerald-600 bg-emerald-50 border-emerald-200 cursor-default"
+                                                            : "text-blue-600 bg-blue-50 hover:bg-blue-100 border-blue-200 disabled:opacity-50"
+                                                    )}
+                                                    title="保存到本地文件"
+                                                >
+                                                    {savedToServer ? <Check className="w-3 h-3" /> : <Save className="w-3 h-3" />}
+                                                    {savedToServer ? '已保存' : '保存'}
+                                                </button>
+
+                                                <button
+                                                    onClick={handleRegenerate}
+                                                    disabled={isGenerating}
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium text-white bg-zinc-800 hover:bg-zinc-700 rounded-md transition-colors disabled:opacity-50 shadow-sm leading-none"
+                                                >
+                                                    <RefreshCw className={cn("w-3 h-3", isGenerating && "animate-spin")} />
+                                                    {UI_TEXT.actions.regenerate}
+                                                </button>
+
+                                                <button
+                                                    onClick={handleNewCreation}
+                                                    disabled={isGenerating}
+                                                    className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors disabled:opacity-50 border border-red-200 shadow-sm leading-none"
+                                                    title="清空当前内容，开始新创作"
+                                                >
+                                                    <FilePlus className="w-3 h-3" />
+                                                    新建
+                                                </button>
+                                            </>
+                                        }
+                                    />
                                 </div>
+                            </>
+                        ) : isWaitingForSelection ? (
+                            <div className="flex flex-col items-center justify-center min-h-[60vh] bg-white border border-zinc-100 p-16 rounded-xl shadow-island">
+                                <StrategySelector />
+                            </div>
+                        ) : (
+                            <div className="flex flex-col items-center justify-center flex-1 w-full max-w-[820px] mx-auto pt-20 pb-32">
+                                <HeroInput />
                             </div>
                         )}
-
-                        <div className="animate-in fade-in duration-500">
-                            <RichEditor
-                                content={content}
-                                isStreaming={status === 'writing'}
-                                onUpdate={updateContent}
-                                onSave={handleManualSave}
-                                className="min-h-[800px]"
-                            />
-                        </div>
-                    </>
-                ) : isWaitingForSelection ? (
-                    <div className="flex flex-col items-center justify-center min-h-[60vh] bg-white border border-zinc-100 p-16 rounded-xl shadow-island">
-                        <StrategySelector />
                     </div>
-                ) : (
-                    <div className="flex flex-col items-center justify-center min-h-[60vh] bg-white border border-zinc-200 p-16 rounded-xl shadow-island">
-                        <HeroInput variant="canvas" />
-                    </div>
-                )}
+                </div>
             </div>
+
         </div >
     );
 }

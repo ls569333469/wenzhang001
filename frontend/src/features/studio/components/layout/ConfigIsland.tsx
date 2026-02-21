@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IslandContainer } from "./IslandContainer";
 import { ConfigPanel } from "../ConfigPanel";
 import { useDetailPanel } from "../DetailPanel";
@@ -22,6 +22,12 @@ const BOTTOM_ICONS = [
 
 export function ConfigIsland() {
     const [isExpanded, setIsExpanded] = useState(true); // 默认展开配置
+
+    // P27: 通知 StudioLayout 配置面板的展开/收起状态
+    useEffect(() => {
+        document.documentElement.setAttribute('data-config-expanded', String(isExpanded));
+        return () => document.documentElement.removeAttribute('data-config-expanded');
+    }, [isExpanded]);
 
     // Connect to DetailPanel
     let detailPanel: ReturnType<typeof useDetailPanel> | null = null;

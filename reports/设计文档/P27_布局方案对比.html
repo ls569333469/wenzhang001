@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>P27 布局方案对比 — 3 选 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, 'SF Pro', 'Inter', system-ui, sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* Tab switcher */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #0f0f0f;
+        }
+
+        .tab {
+            padding: 10px 24px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            color: #aaa;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .tab:hover {
+            border-color: #555;
+            color: #fff;
+        }
+
+        .tab.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        /* Mockup container */
+        .mockup-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .mockup-section {
+            display: none;
+        }
+
+        .mockup-section.active {
+            display: block;
+        }
+
+        /* Info card */
+        .info-card {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .info-card h2 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .info-card .subtitle {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .info-card .specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .spec-item {
+            background: #222;
+            border-radius: 10px;
+            padding: 12px 16px;
+        }
+
+        .spec-item .label {
+            font-size: 11px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-item .value {
+            font-size: 15px;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .spec-item .note {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+        }
+
+        /* Pros/Cons */
+        .pros-cons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .pros,
+        .cons {
+            flex: 1;
+            background: #222;
+            border-radius: 10px;
+            padding: 12px 16px;
+        }
+
+        .pros h4 {
+            color: #4ade80;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .cons h4 {
+            color: #f87171;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .pros li,
+        .cons li {
+            font-size: 12px;
+            color: #bbb;
+            margin-left: 16px;
+            margin-bottom: 3px;
+        }
+
+        /* ========== VIEWPORT MOCKUP ========== */
+        .viewport {
+            background: #fafaf8;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #333;
+            position: relative;
+            height: 560px;
+        }
+
+        /* Top navbar */
+        .mock-nav {
+            height: 48px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .mock-nav .active-tab {
+            background: #111;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* Left sidebar */
+        .mock-left {
+            position: absolute;
+            left: 0;
+            top: 48px;
+            bottom: 0;
+            width: 200px;
+            background: #fff;
+            border-right: 1px solid #eee;
+            padding: 16px 12px;
+            font-size: 12px;
+        }
+
+        .mock-left .section-title {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .mock-mode {
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            color: #555;
+            cursor: default;
+            border: 1px solid transparent;
+        }
+
+        .mock-mode.selected {
+            background: #111;
+            color: #fff;
+        }
+
+        .mock-mode.compact {
+            display: inline-block;
+            width: 48%;
+            font-size: 11px;
+        }
+
+        /* Right sidebar */
+        .mock-right {
+            position: absolute;
+            right: 0;
+            top: 48px;
+            bottom: 0;
+            width: 200px;
+            background: #fff;
+            border-left: 1px solid #eee;
+            padding: 16px 12px;
+            font-size: 11px;
+            color: #999;
+        }
+
+        .mock-right .step {
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .mock-right .step-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .mock-right .step-status {
+            color: #ccc;
+            font-size: 10px;
+        }
+
+        /* Center content area */
+        .mock-center {
+            position: absolute;
+            top: 48px;
+            bottom: 0;
+            left: 200px;
+            right: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 40px;
+            overflow: hidden;
+        }
+
+        /* Content wrapper — THIS IS WHAT CHANGES PER OPTION */
+        .content-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        /* DataPanel mock */
+        .mock-data-panel {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .mock-data-panel .dp-header {
+            padding: 12px 14px 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mock-data-panel .dp-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 8px 14px;
+            font-size: 11px;
+        }
+
+        .mock-data-panel .dp-tab {
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: #f5f5f5;
+            color: #888;
+        }
+
+        .mock-data-panel .dp-tab.active {
+            background: #fce7e7;
+            color: #d33;
+        }
+
+        .mock-data-panel .dp-item {
+            padding: 10px 14px;
+            border-bottom: 1px solid #f8f8f8;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .mock-data-panel .dp-item .author {
+            font-weight: 600;
+            color: #333;
+            font-size: 12px;
+        }
+
+        /* Input card mock */
+        .mock-input-card {
+            background: #fff;
+            border-radius: 16px;
+            border: 1px solid #e8e8e8;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        .mock-textarea {
+            padding: 16px 18px;
+            font-size: 14px;
+            color: #ccc;
+            min-height: 50px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .mock-shortcuts {
+            display: flex;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 11px;
+        }
+
+        .mock-shortcut {
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            color: #888;
+        }
+
+        .mock-action-bar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 6px 16px 12px;
+        }
+
+        .mock-btn {
+            padding: 6px 16px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        /* Hint text */
+        .mock-hint {
+            text-align: center;
+            font-size: 11px;
+            color: #ccc;
+            margin-top: 12px;
+            max-width: 400px;
+        }
+
+        /* Dimension annotations */
+        .dim-label {
+            position: absolute;
+            font-size: 10px;
+            color: #f97316;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            background: rgba(249, 115, 22, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Whitespace overlay */
+        .ws-overlay {
+            position: absolute;
+            top: 48px;
+            bottom: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(249, 115, 22, 0.03) 10px, rgba(249, 115, 22, 0.03) 11px);
+            pointer-events: none;
+        }
+
+        /* Recommendation tag */
+        .recommend-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .recommend-tag.best {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .recommend-tag.good {
+            background: #fef3c7;
+            color: #d97706;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>P27 布局方案对比</h1>
+        <p>基于 2560×1305 视窗 · 左栏 200px · 右栏 200px · 可用中心 ≈ 1920px</p>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active" onclick="showOption('a')">方案 A · 聚焦写作</div>
+        <div class="tab" onclick="showOption('b')">方案 B · 均衡布局 ⭐</div>
+        <div class="tab" onclick="showOption('c')">方案 C · 宽敞工作台</div>
+    </div>
+
+    <div class="mockup-container">
+
+        <!-- ==================== OPTION A ==================== -->
+        <div class="mockup-section active" id="option-a">
+            <div class="info-card">
+                <h2>方案 A · 聚焦写作 <span class="recommend-tag good">简洁</span></h2>
+                <div class="subtitle">参考：Notion、Craft、iA Writer — 写作优先，极简留白</div>
+                <div class="specs">
+                    <div class="spec-item">
+                        <div class="label">内容区最大宽度</div>
+                        <div class="value">max-w-[800px]</div>
+                        <div class="note">标准模式居中</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">输入框宽度</div>
+                        <div class="value">max-w-[640px]</div>
+                        <div class="note">紧凑聚焦</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">DataPanel 宽度</div>
+                        <div class="value">280px</div>
+                        <div class="note">窄侧栏风格</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">有 DataPanel 时</div>
+                        <div class="value">max-w-[960px]</div>
+                        <div class="note">280 + 680</div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ 优点</h4>
+                        <ul>
+                            <li>视线集中，阅读体验最佳</li>
+                            <li>适合深度写作和长文编辑</li>
+                            <li>留白优雅，类 Notion 风格</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>❌ 缺点</h4>
+                        <ul>
+                            <li>2560 屏 60%+ 空间浪费</li>
+                            <li>DataPanel 太窄信息量不足</li>
+                            <li>切换到 DataPanel 模式时跳变明显</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Viewport Mockup A: Standard -->
+            <div style="margin-bottom: 12px; font-size: 12px; color: #666;">▼ 标准模式（中篇）</div>
+            <div class="viewport" style="margin-bottom: 24px;">
+                <div class="mock-nav">
+                    <span>🏠</span>
+                    <span class="active-tab">✨ 创作中心</span>
+                    <span>数据管理</span>
+                    <span>素材</span>
+                    <span>历史</span>
+                </div>
+                <div class="mock-left">
+                    <div class="section-title">✨ 核心配置</div>
+                    <div class="mock-mode">🔥 锐评</div>
+                    <div class="mock-mode">🌸 吹捧</div>
+                    <div class="mock-mode">💬 短篇</div>
+                    <div class="mock-mode selected">📝 中篇</div>
+                    <div class="mock-mode">📖 长篇</div>
+                    <div class="mock-mode">🎯 嘴撸</div>
+                    <div class="mock-mode compact">📚 教程</div>
+                    <div class="mock-mode compact">🔬 投研</div>
+                </div>
+                <div class="mock-right">
+                    <div style="font-weight:600;color:#333;margin-bottom:12px;">智能体执行进度</div>
+                    <div class="step"><span class="step-name">策略分析</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">初稿撰写</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">质量审核</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">润色打磨</span><br><span class="step-status">等待开始</span></div>
+                </div>
+                <div class="mock-center">
+                    <!-- A: 800px content -->
+                    <div>
+                        <div class="mock-input-card" style="width: 640px;">
+                            <div class="mock-textarea">请输入您的研究主题或指令…</div>
+                            <div class="mock-shortcuts">
+                                <span class="mock-shortcut">📄 🌸 中篇</span>
+                                <span class="mock-shortcut">🎨 咪蒙体</span>
+                                <span class="mock-shortcut">🗓 近几天</span>
+                            </div>
+                            <div class="mock-action-bar"><span class="mock-btn">开始深度创作 ▶</span></div>
+                        </div>
+                        <div class="mock-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局"</div>
+                    </div>
+                    <div class="dim-label" style="bottom: 20px; left: 50%; transform: translateX(-50%);">↔ 640px 输入框
+                    </div>
+                </div>
+                <!-- Whitespace indicators -->
+                <div class="ws-overlay" style="left:200px; width: calc((100% - 400px - 640px) / 2);"></div>
+                <div class="ws-overlay" style="right:200px; width: calc((100% - 400px - 640px) / 2);"></div>
+            </div>
+
+            <!-- Viewport Mockup A: DataPanel -->
+            <div style="margin-bottom: 12px; font-size: 12px; color: #666;">▼ DataPanel 模式（吹捧）</div>
+            <div class="viewport">
+                <div class="mock-nav">
+                    <span>🏠</span>
+                    <span class="active-tab">✨ 创作中心</span>
+                    <span>数据管理</span>
+                    <span>素材</span>
+                    <span>历史</span>
+                </div>
+                <div class="mock-left">
+                    <div class="section-title">✨ 核心配置</div>
+                    <div class="mock-mode">🔥 锐评</div>
+                    <div class="mock-mode selected">🌸 吹捧</div>
+                    <div class="mock-mode">💬 短篇</div>
+                    <div class="mock-mode">📝 中篇</div>
+                    <div class="mock-mode">📖 长篇</div>
+                    <div class="mock-mode">🎯 嘴撸</div>
+                    <div class="mock-mode compact">📚 教程</div>
+                    <div class="mock-mode compact">🔬 投研</div>
+                </div>
+                <div class="mock-right">
+                    <div style="font-weight:600;color:#333;margin-bottom:12px;">智能体执行进度</div>
+                    <div class="step"><span class="step-name">策略分析</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">初稿撰写</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">质量审核</span><br><span class="step-status">等待开始</span></div>
+                </div>
+                <div class="mock-center">
+                    <div class="content-wrapper" style="max-width: 960px;">
+                        <div class="mock-data-panel" style="width: 280px;">
+                            <div class="dp-header">🌸 币安动态</div>
+                            <div class="dp-tabs">
+                                <span class="dp-tab active">全部</span><span class="dp-tab">CZ</span><span
+                                    class="dp-tab">何一</span>
+                            </div>
+                            <div class="dp-item"><span class="author">@cz_binance</span><br>Binance has processed over
+                                $100B...</div>
+                            <div class="dp-item"><span class="author">@haborofficial</span><br>Web3 education is the
+                                key...</div>
+                            <div class="dp-item"><span class="author">@binance</span><br>New listing announcement...
+                            </div>
+                            <div class="dp-item"><span class="author">@cz_binance</span><br>Building in bear market...
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mock-input-card" style="width: 560px;">
+                                <div class="mock-textarea">请输入您的研究主题或指令…</div>
+                                <div class="mock-shortcuts">
+                                    <span class="mock-shortcut">📄 吹捧</span>
+                                    <span class="mock-shortcut">🎨 咪蒙体</span>
+                                </div>
+                                <div class="mock-action-bar"><span class="mock-btn">开始深度创作 ▶</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dim-label" style="bottom: 20px; left: 50%; transform: translateX(-50%);">↔ 280 + 560 =
+                        840px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== OPTION B ==================== -->
+        <div class="mockup-section" id="option-b">
+            <div class="info-card">
+                <h2>方案 B · 均衡布局 <span class="recommend-tag best">推荐 ⭐</span></h2>
+                <div class="subtitle">参考：Linear、Vercel Dashboard — 信息密度 + 呼吸感平衡</div>
+                <div class="specs">
+                    <div class="spec-item">
+                        <div class="label">内容区最大宽度</div>
+                        <div class="value">max-w-[1080px]</div>
+                        <div class="note">标准模式居中</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">输入框宽度</div>
+                        <div class="value">max-w-[720px]</div>
+                        <div class="note">舒适阅读宽度</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">DataPanel 宽度</div>
+                        <div class="value">320px</div>
+                        <div class="note">卡片式独立滚动</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">有 DataPanel 时</div>
+                        <div class="value">max-w-[1080px]</div>
+                        <div class="note">320 + 720 (同宽度)</div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ 优点</h4>
+                        <ul>
+                            <li>标准/DataPanel 模式切换<strong>不跳变</strong></li>
+                            <li>输入框 720px ≈ 最佳可读行宽</li>
+                            <li>DataPanel 信息量充足</li>
+                            <li>两侧留白均匀，视觉稳定</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>❌ 缺点</h4>
+                        <ul>
+                            <li>超宽屏仍有留白（但可接受）</li>
+                            <li>比方案 C 信息密度略低</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px; font-size: 12px; color: #666;">▼ 标准模式（中篇）</div>
+            <div class="viewport" style="margin-bottom: 24px;">
+                <div class="mock-nav">
+                    <span>🏠</span>
+                    <span class="active-tab">✨ 创作中心</span>
+                    <span>数据管理</span>
+                    <span>素材</span>
+                    <span>历史</span>
+                </div>
+                <div class="mock-left">
+                    <div class="section-title">✨ 核心配置</div>
+                    <div class="mock-mode">🔥 锐评</div>
+                    <div class="mock-mode">🌸 吹捧</div>
+                    <div class="mock-mode">💬 短篇</div>
+                    <div class="mock-mode selected">📝 中篇</div>
+                    <div class="mock-mode">📖 长篇</div>
+                    <div class="mock-mode">🎯 嘴撸</div>
+                    <div class="mock-mode compact">📚 教程</div>
+                    <div class="mock-mode compact">🔬 投研</div>
+                </div>
+                <div class="mock-right">
+                    <div style="font-weight:600;color:#333;margin-bottom:12px;">智能体执行进度</div>
+                    <div class="step"><span class="step-name">策略分析</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">初稿撰写</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">质量审核</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">润色打磨</span><br><span class="step-status">等待开始</span></div>
+                </div>
+                <div class="mock-center">
+                    <div>
+                        <div class="mock-input-card" style="width: 720px;">
+                            <div class="mock-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                            <div class="mock-shortcuts">
+                                <span class="mock-shortcut">📄 🌸 中篇</span>
+                                <span class="mock-shortcut">🎨 咪蒙体</span>
+                                <span class="mock-shortcut">🗓 近几天</span>
+                            </div>
+                            <div class="mock-action-bar"><span class="mock-btn">开始深度创作 ▶</span></div>
+                        </div>
+                        <div class="mock-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"</div>
+                    </div>
+                    <div class="dim-label" style="bottom: 20px; left: 50%; transform: translateX(-50%);">↔ 720px 输入框 ·
+                        两侧留白 ≈ 600px</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px; font-size: 12px; color: #666;">▼ DataPanel 模式（吹捧）</div>
+            <div class="viewport">
+                <div class="mock-nav">
+                    <span>🏠</span>
+                    <span class="active-tab">✨ 创作中心</span>
+                    <span>数据管理</span>
+                    <span>素材</span>
+                    <span>历史</span>
+                </div>
+                <div class="mock-left">
+                    <div class="section-title">✨ 核心配置</div>
+                    <div class="mock-mode">🔥 锐评</div>
+                    <div class="mock-mode selected">🌸 吹捧</div>
+                    <div class="mock-mode">💬 短篇</div>
+                    <div class="mock-mode">📝 中篇</div>
+                    <div class="mock-mode">📖 长篇</div>
+                    <div class="mock-mode">🎯 嘴撸</div>
+                    <div class="mock-mode compact">📚 教程</div>
+                    <div class="mock-mode compact">🔬 投研</div>
+                </div>
+                <div class="mock-right">
+                    <div style="font-weight:600;color:#333;margin-bottom:12px;">智能体执行进度</div>
+                    <div class="step"><span class="step-name">策略分析</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">初稿撰写</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">质量审核</span><br><span class="step-status">等待开始</span></div>
+                </div>
+                <div class="mock-center">
+                    <div class="content-wrapper" style="max-width: 1080px; width: 100%;">
+                        <div class="mock-data-panel" style="width: 320px;">
+                            <div class="dp-header">🌸 币安动态</div>
+                            <div class="dp-tabs">
+                                <span class="dp-tab active">全部</span><span class="dp-tab">CZ</span><span
+                                    class="dp-tab">何一</span><span class="dp-tab">官方</span>
+                            </div>
+                            <div class="dp-item"><span class="author">@cz_binance · 2h</span><br>Binance has processed
+                                over $100B in trading volume this month.</div>
+                            <div class="dp-item"><span class="author">@haborofficial · 5h</span><br>Web3 education is
+                                the key to mass adoption. Building bridges.</div>
+                            <div class="dp-item"><span class="author">@binance · 8h</span><br>New listing announcement:
+                                $KAITO Token available on Spot.</div>
+                            <div class="dp-item"><span class="author">@cz_binance · 12h</span><br>Building in bear
+                                market, shipping in bull. Stay focused.</div>
+                            <div class="dp-item" style="font-size: 10px; color: #bbb; text-align: center;">⚡ 数据来源: Grok
+                                → binance_daily</div>
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div class="mock-input-card">
+                                <div class="mock-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                                <div class="mock-shortcuts">
+                                    <span class="mock-shortcut">📄 🌸 吹捧</span>
+                                    <span class="mock-shortcut">🎨 咪蒙体</span>
+                                    <span class="mock-shortcut">🗓 近几天</span>
+                                </div>
+                                <div class="mock-action-bar"><span class="mock-btn">开始深度创作 ▶</span></div>
+                            </div>
+                            <div class="mock-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局"</div>
+                        </div>
+                    </div>
+                    <div class="dim-label" style="bottom: 20px; left: 50%; transform: translateX(-50%);">↔ 320 + 720 =
+                        1040px · 两侧留白 ≈ 440px</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== OPTION C ==================== -->
+        <div class="mockup-section" id="option-c">
+            <div class="info-card">
+                <h2>方案 C · 宽敞工作台 <span class="recommend-tag good">高效</span></h2>
+                <div class="subtitle">参考：Figma、VS Code、Arc — 最大化信息利用率</div>
+                <div class="specs">
+                    <div class="spec-item">
+                        <div class="label">内容区最大宽度</div>
+                        <div class="value">max-w-[1320px]</div>
+                        <div class="note">标准模式居中</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">输入框宽度</div>
+                        <div class="value">max-w-[800px]</div>
+                        <div class="note">宽敞输入</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">DataPanel 宽度</div>
+                        <div class="value">380px</div>
+                        <div class="note">宽面板高密度</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="label">有 DataPanel 时</div>
+                        <div class="value">max-w-[1320px]</div>
+                        <div class="note">380 + 900</div>
+                    </div>
+                </div>
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✅ 优点</h4>
+                        <ul>
+                            <li>充分利用超宽屏空间</li>
+                            <li>DataPanel 信息密度最高</li>
+                            <li>适合多任务/重度用户</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>❌ 缺点</h4>
+                        <ul>
+                            <li>视线需要大幅移动</li>
+                            <li>1080p 屏幕会显得拥挤</li>
+                            <li>留白少，缺乏高级感</li>
+                            <li>标准模式输入框太宽</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px; font-size: 12px; color: #666;">▼ 标准模式（中篇）</div>
+            <div class="viewport" style="margin-bottom: 24px;">
+                <div class="mock-nav">
+                    <span>🏠</span>
+                    <span class="active-tab">✨ 创作中心</span>
+                    <span>数据管理</span>
+                    <span>素材</span>
+                    <span>历史</span>
+                </div>
+                <div class="mock-left">
+                    <div class="section-title">✨ 核心配置</div>
+                    <div class="mock-mode">🔥 锐评</div>
+                    <div class="mock-mode">🌸 吹捧</div>
+                    <div class="mock-mode">💬 短篇</div>
+                    <div class="mock-mode selected">📝 中篇</div>
+                    <div class="mock-mode">📖 长篇</div>
+                    <div class="mock-mode">🎯 嘴撸</div>
+                    <div class="mock-mode compact">📚 教程</div>
+                    <div class="mock-mode compact">🔬 投研</div>
+                </div>
+                <div class="mock-right">
+                    <div style="font-weight:600;color:#333;margin-bottom:12px;">智能体执行进度</div>
+                    <div class="step"><span class="step-name">策略分析</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">初稿撰写</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">质量审核</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">润色打磨</span><br><span class="step-status">等待开始</span></div>
+                </div>
+                <div class="mock-center">
+                    <div>
+                        <div class="mock-input-card" style="width: 800px;">
+                            <div class="mock-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                            <div class="mock-shortcuts">
+                                <span class="mock-shortcut">📄 🌸 中篇</span>
+                                <span class="mock-shortcut">🎨 咪蒙体</span>
+                                <span class="mock-shortcut">🗓 近几天</span>
+                            </div>
+                            <div class="mock-action-bar"><span class="mock-btn">开始深度创作 ▶</span></div>
+                        </div>
+                        <div class="mock-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局" 或 "写一篇关于 DAO 治理的深度观察"</div>
+                    </div>
+                    <div class="dim-label" style="bottom: 20px; left: 50%; transform: translateX(-50%);">↔ 800px 输入框 ·
+                        两侧留白 ≈ 560px</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px; font-size: 12px; color: #666;">▼ DataPanel 模式（吹捧）</div>
+            <div class="viewport">
+                <div class="mock-nav">
+                    <span>🏠</span>
+                    <span class="active-tab">✨ 创作中心</span>
+                    <span>数据管理</span>
+                    <span>素材</span>
+                    <span>历史</span>
+                </div>
+                <div class="mock-left">
+                    <div class="section-title">✨ 核心配置</div>
+                    <div class="mock-mode">🔥 锐评</div>
+                    <div class="mock-mode selected">🌸 吹捧</div>
+                    <div class="mock-mode">💬 短篇</div>
+                    <div class="mock-mode">📝 中篇</div>
+                    <div class="mock-mode">📖 长篇</div>
+                    <div class="mock-mode">🎯 嘴撸</div>
+                    <div class="mock-mode compact">📚 教程</div>
+                    <div class="mock-mode compact">🔬 投研</div>
+                </div>
+                <div class="mock-right">
+                    <div style="font-weight:600;color:#333;margin-bottom:12px;">智能体执行进度</div>
+                    <div class="step"><span class="step-name">策略分析</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">初稿撰写</span><br><span class="step-status">等待开始</span></div>
+                    <div class="step"><span class="step-name">质量审核</span><br><span class="step-status">等待开始</span></div>
+                </div>
+                <div class="mock-center">
+                    <div class="content-wrapper" style="max-width: 1320px; width: 100%;">
+                        <div class="mock-data-panel" style="width: 380px;">
+                            <div class="dp-header">🌸 币安动态</div>
+                            <div class="dp-tabs">
+                                <span class="dp-tab active">全部</span><span class="dp-tab">CZ</span><span
+                                    class="dp-tab">何一</span><span class="dp-tab">官方</span>
+                            </div>
+                            <div class="dp-item"><span class="author">@cz_binance · 2h</span><br>Binance has processed
+                                over $100B in trading volume this month. Thank you for your support!</div>
+                            <div class="dp-item"><span class="author">@haborofficial · 5h</span><br>Web3 education is
+                                the key to mass adoption. We are building bridges, not walls.</div>
+                            <div class="dp-item"><span class="author">@binance · 8h</span><br>New listing announcement:
+                                $KAITO Token is now available on Binance Spot. Trade now!</div>
+                            <div class="dp-item"><span class="author">@cz_binance · 12h</span><br>Building in bear
+                                market, shipping in bull market. The cycle continues. Stay focused.</div>
+                            <div class="dp-item" style="font-size: 10px; color: #bbb; text-align: center;">⚡ 数据来源: Grok
+                                → binance_daily</div>
+                        </div>
+                        <div style="flex: 1; min-width: 0;">
+                            <div class="mock-input-card">
+                                <div class="mock-textarea">请输入您的研究主题或指令…（例如：分析 EIP-4844 对 Layer2 经济模型的影响）</div>
+                                <div class="mock-shortcuts">
+                                    <span class="mock-shortcut">📄 🌸 吹捧</span>
+                                    <span class="mock-shortcut">🎨 咪蒙体</span>
+                                    <span class="mock-shortcut">🗓 近几天</span>
+                                </div>
+                                <div class="mock-action-bar"><span class="mock-btn">开始深度创作 ▶</span></div>
+                            </div>
+                            <div class="mock-hint">尝试输入: "分析以太坊 Layer 2 的竞争格局"</div>
+                        </div>
+                    </div>
+                    <div class="dim-label" style="bottom: 20px; left: 50%; transform: translateX(-50%);">↔ 380 + 900 =
+                        1280px · 两侧留白 ≈ 200px</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showOption(id) {
+            document.querySelectorAll('.mockup-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('option-' + id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+
+</body>
+
+</html>

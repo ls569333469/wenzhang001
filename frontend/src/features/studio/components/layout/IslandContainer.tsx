@@ -18,7 +18,7 @@ export function IslandContainer({ children, position, className }: IslandContain
         <aside className={cn(
             "flex flex-col overflow-hidden transition-all duration-300",
             // 共用样式根据 position 不同
-            position === 'left' && "fixed left-6 top-24 bottom-6 w-80 z-40 bg-white rounded-2xl shadow-island border border-zinc-100",
+            position === 'left' && "fixed left-6 top-24 bottom-6 z-40 bg-white rounded-2xl shadow-island border border-zinc-100",
             position === 'right' && "h-full w-full bg-white border-l border-zinc-200", // 简洁边框
             position === 'center' && "fixed left-1/2 -translate-x-1/2 top-24 bottom-6 max-w-4xl w-full z-40 bg-white rounded-2xl shadow-island border border-zinc-100",
             className

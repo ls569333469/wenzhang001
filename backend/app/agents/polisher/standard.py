@@ -1,6 +1,6 @@
 """
 标准 Polisher - P24 全模式独立管线
-适用于: mid_article, long_article, tutorial, rewrite
+适用于: mid_article, long_article, tutorial
 每个模式使用独立 jinja2 模板（polisher/{mode}.jinja2）
 """
 from datetime import datetime

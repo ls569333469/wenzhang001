@@ -7,7 +7,6 @@ import { Check, Edit2, Sparkles } from 'lucide-react';
 export interface TitleCandidate {
     title: string;
     formula_tags: string[];
-    hook_score: number;
     rationale?: string;
 }
 
@@ -135,27 +134,6 @@ export function TitleSelector({
                                         {tag}
                                     </span>
                                 ))}
-
-                                {/* Hook 评分 */}
-                                <div className="flex items-center gap-1 ml-auto">
-                                    <span className="text-xs text-zinc-400">Hook强度</span>
-                                    <div className="w-16 h-1.5 bg-zinc-200 rounded-full overflow-hidden">
-                                        <div
-                                            className={cn(
-                                                "h-full rounded-full transition-all",
-                                                candidate.hook_score >= 80
-                                                    ? "bg-green-500"
-                                                    : candidate.hook_score >= 60
-                                                        ? "bg-amber-500"
-                                                        : "bg-red-500"
-                                            )}
-                                            style={{ width: `${candidate.hook_score}%` }}
-                                        />
-                                    </div>
-                                    <span className="text-xs font-medium text-zinc-600">
-                                        {candidate.hook_score}
-                                    </span>
-                                </div>
                             </div>
 
                             {/* 分析理由 */}

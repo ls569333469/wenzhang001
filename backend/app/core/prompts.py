@@ -74,10 +74,13 @@ def get_writer_template_path(mode: str) -> str:
     mode_template_map = {
         # P18: 标准模式 (指向 Phase 1 新建的专用模板)
         "hot_take": "writer/hot_take.jinja2",
-        "mid_article": "writer/mid_article.jinja2",    # [FIXED] 指向新模板
-        "long_article": "writer/long_article.jinja2",  # [FIXED] 指向新模板
+        "short_article": "writer/short_article.jinja2",
+        "mid_article": "writer/mid_article.jinja2",
+        "long_article": "writer/long_article.jinja2",
         "tutorial": "writer/tutorial.jinja2",
-        "rewrite": "writer/rewrite.jinja2",
+        "bullish_take": "writer/bullish_take.jinja2",
+        "kaito_yap": "writer/kaito_yap.jinja2",
+        "project_research": "writer/project_research.jinja2",
     }
     return mode_template_map.get(mode, "writer.jinja2")  # fallback
 

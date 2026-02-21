@@ -15,7 +15,6 @@ describe('Studio Schema', () => {
             expect(result.mode).toBe('mid_article');  // P16: 默认中篇
             expect(result.style).toBe('professional');
             expect(result.length).toBe('thread');  // P11: 默认 thread
-            expect(result.temperature).toBe(0.7);
             expect(result.topP).toBe(0.9);
             expect(result.maxTokens).toBe(4096);
         });

@@ -56,7 +56,7 @@ export default function RootLayout({
         <NuqsAdapter>
           {children}
         </NuqsAdapter>
-        <Toaster position="top-center" richColors />
+        <Toaster position="bottom-right" richColors />
       </body>
     </html>
   );
