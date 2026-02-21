@@ -15,7 +15,6 @@ class AgentState(TypedDict):
     raw_input: str
     mode: str  # "hot_take", "mid_article", "long_article", "tutorial"  # P16: 模式改名
     style: str  # P10: "auto", "mimeng", "banfo", "xinshixiang", "insider"
-    length: Union[str, None]  # @deprecated P11: "tweet", "thread", "post"
     custom_length: int  # P16: 自定义字数 (0=使用模式默认)
     retention_level: int  # P10: 保留度等级 1-5
     narrative_type: str  # 新增：叙事类型

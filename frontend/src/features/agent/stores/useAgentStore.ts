@@ -43,16 +43,7 @@ export function mapStatusToPhase(status: SessionStatus): StudioPhase {
     }
 }
 
-// P13: 获取 API 配置 (从 localStorage)
-function getAPIConfig() {
-    if (typeof window === 'undefined') return undefined;
-    try {
-        const stored = localStorage.getItem('qs_api_config');
-        return stored ? JSON.parse(stored) : undefined;
-    } catch {
-        return undefined;
-    }
-}
+
 
 // P13: 获取 Agent 配置 (从 localStorage)
 function getAgentConfig() {
@@ -63,12 +54,6 @@ function getAgentConfig() {
 
         const config = JSON.parse(stored);
 
-        // P18: Frontend Migration Logic (Clean Break)
-        // 自动迁移旧模式名，防止 UI 崩溃
-        if (config.mode === 'quick_summary') config.mode = 'mid_article';     // 快讯 -> 中篇
-        if (config.mode === 'deep_analysis') config.mode = 'long_article';    // 深度 -> 长篇
-        if (config.mode === 'mid_take') config.mode = 'mid_article';          // 别名 -> 中篇
-        if (config.mode === 'quick_take') config.mode = 'mid_article';        // 别名 -> 中篇
 
         return config;
     } catch {
@@ -241,7 +226,6 @@ export const useAgentStore = create<AgentState>((set, get) => ({
             console.error("Failed to load provider keys", e);
         }
 
-        const apiConfig = getAPIConfig(); // Legacy global
 
         // Construct Agent Config Payload
         const agentConfigPayload: Record<string, any> = {};
@@ -250,14 +234,11 @@ export const useAgentStore = create<AgentState>((set, get) => ({
         roles.forEach(role => {
             const modelConfig = agentModels[role];
             if (modelConfig) {
-                let apiKey = providerKeys[modelConfig.provider];
-                if (!apiKey && apiConfig?.provider === modelConfig.provider) {
-                    apiKey = apiConfig.api_key;
-                }
+                const apiKey = providerKeys[modelConfig.provider] || '';
                 agentConfigPayload[role] = {
                     provider: modelConfig.provider,
                     model_id: modelConfig.model,
-                    api_key: apiKey || ''
+                    api_key: apiKey
                 };
             }
         });
@@ -400,8 +381,7 @@ export const useAgentStore = create<AgentState>((set, get) => ({
 
                 narrative_type: 'project_review',
                 references: [],
-                // P13: 添加 API 配置
-                api_config: getAPIConfig(),
+                // P14-C: Include Mode Writer override
                 agent_config: finalAgentConfig, // P14-C: 使用覆盖后的配置
                 // P23: 素材原文作为参考
                 material_context: get().materialContext || undefined,
@@ -539,7 +519,6 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 selected_option: option,
                 info_anchors: analysisResult?.info_anchors,
                 // P14-C: Include Mode Writer override
-                api_config: getAPIConfig(),
                 agent_config: finalAgentConfig
             };
 
@@ -663,7 +642,6 @@ export const useAgentStore = create<AgentState>((set, get) => ({
                 selected_option: lastSelectedOption,
                 info_anchors: analysisResult?.info_anchors,
                 // P14-C: Include Mode Writer override
-                api_config: getAPIConfig(),
                 agent_config: finalAgentConfig
             };
 

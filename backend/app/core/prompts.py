@@ -84,3 +84,34 @@ def get_writer_template_path(mode: str) -> str:
     }
     return mode_template_map.get(mode, "writer.jinja2")  # fallback
 
+
+def get_critic_template_path(mode: str) -> str:
+    """P27: 根据 mode 获取 Critic 模板路径"""
+    mode_template_map = {
+        "short_article": "critic/short_article.jinja2",
+        "mid_article": "critic/mid_article.jinja2",
+        "long_article": "critic/long_article.jinja2",
+        "tutorial": "critic/tutorial.jinja2",
+        "bullish_take": "critic/bullish_take.jinja2",
+        "kaito_yap": "critic/kaito_yap.jinja2",
+        "project_research": "critic/project_research.jinja2",
+        # hot_take: skip_critic, 不需要模板
+    }
+    return mode_template_map.get(mode, "shared/base_critic.jinja2")  # fallback
+
+
+def get_polisher_template_path(mode: str) -> str:
+    """P27: 根据 mode 获取 Polisher 模板路径"""
+    mode_template_map = {
+        "short_article": "polisher/short_article.jinja2",
+        "mid_article": "polisher/mid_article.jinja2",
+        "long_article": "polisher/long_article.jinja2",
+        "tutorial": "polisher/tutorial.jinja2",
+        "bullish_take": "polisher/bullish_take.jinja2",
+        "kaito_yap": "polisher/kaito_yap.jinja2",
+        "project_research": "polisher/project_research.jinja2",
+        # hot_take: skip_polisher, 不需要模板
+    }
+    return mode_template_map.get(mode, "shared/base_polisher.jinja2")  # fallback
+
+

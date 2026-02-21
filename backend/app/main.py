@@ -92,7 +92,6 @@ class GenerateRequest(BaseModel):
     input: str
     mode: str = "mid_article"  # P16: 创作模式 (hot_take, mid_article, long_article, tutorial)
     style: str = "auto"  # P10: 写作风格 (auto, mimeng, banfo, xinshixiang, insider)
-    length: Optional[str] = None  # @deprecated P11: 旧篇幅长度 (tweet, thread, post)
     length_type: str = "auto"  # P16: 篇幅类型 (auto=用模式默认, custom=自定义字数)
     custom_length: Optional[int] = None  # P16: 自定义字数 (50-5000)
     retention_level: int = 3  # P10: 保留度等级 1-5 (1=95%保留, 5=10%保留)
@@ -215,7 +214,6 @@ async def generate_narrative(request: GenerateRequest):
             "raw_input": request.input, 
             "mode": request.mode,
             "style": request.style,  # P10
-            "length": request.length,  # P16.1: 仅用于兼容，实际字数由 mode_configs 控制
             "custom_length": request.custom_length or 0,  # P16: 自定义字数
             "retention_level": request.retention_level,  # P10
             "narrative_type": request.narrative_type,

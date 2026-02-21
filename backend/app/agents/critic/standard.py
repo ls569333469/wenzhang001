@@ -56,6 +56,7 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
     context = {
         "current_time_str": datetime.now().isoformat(),
         "mode": mode,
+        "mode_name": mode_config.get("name", mode),
         "length": length,
         "length_constraints": length_constraints,
         "style": style,
@@ -63,6 +64,8 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         "draft": draft,
         "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
         # P24: 模式专用评分参数
+        "dimensions": scoring.get("dimensions", SCORING_DIMENSIONS),
+        "penalty_rules": scoring.get("penalty_rules", PENALTY_RULES),
         "penalty_cap": scoring.get("penalty_cap", 30),
         "pass_threshold": scoring.get("pass_threshold", 85),
         "refine_threshold": scoring.get("refine_threshold", 70),
