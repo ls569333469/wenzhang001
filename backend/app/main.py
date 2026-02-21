@@ -552,6 +552,56 @@ async def save_feature_flags(flags: FeatureFlagsRequest):
 
 
 # ============================================
+# P27-P2: DataPanel 数据 API
+# ============================================
+
+from app.services.data_service import data_service
+
+@app.get("/api/data/bullish")
+async def get_bullish_feed(category: Optional[str] = None, limit: int = 20):
+    """🌸 吹捧素材 Feed (Tab: 吹捧素材)"""
+    try:
+        items = data_service.get_bullish_feed(category=category, limit=limit)
+        return {"items": items, "total": len(items)}
+    except Exception as e:
+        logger.error(f"[DataAPI] bullish feed error: {e}")
+        return {"items": [], "total": 0, "error": str(e)}
+
+
+@app.get("/api/data/kaito/projects")
+async def get_kaito_projects():
+    """🎯 嘴撸项目列表 (Tab: 嘴撸项目)"""
+    try:
+        projects = data_service.get_kaito_projects()
+        return {"projects": projects}
+    except Exception as e:
+        logger.error(f"[DataAPI] kaito projects error: {e}")
+        return {"projects": [], "error": str(e)}
+
+
+@app.get("/api/data/kaito/{project_id}/intel")
+async def get_kaito_intel(project_id: str):
+    """🎯 某项目角度+情报 (Tab: 嘴撸_{项目名})"""
+    try:
+        intel = data_service.get_kaito_intel(project_id=project_id)
+        return intel
+    except Exception as e:
+        logger.error(f"[DataAPI] kaito intel error: {e}")
+        return {"project": project_id, "angles": [], "news": [], "error": str(e)}
+
+
+@app.get("/api/data/research")
+async def get_research_projects(q: Optional[str] = None):
+    """🔬 搜索投研项目 (Tab: 投研项目)"""
+    try:
+        projects = data_service.get_research_projects(query=q)
+        return {"projects": projects, "total": len(projects)}
+    except Exception as e:
+        logger.error(f"[DataAPI] research error: {e}")
+        return {"projects": [], "total": 0, "error": str(e)}
+
+
+# ============================================
 # Ingest Management API (P13)
 # ============================================
 
