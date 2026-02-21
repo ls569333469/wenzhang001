@@ -48,7 +48,7 @@ export function RichEditor({
         immediatelyRender: false,
         editorProps: {
             attributes: {
-                class: 'prose prose-zinc max-w-none focus:outline-none min-h-[600px] px-12 py-8',
+                class: 'prose prose-zinc max-w-none focus:outline-none min-h-[600px] px-12 py-8 bg-white mx-auto w-full max-w-4xl',
             },
         },
         onUpdate: ({ editor }) => {
@@ -85,7 +85,7 @@ export function RichEditor({
     }, [content, editor, isStreaming]);
 
     return (
-        <div className={cn("relative w-full border border-zinc-200 rounded-xl bg-white shadow-island transition-all flex flex-col overflow-hidden", className)}>
+        <div className={cn("relative w-full transition-all flex flex-col overflow-hidden", className)}>
             <EditorToolbar editor={editor} actions={toolbarActions} />
             {editor && <EditorBubbleMenu editor={editor} />}
             <div className="flex-1 overflow-y-auto scrollbar-hide w-full h-full">

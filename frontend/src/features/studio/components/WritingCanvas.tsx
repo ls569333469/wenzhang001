@@ -141,8 +141,8 @@ ${marked.parse(content)}
         <div className="flex flex-col h-full w-full relative">
 
             {/* Fixed Canvas Area */}
-            <div className="flex-1 flex flex-col overflow-hidden px-6 pt-24 pb-12">
-                <div className="w-full h-full mx-auto max-w-4xl flex flex-col space-y-8">
+            <div className="flex-1 flex flex-col overflow-hidden px-12 pt-24 pb-12 bg-white">
+                <div className="w-full h-full flex flex-col space-y-8">
                     {/* Paper Sheet (拟物化容器) */}
                     <div className={cn(
                         "flex-1 w-full flex flex-col rounded-xl transition-all duration-500 relative min-h-0",

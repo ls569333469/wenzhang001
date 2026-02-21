@@ -138,7 +138,7 @@ export function ConfigPanel() {
                             <section className="space-y-3">
                                 <Label icon={Zap} title={UI_TEXT.labels.mode} />
                                 <div className="grid grid-cols-1 gap-2">
-                                    {CREATION_MODES.filter(m => !m.compact).map(m => (
+                                    {CREATION_MODES.map(m => (
                                         <SelectionCard
                                             key={m.id}
                                             active={mode === m.id}
@@ -147,16 +147,6 @@ export function ConfigPanel() {
                                             desc={m.desc}
                                         />
                                     ))}
-                                    <div className="grid grid-cols-2 gap-2">
-                                        {CREATION_MODES.filter(m => m.compact).map(m => (
-                                            <SelectionCard
-                                                key={m.id}
-                                                active={mode === m.id}
-                                                onClick={() => handleModeChange(m.id)}
-                                                title={m.title}
-                                            />
-                                        ))}
-                                    </div>
                                 </div>
                             </section>
 

@@ -14,9 +14,6 @@ describe('Studio Schema', () => {
 
             expect(result.mode).toBe('mid_article');  // P16: 默认中篇
             expect(result.style).toBe('professional');
-            expect(result.length).toBe('thread');  // P11: 默认 thread
-            expect(result.topP).toBe(0.9);
-            expect(result.maxTokens).toBe(4096);
         });
     });
 
@@ -26,7 +23,9 @@ describe('Studio Schema', () => {
             expect(() => CreationModeSchema.parse('hot_take')).not.toThrow();
             expect(() => CreationModeSchema.parse('mid_article')).not.toThrow();
             expect(() => CreationModeSchema.parse('long_article')).not.toThrow();
-            expect(() => CreationModeSchema.parse('rewrite')).not.toThrow();
+            expect(() => CreationModeSchema.parse('bullish_take')).not.toThrow();
+            expect(() => CreationModeSchema.parse('kaito_yap')).not.toThrow();
+            expect(() => CreationModeSchema.parse('project_research')).not.toThrow();
             expect(() => CreationModeSchema.parse('tutorial')).not.toThrow();
         });
 

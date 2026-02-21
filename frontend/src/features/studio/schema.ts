@@ -81,7 +81,7 @@ export const CreationConfigSchema = z.object({
 // ===== P13: API 配置 Schema =====
 
 /** AI 提供商 */
-export const AIProviderSchema = z.enum(['volcengine', 'google']);
+export const AIProviderSchema = z.enum(['volcengine', 'google', 'grok']);
 
 /** 单个 API 配置 */
 export const APIConfigSchema = z.object({
@@ -94,6 +94,7 @@ export const APIConfigSchema = z.object({
 export const PROVIDER_IDS = {
     VOLCENGINE: 'volcengine',
     GOOGLE: 'google',
+    GROK: 'grok',
 } as const;
 
 /** Agent 模型配置项 (必须包含 provider 和 model) */
@@ -154,8 +155,8 @@ export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
-    bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
+    kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
 };
 
@@ -191,8 +192,8 @@ export const DEFAULT_MODE_STRATEGISTS: z.infer<typeof ModeStrategistConfigSchema
     mid_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     long_article: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
-    kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
+    kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-beta' },
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
 };
 export type ModeStrategistConfig = z.infer<typeof ModeStrategistConfigSchema>;

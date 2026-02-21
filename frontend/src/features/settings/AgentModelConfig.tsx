@@ -22,6 +22,10 @@ const PROVIDER_MODELS = {
     [PROVIDER_IDS.GOOGLE]: [
         { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', description: '最新快速模型' },
         { id: 'gemini-3-pro-preview', name: 'Gemini 3 Pro Preview', description: '预览版专业模型' },
+    ],
+    [PROVIDER_IDS.GROK]: [
+        { id: 'grok-beta', name: 'grok-beta', description: 'xAI 快速响应模型' },
+        { id: 'grok-4-latest', name: 'grok-4-latest', description: 'xAI 最新旗舰模型' },
     ]
 };
 
@@ -47,6 +51,7 @@ const AGENT_ROLES: { id: keyof AgentModels; label: string; icon: React.ReactNode
 const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
     [PROVIDER_IDS.VOLCENGINE]: '火山引擎',
     [PROVIDER_IDS.GOOGLE]: 'Google Gemini',
+    [PROVIDER_IDS.GROK]: 'xAI Grok',
 };
 
 interface AgentModelConfigProps {

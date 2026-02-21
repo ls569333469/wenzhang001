@@ -16,6 +16,9 @@ const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: Re
     { id: 'mid_article', name: '中篇', icon: <FileText className="w-4 h-4" />, desc: '快速产出要点 (500字左右)' },
     { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" />, desc: '全面深度分析 (1200字左右)' },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" />, desc: '结构化教程，步骤清晰' },
+    { id: 'bullish_take', name: '吹捧', icon: <Zap className="w-4 h-4" />, desc: '狂热吹捧情绪流' },
+    { id: 'kaito_yap', name: 'Kaito', icon: <MessageSquare className="w-4 h-4" />, desc: '加密原语喊单风格' },
+    { id: 'project_research', name: '投研', icon: <FileText className="w-4 h-4" />, desc: '专业级数据沉淀分析' },
 ];
 
 // 复用 AgentModelConfig 的模型列表
@@ -28,12 +31,17 @@ const PROVIDER_MODELS = {
     [PROVIDER_IDS.GOOGLE]: [
         { id: 'gemini-2.0-flash', name: 'Gemini 2.0 Flash', description: '快速' },
         { id: 'gemini-3-pro-preview', name: 'Gemini 3 Pro', description: '专业' },
+    ],
+    [PROVIDER_IDS.GROK]: [
+        { id: 'grok-beta', name: 'grok-beta', description: '快速(xAI)' },
+        { id: 'grok-4-latest', name: 'grok-4-latest', description: '旗舰(xAI)' },
     ]
 };
 
 const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
     [PROVIDER_IDS.VOLCENGINE]: '火山引擎',
     [PROVIDER_IDS.GOOGLE]: 'Google',
+    [PROVIDER_IDS.GROK]: 'xAI Grok',
 };
 
 interface ModeWriterConfigProps {
@@ -87,8 +95,8 @@ export const ModeWriterConfig: React.FC<ModeWriterConfigProps> = ({ apiKeys }) =
                                 <select
                                     value={selectedProvider}
                                     onChange={(e) => {
-                                        const newProvider = e.target.value as 'volcengine' | 'google';
-                                        const newModels = PROVIDER_MODELS[newProvider] || [];
+                                        const newProvider = e.target.value as 'volcengine' | 'google' | 'grok';
+                                        const newModels = PROVIDER_MODELS[newProvider as keyof typeof PROVIDER_MODELS] || [];
                                         updateWriter(mode.id, {
                                             provider: newProvider,
                                             model: newModels[0]?.id || ''
