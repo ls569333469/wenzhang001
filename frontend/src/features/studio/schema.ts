@@ -72,7 +72,7 @@ export const KnowledgeSourceSchema = z.object({
 /** 完整创作配置 */
 export const CreationConfigSchema = z.object({
     mode: CreationModeSchema.default('mid_article'),
-    style: WritingStyleSchema.default('professional'),
+    style: WritingStyleSchema.default('mimeng'),  // P28: 默认咪蒙，有 Google Sheets 数据
     length_type: LengthTypeSchema.default('auto'),  // P16: 篇幅类型
     custom_length: z.number().min(50).max(5000).optional(),  // P16: 自定义字数
     knowledgeSources: z.array(z.string()).default([]),  // source IDs
