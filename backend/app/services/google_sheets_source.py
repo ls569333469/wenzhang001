@@ -118,8 +118,14 @@ class GoogleSheetsDataSource:
         Get random samples matching the style.
         Each style has its own worksheet (mimeng, banfo, etc.)
         """
-        # P23: 使用 style_ 前缀作为工作表名称
-        sheet_name = f"style_{style.lower()}"
+        # P28: 统一使用中文 Tab 名，方便在 Google Sheets 中维护
+        STYLE_TAB_MAP = {
+            "mimeng": "风格_咪蒙",
+            "banfo": "风格_半佛",
+            "insider": "风格_圈内人",
+            "xinshixiang": "风格_新世相",
+        }
+        sheet_name = STYLE_TAB_MAP.get(style.lower(), f"风格_{style}")
         
         # Load data if not cached
         if sheet_name not in self._cache:
