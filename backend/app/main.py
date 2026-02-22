@@ -120,7 +120,7 @@ async def analyze_narrative(request: GenerateRequest):
                 "raw_input": request.input, 
                 "mode": request.mode,
                 "style": request.style,  # P10
-                "length": request.length,  # P10
+                "length": request.length_type,  # P10: 篇幅类型
                 "custom_length": request.custom_length or 0,  # P16: 自定义字数
                 "retention_level": request.retention_level,  # P10
                 "narrative_type": request.narrative_type,
