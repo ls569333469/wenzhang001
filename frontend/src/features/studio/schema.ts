@@ -64,7 +64,7 @@ export const ArticleLengthSchema = z.enum([
 export const KnowledgeSourceSchema = z.object({
     id: z.string(),
     name: z.string(),
-    type: z.enum(['lark', 'local', 'url']),
+    type: z.enum(['google_sheets', 'local', 'url']),
     docCount: z.number(),
     lastSync: z.string().datetime().optional(),
 });

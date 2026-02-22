@@ -10,7 +10,7 @@ export default function DashboardPage() {
   // Phase 9: Dynamic health check
   const [backendStatus, setBackendStatus] = useState<"online" | "offline" | "busy">("offline");
   const [backendLatency, setBackendLatency] = useState<string | undefined>(undefined);
-  const [larkStatus, setLarkStatus] = useState<"online" | "offline" | "busy">("offline");
+  const [sheetsStatus, setSheetsStatus] = useState<"online" | "offline" | "busy">("offline");
 
   useEffect(() => {
     async function checkHealth() {
@@ -24,10 +24,10 @@ export default function DashboardPage() {
         if (res.ok) {
           setBackendStatus("online");
           setBackendLatency(`${latency}ms`);
-          // Check Lark status from response if available
+          // Check Google Sheets status
           const data = await res.json().catch(() => ({}));
-          if (data.lark_connected) {
-            setLarkStatus("online");
+          if (data.sheets_connected) {
+            setSheetsStatus("online");
           }
         } else {
           setBackendStatus("offline");
@@ -73,7 +73,7 @@ export default function DashboardPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <MonitorCard label="后端核心" status={backendStatus} latency={backendLatency} />
-            <MonitorCard label="知识库引擎" status={larkStatus} />
+            <MonitorCard label="知识库引擎" status={sheetsStatus} />
           </div>
         </section>
 
@@ -96,7 +96,7 @@ export default function DashboardPage() {
             <ActionTile
               icon={Library}
               title="知识库管理"
-              description="管理来自飞书的素材。"
+              description="管理 Google Sheets 素材。"
               href="/knowledge"
             />
             <ActionTile

@@ -197,7 +197,7 @@ export default function SettingsPage() {
             </div>
             <div className="flex-1 space-y-1">
               <h3 className="font-medium text-ink-primary">数据清洗配置</h3>
-              <p className="text-xs text-ink-muted">配置 Lark 表格和入库参数</p>
+              <p className="text-xs text-ink-muted">配置 Google Sheets 和入库参数</p>
             </div>
           </div>
 

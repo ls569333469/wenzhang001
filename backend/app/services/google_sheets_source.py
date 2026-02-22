@@ -1,5 +1,5 @@
-# Google Sheets Data Source for Quantum Studio
-# A/B Test Mode: Coexists with Lark data source
+# P28: Google Sheets Data Source for Quantum Studio
+# 唯一数据源 — 所有风格样本和知识库数据
 
 import os
 import random
@@ -30,7 +30,7 @@ class GoogleSheetsDataSource:
     # IMPORTANT: Always use open_by_key() with spreadsheet ID, not open() with name
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
     
-    # Reuse the same field mapping as Lark
+    # 字段映射：中文列名 → 内部键名
     FIELD_MAPPING = {
         "内容": "content",
         "博主": "author",

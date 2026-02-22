@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 
 interface IngestStatus {
   hash_cache_count: number;
-  lark_record_count: number;
+  sheets_record_count: number;
   status: string;
 }
 
@@ -231,9 +231,9 @@ export default function KnowledgePage() {
           </div>
           <div className="bg-white rounded-xl border border-zinc-100 p-4 space-y-1">
             <p className="text-2xl font-serif font-bold text-ink-primary">
-              {ingestStatus?.lark_record_count?.toLocaleString() ?? '-'}
+              {ingestStatus?.sheets_record_count?.toLocaleString() ?? '-'}
             </p>
-            <p className="text-xs text-ink-muted uppercase tracking-wider">Lark 记录</p>
+            <p className="text-xs text-ink-muted uppercase tracking-wider">Sheets 记录</p>
           </div>
           <div className="bg-white rounded-xl border border-zinc-100 p-4 space-y-1">
             <p className="text-2xl font-serif font-bold text-ink-primary">{folders.length}</p>

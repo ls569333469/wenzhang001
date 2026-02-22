@@ -11,7 +11,7 @@ from fastapi.responses import StreamingResponse
 import json
 from .core.config import ensure_config_dir, load_config, save_config
 from .core.mode_configs import get_mode_config, MODE_CONFIGS  # P14: 模式配置
-from .core.lark_client import lark_client
+
 from .api.cleaner import router as cleaner_router
 from .api.materials import router as materials_router
 from .api.creations import router as creations_router
@@ -38,35 +38,6 @@ app.include_router(creations_router)
 @app.on_event("startup")
 async def startup_event():
     ensure_config_dir()
-    # Start background sync task
-    asyncio.create_task(background_sync_task())
-
-async def background_sync_task():
-    """Run sync every 10 minutes"""
-    from .services.sync_service import sync_service
-    from .core.config import get_logger
-    logger = get_logger("scheduler")
-    
-    while True:
-        try:
-            logger.info("Scheduler: Starting scheduled Lark sync...")
-            result = sync_service.sync_from_lark()
-            logger.info(f"Scheduler: Sync completed. {result}")
-        except Exception as e:
-            logger.error(f"Scheduler: Sync failed: {e}")
-        
-        # Wait 10 minutes (600 seconds)
-        await asyncio.sleep(600)
-
-@app.post("/config/lark-sync")
-async def trigger_sync():
-    """Manual trigger for Lark Sync"""
-    from .services.sync_service import sync_service
-    try:
-        result = sync_service.sync_from_lark()
-        return result
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 
 app.add_middleware(
@@ -496,26 +467,18 @@ async def save_api_keys(keys: APIKeysRequest):
     save_config(config)
     return {"status": "success"}
 
-@app.get("/config/lark-status")
-async def get_lark_status():
-    """Get Lark Sync Status (Count & Last Sync Time)"""
-    from .services.sync_service import sync_service, STYLE_LIBRARY_FILE
-    import os
-    from datetime import datetime
-    
-    library = sync_service.load_library()
-    count = len(library)
-    last_sync = "Never"
-    
-    if STYLE_LIBRARY_FILE.exists():
-        mtime = os.path.getmtime(STYLE_LIBRARY_FILE)
-        last_sync = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M:%S")
-        
-    return {
-        "status": "active" if count > 0 else "empty",
-        "count": count,
-        "last_sync": last_sync
-    }
+@app.get("/config/sheets-status")
+async def get_sheets_status():
+    """P28: Google Sheets 数据源状态"""
+    try:
+        from .services.google_sheets_source import google_sheets_source as gs
+        available = gs.is_available()
+        return {
+            "status": "active" if available else "offline",
+            "source": "google_sheets",
+        }
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 
 # ============================================
