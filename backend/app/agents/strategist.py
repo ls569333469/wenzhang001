@@ -40,7 +40,7 @@ def build_strategist_context(state: dict) -> dict:
     style = state.get("style", mode)  # P10: style 参数
     narrative_type = state.get("narrative_type", "project_review")
     
-    # 使用 sample_service 获取样本 (支持 Lark/Google Sheets A/B 测试)
+    # P29 B方案: 所有模式统一使用 random 样本
     samples = sample_service.get_samples(style=style, count=3)
     if samples:
         rag_context = "\n\n".join([
@@ -92,6 +92,13 @@ def build_strategist_context(state: dict) -> dict:
         "retention_level": state.get("retention_level", 3),  # P10: 内容保留度
         "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
+    
+    # P29: 注入公式菜单供策略师选择（仅 short_article 模式）
+    if state.get("mode") == "short_article":
+        pattern_menu = sample_service.get_pattern_menu(style=style)
+        context["pattern_menu"] = pattern_menu
+        logger.info(f"[P29] Injected pattern_menu: {len(pattern_menu)} patterns for {style}")
+    
     return context
 
 def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:

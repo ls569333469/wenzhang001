@@ -58,8 +58,7 @@ def _generate_variant(
     angle = plan.get("angle", "")
     hook = plan.get("hook", "")
     tone = plan.get("tone", "")
-    emotion_arc = plan.get("emotion_arc", "")
-    ending_style = plan.get("ending_style", "")
+    logic_pattern = plan.get("logic_pattern", "")  # P29: 从GSheets公式菜单选的
 
     # 构建动态 system prompt
     ctx = {**system_prompt_context}
@@ -71,7 +70,7 @@ def _generate_variant(
     else:
         system_prompt = render_modular_prompt("writer/short_article.jinja2", ctx)
 
-    # P26: user prompt — 给方向 + 情感弧线 + 收尾方式
+    # P29: user prompt — 给方向 + 写作公式
     user_prompt = f"""素材：
 {raw_input}
 
@@ -79,12 +78,11 @@ def _generate_variant(
 角度：{angle}
 第一句的方向：{hook}
 语气：{tone}
-情感走向：{emotion_arc}
-收尾方式：{ending_style}
+写作公式：{logic_pattern}
 
 ⚠️ 严禁编造素材中没有的事实、场景、对话、数据。只能基于素材内容进行观点重构和表达重构。
 ⚠️ 记住节奏要求：必须有长短句交替，禁止全篇碎片短句。
-直接写。{length_constraints['target']}字左右。第一句就亮出判断。"""
+直接写。{length_constraints['target']}字左右。按策略官hook方向即时反应写第一句。"""
 
     provider = api_config.get("provider", "volcengine")
     api_key = api_config.get("api_key") or None
@@ -136,10 +134,15 @@ def short_article_writer(state: dict) -> dict:
             "target": custom_length
         }
 
-    samples = sample_service.get_samples(style=style, count=2)
-    rag_context = ""
-    if samples:
-        rag_context = "\n\n".join([f"--- 样本 ---\n{s.get('content', '')[:300]}" for s in samples])
+    # P29 B方案: random 取 2 条样本，3个版本共用
+    writer_samples = sample_service.get_samples(style=style, count=2)
+    if writer_samples:
+        rag_context_base = "\n\n".join([
+            f"--- 样本({s.get('snippet_type','')}) ---\n{s.get('content','')[:300]}"
+            for s in writer_samples
+        ])
+    else:
+        rag_context_base = ""
 
     context_card = None
     try:
@@ -155,7 +158,7 @@ def short_article_writer(state: dict) -> dict:
         "retention_level": state.get("retention_level", 3),
         "raw_input": raw_input,
         "strategy_plan": strategy_json,
-        "rag_context": rag_context,
+        "rag_context": rag_context_base,  # P29 B方案: random 样本，3版本共用
         "context_card": context_card,
         "forbidden_patterns": load_forbidden_patterns(),
     }
@@ -166,13 +169,15 @@ def short_article_writer(state: dict) -> dict:
     print("--- [P25] 从策略官输出提取版本方案 ---")
     plans = _extract_plans_from_strategy(strategy_json)
     for i, p in enumerate(plans):
-        print(f"  版本{i+1}: {p['label']} | 语气: {p.get('tone','')} | 情感: {p.get('emotion_arc','')} | 收尾: {p.get('ending_style','')}")
+        print(f"  版本{i+1}: {p['label']} | 语气: {p.get('tone','')} | 公式: {p.get('logic_pattern','')}")
 
     # P25: 写手按策略官方案生成3个版本
     variants = []
     for i, plan in enumerate(plans):
         try:
-            print(f"--- [P26] 写手生成版本 {i+1}/3: {plan['label']} ({plan.get('tone','')}) | {plan.get('ending_style','')} ---")
+            # P29 B方案: 所有版本共用 shared_context（已包含 random 样本）
+            lp = plan.get("logic_pattern", "")
+            print(f"--- [P29] 写手生成版本 {i+1}/3: {plan['label']} ({plan.get('tone','')}) | 公式:{lp} ---")
             content = _generate_variant(
                 raw_input=raw_input,
                 plan=plan,

@@ -136,18 +136,10 @@ class GoogleSheetsDataSource:
             print(f"[GoogleSheets] No records found in sheet: {sheet_name}")
             return []
         
-        # Filter by style (case-insensitive) - 兼容表内有 style 列的情况
-        # Fallback: if style field is empty, verify if sheet name matches the requested style
-        # Filter by style - 工作表本身已按风格划分
-        # 如果表内有 style 列则过滤，否则直接使用所有记录
-        style_matches = []
-        for item in all_records:
-            item_style = item.get("style", "")
-            if item_style and item_style.lower() == style.lower():
-                style_matches.append(item)
-            elif not item_style:
-                # 工作表名称即风格，直接添加
-                style_matches.append(item)
+        # P29 fix: 工作表本身已按风格划分（风格_半佛 = banfo），
+        # 表内的 style 列是"逻辑/对比"等风格标签，不是 style identifier，
+        # 直接使用工作表内所有记录
+        style_matches = all_records
         
         # Filter out PS content (same as SyncService)
         def is_not_ps_content(item):
@@ -176,6 +168,89 @@ class GoogleSheetsDataSource:
                 return emotion_matches + random.sample(others, min(len(others), remaining))
         
         return random.sample(style_matches, min(len(style_matches), count))
+    
+    def get_pattern_menu(self, style: str) -> List[str]:
+        """
+        P29: 提取当前风格下所有 logic_pattern，按频次排序返回前15个。
+        供策略师从中选择写作公式。
+        """
+        from collections import Counter
+        
+        STYLE_TAB_MAP = {
+            "mimeng": "风格_咪蒙",
+            "banfo": "风格_半佛",
+            "insider": "风格_圈内人",
+            "xinshixiang": "风格_新世相",
+        }
+        sheet_name = STYLE_TAB_MAP.get(style.lower(), f"风格_{style}")
+        
+        if sheet_name not in self._cache:
+            self._cache[sheet_name] = self._load_sheet_data(sheet_name)
+        
+        all_records = self._cache.get(sheet_name, [])
+        if not all_records:
+            return []
+        
+        # 统计 logic_pattern 频次
+        patterns = [r.get("logic_pattern", "") for r in all_records]
+        patterns = [p for p in patterns if p]  # 过滤空值
+        counter = Counter(patterns)
+        
+        # 按频次降序，返回前15个
+        top_patterns = [p for p, _ in counter.most_common(15)]
+        print(f"[GoogleSheets] Pattern menu for {style}: {len(top_patterns)} patterns")
+        return top_patterns
+    
+    def get_targeted_samples(self, style: str, snippet_type: str = None, 
+                             logic_pattern: str = None, count: int = 2) -> List[Dict]:
+        """
+        P29 Phase 2: 按 snippet_type + logic_pattern 精准筛选样本。
+        优先精准匹配，匹配不足时放宽条件。
+        """
+        STYLE_TAB_MAP = {
+            "mimeng": "风格_咪蒙",
+            "banfo": "风格_半佛",
+            "insider": "风格_圈内人",
+            "xinshixiang": "风格_新世相",
+        }
+        sheet_name = STYLE_TAB_MAP.get(style.lower(), f"风格_{style}")
+        
+        if sheet_name not in self._cache:
+            self._cache[sheet_name] = self._load_sheet_data(sheet_name)
+        
+        all_records = self._cache.get(sheet_name, [])
+        if not all_records:
+            return []
+        
+        # 过滤 PS 内容
+        records = [r for r in all_records if not r.get("content", "").strip().startswith(("PS", "再PS"))]
+        
+        # Step 1: 双条件精准匹配
+        if snippet_type and logic_pattern:
+            exact = [r for r in records 
+                     if r.get("snippet_type") == snippet_type 
+                     and r.get("logic_pattern") == logic_pattern]
+            if len(exact) >= count:
+                return random.sample(exact, count)
+        
+        # Step 2: 退而求其次 — 只按 snippet_type
+        if snippet_type:
+            by_type = [r for r in records if r.get("snippet_type") == snippet_type]
+            if len(by_type) >= count:
+                return random.sample(by_type, count)
+            elif by_type:
+                return by_type[:count]
+        
+        # Step 3: 退而求其次 — 只按 logic_pattern
+        if logic_pattern:
+            by_pattern = [r for r in records if r.get("logic_pattern") == logic_pattern]
+            if len(by_pattern) >= count:
+                return random.sample(by_pattern, count)
+            elif by_pattern:
+                return by_pattern[:count]
+        
+        # Step 4: 兜底 — random
+        return random.sample(records, min(len(records), count))
     
     def refresh_cache(self, sheet_name: str = None):
         """Clear cache to force reload"""

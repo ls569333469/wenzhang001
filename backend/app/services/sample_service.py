@@ -38,6 +38,26 @@ class SampleService:
         
         logger.warning(f"[SampleService] Google Sheets unavailable, no samples for {style}")
         return []
+    
+    def get_pattern_menu(self, style: str) -> list:
+        """
+        P29: 返回当前风格的公式菜单，供策略师选择。
+        """
+        gs = self._get_google_source()
+        if gs and gs.is_available():
+            return gs.get_pattern_menu(style)
+        return []
+    
+    def get_targeted_samples(self, style: str, snippet_type: str = None,
+                             logic_pattern: str = None, count: int = 2) -> list:
+        """
+        P29 Phase 2: 按 snippet_type + logic_pattern 精准获取样本。
+        """
+        gs = self._get_google_source()
+        if gs and gs.is_available():
+            return gs.get_targeted_samples(style, snippet_type=snippet_type,
+                                           logic_pattern=logic_pattern, count=count)
+        return []
 
 
 # Singleton instance
