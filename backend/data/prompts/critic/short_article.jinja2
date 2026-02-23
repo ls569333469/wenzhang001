@@ -1,4 +1,4 @@
-{# P26: 短篇 Critic — 最简判断，机械检查交给代码 #}
+{# P29: 短篇 Critic — B方案适配版 #}
 
 Current Time: {{ current_time_str }}
 
@@ -10,18 +10,19 @@ Current Time: {{ current_time_str }}
 - 纯转述原文，没有作者自己的判断
 - 整篇读起来像 AI 生成的模板文章
 - 逻辑断裂，读不通
+- 开头是分析式陈述（如"从技术角度分析..."），不是即时反应式评论
 
 ## 判 REFINE（能发但要改）的情况
 - 观点有但不够锐利
-- 收尾方式和策略官要求的「{{ ending_style }}」不一致
-- 情绪走向和策略官要求的「{{ emotion_arc }}」偏差较大
+- 语气风格和策略官要求的「{{ tone }}」明显偏离
+- 写作公式「{{ logic_pattern }}」未被有效执行（如要求"对比反差"却无对比）
 - 整体还行但某一段拖沓或重复
 
 ## 其他情况一律 PASS
 
 ---
 
-策略官要求｜情感走向: {{ emotion_arc }}｜收尾方式: {{ ending_style }}
+策略官要求｜语气: {{ tone }}｜写作公式: {{ logic_pattern }}
 字数: {{ word_count }}字（目标{{ length_constraints.target }}，范围{{ length_constraints.min }}-{{ length_constraints.max }}）
 
 {% if code_scan_results %}
@@ -42,3 +43,4 @@ Current Time: {{ current_time_str }}
   "suggestions": ["如果是REFINE，最多2条改进建议，只描述问题不给替代词"]
 }
 ```
+

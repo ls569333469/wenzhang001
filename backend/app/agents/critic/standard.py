@@ -39,17 +39,17 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
     # P24: 注入模式专用评分配置
     scoring = mode_config.get("scoring", {})
     
-    # P26-fix: 从策略官 JSON 提取 emotion_arc 和 ending_style
-    emotion_arc = ""
-    ending_style = ""
+    # P29: 从策略官 JSON 提取 logic_pattern 和 tone
+    logic_pattern = ""
+    tone = ""
     if strategy_json:
         try:
             strategy_obj = json.loads(strategy_json) if isinstance(strategy_json, str) else strategy_json
             plans = strategy_obj.get("plans", [])
             if plans and isinstance(plans, list):
-                # 取第一个 plan 的情感走向和收尾方式（供 Critic 对照检查）
-                emotion_arc = plans[0].get("emotion_arc", "")
-                ending_style = plans[0].get("ending_style", "")
+                # 取第一个 plan 的写作公式和语气（供 Critic 对照检查）
+                logic_pattern = plans[0].get("logic_pattern", "")
+                tone = plans[0].get("tone", "")
         except (json.JSONDecodeError, TypeError):
             pass
     
@@ -69,9 +69,9 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         "penalty_cap": scoring.get("penalty_cap", 30),
         "pass_threshold": scoring.get("pass_threshold", 85),
         "refine_threshold": scoring.get("refine_threshold", 70),
-        # P26-fix: 策略官上下文
-        "emotion_arc": emotion_arc,
-        "ending_style": ending_style,
+        # P29: 策略官上下文（B方案字段）
+        "logic_pattern": logic_pattern,
+        "tone": tone,
     }
 
     

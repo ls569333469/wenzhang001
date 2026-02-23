@@ -127,10 +127,11 @@ async def analyze_narrative(request: GenerateRequest):
             
             yield f"data: {json.dumps({'type': 'thinking_step', 'agent': 'strategist', 'step': 'query', 'detail': f'Querying {provider_name} reasoning model...'})}\n\n"
             
-            # Execute (Blocking LLM call, but we have already sent status)
-            # In a real async system we might use loop.run_in_executor if this was very slow blocking IO, 
-            # but generate_text is synchronous.
-            strategy_json_str = execute_strategist_analysis(user_prompt, system_prompt, effective_config)
+            # P29 fix: 将同步阻塞 LLM 调用放到线程池，避免阻塞 asyncio 事件循环
+            # 长素材时 LLM 调用可能需要 30s+，直接阻塞会导致 SSE 流超时断开
+            strategy_json_str = await asyncio.to_thread(
+                execute_strategist_analysis, user_prompt, system_prompt, effective_config
+            )
             
             # --- Step 4: Parsing & Result ---
             yield f"data: {json.dumps({'type': 'thinking_step', 'agent': 'strategist', 'step': 'parsing', 'detail': 'Parsing strategy options...'})}\n\n"
