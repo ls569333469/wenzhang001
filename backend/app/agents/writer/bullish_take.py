@@ -27,7 +27,7 @@ def _extract_plans(strategy_json: str) -> list:
 
 
 def _get_rag_samples() -> str:
-    """获取风格样本 — 暂用半佛积极情绪样本，后续切换刘润数据"""
+    """获取风格样本 — 暂用半佛积极情绪样本，后续切换CZ转发推文样本"""
     try:
         samples = google_sheets_source.get_samples(
             style="banfo", emotion="积极", count=2
@@ -66,11 +66,13 @@ def _generate_variant(
 ) -> str:
     """根据策略官方案生成单个版本"""
     label = plan.get("label", "")
-    angle = plan.get("angle", "")
+    perspective = plan.get("perspective", "")
+    story = plan.get("story", "")
     hook = plan.get("hook", "")
+    detail = plan.get("detail", "")
     tone = plan.get("tone", "")
     logic_pattern = plan.get("logic_pattern", "")
-    praise_type = plan.get("praise_type", "")
+
 
     system_prompt = render_modular_prompt("writer/bullish_take.jinja2", system_prompt_context)
 
@@ -78,20 +80,23 @@ def _generate_variant(
 {raw_input}
 
 你要写的版本：{label}
-角度：{angle}
+切入视角：{perspective}
+这篇内容讲的故事：{story}
 第一句的方向：{hook}
+用这个事实/数据支撑：{detail}
 语气：{tone}
 写作公式：{logic_pattern}
-捧法：{praise_type}
 
 ⚠️ 严禁编造素材中没有的事实、数据、引言。
 ⚠️ 记住节奏要求：必须有长短句交替，禁止全篇碎片短句。
-直接写。{length_constraints['target']}字左右。按策略官hook方向即时反应写第一句。"""
+⚠️ 币安是配角，博主/读者/用户才是主角。
+直接写。严格控制在{length_constraints['target']}字左右（{length_constraints['min']}-{length_constraints['max']}字）。按策略官hook方向即时反应写第一句。"""
 
     provider = api_config.get("provider", "grok")
     api_key = api_config.get("api_key") or None
     model_id = api_config.get("model_id") or None
-    max_tokens = min(int(length_constraints.get("max", 500) * 1.5), 2048)
+    max_tokens = min(int(length_constraints['target'] * 2), 2048)
+    print(f"    [P30] max_tokens={max_tokens} (target={length_constraints['target']}字×2)")
 
     # 重试机制
     max_retries = 2
@@ -137,7 +142,7 @@ def bullish_take_writer(state: dict) -> dict:
             "target": custom_length
         }
 
-    # P30: RAG 样本（暂用半佛积极，后续换刘润）
+    # P30: RAG 样本（暂用半佛积极，后续换CZ转发推文样本）
     rag_context = _get_rag_samples()
 
     shared_context = {
@@ -154,7 +159,7 @@ def bullish_take_writer(state: dict) -> dict:
     print("--- [P30] 从策略官输出提取吹捧版本方案 ---")
     plans = _extract_plans(strategy_json)
     for i, p in enumerate(plans):
-        print(f"  版本{i+1}: {p.get('label','')} | 捧法: {p.get('praise_type','')} | 公式: {p.get('logic_pattern','')}")
+        print(f"  版本{i+1}: {p.get('label','')} | 视角: {p.get('perspective','')} | 公式: {p.get('logic_pattern','')}")
 
     # 按方案循环生成3个版本
     variants = []
@@ -172,7 +177,7 @@ def bullish_take_writer(state: dict) -> dict:
                 "key": f"variant_{i+1}",
                 "label": plan.get("label", f"版本{i+1}"),
                 "methods": [],
-                "instruction": plan.get("angle", ""),
+                "instruction": plan.get("story", ""),
                 "content": content,
                 "char_count": len(content) if content else 0,
             })

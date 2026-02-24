@@ -17,10 +17,12 @@ logger = logging.getLogger(__name__)
 def standard_critic(draft: str, mode: str, api_config: dict = None,
                     length: str = "thread", style: str = "auto", 
                     custom_prompts: dict = None,
-                    strategy_json: str = None) -> dict:
+                    strategy_json: str = None,
+                    variant_index: int = 0) -> dict:
     """
     标准 Critic - 5维度评分系统
     约束已烘焙到模板中
+    variant_index: P30 吹捧模式按版本索引取对应plan（0/1/2）
     """
     if api_config is None:
         api_config = {}
@@ -39,19 +41,26 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
     # P24: 注入模式专用评分配置
     scoring = mode_config.get("scoring", {})
     
-    # P29: 从策略官 JSON 提取 logic_pattern 和 tone
+    # P29/P30: 从策略官 JSON 提取对应版本的字段
     logic_pattern = ""
     tone = ""
-    praise_type = ""  # P30: 吹捧模式 praise_type
+    perspective = ""
+    story = ""
+    detail = ""
     if strategy_json:
         try:
             strategy_obj = json.loads(strategy_json) if isinstance(strategy_json, str) else strategy_json
             plans = strategy_obj.get("plans", [])
             if plans and isinstance(plans, list):
-                # 取第一个 plan 的写作公式和语气（供 Critic 对照检查）
-                logic_pattern = plans[0].get("logic_pattern", "")
-                tone = plans[0].get("tone", "")
-                praise_type = plans[0].get("praise_type", "")  # P30
+                # P30-fix: 按 variant_index 取对应版本的 plan，而非始终 plans[0]
+                idx = min(variant_index, len(plans) - 1) if variant_index >= 0 else 0
+                plan = plans[idx]
+                logic_pattern = plan.get("logic_pattern", "")
+                tone = plan.get("tone", "")
+                perspective = plan.get("perspective", "")
+                story = plan.get("story", "")
+                detail = plan.get("detail", "")
+                logger.info(f"[P30] Critic 对照版本{idx+1}: perspective={perspective}, tone={tone}")
         except (json.JSONDecodeError, TypeError):
             pass
     
@@ -71,10 +80,12 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         "penalty_cap": scoring.get("penalty_cap", 30),
         "pass_threshold": scoring.get("pass_threshold", 85),
         "refine_threshold": scoring.get("refine_threshold", 70),
-        # P29: 策略官上下文（B方案字段）
+        # P29/P30: 策略官上下文
         "logic_pattern": logic_pattern,
         "tone": tone,
-        "praise_type": praise_type,  # P30
+        "perspective": perspective,
+        "story": story,
+        "detail": detail,
     }
 
     

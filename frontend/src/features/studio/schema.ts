@@ -168,8 +168,8 @@ export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
 export const SKIP_MODES = {
     strategist: [] as string[],
     writer: [] as string[],
-    critic: ['hot_take', 'bullish_take', 'kaito_yap'],
-    polisher: ['hot_take', 'bullish_take', 'kaito_yap'],
+    critic: ['hot_take', 'kaito_yap'],
+    polisher: ['hot_take', 'kaito_yap'],
 } as const;
 
 /** 完整模式 Schema（4 个 agent 通用, P27: 8 模式） */

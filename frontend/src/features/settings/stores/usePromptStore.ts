@@ -153,7 +153,7 @@ export const usePromptStore = create<CustomPromptsState>()(
         {
             name: 'qs_custom_prompts',
             partialize: (state) => ({ customPrompts: state.customPrompts }),
-            version: 6, // P27: Bump v5→v6 for 3 new modes
+            version: 8, // P30: Bump v7→v8 for bullish_take B-plan defaults (all 4 agents)
             migrate: (persistedState: any, version: number) => {
                 // Version 0→1: mid_take → quick_summary
                 if (version === 0) {
@@ -198,18 +198,15 @@ export const usePromptStore = create<CustomPromptsState>()(
                     const cp = persistedState.customPrompts;
                     if (cp) {
                         const modes = ['hot_take', 'short_article', 'mid_article', 'long_article', 'tutorial'] as const;
-                        // Migrate each agent: if it's a flat object (has 'role' key), expand to per-mode
                         for (const agent of ['strategist', 'critic', 'polisher'] as const) {
                             const current = cp[agent];
                             if (current && typeof current.role === 'string') {
-                                // It's a flat PromptSection — expand to 6 modes
                                 const expanded: any = {};
                                 for (const m of modes) {
                                     expanded[m] = { ...current };
                                 }
                                 cp[agent] = expanded;
                             } else if (!current) {
-                                // Missing entirely — use defaults
                                 cp[agent] = JSON.parse(JSON.stringify(DEFAULT_PROMPTS[agent]));
                             }
                         }
@@ -241,6 +238,17 @@ export const usePromptStore = create<CustomPromptsState>()(
                                 if (!cp[agent].project_research && DEFAULT_PROMPTS[agent]?.project_research) {
                                     cp[agent].project_research = { ...DEFAULT_PROMPTS[agent].project_research };
                                 }
+                            }
+                        }
+                    }
+                }
+                // Version 6→8: P30 reset bullish_take for ALL agents (B-plan defaults)
+                if (version < 8) {
+                    const cp = persistedState.customPrompts;
+                    if (cp) {
+                        for (const agent of ['writer', 'strategist', 'critic', 'polisher'] as const) {
+                            if (cp[agent] && DEFAULT_PROMPTS[agent]?.bullish_take) {
+                                cp[agent].bullish_take = { ...DEFAULT_PROMPTS[agent].bullish_take };
                             }
                         }
                     }

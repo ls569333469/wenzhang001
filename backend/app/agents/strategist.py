@@ -155,10 +155,10 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
             system_prompt = render_prompt("strategist/short_article", context)
             user_prompt = f"[Session: {random_seed}]\n请分析以上素材，输出3个版本方案的JSON。"
         elif mode == "bullish_take":
-            # P30: 吹捧专用模板：捧法选择 + 事实提取
+            # P30: 吹捧专用模板：5种切入视角 + story/detail
             context["raw_input"] = combined_input
             system_prompt = render_prompt("strategist/bullish_take", context)
-            user_prompt = f"[Session: {random_seed}]\n请分析以上素材，选择最合适的捧法，输出3个方案的JSON。"
+            user_prompt = f"[Session: {random_seed}]\n请分析以上素材，选择最合适的切入视角，输出3个方案的JSON。"
         else:
             # Default Logic
             system_prompt = render_prompt("strategist", context)

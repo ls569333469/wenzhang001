@@ -13,7 +13,9 @@ const MODES: { id: keyof WriterPrompts; label: string }[] = [
     { id: 'mid_article', label: '中篇 (Mid Article)' },
     { id: 'long_article', label: '长篇 (Long Article)' },
     { id: 'tutorial', label: '教程 (Tutorial)' },
-
+    { id: 'bullish_take', label: '吹捧 (Bullish Take)' },
+    { id: 'kaito_yap', label: 'Kaito (Yap)' },
+    { id: 'project_research', label: '投研 (Research)' },
 ];
 
 export function WriterPromptEditor() {

@@ -127,7 +127,7 @@ MODE_CONFIGS = {
     },
     "bullish_take": {
         "name": "吹捧模式",
-        "length": {"min": 100, "max": 300, "target": 200},
+        "length": {"min": 250, "max": 500, "target": 350},
         "length_locked": False,
         "skip_strategist": False,  # P30: 启用策略师（对齐P29短篇架构）
         "skip_critic": False,

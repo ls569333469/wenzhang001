@@ -6,14 +6,16 @@ import { RotateCcw, Eye, FileJson, SkipForward } from 'lucide-react';
 import { DEFAULT_PROMPTS } from '../constants/defaultPrompts';
 import { SKIP_MODES } from '../../studio/schema';
 
-// P24-D: 6 模式子标签
+// P24-D: 8 模式子标签
 const MODES: { id: keyof WriterPrompts; label: string }[] = [
     { id: 'hot_take', label: '锐评' },
     { id: 'short_article', label: '短篇' },
     { id: 'mid_article', label: '中篇' },
     { id: 'long_article', label: '长篇' },
     { id: 'tutorial', label: '教程' },
-
+    { id: 'bullish_take', label: '吹捧' },
+    { id: 'kaito_yap', label: 'Kaito' },
+    { id: 'project_research', label: '投研' },
 ];
 
 export function CriticPromptEditor() {
