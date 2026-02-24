@@ -129,10 +129,10 @@ MODE_CONFIGS = {
         "name": "吹捧模式",
         "length": {"min": 100, "max": 300, "target": 200},
         "length_locked": False,
-        "skip_strategist": True,
+        "skip_strategist": False,  # P30: 启用策略师（对齐P29短篇架构）
         "skip_critic": False,
         "skip_polisher": False,
-        "output_count": 1,
+        "output_count": 3,  # P30: 3版本输出
         "scoring": {
             "dimensions": SCORING_DIMENSIONS,
             "penalty_rules": PENALTY_RULES,

@@ -327,14 +327,41 @@ def node_polisher(state: AgentState):
     
     # P18: 使用模块化路由获取对应 Polisher
     polisher_fn = get_polisher(mode)
-    final = polisher_fn(
-        draft=state["draft_v1"], 
-        critique_feedback=state["critique_feedback"], 
-        api_config=effective_config,
-        custom_prompts=state.get("custom_prompts", {}),
-        mode=mode,
-        length_constraints=length_constraints
-    )
+    
+    draft_v1 = state["draft_v1"]
+    
+    # P30: 多版本独立润色 — 检测是否包含多版本格式
+    import re
+    version_sections = re.split(r'\n\n---\n\n', draft_v1)
+    if len(version_sections) > 1 and "## 版本" in draft_v1:
+        print(f"--- [P30] 检测到 {len(version_sections)} 个版本，逐个独立润色 ---")
+        polished_parts = []
+        for i, section in enumerate(version_sections):
+            print(f"--- [P30] 润色版本 {i+1}/{len(version_sections)} ---")
+            try:
+                polished = polisher_fn(
+                    draft=section,
+                    critique_feedback=state["critique_feedback"],
+                    api_config=effective_config,
+                    custom_prompts=state.get("custom_prompts", {}),
+                    mode=mode,
+                    length_constraints=length_constraints
+                )
+                polished_parts.append(polished)
+            except Exception as e:
+                print(f"--- [P30] ⚠️ 版本 {i+1} 润色失败，保留原文: {e} ---")
+                polished_parts.append(section)
+        final = "\n\n---\n\n".join(polished_parts)
+        steps.append({"step": "multi_version", "content": f"独立润色 {len(version_sections)} 个版本"})
+    else:
+        final = polisher_fn(
+            draft=draft_v1, 
+            critique_feedback=state["critique_feedback"], 
+            api_config=effective_config,
+            custom_prompts=state.get("custom_prompts", {}),
+            mode=mode,
+            length_constraints=length_constraints
+        )
     
     steps.append({"step": "formatting", "content": "格式化 Markdown..."})
     steps.append({"step": "completed", "content": f"最终内容: {len(final)} 字"})

@@ -64,6 +64,11 @@ def build_strategist_context(state: dict) -> dict:
         "banfo": "半佛仙人体 - 反常识观点、案例轰炸、硬核科普"
     }
     
+    # P30: 吹捧模式使用半佛积极样本（后续换刘润）
+    STYLE_OVERRIDE = {"bullish_take": "banfo"}
+    if mode in STYLE_OVERRIDE:
+        style = STYLE_OVERRIDE[mode]
+    
     # 安全检查：未知风格 fallback 到 mimeng
     VALID_STYLES = {"mimeng", "banfo"}
     if style not in VALID_STYLES:
@@ -93,8 +98,8 @@ def build_strategist_context(state: dict) -> dict:
         "forbidden_patterns": load_forbidden_patterns(),  # P21: 禁用词库
     }
     
-    # P29: 注入公式菜单供策略师选择（仅 short_article 模式）
-    if state.get("mode") == "short_article":
+    # P29: 注入公式菜单供策略师选择（short_article + bullish_take）
+    if state.get("mode") in ("short_article", "bullish_take"):
         pattern_menu = sample_service.get_pattern_menu(style=style)
         context["pattern_menu"] = pattern_menu
         logger.info(f"[P29] Injected pattern_menu: {len(pattern_menu)} patterns for {style}")
@@ -149,6 +154,11 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
             context["raw_input"] = combined_input
             system_prompt = render_prompt("strategist/short_article", context)
             user_prompt = f"[Session: {random_seed}]\n请分析以上素材，输出3个版本方案的JSON。"
+        elif mode == "bullish_take":
+            # P30: 吹捧专用模板：捧法选择 + 事实提取
+            context["raw_input"] = combined_input
+            system_prompt = render_prompt("strategist/bullish_take", context)
+            user_prompt = f"[Session: {random_seed}]\n请分析以上素材，选择最合适的捧法，输出3个方案的JSON。"
         else:
             # Default Logic
             system_prompt = render_prompt("strategist", context)

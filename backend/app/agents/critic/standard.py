@@ -42,6 +42,7 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
     # P29: 从策略官 JSON 提取 logic_pattern 和 tone
     logic_pattern = ""
     tone = ""
+    praise_type = ""  # P30: 吹捧模式 praise_type
     if strategy_json:
         try:
             strategy_obj = json.loads(strategy_json) if isinstance(strategy_json, str) else strategy_json
@@ -50,6 +51,7 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
                 # 取第一个 plan 的写作公式和语气（供 Critic 对照检查）
                 logic_pattern = plans[0].get("logic_pattern", "")
                 tone = plans[0].get("tone", "")
+                praise_type = plans[0].get("praise_type", "")  # P30
         except (json.JSONDecodeError, TypeError):
             pass
     
@@ -72,6 +74,7 @@ def standard_critic(draft: str, mode: str, api_config: dict = None,
         # P29: 策略官上下文（B方案字段）
         "logic_pattern": logic_pattern,
         "tone": tone,
+        "praise_type": praise_type,  # P30
     }
 
     
