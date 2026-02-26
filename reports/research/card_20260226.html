@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Alpha Daily - 2026.02.26</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #050505;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(20, 25, 35, 1), transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(15, 20, 25, 1), transparent 50%);
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            padding: 40px; min-height: 100vh; color: #e5e7eb;
+        }
+        .canvas {
+            width: 1200px; min-height: 675px;
+            background: rgba(10, 10, 12, 0.4);
+            border: 1px solid #1f2025; border-radius: 24px;
+            padding: 48px; display: flex; flex-direction: column;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            position: relative; overflow: hidden;
+        }
+        .header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 20px;
+        }
+        .header-left { display: flex; flex-direction: column; gap: 8px; }
+        .title {
+            font-size: 28px; font-weight: 800; letter-spacing: 2px;
+            background: linear-gradient(90deg, #ffffff, #a1a1aa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle {
+            font-size: 14px; color: #6b7280; letter-spacing: 4px; text-transform: uppercase;
+        }
+        .date-badge {
+            background: #f5b300; color: #000; padding: 6px 16px;
+            border-radius: 20px; font-size: 14px; font-weight: 700; letter-spacing: 1px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px; flex: 1; align-content: start;
+        }
+        .card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 32px 24px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            display: flex; flex-direction: column; position: relative;
+        }
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 24px; right: 24px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        }
+        .tag {
+            font-size: 12px; color: #9ca3af; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .project-name {
+            font-size: 22px; font-weight: 700; color: #ffffff;
+            margin-bottom: 24px; line-height: 1.3;
+        }
+        .info-list { display: flex; flex-direction: column; gap: 16px; }
+        .info-item { display: flex; flex-direction: column; gap: 6px; }
+        .info-label {
+            font-size: 12px; color: #52525b; text-transform: uppercase;
+            letter-spacing: 1px; font-weight: 600;
+        }
+        .info-value { font-size: 14px; color: #d4d4d8; line-height: 1.5; }
+        .highlight { color: #38bdf8; font-weight: 500; }
+        .warning { color: #fbbf24; }
+    </style>
+</head>
+<body>
+    <div class="canvas">
+        <div class="header">
+            <div class="header-left">
+                <div class="subtitle">Institutional Grade Intel</div>
+                <div class="title">WEB3 ALPHA DAILY</div>
+            </div>
+            <div class="date-badge">2026.02.26</div>
+        </div>
+        <div class="grid">
+
+            <div class="card">
+                <div class="tag">🏛️ </div>
+                <div class="project-name">Perplexity</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">一句话定位</span>
+                        <span class="info-value">Perplexity AI 是一个 AI 驱动的搜索引擎，使用大语言模型合成实时网络内容回答用户查询，目标市场聚焦于信息检索和研究工具，挑战传统搜索引擎如 Go</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">近期催化</span>
+                        <span class="info-value">2026 年 2 月 25 日推出 Perplexity Computer，整合 19 个模型支持端到端项目管理，吸引超 700 万浏览和 2 万点赞，引发关注</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">结论</span>
+                        <span class="info-value">中立略看涨，适合股权或长期持有策略，通过订阅或合作伙伴间接参与。需要跟踪的 3 个关键指标：月活跃用户增长、ARR 变化、crypto 功能发布进度。</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag">🚀 </div>
+                <div class="project-name">Claude</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">市场数据</span>
+                        <span class="info-value">$CMEM价格/市值/交易量未知，但关联$CLAUDE价格约0.000021 USD，市值约200万美元，24h交易量中等。X粉丝数4831，GitHub st</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">近期催化</span>
+                        <span class="info-value">2月25日完成$MEMEDECK airdrop和MemeDeck平台launch，引发关注因结合AI工具和token激励，提升用户参与和流动性。2月23日1.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag">🏛️ </div>
+                <div class="project-name">Flood</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">一句话定位</span>
+                        <span class="info-value">Flood是一个创新的基于意图的DEX，简化订单流供应链，通过用户、所有者和履行者角色实现无gas交易和声明式交易逻辑，目标市场为Ethereum生态的去中心化</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">近期催化</span>
+                        <span class="info-value">最近2周内@ThinkingUSD发布多条推文讨论BTC囤积、Hyperliquid等话题，互动活跃（如单条推文超35万浏览），引发关注因其作为高影响力KOL的</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">结论</span>
+                        <span class="info-value">中立偏看跌，因项目已收购退休无独立赚钱机会。适合策略为观察0x生态动态而非直接参与。需要跟踪的3个关键指标：0x整合进展、@ThinkingUSD推文互动量、市</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag">🎯 </div>
+                <div class="project-name">QuiverAI</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">参与机会</span>
+                        <span class="info-value">项目于 2026 年 2 月 25 日推出 Arrow 1.0 公测版，提供免费试用和付费 API 访问，目前无 TGE 或空投计划，但种子轮融资公告可能吸引股</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="tag">💡 </div>
+                <div class="project-name">Qwen</div>
+                <div class="info-list">
+                    <div class="info-item">
+                        <span class="info-label">一句话定位</span>
+                        <span class="info-value">Qwen 是阿里巴巴开发的开源大语言模型系列，专注于多模态 AI 能力和代理功能，目标市场为全球 AI 开发者和企业用户。</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
