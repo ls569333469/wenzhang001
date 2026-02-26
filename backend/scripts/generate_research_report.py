@@ -12,6 +12,7 @@ import json
 import httpx
 from pathlib import Path
 from datetime import datetime
+from jinja2 import Environment, FileSystemLoader
 
 # ===== 环境 =====
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -30,6 +31,19 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 TODAY = datetime.now().strftime("%Y%m%d")
 TODAY_DISPLAY = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+# ===== P31 Phase 3: Jinja2 模板引擎 =====
+PROMPTS_DIR = Path(__file__).parent.parent / "data" / "prompts"
+_jinja_env = Environment(loader=FileSystemLoader(str(PROMPTS_DIR)))
+
+def render_research_prompt(template_name: str, context: dict = None) -> str:
+    """渲染投研 prompt 模板"""
+    try:
+        template = _jinja_env.get_template(f"research/{template_name}")
+        return template.render(**(context or {}))
+    except Exception as e:
+        print(f"  ⚠️ 模板加载失败 ({template_name}): {e}，使用空 prompt")
+        return ""
 
 
 # ============================================================
@@ -137,15 +151,8 @@ def parse_projects_from_text(text: str) -> list[dict]:
 
 
 def layer1_discover(target_account: str = "@leakmealpha") -> list[dict]:
-    """Layer 1: 选题发现 — 简洁 prompt，不限输出格式"""
-    # 搜 leak.me 网站 — 经多次测试验证，比搜推文更可靠
-    user_prompt = (
-        f"请访问和分析 leak.me（https://leak.me/）网站的当前 trending 数据。"
-        f"leak.me 是一个 Crypto KOL Tracker，追踪加密货币 KOL 的新关注行为。"
-        f"请整理出所有被 KOL 关注的 Web3 和 AI 项目，"
-        f"用表格列出：项目名称、Twitter 账号、类别、24h KOL 新关注数、热度原因。"
-        f"排除个人 KOL 账号、交易所和媒体。"
-    )
+    """Layer 1: 🔭 Scout（侦察官）— 从数据源发现项目"""
+    user_prompt = render_research_prompt("scout.jinja2")
 
     print("\n" + "=" * 60)
     print("📡 Layer 1: 选题发现")
@@ -187,53 +194,8 @@ def layer1_discover(target_account: str = "@leakmealpha") -> list[dict]:
 # ============================================================
 #  Layer 2: 深度分析
 # ============================================================
-LAYER2_SYSTEM = """# 角色
-你是一位机构级加密货币投研分析师，专注于发现可操作的投资机会。
-
-# 任务
-对指定 Web3 项目进行全维度深度分析，输出结构化的投研数据。
-
-# 分析重点
-你的分析应聚焦于"这个项目有没有赚钱机会"，具体包括：
-- 关键事件：TGE 时间、空投计划、主网上线、新融资轮、上所公告
-- 筹码结构：融资方阵容、估值区间、代币分配
-- 团队背书：核心成员背景、顾问阵容
-- 市场位置：竞品对比、赛道热度
-
-# 约束
-- 用中文输出
-- 只输出结论和数据，不要暴露你的搜索过程和推理步骤
-- 不要输出任何数据来源引用、URL 链接或内部数据库标记
-- 没有数据的维度直接跳过整个章节，不要写"待验证""暂无数据""未找到"
-- 每个章节内容精炼，2-4 句话为宜
-- 使用表格呈现融资历史、团队、风险等结构化数据
-
-# 输出格式
-按以下章节结构输出（没有数据的章节直接省略）：
-
-## 📊 一句话定位
-一句话概括项目是什么、做什么、目标市场。
-
-## 🎯 关键事件与参与机会
-近期有什么可操作的事件？TGE/空投/主网/融资？参与方式是什么？
-
-## 💰 筹码结构
-融资历史表格（轮次/金额/领投/日期）。当前估值/FDV。代币分配比例。
-
-## 👥 团队与背书
-核心成员表格（姓名/角色/背景）。顾问阵容。团队可信度（强/中/弱）。
-
-## 📈 市场数据
-价格/市值/交易量/TVL。社交数据：X 粉丝数。
-
-## 🔥 近期催化剂
-最近 2 周内的重要公告或事件，为什么引发关注。
-
-## ⚠️ 风险清单
-表格列出 3-5 个风险（风险描述/影响程度/发生概率）。
-
-## 🎯 结论
-一句话判断：看涨/中立/看跌。适合的参与策略。需要跟踪的 3 个关键指标。"""
+# Layer 2: 🔬 Analyst（分析师）— 从 Jinja2 模板加载
+LAYER2_SYSTEM = render_research_prompt("analyst.jinja2")
 
 
 def layer2_analyze(project: dict) -> dict:
@@ -389,9 +351,9 @@ def save_json(projects: list[dict]) -> Path:
 #  TODO: Phase 2 接入 Gemini/豆包 AI 润色
 # ============================================================
 def layer4_build_report(projects: list[dict]) -> Path:
-    """Layer 4: 组装最终 Markdown 报告"""
+    """Layer 4: ✍️ Copywriter（文案官）— 组装 Markdown 报告"""
     print("\n" + "=" * 60)
-    print("📝 Layer 4: 报告组装")
+    print("📝 Layer 4: 报告组装（Copywriter 文案官）")
     print("=" * 60)
 
     stage_labels = {
@@ -402,43 +364,22 @@ def layer4_build_report(projects: list[dict]) -> Path:
         "mature": "🏛️ 成熟协议",
     }
 
-    lines = [
-        "# 🌊 每日投研快报\n",
-        f"> **生成时间**: {TODAY_DISPLAY}  ",
-        f"> **数据来源**: KOL Tracker + Surf AI 深度分析  ",
-        f"> **分析模型**: surf-1.5 (reasoning: high)  ",
-        f"> **架构版本**: v2（选题→分析→清洗→组装）\n",
-        "---\n",
-        "## 📋 今日热点项目总览\n",
-        "| # | 项目 | 阶段 | 类别 | KOL | 参与机会 |",
-        "|---|------|------|------|-----|---------|",
-    ]
+    # 准备模板上下文
+    template_projects = []
+    for p in projects:
+        template_projects.append({
+            **p,
+            "stage_label": stage_labels.get(p["stage"], p["stage"]),
+        })
 
-    for i, p in enumerate(projects, 1):
-        stage = stage_labels.get(p["stage"], p["stage"])
-        lines.append(
-            f"| {i} | **{p['name']}** ({p.get('twitter', '')}) "
-            f"| {stage} | {p.get('category', '')} "
-            f"| +{p.get('kol_24h', '?')} | {p.get('opportunity', '')} |"
-        )
+    context = {
+        "date": datetime.now().strftime("%Y-%m-%d"),
+        "display_time": TODAY_DISPLAY,
+        "projects": template_projects,
+    }
 
-    lines.append("\n---\n")
+    report_text = render_research_prompt("copywriter/report.jinja2", context)
 
-    for i, p in enumerate(projects, 1):
-        stage = stage_labels.get(p["stage"], p["stage"])
-        lines.append(f"## {i}. {p['name']}\n")
-        lines.append(f"> 📍 {p.get('category', '')} | {stage} "
-                     f"| 🐦 {p.get('twitter', '')} | 🔥 KOL +{p.get('kol_24h', '?')}\n")
-        lines.append(p.get("analysis", "（分析数据获取失败）"))
-        lines.append("\n---\n")
-
-    # 免责声明
-    lines.append("## 📝 报告说明\n")
-    lines.append("- 本报告由 AI 自动生成，仅供参考，不构成投资建议")
-    lines.append("- 数据来源于公开信息，可能存在滞后或不完整")
-    lines.append("- 投资有风险，入市需谨慎\n")
-
-    report_text = "\n".join(lines)
     report_path = OUTPUT_DIR / f"daily_research_{TODAY}.md"
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report_text)

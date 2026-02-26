@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { LayoutGrid, Settings, PenTool, FolderOpen, PanelLeftClose, PanelLeft } from "lucide-react";
+import { LayoutGrid, Settings, PenTool, FolderOpen, PanelLeftClose, PanelLeft, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -30,6 +30,7 @@ export function AdaptiveSidebar() {
     const navItems = [
         { href: "/dashboard", icon: LayoutGrid, label: "仪表盘" },
         { href: "/studio", icon: PenTool, label: "创作中心" },
+        { href: "/research", icon: Search, label: "投研报告" },
         { href: "/data", icon: FolderOpen, label: "数据管理" },
         { href: "/settings", icon: Settings, label: "系统设置" },
     ];

@@ -1,0 +1,9 @@
+{# P31: Copywriter（文案官）— 汇总推文模板 #}
+{# 变量: date, projects (list of {name, twitter, stage, summary}) #}
+📊 今日 Alpha 速递 {{ date }}
+
+{% for p in projects %}
+{{ p.emoji }} {{ p.name }} ({{ p.twitter }}){% if p.summary %} — {{ p.summary }}{% endif %}
+
+{% endfor %}
+#Web3 #Alpha #投研日报

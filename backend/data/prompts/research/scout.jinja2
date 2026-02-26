@@ -1,0 +1,7 @@
+{# P31: Scout（侦察官）— Layer 1 选题发现 prompt #}
+{# 变量: source_url, categories, exclusion_rules #}
+请访问和分析 {{ source_url | default('leak.me（https://leak.me/）') }} 的当前 trending 数据。
+{{ source_description | default('leak.me 是一个 Crypto KOL Tracker，追踪加密货币 KOL 的新关注行为。') }}
+请整理出所有被 KOL 关注的 {{ categories | default('Web3 和 AI') }} 项目，
+用表格列出：项目名称、Twitter 账号、类别、24h KOL 新关注数、热度原因。
+{{ exclusion_rules | default('排除个人 KOL 账号、交易所和媒体。') }}

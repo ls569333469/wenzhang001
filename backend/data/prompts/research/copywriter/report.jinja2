@@ -1,0 +1,25 @@
+{# P31: Copywriter（文案官）— Markdown 报告模板 #}
+{# 变量: date, display_time, projects (list of dicts) #}
+# 📊 每日投研快报 — {{ date }}
+
+> 生成时间: {{ display_time }} | 数据源: KOL Tracker × Surf AI | 共 {{ projects | length }} 个项目
+
+---
+
+{% for p in projects %}
+## {{ loop.index }}. {{ p.name }} {{ p.stage_label }}
+
+| 维度 | 数据 |
+|------|------|
+| Twitter | {{ p.twitter }} |
+| 类别 | {{ p.category }} |
+| 阶段 | {{ p.stage }} |
+{% if p.kol_24h %}| 24h KOL | +{{ p.kol_24h }} |{% endif %}
+
+{{ p.analysis }}
+
+---
+
+{% endfor %}
+
+> 免责声明: 本报告由 AI 生成，仅供研究参考，不构成任何投资建议。

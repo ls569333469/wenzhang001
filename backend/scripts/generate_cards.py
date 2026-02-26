@@ -88,7 +88,7 @@ def extract_card_info(project: dict) -> dict:
             # 截取第一段有效内容
             first_para = text.split("\n")[0].strip()
             if first_para and len(first_para) > 10:
-                items.append({"label": label, "value": first_para[:80]})
+                items.append({"label": label, "value": first_para[:40]})
 
     # 确保至少有 1 条
     if not items:
@@ -214,10 +214,10 @@ def render_html(cards: list, date_str: str) -> str:
             padding: 40px; min-height: 100vh; color: #e5e7eb;
         }}
         .canvas {{
-            width: 1200px; min-height: 675px;
+            width: 1200px; height: 675px;
             background: rgba(10, 10, 12, 0.4);
             border: 1px solid #1f2025; border-radius: 24px;
-            padding: 48px; display: flex; flex-direction: column;
+            padding: 40px 48px; display: flex; flex-direction: column;
             box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
             position: relative; overflow: hidden;
         }}
@@ -270,7 +270,7 @@ def render_html(cards: list, date_str: str) -> str:
             font-size: 12px; color: #52525b; text-transform: uppercase;
             letter-spacing: 1px; font-weight: 600;
         }}
-        .info-value {{ font-size: 14px; color: #d4d4d8; line-height: 1.5; }}
+        .info-value {{ font-size: 13px; color: #d4d4d8; line-height: 1.4; }}
         .highlight {{ color: #38bdf8; font-weight: 500; }}
         .warning {{ color: #fbbf24; }}
     </style>
