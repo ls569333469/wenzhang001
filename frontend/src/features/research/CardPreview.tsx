@@ -99,21 +99,28 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                 </button>
             </div>
 
-            {/* 配图渲染 — 响应式缩放 */}
-            <div ref={wrapperRef} className="bg-[#050505] overflow-hidden">
-                <div style={{
-                    width: CARD_W,
-                    height: CARD_H,
-                    transform: `scale(${scale})`,
-                    transformOrigin: 'top left',
-                }}>
+            {/* 配图渲染 — 响应式缩放，绝对定位防穿模 */}
+            <div
+                ref={wrapperRef}
+                className="bg-[#050505] overflow-hidden"
+                style={{ position: 'relative', width: '100%', height: CARD_H * scale }}
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: CARD_W,
+                        height: CARD_H,
+                        transform: `scale(${scale})`,
+                        transformOrigin: 'top left',
+                    }}
+                >
                     <div ref={cardRef} style={{ width: CARD_W, height: CARD_H }}>
                         <style dangerouslySetInnerHTML={{ __html: styleContent }} />
                         <div dangerouslySetInnerHTML={{ __html: bodyContent }} />
                     </div>
                 </div>
-                {/* 占位高度，让外层正确计算高度 */}
-                <div style={{ height: CARD_H * scale - CARD_H, marginTop: 0 }} />
             </div>
         </div>
     );
