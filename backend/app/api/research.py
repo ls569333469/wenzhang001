@@ -1,12 +1,14 @@
 """
 P31: 投研报告 API
-提供投研数据给前端展示
+提供投研数据给前端展示 + 日报生成 + 侦察官搜索
 """
 import json
 import os
+import asyncio
 from pathlib import Path
 from typing import Optional
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, BackgroundTasks
+from pydantic import BaseModel
 
 router = APIRouter(prefix="/api/research", tags=["research"])
 
@@ -157,3 +159,119 @@ async def update_research_prompt(agent_name: str, content: str = ""):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     return {"status": "success", "agent": agent_name}
+
+
+# ============================================
+# P31 v4: 日报生成 + 侦察官独立 API
+# ============================================
+
+class DailyReportRequest(BaseModel):
+    """日报生成请求"""
+    provider: str = "volcengine"
+    model_id: Optional[str] = None
+    concurrency: int = 3
+
+
+@router.post("/daily-report")
+async def generate_daily_report(
+    request: DailyReportRequest,
+    background_tasks: BackgroundTasks,
+):
+    """
+    POST /api/research/daily-report
+    生成每日投研快报（侦察官→策略官×N→审核官→写手→润色官）
+
+    前端调用或定时任务调用均可。
+    策略官使用 Surf API（固定），审核官/写手/润色官使用 request 中的 provider。
+    """
+    from ..services.daily_report_service import generate_daily_report as _generate
+
+    api_config = {
+        "provider": request.provider,
+        "model_id": request.model_id,
+    }
+
+    try:
+        result = await _generate(
+            api_config=api_config,
+            concurrency=request.concurrency,
+        )
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/scout")
+async def run_scout_search():
+    """
+    GET /api/research/scout
+    单独跑侦察官，返回项目列表。
+    供前端 DataPanel (ResearchPanel) 使用。
+    """
+    from ..services.daily_report_service import run_scout
+
+    result = run_scout()
+
+    if not result["projects"]:
+        return {
+            "status": "empty",
+            "projects": [],
+            "message": "未发现热门项目",
+            "elapsed": result.get("elapsed", 0),
+        }
+
+    return {
+        "status": "success",
+        "projects": result["projects"],
+        "count": len(result["projects"]),
+        "elapsed": result.get("elapsed", 0),
+    }
+
+
+@router.get("/reports")
+async def list_research_reports():
+    """
+    GET /api/research/reports
+    列出所有日报和单项目报告。
+    供前端素材中心「投研报告」标签页使用。
+    """
+    RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
+    projects_dir = RESEARCH_DIR / "projects"
+    projects_dir.mkdir(exist_ok=True)
+
+    # 收集日报
+    daily_reports = []
+    for f in sorted(RESEARCH_DIR.glob("daily_research_*.md"), reverse=True):
+        date_str = f.stem.replace("daily_research_", "")
+        content = f.read_text(encoding="utf-8")
+        # 提取摘要（前 200 字）
+        summary = content[:200].replace("\n", " ").strip()
+        daily_reports.append({
+            "type": "daily",
+            "date": f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:]}" if len(date_str) == 8 else date_str,
+            "date_raw": date_str,
+            "filename": f.name,
+            "summary": summary,
+            "size": f.stat().st_size,
+        })
+
+    # 收集单项目报告
+    project_reports = []
+    for f in sorted(projects_dir.glob("*.md"), reverse=True):
+        parts = f.stem.rsplit("_", 1)
+        name = parts[0] if len(parts) > 1 else f.stem
+        date_str = parts[1] if len(parts) > 1 else ""
+        project_reports.append({
+            "type": "project",
+            "name": name,
+            "date_raw": date_str,
+            "filename": f.name,
+            "size": f.stat().st_size,
+        })
+
+    return {
+        "daily_reports": daily_reports,
+        "project_reports": project_reports,
+        "daily_count": len(daily_reports),
+        "project_count": len(project_reports),
+    }
