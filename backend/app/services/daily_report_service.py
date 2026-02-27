@@ -25,7 +25,7 @@ logger = get_logger("daily_report")
 # 默认配置
 DEFAULT_MODEL = "surf-1.5"
 DEFAULT_CONCURRENCY = 3
-REPORTS_DIR = Path(__file__).parent.parent.parent / "reports" / "research"
+REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research"
 
 
 # ============================================================

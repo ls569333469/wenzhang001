@@ -207,10 +207,11 @@ async def run_scout_search():
     GET /api/research/scout
     单独跑侦察官，返回项目列表。
     供前端 DataPanel (ResearchPanel) 使用。
+    注意: run_scout 内部用同步 httpx，需要 to_thread 避免阻塞 event loop。
     """
     from ..services.daily_report_service import run_scout
 
-    result = run_scout()
+    result = await asyncio.to_thread(run_scout)
 
     if not result["projects"]:
         return {
