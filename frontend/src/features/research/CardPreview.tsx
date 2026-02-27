@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Copy, Check, Image } from 'lucide-react';
 
 interface CardPreviewProps {
@@ -8,23 +8,40 @@ interface CardPreviewProps {
     date: string;
 }
 
+const CARD_W = 1200;
+const CARD_H = 675;
+
 export function CardPreview({ html, date }: CardPreviewProps) {
     const cardRef = useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
     const [copied, setCopied] = useState(false);
     const [copying, setCopying] = useState(false);
+    const [scale, setScale] = useState(0.5);
+
+    // 响应式计算缩放比
+    useEffect(() => {
+        const calc = () => {
+            if (wrapperRef.current) {
+                const w = wrapperRef.current.clientWidth;
+                setScale(Math.min(w / CARD_W, 1));
+            }
+        };
+        calc();
+        window.addEventListener('resize', calc);
+        return () => window.removeEventListener('resize', calc);
+    }, []);
 
     const handleCopyImage = async () => {
         if (!cardRef.current || copying) return;
         setCopying(true);
         try {
-            // 动态导入 html2canvas
             const html2canvas = (await import('html2canvas')).default;
             const canvas = await html2canvas(cardRef.current, {
                 backgroundColor: '#050505',
                 scale: 2,
                 useCORS: true,
-                width: 1200,
-                height: 675,
+                width: CARD_W,
+                height: CARD_H,
             });
             canvas.toBlob(async (blob) => {
                 if (blob) {
@@ -35,7 +52,6 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                         setCopied(true);
                         setTimeout(() => setCopied(false), 2000);
                     } catch {
-                        // Fallback: 下载图片
                         const url = URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = url;
@@ -54,7 +70,7 @@ export function CardPreview({ html, date }: CardPreviewProps) {
         }
     };
 
-    // 从完整 HTML 中提取 body 内容
+    // 从完整 HTML 中提取 body 和 style
     const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
     const styleMatch = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
     const bodyContent = bodyMatch ? bodyMatch[1] : '';
@@ -83,15 +99,21 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                 </button>
             </div>
 
-            {/* 配图渲染区域 */}
-            <div className="bg-[#050505] flex justify-center p-6 overflow-auto">
-                <div
-                    ref={cardRef}
-                    style={{ width: 1200, height: 675, transform: 'scale(0.85)', transformOrigin: 'top center' }}
-                >
-                    <style dangerouslySetInnerHTML={{ __html: styleContent }} />
-                    <div dangerouslySetInnerHTML={{ __html: bodyContent }} />
+            {/* 配图渲染 — 响应式缩放 */}
+            <div ref={wrapperRef} className="bg-[#050505] overflow-hidden">
+                <div style={{
+                    width: CARD_W,
+                    height: CARD_H,
+                    transform: `scale(${scale})`,
+                    transformOrigin: 'top left',
+                }}>
+                    <div ref={cardRef} style={{ width: CARD_W, height: CARD_H }}>
+                        <style dangerouslySetInnerHTML={{ __html: styleContent }} />
+                        <div dangerouslySetInnerHTML={{ __html: bodyContent }} />
+                    </div>
                 </div>
+                {/* 占位高度，让外层正确计算高度 */}
+                <div style={{ height: CARD_H * scale - CARD_H, marginTop: 0 }} />
             </div>
         </div>
     );

@@ -75,7 +75,7 @@ export function ResearchView() {
 
     return (
         <div className="h-full overflow-y-auto bg-canvas">
-            <div className="max-w-[1400px] mx-auto p-6 space-y-6">
+            <div className="w-full mx-auto p-4 space-y-4">
                 {/* 页面头部 */}
                 <div className="flex items-center justify-between">
                     <div>
