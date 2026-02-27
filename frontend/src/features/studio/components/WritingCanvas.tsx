@@ -23,12 +23,9 @@ export function WritingCanvas() {
     const lastSavedContent = useRef<string>('');
     const isGenerating = status === 'writing' || status === 'thinking';
 
-    // P31: 投研模式直接展示 ResearchView
+    // P31: 投研模式检测
     const searchParams = useSearchParams();
     const currentMode = searchParams.get('mode') || 'mid_article';
-    if (currentMode === 'project_research') {
-        return <ResearchView />;
-    }
 
     // Reset saved state when content changes after save
     useEffect(() => {
@@ -36,6 +33,22 @@ export function WritingCanvas() {
             setSavedToServer(false);
         }
     }, [content, savedToServer]);
+
+    // Auto-save (Every 60s)
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (content && !isGenerating && !isWaitingForSelection) {
+                saveVersion('user', 'Auto-save');
+            }
+        }, 60000);
+
+        return () => clearInterval(timer);
+    }, [content, isGenerating, isWaitingForSelection, saveVersion]);
+
+    // P31: 投研模式 — 所有 hooks 之后才能 early return
+    if (currentMode === 'project_research') {
+        return <ResearchView />;
+    }
 
     // P27: Save to server (local file)
     const handleSaveToServer = async () => {
@@ -66,18 +79,6 @@ export function WritingCanvas() {
         if (!content || isGenerating) return;
         saveVersion('user', 'Manual Save');
     };
-
-    // Auto-save (Every 60s)
-    useEffect(() => {
-        const timer = setInterval(() => {
-            if (content && !isGenerating && !isWaitingForSelection) {
-                // saveVersion has internal check for duplicates, so it's safe to call
-                saveVersion('user', 'Auto-save');
-            }
-        }, 60000); // 60 seconds
-
-        return () => clearInterval(timer);
-    }, [content, isGenerating, isWaitingForSelection, saveVersion]);
 
     const handleCopy = async () => {
         await navigator.clipboard.writeText(content);
