@@ -6,11 +6,13 @@ import { useAgentStore } from "@/features/agent/stores/useAgentStore";
 import { cn } from "@/lib/utils";
 import { RefreshCw, Copy, Check, FilePlus, Save } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { UI_TEXT } from '@/config/constants';
 import { marked } from 'marked';
 import { RichEditor } from "./editor/RichEditor";
 import { API_BASE_URL } from '@/config/api';
+import { ResearchView } from "@/features/research/ResearchView";
 
 export function WritingCanvas() {
     const { content, isWaitingForSelection, regenerate, status, updateContent, saveVersion, resetSession,
@@ -20,6 +22,13 @@ export function WritingCanvas() {
     const [savedToServer, setSavedToServer] = useState(false);
     const lastSavedContent = useRef<string>('');
     const isGenerating = status === 'writing' || status === 'thinking';
+
+    // P31: 投研模式直接展示 ResearchView
+    const searchParams = useSearchParams();
+    const currentMode = searchParams.get('mode') || 'mid_article';
+    if (currentMode === 'project_research') {
+        return <ResearchView />;
+    }
 
     // Reset saved state when content changes after save
     useEffect(() => {

@@ -2,7 +2,7 @@
 P31: 每日投研快报生成服务
 
 编排完整流程：
-    侦察官 → 策略官×N（并发3）→ 审核官 → 写手 → 润色官
+    侦察官 → 策略官×N（并发3）→ 审核官 → 写手 → 配图 → 推文 → 润色官
 
 调用方式：
     POST /api/research/daily-report
@@ -321,7 +321,106 @@ def run_writer(
 
 
 # ============================================================
-#  Step 5: 润色官 — 定稿
+#  Step 5: 配图生成
+# ============================================================
+
+def run_card_generator(projects: list[dict], date_str: str) -> str:
+    """
+    生成 1200×675 配图 HTML
+
+    Returns:
+        保存路径
+    """
+    logger.info("📸 配图: 生成中...")
+    from ..services.card_generator import save_card
+    path = save_card(projects, date_str)
+    logger.info(f"📸 配图完成: {path}")
+    return path
+
+
+# ============================================================
+#  Step 6: 推文文案
+# ============================================================
+
+def run_tweet_writer(
+    summary: str,
+    projects: list[dict],
+    api_config: dict = None,
+) -> list[dict]:
+    """
+    为每个项目生成一条推文（≤280字）
+
+    Returns:
+        [{"name": str, "text": str, "char_count": int}]
+    """
+    api_config = api_config or {}
+    logger.info(f"🐦 推文: 生成 {len(projects)} 条推文...")
+
+    system_prompt = (
+        "你是 Web3 推文写手。为每个项目生成一条中文推文：\n"
+        "1. 每条 ≤280 字\n"
+        "2. 开头用 emoji + 项目名\n"
+        "3. 核心亮点 1-2 个\n"
+        "4. 结尾加相关话题标签\n"
+        "5. 语言犀利有观点，不要套话\n\n"
+        "格式：每个项目一个段落，用 ## 项目名 分隔。"
+    )
+
+    user_prompt = f"请为以下项目各写一条推文：\n\n{summary}"
+
+    provider = api_config.get("provider", "volcengine")
+    model_id = api_config.get("model_id")
+
+    try:
+        result = generate_text(
+            prompt=user_prompt,
+            model_id=model_id,
+            provider=provider,
+            temperature=0.7,
+            system_prompt=system_prompt,
+            max_tokens=3000,
+        )
+
+        # 解析推文
+        import re
+        tweets = []
+        blocks = re.split(r"##\s*(.+?)\n", result)
+        for i in range(1, len(blocks), 2):
+            name = blocks[i].strip()
+            text = blocks[i + 1].strip() if i + 1 < len(blocks) else ""
+            if text:
+                tweets.append({"name": name, "text": text, "char_count": len(text)})
+
+        # fallback: 如果解析失败，尝试按项目名匹配
+        if not tweets:
+            for p in projects:
+                name = p.get("name", "")
+                if name in result:
+                    tweets.append({"name": name, "text": result[:280], "char_count": min(len(result), 280)})
+                    break
+
+        logger.info(f"🐦 推文完成: {len(tweets)} 条")
+        return tweets
+
+    except Exception as e:
+        logger.error(f"🐦 推文失败: {e}")
+        return []
+
+
+def _save_tweets(tweets: list[dict], date_str: str) -> str:
+    """保存推文到文件"""
+    _ensure_dirs()
+    path = REPORTS_DIR / f"tweets_{date_str}.md"
+    content = f"# 🐦 推文文案 — {date_str}\n\n"
+    for t in tweets:
+        content += f"## {t['name']}\n\n```\n{t['text']}\n```\n\n"
+    path.write_text(content, encoding="utf-8")
+    logger.info(f"📁 保存: {path}")
+    return str(path)
+
+
+# ============================================================
+#  Step 7: 润色官 — 定稿
 # ============================================================
 
 def run_polisher(draft: str, api_config: dict = None) -> str:
@@ -502,7 +601,18 @@ async def generate_daily_report(
         _progress("writer", "组装日报...")
         draft = run_writer(summary, projects, date_str, api_config)
 
-        # ===== Step 5: 润色官（定稿） =====
+        # ===== Step 5: 配图生成 =====
+        _progress("card", "生成配图...")
+        card_path = run_card_generator(projects, date_str)
+
+        # ===== Step 6: 推文文案 =====
+        _progress("tweets", "生成推文文案...")
+        tweets = run_tweet_writer(summary, projects, api_config)
+        tweets_path = ""
+        if tweets:
+            tweets_path = _save_tweets(tweets, date_str)
+
+        # ===== Step 7: 润色官（定稿） =====
         _progress("polisher", "润色定稿...")
         final_report = run_polisher(draft, api_config)
 
@@ -514,10 +624,14 @@ async def generate_daily_report(
 
         return {
             "status": "success",
+            "date": date_str,
             "projects_count": ok_count,
             "report_path": report_path,
+            "card_path": card_path,
+            "tweets_path": tweets_path,
             "project_paths": project_paths,
             "report_content": final_report,
+            "tweets": tweets,
             "elapsed": elapsed,
             "error": None,
         }
