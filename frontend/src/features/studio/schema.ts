@@ -81,7 +81,7 @@ export const CreationConfigSchema = z.object({
 // ===== P13: API 配置 Schema =====
 
 /** AI 提供商 */
-export const AIProviderSchema = z.enum(['volcengine', 'google', 'grok']);
+export const AIProviderSchema = z.enum(['volcengine', 'google', 'grok', 'surf']);
 
 /** 单个 API 配置 */
 export const APIConfigSchema = z.object({
@@ -158,7 +158,7 @@ export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
     bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
-    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },
+    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },  // P31: 写手用 DeepSeek
 };
 
 export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
@@ -195,7 +195,7 @@ export const DEFAULT_MODE_STRATEGISTS: z.infer<typeof ModeStrategistConfigSchema
     tutorial: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
-    project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    project_research: { provider: PROVIDER_IDS.SURF, model: 'surf-1.5' },  // P31: 策略官用 Surf 搜索
 };
 export type ModeStrategistConfig = z.infer<typeof ModeStrategistConfigSchema>;
 
