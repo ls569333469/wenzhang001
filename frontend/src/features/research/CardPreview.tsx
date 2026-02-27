@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { Copy, Check, Image } from 'lucide-react';
 
 interface CardPreviewProps {
@@ -11,38 +11,49 @@ interface CardPreviewProps {
 const CARD_W = 1200;
 const CARD_H = 675;
 
+/**
+ * P31: 配图预览组件
+ * 用 iframe 隔离配图 HTML 的 CSS，防止全局样式污染
+ * 截图时动态创建离屏 div 渲染完整 HTML
+ */
 export function CardPreview({ html, date }: CardPreviewProps) {
-    const cardRef = useRef<HTMLDivElement>(null);
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
     const [copied, setCopied] = useState(false);
     const [copying, setCopying] = useState(false);
-    const [scale, setScale] = useState(0.5);
-
-    // 响应式计算缩放比
-    useEffect(() => {
-        const calc = () => {
-            if (wrapperRef.current) {
-                const w = wrapperRef.current.clientWidth;
-                setScale(Math.min(w / CARD_W, 1));
-            }
-        };
-        calc();
-        window.addEventListener('resize', calc);
-        return () => window.removeEventListener('resize', calc);
-    }, []);
 
     const handleCopyImage = async () => {
-        if (!cardRef.current || copying) return;
+        if (copying) return;
         setCopying(true);
         try {
+            // 创建离屏 div 渲染完整 HTML，用于截图
+            const offscreen = document.createElement('div');
+            offscreen.style.cssText = `position:fixed;left:-9999px;top:0;width:${CARD_W}px;height:${CARD_H}px;overflow:hidden;z-index:-1;`;
+
+            // 提取 body 和 style
+            const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+            const styleMatch = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+            const bodyContent = bodyMatch ? bodyMatch[1] : '';
+            const styleContent = styleMatch ? styleMatch[1] : '';
+
+            // 用 shadow DOM 隔离样式
+            const shadow = offscreen.attachShadow({ mode: 'open' });
+            shadow.innerHTML = `<style>${styleContent}</style>${bodyContent}`;
+            document.body.appendChild(offscreen);
+
+            // 等待渲染
+            await new Promise(r => setTimeout(r, 100));
+
             const html2canvas = (await import('html2canvas')).default;
-            const canvas = await html2canvas(cardRef.current, {
+            const canvas = await html2canvas(shadow.querySelector('.canvas') as HTMLElement || offscreen, {
                 backgroundColor: '#050505',
                 scale: 2,
                 useCORS: true,
                 width: CARD_W,
                 height: CARD_H,
             });
+
+            document.body.removeChild(offscreen);
+
             canvas.toBlob(async (blob) => {
                 if (blob) {
                     try {
@@ -70,12 +81,6 @@ export function CardPreview({ html, date }: CardPreviewProps) {
         }
     };
 
-    // 从完整 HTML 中提取 body 和 style
-    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-    const styleMatch = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
-    const bodyContent = bodyMatch ? bodyMatch[1] : '';
-    const styleContent = styleMatch ? styleMatch[1] : '';
-
     return (
         <div className="bg-white border border-zinc-200 rounded-xl overflow-hidden">
             {/* 区域头部 */}
@@ -99,28 +104,16 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                 </button>
             </div>
 
-            {/* 配图渲染 — 响应式缩放，绝对定位防穿模 */}
-            <div
-                ref={wrapperRef}
-                className="bg-[#050505] overflow-hidden"
-                style={{ position: 'relative', width: '100%', height: CARD_H * scale }}
-            >
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        width: CARD_W,
-                        height: CARD_H,
-                        transform: `scale(${scale})`,
-                        transformOrigin: 'top left',
-                    }}
-                >
-                    <div ref={cardRef} style={{ width: CARD_W, height: CARD_H }}>
-                        <style dangerouslySetInnerHTML={{ __html: styleContent }} />
-                        <div dangerouslySetInnerHTML={{ __html: bodyContent }} />
-                    </div>
-                </div>
+            {/* 配图渲染 — iframe 隔离 CSS */}
+            <div className="bg-[#050505] w-full" style={{ aspectRatio: `${CARD_W}/${CARD_H}` }}>
+                <iframe
+                    ref={iframeRef}
+                    srcDoc={html}
+                    title="投研配图预览"
+                    sandbox="allow-same-origin"
+                    className="w-full h-full border-0"
+                    style={{ display: 'block' }}
+                />
             </div>
         </div>
     );
