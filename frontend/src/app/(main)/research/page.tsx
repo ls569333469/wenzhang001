@@ -1,20 +1,22 @@
 'use client';
 
-import { Suspense } from 'react';
-import { ResearchView } from '@/features/research/ResearchView';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 /**
- * P31: 投研报告页面
- * 展示配图、推文文案和完整报告
+ * P31: 投研报告页面 → 重定向到 Studio 投研模式
+ * 投研报告现在在 Studio 主区域展示
  */
 export default function ResearchPage() {
+    const router = useRouter();
+
+    useEffect(() => {
+        router.replace('/studio?mode=project_research');
+    }, [router]);
+
     return (
-        <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center">
-                <div className="text-ink-muted">加载中...</div>
-            </div>
-        }>
-            <ResearchView />
-        </Suspense>
+        <div className="min-h-screen flex items-center justify-center">
+            <div className="text-ink-muted text-sm">跳转到投研工作台...</div>
+        </div>
     );
 }
