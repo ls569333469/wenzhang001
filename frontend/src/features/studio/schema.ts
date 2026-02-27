@@ -95,6 +95,7 @@ export const PROVIDER_IDS = {
     VOLCENGINE: 'volcengine',
     GOOGLE: 'google',
     GROK: 'grok',
+    SURF: 'surf',  // P31: Surf AI (搜索+分析)
 } as const;
 
 /** Agent 模型配置项 (必须包含 provider 和 model) */

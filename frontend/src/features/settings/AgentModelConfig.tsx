@@ -28,6 +28,10 @@ const PROVIDER_MODELS = {
         { id: 'grok-4-1-fast-non-reasoning', name: 'Grok 4.1 Fast', description: '高速非推理 (2M上下文)' },
         { id: 'grok-4-0709', name: 'Grok 4 旗舰', description: '旗舰推理 (256K, $3/$15)' },
         { id: 'grok-3-mini', name: 'Grok 3 Mini', description: '轻量快速 (131K, $0.30/$0.50)' },
+    ],
+    [PROVIDER_IDS.SURF]: [
+        { id: 'surf-1.5', name: 'Surf 1.5', description: '深度搜索+分析 (推荐)' },
+        { id: 'surf-1.5-instant', name: 'Surf 1.5 Instant', description: '快速搜索' },
     ]
 };
 
@@ -54,6 +58,7 @@ const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
     [PROVIDER_IDS.VOLCENGINE]: '火山引擎',
     [PROVIDER_IDS.GOOGLE]: 'Google Gemini',
     [PROVIDER_IDS.GROK]: 'xAI Grok',
+    [PROVIDER_IDS.SURF]: 'Surf AI',
 };
 
 interface AgentModelConfigProps {

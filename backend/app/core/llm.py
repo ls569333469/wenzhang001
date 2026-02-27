@@ -17,7 +17,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # 支持的提供商类型
-ProviderType = Literal["google", "volcengine", "openai", "deepseek", "grok"]
+ProviderType = Literal["google", "volcengine", "openai", "deepseek", "grok", "surf"]
 
 # 提供商配置
 PROVIDER_CONFIGS = {
@@ -82,6 +82,16 @@ PROVIDER_CONFIGS = {
             "grok-3-mini",                   # 3 轻量 (131K, $0.30/$0.50)
             "grok-3",                        # 3 标准 (131K, $3/$15)
         ]
+    },
+    "surf": {
+        "base_url": "https://api.asksurf.ai/surf-ai/v1/chat/completions",
+        "env_key": "SURF_API_KEY",
+        "config_key": "surf",
+        "default_model": "surf-1.5",
+        "available_models": [
+            "surf-1.5",          # 深度搜索+分析
+            "surf-1.5-instant",  # 快速搜索
+        ]
     }
 }
 
@@ -109,7 +119,11 @@ def get_client(api_key: Optional[str] = None, provider: str = "volcengine"):
     if provider == "google":
         from google import genai
         return genai.Client(api_key=api_key)
-    
+
+    # P31: Surf AI 不使用 OpenAI SDK，返回 None（在 _generate_text_impl 中单独处理）
+    if provider == "surf":
+        return None  # Surf 使用 httpx 直接调用
+
     # 其他提供商使用 OpenAI 兼容 SDK
     from openai import OpenAI
     return OpenAI(
@@ -193,6 +207,21 @@ def _generate_text_impl(
             config=config
         )
         return response.text
+
+    # P31: Surf AI 使用 SurfService
+    if provider == "surf":
+        from ..services.surf_service import SurfService
+        surf = SurfService(api_key=api_key)
+        result = surf.call(
+            model=model,
+            system_prompt=system_prompt or "",
+            user_prompt=prompt,
+            abilities=["search"],
+            reasoning="high",
+        )
+        if result["status"] == 200:
+            return result["content"]
+        raise ValueError(f"Surf API error: {result.get('error', 'Unknown')}")
     
     # OpenAI 兼容格式 (volcengine, openai, deepseek, grok)
     messages = []
