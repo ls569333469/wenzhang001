@@ -34,6 +34,16 @@ class AgentState(TypedDict):
     revision_count: int
     logs: Annotated[List[str], operator.add]
     thinking_steps: Annotated[List[Dict[str, Any]], operator.add]  # 思考步骤
+    scout_projects: List[Dict[str, Any]]  # P31: Scout 发现的项目列表
+
+# 0. P31: 选题发现节点（仅 project_research 模式）
+def node_scout(state: AgentState):
+    from .agents.research.scout import scout_agent
+    print("--- [Step 0] Scout is Discovering ---")
+    steps = [{"step": "discovering", "content": "正在搜索热门项目..."}]
+    result = scout_agent(state)
+    return result
+
 
 # 1. 策略官节点
 def node_strategist(state: AgentState):
@@ -281,7 +291,7 @@ def node_critic(state: AgentState):
     else:
         steps.append({"step": "approved", "content": "质量达标，通过审核 (PASS)"})
     
-    return {
+    return_state = {
         "critique_score": score, 
         "critique_feedback": feedback,
         "critique_verdict": verdict,  # P12: 新增 verdict 字段
@@ -289,6 +299,13 @@ def node_critic(state: AgentState):
         "logs": [f"[{datetime.now().isoformat()}] Critic score: {score} ({verdict})."],
         "thinking_steps": [{"agent": "critic", "steps": steps, "status": "completed"}]
     }
+
+    # P31: 投研清洗模式 — 将清洗后的数据写入 strategy_json 供 Writer 使用
+    if isinstance(critic_result, dict) and "cleaned_draft" in critic_result:
+        return_state["strategy_json"] = critic_result["cleaned_draft"]
+        return_state["draft_v1"] = ""  # 清空 draft 让 Writer 重新生成
+
+    return return_state
 
 # 4. 润色节点 (P18: 使用模块化路由)
 def node_polisher(state: AgentState):
@@ -372,52 +389,98 @@ def node_polisher(state: AgentState):
         "thinking_steps": [{"agent": "polisher", "steps": steps, "status": "completed"}]
     }
 
-# 路由逻辑：Critic 决定是重写还是通过 (P14: 模式感知)
-def router_logic(state: AgentState):
-    mode = state.get("mode", "mid_article")  # P16: 默认中篇
+# ============================================================
+#  P31: 条件路由（支持投研模式不同的节点顺序）
+# ============================================================
+
+def entry_router(state: AgentState):
+    """入口路由：投研空输入 → Scout，否则 → Strategist"""
+    if state.get("mode") == "project_research" and not state.get("raw_input", "").strip():
+        return "scout"
+    return "strategist"
+
+
+def post_strategist_router(state: AgentState):
+    """Strategist 后：投研 → Critic(清洗)，普通 → Writer"""
+    if state.get("mode") == "project_research":
+        return "critic"  # 投研：先清洗数据再写报告
+    return "writer"      # 普通：直接写
+
+
+def post_writer_router(state: AgentState):
+    """Writer 后：投研 → Polisher(跳过评分)，普通 → Critic(评分)"""
+    if state.get("mode") == "project_research":
+        return "polisher"  # 投研：写完直接润色，不打分
+    return "critic"        # 普通：提交评分
+
+
+def post_critic_router(state: AgentState):
+    """Critic 后：投研 → Writer(清洗完写报告)，普通 → 评分路由"""
+    mode = state.get("mode", "mid_article")
+
+    # P31: 投研模式 — Critic 做清洗，完成后交给 Writer
+    if mode == "project_research":
+        return "writer"
+
+    # 以下是普通模式的评分路由（原 router_logic）
     config = get_mode_config(mode)
-    
-    # P25: 如果跳过评审
+
     if config.get("skip_critic", False):
-        # 同时跳过润色 → 直接结束
         if config.get("skip_polisher", False):
             return "end"
         return "polisher"
-    
-    # P14: 获取模式专属阈值
+
     scoring = config.get("scoring", {})
     pass_threshold = scoring.get("pass_threshold", 85)
     max_revisions = scoring.get("max_revisions", 3)
-    
-    # P14-Fix7: 使用模式专属阈值
-    if state.get("critique_score", 0) < pass_threshold and state.get("revision_count", 0) < max_revisions:
+
+    if state.get("critique_score", 0) < pass_threshold \
+       and state.get("revision_count", 0) < max_revisions:
         return "writer"  # 打回重写
-    
-    # 通过评审后检查是否跳过润色
+
     if config.get("skip_polisher", False):
         return "end"
-    return "polisher"    # 通过
+    return "polisher"
 
-# 构建图
+
+# ============================================================
+#  构建图
+# ============================================================
 workflow = StateGraph(AgentState)
 
+workflow.add_node("scout", node_scout)          # P31: 新增
 workflow.add_node("strategist", node_strategist)
 workflow.add_node("writer", node_writer)
 workflow.add_node("critic", node_critic)
 workflow.add_node("polisher", node_polisher)
 
-workflow.set_entry_point("strategist")
-workflow.add_edge("strategist", "writer")
-workflow.add_edge("writer", "critic")
-workflow.add_conditional_edges(
-    "critic",
-    router_logic,
-    {
-        "writer": "writer",
-        "polisher": "polisher",
-        "end": END  # P25: 跳过 critic + polisher 直接结束
-    }
+# P31: 条件入口（投研空输入 → Scout，否则 → Strategist）
+workflow.set_conditional_entry_point(
+    entry_router,
+    {"scout": "scout", "strategist": "strategist"}
 )
+
+# Scout → Strategist（固定边）
+workflow.add_edge("scout", "strategist")
+
+# Strategist → Writer 或 Critic（投研先清洗）
+workflow.add_conditional_edges(
+    "strategist", post_strategist_router,
+    {"writer": "writer", "critic": "critic"}
+)
+
+# Writer → Critic 或 Polisher（投研跳过评分）
+workflow.add_conditional_edges(
+    "writer", post_writer_router,
+    {"critic": "critic", "polisher": "polisher"}
+)
+
+# Critic → Writer 或 Polisher 或 END
+workflow.add_conditional_edges(
+    "critic", post_critic_router,
+    {"writer": "writer", "polisher": "polisher", "end": END}
+)
+
 workflow.add_edge("polisher", END)
 
 app_graph = workflow.compile()

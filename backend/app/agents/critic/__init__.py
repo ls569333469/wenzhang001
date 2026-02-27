@@ -7,6 +7,7 @@ P18: 方案 B - 全模块独立架构
 """
 from .standard import standard_critic
 from .skip import skip_critic
+from .research_cleaner import research_cleaner  # P31
 
 CRITIC_REGISTRY = {
     "short_article": standard_critic,  # P24: 补注册
@@ -16,7 +17,7 @@ CRITIC_REGISTRY = {
     "hot_take": skip_critic,  # 锐评跳过评分
     "bullish_take": standard_critic,   # P27: 吹捧模式 — 专用模板
     "kaito_yap": standard_critic,      # P27: Kaito 嘴撸 — 专用模板
-    "project_research": standard_critic,  # P27: 投研 — 5维度评分
+    "project_research": research_cleaner,  # P31: 投研 — 数据清洗（不打分）
 }
 
 

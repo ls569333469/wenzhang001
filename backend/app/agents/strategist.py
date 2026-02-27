@@ -159,6 +159,11 @@ def build_strategist_prompt(context: dict, state: dict) -> tuple[str, str]:
             context["raw_input"] = combined_input
             system_prompt = render_prompt("strategist/bullish_take", context)
             user_prompt = f"[Session: {random_seed}]\n请分析以上素材，选择最合适的切入视角，输出3个方案的JSON。"
+        elif mode == "project_research":
+            # P31: 投研专用 — 调 Surf API 做深度分析
+            context["raw_input"] = combined_input
+            system_prompt = render_prompt("strategist/project_research", context)
+            user_prompt = f"[Session: {random_seed}]\n请对该项目进行全维度投研分析，输出结构化的投研数据。"
         else:
             # Default Logic
             system_prompt = render_prompt("strategist", context)
