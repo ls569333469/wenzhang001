@@ -111,8 +111,9 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                     srcDoc={html}
                     title="投研配图预览"
                     sandbox="allow-same-origin"
+                    scrolling="no"
                     className="w-full h-full border-0"
-                    style={{ display: 'block' }}
+                    style={{ display: 'block', overflow: 'hidden' }}
                 />
             </div>
         </div>
