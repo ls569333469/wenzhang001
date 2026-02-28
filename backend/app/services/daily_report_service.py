@@ -348,25 +348,47 @@ def run_tweet_writer(
     api_config: dict = None,
 ) -> list[dict]:
     """
-    为每个项目生成一条推文（≤280字）
+    生成一条聚合的 Alpha 日报推文（≤280字）+ 各项目要点
 
     Returns:
-        [{"name": str, "text": str, "char_count": int}]
+        [{"name": "Alpha日报", "text": str, "char_count": int},
+         {"name": project_name, "text": str, "char_count": int}, ...]
     """
     api_config = api_config or {}
-    logger.info(f"🐦 推文: 生成 {len(projects)} 条推文...")
+    project_names = [p.get("name", "Unknown") for p in projects]
+    logger.info(f"🐦 推文: 聚合 {len(projects)} 个项目生成 Alpha 速报...")
 
     system_prompt = (
-        "你是 Web3 推文写手。为每个项目生成一条中文推文：\n"
-        "1. 每条 ≤280 字\n"
-        "2. 开头用 emoji + 项目名\n"
-        "3. 核心亮点 1-2 个\n"
-        "4. 结尾加相关话题标签\n"
-        "5. 语言犀利有观点，不要套话\n\n"
-        "格式：每个项目一个段落，用 ## 项目名 分隔。"
+        "你是顶级 Web3 Alpha 猎手，负责写 X(Twitter) 推文。\n\n"
+        "## 任务\n"
+        "根据今日投研简报，输出以下内容：\n\n"
+        "### PART1: 主推文（必须 ≤ 280字）\n"
+        "一条聚合速报，格式参考：\n"
+        "```\n"
+        "🔍 今日 Alpha 速报\n\n"
+        "1️⃣ $项目A — 一句话催化剂/机会\n"
+        "2️⃣ $项目B — 一句话催化剂/机会\n"
+        "3️⃣ $项目C — 一句话催化剂/机会\n\n"
+        "👇 详细分析见配图\n"
+        "#Web3Alpha #投研日报\n"
+        "```\n\n"
+        "要求：\n"
+        "- 每个项目只写一句核心催化剂或入场信号，不要写项目介绍\n"
+        "- 催化剂示例：融资、空投、TGE、主网上线、合作、链上数据异常\n"
+        "- 如果项目没有明确机会，写风险提示（⚠️）\n"
+        "- 语言要犀利、有判断力，不要客套\n"
+        "- 总字数严格 ≤ 280字\n\n"
+        "### PART2: 各项目详细要点\n"
+        "每个项目用 ## 项目名 分隔，2-3行：\n"
+        "- 第一行：核心 Alpha（催化剂/机会/风险）\n"
+        "- 第二行：建议动作（买入/观望/参与空投/关注等）\n"
+        "- 不要写项目背景介绍\n"
     )
 
-    user_prompt = f"请为以下项目各写一条推文：\n\n{summary}"
+    user_prompt = (
+        f"今日投研的 {len(projects)} 个项目：{', '.join(project_names)}\n\n"
+        f"投研简报内容：\n{summary[:3000]}"
+    )
 
     provider = api_config.get("provider", "volcengine")
     model_id = api_config.get("model_id")
@@ -381,25 +403,44 @@ def run_tweet_writer(
             max_tokens=3000,
         )
 
-        # 解析推文
+        # 解析: 先提取主推文，再提取各项目要点
         import re
         tweets = []
-        blocks = re.split(r"##\s*(.+?)\n", result)
-        for i in range(1, len(blocks), 2):
-            name = blocks[i].strip()
-            text = blocks[i + 1].strip() if i + 1 < len(blocks) else ""
-            if text:
-                tweets.append({"name": name, "text": text, "char_count": len(text)})
 
-        # fallback: 如果解析失败，尝试按项目名匹配
+        # 尝试分离 PART1 和 PART2
+        parts = re.split(r"###?\s*PART\s*2|##\s*各项目", result, maxsplit=1, flags=re.IGNORECASE)
+        main_tweet = parts[0].strip()
+        detail_section = parts[1] if len(parts) > 1 else ""
+
+        # 清理主推文（去掉标题行）
+        main_tweet = re.sub(r"###?\s*PART\s*1.*?\n", "", main_tweet, flags=re.IGNORECASE).strip()
+        main_tweet = re.sub(r"^```\n?|```$", "", main_tweet).strip()
+
+        if main_tweet:
+            tweets.append({
+                "name": "Alpha日报",
+                "text": main_tweet,
+                "char_count": len(main_tweet),
+            })
+
+        # 解析各项目要点
+        if detail_section:
+            blocks = re.split(r"##\s*(.+?)\n", detail_section)
+            for i in range(1, len(blocks), 2):
+                name = blocks[i].strip()
+                text = blocks[i + 1].strip() if i + 1 < len(blocks) else ""
+                if text:
+                    tweets.append({"name": name, "text": text, "char_count": len(text)})
+
+        # fallback: 如果解析失败，整段作为主推文
         if not tweets:
-            for p in projects:
-                name = p.get("name", "")
-                if name in result:
-                    tweets.append({"name": name, "text": result[:280], "char_count": min(len(result), 280)})
-                    break
+            tweets.append({
+                "name": "Alpha日报",
+                "text": result[:280],
+                "char_count": min(len(result), 280),
+            })
 
-        logger.info(f"🐦 推文完成: {len(tweets)} 条")
+        logger.info(f"🐦 推文完成: 主推文 + {len(tweets)-1} 条要点")
         return tweets
 
     except Exception as e:
