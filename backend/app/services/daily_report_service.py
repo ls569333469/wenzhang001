@@ -42,10 +42,16 @@ def run_scout() -> dict:
     logger.info("🔭 侦察官：开始搜索...")
 
     user_prompt = (
-        "请访问和分析 leak.me（https://leak.me/）网站的当前 trending 数据。"
-        "请整理出所有被 KOL 关注的 Web3 和 AI 项目，"
-        "用表格列出：项目名称、Twitter 账号、类别、24h KOL 新关注数、热度原因。"
-        "排除个人 KOL 账号、交易所和媒体。"
+        "检索 @leakmealpha 近 7 天推文 + 访问 leak.me 网站 trending。\n"
+        "leak.me 是 Crypto KOL Tracker，追踪加密 KOL 的新关注行为。\n"
+        "只输出一张表格，不要写任何分析或说明：\n"
+        "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n"
+        "字段说明：\n"
+        "- 赛道: DeFi/L2/AI/GameFi/RWA/Infra 等\n"
+        "- 代币: 代币符号（如 $NEAR）或 无\n"
+        "- 阶段: 预发布/测试网/已上线/TGE前\n"
+        "- 近期催化剂: 一句话（融资/空投/TGE/上线/合作）\n"
+        "排除个人 KOL、交易所、媒体、纯 meme 币。最多 8 个。"
     )
 
     surf = SurfService()
@@ -86,21 +92,32 @@ def _analyze_single_project(project: dict) -> dict:
     twitter = project.get("twitter", "")
     logger.info(f"🔬 策略官: 分析 {name} ({twitter})...")
 
+    category = project.get("category", "")
+    token = project.get("token", "未知")
+    stage = project.get("stage", "未知")
+    catalyst = project.get("catalyst", project.get("buzz", ""))
+
     user_prompt = (
-        f"请对以下 Web3 项目做全面深度投研分析：\n\n"
-        f"项目名称: {name}\n"
-        f"Twitter: {twitter}\n"
-        f"类别: {project.get('category', '')}\n"
-        f"热度原因: {project.get('buzz', '')}\n\n"
-        f"请从以下维度分析（每个维度都要有具体数据支撑）：\n"
-        f"1. 项目概要（定位、核心产品、目标市场）\n"
-        f"2. 融资与估值（融资历史、投资方、估值、FDV）\n"
-        f"3. 团队（核心成员、背景、可信度评分 1-10）\n"
-        f"4. 市场数据（价格、市值、TVL、社交数据）\n"
-        f"5. 代币经济学（总量、分配、解锁计划）\n"
-        f"6. 竞品对比（同赛道 2-3 个竞品）\n"
-        f"7. 风险与机会（关键风险点、投资机会窗口）\n"
-        f"8. 总结评级（1-10 分 + 一句话结论）"
+        f"深度调研项目 {name} ({twitter})。\n"
+        f"侦察线索: 赛道 {category}，代币 {token}，阶段 {stage}，催化剂 {catalyst}。\n\n"
+        f"输出完整投研报告，包含以下板块，只写事实和数据：\n\n"
+        f"## 📊 项目定位\n"
+        f"是什么、做什么、核心产品、目标市场。\n\n"
+        f"## 💰 融资\n"
+        f"用表格列出每轮融资：\n"
+        f"| 时间 | 轮次 | 金额 | 领投方 |\n"
+        f"融资总额。\n\n"
+        f"## 👥 团队\n"
+        f"核心成员（姓名/角色/背景）。\n\n"
+        f"## 🪙 代币经济学\n"
+        f"代币符号、是否已发行、总供应量、分配比例、解锁计划。\n\n"
+        f"## 📈 市场数据\n"
+        f"当前价格、市值、FDV、TVL、Twitter 粉丝数。\n\n"
+        f"## 🔥 近期催化剂\n"
+        f"最近已发生 + 即将发生的关键事件（TGE/空投/主网/上所/产品发布/合作），注明日期。\n\n"
+        f"## 🏁 竞品对比\n"
+        f"同赛道 2-3 个竞品，简要对比定位和差异。\n\n"
+        f"不要附带来源链接和 URL。没有数据的板块直接跳过。"
     )
 
     surf = SurfService()
@@ -353,41 +370,44 @@ def run_tweet_writer(
     api_config: dict = None,
 ) -> list[dict]:
     """
-    生成一条聚合的 Alpha 日报推文（≤280字）+ 各项目要点
+    为每个项目生成一条独立的 Alpha 推文
 
     Returns:
-        [{"name": "Alpha日报", "text": str, "char_count": int},
-         {"name": project_name, "text": str, "char_count": int}, ...]
+        [{"name": project_name, "text": str, "char_count": int}, ...]
     """
     api_config = api_config or {}
     project_names = [p.get("name", "Unknown") for p in projects]
     logger.info(f"🐦 推文: 聚合 {len(projects)} 个项目生成 Alpha 速报...")
 
+    from datetime import datetime, timedelta
+    today = datetime.now()
+    date_30d_ago = (today - timedelta(days=30)).strftime("%Y-%m-%d")
+    date_str_today = today.strftime("%m-%d")
+
     system_prompt = (
-        "你是顶级 Web3 Alpha 猎手，负责写 X(Twitter) 推文。\n\n"
+        "你是 Web3 Alpha 猎手，负责写 X(Twitter) 推文。\n\n"
         "## 任务\n"
-        "根据今日投研简报，输出以下内容：\n\n"
-        "### PART1: 主推文（必须 ≤ 280字）\n"
-        "一条聚合速报，格式参考：\n"
+        "根据投研报告，为每个项目生成一条独立推文。\n\n"
+        "## 推文格式（每个项目一条）\n"
         "```\n"
-        "🔍 今日 Alpha 速报\n\n"
-        "1️⃣ $项目A — 一句话催化剂/机会\n"
-        "2️⃣ $项目B — 一句话催化剂/机会\n"
-        "3️⃣ $项目C — 一句话催化剂/机会\n\n"
-        "👇 详细分析见配图\n"
-        "#Web3Alpha #投研日报\n"
+        "🔍 项目名称 @X账号\n\n"
+        "一段话介绍项目定位和核心产品（2-3句）\n\n"
+        "💰 融资金额 + 领投方\n"
+        "👥 创始人姓名 + 背景\n"
+        "🪙 代币符号 + 总量 + 关键分配\n"
+        "📈 价格 | 市值 | FDV | TVL | Twitter粉丝\n\n"
+        "🔥 近期催化剂：\n"
+        "• 事件1（日期）\n"
+        "• 事件2（日期）\n\n"
+        "@X账号 | NFA\n"
         "```\n\n"
-        "要求：\n"
-        "- 每个项目只写一句核心催化剂或入场信号，不要写项目介绍\n"
-        "- 催化剂示例：融资、空投、TGE、主网上线、合作、链上数据异常\n"
-        "- 如果项目没有明确机会，写风险提示（⚠️）\n"
-        "- 语言要犀利、有判断力，不要客套\n"
-        "- 总字数严格 ≤ 280字\n\n"
-        "### PART2: 各项目详细要点\n"
-        "每个项目用 ## 项目名 分隔，2-3行：\n"
-        "- 第一行：核心 Alpha（催化剂/机会/风险）\n"
-        "- 第二行：建议动作（买入/观望/参与空投/关注等）\n"
-        "- 不要写项目背景介绍\n"
+        "## 要求\n"
+        f"- 催化剂只取 {date_30d_ago} 之后的事件，旧事件不要\n"
+        "- 标题只写项目名称和 @X账号，不写代币符号和赛道\n"
+        "- 不写可信度评分\n"
+        "- 不写建议动作、投资建议\n"
+        "- 不附带 URL 和来源链接\n"
+        "- 没有数据的行直接跳过\n"
     )
 
     user_prompt = (
@@ -405,47 +425,37 @@ def run_tweet_writer(
             provider=provider,
             temperature=0.7,
             system_prompt=system_prompt,
-            max_tokens=3000,
+            max_tokens=6000,
         )
 
-        # 解析: 先提取主推文，再提取各项目要点
+        # 解析: 按 🔍 分割为各项目推文
         import re
         tweets = []
 
-        # 尝试分离 PART1 和 PART2
-        parts = re.split(r"###?\s*PART\s*2|##\s*各项目", result, maxsplit=1, flags=re.IGNORECASE)
-        main_tweet = parts[0].strip()
-        detail_section = parts[1] if len(parts) > 1 else ""
-
-        # 清理主推文（去掉标题行）
-        main_tweet = re.sub(r"###?\s*PART\s*1.*?\n", "", main_tweet, flags=re.IGNORECASE).strip()
-        main_tweet = re.sub(r"^```\n?|```$", "", main_tweet).strip()
-
-        if main_tweet:
+        # 按 🔍 分割（每个项目一条推文）
+        blocks = re.split(r"(?=🔍)", result.strip())
+        for block in blocks:
+            block = block.strip()
+            if not block:
+                continue
+            # 提取项目名（🔍 后面的第一个词）
+            name_match = re.match(r"🔍\s*(.+?)(?:\s*@|\n)", block)
+            name = name_match.group(1).strip() if name_match else "Unknown"
             tweets.append({
-                "name": "Alpha日报",
-                "text": main_tweet,
-                "char_count": len(main_tweet),
+                "name": name,
+                "text": block,
+                "char_count": len(block),
             })
 
-        # 解析各项目要点
-        if detail_section:
-            blocks = re.split(r"##\s*(.+?)\n", detail_section)
-            for i in range(1, len(blocks), 2):
-                name = blocks[i].strip()
-                text = blocks[i + 1].strip() if i + 1 < len(blocks) else ""
-                if text:
-                    tweets.append({"name": name, "text": text, "char_count": len(text)})
-
-        # fallback: 如果解析失败，整段作为主推文
+        # fallback: 如果解析失败，整段作为推文
         if not tweets:
             tweets.append({
                 "name": "Alpha日报",
-                "text": result[:280],
-                "char_count": min(len(result), 280),
+                "text": result,
+                "char_count": len(result),
             })
 
-        logger.info(f"🐦 推文完成: 主推文 + {len(tweets)-1} 条要点")
+        logger.info(f"🐦 推文完成: {len(tweets)} 条项目推文")
         return tweets
 
     except Exception as e:

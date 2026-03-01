@@ -1,7 +1,13 @@
-{# P31: Scout（侦察官）— Layer 1 选题发现 prompt #}
-{# 变量: source_url, categories, exclusion_rules #}
-请访问和分析 {{ source_url | default('leak.me（https://leak.me/）') }} 的当前 trending 数据。
-{{ source_description | default('leak.me 是一个 Crypto KOL Tracker，追踪加密货币 KOL 的新关注行为。') }}
-请整理出所有被 KOL 关注的 {{ categories | default('Web3 和 AI') }} 项目，
-用表格列出：项目名称、Twitter 账号、类别、24h KOL 新关注数、热度原因。
-{{ exclusion_rules | default('排除个人 KOL 账号、交易所和媒体。') }}
+{# P31: Scout（侦察官）— Layer 1 选题发现 prompt (G 版) #}
+{# 经过 Round 1-2 A/B 测试验证的最佳版本 #}
+{# 特点: 零噪音返回, 7 列结构化表格 #}
+检索 @leakmealpha 近 7 天推文 + 访问 leak.me 网站 trending。
+leak.me 是 Crypto KOL Tracker，追踪加密 KOL 的新关注行为。
+只输出一张表格，不要写任何分析或说明：
+| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |
+字段说明：
+- 赛道: DeFi/L2/AI/GameFi/RWA/Infra 等
+- 代币: 代币符号（如 $NEAR）或 无
+- 阶段: 预发布/测试网/已上线/TGE前
+- 近期催化剂: 一句话（融资/空投/TGE/上线/合作）
+排除个人 KOL、交易所、媒体、纯 meme 币。最多 8 个。

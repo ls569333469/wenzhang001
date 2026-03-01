@@ -17,62 +17,133 @@ from ...services.surf_service import SurfService
 
 def _parse_projects_from_text(text: str) -> list[dict]:
     """
-    从 Surf 返回的 Markdown 中解析项目列表
+    从 Surf 返回的 Markdown 表格中解析项目列表
 
-    支持两种格式:
-    1. Markdown 表格: | Name | @handle | ... |
-    2. 列表项: - **Name** (@handle): ...
+    支持 G 版 7 列表格:
+    | 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |
+
+    也兼容旧版 5 列表格和列表项格式。
     """
     projects = []
     seen = set()
 
-    # 解析 Markdown 表格行
-    table_rows = re.findall(r"\|\s*(.+?)\s*\|\s*(@\w+)\s*\|(.+?)\|", text)
-    for row in table_rows:
-        name = row[0].strip().strip("**").strip("| ").strip()
-        twitter = row[1].strip()
-        rest = row[2].strip()
-        # 跳过表头
-        if name.lower() in ("项目名称", "project", "项目", "姓名", "-", "（无）"):
-            continue
-        key = twitter.lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        projects.append({
-            "name": name,
-            "twitter": twitter,
-            "category": "",
-            "kol_24h": 0,
-            "buzz": rest[:100].strip(" |"),
-        })
+    # ---- 尝试解析 Markdown 表格 ----
+    lines = text.strip().split("\n")
+    header_idx = -1
+    col_count = 0
 
-    # 解析列表项
-    list_items = re.findall(
-        r"[-•]\s*\*{0,2}(.+?)\*{0,2}\s*\((@\w+)\)[：:]\s*(.+?)(?:\n|$)", text
-    )
-    for item in list_items:
-        name = item[0].strip()
-        twitter = item[1].strip()
-        key = twitter.lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        projects.append({
-            "name": name,
-            "twitter": twitter,
-            "category": "",
-            "kol_24h": 0,
-            "buzz": item[2].strip()[:100],
-        })
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith("|") and "项目" in stripped:
+            header_idx = i
+            col_count = len([c for c in stripped.split("|") if c.strip()])
+            break
 
-    # 提取 KOL 关注数
-    for p in projects:
-        kol_match = re.search(r"(\d+)\s*(?:位?\s*)?KOL", p["buzz"], re.IGNORECASE)
-        if kol_match:
-            p["kol_24h"] = int(kol_match.group(1))
+    # 跳过表头行和分隔行
+    data_start = header_idx + 2 if header_idx >= 0 else -1
+
+    if data_start > 0:
+        for line in lines[data_start:]:
+            stripped = line.strip()
+            if not stripped.startswith("|"):
+                break  # 表格结束
+            cells = [c.strip() for c in stripped.split("|") if c.strip()]
+            if not cells or cells[0].startswith("---"):
+                continue
+
+            name = cells[0].strip("** ").strip()
+            twitter = cells[1].strip() if len(cells) > 1 else ""
+
+            # 跳过表头误匹配
+            if name.lower() in ("项目名称", "project", "项目", "-"):
+                continue
+            # 确保 twitter 以 @ 开头
+            if twitter and not twitter.startswith("@"):
+                twitter = f"@{twitter}"
+
+            key = twitter.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+
+            # 7 列 G 版格式
+            if len(cells) >= 7:
+                projects.append({
+                    "name": name,
+                    "twitter": twitter,
+                    "category": cells[2].strip(),
+                    "kol_24h": _safe_int(cells[3]),
+                    "token": cells[4].strip(),
+                    "stage": cells[5].strip(),
+                    "catalyst": cells[6].strip(),
+                    "buzz": cells[6].strip(),  # 兼容旧字段
+                })
+            # 6 列格式
+            elif len(cells) >= 6:
+                projects.append({
+                    "name": name,
+                    "twitter": twitter,
+                    "category": cells[2].strip(),
+                    "kol_24h": _safe_int(cells[3]),
+                    "token": "",
+                    "stage": cells[4].strip(),
+                    "catalyst": cells[5].strip(),
+                    "buzz": cells[5].strip(),
+                })
+            # 5 列旧版格式
+            elif len(cells) >= 5:
+                projects.append({
+                    "name": name,
+                    "twitter": twitter,
+                    "category": cells[2].strip(),
+                    "kol_24h": _safe_int(cells[3]),
+                    "token": "",
+                    "stage": "",
+                    "catalyst": "",
+                    "buzz": cells[4].strip()[:100],
+                })
+            else:
+                projects.append({
+                    "name": name,
+                    "twitter": twitter,
+                    "category": "",
+                    "kol_24h": 0,
+                    "token": "",
+                    "stage": "",
+                    "catalyst": "",
+                    "buzz": " | ".join(cells[2:])[:100],
+                })
+
+    # ---- 兼容：列表项格式 ----
+    if not projects:
+        list_items = re.findall(
+            r"[-•]\s*\*{0,2}(.+?)\*{0,2}\s*\((@\w+)\)[：:]\s*(.+?)(?:\n|$)", text
+        )
+        for item in list_items:
+            name = item[0].strip()
+            twitter = item[1].strip()
+            key = twitter.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            projects.append({
+                "name": name,
+                "twitter": twitter,
+                "category": "",
+                "kol_24h": 0,
+                "token": "",
+                "stage": "",
+                "catalyst": "",
+                "buzz": item[2].strip()[:100],
+            })
 
     return projects
+
+
+def _safe_int(s: str) -> int:
+    """安全提取数字，处理 '高' '未知' '估算5-10' 等非标准值"""
+    m = re.search(r"(\d+)", s)
+    return int(m.group(1)) if m else 0
 
 
 # ============================================================
@@ -96,10 +167,16 @@ def scout_agent(state: dict) -> dict:
     except Exception:
         # Fallback：硬编码基础 prompt
         user_prompt = (
-            "请访问和分析 leak.me（https://leak.me/）网站的当前 trending 数据。"
-            "请整理出所有被 KOL 关注的 Web3 和 AI 项目，"
-            "用表格列出：项目名称、Twitter 账号、类别、24h KOL 新关注数、热度原因。"
-            "排除个人 KOL 账号、交易所和媒体。"
+            "检索 @leakmealpha 近 7 天推文 + 访问 leak.me 网站 trending。\n"
+            "leak.me 是 Crypto KOL Tracker，追踪加密 KOL 的新关注行为。\n"
+            "只输出一张表格，不要写任何分析或说明：\n"
+            "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n"
+            "字段说明：\n"
+            "- 赛道: DeFi/L2/AI/GameFi/RWA/Infra 等\n"
+            "- 代币: 代币符号（如 $NEAR）或 无\n"
+            "- 阶段: 预发布/测试网/已上线/TGE前\n"
+            "- 近期催化剂: 一句话（融资/空投/TGE/上线/合作）\n"
+            "排除个人 KOL、交易所、媒体、纯 meme 币。最多 8 个。"
         )
 
     steps.append({"step": "searching", "content": "正在搜索 leak.me 热门项目..."})
@@ -145,9 +222,10 @@ def scout_agent(state: dict) -> dict:
         raw_input_for_strategist = (
             f"项目名称: {p['name']}\n"
             f"Twitter: {p['twitter']}\n"
-            f"类别: {p.get('category', '')}\n"
-            f"KOL关注: +{p.get('kol_24h', 0)}\n"
-            f"热度原因: {p.get('buzz', '')}"
+            f"赛道: {p.get('category', '')}\n"
+            f"代币: {p.get('token', '')}\n"
+            f"阶段: {p.get('stage', '')}\n"
+            f"近期催化剂: {p.get('catalyst', p.get('buzz', ''))}"
         )
 
     return {
