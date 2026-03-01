@@ -108,10 +108,10 @@ export const DEFAULT_PROMPTS = {
             forbidden: "过于正式的学术行文、长篇大论的说教。"
         },
         project_research: {
-            role: "你是顶级 Crypto 基金的首席投研分析师，正在输出一份硬核的投研报告。",
-            task: "1. **核心逻辑** - 提炼项目的价值主张与底层逻辑。\n2. **数据解析** - 根据提供的素材穿透数据背后的业务真相。\n3. **竞争格局** - 对比同门竞争者（如有）。\n4. **结论与风险** - 给出清晰的投研结论并提示主要风险点。",
-            style: "极其专业、客观、数据驱动、结构化、无冗余废话。",
-            forbidden: "主观煽情、毫无根据的价格预测、套话满篇。"
+            role: "你是 Web3 Alpha 猎手，负责写 X(Twitter) 推文。",
+            task: "根据投研报告，为每个项目生成一条独立推文。\n\n推文格式：\n🔍 项目名称 @X账号\n\n一段话介绍项目定位和核心产品（2-3句）\n\n💰 融资金额 + 领投方\n👥 创始人姓名 + 背景\n🪙 代币符号 + 总量 + 关键分配\n📈 价格 | 市值 | FDV | TVL | Twitter粉丝\n\n🔥 近期催化剂：\n• 事件1（日期）\n• 事件2（日期）",
+            style: "催化剂只取最近30天事件。标题只写项目名称和@X账号。金额用简写：$670万、$1.08亿。粉丝用简写：10.2万粉。",
+            forbidden: "可信度评分、建议动作、投资建议、URL链接、6700000 USD等长数字"
         }
     },
     // P24-D: 策略师 per-mode 默认（所有模式共享相同基础提示词）
@@ -172,10 +172,10 @@ ending_style: 六选一（反问收尾/预判收尾/自嘲收尾/冷叙述收尾
             forbidden: "Do not suggest boring or purely academic angles."
         },
         project_research: {
-            role: "You are a rigorous Crypto Research Director.",
-            task: "Break down the source material to outline a comprehensive, institutional-grade research report framework with 3 potential focal points.",
-            style: "Highly analytical, structured, deep-dive oriented.",
-            forbidden: "Do not hallucinate data not in the material."
+            role: "你是深度投研策略官，为每个项目输出完整的 7 板块投研报告。",
+            task: "输出完整投研报告，包含以下板块，只写事实和数据：\n\n## 📊 项目定位\n是什么、做什么、核心产品、目标市场。\n\n## 💰 融资\n用表格列出每轮融资（时间/轮次/金额/领投方），融资总额。\n\n## 👥 团队\n核心成员（姓名/角色/背景）。\n\n## 🪙 代币经济学\n代币符号、是否已发行、总供应量、分配比例、解锁计划。\n\n## 📈 市场数据\n当前价格、市值、FDV、TVL、Twitter 粉丝数。\n\n## 🔥 近期催化剂\n最近已发生 + 即将发生的关键事件，注明日期。\n\n## 🏁 竞品对比\n同赛道 2-3 个竞品，简要对比。",
+            style: "纯事实和数据，结构化板块输出",
+            forbidden: "来源链接和URL、风险分析、建议动作、方法论描述。没有数据的板块直接跳过。"
         }
     },
     // P24-D: 评论家 per-mode 默认

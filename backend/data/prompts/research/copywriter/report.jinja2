@@ -1,5 +1,5 @@
-{# P31: Copywriter（文案官）— Markdown 报告模板 #}
-{# 变量: date, display_time, projects (list of dicts) #}
+{# P31: Report（日报模板）— Markdown 报告 (v2) #}
+{# 变量: date, display_time, projects (list of dicts with analysis) #}
 # 📊 每日投研快报 — {{ date }}
 
 > 生成时间: {{ display_time }} | 数据源: KOL Tracker × Surf AI | 共 {{ projects | length }} 个项目
@@ -7,14 +7,15 @@
 ---
 
 {% for p in projects %}
-## {{ loop.index }}. {{ p.name }} {{ p.stage_label }}
+## {{ loop.index }}. {{ p.name }} ({{ p.twitter }})
 
 | 维度 | 数据 |
 |------|------|
-| Twitter | {{ p.twitter }} |
-| 类别 | {{ p.category }} |
-| 阶段 | {{ p.stage }} |
-{% if p.kol_24h %}| 24h KOL | +{{ p.kol_24h }} |{% endif %}
+| 赛道 | {{ p.category }} |
+| 代币 | {{ p.token | default('未知') }} |
+| 阶段 | {{ p.stage | default('未知') }} |
+{% if p.kol_24h %}| KOL 关注 | +{{ p.kol_24h }} |{% endif %}
+{% if p.catalyst %}| 催化剂 | {{ p.catalyst }} |{% endif %}
 
 {{ p.analysis }}
 
