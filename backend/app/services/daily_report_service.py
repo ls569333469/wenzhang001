@@ -431,19 +431,35 @@ def _enrich_projects_from_analysis(
                     # 最终限制 45 字符
                     p["summary"] = raw[:45]
 
-            # ---------- 提取催化剂（只从专门催化剂段） ----------
+            # ---------- 提取催化剂（催化剂段 + 代币经济学解锁） ----------
+            cat_lines = []
+
+            # 来源 1: 专门催化剂段 ## 🔥 近期催化剂
             cat_match = CAT_PATTERN.search(content)
             if cat_match:
-                cat_lines = []
                 for l in cat_match.group(1).strip().split("\n"):
                     l = l.strip().lstrip("-•·* ")
-                    # 跳过无效行
                     if not l or l.startswith("|") or l.startswith("#"):
                         continue
-                    # 跳过风险描述和推理过程
                     if any(kw in l for kw in ["风险", "推理", "局限", "不确定"]):
                         continue
                     cat_lines.append(l)
+
+            # 来源 2: 代币经济学段中的解锁日期
+            token_match = re.search(
+                r"##\s*(?:🪙\s*代币经济学|代币经济)\s*\n+(.*?)(?=\n##|\Z)",
+                content, re.DOTALL,
+            )
+            if token_match:
+                token_text = token_match.group(1)
+                # 提取 "YYYY-MM-DD 解锁 X%" 格式
+                for m in re.finditer(
+                    r"(202[4-9]-\d{2}-\d{2})\s*解锁\s*([\d.]+%)",
+                    token_text,
+                ):
+                    cat_lines.append(f"{m.group(1)} 解锁 {m.group(2)}")
+
+            if cat_lines:
                 best = pick_best_catalyst(cat_lines)
                 if best:
                     p["catalyst"] = best
