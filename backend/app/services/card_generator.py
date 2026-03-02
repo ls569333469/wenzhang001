@@ -1,6 +1,6 @@
 """
 P31: 投研配图生成器
-生成 1200×675 暗色卡片 HTML，适配 X(Twitter) 分享
+生成 1200×675 浅色瑞士金融报纸风 HTML 卡片，适配 X(Twitter) 分享
 
 前端用 html2canvas 截图为 PNG
 """
@@ -13,8 +13,9 @@ REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research
 # 赛道 emoji 映射
 CATEGORY_EMOJI = {
     "AI": "🤖", "Web3": "🔗", "Web3 AI": "🧠", "Web3/AI": "🧠",
-    "DeFi": "💰", "Layer1": "⛓️", "Layer2": "🔷", "NFT": "🎨",
-    "Gaming": "🎮", "Infra": "🏗️", "Social": "💬",
+    "DeFi": "💰", "DeFi AI": "🤖", "Layer1": "⛓️", "Layer2": "🔷",
+    "NFT": "🎨", "Gaming": "🎮", "GameFi": "🎮",
+    "SportFi": "⚽", "Infra": "🏗️", "Social": "💬", "RWA": "🏦",
 }
 
 
