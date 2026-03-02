@@ -343,6 +343,93 @@ def run_writer(
 
 
 # ============================================================
+#  Step 4.5: 从策略官报告中回填 summary + catalyst
+# ============================================================
+
+def _enrich_projects_from_analysis(
+    projects: list[dict],
+    analysis_results: list[dict],
+) -> list[dict]:
+    """
+    从策略官的深度报告中提取一句话定位和催化剂，回填到 projects 列表。
+
+    用于 Step 5 (配图) 和 Step 6 (推文) 的数据输入。
+    兼容新旧两种报告格式。
+    """
+    import re
+    from .card_generator import pick_best_catalyst
+
+    # 建立 name → analysis_content 映射
+    analysis_map = {}
+    for r in analysis_results:
+        if r.get("content"):
+            analysis_map[r["name"].lower().strip()] = r["content"]
+
+    # 兼容新旧格式的 section 正则
+    # 新格式: ## 📊 项目定位    旧格式: ## 1. 项目概要
+    POS_PATTERN = re.compile(
+        r"##\s*(?:📊\s*项目定位|\d+\.\s*项目概要[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
+        re.DOTALL,
+    )
+    # 新格式: ## 🔥 近期催化剂   旧格式: ## 7. 风险与机会
+    CAT_PATTERN = re.compile(
+        r"##\s*(?:🔥\s*近期催化剂|\d+\.\s*(?:风险与机会|近期催化剂)[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
+        re.DOTALL,
+    )
+
+    enriched = []
+    for p in projects:
+        p = dict(p)  # shallow copy
+        name_key = p.get("name", "").lower().strip()
+        content = analysis_map.get(name_key, "")
+
+        if content:
+            # 提取一句话定位
+            pos_match = POS_PATTERN.search(content)
+            if pos_match:
+                text = pos_match.group(1).strip()
+                # 过滤掉表格行和空行，取第一段有效文字
+                lines = [
+                    l.strip() for l in text.split("\n")
+                    if l.strip()
+                    and not l.strip().startswith("|")
+                    and not l.strip().startswith("-")
+                    and not l.strip().startswith("**")
+                ]
+                if lines:
+                    first = lines[0]
+                    # 截断到合理长度（第一个句号或逗号分句）
+                    for sep in ["。", "，旨在", "，支持", "，提供", "，专注", "，强调"]:
+                        idx = first.find(sep)
+                        if idx > 10:
+                            first = first[:idx + len(sep)].rstrip("，、")
+                            break
+                    # 去掉来源标注 (来源：xxx)
+                    first = re.sub(r"[（(]来源[：:].*?[）)]", "", first).strip()
+                    p["summary"] = first[:80]
+
+            # 提取催化剂列表
+            cat_match = CAT_PATTERN.search(content)
+            if cat_match:
+                cat_lines = []
+                for l in cat_match.group(1).strip().split("\n"):
+                    l = l.strip().lstrip("-•·* ")
+                    if l and not l.startswith("|") and not l.startswith("#"):
+                        cat_lines.append(l)
+                best = pick_best_catalyst(cat_lines)
+                if best:
+                    p["catalyst"] = best
+
+        enriched.append(p)
+
+    logger.info(
+        f"📋 数据回填: {sum(1 for p in enriched if p.get('summary'))} 个 summary, "
+        f"{sum(1 for p in enriched if p.get('catalyst'))} 个 catalyst"
+    )
+    return enriched
+
+
+# ============================================================
 #  Step 5: 配图生成
 # ============================================================
 
@@ -658,13 +745,17 @@ async def generate_daily_report(
         _progress("writer", "组装日报...")
         draft = run_writer(summary, projects, date_str, api_config)
 
+        # ===== Step 4.5: 从策略官报告回填 summary + catalyst =====
+        _progress("enrich", "提取项目定位与催化剂...")
+        enriched_projects = _enrich_projects_from_analysis(projects, analysis_results)
+
         # ===== Step 5: 配图生成 =====
         _progress("card", "生成配图...")
-        card_path = run_card_generator(projects, date_str)
+        card_path = run_card_generator(enriched_projects, date_str)
 
         # ===== Step 6: 推文文案 =====
         _progress("tweets", "生成推文文案...")
-        tweets = run_tweet_writer(summary, projects, api_config)
+        tweets = run_tweet_writer(summary, enriched_projects, api_config)
         tweets_path = ""
         if tweets:
             tweets_path = _save_tweets(tweets, date_str)
