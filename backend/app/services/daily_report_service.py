@@ -398,6 +398,14 @@ def _enrich_projects_from_analysis(
                     and not l.strip().startswith("**")
                 ]
                 if lines:
+                    # 跳过模板指令行（如 "是什么、做什么、核心产品、目标市场"）
+                    lines = [
+                        l for l in lines
+                        if len(l) > 8
+                        and "是什么" not in l
+                        and "用表格" not in l
+                    ]
+                if lines:
                     raw = lines[0]
                     # 去掉来源标注
                     raw = re.sub(r"[（(]来源[：:].*?[）)]", "", raw).strip()
@@ -407,14 +415,21 @@ def _enrich_projects_from_analysis(
                         "",
                         raw,
                     ).strip()
-                    # 截断到第一个逗号分句（生成短 summary）
-                    for sep in ["，", "。", "；"]:
-                        idx = raw.find(sep)
-                        if 4 < idx < 40:
+                    # 截断策略：保留前 2 个逗号分句（兼顾信息量和卡片空间）
+                    # 例如 "非托管 DeFi AI 代理基础设施，支持跨协议自动执行收益策略"
+                    commas = [m.start() for m in re.finditer("，", raw)]
+                    if len(commas) >= 2 and commas[1] < 50:
+                        # 取到第 2 个逗号
+                        raw = raw[:commas[1]]
+                    elif len(commas) >= 1 and commas[0] < 45:
+                        # 只有 1 个逗号在合理范围内
+                        raw = raw[:commas[0]]
+                    elif "。" in raw:
+                        idx = raw.index("。")
+                        if idx < 50:
                             raw = raw[:idx]
-                            break
-                    # 最终限制 35 字符（配图卡片空间有限）
-                    p["summary"] = raw[:35]
+                    # 最终限制 45 字符
+                    p["summary"] = raw[:45]
 
             # ---------- 提取催化剂（只从专门催化剂段） ----------
             cat_match = CAT_PATTERN.search(content)
