@@ -102,15 +102,24 @@ def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
             vague_future.append(c)
             continue
 
+    # 清理催化剂文本：截断到第一个逗号/分号，去掉尾部标点
+    def _clean(text: str) -> str:
+        for sep in ["，", "；", "。", ",", ";"]:
+            idx = text.find(sep)
+            if idx > 4:
+                text = text[:idx]
+                break
+        return text.rstrip("。，；.、：: ")
+
     # 按优先级返回
     if future_events:
         future_events.sort(key=lambda x: x[0])
-        return future_events[0][1]
+        return _clean(future_events[0][1])
     if recent_events:
         recent_events.sort(key=lambda x: x[0], reverse=True)
-        return recent_events[0][1]
+        return _clean(recent_events[0][1])
     if vague_future:
-        return vague_future[0]
+        return _clean(vague_future[0])
     return ""
 
 
@@ -143,7 +152,7 @@ def generate_card_html(
         emoji = _get_emoji(category)
         summary = _truncate(p.get("summary", p.get("buzz", "")), 60)
         twitter = p.get("twitter", "")
-        catalyst = _truncate(p.get("catalyst", ""), 50)
+        catalyst = _truncate(p.get("catalyst", ""), 25)
 
         catalyst_html = ""
         if catalyst:
