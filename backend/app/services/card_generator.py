@@ -4,7 +4,8 @@ P31: 投研配图生成器
 
 前端用 html2canvas 截图为 PNG
 """
-from datetime import datetime
+import re
+from datetime import datetime, timedelta
 from pathlib import Path
 
 REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research"
@@ -29,6 +30,87 @@ def _truncate(text: str, max_len: int) -> str:
     if len(text) <= max_len:
         return text
     return text[:max_len - 1] + "…"
+
+
+def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
+    """
+    从催化剂列表中选出最适合展示在卡片上的一条。
+
+    优先级：
+    1. 未来事件（最近的一条）
+    2. 7 天内已发生的事件（最近的一条）
+    3. 模糊未来事件（如 "2026年 xxx"）
+    4. 都不满足 → 返回空字符串
+
+    Args:
+        catalysts: 催化剂文本列表，例如 ["2026-02-03 Vision 2030", "2026年 美国市场重入"]
+        today: 当前日期（默认 now）
+    """
+    if not catalysts:
+        return ""
+
+    today = today or datetime.now()
+    today_date = today.date()
+    cutoff = today_date - timedelta(days=7)
+
+    future_events = []    # (date, text)
+    recent_events = []    # (date, text)
+    vague_future = []     # 模糊未来事件
+
+    for c in catalysts:
+        c = c.strip().lstrip("•·- ")
+        if not c:
+            continue
+
+        # 尝试提取 YYYY-MM-DD
+        m = re.search(r"(202[4-9])-(\d{2})-(\d{2})", c)
+        if m:
+            try:
+                event_date = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3))).date()
+                # 去掉日期前缀，保留事件描述
+                desc = re.sub(r"^\s*202[4-9]-\d{2}-\d{2}\s*[:：]?\s*", "", c).strip()
+                display = f"{m.group(2)}-{m.group(3)} {desc}"
+                if event_date > today_date:
+                    future_events.append((event_date, display))
+                elif event_date >= cutoff:
+                    recent_events.append((event_date, display))
+                # else: 太旧，丢弃
+                continue
+            except ValueError:
+                pass
+
+        # 尝试匹配 YYYY-MM（月份） 或 XX月
+        m_month = re.search(r"(202[4-9])-(\d{2})\b|(\d{1,2})月", c)
+        if m_month:
+            try:
+                if m_month.group(1):  # YYYY-MM
+                    year, month = int(m_month.group(1)), int(m_month.group(2))
+                else:  # X月
+                    year, month = today.year, int(m_month.group(3))
+                if year > today.year or (year == today.year and month >= today.month):
+                    desc = re.sub(r"^\s*202[4-9]-\d{2}\s*[:：]?\s*|\s*\d{1,2}月\s*", "", c).strip()
+                    display = f"{month}月 {desc}" if desc else c
+                    vague_future.append(display)
+                    continue
+            except ValueError:
+                pass
+
+        # 模糊年份（如 "2026年 xxx"）
+        m_year = re.search(r"(202[5-9])年", c)
+        if m_year and int(m_year.group(1)) >= today.year:
+            vague_future.append(c)
+            continue
+
+    # 按优先级返回
+    if future_events:
+        future_events.sort(key=lambda x: x[0])
+        return future_events[0][1]
+    if recent_events:
+        recent_events.sort(key=lambda x: x[0], reverse=True)
+        return recent_events[0][1]
+    if vague_future:
+        return vague_future[0]
+    return ""
 
 
 def generate_card_html(
@@ -58,138 +140,108 @@ def generate_card_html(
         name = _truncate(p.get("name", "Unknown"), 20)
         category = p.get("category", "Web3")
         emoji = _get_emoji(category)
-        # 从日报精简版提取一句话定位（取前60字）
         summary = _truncate(p.get("summary", p.get("buzz", "")), 60)
         twitter = p.get("twitter", "")
+        catalyst = _truncate(p.get("catalyst", ""), 50)
+
+        catalyst_html = ""
+        if catalyst:
+            catalyst_html = f'<div class="catalyst">🔥 {catalyst}</div>'
 
         cards_html += f"""
             <div class="card">
-                <div class="card-header">
-                    <span class="card-emoji">{emoji}</span>
-                    <span class="card-cat">{_truncate(category, 12)}</span>
-                </div>
-                <div class="card-name">{name}</div>
-                {f'<div class="card-twitter">{twitter}</div>' if twitter else ''}
-                <div class="card-summary">{summary}</div>
+                <div class="card-top"><span>{emoji} {_truncate(category, 12)}</span><span class="twitter">{twitter}</span></div>
+                <h2 class="project-name">{name}</h2>
+                <div class="desc">{summary}</div>
+                {catalyst_html}
             </div>"""
 
     # 底部提示
     extra_note = ""
     if total > max_projects:
-        extra_note = f'<div class="footer-note">+{total - max_projects} more projects in full report</div>'
+        extra_note = f'<div style="text-align:center;font-size:13px;color:#666;margin-top:8px;">+{total - max_projects} 个项目见完整报告</div>'
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
 * {{ box-sizing: border-box; margin: 0; padding: 0; }}
 body {{
-    background: #050505;
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Display", sans-serif;
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; color: #e5e7eb;
+    min-height: 100vh;
 }}
 .canvas {{
     width: 1200px; height: 675px;
-    background: linear-gradient(135deg, #0a0a0f 0%, #111118 50%, #0d0d14 100%);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 24px; padding: 40px 48px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
     display: flex; flex-direction: column;
-    position: relative; overflow: hidden;
-}}
-.canvas::before {{
-    content: ''; position: absolute; top: -200px; right: -200px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(99,102,241,0.08), transparent 70%);
-    pointer-events: none;
+    overflow: hidden;
 }}
 .header {{
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 32px; padding-bottom: 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
 }}
-.subtitle {{
-    font-size: 11px; color: #6b7280; letter-spacing: 4px;
-    text-transform: uppercase; margin-bottom: 4px;
-}}
-.title {{
-    font-size: 26px; font-weight: 800; letter-spacing: 2px;
-    background: linear-gradient(90deg, #fff, #a1a1aa);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-}}
-.date-badge {{
-    background: #f5b300; color: #000; padding: 6px 16px;
-    border-radius: 20px; font-size: 13px; font-weight: 700;
-    letter-spacing: 1px;
-}}
+.title-group {{ display: flex; flex-direction: column; }}
+.subtitle {{ font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }}
+.main-title {{ font-size: 42px; font-weight: 900; letter-spacing: -1px; }}
+.main-title .accent {{ color: #FF3A2D; }}
+.date {{ font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }}
 .grid {{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px; flex: 1;
+    grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
 }}
 .card {{
-    background: rgba(255,255,255,0.025);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 14px; padding: 20px;
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
     display: flex; flex-direction: column;
-    transition: border-color 0.2s;
 }}
-.card-header {{
-    display: flex; align-items: center; gap: 6px;
-    margin-bottom: 10px;
+.card-top {{
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
 }}
-.card-emoji {{ font-size: 16px; }}
-.card-cat {{
-    font-size: 11px; color: #9ca3af;
-    letter-spacing: 0.5px;
+.twitter {{ color: #666; }}
+.project-name {{
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
 }}
-.card-name {{
-    font-size: 18px; font-weight: 700; color: #fff;
-    margin-bottom: 4px; line-height: 1.3;
-}}
-.card-twitter {{
-    font-size: 12px; color: #818cf8;
-    margin-bottom: 8px;
-}}
-.card-summary {{
-    font-size: 12px; color: #9ca3af;
-    line-height: 1.6;
-    display: -webkit-box; -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical; overflow: hidden;
+.desc {{ font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1; }}
+.catalyst {{
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 13px; font-weight: 700;
+    padding: 6px 10px; display: inline-block;
+    align-self: flex-start; margin-top: 12px;
 }}
 .footer {{
-    display: flex; justify-content: space-between; align-items: center;
-    margin-top: auto; padding-top: 16px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-}}
-.footer-left {{
-    font-size: 11px; color: #52525b;
-    letter-spacing: 1px;
-}}
-.footer-right {{
-    font-size: 11px; color: #52525b;
-}}
-.footer-note {{
-    font-size: 11px; color: #6b7280;
-    text-align: center; margin-top: 8px;
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
 }}
 </style>
 </head>
 <body>
 <div class="canvas">
     <div class="header">
-        <div>
-            <div class="subtitle">Institutional Grade Intel</div>
-            <div class="title">WEB3 ALPHA DAILY</div>
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
         </div>
-        <div class="date-badge">{date_display}</div>
+        <div class="date">{date_display}</div>
     </div>
     <div class="grid">{cards_html}
     </div>
     <div class="footer">
-        <div class="footer-left">{total} PROJECTS ANALYZED</div>
-        <div class="footer-right">Powered by Surf AI · leak.me</div>
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
     </div>
     {extra_note}
 </div>
