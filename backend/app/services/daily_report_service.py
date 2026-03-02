@@ -365,15 +365,16 @@ def _enrich_projects_from_analysis(
         if r.get("content"):
             analysis_map[r["name"].lower().strip()] = r["content"]
 
-    # 兼容新旧格式的 section 正则
-    # 新格式: ## 📊 项目定位    旧格式: ## 1. 项目概要
+    # ---- 正则模式 ----
+    # Summary: 新格式 ## 📊 项目定位   旧格式 ## 1. 项目概要
     POS_PATTERN = re.compile(
         r"##\s*(?:📊\s*项目定位|\d+\.\s*项目概要[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
         re.DOTALL,
     )
-    # 新格式: ## 🔥 近期催化剂   旧格式: ## 7. 风险与机会
+    # Catalyst: 只匹配专门的催化剂段，不匹配 "风险与机会"
+    # 新格式: ## 🔥 近期催化剂   旧格式: ## X. 近期催化剂
     CAT_PATTERN = re.compile(
-        r"##\s*(?:🔥\s*近期催化剂|\d+\.\s*(?:风险与机会|近期催化剂)[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
+        r"##\s*(?:🔥\s*近期催化剂|\d+\.\s*近期催化剂[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
         re.DOTALL,
     )
 
@@ -384,11 +385,11 @@ def _enrich_projects_from_analysis(
         content = analysis_map.get(name_key, "")
 
         if content:
-            # 提取一句话定位
+            # ---------- 提取一句话定位（短版，适配配图卡片） ----------
             pos_match = POS_PATTERN.search(content)
             if pos_match:
                 text = pos_match.group(1).strip()
-                # 过滤掉表格行和空行，取第一段有效文字
+                # 取第一段有效文字
                 lines = [
                     l.strip() for l in text.split("\n")
                     if l.strip()
@@ -397,25 +398,37 @@ def _enrich_projects_from_analysis(
                     and not l.strip().startswith("**")
                 ]
                 if lines:
-                    first = lines[0]
-                    # 截断到合理长度（第一个句号或逗号分句）
-                    for sep in ["。", "，旨在", "，支持", "，提供", "，专注", "，强调"]:
-                        idx = first.find(sep)
-                        if idx > 10:
-                            first = first[:idx + len(sep)].rstrip("，、")
+                    raw = lines[0]
+                    # 去掉来源标注
+                    raw = re.sub(r"[（(]来源[：:].*?[）)]", "", raw).strip()
+                    # 去掉项目名开头（如 "Dicey 定位为..." → "定位为..."）
+                    raw = re.sub(
+                        r"^[A-Za-z0-9\s\$]+(?:定位为|是)",
+                        "",
+                        raw,
+                    ).strip()
+                    # 截断到第一个逗号分句（生成短 summary）
+                    for sep in ["，", "。", "；"]:
+                        idx = raw.find(sep)
+                        if 4 < idx < 40:
+                            raw = raw[:idx]
                             break
-                    # 去掉来源标注 (来源：xxx)
-                    first = re.sub(r"[（(]来源[：:].*?[）)]", "", first).strip()
-                    p["summary"] = first[:80]
+                    # 最终限制 35 字符（配图卡片空间有限）
+                    p["summary"] = raw[:35]
 
-            # 提取催化剂列表
+            # ---------- 提取催化剂（只从专门催化剂段） ----------
             cat_match = CAT_PATTERN.search(content)
             if cat_match:
                 cat_lines = []
                 for l in cat_match.group(1).strip().split("\n"):
                     l = l.strip().lstrip("-•·* ")
-                    if l and not l.startswith("|") and not l.startswith("#"):
-                        cat_lines.append(l)
+                    # 跳过无效行
+                    if not l or l.startswith("|") or l.startswith("#"):
+                        continue
+                    # 跳过风险描述和推理过程
+                    if any(kw in l for kw in ["风险", "推理", "局限", "不确定"]):
+                        continue
+                    cat_lines.append(l)
                 best = pick_best_catalyst(cat_lines)
                 if best:
                     p["catalyst"] = best
@@ -524,11 +537,13 @@ def run_tweet_writer(
         blocks = re.split(r"(?=🔍)", result.strip())
         for block in blocks:
             block = block.strip()
-            if not block:
-                continue
+            if not block or not block.startswith("🔍"):
+                continue  # 跳过 LLM 前言/intro 文字
             # 提取项目名（🔍 后面的第一个词）
             name_match = re.match(r"🔍\s*(.+?)(?:\s*@|\n)", block)
-            name = name_match.group(1).strip() if name_match else "Unknown"
+            if not name_match:
+                continue
+            name = name_match.group(1).strip()
             tweets.append({
                 "name": name,
                 "text": block,
