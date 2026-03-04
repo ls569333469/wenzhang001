@@ -18,7 +18,7 @@ from typing import Optional
 from ..services.surf_service import SurfService
 from ..agents.research.scout import _parse_projects_from_text
 from ..core.llm import generate_text
-from ..core.config import get_logger
+from ..core.config import get_logger, cn_now
 
 logger = get_logger("daily_report")
 
@@ -26,6 +26,32 @@ logger = get_logger("daily_report")
 DEFAULT_MODEL = "surf-1.5"
 DEFAULT_CONCURRENCY = 3
 REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research"
+PROMPTS_DIR = Path(__file__).parent.parent.parent / "data" / "prompts" / "research"
+
+
+def _render_research_template(template_name: str, variables: dict) -> Optional[str]:
+    """
+    P32-C: 渲染投研 Jinja2 模板（P15 可编辑）。
+    
+    Args:
+        template_name: 模板文件名，如 "analyst.jinja2" 或 "copywriter/tweet_digest.jinja2"
+        variables: 模板变量字典
+    
+    Returns:
+        渲染后的文本，失败返回 None
+    """
+    try:
+        from jinja2 import Template
+        path = PROMPTS_DIR / template_name
+        if not path.exists():
+            logger.warning(f"模板不存在: {path}")
+            return None
+        template_str = path.read_text(encoding="utf-8")
+        template = Template(template_str)
+        return template.render(**variables)
+    except Exception as e:
+        logger.warning(f"模板渲染失败 ({template_name}): {e}")
+        return None
 
 
 # ============================================================
@@ -34,25 +60,52 @@ REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research
 
 def run_scout() -> dict:
     """
-    调用 Surf API 搜索 leak.me 热门项目
+    调用 Surf API 搜索热门项目。
+    
+    P32-C: prompt 来自 scout.jinja2 模板（P15 可编辑），
+    账号列表从 Google Sheets '侦察源' Tab 动态注入。
 
     Returns:
         {"projects": list[dict], "raw_text": str, "elapsed": float}
     """
     logger.info("🔭 侦察官：开始搜索...")
 
-    user_prompt = (
-        "检索 @leakmealpha 近 7 天推文 + 访问 leak.me 网站 trending。\n"
-        "leak.me 是 Crypto KOL Tracker，追踪加密 KOL 的新关注行为。\n"
-        "只输出一张表格，不要写任何分析或说明：\n"
-        "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n"
-        "字段说明：\n"
-        "- 赛道: DeFi/L2/AI/GameFi/RWA/Infra 等\n"
-        "- 代币: 代币符号（如 $NEAR）或 无\n"
-        "- 阶段: 预发布/测试网/已上线/TGE前\n"
-        "- 近期催化剂: 一句话（融资/空投/TGE/上线/合作）\n"
-        "排除个人 KOL、交易所、媒体、纯 meme 币。最多 8 个。"
+    # P32-C: 从 Sheets 读取信源账号
+    try:
+        from app.services.research_sheet import research_sheet_service
+        sources = research_sheet_service.get_scout_sources()
+    except Exception as e:
+        logger.warning(f"读取 Sheets 信源失败，使用默认: {e}")
+        sources = [
+            {"handle": "@leakmealpha", "desc": "Crypto KOL Tracker"},
+            {"handle": "@top7ico", "desc": "早期融资与 ICO"},
+            {"handle": "@Eli5defi", "desc": "DeFi 科普与分析"},
+            {"handle": "@Web3Alerts", "desc": "Web3 动态与预警"},
+            {"handle": "@WY_mask", "desc": "中文投研与分析"},
+        ]
+
+    # 生成账号列表文本
+    accounts_text = "\n".join(
+        f"{i+1}. {s['handle']} — {s['desc']}"
+        for i, s in enumerate(sources)
     )
+    logger.info(f"🔭 侦察官信源: {len(sources)} 个账号")
+
+    # P32-C: 渲染 scout.jinja2 模板（P15 可编辑）
+    user_prompt = _render_research_template("scout.jinja2", {
+        "accounts": accounts_text,
+        "account_count": len(sources),
+    })
+
+    if not user_prompt:
+        # fallback: 硬编码 prompt
+        user_prompt = (
+            f"检索以下 {len(sources)} 个 Twitter/X 账号近 7 天推文，找出热门 Crypto 项目：\n"
+            f"{accounts_text}\n\n"
+            "汇总去重后只输出一张表格：\n"
+            "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n"
+            "排除个人 KOL、交易所、媒体、纯 meme 币。最多 12 个。"
+        )
 
     surf = SurfService()
     result = surf.call(
@@ -97,28 +150,31 @@ def _analyze_single_project(project: dict) -> dict:
     stage = project.get("stage", "未知")
     catalyst = project.get("catalyst", project.get("buzz", ""))
 
-    user_prompt = (
-        f"深度调研项目 {name} ({twitter})。\n"
-        f"侦察线索: 赛道 {category}，代币 {token}，阶段 {stage}，催化剂 {catalyst}。\n\n"
-        f"输出完整投研报告，包含以下板块，只写事实和数据：\n\n"
-        f"## 📊 项目定位\n"
-        f"是什么、做什么、核心产品、目标市场。\n\n"
-        f"## 💰 融资\n"
-        f"用表格列出每轮融资：\n"
-        f"| 时间 | 轮次 | 金额 | 领投方 |\n"
-        f"融资总额。\n\n"
-        f"## 👥 团队\n"
-        f"核心成员（姓名/角色/背景）。\n\n"
-        f"## 🪙 代币经济学\n"
-        f"代币符号、是否已发行、总供应量、分配比例、解锁计划。\n\n"
-        f"## 📈 市场数据\n"
-        f"当前价格、市值、FDV、TVL、Twitter 粉丝数。\n\n"
-        f"## 🔥 近期催化剂\n"
-        f"最近已发生 + 即将发生的关键事件（TGE/空投/主网/上所/产品发布/合作），注明日期。\n\n"
-        f"## 🏁 竞品对比\n"
-        f"同赛道 2-3 个竞品，简要对比定位和差异。\n\n"
-        f"不要附带来源链接和 URL。没有数据的板块直接跳过。"
-    )
+    # P32-C: 从 analyst.jinja2 模板渲染 prompt（P15 可编辑）
+    user_prompt = _render_research_template("analyst.jinja2", {
+        "name": name,
+        "twitter": twitter,
+        "category": category,
+        "token": token,
+        "stage": stage,
+        "catalyst": catalyst,
+    })
+
+    if not user_prompt:
+        # fallback: 硬编码 prompt
+        user_prompt = (
+            f"深度调研项目 {name} ({twitter})。\n"
+            f"侦察线索: 赛道 {category}，代币 {token}，阶段 {stage}，催化剂 {catalyst}。\n\n"
+            f"输出完整投研报告，包含以下板块，只写事实和数据：\n\n"
+            f"## 📊 项目定位\n是什么、做什么、核心产品、目标市场。\n\n"
+            f"## 💰 融资\n用表格列出每轮融资：\n| 时间 | 轮次 | 金额 | 领投方 |\n融资总额。\n\n"
+            f"## 👥 团队\n核心成员（姓名/角色/背景）。\n\n"
+            f"## 🪙 代币经济学\n代币符号、是否已发行、总供应量、分配比例、解锁计划。\n\n"
+            f"## 📈 市场数据\n当前价格、市值、FDV、TVL、Twitter 粉丝数。\n\n"
+            f"## 🔥 近期催化剂\n最近已发生 + 即将发生的关键事件，注明日期。\n\n"
+            f"## 🏁 竞品对比\n同赛道 2-3 个竞品，简要对比定位和差异。\n\n"
+            f"不要附带来源链接和 URL。没有数据的板块直接跳过。"
+        )
 
     surf = SurfService()
     result = surf.call(
@@ -216,15 +272,17 @@ def run_summarizer(analysis_results: list[dict], api_config: dict = None) -> str
 
     all_reports = "\n\n---\n\n".join(combined)
 
-    system_prompt = (
-        "你是投研报告编辑。你的任务是将多篇详细的项目分析报告总结归纳成精简版本。\n\n"
-        "每个项目保留以下 4 个板块（每项 100-200 字）：\n"
-        "1. 📊 一句话定位\n"
-        "2. 🎯 关键事件与参与机会（时间窗口 + 参与方式）\n"
-        "3. 👥 团队与背书（核心成员 + 可信度）\n"
-        "4. 🔥 近期催化剂（具体事件 + 影响）\n\n"
-        "去掉所有 URL、内部标记、冗长的方法论描述。"
-    )
+    # P32-C: 从 summarizer.jinja2 模板渲染（P15 可编辑）
+    system_prompt = _render_research_template("summarizer.jinja2", {})
+
+    if not system_prompt:
+        system_prompt = (
+            "你是投研报告编辑。你的任务是将多篇详细的项目分析报告总结归纳成精简版本。\n\n"
+            "每个项目保留以下 4 个板块（每项 100-200 字）：\n"
+            "1. 📊 一句话定位\n2. 🎯 关键事件与参与机会\n"
+            "3. 👥 团队与背书\n4. 🔥 近期催化剂\n\n"
+            "去掉所有 URL、内部标记、冗长的方法论描述。"
+        )
 
     user_prompt = f"请将以下 {len(combined)} 篇投研报告总结归纳成精简版：\n\n{all_reports}"
 
@@ -293,22 +351,18 @@ def run_writer(
         + "\n".join(overview_rows)
     )
 
-    system_prompt = (
-        "你是投研日报写手。将项目总览和精简分析组装成一份结构清晰的每日投研快报。\n\n"
-        "日报格式要求：\n"
-        "1. 标题：# 🌊 每日投研快报\n"
-        "2. 元信息（日期、项目数）\n"
-        "3. 📋 项目总览表格\n"
-        "4. 每个项目的分析，严格只保留以下 4 个板块：\n"
-        "   - ## 📊 一句话定位\n"
-        "   - ## 🎯 关键事件与参与机会\n"
-        "   - ## 👥 团队与背书\n"
-        "   - ## 🔥 近期催化剂\n"
-        "5. 没有数据的板块直接省略，不要写「暂无」\n"
-        "6. 每个板块 2-4 句话，语言简洁专业\n"
-        "7. 末尾加免责声明\n\n"
-        "直接输出 Markdown 格式日报，不要添加任何说明。"
-    )
+    # P32-C: 从 writer.jinja2 模板渲染（P15 可编辑）
+    system_prompt = _render_research_template("writer.jinja2", {})
+
+    if not system_prompt:
+        system_prompt = (
+            "你是投研日报写手。将项目总览和精简分析组装成一份结构清晰的每日投研快报。\n\n"
+            "日报格式要求：\n1. 标题：# 🌊 每日投研快报\n2. 元信息（日期、项目数）\n"
+            "3. 📋 项目总览表格\n4. 每个项目的分析，严格只保留 4 个板块：\n"
+            "   📊 一句话定位 / 🎯 关键事件与参与机会 / 👥 团队与背书 / 🔥 近期催化剂\n"
+            "5. 没有数据的板块直接省略\n6. 每个板块 2-4 句话\n7. 末尾加免责声明\n\n"
+            "直接输出 Markdown 格式日报，不要添加任何说明。"
+        )
 
     user_prompt = (
         f"请组装以下内容为每日投研快报：\n\n"
@@ -511,36 +565,36 @@ def run_tweet_writer(
     logger.info(f"🐦 推文: 聚合 {len(projects)} 个项目生成 Alpha 速报...")
 
     from datetime import datetime, timedelta
-    today = datetime.now()
+    today = cn_now()
     date_30d_ago = (today - timedelta(days=30)).strftime("%Y-%m-%d")
     date_str_today = today.strftime("%m-%d")
 
-    system_prompt = (
-        "你是 Web3 Alpha 猎手，负责写 X(Twitter) 推文。\n\n"
-        "## 任务\n"
-        "根据投研报告，为每个项目生成一条独立推文。\n\n"
-        "## 推文格式（每个项目一条）\n"
-        "```\n"
-        "🔍 项目名称 @X账号\n\n"
-        "一段话介绍项目定位和核心产品（2-3句）\n\n"
-        "💰 融资金额 + 领投方\n"
-        "👥 创始人姓名 + 背景\n"
-        "🪙 代币符号 + 总量 + 关键分配\n"
-        "📈 价格 | 市值 | FDV | TVL | Twitter粉丝\n\n"
-        "🔥 近期催化剂：\n"
-        "• 事件1（日期）\n"
-        "• 事件2（日期）\n"
-        "```\n\n"
-        "## 要求\n"
-        f"- 催化剂只取 {date_30d_ago} 之后的事件，旧事件不要\n"
-        "- 标题只写项目名称和 @X账号，不写代币符号和赛道\n"
-        "- 不写可信度评分\n"
-        "- 不写建议动作、投资建议\n"
-        "- 不附带 URL 和来源链接\n"
-        "- 金额用简写：$670万、$1.08亿、$0.035，不要写 6700000 USD 这种长数字\n"
-        "- 粉丝数用简写：10.2万粉，不要写 102145\n"
-        "- 没有数据的行直接跳过\n"
-    )
+    # P32-C: 从 tweet_digest.jinja2 模板渲染 system prompt（P15 可编辑）
+    system_prompt = _render_research_template("copywriter/tweet_digest.jinja2", {
+        "date_30d_ago": date_30d_ago,
+    })
+
+    if not system_prompt:
+        # fallback: 硬编码 prompt
+        system_prompt = (
+            "你是 Web3 Alpha 猎手，负责写 X(Twitter) 推文。\n\n"
+            "## 任务\n根据投研报告，为每个项目生成一条独立推文。\n\n"
+            "## 推文格式（每个项目一条）\n"
+            "```\n🔍 项目名称 @X账号\n\n"
+            "一段话介绍项目定位和核心产品（2-3句）\n\n"
+            "💰 融资金额 + 领投方\n👥 创始人姓名 + 背景\n"
+            "🪙 代币符号 + 总量 + 关键分配\n"
+            "📈 价格 | 市值 | FDV | TVL | Twitter粉丝\n\n"
+            "🔥 近期催化剂：\n• 事件1（日期）\n• 事件2（日期）\n```\n\n"
+            "## 要求\n"
+            f"- 催化剂只取 {date_30d_ago} 之后的事件，旧事件不要\n"
+            "- 标题只写项目名称和 @X账号，不写代币符号和赛道\n"
+            "- 不写可信度评分\n- 不写建议动作、投资建议\n"
+            "- 不附带 URL 和来源链接\n"
+            "- 金额用简写：$670万、$1.08亿\n"
+            "- 粉丝数用简写：10.2万粉\n"
+            "- 没有数据的行直接跳过\n"
+        )
 
     user_prompt = (
         f"今日投研的 {len(projects)} 个项目：{', '.join(project_names)}\n\n"
@@ -589,7 +643,60 @@ def run_tweet_writer(
                 "char_count": len(result),
             })
 
-        logger.info(f"🐦 推文完成: {len(tweets)} 条项目推文")
+        # P33: 固定标语 + LLM 悬念内容的聚合主推文（tweets[0]）
+        # 前端 TweetCards.tsx 取 tweets[0] 作为主推文展示
+        if len(tweets) >= 2:
+            n = len(tweets)
+
+            # 提取每个项目的核心亮点供 LLM 参考
+            highlights = []
+            for t in tweets:
+                name = t.get("name", "?")
+                snippet = t["text"][:150].replace("🔍", "").strip()
+                highlights.append(f"- {name}: {snippet}")
+            highlights_text = "\n".join(highlights)
+
+            hook_prompt = (
+                f"今日投研发现了 {n} 个项目，亮点如下：\n{highlights_text}\n\n"
+                "请为每个项目写一句悬念式描述（不写项目名称），要求：\n"
+                "1. 每行以'一个'或具体数据开头，制造好奇心\n"
+                "2. 只陈述事实，不夸张，不用感叹号\n"
+                "3. 每行不超过25个字\n"
+                "4. 只输出描述行，不加任何标题、编号、解释\n"
+            )
+
+            try:
+                body_text = generate_text(
+                    prompt=hook_prompt,
+                    provider=provider,
+                    model_id=model_id,
+                    temperature=0.7,
+                    max_tokens=300,
+                )
+                body_text = body_text.strip().strip("`").strip()
+                if body_text.startswith("```"):
+                    body_text = body_text.split("```")[1].strip()
+                # 只保留非空行
+                lines = [l.strip() for l in body_text.split("\n") if l.strip()]
+                body_text = "\n".join(lines[:n])  # 最多和项目数一样
+                logger.info(f"🐦 主推文内容(LLM): {len(body_text)}字")
+            except Exception as e:
+                logger.warning(f"🐦 主推文 LLM 失败，使用 fallback: {e}")
+                names = " | ".join(t.get("name", "?") for t in tweets[:6])
+                body_text = f"今日 {n} 个项目：{names}"
+
+            # 组装：固定标语 + LLM内容 + 固定结尾
+            hook_text = f"今日发现，值得细看\n\n{body_text}\n\n⬇️\n\n#Web3Alpha"
+
+            main_tweet = {
+                "name": "Alpha日报",
+                "text": hook_text,
+                "char_count": len(hook_text),
+            }
+            tweets.insert(0, main_tweet)
+            logger.info(f"🐦 主推文: {main_tweet['char_count']}字, 含 {n} 个项目")
+
+        logger.info(f"🐦 推文完成: {len(tweets)} 条（含主推文）")
         return tweets
 
     except Exception as e:
@@ -731,7 +838,7 @@ async def generate_daily_report(
     """
     api_config = api_config or {}
     start_time = time.time()
-    date_str = datetime.now().strftime("%Y%m%d")
+    date_str = cn_now().strftime("%Y%m%d")
 
     def _progress(step: str, detail: str):
         logger.info(f"[{step}] {detail}")
@@ -757,6 +864,31 @@ async def generate_daily_report(
 
         _progress("scout", f"发现 {len(projects)} 个项目")
         _save_scout_report(projects, scout_result["raw_text"], date_str)
+
+        # ===== Step 1.5: 去重过滤（P32-B） =====
+        try:
+            from app.services.research_sheet import research_sheet_service
+            _progress("dedup", f"去重过滤 {len(projects)} 个项目...")
+            original_count = len(projects)
+            projects = research_sheet_service.dedup_filter(projects)
+            skipped = original_count - len(projects)
+            if skipped > 0:
+                _progress("dedup", f"去重: {len(projects)} 保留, {skipped} 跳过")
+            else:
+                _progress("dedup", f"去重: 全部 {len(projects)} 个保留（均为新项目）")
+        except Exception as e:
+            logger.warning(f"去重过滤跳过（Sheets 不可用）: {e}")
+
+        if not projects:
+            return {
+                "status": "error",
+                "projects_count": 0,
+                "report_path": "",
+                "project_paths": [],
+                "report_content": "",
+                "elapsed": time.time() - start_time,
+                "error": "去重后无剩余项目",
+            }
 
         # ===== Step 2: 策略官（并发 N） =====
         _progress("strategist", f"开始分析 {len(projects)} 个项目（并发 {concurrency}）...")
@@ -801,7 +933,9 @@ async def generate_daily_report(
 
         # ===== Step 6: 推文文案 =====
         _progress("tweets", "生成推文文案...")
-        tweets = run_tweet_writer(summary, enriched_projects, api_config)
+        # P33: 主推文只包含配图中显示的项目（max_projects=6）
+        card_projects = enriched_projects[:6]
+        tweets = run_tweet_writer(summary, card_projects, api_config)
         tweets_path = ""
         if tweets:
             tweets_path = _save_tweets(tweets, date_str)
@@ -812,6 +946,15 @@ async def generate_daily_report(
 
         # 保存日报
         report_path = _save_daily_report(final_report, date_str)
+
+        # ===== Step 7.5: 回写 Sheets（P32-B） =====
+        try:
+            from app.services.research_sheet import research_sheet_service
+            _progress("writeback", "回写分析记录到 Sheets...")
+            research_sheet_service.write_analysis_records(enriched_projects, date_str)
+            _progress("writeback", f"回写 {len(enriched_projects)} 条记录完成")
+        except Exception as e:
+            logger.warning(f"Sheets 回写跳过: {e}")
 
         elapsed = time.time() - start_time
         _progress("done", f"日报生成完成！{ok_count} 个项目, {elapsed:.0f}s")

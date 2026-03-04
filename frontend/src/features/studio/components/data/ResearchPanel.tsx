@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { cn } from "@/lib/utils";
-import { Search, Briefcase, Coins, Telescope, Loader2, FileBarChart } from 'lucide-react';
+import { Search, Telescope, Loader2, FileBarChart } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
+import { useResearchStore } from '@/features/research/useResearchStore';
 
 /**
  * ResearchPanel — 投研模式 DataPanel
@@ -15,13 +16,15 @@ interface ResearchProject {
     id: string;
     name: string;
     category: string;
-    funding_round: string;
-    funding_amount: string;
-    investors: string;
-    chain: string;
     summary: string;
-    // P31: 侦察官返回的额外字段
+    // P32-B: 投研记录 Tab 字段
     twitter?: string;
+    last_analyzed?: string;
+    catalyst?: string;
+    rating?: string;
+    status?: string;
+    scout_count?: number;
+    // P31: 侦察官额外字段
     kol_24h?: number;
     buzz?: string;
     source?: 'sheets' | 'scout';
@@ -76,10 +79,6 @@ export function ResearchPanel() {
                 category: p.category || '',
                 kol_24h: p.kol_24h || 0,
                 buzz: p.buzz || '',
-                funding_round: '',
-                funding_amount: '',
-                investors: '',
-                chain: '',
                 summary: p.buzz || '',
                 source: 'scout' as const,
             }));
@@ -106,6 +105,8 @@ export function ResearchPanel() {
     // P31: 生成日报
     const handleGenerateDaily = async () => {
         setIsGenerating(true);
+        const { setGenerating, triggerRefresh } = useResearchStore.getState();
+        setGenerating(true, '正在生成日报...');
         try {
             const res = await fetch(`${API_BASE_URL}/api/research/daily-report`, {
                 method: 'POST',
@@ -118,9 +119,12 @@ export function ResearchPanel() {
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
             console.log('[ResearchPanel] daily report:', data);
-            // TODO: 把日报内容传到主区域展示
+            // P31 P0: 触发 ResearchView 刷新
+            setGenerating(false, '日报生成完成！');
+            triggerRefresh();
         } catch (e) {
             console.error('[ResearchPanel] generate failed:', e);
+            setGenerating(false, '生成失败，请重试');
         } finally {
             setIsGenerating(false);
         }
@@ -171,7 +175,7 @@ export function ResearchPanel() {
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="搜索项目名称、赛道、公链..."
+                        placeholder="搜索项目名称、赛道..."
                         className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-zinc-200 bg-white focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-200 transition-all"
                     />
                 </div>
@@ -273,26 +277,19 @@ export function ResearchPanel() {
                                                     {project.category}
                                                 </span>
                                             )}
-                                            {project.chain && (
-                                                <span className="text-[10px] px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded">
-                                                    {project.chain}
+                                            {project.rating && (
+                                                <span className="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-600 rounded font-medium">
+                                                    ⭐ {project.rating}
                                                 </span>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                                {(project.funding_round || project.funding_amount) && (
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Coins className="w-3 h-3 text-amber-500 shrink-0" />
-                                        <span className="text-[11px] text-ink-secondary">
-                                            {project.funding_round}{project.funding_round && project.funding_amount ? ' · ' : ''}{project.funding_amount}
+                                {project.catalyst && (
+                                    <div className="flex items-center gap-1.5 mb-1.5 overflow-hidden">
+                                        <span className="text-[10px] px-1.5 py-0.5 bg-red-50 text-red-600 rounded font-medium truncate max-w-full block">
+                                            🔥 {project.catalyst}
                                         </span>
-                                    </div>
-                                )}
-                                {project.investors && (
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <Briefcase className="w-3 h-3 text-zinc-400 shrink-0" />
-                                        <span className="text-[10px] text-ink-muted truncate">{project.investors}</span>
                                     </div>
                                 )}
                                 {project.summary && (
@@ -300,9 +297,11 @@ export function ResearchPanel() {
                                         {project.summary}
                                     </p>
                                 )}
-                                <div className="mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <span className="text-[10px] text-emerald-600 font-medium">点击生成投研报告 →</span>
-                                </div>
+                                {project.last_analyzed && (
+                                    <div className="text-[10px] text-ink-muted mt-1.5">
+                                        📅 {project.last_analyzed}
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </>

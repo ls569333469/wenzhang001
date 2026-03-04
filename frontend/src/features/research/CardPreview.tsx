@@ -12,9 +12,8 @@ const CARD_W = 1200;
 const CARD_H = 675;
 
 /**
- * P31: 配图预览组件
- * 用 iframe 隔离配图 HTML 的 CSS，防止全局样式污染
- * 截图时动态创建离屏 div 渲染完整 HTML
+ * P32: 配图预览组件（全宽版）
+ * 配图占满主内容区，完整显示所有项目卡片
  */
 export function CardPreview({ html, date }: CardPreviewProps) {
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -25,28 +24,32 @@ export function CardPreview({ html, date }: CardPreviewProps) {
         if (copying) return;
         setCopying(true);
         try {
-            // 创建离屏 div 渲染完整 HTML，用于截图
             const offscreen = document.createElement('div');
             offscreen.style.cssText = `position:fixed;left:-9999px;top:0;width:${CARD_W}px;height:${CARD_H}px;overflow:hidden;z-index:-1;`;
 
-            // 提取 body 和 style
             const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
             const styleMatch = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
             const bodyContent = bodyMatch ? bodyMatch[1] : '';
             const styleContent = styleMatch ? styleMatch[1] : '';
 
-            // 用 shadow DOM 隔离样式
-            const shadow = offscreen.attachShadow({ mode: 'open' });
-            shadow.innerHTML = `<style>${styleContent}</style>${bodyContent}`;
+            // 直接插入 DOM（不用 Shadow DOM，确保 html2canvas 能访问字体）
+            const styleEl = document.createElement('style');
+            styleEl.textContent = styleContent;
+            offscreen.appendChild(styleEl);
+            offscreen.insertAdjacentHTML('beforeend', bodyContent);
             document.body.appendChild(offscreen);
 
-            // 等待渲染
-            await new Promise(r => setTimeout(r, 100));
+            // 预加载 Google Font 并等待渲染
+            try {
+                await document.fonts.load('900 42px Inter');
+                await document.fonts.load('400 14px Inter');
+            } catch { }
+            await new Promise(r => setTimeout(r, 200));
 
             const html2canvas = (await import('html2canvas')).default;
-            const canvas = await html2canvas(shadow.querySelector('.canvas') as HTMLElement || offscreen, {
+            const canvas = await html2canvas(offscreen.querySelector('.canvas') as HTMLElement || offscreen, {
                 backgroundColor: '#050505',
-                scale: 2,
+                scale: 4,
                 useCORS: true,
                 width: CARD_W,
                 height: CARD_H,
@@ -104,7 +107,7 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                 </button>
             </div>
 
-            {/* 配图渲染 — iframe 隔离 CSS */}
+            {/* 配图渲染 — 全宽 iframe */}
             <div className="bg-[#050505] w-full" style={{ aspectRatio: `${CARD_W}/${CARD_H}` }}>
                 <iframe
                     ref={iframeRef}
@@ -112,8 +115,8 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                     title="投研配图预览"
                     sandbox="allow-same-origin"
                     scrolling="no"
-                    className="w-full h-full border-0"
-                    style={{ display: 'block', overflow: 'hidden' }}
+                    className="w-full h-full border-0 block"
+                    style={{ overflow: 'hidden' }}
                 />
             </div>
         </div>

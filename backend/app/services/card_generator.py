@@ -7,6 +7,7 @@ P31: 投研配图生成器
 import re
 from datetime import datetime, timedelta
 from pathlib import Path
+from app.core.config import cn_now
 
 REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research"
 
@@ -26,11 +27,50 @@ def _get_emoji(category: str) -> str:
     return "📌"
 
 
-def _truncate(text: str, max_len: int) -> str:
-    """精确截断，避免截在中间"""
+def _abbreviate_numbers(text: str) -> str:
+    """将大数字缩写：82000000美元 → $82M, 小数字和已缩写的不动"""
+    import re
+    def _shorten(m):
+        prefix = m.group(1) or ''  # $ or empty
+        num_str = m.group(2)
+        suffix = m.group(3) or ''  # 美元 etc.
+        # 跳过后面紧跟 K/M/B/万/亿 的（已缩写）
+        num = int(num_str)
+        if num >= 1_000_000_000:
+            short = f"${num / 1_000_000_000:g}B"
+        elif num >= 1_000_000:
+            short = f"${num / 1_000_000:g}M"
+        elif num >= 100_000:
+            short = f"${num / 10_000:g}万"
+        else:
+            return m.group(0)  # 10万以下不缩写
+        # 如果原文有"美元"等后缀，去掉（已在$M里体现）
+        if suffix in ('美元', '美金', 'USD'):
+            return short
+        return short + suffix
+    # 只匹配 6位及以上的纯数字，且后面不是 K/M/B/万/亿（避免重复缩写）
+    text = re.sub(r'(\$?)(\d{6,})(美元|美金|USD)?(?![KMBkmbWw万亿])', _shorten, text)
+    return text
+
+
+def _clip(text: str, max_len: int) -> str:
+    """智能截断：不在括号中间断开，优先在标点处断开"""
     if len(text) <= max_len:
         return text
-    return text[:max_len - 1] + "…"
+    chunk = text[:max_len]
+    # 检查是否在未闭合的括号中间，如果是则回退到括号前
+    for open_b, close_b in [('(', ')'), ('（', '）'), ('[', ']'), ('【', '】')]:
+        last_open = chunk.rfind(open_b)
+        last_close = chunk.rfind(close_b)
+        if last_open > last_close and last_open > max_len // 3:
+            chunk = chunk[:last_open].rstrip('，、 ,')
+            return chunk
+    # 在标点处断开
+    for sep in ['，', '、', '。', '；', ',', ' ']:
+        idx = chunk.rfind(sep)
+        if idx > max_len // 3:
+            return chunk[:idx]
+    return chunk
 
 
 def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
@@ -50,7 +90,7 @@ def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
     if not catalysts:
         return ""
 
-    today = today or datetime.now()
+    today = today or cn_now()
     today_date = today.date()
     cutoff = today_date - timedelta(days=7)
 
@@ -139,7 +179,7 @@ def generate_card_html(
     Returns:
         完整 HTML 字符串
     """
-    date_str = date_str or datetime.now().strftime("%Y%m%d")
+    date_str = date_str or cn_now().strftime("%Y%m%d")
     date_display = f"{date_str[:4]}.{date_str[4:6]}.{date_str[6:]}"
     display_projects = projects[:max_projects]
     total = len(projects)
@@ -147,12 +187,13 @@ def generate_card_html(
     # 生成项目卡片
     cards_html = ""
     for p in display_projects:
-        name = _truncate(p.get("name", "Unknown"), 20)
+        name = _clip(p.get("name", "Unknown"), 20)
         category = p.get("category", "Web3")
         emoji = _get_emoji(category)
-        summary = _truncate(p.get("summary", p.get("buzz", "")), 60)
+        summary = _clip(p.get("summary", p.get("buzz", "")), 40)
         twitter = p.get("twitter", "")
-        catalyst = _truncate(p.get("catalyst", ""), 25)
+        catalyst_raw = p.get("catalyst", "")
+        catalyst = _clip(_abbreviate_numbers(catalyst_raw), 35)
 
         catalyst_html = ""
         if catalyst:
@@ -160,16 +201,12 @@ def generate_card_html(
 
         cards_html += f"""
             <div class="card">
-                <div class="card-top"><span>{emoji} {_truncate(category, 12)}</span><span class="twitter">{twitter}</span></div>
+                <div class="card-top"><span>{emoji} {_clip(category, 12)}</span><span class="twitter">{twitter}</span></div>
                 <h2 class="project-name">{name}</h2>
                 <div class="desc">{summary}</div>
                 {catalyst_html}
             </div>"""
 
-    # 底部提示
-    extra_note = ""
-    if total > max_projects:
-        extra_note = f'<div style="text-align:center;font-size:13px;color:#666;margin-top:8px;">+{total - max_projects} 个项目见完整报告</div>'
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -225,12 +262,19 @@ body {{
     font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
     letter-spacing: -0.5px;
 }}
-.desc {{ font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1; }}
+.desc {{ font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+}}
 .catalyst {{
     background-color: #FF3A2D; color: #FFF;
-    font-size: 13px; font-weight: 700;
-    padding: 6px 10px; display: inline-block;
-    align-self: flex-start; margin-top: 12px;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; overflow-wrap: break-word; word-break: break-all;
+    align-self: flex-start; margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
 }}
 .footer {{
     display: flex; justify-content: space-between;
@@ -253,7 +297,6 @@ body {{
         <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
         <span>雪球 @xueqiu88</span>
     </div>
-    {extra_note}
 </div>
 </body>
 </html>"""
@@ -268,7 +311,7 @@ def save_card(projects: list[dict], date_str: str = None) -> str:
     Returns:
         保存路径
     """
-    date_str = date_str or datetime.now().strftime("%Y%m%d")
+    date_str = date_str or cn_now().strftime("%Y%m%d")
     html = generate_card_html(projects, date_str)
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     path = REPORTS_DIR / f"card_{date_str}.html"
