@@ -72,7 +72,7 @@ class SurfService:
 
         start = time.time()
         try:
-            with httpx.Client(timeout=timeout, verify=False) as client:
+            with httpx.Client(timeout=timeout) as client:
                 resp = client.post(self.base_url, headers=headers, json=payload)
             elapsed = time.time() - start
 

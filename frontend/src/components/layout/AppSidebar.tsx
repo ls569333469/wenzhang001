@@ -30,8 +30,7 @@ export function AdaptiveSidebar() {
     const navItems = [
         { href: "/dashboard", icon: LayoutGrid, label: "仪表盘" },
         { href: "/studio", icon: PenTool, label: "创作中心" },
-        { href: "/research", icon: Search, label: "投研报告" },
-        { href: "/data", icon: FolderOpen, label: "数据管理" },
+        { href: "/data", icon: FolderOpen, label: "数据中心" },
         { href: "/settings", icon: Settings, label: "系统设置" },
     ];
 

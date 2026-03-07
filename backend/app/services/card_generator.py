@@ -193,7 +193,7 @@ def generate_card_html(
         summary = _clip(p.get("summary", p.get("buzz", "")), 40)
         twitter = p.get("twitter", "")
         catalyst_raw = p.get("catalyst", "")
-        catalyst = _clip(_abbreviate_numbers(catalyst_raw), 35)
+        catalyst = _clip(_abbreviate_numbers(catalyst_raw), 50)
 
         catalyst_html = ""
         if catalyst:
@@ -263,16 +263,15 @@ body {{
     letter-spacing: -0.5px;
 }}
 .desc {{ font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow: hidden; max-height: 2.8em;
 }}
 .catalyst {{
     background-color: #FF3A2D; color: #FFF;
     font-size: 12px; font-weight: 700;
-    padding: 5px 10px; display: -webkit-box;
-    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    overflow: hidden; overflow-wrap: break-word; word-break: break-all;
-    align-self: flex-start; margin-top: 10px;
+    padding: 5px 10px; display: inline-block;
+    overflow: hidden; max-height: 3.36em;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
     border-radius: 4px; line-height: 1.4;
     max-width: 95%;
 }}
@@ -304,16 +303,107 @@ body {{
     return html
 
 
-def save_card(projects: list[dict], date_str: str = None) -> str:
+def generate_card_image(html: str, output_path: str) -> str:
     """
-    生成并保存配图 HTML 文件
+    用 Playwright 无头浏览器渲染 HTML 配图并截取 .canvas 元素为 PNG
+
+    注意: Playwright Sync API 不能在 asyncio 事件循环中运行，
+    因此用 subprocess 启动独立 Python 进程执行截图。
+
+    Args:
+        html: 完整 HTML 字符串
+        output_path: PNG 保存路径
 
     Returns:
         保存路径
     """
+    import subprocess
+    import tempfile
+    import logging
+    logger = logging.getLogger("card_generator")
+
+    # 把 HTML 写入临时文件（避免命令行转义问题）
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.html', delete=False, encoding='utf-8') as f:
+        f.write(html)
+        html_tmp = f.name
+
+    # 截图脚本
+    script = f"""
+import sys
+from playwright.sync_api import sync_playwright
+
+html_path = r"{html_tmp}"
+output_path = r"{output_path}"
+
+with open(html_path, 'r', encoding='utf-8') as f:
+    html = f.read()
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    page = browser.new_page(viewport={{"width": 1400, "height": 800}}, device_scale_factor=4)
+    page.set_content(html, wait_until="networkidle")
+    page.wait_for_timeout(1500)
+    canvas = page.query_selector(".canvas")
+    if canvas:
+        canvas.screenshot(path=output_path, type="png")
+    else:
+        page.screenshot(path=output_path, type="png")
+    browser.close()
+
+import os
+os.unlink(html_path)
+print("OK")
+"""
+
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False, encoding='utf-8') as f:
+        f.write(script)
+        script_path = f.name
+
+    try:
+        import sys
+        result = subprocess.run(
+            [sys.executable, script_path],
+            capture_output=True, text=True, timeout=30
+        )
+        if result.returncode == 0:
+            logger.info(f"🖼️ 配图 PNG: {output_path}")
+        else:
+            logger.error(f"PNG 生成失败: {result.stderr}")
+    finally:
+        import os
+        try:
+            os.unlink(script_path)
+        except OSError:
+            pass
+        try:
+            os.unlink(html_tmp)
+        except OSError:
+            pass
+
+    return output_path
+
+
+def save_card(projects: list[dict], date_str: str = None) -> str:
+    """
+    生成并保存配图 HTML + PNG 文件
+
+    Returns:
+        HTML 保存路径
+    """
     date_str = date_str or cn_now().strftime("%Y%m%d")
     html = generate_card_html(projects, date_str)
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
-    path = REPORTS_DIR / f"card_{date_str}.html"
-    path.write_text(html, encoding="utf-8")
-    return str(path)
+
+    # 保存 HTML
+    html_path = REPORTS_DIR / f"card_{date_str}.html"
+    html_path.write_text(html, encoding="utf-8")
+
+    # 用 Playwright 生成 PNG
+    png_path = REPORTS_DIR / f"card_{date_str}.png"
+    try:
+        generate_card_image(html, str(png_path))
+    except Exception as e:
+        import logging
+        logging.getLogger("card_generator").error(f"PNG 生成失败: {e}")
+
+    return str(html_path)

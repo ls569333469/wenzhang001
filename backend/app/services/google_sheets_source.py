@@ -5,6 +5,9 @@ import os
 import random
 from typing import List, Dict, Optional
 from pathlib import Path
+from app.core.config import get_logger
+
+logger = get_logger("google_sheets")
 
 # Lazy import to avoid startup errors if gspread not installed
 gspread = None
@@ -61,30 +64,30 @@ class GoogleSheetsDataSource:
             
             # Check if credentials file exists
             if not Path(creds_path).exists():
-                print(f"[GoogleSheets] Credentials file not found: {creds_path}")
+                logger.info(f"[GoogleSheets] Credentials file not found: {creds_path}")
                 return False
             
-            print(f"[GoogleSheets] Loading credentials from {creds_path}")
-            print(f"[GoogleSheets] Using scopes: {self.SCOPES}")
+            logger.info(f"[GoogleSheets] Loading credentials from {creds_path}")
+            logger.info(f"[GoogleSheets] Using scopes: {self.SCOPES}")
             
             creds = Credentials.from_service_account_file(creds_path, scopes=self.SCOPES)
             gc = gspread.authorize(creds)
-            print(f"[GoogleSheets] Spreadsheet ID: '{spreadsheet_name}', Length: {len(spreadsheet_name)}")
+            logger.info(f"[GoogleSheets] Spreadsheet ID: '{spreadsheet_name}', Length: {len(spreadsheet_name)}")
             
             # Use open_by_key to avoid Drive API requirement
             # If spreadsheet_name looks like an ID (44 chars), use it directly
             if len(spreadsheet_name) > 40 and '/' not in spreadsheet_name:
-                print("[GoogleSheets] Opening by key...")
+                logger.info("[GoogleSheets] Opening by key...")
                 self._spreadsheet = gc.open_by_key(spreadsheet_name)
             else:
-                print("[GoogleSheets] Opening by name (Requires Drive API)...")
+                logger.info("[GoogleSheets] Opening by name (Requires Drive API)...")
                 self._spreadsheet = gc.open(spreadsheet_name)
             self._initialized = True
-            print(f"[GoogleSheets] Connected to spreadsheet")
+            logger.info(f"[GoogleSheets] Connected to spreadsheet")
             return True
             
         except Exception as e:
-            print(f"[GoogleSheets] Init failed: {e}")
+            logger.error(f"[GoogleSheets] Init failed: {e}")
             return False
     
     def _map_fields(self, record: Dict) -> Dict:
@@ -107,10 +110,10 @@ class GoogleSheetsDataSource:
             records = worksheet.get_all_records()
             # Map field names
             mapped_records = [self._map_fields(r) for r in records]
-            print(f"[GoogleSheets] Loaded {len(mapped_records)} records from sheet: {sheet_name}")
+            logger.info(f"[GoogleSheets] Loaded {len(mapped_records)} records from sheet: {sheet_name}")
             return mapped_records
         except Exception as e:
-            print(f"[GoogleSheets] Failed to load sheet {sheet_name}: {e}")
+            logger.error(f"[GoogleSheets] Failed to load sheet {sheet_name}: {e}")
             return []
     
     def get_samples(self, style: str, emotion: str = None, count: int = 3) -> List[Dict]:
@@ -133,7 +136,7 @@ class GoogleSheetsDataSource:
         
         all_records = self._cache.get(sheet_name, [])
         if not all_records:
-            print(f"[GoogleSheets] No records found in sheet: {sheet_name}")
+            logger.info(f"[GoogleSheets] No records found in sheet: {sheet_name}")
             return []
         
         # P29 fix: 工作表本身已按风格划分（风格_半佛 = banfo），
@@ -151,7 +154,7 @@ class GoogleSheetsDataSource:
         style_matches = [item for item in style_matches if is_not_ps_content(item)]
         
         if not style_matches:
-            print(f"[GoogleSheets] No samples found for style: {style}")
+            logger.info(f"[GoogleSheets] No samples found for style: {style}")
             return []
         
         # Filter by emotion if provided
@@ -198,7 +201,7 @@ class GoogleSheetsDataSource:
         
         # 按频次降序，返回前15个
         top_patterns = [p for p, _ in counter.most_common(15)]
-        print(f"[GoogleSheets] Pattern menu for {style}: {len(top_patterns)} patterns")
+        logger.info(f"[GoogleSheets] Pattern menu for {style}: {len(top_patterns)} patterns")
         return top_patterns
     
     def get_targeted_samples(self, style: str, snippet_type: str = None, 
@@ -258,7 +261,7 @@ class GoogleSheetsDataSource:
             self._cache.pop(sheet_name, None)
         else:
             self._cache.clear()
-        print("[GoogleSheets] Cache cleared")
+        logger.info("[GoogleSheets] Cache cleared")
     
     def is_available(self) -> bool:
         """Check if Google Sheets is configured and accessible"""

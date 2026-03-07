@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { PenTool, Library, Settings2 } from "lucide-react";
+import { PenTool, FolderOpen, Settings2 } from "lucide-react";
 import { MonitorCard } from "@/features/dashboard/components/MonitorCard";
 import { ActionTile } from "@/features/dashboard/components/ActionTile";
 import { API_BASE_URL } from "@/config/api";
@@ -94,10 +94,10 @@ export default function DashboardPage() {
               href="/studio"
             />
             <ActionTile
-              icon={Library}
-              title="知识库管理"
-              description="管理 Google Sheets 素材。"
-              href="/knowledge"
+              icon={FolderOpen}
+              title="数据中心"
+              description="新闻素材、投研报告、数据采集。"
+              href="/data"
             />
             <ActionTile
               icon={Settings2}

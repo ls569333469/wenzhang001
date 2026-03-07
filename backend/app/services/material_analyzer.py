@@ -16,6 +16,9 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 
 from app.core.llm import generate_text
+from app.core.config import get_logger
+
+logger = get_logger("material_analyzer")
 
 ANALYZE_SYSTEM_PROMPT = """你是一个 Web3 内容编辑助手。对给定的素材进行快速评估，返回 JSON（不做任何展开分析）。"""
 
@@ -115,12 +118,12 @@ def analyze_batch(materials: List[Dict], api_config: dict = None) -> List[Dict]:
     total = len(materials)
 
     for i, mat in enumerate(materials):
-        print(f"[Analyzer] 分析 {i + 1}/{total}: {mat.get('title', '')[:40]}...")
+        logger.info(f"[Analyzer] 分析 {i + 1}/{total}: {mat.get('title', '')[:40]}...")
         try:
             result = analyze_material(mat, api_config)
             results.append(result)
         except Exception as e:
-            print(f"[Analyzer] 分析失败: {e}")
+            logger.info(f"[Analyzer] 分析失败: {e}")
             # Fallback: add without AI analysis
             mat["summary"] = mat.get("title", "")[:30]
             mat["quality_score"] = 5
@@ -136,7 +139,7 @@ def analyze_batch(materials: List[Dict], api_config: dict = None) -> List[Dict]:
             mat["status"] = "未使用"
             results.append(mat)
 
-    print(f"[Analyzer] 完成: {len(results)}/{total} 条")
+    logger.info(f"[Analyzer] 完成: {len(results)}/{total} 条")
     return results
 
 
@@ -173,8 +176,8 @@ def _call_llm_analysis(title: str, content: str, api_config: dict = None) -> Dic
         return json.loads(text)
 
     except json.JSONDecodeError as e:
-        print(f"[Analyzer] JSON parse error: {e}")
+        logger.error(f"[Analyzer] JSON parse error: {e}")
         return {}
     except Exception as e:
-        print(f"[Analyzer] LLM error: {e}")
+        logger.error(f"[Analyzer] LLM error: {e}")
         return {}

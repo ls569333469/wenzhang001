@@ -27,7 +27,7 @@ from app.services.daily_report_service import (
 
 PROJECTS_DIR = Path(__file__).parent.parent.parent / "reports" / "research" / "projects"
 SOURCE_DATE = "20260228"  # 策略官报告的日期
-OUTPUT_DATE = "20260302"  # 输出日期
+OUTPUT_DATE = "20260303"  # 输出日期
 
 
 def load_existing_data():

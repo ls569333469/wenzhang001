@@ -11,7 +11,10 @@ from datetime import datetime
 from typing import List, Dict, Optional, Set
 
 from dotenv import load_dotenv
+from app.core.config import get_logger
 load_dotenv()
+
+logger = get_logger("material_sheet")
 
 # Lazy imports
 gspread = None
@@ -73,7 +76,7 @@ class MaterialSheetService:
             spreadsheet_id = os.getenv("GOOGLE_SHEETS_SPREADSHEET", "")
 
             if not os.path.exists(creds_path):
-                print(f"[MaterialSheet] Credentials not found: {creds_path}")
+                logger.info(f"[MaterialSheet] Credentials not found: {creds_path}")
                 return False
 
             creds = Credentials.from_service_account_file(creds_path, scopes=SCOPES)
@@ -86,18 +89,18 @@ class MaterialSheetService:
 
             self._worksheet = spreadsheet.worksheet("materials")
             self._initialized = True
-            print("[MaterialSheet] Connected to materials worksheet")
+            logger.info("[MaterialSheet] Connected to materials worksheet")
             # Pre-warm cache to avoid cold start delay on first request
             try:
                 self._cache_records = self._worksheet.get_all_records()
                 self._cache_time = time.time()
-                print(f"[MaterialSheet] Cache pre-warmed: {len(self._cache_records)} records")
+                logger.info(f"[MaterialSheet] Cache pre-warmed: {len(self._cache_records)} records")
             except Exception:
                 pass
             return True
 
         except Exception as e:
-            print(f"[MaterialSheet] Init failed: {e}")
+            logger.error(f"[MaterialSheet] Init failed: {e}")
             return False
 
     def get_existing_urls(self) -> Set[str]:
@@ -111,7 +114,7 @@ class MaterialSheetService:
             # Skip header
             return set(url_col[1:]) if len(url_col) > 1 else set()
         except Exception as e:
-            print(f"[MaterialSheet] Error reading URLs: {e}")
+            logger.error(f"[MaterialSheet] Error reading URLs: {e}")
             return set()
 
     def write_materials(self, materials: List[Dict]) -> int:
@@ -163,11 +166,11 @@ class MaterialSheetService:
             try:
                 self._worksheet.append_rows(chunk, value_input_option="RAW")
                 written += len(chunk)
-                print(f"[MaterialSheet] 写入 {written}/{len(rows)} 行")
+                logger.info(f"[MaterialSheet] 写入 {written}/{len(rows)} 行")
             except Exception as e:
-                print(f"[MaterialSheet] Write error at chunk {i}: {e}")
+                logger.error(f"[MaterialSheet] Write error at chunk {i}: {e}")
                 break
-        print(f"[MaterialSheet] 写入 {written}/{len(rows)} 行")
+        logger.info(f"[MaterialSheet] 写入 {written}/{len(rows)} 行")
 
         # P23: Invalidate cache after write
         self._cache_records = None
@@ -194,9 +197,9 @@ class MaterialSheetService:
             try:
                 self._cache_records = self._worksheet.get_all_records()
                 self._cache_time = now
-                print(f"[MaterialSheet] Cache refreshed: {len(self._cache_records)} records")
+                logger.info(f"[MaterialSheet] Cache refreshed: {len(self._cache_records)} records")
             except Exception as e:
-                print(f"[MaterialSheet] Read error: {e}")
+                logger.error(f"[MaterialSheet] Read error: {e}")
                 return []
 
         records = self._cache_records
@@ -255,7 +258,7 @@ class MaterialSheetService:
                 return True
             return False
         except Exception as e:
-            print(f"[MaterialSheet] Mark used error: {e}")
+            logger.error(f"[MaterialSheet] Mark used error: {e}")
             return False
         finally:
             # P23: Invalidate cache after mark-used

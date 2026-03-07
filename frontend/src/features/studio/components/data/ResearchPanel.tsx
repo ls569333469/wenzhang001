@@ -108,12 +108,30 @@ export function ResearchPanel() {
         const { setGenerating, triggerRefresh } = useResearchStore.getState();
         setGenerating(true, '正在生成日报...');
         try {
+            // 获取用户勾选的项目
+            const allProjects = [...scoutProjects, ...projects];
+            const selectedList = allProjects.filter(p => selectedIds.has(p.id));
+            const selectedNames = selectedList.map(p => p.name);
+
+            // 构建侦察官项目数据（传给后端避免重新搜索）
+            const scoutData = selectedList
+                .filter(p => p.source === 'scout')
+                .map(p => ({
+                    name: p.name,
+                    twitter: p.twitter || '',
+                    category: p.category || '',
+                    kol_24h: p.kol_24h || 0,
+                    buzz: p.buzz || '',
+                }));
+
             const res = await fetch(`${API_BASE_URL}/api/research/daily-report`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     provider: 'volcengine',
                     concurrency: 3,
+                    selected_projects: selectedNames.length > 0 ? selectedNames : undefined,
+                    scout_projects: scoutData.length > 0 ? scoutData : undefined,
                 }),
             });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -263,8 +281,23 @@ export function ResearchPanel() {
                         {projects.map(project => (
                             <div
                                 key={project.id}
-                                className="group bg-white rounded-xl border border-zinc-200 p-3 hover:border-emerald-300 hover:shadow-sm transition-all cursor-pointer"
+                                onClick={() => toggleSelect(project.id)}
+                                className={cn(
+                                    "group bg-white rounded-xl border-[1.5px] p-3 cursor-pointer transition-all relative",
+                                    selectedIds.has(project.id)
+                                        ? "border-emerald-400 bg-emerald-50/50"
+                                        : "border-zinc-200 hover:border-emerald-300"
+                                )}
                             >
+                                {/* 勾选指示器 */}
+                                <div className={cn(
+                                    "absolute top-2 right-2 w-4 h-4 rounded-full flex items-center justify-center text-[10px] transition-all",
+                                    selectedIds.has(project.id)
+                                        ? "bg-emerald-500 text-white"
+                                        : "bg-zinc-200 text-transparent"
+                                )}>
+                                    ✓
+                                </div>
                                 <div className="flex items-center gap-2.5 mb-2">
                                     <div className="w-8 h-8 bg-emerald-50 rounded-lg flex items-center justify-center text-sm">
                                         💎
@@ -319,7 +352,7 @@ export function ResearchPanel() {
             </div>
 
             {/* P31: 底部操作栏 */}
-            {scoutProjects.length > 0 && (
+            {(selectedCount > 0 || scoutProjects.length > 0) && (
                 <div className="px-4 py-3 border-t border-zinc-100 flex items-center gap-3">
                     <span className="text-[11px] text-ink-muted whitespace-nowrap">
                         已选 {selectedCount} 个

@@ -35,7 +35,7 @@ export function StudioNavbar() {
                 </button>
 
                 {/* Nav Links — P27: 知识库+清洗 → 数据管理 */}
-                <NavPill label="数据管理" icon={FolderOpen} href="/data" />
+                <NavPill label="数据中心" icon={FolderOpen} href="/data" />
                 <NavPill label="素材" icon={Newspaper} href="/studio?view=materials" />
                 <NavPill label="历史" icon={History} href="/studio?view=history" />
 

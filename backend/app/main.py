@@ -44,7 +44,11 @@ async def startup_event():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001", "http://localhost:3003"],
+    allow_origins=[
+        "http://localhost:3000", "http://localhost:3001", "http://localhost:3003",
+        "http://107.172.78.150",        # VPS IP
+        "http://107.172.78.150:3000",   # VPS + Next.js port
+    ] + ([os.environ["CORS_EXTRA_ORIGIN"]] if os.environ.get("CORS_EXTRA_ORIGIN") else []),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

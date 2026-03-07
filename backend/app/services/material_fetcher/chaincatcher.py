@@ -18,6 +18,9 @@ import requests
 from bs4 import BeautifulSoup
 
 from .base import BaseFetcher
+from app.core.config import get_logger
+
+logger = get_logger("chaincatcher")
 
 # UA pool for rotation
 USER_AGENTS = [
@@ -55,18 +58,18 @@ class ChainCatcherFetcher(BaseFetcher):
 
         # 1. 快讯（默认精选）
         label = "精选快讯" if featured_only else "快讯"
-        print(f"[ChainCatcher] 抓取{label} (目标 {count} 条)...")
+        logger.info(f"[ChainCatcher] 抓取{label} (目标 {count} 条)...")
         news = self._fetch_news_list(count=count, featured_only=featured_only)
         results.extend(news)
-        print(f"[ChainCatcher] {label}: {len(news)} 条")
+        logger.info(f"[ChainCatcher] {label}: {len(news)} 条")
 
         # 2. 长文（不受精选筛选影响）
-        print(f"[ChainCatcher] 抓取长文 (目标 {count} 条)...")
+        logger.info(f"[ChainCatcher] 抓取长文 (目标 {count} 条)...")
         articles = self._fetch_article_list(count=count)
         results.extend(articles)
-        print(f"[ChainCatcher] 长文: {len(articles)} 条")
+        logger.info(f"[ChainCatcher] 长文: {len(articles)} 条")
 
-        print(f"[ChainCatcher] 总计: {len(results)} 条")
+        logger.info(f"[ChainCatcher] 总计: {len(results)} 条")
         return results
 
     def _fetch_news_list(self, count: int, featured_only: bool = True) -> List[Dict]:
@@ -81,7 +84,7 @@ class ChainCatcherFetcher(BaseFetcher):
             items = self._fetch_featured_via_browser(count)
             if items:
                 return items
-            print("  [Playwright 失败，回退到 SSR 解析]")
+            logger.info("  [Playwright 失败，回退到 SSR 解析]")
 
         # 非精选模式 或 Playwright 失败时回退
         url = f"{CC_BASE}/news"
@@ -90,7 +93,7 @@ class ChainCatcherFetcher(BaseFetcher):
             return []
         items = self._parse_news_page(soup, featured_only=featured_only)
         label = "精选" if featured_only else "全部"
-        print(f"  [SSR 解析完成] {len(items)} 条{label}快讯")
+        logger.info(f"  [SSR 解析完成] {len(items)} 条{label}快讯")
         return items[:count]
 
     def _fetch_featured_via_browser(self, count: int) -> List[Dict]:
@@ -98,7 +101,7 @@ class ChainCatcherFetcher(BaseFetcher):
         try:
             from playwright.sync_api import sync_playwright
         except ImportError:
-            print("  [Playwright 未安装]")
+            logger.info("  [Playwright 未安装]")
             return []
 
         items = []
@@ -110,7 +113,7 @@ class ChainCatcherFetcher(BaseFetcher):
                 )
                 page = browser.new_page()
 
-                print("  [Browser] 加载页面...")
+                logger.info("  [Browser] 加载页面...")
                 page.goto(f"{CC_BASE}/news", wait_until="domcontentloaded", timeout=30000)
                 page.wait_for_timeout(3000)
 
@@ -119,7 +122,7 @@ class ChainCatcherFetcher(BaseFetcher):
                 page.wait_for_timeout(500)
 
                 # 滚动加载更多内容
-                print("  [Browser] 滚动加载...")
+                logger.info("  [Browser] 滚动加载...")
                 for i in range(8):
                     page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
                     page.wait_for_timeout(1500)
@@ -127,7 +130,7 @@ class ChainCatcherFetcher(BaseFetcher):
                 total = page.evaluate(
                     "document.querySelectorAll('.v-timeline-item').length"
                 )
-                print(f"  [Browser] 已加载 {total} 条快讯")
+                logger.info(f"  [Browser] 已加载 {total} 条快讯")
 
                 # 点击"只看精选"
                 page.evaluate("window.scrollTo(0, 0)")
@@ -135,9 +138,9 @@ class ChainCatcherFetcher(BaseFetcher):
                 try:
                     page.locator(".v-input--switch").first.click(force=True, timeout=3000)
                     page.wait_for_timeout(2000)
-                    print("  [Browser] 只看精选 ON")
+                    logger.info("  [Browser] 只看精选 ON")
                 except Exception:
-                    print("  [Browser] 无法点击精选开关，改为提取 selectedClass 条目")
+                    logger.info("  [Browser] 无法点击精选开关，改为提取 selectedClass 条目")
 
                 # 提取精选条目
                 raw_items = page.evaluate("""
@@ -189,10 +192,10 @@ class ChainCatcherFetcher(BaseFetcher):
                         "is_featured": True,
                     })
 
-                print(f"  [Browser] 精选快讯: {len(items)} 条")
+                logger.info(f"  [Browser] 精选快讯: {len(items)} 条")
 
         except Exception as e:
-            print(f"  [Browser] 异常: {e}")
+            logger.warning(f"  [Browser] 异常: {e}")
             return []
 
         return items[:count]
@@ -390,7 +393,7 @@ class ChainCatcherFetcher(BaseFetcher):
                 enriched.append(item)
                 continue
 
-            print(f"[ChainCatcher] 获取详情 {i + 1}/{total}: {item['title'][:40]}...")
+            logger.info(f"[ChainCatcher] 获取详情 {i + 1}/{total}: {item['title'][:40]}...")
             detail = self.fetch_article_detail(item["url"])
 
             if detail:
@@ -462,13 +465,13 @@ class ChainCatcherFetcher(BaseFetcher):
                     return BeautifulSoup(resp.text, "html.parser")
                 elif resp.status_code == 429:
                     wait = 2 ** attempt + random.uniform(1, 3)
-                    print(f"[ChainCatcher] Rate limited, waiting {wait:.1f}s...")
+                    logger.info(f"[ChainCatcher] Rate limited, waiting {wait:.1f}s...")
                     time.sleep(wait)
                 else:
-                    print(f"[ChainCatcher] HTTP {resp.status_code} for {url}")
+                    logger.info(f"[ChainCatcher] HTTP {resp.status_code} for {url}")
                     return None
             except requests.exceptions.RequestException as e:
-                print(f"[ChainCatcher] Request error (attempt {attempt + 1}): {e}")
+                logger.error(f"[ChainCatcher] Request error (attempt {attempt + 1}): {e}")
                 time.sleep(1)
 
         return None

@@ -9,7 +9,7 @@ import {
     ModeStrategistConfig, ModeCriticConfig, ModePolisherConfig,
     SKIP_MODES, AgentModelSetting
 } from '../studio/schema';
-import { Brain, PenTool, Eye, Sparkles, AlertTriangle, Zap, FileText, BookOpen, GraduationCap, RefreshCcw, Check, ChevronRight, Settings2, MessageSquare, SkipForward, Heart, Target, Search } from 'lucide-react';
+import { Brain, PenTool, Eye, Sparkles, AlertTriangle, Zap, FileText, BookOpen, GraduationCap, RefreshCcw, Check, ChevronRight, Settings2, MessageSquare, SkipForward, Heart, Target, Search, Telescope } from 'lucide-react';
 import { ConfigModal } from '@/components/ui/ConfigModal';
 
 // P14-B: 支持的模型列表
@@ -52,6 +52,7 @@ const AGENT_ROLES: { id: keyof AgentModels; label: string; icon: React.ReactNode
     { id: 'writer', label: '写手', icon: <PenTool className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-orange-600 bg-orange-50', accentBg: 'bg-orange-50', accentText: 'text-orange-700', accentIcon: <PenTool className="w-3.5 h-3.5" /> },
     { id: 'critic', label: '评论家', icon: <Eye className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-blue-600 bg-blue-50', accentBg: 'bg-blue-50', accentText: 'text-blue-700', accentIcon: <Eye className="w-3.5 h-3.5" /> },
     { id: 'polisher', label: '润色师', icon: <Sparkles className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-pink-600 bg-pink-50', accentBg: 'bg-pink-50', accentText: 'text-pink-700', accentIcon: <Sparkles className="w-3.5 h-3.5" /> },
+    { id: 'scout', label: '侦察官', icon: <Telescope className="w-5 h-5" />, desc: 'P31: 投研搜索智能体', color: 'text-teal-600 bg-teal-50', accentBg: 'bg-teal-50', accentText: 'text-teal-700', accentIcon: <Telescope className="w-3.5 h-3.5" /> },
 ];
 
 const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
@@ -66,7 +67,7 @@ interface AgentModelConfigProps {
 }
 
 export const AgentModelConfig: React.FC<AgentModelConfigProps> = ({ apiKeys }) => {
-    const { models } = useAgentModelStore();
+    const { models, updateModel } = useAgentModelStore();
     const { writers, updateWriter } = useModeWriterStore();
     const { strategists, updateStrategist } = useModeStrategistStore();
     const { critics, updateCritic } = useModeCriticStore();
@@ -216,7 +217,10 @@ export const AgentModelConfig: React.FC<AgentModelConfigProps> = ({ apiKeys }) =
                 {AGENT_ROLES.map(role => {
                     const skipCount = (SKIP_MODES[role.id] || []).length;
                     const activeCount = 8 - skipCount;
-                    const currentModelName = `按 ${activeCount} 种模式独立配置${skipCount > 0 ? ` (${skipCount} 种跳过)` : ''}`;
+                    const isScout = role.id === 'scout';
+                    const currentModelName = isScout
+                        ? `${PROVIDER_DISPLAY_NAMES[models.scout?.provider] || 'Surf'} / ${models.scout?.model || 'surf-1.5'}`
+                        : `按 ${activeCount} 种模式独立配置${skipCount > 0 ? ` (${skipCount} 种跳过)` : ''}`;
 
                     return (
                         <div
@@ -256,7 +260,52 @@ export const AgentModelConfig: React.FC<AgentModelConfigProps> = ({ apiKeys }) =
                 description={activeRole ? AGENT_ROLES.find(r => r.id === activeRole)?.desc : ''}
                 icon={activeRole ? AGENT_ROLES.find(r => r.id === activeRole)?.icon : null}
             >
-                {activeRole && renderPerModeConfig(activeRole)}
+                {activeRole && activeRole === 'scout' ? (
+                    /* P31: 侦察官 — 单一模型选择器（不按创作模式拆分） */
+                    <div className="space-y-6">
+                        <div className="bg-teal-50 p-4 rounded-xl flex items-start gap-3">
+                            <div className="p-1 bg-white rounded-full shadow-sm mt-0.5">
+                                <div className="text-teal-700"><Telescope className="w-3.5 h-3.5" /></div>
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-medium text-teal-900">侦察官 — 模型配置</h4>
+                                <p className="text-xs text-teal-700 mt-1 leading-relaxed">
+                                    侦察官用于投研数据搜索，不分创作模式。选择搜索引擎提供商和模型。
+                                </p>
+                            </div>
+                        </div>
+                        <div className="border border-zinc-200 rounded-xl p-5 bg-white space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-zinc-700 mb-2">搜索提供商</label>
+                                <select
+                                    value={models.scout?.provider || 'surf'}
+                                    onChange={(e) => {
+                                        const newP = e.target.value as keyof typeof PROVIDER_MODELS;
+                                        const newMs = PROVIDER_MODELS[newP] || [];
+                                        updateModel('scout', { provider: newP, model: newMs[0]?.id || '' });
+                                    }}
+                                    className="w-full px-3 py-2.5 bg-white border border-zinc-200 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                >
+                                    {validProviders.map(p => (
+                                        <option key={p} value={p}>{PROVIDER_DISPLAY_NAMES[p]}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-zinc-700 mb-2">模型</label>
+                                <select
+                                    value={models.scout?.model || ''}
+                                    onChange={(e) => updateModel('scout', { model: e.target.value })}
+                                    className="w-full px-3 py-2.5 bg-white border border-zinc-200 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                >
+                                    {(PROVIDER_MODELS[models.scout?.provider as keyof typeof PROVIDER_MODELS] || []).map(m => (
+                                        <option key={m.id} value={m.id}>{m.name} — {m.description}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                ) : activeRole ? renderPerModeConfig(activeRole) : null}
             </ConfigModal>
         </div>
     );

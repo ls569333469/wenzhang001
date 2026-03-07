@@ -27,7 +27,7 @@ from app.services.daily_report_service import (
 )
 
 ROUND4_DIR = Path(__file__).parent.parent.parent / "reports" / "research" / "prompt_test" / "strategist" / "round4"
-OUTPUT_DATE = "20260302"
+OUTPUT_DATE = "20260303"
 
 # round4 报告 → (文件名, 项目在侦察官中的信息)
 ROUND4_PROJECTS = [

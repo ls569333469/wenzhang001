@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { Sparkles, BookOpen, Bot, Settings } from "lucide-react";
+import { Sparkles, FolderOpen, Bot, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -20,7 +20,7 @@ interface NavItem {
 
 const navItems: NavItem[] = [
     { id: 'studio', label: '创作工坊', icon: Sparkles, href: '/studio' },
-    { id: 'knowledge', label: '知识库', icon: BookOpen, href: '/knowledge' },
+    { id: 'data', label: '数据中心', icon: FolderOpen, href: '/data' },
     { id: 'agents', label: 'AI 协作', icon: Bot, href: '/agents' },
 ];
 

@@ -580,16 +580,21 @@ def run_tweet_writer(
             "你是 Web3 Alpha 猎手，负责写 X(Twitter) 推文。\n\n"
             "## 任务\n根据投研报告，为每个项目生成一条独立推文。\n\n"
             "## 推文格式（每个项目一条）\n"
-            "```\n🔍 项目名称 @X账号\n\n"
-            "一段话介绍项目定位和核心产品（2-3句）\n\n"
-            "💰 融资金额 + 领投方\n👥 创始人姓名 + 背景\n"
-            "🪙 代币符号 + 总量 + 关键分配\n"
-            "📈 价格 | 市值 | FDV | TVL | Twitter粉丝\n\n"
-            "🔥 近期催化剂：\n• 事件1（日期）\n• 事件2（日期）\n```\n\n"
+            "```\n项目名称：项目名 @X账号\n\n"
+            "一句话介绍项目定位和核心产品（1-2句）\n\n"
+            "1/ 融资金额 — 领投方\n"
+            "2/ 创始人/团队背景\n"
+            "3/ 代币分配 或 空投信息\n"
+            "4/ TVL | 交易量 | 价格 | 粉丝数等数据\n\n"
+            "🔥 一条最强近期催化剂（口语化）\n```\n\n"
             "## 要求\n"
             f"- 催化剂只取 {date_30d_ago} 之后的事件，旧事件不要\n"
-            "- 标题只写项目名称和 @X账号，不写代币符号和赛道\n"
-            "- 不写可信度评分\n- 不写建议动作、投资建议\n"
+            "- 标题固定格式：「项目名称：名称 @X账号」，不加 emoji\n"
+            "- 数据行用「1/ 2/ 3/ 4/」编号，保留所有有价值的信息\n"
+            "- 融资、团队、代币、数据 按顺序排列，没数据的跳过\n"
+            "- 催化剂只写 1 条最强的，口语化，不加(2026-02)格式日期\n"
+            "- 不使用 💰👥🪙📈 等 emoji（只保留🔥）\n"
+            "- 不写可信度评分、建议动作、投资建议\n"
             "- 不附带 URL 和来源链接\n"
             "- 金额用简写：$670万、$1.08亿\n"
             "- 粉丝数用简写：10.2万粉\n"
@@ -598,7 +603,7 @@ def run_tweet_writer(
 
     user_prompt = (
         f"今日投研的 {len(projects)} 个项目：{', '.join(project_names)}\n\n"
-        f"投研简报内容：\n{summary[:3000]}"
+        f"投研简报内容：\n{summary[:6000]}"
     )
 
     provider = api_config.get("provider", "volcengine")
@@ -614,18 +619,18 @@ def run_tweet_writer(
             max_tokens=6000,
         )
 
-        # 解析: 按 🔍 分割为各项目推文
+        # 解析: 按行首「项目名称：」分割为各项目推文（兼容旧版🔍格式）
         import re
         tweets = []
 
-        # 按 🔍 分割（每个项目一条推文）
-        blocks = re.split(r"(?=🔍)", result.strip())
+        # 按行首「项目名称：」或「🔍」分割（避免内容中的"项目"误触发）
+        blocks = re.split(r"(?=^项目名称：|^🔍)", result.strip(), flags=re.MULTILINE)
         for block in blocks:
             block = block.strip()
-            if not block or not block.startswith("🔍"):
-                continue  # 跳过 LLM 前言/intro 文字
-            # 提取项目名（🔍 后面的第一个词）
-            name_match = re.match(r"🔍\s*(.+?)(?:\s*@|\n)", block)
+            if not block:
+                continue
+            # 提取项目名
+            name_match = re.match(r"(?:项目名称：|🔍)\s*(.+?)(?:\s*@|\n)", block)
             if not name_match:
                 continue
             name = name_match.group(1).strip()
@@ -815,6 +820,8 @@ def _save_daily_report(report: str, date_str: str) -> str:
 async def generate_daily_report(
     api_config: dict = None,
     concurrency: int = DEFAULT_CONCURRENCY,
+    selected_projects: list[str] = None,
+    scout_projects: list[dict] = None,
     progress_callback=None,
 ) -> dict:
     """
@@ -847,23 +854,29 @@ async def generate_daily_report(
 
     try:
         # ===== Step 1: 侦察官 =====
-        _progress("scout", "开始搜索热门项目...")
-        scout_result = run_scout()
-        projects = scout_result["projects"]
+        if scout_projects:
+            # 前端已提供侦察结果，跳过重新搜索（避免 Surf API 返回不同结果）
+            _progress("scout", f"使用前端提供的 {len(scout_projects)} 个侦察结果，跳过重新搜索")
+            projects = scout_projects
+            _save_scout_report(projects, "(已由前端提供)", date_str)
+        else:
+            _progress("scout", "开始搜索热门项目...")
+            scout_result = run_scout()
+            projects = scout_result["projects"]
 
-        if not projects:
-            return {
-                "status": "error",
-                "projects_count": 0,
-                "report_path": "",
-                "project_paths": [],
-                "report_content": "",
-                "elapsed": time.time() - start_time,
-                "error": "侦察官未发现任何项目",
-            }
+            if not projects:
+                return {
+                    "status": "error",
+                    "projects_count": 0,
+                    "report_path": "",
+                    "project_paths": [],
+                    "report_content": "",
+                    "elapsed": time.time() - start_time,
+                    "error": "侦察官未发现任何项目",
+                }
 
-        _progress("scout", f"发现 {len(projects)} 个项目")
-        _save_scout_report(projects, scout_result["raw_text"], date_str)
+            _progress("scout", f"发现 {len(projects)} 个项目")
+            _save_scout_report(projects, scout_result["raw_text"], date_str)
 
         # ===== Step 1.5: 去重过滤（P32-B） =====
         try:
@@ -879,6 +892,34 @@ async def generate_daily_report(
         except Exception as e:
             logger.warning(f"去重过滤跳过（Sheets 不可用）: {e}")
 
+        # ===== Step 1.6: 用户手动筛选 =====
+        if selected_projects:
+            selected_set = {n.lower() for n in selected_projects}
+            # 保留侦察中被选中的项目
+            scouted_names = {p.get("name", "").lower() for p in projects}
+            projects = [p for p in projects if p.get("name", "").lower() in selected_set]
+
+            # 补充历史项目（用户选了但侦察官没搜到的）
+            missing = selected_set - {p.get("name", "").lower() for p in projects}
+            if missing:
+                try:
+                    from app.services.research_sheet import research_sheet_service
+                    records = research_sheet_service.get_all_records(use_cache=False)
+                    for r in records:
+                        rname = r.get("项目名", "").strip()
+                        if rname.lower() in missing:
+                            projects.append({
+                                "name": rname,
+                                "twitter": r.get("Twitter", ""),
+                                "category": r.get("赛道", ""),
+                                "buzz": r.get("催化剂摘要", ""),
+                            })
+                            _progress("filter", f"补充历史项目: {rname}")
+                except Exception as e:
+                    logger.warning(f"补充历史项目失败: {e}")
+
+            _progress("filter", f"用户选择: {len(projects)} 个项目")
+
         if not projects:
             return {
                 "status": "error",
@@ -887,7 +928,7 @@ async def generate_daily_report(
                 "project_paths": [],
                 "report_content": "",
                 "elapsed": time.time() - start_time,
-                "error": "去重后无剩余项目",
+                "error": "筛选后无剩余项目",
             }
 
         # ===== Step 2: 策略官（并发 N） =====

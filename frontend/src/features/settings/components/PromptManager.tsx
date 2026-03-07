@@ -4,14 +4,16 @@ import { WriterPromptEditor } from './WriterPromptEditor';
 import { StrategistPromptEditor } from './StrategistPromptEditor';
 import { CriticPromptEditor } from './CriticPromptEditor';
 import { PolisherPromptEditor } from './PolisherPromptEditor';
+import { ScoutPromptEditor } from './ScoutPromptEditor';
 
-import { Sparkles, PenTool, MessageSquare, Wand2 } from 'lucide-react';
+import { Sparkles, PenTool, MessageSquare, Wand2, Telescope } from 'lucide-react';
 
 const AGENTS = [
     { id: 'strategist', label: '策略师 (Strategist)', icon: Sparkles },
     { id: 'writer', label: '写手 (Writer)', icon: PenTool },
     { id: 'critic', label: '评论家 (Critic)', icon: MessageSquare },
     { id: 'polisher', label: '润色师 (Polisher)', icon: Wand2 },
+    { id: 'scout', label: '侦察官 (Scout)', icon: Telescope },
 ] as const;
 
 export function PromptManager() {
@@ -64,6 +66,7 @@ export function PromptManager() {
                 {activeAgent === 'strategist' && <StrategistPromptEditor />}
                 {activeAgent === 'critic' && <CriticPromptEditor />}
                 {activeAgent === 'polisher' && <PolisherPromptEditor />}
+                {activeAgent === 'scout' && <ScoutPromptEditor />}
             </div>
         </div>
     );

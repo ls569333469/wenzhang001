@@ -142,10 +142,10 @@ class DataService:
     def get_research_projects(self, query: Optional[str] = None) -> List[Dict]:
         """
         搜索投研项目
-        Tab: 投研项目
-        列: 项目名, 赛道, 融资轮次, 融资金额, 投资方, 公链, 一句话摘要
+        Tab: 投研记录 (P32-B: 替代旧 投研项目 Tab)
+        列: 项目名, Twitter, 赛道, 上次分析时间, 催化剂摘要, 评级, 一句话摘要, 发布状态, 侦察次数
         """
-        records = self._read_tab("投研项目")
+        records = self._read_tab("投研记录")
         
         # 搜索过滤
         if query:
@@ -154,20 +154,26 @@ class DataService:
                 r for r in records
                 if q in r.get("项目名", "").lower()
                 or q in r.get("赛道", "").lower()
-                or q in r.get("公链", "").lower()
+                or q in r.get("Twitter", "").lower()
+                or q in r.get("催化剂摘要", "").lower()
             ]
+        
+        # 按上次分析时间倒序（最新的在前）
+        records.sort(key=lambda r: r.get("上次分析时间", ""), reverse=True)
         
         result = []
         for i, r in enumerate(records):
             result.append({
                 "id": str(i + 1),
                 "name": r.get("项目名", ""),
+                "twitter": r.get("Twitter", ""),
                 "category": r.get("赛道", ""),
-                "funding_round": r.get("融资轮次", ""),
-                "funding_amount": r.get("融资金额", ""),
-                "investors": r.get("投资方", ""),
-                "chain": r.get("公链", ""),
+                "last_analyzed": r.get("上次分析时间", ""),
+                "catalyst": r.get("催化剂摘要", ""),
+                "rating": r.get("评级", ""),
                 "summary": r.get("一句话摘要", ""),
+                "status": r.get("发布状态", ""),
+                "scout_count": r.get("侦察次数", 0),
             })
         return result
     

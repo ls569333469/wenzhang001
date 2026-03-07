@@ -1,10 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { CardPreview } from './CardPreview';
 import { TweetCards } from './TweetCards';
 import { ReportSection } from './ReportSection';
-import { RefreshCw, AlertCircle } from 'lucide-react';
+import { PublishStrip } from './PublishStrip';
+import { XPreview } from './XPreview';
+import { RefreshCw, AlertCircle, Loader2 } from 'lucide-react';
+import { useResearchStore } from './useResearchStore';
 
 interface ResearchData {
     date: string;
@@ -19,14 +22,19 @@ export function ResearchView() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchData = async () => {
+    // P31 P0: 监听 store 变化，自动 refetch
+    const refreshKey = useResearchStore((s) => s.refreshKey);
+    const isGenerating = useResearchStore((s) => s.isGenerating);
+    const statusMessage = useResearchStore((s) => s.statusMessage);
+
+    const fetchData = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
             const res = await fetch('http://localhost:8000/api/research/latest');
             if (!res.ok) {
                 if (res.status === 404) {
-                    setError('暂无投研报告，请先运行 Pipeline 生成');
+                    setError('暂无投研报告，请先在左侧搜索项目并生成日报');
                     return;
                 }
                 throw new Error(`API 错误: ${res.status}`);
@@ -38,11 +46,34 @@ export function ResearchView() {
         } finally {
             setLoading(false);
         }
-    };
+    }, []);
 
+    // 初始加载 + refreshKey 变化时 refetch
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [fetchData, refreshKey]);
+
+    // P31 P0: 生成中状态
+    if (isGenerating) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-canvas">
+                <div className="text-center space-y-4">
+                    <Loader2 size={32} className="animate-spin mx-auto text-violet-500" />
+                    <div>
+                        <h2 className="text-lg font-serif font-bold text-ink-primary">
+                            正在生成投研快报
+                        </h2>
+                        <p className="text-sm text-ink-muted mt-1">
+                            {statusMessage || '侦察官 → 策略官 → 审核官 → 写手 → 润色官'}
+                        </p>
+                        <p className="text-xs text-ink-muted mt-3 opacity-60">
+                            预计需要 10-15 分钟，请勿关闭页面
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (loading) {
         return (
@@ -73,6 +104,10 @@ export function ResearchView() {
         );
     }
 
+    // P32: 前端推导检查清单数据
+    const mainTweet = data.tweets[0];
+    const totalCharCount = data.tweets.reduce((s, t) => s + (t.char_count || 0), 0);
+
     return (
         <div className="h-full overflow-y-auto bg-canvas">
             <div className="w-full mx-auto p-4 space-y-4">
@@ -95,17 +130,35 @@ export function ResearchView() {
                     </button>
                 </div>
 
-                {/* 区域 1: 配图预览 */}
-                {data.card_html && (
-                    <CardPreview html={data.card_html} date={data.date} />
-                )}
+                {/* P32 区域 1: 发布检查清单 */}
+                <PublishStrip
+                    cardReady={!!data.card_html}
+                    mainTweetReady={!!mainTweet && mainTweet.text.length > 0}
+                    mainTweetCharCount={mainTweet?.char_count ?? 0}
+                    projectCount={data.project_count}
+                    totalCharCount={totalCharCount}
+                    date={data.date}
+                />
 
-                {/* 区域 2: 推文文案 */}
+                {/* P32 区域 2: 发布文案（先复制文案）*/}
                 {data.tweets.length > 0 && (
                     <TweetCards tweets={data.tweets} />
                 )}
 
-                {/* 区域 3: 完整报告 */}
+                {/* P32 区域 3: 配图预览（全宽）*/}
+                {data.card_html && (
+                    <CardPreview html={data.card_html} date={data.date} cardImageUrl={data.card_image_url} />
+                )}
+
+                {/* P32 区域 4: X 发布预览（全宽）*/}
+                {mainTweet && (
+                    <XPreview
+                        tweetText={mainTweet.text}
+                        cardHtml={data.card_html}
+                    />
+                )}
+
+                {/* P32 区域 4: 完整报告 */}
                 {data.report_md && (
                     <ReportSection markdown={data.report_md} />
                 )}

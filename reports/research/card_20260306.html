@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+}
+.canvas {
+    width: 1200px; height: 675px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+}
+.header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
+}
+.title-group { display: flex; flex-direction: column; }
+.subtitle { font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }
+.main-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; }
+.main-title .accent { color: #FF3A2D; }
+.date { font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
+}
+.card {
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
+    display: flex; flex-direction: column;
+}
+.card-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
+}
+.twitter { color: #666; }
+.project-name {
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+.desc { font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    overflow: hidden; max-height: 2.8em;
+}
+.catalyst {
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: inline-block;
+    overflow: hidden; max-height: 3.36em;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
+}
+.footer {
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+    <div class="header">
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
+        </div>
+        <div class="date">2026.03.06</div>
+    </div>
+    <div class="grid">
+            <div class="card">
+                <div class="card-top"><span>📌 Prediction</span><span class="twitter">@predictdotfun</span></div>
+                <h2 class="project-name">predict.fun</h2>
+                <div class="desc">一个去中心化预测市场平台，用户可以投注未来事件的结果</div>
+                <div class="catalyst">🔥 03-04 完成对Probable的战略收购（2026-03-04）</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🏦 RWA</span><span class="twitter">@OstiumLabs</span></div>
+                <h2 class="project-name">OstiumLabs</h2>
+                <div class="desc">一个构建 Ostium 协议的公司</div>
+                <div class="catalyst">🔥 03-02 启动“Fog of War”积分窗口</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 Mobile</span><span class="twitter">@Dreamcash</span></div>
+                <h2 class="project-name">Dreamcash</h2>
+                <div class="desc">一个移动优先的交易应用程序，构建在Hyperliquid上</div>
+                <div class="catalyst">🔥 03-04 Season 1 Week 2快照于17:00 UTC完成</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>💰 DeFi</span><span class="twitter">@etherealdex</span></div>
+                <h2 class="project-name">etherealdex</h2>
+                <div class="desc">USDe原生的去中心化交易所，提供现货和永续合约交易</div>
+                <div class="catalyst">🔥 03-04 新WildcatFi市场上线</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI</span><span class="twitter">@t54ai</span></div>
+                <h2 class="project-name">t54ai</h2>
+                <div class="desc">t54.ai 是一个赋能可信代理经济</div>
+                <div class="catalyst">🔥 03-04 Andi White</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI</span><span class="twitter">@fandomcreator_</span></div>
+                <h2 class="project-name">fandomcreator_</h2>
+                <div class="desc">一个基于Web3的社区平台</div>
+                <div class="catalyst">🔥 03-03 CRTR Staking上线FandoraAI平台</div>
+            </div>
+    </div>
+    <div class="footer">
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
+    </div>
+</div>
+</body>
+</html>

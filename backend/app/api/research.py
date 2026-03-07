@@ -17,12 +17,21 @@ RESEARCH_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "researc
 
 
 def _find_latest_date() -> Optional[str]:
-    """找到最新的报告日期 (YYYYMMDD)"""
+    """找到最新的报告日期 (YYYYMMDD)，从多种文件类型中发现"""
     dates = set()
-    for f in RESEARCH_DIR.glob("data_*.json"):
-        date_str = f.stem.replace("data_", "")
-        if len(date_str) == 8 and date_str.isdigit():
-            dates.add(date_str)
+    # 从所有可能的文件类型中发现日期
+    patterns = [
+        ("data_*.json", "data_"),
+        ("daily_research_*.md", "daily_research_"),
+        ("card_*.html", "card_"),
+        ("tweets_*.md", "tweets_"),
+        ("scout_*.md", "scout_"),
+    ]
+    for glob_pattern, prefix in patterns:
+        for f in RESEARCH_DIR.glob(glob_pattern):
+            date_str = f.stem.replace(prefix, "")
+            if len(date_str) == 8 and date_str.isdigit():
+                dates.add(date_str)
     return max(dates) if dates else None
 
 
@@ -34,22 +43,21 @@ def _read_file(path: Path) -> Optional[str]:
 
 
 @router.get("/latest")
-async def get_latest_report():
-    """获取最新投研报告数据"""
-    date = _find_latest_date()
+async def get_latest_report(date: Optional[str] = None):
+    """获取最新投研报告数据，支持 ?date=YYYYMMDD 指定日期"""
+    if not date:
+        date = _find_latest_date()
     if not date:
         raise HTTPException(status_code=404, detail="暂无投研报告")
 
-    # 读取 JSON 数据
+    # 读取 JSON 数据（可选，不是所有日期都有）
     json_path = RESEARCH_DIR / f"data_{date}.json"
     json_data = _read_file(json_path)
-    if not json_data:
-        raise HTTPException(status_code=404, detail="数据文件不存在")
-
-    projects = json.loads(json_data)
+    projects = json.loads(json_data) if json_data else {}
 
     # 读取配图 HTML
     card_html = _read_file(RESEARCH_DIR / f"card_{date}.html")
+    card_png_exists = (RESEARCH_DIR / f"card_{date}.png").exists()
 
     # 读取推文
     tweets_md = _read_file(RESEARCH_DIR / f"tweets_{date}.md")
@@ -65,23 +73,62 @@ async def get_latest_report():
         for i in range(1, len(blocks), 2):
             name = blocks[i].strip()
             content = blocks[i + 1] if i + 1 < len(blocks) else ""
-            tweet_match = re.search(r"```\n(.*?)\n```", content, re.DOTALL)
-            tweet_text = tweet_match.group(1) if tweet_match else ""
-            tweets.append({
-                "name": name,
-                "text": tweet_text,
-                "char_count": len(tweet_text),
-            })
+            # 移除所有 ``` 标记
+            clean = re.sub(r"```\s*", "", content)
+            # 移除元数据行（字数统计等）
+            clean = re.sub(r"（字数.*?）", "", clean)
+            # 移除纯分隔线
+            clean = re.sub(r"^---\s*$", "", clean, flags=re.MULTILINE)
+            # 清理多余空行
+            clean = re.sub(r"\n{3,}", "\n\n", clean).strip()
+            if clean:
+                tweets.append({
+                    "name": name,
+                    "text": clean,
+                    "char_count": len(clean),
+                })
+
+    # 计算项目数量（优先用 JSON，否则从报告正文推断）
+    project_count = projects.get("project_count", 0)
+    if project_count == 0 and report_md:
+        import re
+        # 统计 "## 1." "## 2." 等项目标题
+        project_count = len(re.findall(r"^## \d+\.", report_md, re.MULTILINE))
 
     return {
         "date": f"{date[:4]}-{date[4:6]}-{date[6:8]}",
         "date_raw": date,
-        "project_count": projects.get("project_count", 0),
+        "project_count": project_count,
         "projects": projects.get("projects", []),
         "card_html": card_html,
+        "card_image_url": f"/api/research/card-image/{date}" if card_png_exists else None,
         "tweets": tweets,
         "report_md": report_md,
     }
+
+
+@router.get("/card-image/{date}")
+async def get_card_image(date: str):
+    """提供预渲染的配图 PNG"""
+    from fastapi.responses import FileResponse
+    png_path = RESEARCH_DIR / f"card_{date}.png"
+    if not png_path.exists():
+        raise HTTPException(status_code=404, detail="配图 PNG 未找到")
+    return FileResponse(str(png_path), media_type="image/png")
+
+
+@router.post("/regen-card-image/{date}")
+async def regen_card_image(date: str):
+    """按需重新生成配图 PNG（用 Playwright 截图）"""
+    html_path = RESEARCH_DIR / f"card_{date}.html"
+    if not html_path.exists():
+        raise HTTPException(status_code=404, detail="配图 HTML 未找到")
+    html = html_path.read_text(encoding="utf-8")
+    png_path = RESEARCH_DIR / f"card_{date}.png"
+
+    from app.services.card_generator import generate_card_image
+    generate_card_image(html, str(png_path))
+    return {"status": "ok", "path": str(png_path)}
 
 
 @router.get("/history")
@@ -118,12 +165,14 @@ async def get_report_history():
 # ============================================
 PROMPTS_DIR = Path(__file__).parent.parent.parent / "data" / "prompts" / "research"
 
-# 投研智能体列表
+# 投研智能体列表（P32-C: 全部注册，P15 可编辑）
 RESEARCH_AGENTS = {
     "scout": {"file": "scout.jinja2", "label": "🔭 侦察官"},
-    "analyst": {"file": "analyst.jinja2", "label": "🔬 分析师"},
-    "tweet_digest": {"file": "copywriter/tweet_digest.jinja2", "label": "✍️ 文案官(推文)"},
-    "report": {"file": "copywriter/report.jinja2", "label": "✍️ 文案官(报告)"},
+    "analyst": {"file": "analyst.jinja2", "label": "🔬 策略官"},
+    "summarizer": {"file": "summarizer.jinja2", "label": "📋 审核官"},
+    "writer": {"file": "writer.jinja2", "label": "✍️ 日报写手"},
+    "tweet_digest": {"file": "copywriter/tweet_digest.jinja2", "label": "🐦 推文写手"},
+    "report": {"file": "copywriter/report.jinja2", "label": "📝 日报模板"},
 }
 
 
@@ -143,21 +192,20 @@ async def get_research_prompts():
     return result
 
 
+class PromptUpdateBody(BaseModel):
+    content: str
+
+
 @router.post("/prompts/{agent_name}")
-async def update_research_prompt(agent_name: str, content: str = ""):
+async def update_research_prompt(agent_name: str, body: PromptUpdateBody):
     """更新指定投研智能体的 Prompt"""
     if agent_name not in RESEARCH_AGENTS:
         raise HTTPException(status_code=404, detail=f"未知智能体: {agent_name}")
 
-    from pydantic import BaseModel
-
-    class PromptBody(BaseModel):
-        content: str
-
     info = RESEARCH_AGENTS[agent_name]
     path = PROMPTS_DIR / info["file"]
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(content, encoding="utf-8")
+    path.write_text(body.content, encoding="utf-8")
     return {"status": "success", "agent": agent_name}
 
 
@@ -170,6 +218,8 @@ class DailyReportRequest(BaseModel):
     provider: str = "volcengine"
     model_id: Optional[str] = None
     concurrency: int = 3
+    selected_projects: Optional[list[str]] = None  # 用户勾选的项目名列表
+    scout_projects: Optional[list[dict]] = None     # 前端侦察官结果（避免重复搜索）
 
 
 @router.post("/daily-report")
@@ -195,6 +245,8 @@ async def generate_daily_report(
         result = await _generate(
             api_config=api_config,
             concurrency=request.concurrency,
+            selected_projects=request.selected_projects,
+            scout_projects=request.scout_projects,
         )
         return result
     except Exception as e:
@@ -275,4 +327,25 @@ async def list_research_reports():
         "project_reports": project_reports,
         "daily_count": len(daily_reports),
         "project_count": len(project_reports),
+    }
+
+
+@router.get("/project-report/{filename}")
+async def get_project_report(filename: str):
+    """
+    GET /api/research/project-report/{filename}
+    读取单个项目深度报告的完整内容。
+    """
+    projects_dir = RESEARCH_DIR / "projects"
+    file_path = projects_dir / filename
+    # 安全检查：防止路径遍历
+    if not file_path.resolve().is_relative_to(projects_dir.resolve()):
+        raise HTTPException(status_code=400, detail="非法路径")
+    content = _read_file(file_path)
+    if not content:
+        raise HTTPException(status_code=404, detail=f"报告不存在: {filename}")
+    return {
+        "filename": filename,
+        "content": content,
+        "size": file_path.stat().st_size,
     }

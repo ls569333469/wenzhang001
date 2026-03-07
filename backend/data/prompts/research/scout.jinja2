@@ -1,13 +1,19 @@
-{# P31: Scout（侦察官）— Layer 1 选题发现 prompt (G 版) #}
-{# 经过 Round 1-2 A/B 测试验证的最佳版本 #}
-{# 特点: 零噪音返回, 7 列结构化表格 #}
-检索 @leakmealpha 近 7 天推文 + 访问 leak.me 网站 trending。
-leak.me 是 Crypto KOL Tracker，追踪加密 KOL 的新关注行为。
-只输出一张表格，不要写任何分析或说明：
+{# P31/P32-C: Scout（侦察官）— 选题发现 prompt #}
+{# 账号列表从 Google Sheets "侦察源" Tab 动态注入 #}
+{# {{ accounts }} 变量由后端自动填充，P15 可编辑结构 #}
+检索以下 {{ account_count }} 个 Twitter/X 账号近 48 小时的推文，找出他们提到的热门 Crypto 项目：
+{{ accounts }}
+
+汇总这些账号提到的项目，去重后只输出一张表格，不要写任何分析或说明：
 | 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |
 字段说明：
 - 赛道: DeFi/L2/AI/GameFi/RWA/Infra 等
 - 代币: 代币符号（如 $NEAR）或 无
 - 阶段: 预发布/测试网/已上线/TGE前
-- 近期催化剂: 一句话（融资/空投/TGE/上线/合作）
-排除个人 KOL、交易所、媒体、纯 meme 币。最多 8 个。
+- 近期催化剂: 一句话，重点关注以下事件类型：
+  早期信号: WL/白名单、积分系统/Points、大使计划/Ambassador、激励测试网、任务Campaign、私募/融资
+  中期信号: 快照/Snapshot、Tokenomics公布、生态合作/集成、Binance Alpha上线
+  TGE前后: TGE、IDO/IEO/公售、空投Claim、DEX/CEX首发上市
+  主网阶段: 主网上线、多轮空投、代币解锁/Unlock、DAO治理
+排除个人 KOL、交易所、媒体、纯 meme 币。最多 12 个。
+所有表格内容必须用中文输出，项目名称和代币符号除外。近期催化剂字段务必用中文描述。

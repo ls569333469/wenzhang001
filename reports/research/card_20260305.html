@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+}
+.canvas {
+    width: 1200px; height: 675px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+}
+.header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
+}
+.title-group { display: flex; flex-direction: column; }
+.subtitle { font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }
+.main-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; }
+.main-title .accent { color: #FF3A2D; }
+.date { font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
+}
+.card {
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
+    display: flex; flex-direction: column;
+}
+.card-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
+}
+.twitter { color: #666; }
+.project-name {
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+.desc { font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    overflow: hidden; max-height: 2.8em;
+}
+.catalyst {
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: inline-block;
+    overflow: hidden; max-height: 3.36em;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
+}
+.footer {
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+    <div class="header">
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
+        </div>
+        <div class="date">2026.03.05</div>
+    </div>
+    <div class="grid">
+            <div class="card">
+                <div class="card-top"><span>📌 Perp DEX</span><span class="twitter">@paradex</span></div>
+                <h2 class="project-name">Paradex</h2>
+                <div class="desc">一个建立在 StarkNet Appchain 上的加密衍生品交易所</div>
+                <div class="catalyst">🔥 TGE及空投将于3月5日启动，社区分配增至25%。</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 Prediction</span><span class="twitter">@predictdotfun</span></div>
+                <h2 class="project-name">predict.fun</h2>
+                <div class="desc">predict.fun 是 BNB Chain 原生的预测市场平台</div>
+                <div class="catalyst">🔥 03-04 完成对 Probable 的战略收购</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 Perp DEX</span><span class="twitter">@edgeX_exchange</span></div>
+                <h2 class="project-name">edgeX_exchange</h2>
+                <div class="desc">一个去中心化交易所，结合现货和永续合约</div>
+                <div class="catalyst">🔥 03-31 前：TGE和创世空投（占总供应25%）</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 Perp DEX</span><span class="twitter">@tradexyz</span></div>
+                <h2 class="project-name">tradexyz</h2>
+                <div class="desc">trade.xyz 是一个基于 Hyperliquid 基础设施的 Perp</div>
+                <div class="catalyst">🔥 03-04 上线 PALLADIUM 和 BRENTOIL</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 Perp DEX</span><span class="twitter">@extendedapp</span></div>
+                <h2 class="project-name">extendedapp</h2>
+                <div class="desc">一个混合永续 DEX，原名 X10</div>
+                <div class="catalyst">🔥 03-03 总累计收入超过 $20M</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 Perp DEX</span><span class="twitter">@nadoHQ</span></div>
+                <h2 class="project-name">nadoHQ</h2>
+                <div class="desc">一个中央限价订单簿DEX，构建于Ink区块链</div>
+                <div class="catalyst">🔥 03-03 新Perp Listings</div>
+            </div>
+    </div>
+    <div class="footer">
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
+    </div>
+</div>
+</body>
+</html>

@@ -110,6 +110,7 @@ export const AgentModelsSchema = z.object({
     writer: AgentModelSettingSchema,
     critic: AgentModelSettingSchema,
     polisher: AgentModelSettingSchema,
+    scout: AgentModelSettingSchema,  // P31: 侦察官
 });
 
 /** P14-B: 默认 Agent 模型配置 (默认使用火山引擎豆包模型) */
@@ -118,6 +119,7 @@ export const DEFAULT_AGENT_MODELS: z.infer<typeof AgentModelsSchema> = {
     writer: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     critic: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
     polisher: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    scout: { provider: PROVIDER_IDS.SURF, model: 'surf-1.5' },  // P31: 侦察官默认使用 Surf
 };
 
 export type AgentModels = z.infer<typeof AgentModelsSchema>;
@@ -171,6 +173,7 @@ export const SKIP_MODES = {
     writer: [] as string[],
     critic: ['hot_take', 'kaito_yap'],
     polisher: ['hot_take', 'kaito_yap'],
+    scout: ['hot_take', 'short_article', 'mid_article', 'long_article', 'tutorial', 'bullish_take', 'kaito_yap', 'project_research'] as string[],  // P31: 侦察官不参与创作模式
 } as const;
 
 /** 完整模式 Schema（4 个 agent 通用, P27: 8 模式） */

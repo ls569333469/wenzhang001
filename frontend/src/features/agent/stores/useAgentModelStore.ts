@@ -29,13 +29,13 @@ export const useAgentModelStore = create<AgentModelStore>()(
         }),
         {
             name: 'qs_agent_models', // localStorage key
-            version: 2, // P14-B: Bump version to trigger migration (was 1)
+            version: 3, // P31: Bump version to add scout agent
             skipHydration: true, // P14-B: SSR-safe - defer localStorage access to client
             migrate: (persistedState: any, version) => {
                 // Version 1 -> 2: Remove deprecated providers (deepseek, openai)
-                if (version < 2 && persistedState?.models) {
+                if (version < 3 && persistedState?.models) {
                     const migratedModels: any = { ...DEFAULT_AGENT_MODELS };
-                    const roles = ['strategist', 'writer', 'critic', 'polisher'] as const;
+                    const roles = ['strategist', 'writer', 'critic', 'polisher', 'scout'] as const;
 
                     roles.forEach(role => {
                         const oldSetting = persistedState.models[role];

@@ -2,6 +2,14 @@ import os
 import json
 from pathlib import Path
 from typing import Dict, Any
+from datetime import datetime, timezone, timedelta
+
+# P33: 统一时区 — VPS 在美国，业务时间用中国时区 (UTC+8)
+CN_TZ = timezone(timedelta(hours=8))
+
+def cn_now() -> datetime:
+    """返回中国时区的当前时间"""
+    return datetime.now(CN_TZ)
 
 # 配置文件路径: backend/config/user_config.json
 # 假设当前文件在 backend/app/core/config.py，向前推 3 级目录到 backend

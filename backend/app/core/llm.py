@@ -184,7 +184,7 @@ def _generate_text_impl(
 ) -> str:
     """Internal implementation of text generation."""
     # 调试输出
-    print(f"[LLM DEBUG] Calling {provider} (model={model_id})...")
+    logger.debug(f"[LLM] Calling {provider} (model={model_id})...")
     
     client = get_client(api_key=api_key, provider=provider)
     model = get_model_id(model_id=model_id, provider=provider)
@@ -238,7 +238,7 @@ def _generate_text_impl(
     }
     
     # P16.1: 调试输出 max_tokens
-    print(f"[LLM DEBUG] max_tokens={max_tokens} passed to API")
+    logger.debug(f"[LLM] max_tokens={max_tokens} passed to API")
     
     if extra_body and provider == "volcengine":
         request_params["extra_body"] = extra_body
@@ -251,7 +251,7 @@ def _generate_text_impl(
     # 判断依据: max_tokens < 4096 表示是有意限制长度的内容生成场景
     max_chars = int(max_tokens * 0.7)
     if max_tokens < 4096 and len(result) > max_chars:
-        print(f"[LLM DEBUG] ⚠️ Output exceeded max_tokens! Truncating {len(result)} → {max_chars} chars")
+        logger.debug(f"[LLM] ⚠️ Output exceeded max_tokens! Truncating {len(result)} → {max_chars} chars")
         # 找到最后一个句号/感叹号/问号截断，避免截断在句子中间
         truncated = result[:max_chars]
         for end_char in ['。', '！', '？', '\n']:
@@ -290,6 +290,6 @@ def generate_text(
         )
     except Exception as e:
         friendly_msg = _handle_llm_error(e, provider)
-        print(f"[LLM ERROR] {friendly_msg}")
+        logger.error(f"[LLM] {friendly_msg}")
         # 这里可以选择抛出原始异常或友好异常，目前选择抛出友好消息以便前端显示
         raise ValueError(friendly_msg)

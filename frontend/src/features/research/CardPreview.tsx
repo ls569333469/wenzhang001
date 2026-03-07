@@ -1,87 +1,88 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { Copy, Check, Image } from 'lucide-react';
+import { useState } from 'react';
+import { Copy, Check, Image, Download } from 'lucide-react';
+import { API_BASE_URL } from '@/config/api';
 
 interface CardPreviewProps {
     html: string;
     date: string;
+    cardImageUrl?: string | null;
 }
 
 const CARD_W = 1200;
 const CARD_H = 675;
 
 /**
- * P32: 配图预览组件（全宽版）
- * 配图占满主内容区，完整显示所有项目卡片
+ * P33: 配图预览组件
+ * - 有 PNG 时显示 <img>（可右键复制）
+ * - 无 PNG 时 fallback 到 iframe 预览
+ * - "复制图片"按钮从后端获取预渲染 PNG → 剪贴板
  */
-export function CardPreview({ html, date }: CardPreviewProps) {
-    const iframeRef = useRef<HTMLIFrameElement>(null);
+export function CardPreview({ html, date, cardImageUrl }: CardPreviewProps) {
     const [copied, setCopied] = useState(false);
     const [copying, setCopying] = useState(false);
+
+    // 完整后端 URL
+    const fullImageUrl = cardImageUrl ? `${API_BASE_URL}${cardImageUrl}` : null;
+    const dateRaw = date.replace(/-/g, '');
 
     const handleCopyImage = async () => {
         if (copying) return;
         setCopying(true);
         try {
-            const offscreen = document.createElement('div');
-            offscreen.style.cssText = `position:fixed;left:-9999px;top:0;width:${CARD_W}px;height:${CARD_H}px;overflow:hidden;z-index:-1;`;
+            // 确定图片 URL
+            let imgUrl = fullImageUrl;
+            if (!imgUrl) {
+                // 触发后端生成
+                const res = await fetch(`${API_BASE_URL}/api/research/regen-card-image/${dateRaw}`, { method: 'POST' });
+                if (!res.ok) throw new Error('生成配图失败');
+                imgUrl = `${API_BASE_URL}/api/research/card-image/${dateRaw}`;
+            }
 
-            const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-            const styleMatch = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
-            const bodyContent = bodyMatch ? bodyMatch[1] : '';
-            const styleContent = styleMatch ? styleMatch[1] : '';
+            // 获取 PNG blob
+            const imgRes = await fetch(imgUrl);
+            if (!imgRes.ok) throw new Error('获取图片失败');
+            const blob = await imgRes.blob();
 
-            // 直接插入 DOM（不用 Shadow DOM，确保 html2canvas 能访问字体）
-            const styleEl = document.createElement('style');
-            styleEl.textContent = styleContent;
-            offscreen.appendChild(styleEl);
-            offscreen.insertAdjacentHTML('beforeend', bodyContent);
-            document.body.appendChild(offscreen);
-
-            // 预加载 Google Font 并等待渲染
+            // 尝试复制到剪贴板
             try {
-                await document.fonts.load('900 42px Inter');
-                await document.fonts.load('400 14px Inter');
-            } catch { }
-            await new Promise(r => setTimeout(r, 200));
-
-            const html2canvas = (await import('html2canvas')).default;
-            const canvas = await html2canvas(offscreen.querySelector('.canvas') as HTMLElement || offscreen, {
-                backgroundColor: '#050505',
-                scale: 4,
-                useCORS: true,
-                width: CARD_W,
-                height: CARD_H,
-            });
-
-            document.body.removeChild(offscreen);
-
-            canvas.toBlob(async (blob) => {
-                if (blob) {
-                    try {
-                        await navigator.clipboard.write([
-                            new ClipboardItem({ 'image/png': blob })
-                        ]);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                    } catch {
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = `research_${date}.png`;
-                        a.click();
-                        URL.revokeObjectURL(url);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 2000);
-                    }
-                }
-            }, 'image/png');
+                await navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            } catch {
+                // 剪贴板不可用 → 下载
+                downloadBlob(blob);
+            }
         } catch (err) {
-            console.error('截图失败:', err);
+            console.error('复制图片失败:', err);
         } finally {
             setCopying(false);
         }
+    };
+
+    const handleDownload = async () => {
+        try {
+            const imgUrl = fullImageUrl || `${API_BASE_URL}/api/research/card-image/${dateRaw}`;
+            const res = await fetch(imgUrl);
+            if (!res.ok) throw new Error('获取图片失败');
+            downloadBlob(await res.blob());
+        } catch (err) {
+            console.error('下载失败:', err);
+        }
+    };
+
+    const downloadBlob = (blob: Blob) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `alpha_daily_${date}.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     return (
@@ -92,32 +93,50 @@ export function CardPreview({ html, date }: CardPreviewProps) {
                     <Image size={16} />
                     配图预览
                 </div>
-                <button
-                    onClick={handleCopyImage}
-                    disabled={copying}
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors border border-zinc-200 hover:bg-zinc-50 disabled:opacity-50"
-                >
-                    {copied ? (
-                        <><Check size={12} className="text-green-500" /> 已复制</>
-                    ) : copying ? (
-                        <><span className="animate-spin">⏳</span> 截图中...</>
-                    ) : (
-                        <><Copy size={12} /> 复制图片</>
-                    )}
-                </button>
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={handleDownload}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors border border-zinc-200 hover:bg-zinc-50"
+                    >
+                        <Download size={12} /> 下载图片
+                    </button>
+                    <button
+                        onClick={handleCopyImage}
+                        disabled={copying}
+                        className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-colors border border-zinc-200 hover:bg-zinc-50 disabled:opacity-50"
+                    >
+                        {copied ? (
+                            <><Check size={12} className="text-green-500" /> 已复制</>
+                        ) : copying ? (
+                            <><span className="animate-spin">⏳</span> 截图中...</>
+                        ) : (
+                            <><Copy size={12} /> 复制图片</>
+                        )}
+                    </button>
+                </div>
             </div>
 
-            {/* 配图渲染 — 全宽 iframe */}
-            <div className="bg-[#050505] w-full" style={{ aspectRatio: `${CARD_W}/${CARD_H}` }}>
-                <iframe
-                    ref={iframeRef}
-                    srcDoc={html}
-                    title="投研配图预览"
-                    sandbox="allow-same-origin"
-                    scrolling="no"
-                    className="w-full h-full border-0 block"
-                    style={{ overflow: 'hidden' }}
-                />
+            {/* 配图渲染 */}
+            <div className="bg-[#F4F3EE] w-full" style={{ aspectRatio: `${CARD_W}/${CARD_H}` }}>
+                {fullImageUrl ? (
+                    /* 方案B: 直接显示后端 PNG，用户可右键复制 */
+                    <img
+                        src={fullImageUrl}
+                        alt="投研配图"
+                        className="w-full h-full object-contain"
+                        draggable
+                    />
+                ) : (
+                    /* fallback: iframe 预览 */
+                    <iframe
+                        srcDoc={html}
+                        title="投研配图预览"
+                        sandbox="allow-same-origin"
+                        scrolling="no"
+                        className="w-full h-full border-0 block"
+                        style={{ overflow: 'hidden' }}
+                    />
+                )}
             </div>
         </div>
     );
