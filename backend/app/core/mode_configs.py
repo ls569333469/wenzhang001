@@ -175,6 +175,23 @@ MODE_CONFIGS = {
             "pass_threshold": 85,
             "refine_threshold": 75
         }
+    },
+    "binance_square": {  # P34: 币安广场发帖模式
+        "name": "币安广场",
+        "length": {"min": 100, "max": 900, "target": 500},
+        "length_locked": False,
+        "skip_strategist": False,
+        "skip_critic": False,  # 需要 Critic (合规检查)
+        "skip_polisher": True,  # 跳过润色 (短内容不需要)
+        "output_count": 3,  # 3 版本供选择
+        "scoring": {
+            "dimensions": SCORING_DIMENSIONS,
+            "penalty_rules": PENALTY_RULES,
+            "penalty_cap": 25,
+            "max_revisions": 1,
+            "pass_threshold": 80,
+            "refine_threshold": 65
+        }
     }
 }
 

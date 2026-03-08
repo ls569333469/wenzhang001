@@ -55,12 +55,12 @@ export const useModePolisherStore = create<ModePolisherStore>()(
         }),
         {
             name: 'qs_mode_polishers',
-            version: 2,  // P24-D: v1→v2 (4→6 modes)
+            version: 3,  // P34: v2→v3 (8→9 modes, +binance_square)
             skipHydration: true,
             migrate: (persistedState: any, version: number) => {
+                const old = persistedState as any;
                 if (version < 2) {
                     // v1→v2: 添加 hot_take + short_article keys
-                    const old = persistedState as any;
                     if (old.polishers) {
                         if (!old.polishers.hot_take) {
                             old.polishers.hot_take = { provider: 'volcengine', model: '' };
@@ -68,6 +68,12 @@ export const useModePolisherStore = create<ModePolisherStore>()(
                         if (!old.polishers.short_article) {
                             old.polishers.short_article = { provider: 'volcengine', model: '' };
                         }
+                    }
+                }
+                if (version < 3) {
+                    // v2→v3: 添加 binance_square key
+                    if (old.polishers && !old.polishers.binance_square) {
+                        old.polishers.binance_square = { provider: 'volcengine', model: '' };
                     }
                 }
                 return persistedState as ModePolisherStore;

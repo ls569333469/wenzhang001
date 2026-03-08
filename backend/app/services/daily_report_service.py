@@ -24,7 +24,7 @@ logger = get_logger("daily_report")
 
 # 默认配置
 DEFAULT_MODEL = "surf-1.5"
-DEFAULT_CONCURRENCY = 3
+DEFAULT_CONCURRENCY = 6
 REPORTS_DIR = Path(__file__).parent.parent.parent.parent / "reports" / "research"
 PROMPTS_DIR = Path(__file__).parent.parent.parent / "data" / "prompts" / "research"
 
@@ -485,38 +485,74 @@ def _enrich_projects_from_analysis(
                     # 最终限制 45 字符
                     p["summary"] = raw[:45]
 
-            # ---------- 提取催化剂（催化剂段 + 代币经济学解锁） ----------
-            cat_lines = []
+            # ---------- 提取催化剂 ----------
+            # 优先级1: 策略官 LLM 直接选出的卡片催化剂
+            card_cat_match = re.search(r"⚡\s*卡片催化剂[:：]\s*(.+)", content)
+            if card_cat_match:
+                card_cat = card_cat_match.group(1).strip().rstrip("。.")
+                if card_cat and card_cat not in ("无", "无。"):
+                    # 日期新鲜度检查：超过7天的旧事件丢弃
+                    date_m = re.search(r"(202[4-9])-(\d{2})-(\d{2})", card_cat)
+                    if date_m:
+                        from datetime import datetime, timedelta
+                        try:
+                            evt = datetime(int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))).date()
+                            if evt < (cn_now().date() - timedelta(days=7)):
+                                card_cat = ""  # 过旧，跳过
+                        except ValueError:
+                            pass
+                if card_cat:
+                    # YYYY-MM-DD → MM-DD 短格式
+                    card_cat = re.sub(r"202[4-9]-(\d{2})-(\d{2})", r"\1-\2", card_cat)
+                    # 截断到第一个中文逗号/句号/分号（英文逗号只在非数字后截断）
+                    for sep in ["，", "；", "。"]:
+                        idx = card_cat.find(sep)
+                        if idx > 4:
+                            card_cat = card_cat[:idx]
+                            break
+                    else:
+                        # 英文逗号：跳过数字逗号（如 173,000）
+                        for i, ch in enumerate(card_cat):
+                            if ch == "," and i > 4 and not card_cat[i-1].isdigit():
+                                card_cat = card_cat[:i]
+                                break
+                    p["catalyst"] = card_cat.strip()
 
-            # 来源 1: 专门催化剂段 ## 🔥 近期催化剂
-            cat_match = CAT_PATTERN.search(content)
-            if cat_match:
-                for l in cat_match.group(1).strip().split("\n"):
-                    l = l.strip().lstrip("-•·* ")
-                    if not l or l.startswith("|") or l.startswith("#"):
-                        continue
-                    if any(kw in l for kw in ["风险", "推理", "局限", "不确定"]):
-                        continue
-                    cat_lines.append(l)
+            # 优先级2: 侦察官已有的催化（如存在且LLM没选出）
+            # p["catalyst"] 可能已经由侦察官填充
 
-            # 来源 2: 代币经济学段中的解锁日期
-            token_match = re.search(
-                r"##\s*(?:🪙\s*代币经济学|代币经济)\s*\n+(.*?)(?=\n##|\Z)",
-                content, re.DOTALL,
-            )
-            if token_match:
-                token_text = token_match.group(1)
-                # 提取 "YYYY-MM-DD 解锁 X%" 格式
-                for m in re.finditer(
-                    r"(202[4-9]-\d{2}-\d{2})\s*解锁\s*([\d.]+%)",
-                    token_text,
-                ):
-                    cat_lines.append(f"{m.group(1)} 解锁 {m.group(2)}")
+            # 优先级3: 从催化剂段硬匹配（仅作兜底）
+            if not p.get("catalyst"):
+                cat_lines = []
+                cat_match = CAT_PATTERN.search(content)
+                if cat_match:
+                    for l in cat_match.group(1).strip().split("\n"):
+                        l = l.strip().lstrip("-•·* ")
+                        if not l or l.startswith("|") or l.startswith("#"):
+                            continue
+                        if l.startswith("⚡"):
+                            continue  # 跳过卡片催化剂行本身
+                        if any(kw in l for kw in ["风险", "推理", "局限", "不确定"]):
+                            continue
+                        cat_lines.append(l)
 
-            if cat_lines:
-                best = pick_best_catalyst(cat_lines)
-                if best:
-                    p["catalyst"] = best
+                # 来源 2: 代币经济学段中的解锁日期
+                token_match = re.search(
+                    r"##\s*(?:🪙\s*代币经济学|代币经济)\s*\n+(.*?)(?=\n##|\Z)",
+                    content, re.DOTALL,
+                )
+                if token_match:
+                    token_text = token_match.group(1)
+                    for m in re.finditer(
+                        r"(202[4-9]-\d{2}-\d{2})\s*解锁\s*([\d.]+%)",
+                        token_text,
+                    ):
+                        cat_lines.append(f"{m.group(1)} 解锁 {m.group(2)}")
+
+                if cat_lines:
+                    best = pick_best_catalyst(cat_lines)
+                    if best:
+                        p["catalyst"] = best
 
         enriched.append(p)
 
@@ -793,11 +829,15 @@ def _save_scout_report(projects: list[dict], raw_text: str, date_str: str) -> st
     return str(path)
 
 
-def _save_project_report(name: str, content: str, date_str: str) -> str:
-    """保存单项目完整报告"""
+def _save_project_report(name: str, content: str, date_str: str, twitter: str = "") -> str:
+    """保存单项目完整报告（用 twitter handle 去重）"""
     _ensure_dirs()
-    safe_name = name.replace(" ", "_").replace("/", "_")
-    path = REPORTS_DIR / "projects" / f"{safe_name}_{date_str}.md"
+    # 优先用 twitter handle 作为文件名（唯一标识，避免重复）
+    if twitter:
+        file_key = twitter.lstrip("@").replace(" ", "_").replace("/", "_")
+    else:
+        file_key = name.replace(" ", "_").replace("/", "_")
+    path = REPORTS_DIR / "projects" / f"{file_key}_{date_str}.md"
     full = f"# 🔬 {name} — 投研报告\n\n> 生成时间: {date_str}\n\n{content}"
     path.write_text(full, encoding="utf-8")
     logger.info(f"📁 保存: {path}")
@@ -939,7 +979,7 @@ async def generate_daily_report(
         project_paths = []
         for r in analysis_results:
             if r.get("content"):
-                path = _save_project_report(r["name"], r["content"], date_str)
+                path = _save_project_report(r["name"], r["content"], date_str, r.get("twitter", ""))
                 project_paths.append(path)
 
         ok_count = sum(1 for r in analysis_results if not r.get("error"))

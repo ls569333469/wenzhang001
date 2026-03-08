@@ -55,14 +55,20 @@ export const useModeCriticStore = create<ModeCriticStore>()(
         }),
         {
             name: 'qs_mode_critics',
-            version: 2,  // P24-D: v1→v2 (5→6 modes)
+            version: 3,  // P34: v2→v3 (8→9 modes, +binance_square)
             skipHydration: true,
             migrate: (persistedState: any, version: number) => {
+                const old = persistedState as any;
                 if (version < 2) {
                     // v1→v2: 添加 hot_take key
-                    const old = persistedState as any;
                     if (old.critics && !old.critics.hot_take) {
                         old.critics.hot_take = { provider: 'volcengine', model: '' };
+                    }
+                }
+                if (version < 3) {
+                    // v2→v3: 添加 binance_square key
+                    if (old.critics && !old.critics.binance_square) {
+                        old.critics.binance_square = { provider: 'volcengine', model: 'doubao-seed-2-0-lite-260215' };
                     }
                 }
                 return persistedState as ModeCriticStore;

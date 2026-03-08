@@ -202,7 +202,7 @@ export function ResearchArchive() {
                     🔬 项目深度报告
                     <span className="text-xs font-normal text-ink-muted">({projectReports.length} 份)</span>
                 </h3>
-                <div className="bg-white rounded-xl border border-zinc-100 divide-y divide-zinc-100">
+                <div className="bg-white rounded-xl border border-zinc-100 divide-y divide-zinc-100 max-h-[600px] overflow-y-auto">
                     {projectReports.length === 0 ? (
                         <div className="p-8 text-center text-sm text-ink-muted">暂无项目报告</div>
                     ) : (

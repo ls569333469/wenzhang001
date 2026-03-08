@@ -14,6 +14,7 @@ from .bullish_take import bullish_take_writer
 from .kaito_yap import kaito_yap_writer
 from .project_research import project_research_writer
 from .hot_take import hot_take_writer
+from .binance_square import binance_square_writer
 
 # P27: hot_take 已迁入标准管线
 
@@ -26,6 +27,7 @@ WRITER_REGISTRY = {
     "bullish_take": bullish_take_writer,
     "kaito_yap": kaito_yap_writer,
     "project_research": project_research_writer,
+    "binance_square": binance_square_writer,  # P34
 }
 
 

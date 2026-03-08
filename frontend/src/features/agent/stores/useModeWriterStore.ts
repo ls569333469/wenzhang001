@@ -56,8 +56,17 @@ export const useModeWriterStore = create<ModeWriterStore>()(
         }),
         {
             name: 'qs_mode_writers',
-            version: 1,
+            version: 2,  // P34: v1→v2 (8→9 modes, +binance_square)
             skipHydration: true, // P14-C: SSR-safe - defer localStorage access to client
+            migrate: (persistedState: any, version: number) => {
+                if (version < 2) {
+                    const old = persistedState as any;
+                    if (old.writers && !old.writers.binance_square) {
+                        old.writers.binance_square = { provider: 'grok', model: 'grok-4-1-fast-reasoning' };
+                    }
+                }
+                return persistedState as ModeWriterStore;
+            },
         }
     )
 );

@@ -84,6 +84,7 @@ e2e_*.png
 .cache/
 backend/data/vector_db/
 backend/data/cache/
+backend/chroma_db/
 
 # ===================================
 # Temporary Files

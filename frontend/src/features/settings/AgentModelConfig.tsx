@@ -32,6 +32,11 @@ const PROVIDER_MODELS = {
     [PROVIDER_IDS.SURF]: [
         { id: 'surf-1.5', name: 'Surf 1.5', description: '深度搜索+分析 (推荐)' },
         { id: 'surf-1.5-instant', name: 'Surf 1.5 Instant', description: '快速搜索' },
+    ],
+    [PROVIDER_IDS.CLAUDE]: [
+        { id: 'anthropic/claude-sonnet-4-20250514', name: 'Claude Sonnet 4', description: '均衡性能 (推荐)' },
+        { id: 'anthropic/claude-opus-4-20250514', name: 'Claude Opus 4', description: '最强推理' },
+        { id: 'anthropic/claude-haiku-3-5-20241022', name: 'Claude Haiku 3.5', description: '快速轻量' },
     ]
 };
 
@@ -45,13 +50,14 @@ const MODE_DEFINITIONS: { id: string; name: string; icon: React.ReactNode }[] = 
     { id: 'long_article', name: '长篇', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'tutorial', name: '教程指南', icon: <GraduationCap className="w-4 h-4" /> },
     { id: 'project_research', name: '投研', icon: <Search className="w-4 h-4" /> },
+    { id: 'binance_square', name: '广场', icon: <Target className="w-4 h-4" /> },  // P34
 ];
 
 const AGENT_ROLES: { id: keyof AgentModels; label: string; icon: React.ReactNode; desc: string; color: string; accentBg: string; accentText: string; accentIcon: React.ReactNode }[] = [
-    { id: 'strategist', label: '策略师', icon: <Brain className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-purple-600 bg-purple-50', accentBg: 'bg-purple-50', accentText: 'text-purple-700', accentIcon: <Brain className="w-3.5 h-3.5" /> },
-    { id: 'writer', label: '写手', icon: <PenTool className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-orange-600 bg-orange-50', accentBg: 'bg-orange-50', accentText: 'text-orange-700', accentIcon: <PenTool className="w-3.5 h-3.5" /> },
-    { id: 'critic', label: '评论家', icon: <Eye className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-blue-600 bg-blue-50', accentBg: 'bg-blue-50', accentText: 'text-blue-700', accentIcon: <Eye className="w-3.5 h-3.5" /> },
-    { id: 'polisher', label: '润色师', icon: <Sparkles className="w-5 h-5" />, desc: 'P24-D: 按 8 种模式独立配置', color: 'text-pink-600 bg-pink-50', accentBg: 'bg-pink-50', accentText: 'text-pink-700', accentIcon: <Sparkles className="w-3.5 h-3.5" /> },
+    { id: 'strategist', label: '策略师', icon: <Brain className="w-5 h-5" />, desc: 'P24-D: 按 9 种模式独立配置', color: 'text-purple-600 bg-purple-50', accentBg: 'bg-purple-50', accentText: 'text-purple-700', accentIcon: <Brain className="w-3.5 h-3.5" /> },
+    { id: 'writer', label: '写手', icon: <PenTool className="w-5 h-5" />, desc: 'P24-D: 按 9 种模式独立配置', color: 'text-orange-600 bg-orange-50', accentBg: 'bg-orange-50', accentText: 'text-orange-700', accentIcon: <PenTool className="w-3.5 h-3.5" /> },
+    { id: 'critic', label: '评论家', icon: <Eye className="w-5 h-5" />, desc: 'P24-D: 按 9 种模式独立配置', color: 'text-blue-600 bg-blue-50', accentBg: 'bg-blue-50', accentText: 'text-blue-700', accentIcon: <Eye className="w-3.5 h-3.5" /> },
+    { id: 'polisher', label: '润色师', icon: <Sparkles className="w-5 h-5" />, desc: 'P24-D: 按 9 种模式独立配置', color: 'text-pink-600 bg-pink-50', accentBg: 'bg-pink-50', accentText: 'text-pink-700', accentIcon: <Sparkles className="w-3.5 h-3.5" /> },
     { id: 'scout', label: '侦察官', icon: <Telescope className="w-5 h-5" />, desc: 'P31: 投研搜索智能体', color: 'text-teal-600 bg-teal-50', accentBg: 'bg-teal-50', accentText: 'text-teal-700', accentIcon: <Telescope className="w-3.5 h-3.5" /> },
 ];
 
@@ -60,6 +66,7 @@ const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
     [PROVIDER_IDS.GOOGLE]: 'Google Gemini',
     [PROVIDER_IDS.GROK]: 'xAI Grok',
     [PROVIDER_IDS.SURF]: 'Surf AI',
+    [PROVIDER_IDS.CLAUDE]: 'Claude',
 };
 
 interface AgentModelConfigProps {
@@ -216,7 +223,7 @@ export const AgentModelConfig: React.FC<AgentModelConfigProps> = ({ apiKeys }) =
             <div className="grid gap-4 md:grid-cols-2">
                 {AGENT_ROLES.map(role => {
                     const skipCount = (SKIP_MODES[role.id] || []).length;
-                    const activeCount = 8 - skipCount;
+                    const activeCount = MODE_DEFINITIONS.length - skipCount;
                     const isScout = role.id === 'scout';
                     const currentModelName = isScout
                         ? `${PROVIDER_DISPLAY_NAMES[models.scout?.provider] || 'Surf'} / ${models.scout?.model || 'surf-1.5'}`

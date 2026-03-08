@@ -382,11 +382,23 @@ async def health_check():
     except Exception:
         lark_connected = False
     
+    # Check Chroma status
+    chroma_connected = False
+    try:
+        from .services.chroma_service import get_chroma_service
+        svc = get_chroma_service()
+        svc.client.heartbeat()  # test connection
+        chroma_connected = True
+    except Exception:
+        chroma_connected = False
+    
     return {
         "status": "ok", 
         "version": "6.2", 
         "engine": "Web3 Consensus Engine",
-        "lark_connected": lark_connected
+        "lark_connected": lark_connected,
+        "sheets_connected": lark_connected or chroma_connected,  # 前端用此字段判断知识库状态
+        "chroma_connected": chroma_connected,
     }
 
 @app.get("/config/styles")
@@ -411,6 +423,30 @@ async def get_models():
             "default_model": config.get("default_model", ""),
             "available_models": config.get("available_models", [config.get("default_model", "")])
         }
+    return result
+
+
+@app.get("/config/chroma")
+async def get_chroma_stats():
+    """P34: 返回 ChromaDB 向量库统计信息"""
+    try:
+        from .services.chroma_service import get_chroma_service
+        svc = get_chroma_service()
+        return {"status": "ok", "collections": svc.get_stats()}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+class BinancePublishRequest(BaseModel):
+    content: str
+    api_key: str = ""
+
+
+@app.post("/binance/publish")
+async def publish_to_binance_square(req: BinancePublishRequest):
+    """P34: 发布内容到币安广场"""
+    from .services.binance_api import publish_to_square
+    result = await publish_to_square(content=req.content, api_key=req.api_key or None)
     return result
 
 class PromptUpdateRequest(BaseModel):

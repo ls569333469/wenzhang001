@@ -54,9 +54,16 @@ def _abbreviate_numbers(text: str) -> str:
 
 
 def _clip(text: str, max_len: int) -> str:
-    """智能截断：不在括号中间断开，优先在标点处断开"""
+    """智能截断：不在括号中间断开，优先在句子边界处断开"""
     if len(text) <= max_len:
         return text
+    # 先在分号处截断（催化事件经常用分号分隔多条信息）
+    semi_idx = text.find('；')
+    if 0 < semi_idx <= max_len:
+        return text[:semi_idx]
+    semi_idx = text.find(';')
+    if 0 < semi_idx <= max_len:
+        return text[:semi_idx]
     chunk = text[:max_len]
     # 检查是否在未闭合的括号中间，如果是则回退到括号前
     for open_b, close_b in [('(', ')'), ('（', '）'), ('[', ']'), ('【', '】')]:
@@ -66,26 +73,58 @@ def _clip(text: str, max_len: int) -> str:
             chunk = chunk[:last_open].rstrip('，、 ,')
             return chunk
     # 在标点处断开
-    for sep in ['，', '、', '。', '；', ',', ' ']:
+    for sep in ['，', '。', '、', ',', ' ']:
         idx = chunk.rfind(sep)
         if idx > max_len // 3:
             return chunk[:idx]
     return chunk
 
 
+def _catalyst_importance(text: str) -> int:
+    """
+    给催化事件打重要性分，高分优先展示在卡片上。
+    优先有预期的未来事件，过滤噪声和统计数据。
+    """
+    t = text
+    tl = text.lower()  # 仅用于英文关键词匹配
+    # === 过滤噪声 ===
+    if any(kw in tl for kw in ["kol", "twitter", "changelog"]):
+        return -1
+    if any(kw in t for kw in ["提及", "问候", "农历", "浏览量", "审计"]):
+        return -1
+    if any(kw in t for kw in ["参与者", "名参与", "增长10", "增长超过",
+                               "交易量达", "交易量创", "交易量超"]):
+        return -1
+    if "以来" in t:
+        return -1
+
+    score = 0
+    # === +10 有预期的未来里程碑 ===
+    if any(kw in tl for kw in ["tge", "ido", "ieo"]):
+        score += 10
+    if any(kw in t for kw in ["公售", "空投", "代币上线", "主网上线",
+                               "白名单", "大使计划", "测试网"]):
+        score += 10
+    # === +5 产品/功能节点 ===
+    if any(kw in tl for kw in ["galxe", "zealy", "ai代理", "ai agent", "season"]):
+        score += 5
+    if any(kw in t for kw in ["产品发布", "功能上线", "币安广场", "赛季"]):
+        score += 5
+    # === +4 一般事件 ===
+    if any(kw in t for kw in ["积分奖励", "竞赛活动", "NFT铸造", "奖励计划"]):
+        score += 4
+    return score
+
+
 def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
     """
     从催化剂列表中选出最适合展示在卡片上的一条。
 
-    优先级：
-    1. 未来事件（最近的一条）
-    2. 7 天内已发生的事件（最近的一条）
-    3. 模糊未来事件（如 "2026年 xxx"）
+    优先级：重要性 > 时间接近度
+    1. 高重要性的近期/未来事件
+    2. 普通重要性的近期/未来事件
+    3. 模糊未来事件
     4. 都不满足 → 返回空字符串
-
-    Args:
-        catalysts: 催化剂文本列表，例如 ["2026-02-03 Vision 2030", "2026年 美国市场重入"]
-        today: 当前日期（默认 now）
     """
     if not catalysts:
         return ""
@@ -94,28 +133,34 @@ def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
     today_date = today.date()
     cutoff = today_date - timedelta(days=7)
 
-    future_events = []    # (date, text)
-    recent_events = []    # (date, text)
-    vague_future = []     # 模糊未来事件
+    future_events = []    # (importance, date, text)
+    recent_events = []    # (importance, date, text)
+    vague_future = []     # (importance, text)
 
     for c in catalysts:
         c = c.strip().lstrip("•·- ")
         if not c:
             continue
 
+        importance = _catalyst_importance(c)
+        if importance < 0:
+            continue  # 过滤噪声
+
         # 尝试提取 YYYY-MM-DD
         m = re.search(r"(202[4-9])-(\d{2})-(\d{2})", c)
         if m:
             try:
                 event_date = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3))).date()
-                # 去掉日期前缀，保留事件描述
-                desc = re.sub(r"^\s*202[4-9]-\d{2}-\d{2}\s*[:：]?\s*", "", c).strip()
+                # 去掉所有 YYYY-MM-DD 日期，避免重复显示
+                desc = re.sub(r"202[4-9]-\d{2}-\d{2}", "", c).strip()
+                # 清理残留的标签词和标点
+                desc = re.sub(r"^[\s:：即将发生最近已]*[:：]?\s*", "", desc).strip()
+                desc = re.sub(r"[（(]\s*[）)]", "", desc).strip()  # 空括号
                 display = f"{m.group(2)}-{m.group(3)} {desc}"
                 if event_date > today_date:
-                    future_events.append((event_date, display))
+                    future_events.append((importance, event_date, display))
                 elif event_date >= cutoff:
-                    recent_events.append((event_date, display))
-                # else: 太旧，丢弃
+                    recent_events.append((importance, event_date, display))
                 continue
             except ValueError:
                 pass
@@ -131,7 +176,7 @@ def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
                 if year > today.year or (year == today.year and month >= today.month):
                     desc = re.sub(r"^\s*202[4-9]-\d{2}\s*[:：]?\s*|\s*\d{1,2}月\s*", "", c).strip()
                     display = f"{month}月 {desc}" if desc else c
-                    vague_future.append(display)
+                    vague_future.append((importance, display))
                     continue
             except ValueError:
                 pass
@@ -139,10 +184,10 @@ def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
         # 模糊年份（如 "2026年 xxx"）
         m_year = re.search(r"(202[5-9])年", c)
         if m_year and int(m_year.group(1)) >= today.year:
-            vague_future.append(c)
+            vague_future.append((importance, c))
             continue
 
-    # 清理催化剂文本：截断到第一个逗号/分号，去掉尾部标点
+    # 清理催化剂文本
     def _clean(text: str) -> str:
         for sep in ["，", "；", "。", ",", ";"]:
             idx = text.find(sep)
@@ -151,15 +196,22 @@ def pick_best_catalyst(catalysts: list[str], today: datetime = None) -> str:
                 break
         return text.rstrip("。，；.、：: ")
 
-    # 按优先级返回
+    # 按 重要性(降序) > 日期 排序后返回最佳（仅返回 score > 0 的事件）
     if future_events:
-        future_events.sort(key=lambda x: x[0])
-        return _clean(future_events[0][1])
+        scored = [e for e in future_events if e[0] > 0]
+        if scored:
+            scored.sort(key=lambda x: (-x[0], x[1]))
+            return _clean(scored[0][2])
     if recent_events:
-        recent_events.sort(key=lambda x: x[0], reverse=True)
-        return _clean(recent_events[0][1])
+        scored = [e for e in recent_events if e[0] > 0]
+        if scored:
+            scored.sort(key=lambda x: (-x[0], -x[1].toordinal()))
+            return _clean(scored[0][2])
     if vague_future:
-        return _clean(vague_future[0])
+        scored = [e for e in vague_future if e[0] > 0]
+        if scored:
+            scored.sort(key=lambda x: -x[0])
+            return _clean(scored[0][1])
     return ""
 
 
@@ -180,7 +232,9 @@ def generate_card_html(
         完整 HTML 字符串
     """
     date_str = date_str or cn_now().strftime("%Y%m%d")
-    date_display = f"{date_str[:4]}.{date_str[4:6]}.{date_str[6:]}"
+    # 兼容 "20260307" 和 "2026.03.07" 两种格式
+    clean_date = date_str.replace(".", "").replace("-", "")
+    date_display = f"{clean_date[:4]}.{clean_date[4:6]}.{clean_date[6:8]}"
     display_projects = projects[:max_projects]
     total = len(projects)
 
@@ -193,11 +247,13 @@ def generate_card_html(
         summary = _clip(p.get("summary", p.get("buzz", "")), 40)
         twitter = p.get("twitter", "")
         catalyst_raw = p.get("catalyst", "")
-        catalyst = _clip(_abbreviate_numbers(catalyst_raw), 50)
+        catalyst = _clip(_abbreviate_numbers(catalyst_raw), 65)
 
         catalyst_html = ""
         if catalyst:
-            catalyst_html = f'<div class="catalyst">🔥 {catalyst}</div>'
+            # 长文本动态缩小字号
+            cat_style = ' style="font-size:11px;padding:4px 8px;"' if len(catalyst) > 30 else ''
+            catalyst_html = f'<div class="catalyst"{cat_style}>🔥 {catalyst}</div>'
 
         cards_html += f"""
             <div class="card">
@@ -269,7 +325,6 @@ body {{
     background-color: #FF3A2D; color: #FFF;
     font-size: 12px; font-weight: 700;
     padding: 5px 10px; display: inline-block;
-    overflow: hidden; max-height: 3.36em;
     overflow-wrap: break-word; word-break: break-all;
     margin-top: 10px;
     border-radius: 4px; line-height: 1.4;

@@ -18,6 +18,7 @@ POLISHER_REGISTRY = {
     "bullish_take": standard_polisher,   # P27: 吹捧模式 — 专用模板
     "kaito_yap": standard_polisher,      # P27: Kaito 嘴撸 — 专用模板
     "project_research": standard_polisher,  # P27: 投研 — 专业化打磨
+    "binance_square": skip_polisher,  # P34: 币安广场 — 跳过润色（短内容）
 }
 
 

@@ -27,6 +27,7 @@ describe('Studio Schema', () => {
             expect(() => CreationModeSchema.parse('kaito_yap')).not.toThrow();
             expect(() => CreationModeSchema.parse('project_research')).not.toThrow();
             expect(() => CreationModeSchema.parse('tutorial')).not.toThrow();
+            expect(() => CreationModeSchema.parse('binance_square')).not.toThrow();  // P34
         });
 
         it('should reject invalid modes', () => {

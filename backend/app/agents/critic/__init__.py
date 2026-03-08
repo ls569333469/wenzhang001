@@ -18,6 +18,7 @@ CRITIC_REGISTRY = {
     "bullish_take": standard_critic,   # P27: 吹捧模式 — 专用模板
     "kaito_yap": standard_critic,      # P27: Kaito 嘴撸 — 专用模板
     "project_research": research_cleaner,  # P31: 投研 — 数据清洗（不打分）
+    "binance_square": standard_critic,  # P34: 币安广场 — 合规审查
 }
 
 

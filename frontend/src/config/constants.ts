@@ -42,12 +42,17 @@ export const CREATION_MODES: { id: CreationMode; title: string; desc?: string; c
         id: 'project_research',
         title: '🔬 投研',
         compact: true
+    },
+    {
+        id: 'binance_square',
+        title: '🟡 广场',
+        desc: '币安广场专业发帖，100-900字'
     }
 ];
 
 // P27: 需要 DataPanel 的模式（有数据展示面板）
 export const MODES_WITH_DATA_PANEL: CreationMode[] = [
-    'bullish_take', 'kaito_yap', 'project_research'
+    'bullish_take', 'kaito_yap', 'project_research', 'binance_square'
 ];
 
 // P11: 文章长度配置 (新篇幅体系)

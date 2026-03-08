@@ -19,6 +19,7 @@ export interface WriterPrompts {
     tutorial: PromptSection;
     bullish_take: PromptSection;
     kaito_yap: PromptSection;
+    binance_square: PromptSection;  // P34
     project_research: PromptSection;
 }
 
@@ -153,7 +154,7 @@ export const usePromptStore = create<CustomPromptsState>()(
         {
             name: 'qs_custom_prompts',
             partialize: (state) => ({ customPrompts: state.customPrompts }),
-            version: 8, // P30: Bump v7→v8 for bullish_take B-plan defaults (all 4 agents)
+            version: 9, // P34: Bump v8→v9 for binance_square defaults (all 4 agents)
             migrate: (persistedState: any, version: number) => {
                 // Version 0→1: mid_take → quick_summary
                 if (version === 0) {
@@ -249,6 +250,17 @@ export const usePromptStore = create<CustomPromptsState>()(
                         for (const agent of ['writer', 'strategist', 'critic', 'polisher'] as const) {
                             if (cp[agent] && DEFAULT_PROMPTS[agent]?.bullish_take) {
                                 cp[agent].bullish_take = { ...DEFAULT_PROMPTS[agent].bullish_take };
+                            }
+                        }
+                    }
+                }
+                // Version 8→9: P34 add binance_square defaults for all agents
+                if (version < 9) {
+                    const cp = persistedState.customPrompts;
+                    if (cp) {
+                        for (const agent of ['writer', 'strategist', 'critic', 'polisher'] as const) {
+                            if (cp[agent] && !cp[agent].binance_square && DEFAULT_PROMPTS[agent]?.binance_square) {
+                                cp[agent].binance_square = { ...DEFAULT_PROMPTS[agent].binance_square };
                             }
                         }
                     }

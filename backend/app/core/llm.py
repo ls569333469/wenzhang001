@@ -17,7 +17,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # 支持的提供商类型
-ProviderType = Literal["google", "volcengine", "openai", "deepseek", "grok", "surf"]
+ProviderType = Literal["google", "volcengine", "openai", "deepseek", "grok", "surf", "claude"]
 
 # 提供商配置
 PROVIDER_CONFIGS = {
@@ -91,6 +91,17 @@ PROVIDER_CONFIGS = {
         "available_models": [
             "surf-1.5",          # 深度搜索+分析
             "surf-1.5-instant",  # 快速搜索
+        ]
+    },
+    "claude": {
+        "base_url": "https://api.dgrid.ai/api/v1",
+        "env_key": "ANTHROPIC_API_KEY",
+        "config_key": "claude",
+        "default_model": "anthropic/claude-sonnet-4-20250514",
+        "available_models": [
+            "anthropic/claude-sonnet-4-20250514",   # Sonnet 4 (均衡)
+            "anthropic/claude-opus-4-20250514",      # Opus 4 (最强)
+            "anthropic/claude-haiku-3-5-20241022",   # Haiku 3.5 (快速)
         ]
     }
 }

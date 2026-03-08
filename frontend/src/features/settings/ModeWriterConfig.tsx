@@ -19,6 +19,7 @@ const MODE_DEFINITIONS: { id: keyof ModeWriterConfigType; name: string; icon: Re
     { id: 'bullish_take', name: '吹捧', icon: <Zap className="w-4 h-4" />, desc: '狂热吹捧情绪流' },
     { id: 'kaito_yap', name: 'Kaito', icon: <MessageSquare className="w-4 h-4" />, desc: '加密原语喊单风格' },
     { id: 'project_research', name: '投研', icon: <FileText className="w-4 h-4" />, desc: '专业级数据沉淀分析' },
+    { id: 'binance_square', name: '广场', icon: <MessageSquare className="w-4 h-4" />, desc: '币安广场专业发帖 (100-900字)' },  // P34
 ];
 
 // 复用 AgentModelConfig 的模型列表
@@ -37,6 +38,11 @@ const PROVIDER_MODELS = {
         { id: 'grok-4-1-fast-non-reasoning', name: 'Grok 4.1 Fast', description: '非推理(xAI)' },
         { id: 'grok-4-0709', name: 'Grok 4 旗舰', description: '旗舰(xAI)' },
         { id: 'grok-3-mini', name: 'Grok 3 Mini', description: '轻量(xAI)' },
+    ],
+    [PROVIDER_IDS.CLAUDE]: [
+        { id: 'anthropic/claude-sonnet-4-20250514', name: 'Claude Sonnet 4', description: '均衡' },
+        { id: 'anthropic/claude-opus-4-20250514', name: 'Claude Opus 4', description: '最强' },
+        { id: 'anthropic/claude-haiku-3-5-20241022', name: 'Claude Haiku 3.5', description: '快速' },
     ]
 };
 
@@ -44,6 +50,7 @@ const PROVIDER_DISPLAY_NAMES: Record<string, string> = {
     [PROVIDER_IDS.VOLCENGINE]: '火山引擎',
     [PROVIDER_IDS.GOOGLE]: 'Google',
     [PROVIDER_IDS.GROK]: 'xAI Grok',
+    [PROVIDER_IDS.CLAUDE]: 'Claude',
 };
 
 interface ModeWriterConfigProps {

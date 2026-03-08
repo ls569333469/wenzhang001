@@ -254,6 +254,44 @@ class GoogleSheetsDataSource:
         
         # Step 4: 兜底 — random
         return random.sample(records, min(len(records), count))
+
+    def get_semantic_samples(self, query_text: str, style: str, 
+                             snippet_type: str = None, logic_pattern: str = None, 
+                             count: int = 2) -> List[Dict]:
+        """
+        P34: 语义匹配风格样本 — Chroma 优先，回退到 get_targeted_samples。
+        
+        Args:
+            query_text: 素材内容 (用于语义搜索)
+            style: 风格 (如 "banfo", "mimeng")
+            snippet_type: 片段类型
+            logic_pattern: 逻辑公式
+            count: 返回数量
+        
+        Returns:
+            [{"content": "...", "metadata": {...}, ...}]
+        """
+        try:
+            from .chroma_service import get_chroma_service
+            chroma = get_chroma_service()
+            
+            results = chroma.get_semantic_samples(
+                query_text=query_text,
+                n_results=count,
+                style_filter=style,
+                logic_pattern=logic_pattern,
+            )
+            
+            if results:
+                logger.info(f"[GoogleSheets] P34: Chroma 语义匹配 {len(results)} 条 (style={style})")
+                return results
+            else:
+                logger.info("[GoogleSheets] P34: Chroma 无匹配结果, 回退到标签匹配")
+        except Exception as e:
+            logger.warning(f"[GoogleSheets] P34: Chroma 不可用, 回退到标签匹配: {e}")
+        
+        # 回退到现有的标签匹配
+        return self.get_targeted_samples(style, snippet_type, logic_pattern, count)
     
     def refresh_cache(self, sheet_name: str = None):
         """Clear cache to force reload"""

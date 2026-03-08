@@ -15,6 +15,7 @@ const MODES: { id: keyof WriterPrompts; label: string }[] = [
     { id: 'tutorial', label: '教程 (Tutorial)' },
     { id: 'bullish_take', label: '吹捧 (Bullish Take)' },
     { id: 'kaito_yap', label: 'Kaito (Yap)' },
+    { id: 'binance_square', label: '广场' },  // P34
     { id: 'project_research', label: '投研 (Research)' },
 ];
 

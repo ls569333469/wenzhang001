@@ -21,6 +21,7 @@ export const CreationModeSchema = z.enum([
     'bullish_take',       // P27: 吹捧 (50-500字)
     'kaito_yap',          // P27: Kaito 嘴撸 (50-500字)
     'project_research',   // P27: 项目投研
+    'binance_square',     // P34: 币安广场 (100-900字)
 ]);
 
 /** 写作风格 */
@@ -81,7 +82,7 @@ export const CreationConfigSchema = z.object({
 // ===== P13: API 配置 Schema =====
 
 /** AI 提供商 */
-export const AIProviderSchema = z.enum(['volcengine', 'google', 'grok', 'surf']);
+export const AIProviderSchema = z.enum(['volcengine', 'google', 'grok', 'surf', 'claude']);
 
 /** 单个 API 配置 */
 export const APIConfigSchema = z.object({
@@ -96,6 +97,7 @@ export const PROVIDER_IDS = {
     GOOGLE: 'google',
     GROK: 'grok',
     SURF: 'surf',  // P31: Surf AI (搜索+分析)
+    CLAUDE: 'claude',  // P34: Claude (DGrid)
 } as const;
 
 /** Agent 模型配置项 (必须包含 provider 和 model) */
@@ -137,6 +139,7 @@ export const MODE_WRITER_IDS = {
     BULLISH_TAKE: 'bullish_take',
     KAITO_YAP: 'kaito_yap',
     PROJECT_RESEARCH: 'project_research',
+    BINANCE_SQUARE: 'binance_square',  // P34
 } as const;
 
 /** 模式 Writer 配置 Schema */
@@ -149,6 +152,7 @@ export const ModeWriterConfigSchema = z.object({
     bullish_take: AgentModelSettingSchema,
     kaito_yap: AgentModelSettingSchema,
     project_research: AgentModelSettingSchema,
+    binance_square: AgentModelSettingSchema,  // P34
 });
 
 /** P14-C: 默认模式 Writer 配置 */
@@ -161,6 +165,7 @@ export const DEFAULT_MODE_WRITERS: z.infer<typeof ModeWriterConfigSchema> = {
     bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'deepseek-v3-2-251201' },  // P31: 写手用 DeepSeek
+    binance_square: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },  // P34: 广场
 };
 
 export type ModeWriterConfig = z.infer<typeof ModeWriterConfigSchema>;
@@ -172,8 +177,8 @@ export const SKIP_MODES = {
     strategist: [] as string[],
     writer: [] as string[],
     critic: ['hot_take', 'kaito_yap'],
-    polisher: ['hot_take', 'kaito_yap'],
-    scout: ['hot_take', 'short_article', 'mid_article', 'long_article', 'tutorial', 'bullish_take', 'kaito_yap', 'project_research'] as string[],  // P31: 侦察官不参与创作模式
+    polisher: ['hot_take', 'kaito_yap', 'binance_square'],  // P34: 广场跳过润色
+    scout: ['hot_take', 'short_article', 'mid_article', 'long_article', 'tutorial', 'bullish_take', 'kaito_yap', 'project_research', 'binance_square'] as string[],
 } as const;
 
 /** 完整模式 Schema（4 个 agent 通用, P27: 8 模式） */
@@ -186,6 +191,7 @@ const FullModeConfigSchema = z.object({
     bullish_take: AgentModelSettingSchema,
     kaito_yap: AgentModelSettingSchema,
     project_research: AgentModelSettingSchema,
+    binance_square: AgentModelSettingSchema,  // P34
 });
 
 /** P24-D: 模式专属 Strategist 配置 */
@@ -199,6 +205,7 @@ export const DEFAULT_MODE_STRATEGISTS: z.infer<typeof ModeStrategistConfigSchema
     bullish_take: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     kaito_yap: { provider: PROVIDER_IDS.GROK, model: 'grok-4-1-fast-reasoning' },
     project_research: { provider: PROVIDER_IDS.SURF, model: 'surf-1.5' },  // P31: 策略官用 Surf 搜索
+    binance_square: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },  // P34
 };
 export type ModeStrategistConfig = z.infer<typeof ModeStrategistConfigSchema>;
 
@@ -213,6 +220,7 @@ export const DEFAULT_MODE_CRITICS: z.infer<typeof ModeCriticConfigSchema> = {
     bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
     kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    binance_square: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },  // P34: 需要Critic
 };
 export type ModeCriticConfig = z.infer<typeof ModeCriticConfigSchema>;
 
@@ -227,6 +235,7 @@ export const DEFAULT_MODE_POLISHERS: z.infer<typeof ModePolisherConfigSchema> = 
     bullish_take: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
     kaito_yap: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // skip
     project_research: { provider: PROVIDER_IDS.VOLCENGINE, model: 'doubao-seed-2-0-lite-260215' },
+    binance_square: { provider: PROVIDER_IDS.VOLCENGINE, model: '' },  // P34: skip Polisher
 };
 export type ModePolisherConfig = z.infer<typeof ModePolisherConfigSchema>;
 

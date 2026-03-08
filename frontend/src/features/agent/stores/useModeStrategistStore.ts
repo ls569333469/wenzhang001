@@ -54,8 +54,17 @@ export const useModeStrategistStore = create<ModeStrategistStore>()(
         }),
         {
             name: 'qs_mode_strategists',
-            version: 1,
+            version: 2,  // P34: v1→v2 (8→9 modes, +binance_square)
             skipHydration: true,
+            migrate: (persistedState: any, version: number) => {
+                if (version < 2) {
+                    const old = persistedState as any;
+                    if (old.strategists && !old.strategists.binance_square) {
+                        old.strategists.binance_square = { provider: 'volcengine', model: 'doubao-seed-2-0-lite-260215' };
+                    }
+                }
+                return persistedState as ModeStrategistStore;
+            },
         }
     )
 );
