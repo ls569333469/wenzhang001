@@ -64,7 +64,7 @@ export function ResearchView() {
                             正在生成投研快报
                         </h2>
                         <p className="text-sm text-ink-muted mt-1">
-                            {statusMessage || '侦察官 → 策略官 → 审核官 → 写手 → 润色官'}
+                            {statusMessage || '侦察官 → 策略官 → 质检官 → 总结官 → 推文写手 → 配图'}
                         </p>
                         <p className="text-xs text-ink-muted mt-3 opacity-60">
                             预计需要 10-15 分钟，请勿关闭页面

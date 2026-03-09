@@ -1,14 +1,15 @@
 """
-P31: 每日投研快报生成服务
+P31/P34: 每日投研快报生成服务
 
-编排完整流程：
-    侦察官 → 策略官×N（并发3）→ 审核官 → 写手 → 配图 → 推文 → 润色官
+编排完整流程（P34重构）：
+    侦察官 → 策略官×N → enrichment → 质检官 → 总结官 → 推文写手 → 主推文 → 配图 → 回写
 
 调用方式：
     POST /api/research/daily-report
     或定时任务直接调用 generate_daily_report()
 """
 import os
+import re
 import asyncio
 import time
 from datetime import datetime
@@ -310,90 +311,7 @@ def run_summarizer(analysis_results: list[dict], api_config: dict = None) -> str
         return "\n\n---\n\n".join(fallback)
 
 
-# ============================================================
-#  Step 4: 写手 — 组装日报
-# ============================================================
-
-def run_writer(
-    summary: str,
-    projects: list[dict],
-    date_str: str,
-    api_config: dict = None,
-) -> str:
-    """
-    把精简版内容组装成一份日报
-
-    Args:
-        summary: 审核官输出的精简版
-        projects: 侦察官发现的项目列表（含基本信息）
-        date_str: 日期字符串
-        api_config: AI 配置
-
-    Returns:
-        日报 Markdown 文本
-    """
-    api_config = api_config or {}
-    logger.info("✍️ 写手: 组装日报...")
-
-    # 构建项目总览表
-    overview_rows = []
-    for i, p in enumerate(projects, 1):
-        name = p.get("name", "?")
-        twitter = p.get("twitter", "")
-        category = p.get("category", "")
-        kol = p.get("kol_24h", 0)
-        buzz = p.get("buzz", "")[:50]
-        overview_rows.append(f"| {i} | **{name}** ({twitter}) | {category} | +{kol} | {buzz} |")
-
-    overview_table = (
-        "| # | 项目 | 类别 | 24h KOL | 热度原因 |\n"
-        "|---|------|------|---------|----------|\n"
-        + "\n".join(overview_rows)
-    )
-
-    # P32-C: 从 writer.jinja2 模板渲染（P15 可编辑）
-    system_prompt = _render_research_template("writer.jinja2", {})
-
-    if not system_prompt:
-        system_prompt = (
-            "你是投研日报写手。将项目总览和精简分析组装成一份结构清晰的每日投研快报。\n\n"
-            "日报格式要求：\n1. 标题：# 🌊 每日投研快报\n2. 元信息（日期、项目数）\n"
-            "3. 📋 项目总览表格\n4. 每个项目的分析，严格只保留 4 个板块：\n"
-            "   📊 一句话定位 / 🎯 关键事件与参与机会 / 👥 团队与背书 / 🔥 近期催化剂\n"
-            "5. 没有数据的板块直接省略\n6. 每个板块 2-4 句话\n7. 末尾加免责声明\n\n"
-            "直接输出 Markdown 格式日报，不要添加任何说明。"
-        )
-
-    user_prompt = (
-        f"请组装以下内容为每日投研快报：\n\n"
-        f"日期: {date_str}\n\n"
-        f"项目总览:\n{overview_table}\n\n"
-        f"精简分析:\n{summary}"
-    )
-
-    provider = api_config.get("provider", "volcengine")
-    model_id = api_config.get("model_id")
-
-    try:
-        result = generate_text(
-            prompt=user_prompt,
-            model_id=model_id,
-            provider=provider,
-            temperature=0.5,
-            system_prompt=system_prompt,
-            max_tokens=6000,
-        )
-        logger.info("✍️ 写手完成")
-        return result
-    except Exception as e:
-        logger.error(f"✍️ 写手失败: {e}")
-        # fallback: 手动拼日报
-        return (
-            f"# 🌊 每日投研快报\n\n"
-            f"> 日期: {date_str} | 数据来源: leak.me\n\n"
-            f"## 项目总览\n\n{overview_table}\n\n"
-            f"## 分析\n\n{summary}"
-        )
+# P34: run_writer() 已删除 — 日报由 report.jinja2 代码模板直接渲染
 
 
 # ============================================================
@@ -413,30 +331,37 @@ def _enrich_projects_from_analysis(
     import re
     from .card_generator import pick_best_catalyst
 
-    # 建立 name → analysis_content 映射
-    analysis_map = {}
+    # 建立 twitter → analysis_content 映射（P34: twitter handle 更可靠）
+    analysis_map_tw = {}
+    analysis_map_name = {}
     for r in analysis_results:
         if r.get("content"):
-            analysis_map[r["name"].lower().strip()] = r["content"]
+            tw = r.get("twitter", "").lower().strip().lstrip("@")
+            if tw:
+                analysis_map_tw[tw] = r["content"]
+            analysis_map_name[r["name"].lower().strip()] = r["content"]
 
-    # ---- 正则模式 ----
-    # Summary: 新格式 ## 📊 项目定位   旧格式 ## 1. 项目概要
+    # ---- 正则模式（兼容有无 emoji 前缀）----
+    # Summary: ## 📊 项目定位 / ## 项目定位 / ## 1. 项目概要
     POS_PATTERN = re.compile(
-        r"##\s*(?:📊\s*项目定位|\d+\.\s*项目概要[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
+        r"##\s*(?:📊\s*)?(?:项目定位|\d+\.\s*项目概要[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
         re.DOTALL,
     )
-    # Catalyst: 只匹配专门的催化剂段，不匹配 "风险与机会"
-    # 新格式: ## 🔥 近期催化剂   旧格式: ## X. 近期催化剂
+    # Catalyst: ## 🔥 近期催化剂 / ## 近期催化剂 / ## X. 近期催化剂
     CAT_PATTERN = re.compile(
-        r"##\s*(?:🔥\s*近期催化剂|\d+\.\s*近期催化剂[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
+        r"##\s*(?:🔥\s*)?(?:近期催化剂|\d+\.\s*近期催化剂[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
         re.DOTALL,
     )
 
     enriched = []
     for p in projects:
         p = dict(p)  # shallow copy
+        # 优先用 twitter handle 匹配，fallback 到 name
+        tw_key = p.get("twitter", "").lower().strip().lstrip("@")
         name_key = p.get("name", "").lower().strip()
-        content = analysis_map.get(name_key, "")
+        content = analysis_map_tw.get(tw_key) or analysis_map_name.get(name_key, "")
+        match_by = "twitter" if tw_key in analysis_map_tw else ("name" if name_key in analysis_map_name else "none")
+        logger.info(f"📋 enrichment [{p.get('name')}] match={match_by} tw={tw_key} content={'✅' if content else '❌'}")
 
         if content:
             # ---------- 提取一句话定位（短版，适配配图卡片） ----------
@@ -463,31 +388,13 @@ def _enrich_projects_from_analysis(
                     raw = lines[0]
                     # 去掉来源标注
                     raw = re.sub(r"[（(]来源[：:].*?[）)]", "", raw).strip()
-                    # 去掉项目名开头（如 "Dicey 定位为..." → "定位为..."）
-                    raw = re.sub(
-                        r"^[A-Za-z0-9\s\$]+(?:定位为|是)",
-                        "",
-                        raw,
-                    ).strip()
-                    # 截断策略：保留前 2 个逗号分句（兼顾信息量和卡片空间）
-                    # 例如 "非托管 DeFi AI 代理基础设施，支持跨协议自动执行收益策略"
-                    commas = [m.start() for m in re.finditer("，", raw)]
-                    if len(commas) >= 2 and commas[1] < 50:
-                        # 取到第 2 个逗号
-                        raw = raw[:commas[1]]
-                    elif len(commas) >= 1 and commas[0] < 45:
-                        # 只有 1 个逗号在合理范围内
-                        raw = raw[:commas[0]]
-                    elif "。" in raw:
-                        idx = raw.index("。")
-                        if idx < 50:
-                            raw = raw[:idx]
-                    # 最终限制 45 字符
-                    p["summary"] = raw[:45]
+                    # P34: LLM prompt 已要求30字定位，不再做逗号截断
+                    # 安全兜底：限制60字符（配图卡片空间）
+                    p["summary"] = raw[:60]
 
             # ---------- 提取催化剂 ----------
-            # 优先级1: 策略官 LLM 直接选出的卡片催化剂
-            card_cat_match = re.search(r"⚡\s*卡片催化剂[:：]\s*(.+)", content)
+            # 优先级1: 策略官 LLM 直接选出的卡片催化剂（兼容⚡和无⚡格式）
+            card_cat_match = re.search(r"(?:⚡\s*)?卡片催化剂[:：]\s*(.+)", content)
             if card_cat_match:
                 card_cat = card_cat_match.group(1).strip().rstrip("。.")
                 if card_cat and card_cat not in ("无", "无。"):
@@ -504,20 +411,15 @@ def _enrich_projects_from_analysis(
                 if card_cat:
                     # YYYY-MM-DD → MM-DD 短格式
                     card_cat = re.sub(r"202[4-9]-(\d{2})-(\d{2})", r"\1-\2", card_cat)
-                    # 截断到第一个中文逗号/句号/分号（英文逗号只在非数字后截断）
-                    for sep in ["，", "；", "。"]:
-                        idx = card_cat.find(sep)
-                        if idx > 4:
-                            card_cat = card_cat[:idx]
-                            break
+                    # P34: LLM + 质检官已保证催化文本质量，不再做截断
+                    # P34: 二次校验 — 催化事件必须匹配评分系统关键词（TGE/空投/白名单等）
+                    from .card_generator import _catalyst_importance
+                    importance = _catalyst_importance(card_cat)
+                    if importance > 0:
+                        p["catalyst"] = card_cat.strip()
+                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}' (score={importance})")
                     else:
-                        # 英文逗号：跳过数字逗号（如 173,000）
-                        for i, ch in enumerate(card_cat):
-                            if ch == "," and i > 4 and not card_cat[i-1].isdigit():
-                                card_cat = card_cat[:i]
-                                break
-                    p["catalyst"] = card_cat.strip()
-
+                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst跳过(score={importance}): '{card_cat}'")
             # 优先级2: 侦察官已有的催化（如存在且LLM没选出）
             # p["catalyst"] 可能已经由侦察官填充
 
@@ -530,7 +432,7 @@ def _enrich_projects_from_analysis(
                         l = l.strip().lstrip("-•·* ")
                         if not l or l.startswith("|") or l.startswith("#"):
                             continue
-                        if l.startswith("⚡"):
+                        if l.startswith("⚡") or l.startswith("卡片催化剂"):
                             continue  # 跳过卡片催化剂行本身
                         if any(kw in l for kw in ["风险", "推理", "局限", "不确定"]):
                             continue
@@ -552,6 +454,7 @@ def _enrich_projects_from_analysis(
                 if cat_lines:
                     best = pick_best_catalyst(cat_lines)
                     if best:
+                        logger.warning(f"⚠️ 催化兜底: {p.get('name')} 使用硬匹配（LLM未输出卡片催化剂）")
                         p["catalyst"] = best
 
         enriched.append(p)
@@ -564,7 +467,78 @@ def _enrich_projects_from_analysis(
 
 
 # ============================================================
-#  Step 5: 配图生成
+#  Step 3.5: 质检官 — 检查配图数据
+# ============================================================
+
+def run_reviewer(projects: list[dict], api_config: dict = None) -> list[dict]:
+    """
+    P34: 质检官 — 用 LLM 检查 enrichment 提取的 catalyst/summary。
+    修复截断、英文、主观预测等问题。
+    """
+    api_config = api_config or {}
+    logger.info("🔍 质检官: 检查配图数据...")
+
+    # 只检查有 catalyst 或 summary 的项目
+    items = []
+    for p in projects:
+        cat = p.get("catalyst", "无")
+        summ = p.get("summary", "无")
+        if cat or summ:
+            items.append(f"{p.get('name', '?')} | {cat or '无'} | {summ or '无'}")
+
+    if not items:
+        logger.info("🔍 质检官: 无数据需要检查")
+        return projects
+
+    system_prompt = _render_research_template("reviewer.jinja2", {})
+    if not system_prompt:
+        logger.warning("🔍 质检官: 模板不存在，跳过")
+        return projects
+
+    user_prompt = "\n".join(items)
+    provider = api_config.get("provider", "volcengine")
+    model_id = api_config.get("model_id")
+
+    try:
+        result = generate_text(
+            prompt=user_prompt,
+            model_id=model_id,
+            provider=provider,
+            temperature=0.2,
+            system_prompt=system_prompt,
+            max_tokens=2000,
+        )
+
+        # 解析质检结果，回写到 projects
+        for line in result.strip().split("\n"):
+            line = line.strip()
+            if not line or "|" not in line:
+                continue
+            parts = [p.strip() for p in line.split("|")]
+            if len(parts) < 3:
+                continue
+            name = parts[0]
+            for p in projects:
+                if p.get("name", "") == name:
+                    new_cat = parts[1].strip()
+                    new_summ = parts[2].strip()
+                    if new_cat and new_cat != "无":
+                        p["catalyst"] = new_cat
+                    elif new_cat == "无":
+                        p["catalyst"] = ""
+                    if new_summ and new_summ != "无":
+                        p["summary"] = new_summ
+                    break
+
+        logger.info(f"🔍 质检官完成: 检查 {len(items)} 个项目")
+    except Exception as e:
+        logger.warning(f"🔍 质检官失败，使用原始数据: {e}")
+
+    return projects
+
+
+# ============================================================
+#  Step 4: 配图生成
 # ============================================================
 
 def run_card_generator(projects: list[dict], date_str: str) -> str:
@@ -670,10 +644,12 @@ def run_tweet_writer(
             if not name_match:
                 continue
             name = name_match.group(1).strip()
+            # P34: 清理 LLM 输出的孤零零 # 和尾部空白
+            clean_text = re.sub(r'\n\s*#\s*$', '', block.strip()).strip()
             tweets.append({
                 "name": name,
-                "text": block,
-                "char_count": len(block),
+                "text": clean_text,
+                "char_count": len(clean_text),
             })
 
         # fallback: 如果解析失败，整段作为推文
@@ -727,7 +703,7 @@ def run_tweet_writer(
                 body_text = f"今日 {n} 个项目：{names}"
 
             # 组装：固定标语 + LLM内容 + 固定结尾
-            hook_text = f"今日发现，值得细看\n\n{body_text}\n\n⬇️\n\n#Web3Alpha"
+            hook_text = f"今日发现，值得细看\n\n{body_text}\n\n⬇️\n\n#AI #Alpha"
 
             main_tweet = {
                 "name": "Alpha日报",
@@ -756,52 +732,6 @@ def _save_tweets(tweets: list[dict], date_str: str) -> str:
     logger.info(f"📁 保存: {path}")
     return str(path)
 
-
-# ============================================================
-#  Step 7: 润色官 — 定稿
-# ============================================================
-
-def run_polisher(draft: str, api_config: dict = None) -> str:
-    """
-    润色日报最终版
-
-    Args:
-        draft: 写手输出的日报草稿
-        api_config: AI 配置
-
-    Returns:
-        润色后的最终日报
-    """
-    api_config = api_config or {}
-    logger.info("✨ 润色官: 润色定稿...")
-
-    system_prompt = (
-        "你是专业编辑。对以下投研日报做最终润色：\n"
-        "1. 修正错别字和语法\n"
-        "2. 统一格式和标点\n"
-        "3. 确保数据引用准确\n"
-        "4. 不改变内容和结构\n"
-        "5. 去掉明显的 AI 痕迹（\"值得关注的是\"\"不可忽视\"等套话）\n\n"
-        "直接输出润色后的完整日报。"
-    )
-
-    provider = api_config.get("provider", "volcengine")
-    model_id = api_config.get("model_id")
-
-    try:
-        result = generate_text(
-            prompt=draft,
-            model_id=model_id,
-            provider=provider,
-            temperature=0.3,
-            system_prompt=system_prompt,
-            max_tokens=6000,
-        )
-        logger.info("✨ 润色官完成")
-        return result
-    except Exception as e:
-        logger.error(f"✨ 润色官失败: {e}，使用写手原稿")
-        return draft
 
 
 # ============================================================
@@ -996,23 +926,19 @@ async def generate_daily_report(
                 "error": "所有项目分析均失败",
             }
 
-        # ===== Step 3: 审核官（总结归纳） =====
-        _progress("summarizer", "总结归纳分析报告...")
-        summary = run_summarizer(analysis_results, api_config)
-
-        # ===== Step 4: 写手（组装日报） =====
-        _progress("writer", "组装日报...")
-        draft = run_writer(summary, projects, date_str, api_config)
-
-        # ===== Step 4.5: 从策略官报告回填 summary + catalyst =====
+        # ===== Step 3: enrichment — 从策略官报告回填 summary + catalyst =====
         _progress("enrich", "提取项目定位与催化剂...")
         enriched_projects = _enrich_projects_from_analysis(projects, analysis_results)
 
-        # ===== Step 5: 配图生成 =====
-        _progress("card", "生成配图...")
-        card_path = run_card_generator(enriched_projects, date_str)
+        # ===== Step 3.5: 质检官 — 检查配图数据 =====
+        _progress("reviewer", "质检配图数据...")
+        enriched_projects = run_reviewer(enriched_projects, api_config)
 
-        # ===== Step 6: 推文文案 =====
+        # ===== Step 4: 总结官（总结归纳） =====
+        _progress("summarizer", "总结归纳分析报告...")
+        summary = run_summarizer(analysis_results, api_config)
+
+        # ===== Step 5: 推文文案 =====
         _progress("tweets", "生成推文文案...")
         # P33: 主推文只包含配图中显示的项目（max_projects=6）
         card_projects = enriched_projects[:6]
@@ -1021,9 +947,50 @@ async def generate_daily_report(
         if tweets:
             tweets_path = _save_tweets(tweets, date_str)
 
-        # ===== Step 7: 润色官（定稿） =====
-        _progress("polisher", "润色定稿...")
-        final_report = run_polisher(draft, api_config)
+        # ===== Step 6: 配图生成 =====
+        _progress("card", "生成配图...")
+        card_path = run_card_generator(enriched_projects, date_str)
+
+        # ===== Step 7: 日报渲染（代码模板，不用 LLM） =====
+        _progress("report", "渲染日报...")
+        # 用 report.jinja2 代码模板直接渲染
+        report_projects = []
+        for p_item in projects:
+            rp = dict(p_item)
+            # 找到对应的策略官报告
+            for r in analysis_results:
+                if r.get("twitter") == p_item.get("twitter") and r.get("content"):
+                    # P34: 过滤 LLM 推理过程（Reasoning Process）泄露
+                    clean_analysis = re.sub(
+                        r"###\s*Reasoning Process.*?(?=\n##|\Z)",
+                        "", r["content"], flags=re.DOTALL
+                    ).strip()
+                    rp["analysis"] = clean_analysis
+                    break
+            else:
+                rp["analysis"] = ""
+            report_projects.append(rp)
+
+        try:
+            from jinja2 import Template
+            template_path = PROMPTS_DIR / "copywriter" / "report.jinja2"
+            template_text = template_path.read_text(encoding="utf-8")
+            # 去掉 jinja2 注释行
+            template_lines = [l for l in template_text.split("\n") if not l.strip().startswith("{#")]
+            template_clean = "\n".join(template_lines)
+            tmpl = Template(template_clean)
+            final_report = tmpl.render(
+                date=date_str,
+                display_time=cn_now().strftime("%Y-%m-%d %H:%M"),
+                projects=report_projects,
+            )
+        except Exception as e:
+            logger.warning(f"report.jinja2 渲染失败，使用 fallback: {e}")
+            final_report = (
+                f"# 每日投研快报\n\n"
+                f"> 日期: {date_str}\n\n"
+                f"{summary}"
+            )
 
         # 保存日报
         report_path = _save_daily_report(final_report, date_str)

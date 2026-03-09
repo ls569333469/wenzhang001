@@ -167,12 +167,12 @@ PROMPTS_DIR = Path(__file__).parent.parent.parent / "data" / "prompts" / "resear
 
 # 投研智能体列表（P32-C: 全部注册，P15 可编辑）
 RESEARCH_AGENTS = {
-    "scout": {"file": "scout.jinja2", "label": "🔭 侦察官"},
-    "analyst": {"file": "analyst.jinja2", "label": "🔬 策略官"},
-    "summarizer": {"file": "summarizer.jinja2", "label": "📋 审核官"},
-    "writer": {"file": "writer.jinja2", "label": "✍️ 日报写手"},
-    "tweet_digest": {"file": "copywriter/tweet_digest.jinja2", "label": "🐦 推文写手"},
-    "report": {"file": "copywriter/report.jinja2", "label": "📝 日报模板"},
+    "scout": {"file": "scout.jinja2", "label": "侦察官"},
+    "analyst": {"file": "analyst.jinja2", "label": "策略官"},
+    "summarizer": {"file": "summarizer.jinja2", "label": "总结官"},
+    "reviewer": {"file": "reviewer.jinja2", "label": "质检官"},
+    "tweet_digest": {"file": "copywriter/tweet_digest.jinja2", "label": "推文写手"},
+    "report": {"file": "copywriter/report.jinja2", "label": "日报模板"},
 }
 
 

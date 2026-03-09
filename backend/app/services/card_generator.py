@@ -83,11 +83,11 @@ def _clip(text: str, max_len: int) -> str:
 def _catalyst_importance(text: str) -> int:
     """
     给催化事件打重要性分，高分优先展示在卡片上。
-    优先有预期的未来事件，过滤噪声和统计数据。
+    P34 统一词条：10/5/4 三档 + 噪声过滤。
     """
     t = text
     tl = text.lower()  # 仅用于英文关键词匹配
-    # === 过滤噪声 ===
+    # === 过滤噪声（-1分）===
     if any(kw in tl for kw in ["kol", "twitter", "changelog"]):
         return -1
     if any(kw in t for kw in ["提及", "问候", "农历", "浏览量", "审计"]):
@@ -99,19 +99,24 @@ def _catalyst_importance(text: str) -> int:
         return -1
 
     score = 0
-    # === +10 有预期的未来里程碑 ===
-    if any(kw in tl for kw in ["tge", "ido", "ieo"]):
+    # === 第一优先（+10）直接参与机会 ===
+    if any(kw in tl for kw in ["tge", "ido", "ieo", "airdrop"]):
         score += 10
     if any(kw in t for kw in ["公售", "空投", "代币上线", "主网上线",
-                               "白名单", "大使计划", "测试网"]):
+                               "白名单", "大使计划", "测试网",
+                               "Ambassador", "WL"]):
         score += 10
-    # === +5 产品/功能节点 ===
-    if any(kw in tl for kw in ["galxe", "zealy", "ai代理", "ai agent", "season"]):
+    # === 第二优先（+5）生态进展 ===
+    if any(kw in tl for kw in ["galxe", "zealy", "season", "snapshot",
+                                "binance alpha", "testnet"]):
         score += 5
-    if any(kw in t for kw in ["产品发布", "功能上线", "币安广场", "赛季"]):
+    if any(kw in t for kw in ["产品发布", "功能上线", "赛季",
+                               "快照", "生态合作", "集成"]):
         score += 5
-    # === +4 一般事件 ===
-    if any(kw in t for kw in ["积分奖励", "竞赛活动", "NFT铸造", "奖励计划"]):
+    # === 第三优先（+4）一般事件 ===
+    if any(kw in t for kw in ["积分系统", "积分奖励", "竞赛活动",
+                               "NFT铸造", "奖励计划", "代币解锁",
+                               "DAO治理", "Campaign", "Points"]):
         score += 4
     return score
 
