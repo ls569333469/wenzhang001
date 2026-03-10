@@ -242,12 +242,30 @@ def generate_card_html(
     date_display = f"{clean_date[:4]}.{clean_date[4:6]}.{clean_date[6:8]}"
     display_projects = projects[:max_projects]
     total = len(projects)
+    n_cards = len(display_projects)
+
+    # P35 B2: 动态 grid 布局
+    if n_cards <= 1:
+        grid_css = "grid-template-columns: 1fr; grid-template-rows: 1fr;"
+    elif n_cards == 2:
+        grid_css = "grid-template-columns: repeat(2, 1fr); grid-template-rows: 1fr;"
+    elif n_cards == 3:
+        grid_css = "grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr;"
+    elif n_cards == 4:
+        grid_css = "grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr);"
+    elif n_cards == 5:
+        grid_css = "grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);"
+    else:  # 6+
+        grid_css = "grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);"
 
     # 生成项目卡片
     cards_html = ""
     for p in display_projects:
         name = _clip(p.get("name", "Unknown"), 20)
         category = p.get("category", "Web3")
+        # P35: 防御侦察官数据错位（category 为纯数字时 fallback）
+        if not category or category.isdigit():
+            category = "Web3"
         emoji = _get_emoji(category)
         summary = _clip(p.get("summary", p.get("buzz", "")), 40)
         twitter = p.get("twitter", "")
@@ -302,8 +320,7 @@ body {{
 .date {{ font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }}
 .grid {{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    {grid_css}
     flex-grow: 1;
     border-bottom: 1px solid #1C1C1C;
     border-left: 1px solid #1C1C1C;

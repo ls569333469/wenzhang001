@@ -1,6 +1,7 @@
 """
 ChromaDB 向量引擎服务
 P34: 三个 Collection — style_samples / published_posts / content_history
+P35: 第 4 个 Collection — research_reports (策略官报告入库 + 48h 去重)
 
 用途:
     1. style_samples: 风格样本语义匹配 (替代 random sampling)
@@ -14,6 +15,7 @@ P34: 三个 Collection — style_samples / published_posts / content_history
 
 import os
 import logging
+from datetime import datetime, timedelta
 from typing import Optional
 from pathlib import Path
 
@@ -29,10 +31,11 @@ CHROMA_DB_PATH = os.environ.get(
 class ChromaService:
     """ChromaDB 向量引擎封装"""
 
-    # 三个 Collection 名称
+    # 四个 Collection 名称
     STYLE_SAMPLES = "style_samples"
     PUBLISHED_POSTS = "published_posts"
     CONTENT_HISTORY = "content_history"
+    RESEARCH_REPORTS = "research_reports"  # P35 F2
 
     def __init__(self, db_path: Optional[str] = None):
         self._client = None
@@ -276,12 +279,105 @@ class ChromaService:
 
         return {"is_duplicate": False, "most_similar": None, "distance": 1.0}
 
+    # ==================== P35 F2: 投研报告 ====================
+
+    def add_research_report(
+        self,
+        twitter: str,
+        date: str,
+        name: str,
+        content: str,
+        metadata: dict = None,
+    ):
+        """
+        入库一份策略官报告
+        ID: {twitter}_{date}，upsert 防重复
+        """
+        collection = self._get_collection(self.RESEARCH_REPORTS)
+        report_id = f"{twitter.lstrip('@')}_{date}"
+        meta = {
+            "project_name": name,
+            "twitter": twitter,
+            "date": date,
+            "ingested_at": datetime.now().isoformat(),
+            **(metadata or {}),
+        }
+        collection.upsert(
+            ids=[report_id],
+            documents=[content],
+            metadatas=[meta],
+        )
+        logger.info(f"[Chroma] research_reports: +1 ({report_id})")
+
+    def get_recent_reports(self, hours: int = 48) -> list[str]:
+        """
+        返回近 N 小时内已分析的 twitter handle 列表（用于 48h 去重）
+        """
+        collection = self._get_collection(self.RESEARCH_REPORTS)
+        if collection.count() == 0:
+            return []
+
+        cutoff = (datetime.now() - timedelta(hours=hours)).strftime("%Y%m%d")
+        try:
+            # 获取所有 metadata，筛选 date >= cutoff
+            all_data = collection.get(include=["metadatas"])
+            recent = set()
+            for meta in (all_data.get("metadatas") or []):
+                if meta.get("date", "") >= cutoff:
+                    tw = meta.get("twitter", "")
+                    if tw:
+                        recent.add(tw.lower().lstrip("@"))
+            logger.info(f"[Chroma] 近{hours}h已分析: {len(recent)} 个项目")
+            return list(recent)
+        except Exception as e:
+            logger.warning(f"[Chroma] get_recent_reports 失败: {e}")
+            return []
+
+    def get_project_history(self, twitter: str, limit: int = 10) -> list[dict]:
+        """
+        返回指定项目的历史报告列表
+        """
+        collection = self._get_collection(self.RESEARCH_REPORTS)
+        if collection.count() == 0:
+            return []
+
+        handle = twitter.lower().lstrip("@")
+        try:
+            all_data = collection.get(
+                where={"twitter": {"$eq": twitter}},
+                include=["metadatas", "documents"],
+            )
+            # fallback: 如果 where 条件不匹配，用 ID 前缀匹配
+            if not all_data.get("ids"):
+                all_data = collection.get(include=["metadatas", "documents"])
+                results = []
+                for i, rid in enumerate(all_data.get("ids") or []):
+                    if rid.lower().startswith(handle):
+                        results.append({
+                            "id": rid,
+                            "metadata": (all_data["metadatas"] or [])[i] if all_data.get("metadatas") else {},
+                            "content_preview": ((all_data["documents"] or [])[i] or "")[:300],
+                        })
+                return results[:limit]
+
+            results = []
+            for i, rid in enumerate(all_data.get("ids") or []):
+                results.append({
+                    "id": rid,
+                    "metadata": (all_data["metadatas"] or [])[i] if all_data.get("metadatas") else {},
+                    "content_preview": ((all_data["documents"] or [])[i] or "")[:300],
+                })
+            return results[:limit]
+        except Exception as e:
+            logger.warning(f"[Chroma] get_project_history 失败: {e}")
+            return []
+
     # ==================== 工具方法 ====================
 
     def get_stats(self) -> dict:
         """获取各 Collection 的统计信息"""
         stats = {}
-        for name in [self.STYLE_SAMPLES, self.PUBLISHED_POSTS, self.CONTENT_HISTORY]:
+        for name in [self.STYLE_SAMPLES, self.PUBLISHED_POSTS, self.CONTENT_HISTORY, self.RESEARCH_REPORTS]:
             try:
                 collection = self._get_collection(name)
                 stats[name] = collection.count()

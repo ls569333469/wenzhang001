@@ -5,10 +5,13 @@ P31: 投研报告 API
 import json
 import os
 import asyncio
+import logging
 from pathlib import Path
 from typing import Optional
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pydantic import BaseModel
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/research", tags=["research"])
 
@@ -253,6 +256,90 @@ async def generate_daily_report(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ===== P35: 重新组装日报 =====
+
+@router.get("/available-projects")
+async def get_available_projects(date: str = None):
+    """
+    GET /api/research/available-projects?date=20260309
+    返回指定日期已分析的项目列表（供重新组装选择用）
+    """
+    from ..services.daily_report_service import get_available_projects as _get_projects
+
+    projects = _get_projects(date)
+    return {"projects": projects, "count": len(projects)}
+
+
+class ReassembleRequest(BaseModel):
+    selected_twitters: list[str] = []   # 选中的 twitter handles
+    selected_names: list[str] = []      # P35: 选中的项目名（twitter 为空时的 fallback）
+    date: Optional[str] = None          # 日期, 默认今天
+    provider: str = "volcengine"
+    model_id: Optional[str] = None
+
+
+@router.post("/reassemble")
+async def reassemble_daily_report(request: ReassembleRequest):
+    """
+    POST /api/research/reassemble
+    重新组装日报 — 跳过侦察+策略(省 Surf API)，从磁盘读已有报告后跑后半段管线
+    """
+    import time as _time
+    from ..services.daily_report_service import (
+        load_analysis_from_disk,
+        _run_post_analysis_pipeline,
+        cn_now,
+    )
+
+    start_time = _time.time()
+    date_str = request.date or cn_now().strftime("%Y%m%d")
+
+    # 从磁盘加载指定项目的报告（twitter + name 双途径匹配）
+    twitters = request.selected_twitters if request.selected_twitters else None
+    names = request.selected_names if request.selected_names else None
+    projects, analysis_results = load_analysis_from_disk(date_str, twitters=twitters, names=names)
+
+    if not projects:
+        raise HTTPException(
+            status_code=404,
+            detail=f"未找到 {date_str} 的报告，或选中的项目无匹配文件"
+        )
+
+    api_config = {
+        "provider": request.provider,
+        "model_id": request.model_id,
+    }
+
+    def _progress(step, detail):
+        logger.info(f"[reassemble][{step}] {detail}")
+
+    try:
+        result = await _run_post_analysis_pipeline(
+            projects=projects,
+            analysis_results=analysis_results,
+            api_config=api_config,
+            date_str=date_str,
+            _progress=_progress,
+            skip_sheets_writeback=True,  # 重新组装不覆盖 Sheets
+        )
+
+        elapsed = _time.time() - start_time
+        return {
+            "status": "success",
+            "date": date_str,
+            "projects_count": len(projects),
+            "projects": [{"name": p["name"], "twitter": p["twitter"]} for p in projects],
+            "report_path": result["report_path"],
+            "card_path": result["card_path"],
+            "tweets_path": result["tweets_path"],
+            "report_content": result["report_content"],
+            "tweets": result["tweets"],
+            "elapsed": elapsed,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @router.get("/scout")
 async def run_scout_search():
     """
@@ -349,3 +436,24 @@ async def get_project_report(filename: str):
         "content": content,
         "size": file_path.stat().st_size,
     }
+
+
+# P35 F2: 项目历史查询
+@router.get("/project-history")
+async def get_project_history(twitter: str = ""):
+    """
+    GET /api/research/project-history?twitter=xxx
+    从 ChromaDB 查询指定项目的历史报告列表。
+    """
+    if not twitter:
+        raise HTTPException(status_code=400, detail="请提供 twitter 参数")
+
+    from app.services.chroma_service import get_chroma_service
+    chroma = get_chroma_service()
+    history = chroma.get_project_history(twitter)
+    return {
+        "twitter": twitter,
+        "count": len(history),
+        "reports": history,
+    }
+

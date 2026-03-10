@@ -1,7 +1,7 @@
 # 🌊 每日投研快报
 
 > **生成时间**: 2026-02-25 15:38  
-> **数据来源**: leak.me KOL Tracker + Surf AI 深度分析  
+> **数据来源**: Tracker + Surf AI 深度分析  
 > **分析模型**: surf-1.5 (reasoning: high)
 
 ---

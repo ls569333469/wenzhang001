@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { cn } from "@/lib/utils";
-import { Search, Telescope, Loader2, FileBarChart } from 'lucide-react';
+import { Search, Telescope, Loader2, FileBarChart, Layers } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
 import { useResearchStore } from '@/features/research/useResearchStore';
 
@@ -37,6 +37,7 @@ export function ResearchPanel() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isScoutLoading, setIsScoutLoading] = useState(false);
     const [isGenerating, setIsGenerating] = useState(false);
+    const [isReassembling, setIsReassembling] = useState(false);
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
     // 加载 Google Sheets 项目（已有）
@@ -65,6 +66,20 @@ export function ResearchPanel() {
         return () => clearTimeout(timer);
     }, [searchQuery, fetchProjects]);
 
+    // P35: 从 localStorage 恢复侦察官缓存
+    useEffect(() => {
+        try {
+            const cached = localStorage.getItem('scout_projects');
+            if (cached) {
+                const parsed = JSON.parse(cached);
+                if (parsed.length > 0) {
+                    setScoutProjects(parsed);
+                    setSelectedIds(new Set(parsed.map((p: ResearchProject) => p.id)));
+                }
+            }
+        } catch { /* 静默 */ }
+    }, []);
+
     // P31: 侦察官搜索
     const handleScoutSearch = async () => {
         setIsScoutLoading(true);
@@ -83,6 +98,8 @@ export function ResearchPanel() {
                 source: 'scout' as const,
             }));
             setScoutProjects(scouts);
+            // P35: 缓存到 localStorage
+            try { localStorage.setItem('scout_projects', JSON.stringify(scouts)); } catch { /* */ }
             // 默认全选侦察官项目
             setSelectedIds(new Set(scouts.map((p: ResearchProject) => p.id)));
         } catch (e) {
@@ -145,6 +162,37 @@ export function ResearchPanel() {
             setGenerating(false, '生成失败，请重试');
         } finally {
             setIsGenerating(false);
+        }
+    };
+
+    // P35: 重新组装日报（跳过侦察+策略）
+    const handleReassemble = async () => {
+        const allProjects = [...scoutProjects, ...projects];
+        const selectedList = allProjects.filter(p => selectedIds.has(p.id));
+        const twitters = selectedList.map(p => p.twitter).filter(Boolean);
+        const names = selectedList.map(p => p.name).filter(Boolean);
+        if (names.length === 0) return;
+
+        setIsReassembling(true);
+        const { setGenerating, triggerRefresh } = useResearchStore.getState();
+        setGenerating(true, '重新组装中...');
+        try {
+            const res = await fetch(`${API_BASE_URL}/api/research/reassemble`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ selected_twitters: twitters, selected_names: names }),
+            });
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.detail || '重新组装失败');
+            }
+            setGenerating(false, '重新组装完成！');
+            triggerRefresh();
+        } catch (e) {
+            console.error('[ResearchPanel] reassemble failed:', e);
+            setGenerating(false, '重新组装失败');
+        } finally {
+            setIsReassembling(false);
         }
     };
 
@@ -353,30 +401,43 @@ export function ResearchPanel() {
 
             {/* P31: 底部操作栏 */}
             {(selectedCount > 0 || scoutProjects.length > 0) && (
-                <div className="px-4 py-3 border-t border-zinc-100 flex items-center gap-3">
-                    <span className="text-[11px] text-ink-muted whitespace-nowrap">
-                        已选 {selectedCount} 个
-                    </span>
+                <div className="px-4 py-3 border-t border-zinc-100 space-y-2">
+                    <div className="flex items-center gap-2">
+                        <span className="text-[11px] text-ink-muted whitespace-nowrap">
+                            已选 {selectedCount} 个
+                        </span>
+                        <button
+                            onClick={handleGenerateDaily}
+                            disabled={selectedCount === 0 || isGenerating || isReassembling}
+                            className={cn(
+                                "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all",
+                                selectedCount > 0 && !isGenerating && !isReassembling
+                                    ? "bg-violet-600 text-white hover:bg-violet-700"
+                                    : "bg-zinc-100 text-zinc-400 cursor-not-allowed"
+                            )}
+                        >
+                            {isGenerating ? (
+                                <><Loader2 className="w-4 h-4 animate-spin" />生成中...</>
+                            ) : (
+                                <><FileBarChart className="w-4 h-4" />📊 生成日报</>
+                            )}
+                        </button>
+                    </div>
+                    {/* P35: 重新组装按钮 */}
                     <button
-                        onClick={handleGenerateDaily}
-                        disabled={selectedCount === 0 || isGenerating}
+                        onClick={handleReassemble}
+                        disabled={selectedCount === 0 || isReassembling || isGenerating}
                         className={cn(
-                            "flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm font-semibold transition-all",
-                            selectedCount > 0 && !isGenerating
-                                ? "bg-violet-600 text-white hover:bg-violet-700"
-                                : "bg-zinc-100 text-zinc-400 cursor-not-allowed"
+                            "w-full flex items-center justify-center gap-2 py-2 rounded-xl text-xs font-medium transition-all",
+                            selectedCount > 0 && !isReassembling && !isGenerating
+                                ? "border border-blue-200 text-blue-600 hover:bg-blue-50"
+                                : "border border-zinc-100 text-zinc-400 cursor-not-allowed"
                         )}
                     >
-                        {isGenerating ? (
-                            <>
-                                <Loader2 className="w-4 h-4 animate-spin" />
-                                生成中...
-                            </>
+                        {isReassembling ? (
+                            <><Loader2 className="w-3.5 h-3.5 animate-spin" />组装中...</>
                         ) : (
-                            <>
-                                <FileBarChart className="w-4 h-4" />
-                                📊 生成日报
-                            </>
+                            <><Layers className="w-3.5 h-3.5" />🔄 重新组装（跳过侦察+策略）</>
                         )}
                     </button>
                 </div>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+}
+.canvas {
+    width: 1200px; height: 675px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+}
+.header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
+}
+.title-group { display: flex; flex-direction: column; }
+.subtitle { font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }
+.main-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; }
+.main-title .accent { color: #FF3A2D; }
+.date { font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
+}
+.card {
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
+    display: flex; flex-direction: column;
+}
+.card-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
+}
+.twitter { color: #666; }
+.project-name {
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+.desc { font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    overflow: hidden; max-height: 2.8em;
+}
+.catalyst {
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: inline-block;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
+}
+.footer {
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+    <div class="header">
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
+        </div>
+        <div class="date">2026.03.09</div>
+    </div>
+    <div class="grid">
+            <div class="card">
+                <div class="card-top"><span>🔗 Web3</span><span class="twitter">@DecibelTrade</span></div>
+                <h2 class="project-name">Decibel</h2>
+                <div class="desc">Decibel是一个Aptos上的全链上交易引擎</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 03-06 新perp市场上线，支持BNB/ZEC/XRP/DOGE/SUI等多资产最高10x杠杆交易</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🔗 Web3</span><span class="twitter">@freysa_ai</span></div>
+                <h2 class="project-name">Freysa AI</h2>
+                <div class="desc">Freysa AI 是主权、自治 AI 代理和框架</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 03-07 推出主权代理栈产品，包括 Silo 和 ml Pantheon</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🔗 Web3</span><span class="twitter">@KASTxyz</span></div>
+                <h2 class="project-name">KAST</h2>
+                <div class="desc">KAST是一个以稳定币驱动的全球金融平台</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 03-09 获得QED Investors和Left Lane Capital领投的8000万美元A轮融资</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🔗 Web3</span><span class="twitter">@N_A</span></div>
+                <h2 class="project-name">Utexo</h2>
+                <div class="desc">Utexo 是一个区块链基础设施公司，开发比特币网络上的原生稳定币结算解决方案</div>
+                <div class="catalyst">🔥 03-06 Tether领投750万美元种子轮融资完成</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🔗 Web3</span><span class="twitter">@Pan_Ecosystem</span></div>
+                <h2 class="project-name">PAN Ecosystem</h2>
+                <div class="desc">PAN Ecosystem（Pan Network）是构建于BNB</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 03-09 PANdora v2上线，支持OpenClaw技能集成</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>💰 1 锚定底层资产实现</span><span class="twitter">@xStocksFi</span></div>
+                <h2 class="project-name">xStocksFi</h2>
+                <div class="desc">xStocksFi 是 Backed Finance 发行的代币化美国股票和</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 03-09 与 Nasdaq 合作推出权益转型网关连接代币化市场和区块链</div>
+            </div>
+    </div>
+    <div class="footer">
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
+    </div>
+</div>
+</body>
+</html>

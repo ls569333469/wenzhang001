@@ -132,6 +132,85 @@ def run_scout() -> dict:
 
 
 # ============================================================
+#  Step 1.7: 6551 X 账号验证（P35 B3）
+# ============================================================
+
+def _verify_twitter_handle(handle: str) -> dict:
+    """
+    用 6551 API 验证单个 twitter handle。
+    返回 {"valid": bool, "verified_handle": str, "display_name": str}
+    """
+    import httpx
+    from dotenv import dotenv_values
+
+    clean = handle.lstrip("@").strip()
+    if not clean:
+        return {"valid": False, "verified_handle": handle, "display_name": ""}
+
+    # 从 .env 获取 token
+    token = os.environ.get("TWITTER_TOKEN", "")
+    if not token:
+        env_path = Path(__file__).parent.parent.parent / ".env"
+        if env_path.exists():
+            vals = dotenv_values(env_path)
+            token = vals.get("TWITTER_TOKEN", "")
+
+    if not token:
+        logger.warning("[6551] TWITTER_TOKEN 未配置，跳过验证")
+        return {"valid": True, "verified_handle": handle, "display_name": ""}
+
+    try:
+        resp = httpx.post(
+            "https://ai.6551.io/open/twitter_user_info",
+            json={"username": clean},
+            headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+            timeout=10.0,
+        )
+        data = resp.json()
+
+        if resp.status_code == 200 and data.get("data"):
+            user_data = data["data"]
+            verified = user_data.get("screen_name", clean)
+            display = user_data.get("name", "")
+            logger.info(f"[6551] ✅ @{clean} → @{verified} ({display})")
+            return {
+                "valid": True,
+                "verified_handle": f"@{verified}",
+                "display_name": display,
+            }
+        else:
+            logger.warning(f"[6551] ❌ @{clean} 无效或未找到")
+            return {"valid": False, "verified_handle": handle, "display_name": ""}
+    except Exception as e:
+        logger.warning(f"[6551] 验证失败 @{clean}: {e}")
+        return {"valid": True, "verified_handle": handle, "display_name": ""}
+
+
+def verify_project_handles(projects: list[dict]) -> list[dict]:
+    """
+    批量验证项目 twitter handle，修正错误 handle。
+    """
+    verified = 0
+    corrected = 0
+    for p in projects:
+        tw = p.get("twitter", "")
+        if not tw:
+            continue
+        result = _verify_twitter_handle(tw)
+        if result["valid"]:
+            if result["verified_handle"] != tw:
+                logger.info(f"[6551] 修正: {tw} → {result['verified_handle']}")
+                p["twitter"] = result["verified_handle"]
+                corrected += 1
+            verified += 1
+        else:
+            logger.warning(f"[6551] ⚠️ {p.get('name', '?')} 的 handle {tw} 无效，保留原值")
+
+    logger.info(f"[6551] 验证完成: {verified}/{len(projects)} 有效, {corrected} 个修正")
+    return projects
+
+
+# ============================================================
 #  Step 2: 策略官 — 逐个深度分析（并发控制）
 # ============================================================
 
@@ -411,15 +490,16 @@ def _enrich_projects_from_analysis(
                 if card_cat:
                     # YYYY-MM-DD → MM-DD 短格式
                     card_cat = re.sub(r"202[4-9]-(\d{2})-(\d{2})", r"\1-\2", card_cat)
-                    # P34: LLM + 质检官已保证催化文本质量，不再做截断
-                    # P34: 二次校验 — 催化事件必须匹配评分系统关键词（TGE/空投/白名单等）
+                    # P35修复: LLM 已选定的卡片催化剂直接采用
+                    # （P34 的 importance>0 硬拦截导致重新组装时催化全部丢失，
+                    #   因为原流程依赖侦察官预填充的 catalyst 绕过了此检查）
                     from .card_generator import _catalyst_importance
                     importance = _catalyst_importance(card_cat)
+                    p["catalyst"] = card_cat.strip()
                     if importance > 0:
-                        p["catalyst"] = card_cat.strip()
                         logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}' (score={importance})")
                     else:
-                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst跳过(score={importance}): '{card_cat}'")
+                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}' (score={importance}, LLM直选采用)")
             # 优先级2: 侦察官已有的催化（如存在且LLM没选出）
             # p["catalyst"] 可能已经由侦察官填充
 
@@ -456,6 +536,9 @@ def _enrich_projects_from_analysis(
                     if best:
                         logger.warning(f"⚠️ 催化兜底: {p.get('name')} 使用硬匹配（LLM未输出卡片催化剂）")
                         p["catalyst"] = best
+        # P35: 清理无效催化（配图不显示"无"）
+        if p.get("catalyst") in ("无", "无。", "无.", ""):
+            p.pop("catalyst", None)
 
         enriched.append(p)
 
@@ -522,11 +605,11 @@ def run_reviewer(projects: list[dict], api_config: dict = None) -> list[dict]:
                 if p.get("name", "") == name:
                     new_cat = parts[1].strip()
                     new_summ = parts[2].strip()
-                    if new_cat and new_cat != "无":
+                    # P35: 质检官只能改进催化文本，不能清空已有催化
+                    if new_cat and new_cat not in ("无", "无。", ""):
                         p["catalyst"] = new_cat
-                    elif new_cat == "无":
-                        p["catalyst"] = ""
-                    if new_summ and new_summ != "无":
+                    # new_cat == "无" 时保留 enrichment 原值
+                    if new_summ and new_summ not in ("无", "无。", ""):
                         p["summary"] = new_summ
                     break
 
@@ -633,6 +716,30 @@ def run_tweet_writer(
         import re
         tweets = []
 
+        # P35: 构建 name → twitter 映射（精确 + 模糊）
+        handle_map = {}  # exact lower name → twitter
+        for p in projects:
+            pname = p.get("name", "").strip()
+            tw = p.get("twitter", "")
+            if pname:
+                handle_map[pname.lower()] = tw
+
+        def _find_twitter(tweet_name: str, tweet_text: str) -> str:
+            """3 级匹配: 精确 → 包含 → 从文本提取 @handle"""
+            key = tweet_name.lower()
+            # 1) 精确匹配
+            if key in handle_map:
+                return handle_map[key]
+            # 2) 包含匹配（项目名是对方子串，或对方是项目名子串）
+            for pname, tw in handle_map.items():
+                if pname in key or key in pname:
+                    return tw
+            # 3) 从推文文本第一行提取 @handle
+            at_match = re.search(r"@(\w+)", tweet_text[:200])
+            if at_match:
+                return f"@{at_match.group(1)}"
+            return ""
+
         # 按行首「项目名称：」或「🔍」分割（避免内容中的"项目"误触发）
         blocks = re.split(r"(?=^项目名称：|^🔍)", result.strip(), flags=re.MULTILINE)
         for block in blocks:
@@ -646,8 +753,11 @@ def run_tweet_writer(
             name = name_match.group(1).strip()
             # P34: 清理 LLM 输出的孤零零 # 和尾部空白
             clean_text = re.sub(r'\n\s*#\s*$', '', block.strip()).strip()
+            # P35: 3 级匹配查找 twitter handle
+            twitter = _find_twitter(name, clean_text)
             tweets.append({
                 "name": name,
+                "twitter": twitter,
                 "text": clean_text,
                 "char_count": len(clean_text),
             })
@@ -717,7 +827,8 @@ def run_tweet_writer(
         return tweets
 
     except Exception as e:
-        logger.error(f"🐦 推文失败: {e}")
+        import traceback
+        logger.error(f"🐦 推文失败: {e}\n{traceback.format_exc()}")
         return []
 
 
@@ -781,6 +892,248 @@ def _save_daily_report(report: str, date_str: str) -> str:
     path.write_text(report, encoding="utf-8")
     logger.info(f"📁 保存: {path}")
     return str(path)
+
+
+# ============================================================
+#  P35: 从磁盘加载已有策略官报告
+# ============================================================
+
+def load_analysis_from_disk(date_str: str, twitters: list[str] = None, names: list[str] = None) -> tuple[list[dict], list[dict]]:
+    """
+    从 reports/research/projects/ 目录加载已有的策略官报告。
+    用于重新组装日报时跳过侦察+策略(省 Surf API)。
+
+    Args:
+        date_str: 日期字符串, 如 "20260309"
+        twitters: 可选, 只加载指定 twitter handle 的报告
+        names: 可选, 只加载指定项目名的报告（twitter 为空时的 fallback）
+
+    Returns:
+        (projects, analysis_results) — 与 generate_daily_report 兼容的格式
+    """
+    projects_dir = REPORTS_DIR / "projects"
+    if not projects_dir.exists():
+        return [], []
+
+    projects = []
+    analysis_results = []
+
+    # 列出当天所有报告文件
+    pattern = f"*_{date_str}.md"
+    files = list(projects_dir.glob(pattern))
+
+    if not files:
+        logger.warning(f"[load_disk] 未找到 {date_str} 的报告文件")
+        return [], []
+
+    for fpath in files:
+        content = fpath.read_text(encoding="utf-8")
+
+        # 从文件名提取 twitter handle: {handle}_{date}.md
+        fname = fpath.stem  # e.g. "reya_xyz_20260309"
+        handle = fname.replace(f"_{date_str}", "")
+
+        # 从报告内容提取项目名 (第一行 "# 🔬 Name — 投研报告")
+        name = handle  # fallback
+        first_line = content.split("\n")[0] if content else ""
+        if "—" in first_line:
+            name = first_line.split("🔬")[-1].split("—")[0].strip()
+        elif "-" in first_line:
+            name = first_line.split("🔬")[-1].split("-")[0].strip()
+
+        twitter = f"@{handle}"
+
+        # 按 twitter 或 name 过滤
+        if twitters or names:
+            matched = False
+            if twitters:
+                normalized_tw = {t.lstrip("@").lower().replace(" ", "_") for t in twitters}
+                if handle.lower() in normalized_tw:
+                    matched = True
+            if not matched and names:
+                normalized_names = {n.lower().strip() for n in names}
+                if name.lower().strip() in normalized_names:
+                    matched = True
+            if not matched:
+                continue
+
+        # 提取正文（跳过标题和元信息行）
+        lines = content.split("\n")
+        body_lines = []
+        for line in lines:
+            if line.startswith("# 🔬") or line.startswith("> 生成时间"):
+                continue
+            body_lines.append(line)
+        body = "\n".join(body_lines).strip()
+
+        # 从报告提取赛道
+        category = ""
+        for line in lines:
+            if "赛道" in line or "Track" in line:
+                category = line.split(":")[-1].strip() if ":" in line else ""
+                break
+
+        projects.append({
+            "name": name,
+            "twitter": twitter,
+            "category": category,
+        })
+
+        analysis_results.append({
+            "name": name,
+            "twitter": twitter,
+            "content": body,
+        })
+
+    logger.info(f"[load_disk] 从磁盘加载 {len(projects)} 个项目报告 ({date_str})")
+    return projects, analysis_results
+
+
+def get_available_projects(date_str: str = None) -> list[dict]:
+    """
+    获取指定日期已分析的项目列表（供前端重新组装选择用）
+
+    Returns:
+        [{"name": str, "twitter": str, "file": str, "date": str}]
+    """
+    if not date_str:
+        date_str = cn_now().strftime("%Y%m%d")
+
+    projects_dir = REPORTS_DIR / "projects"
+    if not projects_dir.exists():
+        return []
+
+    pattern = f"*_{date_str}.md"
+    files = list(projects_dir.glob(pattern))
+
+    result = []
+    for fpath in files:
+        fname = fpath.stem
+        handle = fname.replace(f"_{date_str}", "")
+        # 读第一行取项目名
+        first_line = fpath.read_text(encoding="utf-8").split("\n")[0]
+        name = handle
+        if "🔬" in first_line and "—" in first_line:
+            name = first_line.split("🔬")[-1].split("—")[0].strip()
+
+        result.append({
+            "name": name,
+            "twitter": f"@{handle}",
+            "file": str(fpath),
+            "date": date_str,
+        })
+
+    return result
+
+
+# ============================================================
+#  P35: 后半段管线（enrichment → 日报）
+# ============================================================
+
+async def _run_post_analysis_pipeline(
+    projects: list[dict],
+    analysis_results: list[dict],
+    api_config: dict,
+    date_str: str,
+    _progress,
+    skip_sheets_writeback: bool = False,
+) -> dict:
+    """
+    后半段管线: enrichment → 质检 → 总结 → 推文 → 配图 → 日报渲染 → Sheets回写
+
+    Args:
+        projects: 项目基础信息列表
+        analysis_results: 策略官分析结果列表
+        api_config: AI 配置
+        date_str: 日期字符串
+        _progress: 进度回调
+        skip_sheets_writeback: 重新组装时跳过 Sheets 回写
+
+    Returns:
+        {"report_path", "card_path", "tweets_path", "report_content", "tweets"}
+    """
+    # ===== enrichment — 从策略官报告回填 summary + catalyst =====
+    _progress("enrich", "提取项目定位与催化剂...")
+    enriched_projects = _enrich_projects_from_analysis(projects, analysis_results)
+
+    # ===== 质检官 — 检查配图数据 =====
+    _progress("reviewer", "质检配图数据...")
+    enriched_projects = run_reviewer(enriched_projects, api_config)
+
+    # ===== 总结官（总结归纳） =====
+    _progress("summarizer", "总结归纳分析报告...")
+    summary = run_summarizer(analysis_results, api_config)
+
+    # ===== 推文文案 =====
+    _progress("tweets", "生成推文文案...")
+    card_projects = enriched_projects[:6]
+    tweets = run_tweet_writer(summary, card_projects, api_config)
+    tweets_path = ""
+    if tweets:
+        tweets_path = _save_tweets(tweets, date_str)
+
+    # ===== 配图生成 =====
+    _progress("card", "生成配图...")
+    card_path = run_card_generator(enriched_projects, date_str)
+
+    # ===== 日报渲染（代码模板，不用 LLM） =====
+    _progress("report", "渲染日报...")
+    report_projects = []
+    for p_item in projects:
+        rp = dict(p_item)
+        for r in analysis_results:
+            if r.get("twitter") == p_item.get("twitter") and r.get("content"):
+                clean_analysis = re.sub(
+                    r"###\s*Reasoning Process.*?(?=\n##|\Z)",
+                    "", r["content"], flags=re.DOTALL
+                ).strip()
+                rp["analysis"] = clean_analysis
+                break
+        else:
+            rp["analysis"] = ""
+        report_projects.append(rp)
+
+    try:
+        from jinja2 import Template
+        template_path = PROMPTS_DIR / "copywriter" / "report.jinja2"
+        template_text = template_path.read_text(encoding="utf-8")
+        template_lines = [l for l in template_text.split("\n") if not l.strip().startswith("{#")]
+        template_clean = "\n".join(template_lines)
+        tmpl = Template(template_clean)
+        final_report = tmpl.render(
+            date=date_str,
+            display_time=cn_now().strftime("%Y-%m-%d %H:%M"),
+            projects=report_projects,
+        )
+    except Exception as e:
+        logger.warning(f"report.jinja2 渲染失败，使用 fallback: {e}")
+        final_report = (
+            f"# 每日投研快报\n\n"
+            f"> 日期: {date_str}\n\n"
+            f"{summary}"
+        )
+
+    # 保存日报
+    report_path = _save_daily_report(final_report, date_str)
+
+    # ===== Sheets 回写 =====
+    if not skip_sheets_writeback:
+        try:
+            from app.services.research_sheet import research_sheet_service
+            _progress("writeback", "回写分析记录到 Sheets...")
+            research_sheet_service.write_analysis_records(enriched_projects, date_str)
+            _progress("writeback", f"回写 {len(enriched_projects)} 条记录完成")
+        except Exception as e:
+            logger.warning(f"Sheets 回写跳过: {e}")
+
+    return {
+        "report_path": report_path,
+        "card_path": card_path,
+        "tweets_path": tweets_path,
+        "report_content": final_report,
+        "tweets": tweets,
+        "enriched_projects": enriched_projects,
+    }
 
 
 # ============================================================
@@ -862,6 +1215,25 @@ async def generate_daily_report(
         except Exception as e:
             logger.warning(f"去重过滤跳过（Sheets 不可用）: {e}")
 
+        # ===== Step 1.55: 48h ChromaDB 去重（P35 F2） =====
+        if not selected_projects:  # 仅自动模式，用户手动选择不过滤
+            try:
+                from app.services.chroma_service import get_chroma_service
+                chroma = get_chroma_service()
+                recent_handles = chroma.get_recent_reports(hours=48)
+                if recent_handles:
+                    before = len(projects)
+                    projects = [
+                        p for p in projects
+                        if p.get("twitter", "").lower().lstrip("@") not in recent_handles
+                    ]
+                    skipped_48h = before - len(projects)
+                    if skipped_48h > 0:
+                        _progress("dedup", f"⚠️ 48h去重: 跳过 {skipped_48h} 个已分析项目")
+                        logger.info(f"[48h dedup] {skipped_48h} 个项目已在近48h分析，跳过")
+            except Exception as e:
+                logger.warning(f"48h ChromaDB 去重跳过: {e}")
+
         # ===== Step 1.6: 用户手动筛选 =====
         if selected_projects:
             selected_set = {n.lower() for n in selected_projects}
@@ -901,6 +1273,14 @@ async def generate_daily_report(
                 "error": "筛选后无剩余项目",
             }
 
+        # ===== Step 1.8: 6551 X 账号验证（P35 B3） =====
+        try:
+            _progress("verify", f"验证 {len(projects)} 个 X 账号...")
+            projects = verify_project_handles(projects)
+            _progress("verify", "X 账号验证完成")
+        except Exception as e:
+            logger.warning(f"6551 验证跳过: {e}")
+
         # ===== Step 2: 策略官（并发 N） =====
         _progress("strategist", f"开始分析 {len(projects)} 个项目（并发 {concurrency}）...")
         analysis_results = await run_strategist_batch(projects, concurrency)
@@ -911,6 +1291,17 @@ async def generate_daily_report(
             if r.get("content"):
                 path = _save_project_report(r["name"], r["content"], date_str, r.get("twitter", ""))
                 project_paths.append(path)
+                # P35 F2: 同时入库 ChromaDB
+                try:
+                    from app.services.chroma_service import get_chroma_service
+                    get_chroma_service().add_research_report(
+                        twitter=r.get("twitter", r["name"]),
+                        date=date_str,
+                        name=r["name"],
+                        content=r["content"],
+                    )
+                except Exception as e:
+                    logger.warning(f"[Chroma] 入库失败 {r['name']}: {e}")
 
         ok_count = sum(1 for r in analysis_results if not r.get("error"))
         _progress("strategist", f"{ok_count}/{len(projects)} 个项目分析完成")
@@ -926,83 +1317,14 @@ async def generate_daily_report(
                 "error": "所有项目分析均失败",
             }
 
-        # ===== Step 3: enrichment — 从策略官报告回填 summary + catalyst =====
-        _progress("enrich", "提取项目定位与催化剂...")
-        enriched_projects = _enrich_projects_from_analysis(projects, analysis_results)
-
-        # ===== Step 3.5: 质检官 — 检查配图数据 =====
-        _progress("reviewer", "质检配图数据...")
-        enriched_projects = run_reviewer(enriched_projects, api_config)
-
-        # ===== Step 4: 总结官（总结归纳） =====
-        _progress("summarizer", "总结归纳分析报告...")
-        summary = run_summarizer(analysis_results, api_config)
-
-        # ===== Step 5: 推文文案 =====
-        _progress("tweets", "生成推文文案...")
-        # P33: 主推文只包含配图中显示的项目（max_projects=6）
-        card_projects = enriched_projects[:6]
-        tweets = run_tweet_writer(summary, card_projects, api_config)
-        tweets_path = ""
-        if tweets:
-            tweets_path = _save_tweets(tweets, date_str)
-
-        # ===== Step 6: 配图生成 =====
-        _progress("card", "生成配图...")
-        card_path = run_card_generator(enriched_projects, date_str)
-
-        # ===== Step 7: 日报渲染（代码模板，不用 LLM） =====
-        _progress("report", "渲染日报...")
-        # 用 report.jinja2 代码模板直接渲染
-        report_projects = []
-        for p_item in projects:
-            rp = dict(p_item)
-            # 找到对应的策略官报告
-            for r in analysis_results:
-                if r.get("twitter") == p_item.get("twitter") and r.get("content"):
-                    # P34: 过滤 LLM 推理过程（Reasoning Process）泄露
-                    clean_analysis = re.sub(
-                        r"###\s*Reasoning Process.*?(?=\n##|\Z)",
-                        "", r["content"], flags=re.DOTALL
-                    ).strip()
-                    rp["analysis"] = clean_analysis
-                    break
-            else:
-                rp["analysis"] = ""
-            report_projects.append(rp)
-
-        try:
-            from jinja2 import Template
-            template_path = PROMPTS_DIR / "copywriter" / "report.jinja2"
-            template_text = template_path.read_text(encoding="utf-8")
-            # 去掉 jinja2 注释行
-            template_lines = [l for l in template_text.split("\n") if not l.strip().startswith("{#")]
-            template_clean = "\n".join(template_lines)
-            tmpl = Template(template_clean)
-            final_report = tmpl.render(
-                date=date_str,
-                display_time=cn_now().strftime("%Y-%m-%d %H:%M"),
-                projects=report_projects,
-            )
-        except Exception as e:
-            logger.warning(f"report.jinja2 渲染失败，使用 fallback: {e}")
-            final_report = (
-                f"# 每日投研快报\n\n"
-                f"> 日期: {date_str}\n\n"
-                f"{summary}"
-            )
-
-        # 保存日报
-        report_path = _save_daily_report(final_report, date_str)
-
-        # ===== Step 7.5: 回写 Sheets（P32-B） =====
-        try:
-            from app.services.research_sheet import research_sheet_service
-            _progress("writeback", "回写分析记录到 Sheets...")
-            research_sheet_service.write_analysis_records(enriched_projects, date_str)
-            _progress("writeback", f"回写 {len(enriched_projects)} 条记录完成")
-        except Exception as e:
-            logger.warning(f"Sheets 回写跳过: {e}")
+        # ===== Step 3-7: 后半段管线（P35 抽取） =====
+        pipeline_result = await _run_post_analysis_pipeline(
+            projects=projects,
+            analysis_results=analysis_results,
+            api_config=api_config,
+            date_str=date_str,
+            _progress=_progress,
+        )
 
         elapsed = time.time() - start_time
         _progress("done", f"日报生成完成！{ok_count} 个项目, {elapsed:.0f}s")
@@ -1011,12 +1333,12 @@ async def generate_daily_report(
             "status": "success",
             "date": date_str,
             "projects_count": ok_count,
-            "report_path": report_path,
-            "card_path": card_path,
-            "tweets_path": tweets_path,
+            "report_path": pipeline_result["report_path"],
+            "card_path": pipeline_result["card_path"],
+            "tweets_path": pipeline_result["tweets_path"],
             "project_paths": project_paths,
-            "report_content": final_report,
-            "tweets": tweets,
+            "report_content": pipeline_result["report_content"],
+            "tweets": pipeline_result["tweets"],
             "elapsed": elapsed,
             "error": None,
         }

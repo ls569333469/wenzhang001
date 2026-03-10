@@ -51,6 +51,10 @@ def _parse_projects_from_text(text: str) -> list[dict]:
             if not cells or cells[0].startswith("---"):
                 continue
 
+            # P35: 跳过序号列（如 "1" "2"），LLM 有时输出带序号的表格
+            if cells[0].isdigit() and len(cells) > 3:
+                cells = cells[1:]
+
             name = cells[0].strip("** ").strip()
             twitter = cells[1].strip() if len(cells) > 1 else ""
 

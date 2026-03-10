@@ -15,6 +15,7 @@ interface ResearchData {
     card_html: string | null;
     tweets: { name: string; text: string; char_count: number }[];
     report_md: string | null;
+    card_image_url?: string;
 }
 
 export function ResearchView() {
@@ -48,7 +49,6 @@ export function ResearchView() {
         }
     }, []);
 
-    // 初始加载 + refreshKey 变化时 refetch
     useEffect(() => {
         fetchData();
     }, [fetchData, refreshKey]);
@@ -58,18 +58,10 @@ export function ResearchView() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-canvas">
                 <div className="text-center space-y-4">
-                    <Loader2 size={32} className="animate-spin mx-auto text-violet-500" />
-                    <div>
-                        <h2 className="text-lg font-serif font-bold text-ink-primary">
-                            正在生成投研快报
-                        </h2>
-                        <p className="text-sm text-ink-muted mt-1">
-                            {statusMessage || '侦察官 → 策略官 → 质检官 → 总结官 → 推文写手 → 配图'}
-                        </p>
-                        <p className="text-xs text-ink-muted mt-3 opacity-60">
-                            预计需要 10-15 分钟，请勿关闭页面
-                        </p>
-                    </div>
+                    <Loader2 size={32} className="animate-spin mx-auto text-ink-muted" />
+                    <p className="text-ink-muted text-sm">
+                        {statusMessage || '侦察官 → 策略官 → 质检官 → 总结官 → 推文写手 → 配图'}
+                    </p>
                 </div>
             </div>
         );
@@ -93,10 +85,7 @@ export function ResearchView() {
                     <AlertCircle size={48} className="mx-auto text-zinc-400" />
                     <h2 className="text-xl font-serif font-bold text-ink-primary">投研报告</h2>
                     <p className="text-ink-muted text-sm">{error || '暂无数据'}</p>
-                    <button
-                        onClick={fetchData}
-                        className="px-4 py-2 text-sm font-medium bg-zinc-900 text-white rounded-xl hover:bg-zinc-800 transition-colors"
-                    >
+                    <button onClick={fetchData} className="px-4 py-2 text-sm font-medium bg-zinc-900 text-white rounded-xl hover:bg-zinc-800 transition-colors">
                         重新加载
                     </button>
                 </div>
@@ -114,54 +103,29 @@ export function ResearchView() {
                 {/* 页面头部 */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-xl font-serif font-bold text-ink-primary">
-                            📊 投研快报
-                        </h1>
-                        <p className="text-sm text-ink-muted mt-1">
-                            {data.date} · {data.project_count} 个项目
-                        </p>
+                        <h1 className="text-xl font-serif font-bold text-ink-primary">📊 投研快报</h1>
+                        <p className="text-sm text-ink-muted mt-1">{data.date} · {data.project_count} 个项目</p>
                     </div>
-                    <button
-                        onClick={fetchData}
-                        className="flex items-center gap-2 px-3 py-1.5 text-sm text-ink-muted hover:text-ink-primary border border-zinc-200 rounded-lg hover:bg-zinc-50 transition-colors"
-                    >
+                    <button onClick={fetchData} className="flex items-center gap-2 px-3 py-1.5 text-sm text-ink-muted hover:text-ink-primary border border-zinc-200 rounded-lg hover:bg-zinc-50 transition-colors">
                         <RefreshCw size={14} />
                         刷新
                     </button>
                 </div>
 
                 {/* P32 区域 1: 发布检查清单 */}
-                <PublishStrip
-                    cardReady={!!data.card_html}
-                    mainTweetReady={!!mainTweet && mainTweet.text.length > 0}
-                    mainTweetCharCount={mainTweet?.char_count ?? 0}
-                    projectCount={data.project_count}
-                    totalCharCount={totalCharCount}
-                    date={data.date}
-                />
+                <PublishStrip cardReady={!!data.card_html} mainTweetReady={!!mainTweet && mainTweet.text.length > 0} mainTweetCharCount={mainTweet?.char_count ?? 0} projectCount={data.project_count} totalCharCount={totalCharCount} date={data.date} />
 
-                {/* P32 区域 2: 发布文案（先复制文案）*/}
-                {data.tweets.length > 0 && (
-                    <TweetCards tweets={data.tweets} />
-                )}
+                {/* P32 区域 2: 发布文案 */}
+                {data.tweets.length > 0 && <TweetCards tweets={data.tweets} />}
 
-                {/* P32 区域 3: 配图预览（全宽）*/}
-                {data.card_html && (
-                    <CardPreview html={data.card_html} date={data.date} cardImageUrl={data.card_image_url} />
-                )}
+                {/* P32 区域 3: 配图预览 */}
+                {data.card_html && <CardPreview html={data.card_html} date={data.date} cardImageUrl={data.card_image_url} />}
 
-                {/* P32 区域 4: X 发布预览（全宽）*/}
-                {mainTweet && (
-                    <XPreview
-                        tweetText={mainTweet.text}
-                        cardHtml={data.card_html}
-                    />
-                )}
+                {/* P32 区域 4: X 发布预览 */}
+                {mainTweet && <XPreview tweetText={mainTweet.text} cardHtml={data.card_html} />}
 
-                {/* P32 区域 4: 完整报告 */}
-                {data.report_md && (
-                    <ReportSection markdown={data.report_md} />
-                )}
+                {/* P32 区域 5: 完整报告 */}
+                {data.report_md && <ReportSection markdown={data.report_md} />}
             </div>
         </div>
     );
