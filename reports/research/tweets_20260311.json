@@ -1,0 +1,43 @@
+[
+  {
+    "name": "Alpha日报",
+    "text": "今日发现，值得细看\n\n1200万美元pre-seed无公开领投方\n一个获Foresight投资的AI永久抗审查媒体\n420万美元融资的BNB链AI支付基础设施\n9133万美元市值未披露融资团队信息\n一个上线复制交易的Aptos全链交易引擎\n3.25亿美元融资的模块化AI操作系统\n\n⬇️\n\n#AI #Alpha",
+    "char_count": 155
+  },
+  {
+    "name": "Tria",
+    "twitter": "@Tria",
+    "text": "项目名称：Tria @Tria\n定位：自托管neobank与链抽象协议，统一跨链支付交易收益\n团队与背书\n1/ $1200万 pre-seed轮融资 — 无公开领投方\n2/ 核心团队由CEO Vijit Katta（拥有科技公司领导经验）、联合创始人Parth Bhalla（具备区块链与金融领域经验）组成\n关键事件\nTRIA总供应量10亿枚，初始流通占比21.89%，投资者与核心贡献者TGE无解锁，后续线性解锁。2026-02-03完成TRIA TGE，同日上线KuCoin、Binance Alpha、Bybit、Coinbase；2026-02-05 OKX上线TRIA/USDT永续合约；2026-02-06 Binance上线TRIA/USDT永续合约；2026-02-09 Bitget、ASTER上线TRIA/USDT；2026年2月中旬Hyperliquid生态上线Perp交易集成；2026-03-07位列Hyperliquid生态7日收入第二。",
+    "char_count": 433
+  },
+  {
+    "name": "Permacast",
+    "twitter": "@Permacast",
+    "text": "项目名称：Permacast @Permacast\n定位：AI驱动Arweave永久媒体网络，存储抗审查媒体资产\n团队与背书\n1/ 种子轮融资 — Foresight Ventures，融资金额未公开\n2/ 核心联合创始人xylophone拥有Meson Network项目开发与集成经验\n关键事件\n代币PWT暂未发行，计划用于协议激励、治理、生态费用分成，暂无具体供应量、分配及解锁细节。2026-01-26上线Galxe Starboard，贡献可赚积分及未来$3万PWT奖励；2026-02-27上线On-Chain Boost功能，支持去中心化策展赚积分；2026-03-02启动Curator Program，设500USDT奖励池；2026-04-26 Galxe Starboard Season 1结束，Top200分享$3万等值PWT奖励；计划2026年举办TGE。",
+    "char_count": 392
+  },
+  {
+    "name": "PAN Ecosystem",
+    "twitter": "@Pan_Ecosystem",
+    "text": "项目名称：PAN Ecosystem @Pan_Ecosystem\n定位：BNB Chain上AI代理支付基础设施，支持无gas支付\n团队与背书\n1/ 合计$420万融资，其中种子轮$320万 — Whitewaters、Hadeslabs、HGE领投，同期完成KOL轮$100万融资\n2/ 暂无核心团队详细背景公开披露，战略顾问为前Aster成员BlockFocus\n关键事件\n2026-03-01宣布支持OpenClaw构建虚拟量化对冲基金支付；2026-03-04宣布OpenClaw可实现与链上代理无缝交互；2026-03-09 PANdora v2正式上线，支持OpenClaw技能集成。",
+    "char_count": 299
+  },
+  {
+    "name": "Kaito AI",
+    "twitter": "@KaitoAI",
+    "text": "项目名称：Kaito AI @KaitoAI\n定位：加密AI数据聚合平台，提供情绪分析与创作者匹配\n团队与背书\n1/ 暂无公开融资信息\n2/ 暂无完整核心团队背景披露\n关键事件\n代币KAITO已发行，当前代币价格约0.378美元，市值约$9133万。2026-03-06推出Kaito Studio Beta版本，支持品牌方与创作者完成合作匹配。",
+    "char_count": 173
+  },
+  {
+    "name": "Decibel",
+    "twitter": "",
+    "text": "项目名称：Decibel\n定位：Aptos生态全链上交易引擎，提供CEX级交易体验\n团队与背书\n1/ 暂无公开融资信息\n2/ 暂无完整核心团队背景披露\n关键事件\n2026-03-02启动Guild Wars第二阶段活动，设置25000 AMP积分奖励池；2026-03-05上线Copin复制交易功能，支持用户发现并复制顶级交易者策略；2026-03-06新增多个永续合约市场，最高支持10倍交易杠杆。",
+    "char_count": 201
+  },
+  {
+    "name": "0G Labs",
+    "twitter": "",
+    "text": "项目名称：0G Labs\n定位：模块化Layer1去中心化AI操作系统，承载链上AI工作负载\n团队与背书\n1/ 累计融资$3.25亿，2024年3月pre-seed轮$3500万 — Hack VC领投；2024年11月完成种子轮$4000万、OTC购股$2.5亿\n2/ 核心团队包含CEO Michael Heinrich、CTO Ming Wu等，具备科技行业相关背景\n关键事件\n代币0G已发行，总供应量约2.45亿枚。2026-02-22起代币开始每日线性解锁，计划2026-03-24实现100%全流通；2026-03-06 GLM-5模型正式上线0G Compute网络；2026-03-07宣布与Google Cloud合作Apollo加速器，提供$20万云资源支持AI项目。",
+    "char_count": 344
+  }
+]

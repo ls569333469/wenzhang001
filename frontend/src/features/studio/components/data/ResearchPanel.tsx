@@ -73,8 +73,24 @@ export function ResearchPanel() {
             if (cached) {
                 const parsed = JSON.parse(cached);
                 if (parsed.length > 0) {
-                    setScoutProjects(parsed);
-                    setSelectedIds(new Set(parsed.map((p: ResearchProject) => p.id)));
+                    // P36: 兼容旧缓存 — 补充 catalyst 字段（仅高价值事件）
+                    const CATALYST_KEYWORDS = [
+                        'TGE', '空投', '代币上线', '主网上线', '白名单', '测试网',
+                        'Galxe', 'Zealy', '产品发布', 'Season', '积分', 'Campaign', 'Points',
+                        'airdrop', 'testnet', 'presale', 'launchpad', 'launchpool',
+                        // P36 扩充
+                        '上币', '上所', '上架', '预售', '公售', '代币生成', '主网启动',
+                        '质押', 'staking', 'mint', '铸造', '公测', '内测', 'beta',
+                        'quest', 'Layer3', 'Intract', '任务活动', '黑客松',
+                        '代币解锁', '奖励计划', '排行榜',
+                    ];
+                    const migrated = parsed.map((p: any) => {
+                        const raw = p.catalyst || p.buzz || '';
+                        const isHighValue = CATALYST_KEYWORDS.some(kw => raw.toLowerCase().includes(kw.toLowerCase()));
+                        return { ...p, catalyst: isHighValue ? raw : '' };
+                    });
+                    setScoutProjects(migrated);
+                    setSelectedIds(new Set(migrated.map((p: ResearchProject) => p.id)));
                 }
             }
         } catch { /* 静默 */ }
@@ -93,6 +109,7 @@ export function ResearchPanel() {
                 twitter: p.twitter || '',
                 category: p.category || '',
                 kol_24h: p.kol_24h || 0,
+                catalyst: p.catalyst || '',
                 buzz: p.buzz || '',
                 summary: p.buzz || '',
                 source: 'scout' as const,
@@ -294,7 +311,14 @@ export function ResearchPanel() {
                                         </span>
                                     )}
                                 </div>
-                                {project.buzz && (
+                                {project.catalyst && (
+                                    <div className="flex items-center gap-1.5 mt-1.5 overflow-hidden">
+                                        <span className="text-[10px] px-1.5 py-0.5 bg-red-50 text-red-600 rounded font-medium truncate max-w-full block">
+                                            🔥 {project.catalyst}
+                                        </span>
+                                    </div>
+                                )}
+                                {project.buzz && !project.catalyst && (
                                     <p className="text-[11px] text-ink-secondary leading-relaxed mt-1.5 line-clamp-2">
                                         {project.buzz}
                                     </p>

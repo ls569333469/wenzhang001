@@ -7,6 +7,7 @@ interface Tweet {
     name: string;
     text: string;
     char_count: number;
+    twitter?: string;
 }
 
 interface TweetCardsProps {

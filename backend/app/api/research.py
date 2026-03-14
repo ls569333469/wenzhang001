@@ -62,34 +62,38 @@ async def get_latest_report(date: Optional[str] = None):
     card_html = _read_file(RESEARCH_DIR / f"card_{date}.html")
     card_png_exists = (RESEARCH_DIR / f"card_{date}.png").exists()
 
-    # 读取推文
-    tweets_md = _read_file(RESEARCH_DIR / f"tweets_{date}.md")
+    # P36: 优先从 JSON 读推文（保留 twitter 等所有字段）
+    tweets = []
+    json_path = RESEARCH_DIR / f"tweets_{date}.json"
+    if json_path.exists():
+        import json
+        try:
+            tweets = json.loads(json_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, Exception):
+            tweets = []
+
+    # 降级：JSON 不存在时从 md 解析（旧数据兼容）
+    if not tweets:
+        tweets_md = _read_file(RESEARCH_DIR / f"tweets_{date}.md")
+        if tweets_md:
+            import re
+            blocks = re.split(r"## (.+?)\n", tweets_md)
+            for i in range(1, len(blocks), 2):
+                name = blocks[i].strip()
+                content = blocks[i + 1] if i + 1 < len(blocks) else ""
+                clean = re.sub(r"```\s*", "", content)
+                clean = re.sub(r"（字数.*?）", "", clean)
+                clean = re.sub(r"^---\s*$", "", clean, flags=re.MULTILINE)
+                clean = re.sub(r"\n{3,}", "\n\n", clean).strip()
+                if clean:
+                    tweets.append({
+                        "name": name,
+                        "text": clean,
+                        "char_count": len(clean),
+                    })
 
     # 读取完整报告
     report_md = _read_file(RESEARCH_DIR / f"daily_research_{date}.md")
-
-    # 解析推文为结构化数据
-    tweets = []
-    if tweets_md:
-        import re
-        blocks = re.split(r"## (.+?)\n", tweets_md)
-        for i in range(1, len(blocks), 2):
-            name = blocks[i].strip()
-            content = blocks[i + 1] if i + 1 < len(blocks) else ""
-            # 移除所有 ``` 标记
-            clean = re.sub(r"```\s*", "", content)
-            # 移除元数据行（字数统计等）
-            clean = re.sub(r"（字数.*?）", "", clean)
-            # 移除纯分隔线
-            clean = re.sub(r"^---\s*$", "", clean, flags=re.MULTILINE)
-            # 清理多余空行
-            clean = re.sub(r"\n{3,}", "\n\n", clean).strip()
-            if clean:
-                tweets.append({
-                    "name": name,
-                    "text": clean,
-                    "char_count": len(clean),
-                })
 
     # 计算项目数量（优先用 JSON，否则从报告正文推断）
     project_count = projects.get("project_count", 0)

@@ -73,7 +73,7 @@ def _clip(text: str, max_len: int) -> str:
             chunk = chunk[:last_open].rstrip('，、 ,')
             return chunk
     # 在标点处断开
-    for sep in ['，', '。', '、', ',', ' ']:
+    for sep in ['，', '。', '、', ',']:
         idx = chunk.rfind(sep)
         if idx > max_len // 3:
             return chunk[:idx]
@@ -83,7 +83,7 @@ def _clip(text: str, max_len: int) -> str:
 def _catalyst_importance(text: str) -> int:
     """
     给催化事件打重要性分，高分优先展示在卡片上。
-    P34 统一词条：10/5/4 三档 + 噪声过滤。
+    P36 扩充版：10/5/4 三档 + 噪声过滤，覆盖近义词和英文变体。
     """
     t = text
     tl = text.lower()  # 仅用于英文关键词匹配
@@ -100,23 +100,45 @@ def _catalyst_importance(text: str) -> int:
 
     score = 0
     # === 第一优先（+10）直接参与机会 ===
-    if any(kw in tl for kw in ["tge", "ido", "ieo", "airdrop"]):
+    if any(kw in tl for kw in ["tge", "ido", "ieo", "airdrop",
+                                "presale", "pre-sale", "token launch",
+                                "token listing", "mainnet launch",
+                                "launchpad", "launchpool"]):
         score += 10
     if any(kw in t for kw in ["公售", "空投", "代币上线", "主网上线",
                                "白名单", "大使计划", "测试网",
-                               "Ambassador", "WL"]):
+                               "Ambassador", "WL",
+                               # P36 扩充
+                               "上币", "上所", "上架", "预售",
+                               "公开发售", "代币生成",
+                               "主网启动", "主网发布",
+                               "领空投", "代币领取",
+                               "早期访问"]):
         score += 10
     # === 第二优先（+5）生态进展 ===
     if any(kw in tl for kw in ["galxe", "zealy", "season", "snapshot",
-                                "binance alpha", "testnet"]):
+                                "binance alpha", "testnet",
+                                # P36 扩充
+                                "layer3", "intract", "quest",
+                                "beta", "alpha test",
+                                "staking", "mint", "free mint"]):
         score += 5
     if any(kw in t for kw in ["产品发布", "功能上线", "赛季",
-                               "快照", "生态合作", "集成"]):
+                               "快照", "生态合作", "集成",
+                               # P36 扩充
+                               "公测", "内测", "Beta测试",
+                               "质押", "铸造",
+                               "任务活动", "签到活动",
+                               "黑客松", "开发者激励"]):
         score += 5
     # === 第三优先（+4）一般事件 ===
     if any(kw in t for kw in ["积分系统", "积分奖励", "竞赛活动",
                                "NFT铸造", "奖励计划", "代币解锁",
-                               "DAO治理", "Campaign", "Points"]):
+                               "DAO治理", "Campaign", "Points",
+                               # P36 扩充
+                               "忠诚度", "排行榜", "交易竞赛",
+                               "治理投票", "提案",
+                               "路线图", "里程碑"]):
         score += 4
     return score
 
@@ -267,7 +289,7 @@ def generate_card_html(
         if not category or category.isdigit():
             category = "Web3"
         emoji = _get_emoji(category)
-        summary = _clip(p.get("summary", p.get("buzz", "")), 40)
+        summary = _clip(p.get("summary", p.get("buzz", "")), 60)
         twitter = p.get("twitter", "")
         catalyst_raw = p.get("catalyst", "")
         catalyst = _clip(_abbreviate_numbers(catalyst_raw), 65)

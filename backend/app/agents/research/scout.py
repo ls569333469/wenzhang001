@@ -9,6 +9,7 @@ P31: Scout 智能体（选题发现）
 import re
 from datetime import datetime
 from ...services.surf_service import SurfService
+from ...services.card_generator import _catalyst_importance
 
 
 # ============================================================
@@ -72,6 +73,9 @@ def _parse_projects_from_text(text: str) -> list[dict]:
 
             # 7 列 G 版格式
             if len(cells) >= 7:
+                raw_cat = cells[6].strip()
+                # P36: 评分过滤 — 只有高价值催化事件(≥4分)才标红
+                cat_score = _catalyst_importance(raw_cat)
                 projects.append({
                     "name": name,
                     "twitter": twitter,
@@ -79,11 +83,13 @@ def _parse_projects_from_text(text: str) -> list[dict]:
                     "kol_24h": _safe_int(cells[3]),
                     "token": cells[4].strip(),
                     "stage": cells[5].strip(),
-                    "catalyst": cells[6].strip(),
-                    "buzz": cells[6].strip(),  # 兼容旧字段
+                    "catalyst": raw_cat if cat_score >= 4 else "",
+                    "buzz": raw_cat,  # 兼容旧字段，始终保留原文
                 })
             # 6 列格式
             elif len(cells) >= 6:
+                raw_cat = cells[5].strip()
+                cat_score = _catalyst_importance(raw_cat)
                 projects.append({
                     "name": name,
                     "twitter": twitter,
@@ -91,8 +97,8 @@ def _parse_projects_from_text(text: str) -> list[dict]:
                     "kol_24h": _safe_int(cells[3]),
                     "token": "",
                     "stage": cells[4].strip(),
-                    "catalyst": cells[5].strip(),
-                    "buzz": cells[5].strip(),
+                    "catalyst": raw_cat if cat_score >= 4 else "",
+                    "buzz": raw_cat,
                 })
             # 5 列旧版格式
             elif len(cells) >= 5:

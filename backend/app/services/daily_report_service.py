@@ -408,7 +408,6 @@ def _enrich_projects_from_analysis(
     兼容新旧两种报告格式。
     """
     import re
-    from .card_generator import pick_best_catalyst
 
     # 建立 twitter → analysis_content 映射（P34: twitter handle 更可靠）
     analysis_map_tw = {}
@@ -426,11 +425,7 @@ def _enrich_projects_from_analysis(
         r"##\s*(?:📊\s*)?(?:项目定位|\d+\.\s*项目概要[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
         re.DOTALL,
     )
-    # Catalyst: ## 🔥 近期催化剂 / ## 近期催化剂 / ## X. 近期催化剂
-    CAT_PATTERN = re.compile(
-        r"##\s*(?:🔥\s*)?(?:近期催化剂|\d+\.\s*近期催化剂[^\n]*)\s*\n+(.*?)(?=\n##|\Z)",
-        re.DOTALL,
-    )
+
 
     enriched = []
     for p in projects:
@@ -439,7 +434,15 @@ def _enrich_projects_from_analysis(
         tw_key = p.get("twitter", "").lower().strip().lstrip("@")
         name_key = p.get("name", "").lower().strip()
         content = analysis_map_tw.get(tw_key) or analysis_map_name.get(name_key, "")
-        match_by = "twitter" if tw_key in analysis_map_tw else ("name" if name_key in analysis_map_name else "none")
+
+        # P36: 模糊子串匹配（如 Anchorage → Anchorage Digital）
+        if not content and name_key:
+            for k, v in analysis_map_name.items():
+                if name_key in k or k in name_key:
+                    content = v
+                    break
+
+        match_by = "twitter" if tw_key in analysis_map_tw else ("name" if name_key in analysis_map_name else ("fuzzy" if content else "none"))
         logger.info(f"📋 enrichment [{p.get('name')}] match={match_by} tw={tw_key} content={'✅' if content else '❌'}")
 
         if content:
@@ -471,74 +474,23 @@ def _enrich_projects_from_analysis(
                     # 安全兜底：限制60字符（配图卡片空间）
                     p["summary"] = raw[:60]
 
-            # ---------- 提取催化剂 ----------
-            # 优先级1: 策略官 LLM 直接选出的卡片催化剂（兼容⚡和无⚡格式）
+            # ---------- P36: 简化催化剂提取 ----------
+            # 只从策略官的「卡片催化剂」行提取，不再做代码评分和三级fallback
             card_cat_match = re.search(r"(?:⚡\s*)?卡片催化剂[:：]\s*(.+)", content)
             if card_cat_match:
                 card_cat = card_cat_match.group(1).strip().rstrip("。.")
                 if card_cat and card_cat not in ("无", "无。"):
-                    # 日期新鲜度检查：超过7天的旧事件丢弃
-                    date_m = re.search(r"(202[4-9])-(\d{2})-(\d{2})", card_cat)
-                    if date_m:
-                        from datetime import datetime, timedelta
-                        try:
-                            evt = datetime(int(date_m.group(1)), int(date_m.group(2)), int(date_m.group(3))).date()
-                            if evt < (cn_now().date() - timedelta(days=7)):
-                                card_cat = ""  # 过旧，跳过
-                        except ValueError:
-                            pass
-                if card_cat:
                     # YYYY-MM-DD → MM-DD 短格式
                     card_cat = re.sub(r"202[4-9]-(\d{2})-(\d{2})", r"\1-\2", card_cat)
-                    # P35修复: LLM 已选定的卡片催化剂直接采用
-                    # （P34 的 importance>0 硬拦截导致重新组装时催化全部丢失，
-                    #   因为原流程依赖侦察官预填充的 catalyst 绕过了此检查）
-                    from .card_generator import _catalyst_importance
-                    importance = _catalyst_importance(card_cat)
                     p["catalyst"] = card_cat.strip()
-                    if importance > 0:
-                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}' (score={importance})")
-                    else:
-                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}' (score={importance}, LLM直选采用)")
-            # 优先级2: 侦察官已有的催化（如存在且LLM没选出）
-            # p["catalyst"] 可能已经由侦察官填充
+                    logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}'")
 
-            # 优先级3: 从催化剂段硬匹配（仅作兜底）
-            if not p.get("catalyst"):
-                cat_lines = []
-                cat_match = CAT_PATTERN.search(content)
-                if cat_match:
-                    for l in cat_match.group(1).strip().split("\n"):
-                        l = l.strip().lstrip("-•·* ")
-                        if not l or l.startswith("|") or l.startswith("#"):
-                            continue
-                        if l.startswith("⚡") or l.startswith("卡片催化剂"):
-                            continue  # 跳过卡片催化剂行本身
-                        if any(kw in l for kw in ["风险", "推理", "局限", "不确定"]):
-                            continue
-                        cat_lines.append(l)
+            # P36: 策略官输出"无"时，保留侦察官的催化剂（p["catalyst"] 可能已由侦察官填充）
+            # 不执行任何额外操作，侦察官的值自然保留
 
-                # 来源 2: 代币经济学段中的解锁日期
-                token_match = re.search(
-                    r"##\s*(?:🪙\s*代币经济学|代币经济)\s*\n+(.*?)(?=\n##|\Z)",
-                    content, re.DOTALL,
-                )
-                if token_match:
-                    token_text = token_match.group(1)
-                    for m in re.finditer(
-                        r"(202[4-9]-\d{2}-\d{2})\s*解锁\s*([\d.]+%)",
-                        token_text,
-                    ):
-                        cat_lines.append(f"{m.group(1)} 解锁 {m.group(2)}")
-
-                if cat_lines:
-                    best = pick_best_catalyst(cat_lines)
-                    if best:
-                        logger.warning(f"⚠️ 催化兜底: {p.get('name')} 使用硬匹配（LLM未输出卡片催化剂）")
-                        p["catalyst"] = best
-        # P35: 清理无效催化（配图不显示"无"）
-        if p.get("catalyst") in ("无", "无。", "无.", ""):
-            p.pop("catalyst", None)
+        # P36: 无催化剂项目记录警告（后续可考虑过滤）
+        if not p.get("catalyst"):
+            logger.warning(f"⚠️ [{p.get('name')}] 无催化剂")
 
         enriched.append(p)
 
@@ -753,8 +705,22 @@ def run_tweet_writer(
             name = name_match.group(1).strip()
             # P34: 清理 LLM 输出的孤零零 # 和尾部空白
             clean_text = re.sub(r'\n\s*#\s*$', '', block.strip()).strip()
+            # P36: 清理 LLM 常见杂质
+            clean_text = re.sub(r'###\s*项目\d+.*', '', clean_text)           # ### 项目4
+            clean_text = re.sub(r'[（(]注[：:].*?[）)]', '', clean_text)       # （注：...）
+            clean_text = re.sub(r'\n---+\n?', '\n', clean_text)               # --- 分隔线
+            clean_text = re.sub(r'\n{3,}', '\n\n', clean_text).strip()        # 多余空行
             # P35: 3 级匹配查找 twitter handle
             twitter = _find_twitter(name, clean_text)
+
+            # P36: 将 @handle 注入推文文本（方便复制时带上X账号）
+            if twitter and twitter not in clean_text:
+                clean_text = clean_text.replace(
+                    f"项目名称：{name}",
+                    f"项目名称：{name} {twitter}",
+                    1
+                )
+
             tweets.append({
                 "name": name,
                 "twitter": twitter,
@@ -807,6 +773,12 @@ def run_tweet_writer(
                 lines = [l.strip() for l in body_text.split("\n") if l.strip()]
                 body_text = "\n".join(lines[:n])  # 最多和项目数一样
                 logger.info(f"🐦 主推文内容(LLM): {len(body_text)}字")
+
+                # P36: 主推文最小长度检查（≥50字），不足用模板补充
+                if len(body_text) < 50:
+                    logger.warning(f"🐦 主推文过短({len(body_text)}字 < 50字)，使用模板补充")
+                    names = " | ".join(t.get("name", "?") for t in tweets[:6])
+                    body_text = f"今日 {n} 个 Alpha 项目值得关注：\n{names}\n\n{body_text}"
             except Exception as e:
                 logger.warning(f"🐦 主推文 LLM 失败，使用 fallback: {e}")
                 names = " | ".join(t.get("name", "?") for t in tweets[:6])
@@ -833,14 +805,20 @@ def run_tweet_writer(
 
 
 def _save_tweets(tweets: list[dict], date_str: str) -> str:
-    """保存推文到文件"""
+    """保存推文到文件（P36: 同时保存 JSON 保留所有字段）"""
     _ensure_dirs()
+    # 保留 md 用于人工查看
     path = REPORTS_DIR / f"tweets_{date_str}.md"
     content = f"# 🐦 推文文案 — {date_str}\n\n"
     for t in tweets:
         content += f"## {t['name']}\n\n```\n{t['text']}\n```\n\n"
     path.write_text(content, encoding="utf-8")
-    logger.info(f"📁 保存: {path}")
+
+    # P36: 保存 JSON（保留 twitter/char_count 等所有字段）
+    import json
+    json_path = REPORTS_DIR / f"tweets_{date_str}.json"
+    json_path.write_text(json.dumps(tweets, ensure_ascii=False, indent=2), encoding="utf-8")
+    logger.info(f"📁 保存: {path} + {json_path}")
     return str(path)
 
 
@@ -918,20 +896,50 @@ def load_analysis_from_disk(date_str: str, twitters: list[str] = None, names: li
     projects = []
     analysis_results = []
 
-    # 列出当天所有报告文件
-    pattern = f"*_{date_str}.md"
-    files = list(projects_dir.glob(pattern))
+    # P36: 有指定项目时，搜索所有日期的报告（支持跨日期重组）
+    if twitters or names:
+        files = list(projects_dir.glob("*.md"))
+        logger.info(f"[load_disk] 跨日期搜索: {len(files)} 个文件")
+    else:
+        # 无指定项目时，只搜索当天（或最近日期）
+        pattern = f"*_{date_str}.md"
+        files = list(projects_dir.glob(pattern))
+
+        # P36: 今天没文件时，自动查找最近有数据的日期
+        if not files:
+            import re as _re
+            all_files = list(projects_dir.glob("*.md"))
+            dates_found = set()
+            for f in all_files:
+                m = _re.search(r"(\d{8})\.md$", f.name)
+                if m:
+                    dates_found.add(m.group(1))
+            if dates_found:
+                latest_date = sorted(dates_found, reverse=True)[0]
+                logger.info(f"[load_disk] {date_str} 无数据，自动切换到最近日期 {latest_date}")
+                date_str = latest_date
+                files = list(projects_dir.glob(f"*_{date_str}.md"))
 
     if not files:
-        logger.warning(f"[load_disk] 未找到 {date_str} 的报告文件")
+        logger.warning(f"[load_disk] 未找到任何报告文件")
         return [], []
+
+    # P36: 按文件名倒序（最新报告优先），跨日期去重
+    files = sorted(files, key=lambda f: f.name, reverse=True)
+    seen_handles = set()
 
     for fpath in files:
         content = fpath.read_text(encoding="utf-8")
 
         # 从文件名提取 twitter handle: {handle}_{date}.md
         fname = fpath.stem  # e.g. "reya_xyz_20260309"
-        handle = fname.replace(f"_{date_str}", "")
+        # P36: 用正则剥离日期后缀（支持跨日期）
+        handle = re.sub(r"_\d{8}$", "", fname)
+
+        # P36: 跨日期去重（文件已按日期倒序，第一次出现即最新）
+        if handle.lower() in seen_handles:
+            continue
+        seen_handles.add(handle.lower())
 
         # 从报告内容提取项目名 (第一行 "# 🔬 Name — 投研报告")
         name = handle  # fallback
@@ -1039,7 +1047,7 @@ async def _run_post_analysis_pipeline(
     skip_sheets_writeback: bool = False,
 ) -> dict:
     """
-    后半段管线: enrichment → 质检 → 总结 → 推文 → 配图 → 日报渲染 → Sheets回写
+    后半段管线: enrichment → 总结 → 推文 → 配图 → 质检(终检) → 日报渲染 → Sheets回写
 
     Args:
         projects: 项目基础信息列表
@@ -1056,10 +1064,6 @@ async def _run_post_analysis_pipeline(
     _progress("enrich", "提取项目定位与催化剂...")
     enriched_projects = _enrich_projects_from_analysis(projects, analysis_results)
 
-    # ===== 质检官 — 检查配图数据 =====
-    _progress("reviewer", "质检配图数据...")
-    enriched_projects = run_reviewer(enriched_projects, api_config)
-
     # ===== 总结官（总结归纳） =====
     _progress("summarizer", "总结归纳分析报告...")
     summary = run_summarizer(analysis_results, api_config)
@@ -1075,6 +1079,10 @@ async def _run_post_analysis_pipeline(
     # ===== 配图生成 =====
     _progress("card", "生成配图...")
     card_path = run_card_generator(enriched_projects, date_str)
+
+    # ===== P36: 质检官移到最后（终检最终产物） =====
+    _progress("reviewer", "质检终检...")
+    enriched_projects = run_reviewer(enriched_projects, api_config)
 
     # ===== 日报渲染（代码模板，不用 LLM） =====
     _progress("report", "渲染日报...")
