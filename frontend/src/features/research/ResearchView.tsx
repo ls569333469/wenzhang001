@@ -9,6 +9,8 @@ import { XPreview } from './XPreview';
 import { RefreshCw, AlertCircle, Loader2 } from 'lucide-react';
 import { useResearchStore } from './useResearchStore';
 
+import { API_BASE_URL } from '@/config/api';
+
 interface ResearchData {
     date: string;
     project_count: number;
@@ -32,7 +34,7 @@ export function ResearchView() {
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch('http://localhost:8000/api/research/latest');
+            const res = await fetch(`${API_BASE_URL}/api/research/latest`);
             if (!res.ok) {
                 if (res.status === 404) {
                     setError('暂无投研报告，请先在左侧搜索项目并生成日报');

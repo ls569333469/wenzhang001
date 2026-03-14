@@ -1,0 +1,41 @@
+# ===========================
+# Quantum Studio — Backend
+# Python 3.13 + FastAPI + Playwright
+# ===========================
+FROM python:3.13-slim
+
+# 系统依赖（Playwright Chromium 需要）
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Playwright 所需的共享库
+    libnss3 libatk-bridge2.0-0 libdrm2 libxkbcommon0 \
+    libgbm1 libasound2t64 libpangocairo-1.0-0 libgtk-3-0 \
+    libxshmfence1 libx11-xcb1 libxcomposite1 libxdamage1 \
+    libxrandr2 libcups2 libatspi2.0-0 libwayland-client0 \
+    # 基础工具
+    curl fonts-noto-cjk \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# 安装 Python 依赖
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 安装 Playwright Chromium
+RUN pip install playwright && playwright install chromium
+
+# 复制代码
+COPY backend/app ./app
+COPY backend/data ./data
+COPY backend/scripts ./scripts
+
+# 创建必要目录
+RUN mkdir -p reports/research/projects logs chroma_db config
+
+# 环境变量
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+EXPOSE 8001
+
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001"]

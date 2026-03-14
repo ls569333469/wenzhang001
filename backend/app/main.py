@@ -48,6 +48,7 @@ app.add_middleware(
         "http://localhost:3000", "http://localhost:3001", "http://localhost:3003",
         "http://107.172.78.150",        # VPS IP
         "http://107.172.78.150:3000",   # VPS + Next.js port
+        "http://107.172.78.150:3080",   # VPS + Docker Nginx port
     ] + ([os.environ["CORS_EXTRA_ORIGIN"]] if os.environ.get("CORS_EXTRA_ORIGIN") else []),
     allow_credentials=True,
     allow_methods=["*"],

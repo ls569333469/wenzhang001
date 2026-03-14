@@ -6,6 +6,7 @@ import { Sparkles, Scissors, Minimize2, Maximize2, Eraser, Check } from 'lucide-
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { useAgentStore } from '@/features/agent/stores/useAgentStore';
+import { API_BASE_URL } from '@/config/api';
 
 interface EditorBubbleMenuProps {
     editor: Editor;
@@ -30,7 +31,7 @@ export function EditorBubbleMenu({ editor }: EditorBubbleMenuProps) {
             const contextBefore = editor.state.doc.textBetween(Math.max(0, from - 200), from);
             const contextAfter = editor.state.doc.textBetween(to, Math.min(editor.state.doc.content.size, to + 200));
 
-            const response = await fetch('http://localhost:8000/api/rewrite', {
+            const response = await fetch(`${API_BASE_URL}/api/rewrite`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

@@ -1,0 +1,36 @@
+# ===========================
+# Quantum Studio — Frontend
+# Next.js 16 standalone build
+# ===========================
+
+# --- Stage 1: 构建 ---
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci
+
+COPY frontend/ .
+
+# 构建时注入后端地址（Docker 内部网络）
+ENV NEXT_PUBLIC_API_URL=http://backend:8001
+
+RUN npm run build
+
+# --- Stage 2: 运行 ---
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# 从 builder 复制 standalone 输出
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
