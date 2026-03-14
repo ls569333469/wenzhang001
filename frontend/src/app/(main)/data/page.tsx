@@ -1,7 +1,6 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
+import { Suspense } from 'react';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Newspaper, FileBarChart, Database, Sparkles, FolderOpen } from 'lucide-react';
@@ -24,7 +23,7 @@ const TABS = [
 
 type TabId = typeof TABS[number]['id'];
 
-export default function DataPage() {
+function DataContent() {
     const searchParams = useSearchParams();
     const initialTab = (searchParams.get('tab') as TabId) || 'news';
     const [activeTab, setActiveTab] = useState<TabId>(initialTab);
@@ -79,5 +78,13 @@ export default function DataPage() {
                 </div>
             </div>
         </div>
+    );
+}
+
+export default function DataPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">加载中...</div>}>
+            <DataContent />
+        </Suspense>
     );
 }
