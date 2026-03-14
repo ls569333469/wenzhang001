@@ -19,8 +19,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
-    environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8001
     expose:
       - "3000"
     restart: unless-stopped

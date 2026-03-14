@@ -13,8 +13,9 @@ RUN npm ci
 
 COPY frontend/ .
 
-# 构建时注入后端地址（Docker 内部网络）
-ENV NEXT_PUBLIC_API_URL=http://backend:8001
+# 构建时注入后端地址
+# 空字符串 = 使用相对路径，通过 Nginx 同端口代理到后端
+ENV NEXT_PUBLIC_API_URL=
 
 RUN npm run build
 
