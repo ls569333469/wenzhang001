@@ -4,8 +4,10 @@
 # ===========================
 FROM python:3.13-slim
 
-# 系统依赖（Playwright Chromium 需要）
+# 系统依赖（Playwright Chromium + ChromaDB 编译需要）
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    # C++ 编译器 (chromadb hnswlib 需要)
+    build-essential \
     # Playwright 所需的共享库
     libnss3 libatk-bridge2.0-0 libdrm2 libxkbcommon0 \
     libgbm1 libasound2t64 libpangocairo-1.0-0 libgtk-3-0 \
