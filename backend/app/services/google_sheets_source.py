@@ -29,9 +29,11 @@ class GoogleSheetsDataSource:
     Supports single-sheet mode with filter by 风格标签 column.
     """
     
-    # Only Sheets scope - Drive API is not enabled in the project
-    # IMPORTANT: Always use open_by_key() with spreadsheet ID, not open() with name
-    SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+    # Sheets + Drive readonly: Drive scope needed for open() by name
+    SCOPES = [
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive.readonly',
+    ]
     
     # 字段映射：中文列名 → 内部键名
     FIELD_MAPPING = {

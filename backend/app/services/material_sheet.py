@@ -30,7 +30,10 @@ def _ensure_gspread():
         Credentials = Creds
 
 
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SCOPES = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive.readonly',
+]
 
 # materials Tab 的 17 列字段
 MATERIAL_COLUMNS = [
