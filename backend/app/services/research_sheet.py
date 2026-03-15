@@ -139,18 +139,11 @@ class ResearchSheetService:
                 logger.info(f"  ✅ {name}: 上次分析 {hours_ago:.0f}h 前（>{DEDUP_HOURS}h），保留")
                 continue
 
-            # 规则 3: 窗口内但有新催化剂
-            scout_buzz = p.get("buzz", "").strip()
-            sheet_catalyst = record.get("催化剂摘要", "").strip()
-
-            if scout_buzz and scout_buzz != sheet_catalyst:
-                kept.append(p)
-                logger.info(f"  ✅ {name}: 新催化剂「{scout_buzz}」≠「{sheet_catalyst}」，保留")
-                continue
-
-            # 规则 4: 跳过
+            # 规则 3: 窗口内 → 直接跳过
+            # 注: buzz(侦察官原始) vs 催化剂摘要(enrichment后) 格式不同，
+            #      比较永远不等，导致去重失效。改为窗口内一律跳过。
             skipped.append(name)
-            logger.info(f"  ❌ {name}: {hours_ago:.0f}h 前已分析，催化剂未变，跳过")
+            logger.info(f"  ❌ {name}: {hours_ago:.0f}h 前已分析，跳过")
 
         logger.info(
             f"[ResearchSheet] 去重结果: {len(kept)}/{len(scout_projects)} 保留, "
