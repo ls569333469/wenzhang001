@@ -91,17 +91,37 @@ class ResearchSheetService:
         kept = []
         skipped = []
 
+        def _normalize_name(n: str) -> str:
+            """去除 (@handle) 后缀，提取纯项目名"""
+            n = re.sub(r"\s*\(@[^)]*\)\s*$", "", n).strip()
+            return n.lower()
+
+        def _find_in_history(name_key: str) -> Optional[Dict]:
+            """多级匹配: 精确 → 去handle → 子串"""
+            # 1) 精确匹配
+            if name_key in history_map:
+                return history_map[name_key]
+            # 2) 去掉 (@handle) 后匹配
+            clean = _normalize_name(name_key)
+            if clean != name_key and clean in history_map:
+                return history_map[clean]
+            # 3) 子串匹配（项目名包含在历史名中，或反过来）
+            for h_name, h_record in history_map.items():
+                if clean in h_name or h_name in clean:
+                    return h_record
+            return None
+
         for p in scout_projects:
             name = p.get("name", "").strip()
             name_key = name.lower()
 
-            # 规则 1: 从未分析过
-            if name_key not in history_map:
+            # 规则 1: 从未分析过（多级匹配）
+            record = _find_in_history(name_key)
+            if record is None:
                 kept.append(p)
                 logger.info(f"  ✅ {name}: 新项目，保留")
                 continue
 
-            record = history_map[name_key]
             last_time_str = record.get("上次分析时间", "")
 
             # 解析上次分析时间
