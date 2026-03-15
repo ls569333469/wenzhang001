@@ -1,0 +1,61 @@
+# ===================================
+# Docker 构建上下文排除
+# 这些文件不会被 COPY 进 Docker 镜像
+# ===================================
+
+# 设计文档 / 历史归档 / 测试报告
+reports/
+docs/
+
+# Git
+.git
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Python 缓存
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/.next/
+
+# 环境变量 (通过 Docker Compose env_file 挂载)
+.env
+.env.*
+backend/.env
+
+# 敏感配置
+backend/config/user_config.json
+backend/config/google_service_account.json
+
+# Nginx (通过 volume 挂载)
+nginx/
+
+# Docker 自身
+Dockerfile.*
+docker-compose.yml
+
+# 日志 / 临时文件
+*.log
+logs/
+*.tmp
+tmp/
+
+# 测试截图
+debug_*.png
+e2e_*.png
+feature_test_*.png
+*.egg-info/
+
+# 数据库
+*.db
+*.sqlite
+backend/chroma_db/
