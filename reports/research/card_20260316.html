@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+}
+.canvas {
+    width: 1200px; height: 675px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+}
+.header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
+}
+.title-group { display: flex; flex-direction: column; }
+.subtitle { font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }
+.main-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; }
+.main-title .accent { color: #FF3A2D; }
+.date { font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
+}
+.card {
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
+    display: flex; flex-direction: column;
+}
+.card-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
+}
+.twitter { color: #666; }
+.project-name {
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+.desc { font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    overflow: hidden; max-height: 2.8em;
+}
+.catalyst {
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: inline-block;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
+}
+.footer {
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+    <div class="header">
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
+        </div>
+        <div class="date">2026.03.16</div>
+    </div>
+    <div class="grid">
+            <div class="card">
+                <div class="card-top"><span>💰 DeFi</span><span class="twitter">@Superform</span></div>
+                <h2 class="project-name">Superform</h2>
+                <div class="desc">跨链 yield 管理和 vault DeFi 协议</div>
+                <div class="catalyst">🔥 第一月空投代币可领取</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>💰 DeFi</span><span class="twitter">@Unitas</span></div>
+                <h2 class="project-name">Unitas</h2>
+                <div class="desc">稳定币 delta-neutral 真实收益基础设施</div>
+                <div class="catalyst">🔥 空投领取</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI</span><span class="twitter">@KaitoAI</span></div>
+                <h2 class="project-name">Kaito</h2>
+                <div class="desc">AI 驱动的加密搜索与研究平台</div>
+                <div class="catalyst">🔥 $PTB空投释放领取</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🎮 GameFi</span><span class="twitter">@BasedOneX</span></div>
+                <h2 class="project-name">Based</h2>
+                <div class="desc">Hyperliquid 生态交易积分项目</div>
+                <div class="catalyst">🔥 空投查询</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI</span><span class="twitter">@PerleLabs</span></div>
+                <h2 class="project-name">Perle Labs</h2>
+                <div class="desc">Web3 AI 数据训练人类反馈协议</div>
+                <div class="catalyst">🔥 新任务，融资1750万美元</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🎮 GameFi</span><span class="twitter">@katana</span></div>
+                <h2 class="project-name">Katana</h2>
+                <div class="desc">专注真实收益的 DeFi L2 区块链</div>
+                <div class="catalyst">🔥 验证邮箱完成任务赚XP</div>
+            </div>
+    </div>
+    <div class="footer">
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
+    </div>
+</div>
+</body>
+</html>

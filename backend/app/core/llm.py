@@ -72,15 +72,15 @@ PROVIDER_CONFIGS = {
         "base_url": "https://api.x.ai/v1",
         "env_key": "GROK_API_KEY",
         "config_key": "grok",
-        "default_model": "grok-4-1-fast-reasoning",
+        "default_model": "grok-4.20-beta-latest",  # P38: 最新旗舰 (支持 Responses API + Live Search)
         "available_models": [
-            "grok-4-1-fast-reasoning",      # 4.1 高速推理 (2M上下文, $0.20/$0.50)
-            "grok-4-1-fast-non-reasoning",   # 4.1 高速非推理
-            "grok-4-fast-reasoning",         # 4.0 推理 (2M上下文)
-            "grok-4-fast-non-reasoning",     # 4.0 非推理
-            "grok-4-0709",                   # 4.0 旗舰 (256K, $3/$15)
-            "grok-3-mini",                   # 3 轻量 (131K, $0.30/$0.50)
-            "grok-3",                        # 3 标准 (131K, $3/$15)
+            "grok-4.20-beta-latest",                 # 4.20 最新 (2M上下文, 推理+工具)
+            "grok-4.20-beta-latest-non-reasoning",   # 4.20 非推理 (Live Search 专用)
+            "grok-4-1-fast-reasoning",               # 4.1 高速推理
+            "grok-4-1-fast-non-reasoning",            # 4.1 高速非推理
+            "grok-4-0709",                           # 4.0 旗舰 (256K, $3/$15)
+            "grok-3-mini",                           # 3 轻量 (131K, $0.30/$0.50)
+            "grok-3",                                # 3 标准 (131K, $3/$15)
         ]
     },
     "surf": {
@@ -234,6 +234,61 @@ def _generate_text_impl(
             return result["content"]
         raise ValueError(f"Surf API error: {result.get('error', 'Unknown')}")
     
+    # P38: Grok Live Search — 使用 Responses API 启用实时搜索
+    if provider == "grok" and extra_body and extra_body.get("search"):
+        # P38: Responses API 需要 non-reasoning 模型
+        search_model = "grok-4.20-beta-latest-non-reasoning"
+        logger.info(f"[LLM] 🔍 Grok Live Search 模式 (model={search_model})")
+        input_messages = []
+        if system_prompt:
+            input_messages.append({"role": "system", "content": system_prompt})
+        input_messages.append({"role": "user", "content": prompt})
+        
+        # 允许上层直接透传自定义 tools 配置（例如指定 allowed_x_handles, from_date 等）
+        # 否则默认给一个不带限制的 x_search 工具
+        tools_config = extra_body.get("tools", [{"type": "x_search"}])
+        
+        search_response = client.responses.create(
+            model=search_model,
+            input=input_messages,
+            tools=tools_config,
+            temperature=temperature,
+        )
+        
+        # P38: 从 Responses API 输出中提取文本（兼容多种格式）
+        # 方式1: output_text 快捷属性（OpenAI SDK ≥1.x）
+        result = ""
+        if hasattr(search_response, "output_text") and search_response.output_text:
+            result = search_response.output_text
+            logger.info(f"[LLM] 🔍 Grok: 通过 output_text 提取 ({len(result)} chars)")
+        
+        # 方式2: 遍历 output 列表提取 message content
+        if not result:
+            for item in search_response.output:
+                # 跳过 web_search_call 等工具调用项
+                item_type = getattr(item, "type", "")
+                if item_type == "message" and hasattr(item, "content") and item.content:
+                    for block in item.content:
+                        if hasattr(block, "text"):
+                            result += block.text
+                elif hasattr(item, "content") and item.content and not item_type.endswith("call"):
+                    for block in item.content:
+                        if hasattr(block, "text"):
+                            result += block.text
+            if result:
+                logger.info(f"[LLM] 🔍 Grok: 通过 output[].content 提取 ({len(result)} chars)")
+        
+        # 方式3: 原始 dump 作为最终 fallback
+        if not result:
+            raw_output = str(search_response.output)
+            logger.warning(f"[LLM] ⚠️ Grok Live Search 解析失败，原始输出类型: "
+                          f"{[type(item).__name__ for item in search_response.output]}")
+            logger.warning(f"[LLM] ⚠️ 原始输出前 500 字: {raw_output[:500]}")
+            result = raw_output
+        
+        logger.info(f"[LLM] 🔍 Grok Live Search 完成 ({len(result)} chars)")
+        return result
+
     # OpenAI 兼容格式 (volcengine, openai, deepseek, grok)
     messages = []
     if system_prompt:

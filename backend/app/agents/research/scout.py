@@ -13,6 +13,50 @@ from ...services.card_generator import _catalyst_importance
 
 
 # ============================================================
+#  Twitter 字段清洗
+# ============================================================
+
+# 已知 KOL 信源账号（不是项目自身的 Twitter）
+_KOL_SOURCE_HANDLES = {
+    "@leakmealpha", "@top7ico", "@eli5defi", "@web3alerts", "@wy_mask",
+    "@rootdatacrypto", "@sanyi_eth_", "@kiemusddongao", "@basezh",
+    "@airdroptrail", "@solana", "@base",
+}
+
+def _clean_twitter_field(raw_twitter: str, project_name: str = "") -> str:
+    """
+    清洗 Twitter 字段:
+    - 如果包含多个 handle（逗号/空格分隔），去掉 KOL 信源账号
+    - 如果所有 handle 都是信源，尝试用项目名猜测 handle
+    """
+    if not raw_twitter:
+        return ""
+    
+    # 分割多个 handle
+    handles = re.split(r"[,，\s]+", raw_twitter.strip())
+    handles = [h.strip() for h in handles if h.strip()]
+    
+    if len(handles) <= 1:
+        # 单个 handle，检查是不是信源
+        single = handles[0] if handles else ""
+        if single.lower() in _KOL_SOURCE_HANDLES:
+            # 是信源，用项目名代替
+            clean_name = re.sub(r"\s+", "", project_name).lower()
+            return f"@{clean_name}" if clean_name else ""
+        return single
+    
+    # 多个 handle → 过滤掉信源
+    non_source = [h for h in handles if h.lower() not in _KOL_SOURCE_HANDLES]
+    
+    if non_source:
+        return non_source[0]  # 返回第一个非信源 handle
+    else:
+        # 全是信源，用项目名
+        clean_name = re.sub(r"\s+", "", project_name).lower()
+        return f"@{clean_name}" if clean_name else handles[0]
+
+
+# ============================================================
 #  项目列表解析器
 # ============================================================
 
@@ -34,22 +78,30 @@ def _parse_projects_from_text(text: str) -> list[dict]:
     col_count = 0
 
     for i, line in enumerate(lines):
-        stripped = line.strip()
+        stripped = line.strip().lstrip('* ').strip()
         if stripped.startswith("|") and "项目" in stripped:
             header_idx = i
             col_count = len([c for c in stripped.split("|") if c.strip()])
             break
 
-    # 跳过表头行和分隔行
-    data_start = header_idx + 2 if header_idx >= 0 else -1
+    if header_idx >= 0:
+        for line in lines[header_idx + 1:]:
+            # P36: 容错处理 - 剥离首部加粗符号和空格，比如 "**| 项目名称"
+            stripped = line.strip().lstrip('* ').strip()
+            
+            # 兼容空行和 Markdown 的 |---|---| 分隔符
+            if not stripped:
+                continue
+            if stripped.startswith("|-") or stripped.replace("-", "").replace("|", "").strip() == "":
+                continue
 
-    if data_start > 0:
-        for line in lines[data_start:]:
-            stripped = line.strip()
             if not stripped.startswith("|"):
                 break  # 表格结束
+            
+            # 去掉行尾加粗符号
+            stripped = stripped.rstrip('* ').strip()
             cells = [c.strip() for c in stripped.split("|") if c.strip()]
-            if not cells or cells[0].startswith("---"):
+            if not cells:
                 continue
 
             # P35: 跳过序号列（如 "1" "2"），LLM 有时输出带序号的表格
@@ -62,11 +114,16 @@ def _parse_projects_from_text(text: str) -> list[dict]:
             # 跳过表头误匹配
             if name.lower() in ("项目名称", "project", "项目", "-"):
                 continue
+            
+            # 清洗 Twitter 字段（去除 KOL 信源账号）
+            twitter = _clean_twitter_field(twitter, name)
+            
             # 确保 twitter 以 @ 开头
             if twitter and not twitter.startswith("@"):
                 twitter = f"@{twitter}"
 
-            key = twitter.lower()
+            # 如果 twitter 有效，使用 twitter 去重；否则使用 name 去重
+            key = twitter.lower() if twitter and twitter != "@-" else name.lower()
             if key in seen:
                 continue
             seen.add(key)
@@ -177,7 +234,7 @@ def scout_agent(state: dict) -> dict:
     except Exception:
         # Fallback：硬编码基础 prompt
         user_prompt = (
-            "检索 @leakmealpha 近 7 天推文 + 访问 leak.me 网站 trending。\n"
+            "检索 @leakmealpha 近 2 天推文 + 访问 leak.me 网站 trending。\n"
             "leak.me 是 Crypto KOL Tracker，追踪加密 KOL 的新关注行为。\n"
             "只输出一张表格，不要写任何分析或说明：\n"
             "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n"

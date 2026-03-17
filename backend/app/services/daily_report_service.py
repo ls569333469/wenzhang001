@@ -101,7 +101,7 @@ def run_scout() -> dict:
     if not user_prompt:
         # fallback: 硬编码 prompt
         user_prompt = (
-            f"检索以下 {len(sources)} 个 Twitter/X 账号近 7 天推文，找出热门 Crypto 项目：\n"
+            f"检索以下 {len(sources)} 个 Twitter/X 账号近 2 天推文，找出热门 Crypto 项目：\n"
             f"{accounts_text}\n\n"
             "汇总去重后只输出一张表格：\n"
             "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n"
@@ -116,20 +116,85 @@ def run_scout() -> dict:
         reasoning="high",
     )
 
-    if result["status"] != 200:
-        error = result.get("error", "Unknown")[:200]
-        logger.error(f"🔭 侦察官失败: {error}")
-        return {"projects": [], "raw_text": "", "elapsed": result.get("elapsed", 0)}
-
-    projects = _parse_projects_from_text(result["content"])
-    logger.info(f"🔭 侦察官完成: 发现 {len(projects)} 个项目 ({result['elapsed']:.0f}s)")
-
-    return {
-        "projects": projects,
-        "raw_text": result["content"],
-        "elapsed": result.get("elapsed", 0),
+    # Surf 成功
+    if result["status"] == 200:
+        projects = _parse_projects_from_text(result["content"])
+        logger.info(f"🔭 侦察官完成(Surf): 发现 {len(projects)} 个项目 ({result['elapsed']:.0f}s)")
+        return {
+            "projects": projects,
+            "raw_text": result["content"],
+            "elapsed": result.get("elapsed", 0),
     }
 
+    # Surf 失败 → Grok fallback
+    error = result.get("error", "Unknown")[:200]
+    logger.warning(f"🔭 Surf 失败({error})，尝试 Grok fallback...")
+
+    import time
+    from datetime import timedelta
+    t0 = time.time()
+    today = cn_now()
+    today_str = today.strftime("%Y-%m-%d")
+    two_days_ago = (today - timedelta(days=2)).strftime("%Y-%m-%d")
+    logger.info(f"🔭 Grok fallback: 今天={today_str}, 2天前={two_days_ago}")
+
+    try:
+        from app.core.llm import generate_text
+        grok_system = (
+            "你是加密货币投研侦察机器。你的唯一职责是将搜索到的数据转换为 Markdown 表格。\n"
+            "请搜索用户指定的 Twitter/X 账号近 48 小时的推文。只要推文提到了任何 Crypto 实体、代币符号、积分任务、空投或项目名称，"
+            "无论你认为其质量如何，都必须将其视为项目并收录。\n"
+            "【绝对强制要求】：不准写任何废话！不准做质量主观评判！不准写“目前未发现重点项目”！\n"
+            "只要你搜索到了任何上面提到的内容，你必须、绝对、强制输出一个完整的 Markdown 表格。\n"
+            "如果有任何相关提到项目，不要写除此之外的说明。"
+        )
+        # 提取追踪的所有 X 账号 (最多取前 10 个，因为 X Search API 限制最多 10 个 allowed_x_handles)
+        # 注意: sources 变量是一个包含 {"handle": "@xxx"} 的列表
+        x_handles = [s['handle'].replace('@', '').strip() for s in sources][:10]
+        
+        grok_tools = [{
+            "type": "x_search",
+            "allowed_x_handles": x_handles,
+            "from_date": two_days_ago,
+            "to_date": today_str
+        }]
+
+        # P38: 覆盖 Jinja2 强约束。Grok 容易因为看到“早期、优质”而全盘否定。必须用最基础的提取指令。
+        grok_prompt = (
+            f"请搜索这些账号近48小时的内容: {', '.join(x_handles)}\n"
+            "提取其中提到的所有加密货币项目、代币符号、空投活动或积分任务。\n"
+            "不用管是不是优质项目！全部放在这个格式的表格里：\n"
+            "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n\n"
+            "近期催化剂字段要求：必须包含具体日期！按以下优先级：\n"
+            "第一优先: TGE、空投、代币上线、主网上线（如'3月23日TGE'）\n"
+            "第二优先: 测试网、产品发布、Galxe/Zealy任务、快照、Binance Alpha\n"
+            "第三优先: 积分系统、竞赛活动、NFT铸造、代币解锁\n\n"
+            "所有表格内容必须用中文输出，项目名称和代币符号除外。近期催化剂务必用中文且带具体日期。"
+        )
+
+        grok_text = generate_text(
+            prompt=grok_prompt,
+            provider="grok",
+            system_prompt=grok_system,
+            temperature=0.8,
+            max_tokens=4096,
+            extra_body={
+                "search": True,
+                "tools": grok_tools
+            },
+        )
+        projects = _parse_projects_from_text(grok_text)
+        elapsed = time.time() - t0
+        logger.info(f"Grok Raw Output:\n{grok_text}")
+        logger.info(f"🔭 侦察官完成(Grok fallback): 发现 {len(projects)} 个项目 ({elapsed:.0f}s)")
+        return {
+            "projects": projects,
+            "raw_text": grok_text,
+            "elapsed": elapsed,
+        }
+    except Exception as e:
+        logger.error(f"🔭 Grok fallback 也失败: {e}")
+        return {"projects": [], "raw_text": "", "elapsed": time.time() - t0}
 
 # ============================================================
 #  Step 1.7: 6551 X 账号验证（P35 B3）
@@ -265,19 +330,79 @@ def _analyze_single_project(project: dict) -> dict:
         timeout=600,  # 深度分析耗时较长
     )
 
-    if result["status"] != 200:
-        error = result.get("error", "Unknown")[:200]
-        logger.error(f"🔬 策略官失败 ({name}): {error}")
-        return {"name": name, "content": "", "elapsed": result.get("elapsed", 0), "error": error}
+    # Surf 成功
+    if result["status"] == 200:
+        logger.info(f"🔬 策略官完成(Surf) ({name}): {result['elapsed']:.0f}s")
+        return {
+            "name": name,
+            "twitter": twitter,
+            "content": result["content"],
+            "elapsed": result.get("elapsed", 0),
+            "error": None,
+        }
 
-    logger.info(f"🔬 策略官完成 ({name}): {result['elapsed']:.0f}s")
-    return {
-        "name": name,
-        "twitter": twitter,
-        "content": result["content"],
-        "elapsed": result.get("elapsed", 0),
-        "error": None,
-    }
+    # Surf 失败 → Grok fallback
+    error = result.get("error", "Unknown")[:200]
+    logger.warning(f"🔬 策略官 Surf 失败({name}): {error}，尝试 Grok fallback...")
+
+    import time
+    from datetime import timedelta
+    t0 = time.time()
+    today = cn_now()
+    today_str = today.strftime("%Y-%m-%d")
+    try:
+        from app.core.llm import generate_text
+        two_days_ago = (today - timedelta(days=2)).strftime("%Y-%m-%d")
+        grok_system = (
+            "你是加密货币投研策略官。\n"
+            "请用实时搜索深度调研用户指定的项目，输出完整投研报告，只写事实和数据：\n\n"
+            "## 项目定位\n是什么、做什么、核心产品、目标市场。\n\n"
+            "## 融资\n用表格列出每轮融资：\n| 时间 | 轮次 | 金额 | 领投方 |\n融资总额。\n\n"
+            "## 团队\n核心成员（姓名/角色/背景）。\n\n"
+            "## 代币经济学\n代币符号、是否已发行、总供应量、分配比例、解锁计划。\n\n"
+            "## 市场数据\n当前价格、市值、FDV、TVL、Twitter 粉丝数。\n\n"
+            "## 近期催化剂\n最近已发生 + 即将发生的关键事件，注明日期。\n"
+            "卡片催化剂: 从上述事件中选出对投资者最有参与价值的一条，格式「YYYY-MM-DD 一句话中文描述」。\n"
+            "优先选择未来事件，其次近2天内已发生事件，超过2天的丢弃。\n"
+            "第一优先: TGE、空投、代币上线、主网上线、白名单、大使计划、IDO/IEO/公售\n"
+            "第二优先: 测试网、产品发布、功能上线、Galxe/Zealy任务、快照、生态合作\n"
+            "第三优先: 积分系统、竞赛活动、NFT铸造、奖励计划、代币解锁\n"
+            "如果找不到近期事件，输出「卡片催化剂: 无」。\n\n"
+            "## 竞品对比\n同赛道 2-3 个竞品，简要对比定位和差异。\n\n"
+            "【重要】所有内容必须用中文输出。项目名称和代币符号除外。"
+            "卡片催化剂必须是中文且带具体日期。不要用英文写催化剂。"
+            "不要附带来源链接和 URL。没有数据的板块直接跳过。"
+        )
+        grok_tools = [{
+            "type": "x_search",
+            "from_date": two_days_ago,
+            "to_date": today_str
+        }]
+
+        grok_text = generate_text(
+            prompt=user_prompt,
+            provider="grok",
+            system_prompt=grok_system,
+            temperature=0.3,
+            max_tokens=4096,
+            extra_body={
+                "search": True,
+                "tools": grok_tools
+            },
+        )
+        elapsed = time.time() - t0
+        logger.info(f"🔬 策略官完成(Grok) ({name}): {elapsed:.0f}s")
+        return {
+            "name": name,
+            "twitter": twitter,
+            "content": grok_text,
+            "elapsed": elapsed,
+            "error": None,
+        }
+    except Exception as e:
+        elapsed = time.time() - t0
+        logger.error(f"🔬 策略官 Grok fallback 失败 ({name}): {e}")
+        return {"name": name, "content": "", "elapsed": elapsed, "error": str(e)}
 
 
 async def _analyze_with_semaphore(sem: asyncio.Semaphore, project: dict) -> dict:
@@ -378,34 +503,92 @@ def run_summarizer(analysis_results: list[dict], api_config: dict = None) -> str
             system_prompt=system_prompt,
             max_tokens=4096,
         )
-        logger.info("📋 审核官完成")
+        logger.info("📋 总结官完成")
         return result
     except Exception as e:
-        logger.error(f"📋 审核官失败: {e}")
-        # 简单 fallback：截取每个报告前 500 字
-        fallback = []
-        for r in analysis_results:
-            if r.get("content"):
-                fallback.append(f"## {r['name']}\n\n{r['content'][:500]}...")
-        return "\n\n---\n\n".join(fallback)
+        logger.warning(f"📋 总结官 {provider} 失败: {e}，尝试 Grok fallback...")
+        # P37: Grok fallback
+        try:
+            result = generate_text(
+                prompt=user_prompt,
+                provider="grok",
+                temperature=0.3,
+                system_prompt=system_prompt,
+                max_tokens=4096,
+            )
+            logger.info("📋 总结官完成(Grok fallback)")
+            return result
+        except Exception as e2:
+            logger.error(f"📋 总结官 Grok 也失败: {e2}")
+            # 简单 fallback：截取每个报告前 500 字
+            fallback = []
+            for r in analysis_results:
+                if r.get("content"):
+                    fallback.append(f"## {r['name']}\n\n{r['content'][:500]}...")
+            return "\n\n---\n\n".join(fallback)
 
 
 # P34: run_writer() 已删除 — 日报由 report.jinja2 代码模板直接渲染
 
 
 # ============================================================
-#  Step 4.5: 从策略官报告中回填 summary + catalyst
+#  Step 4.5: 从总结官+策略官报告中回填 summary + catalyst
 # ============================================================
+
+def _parse_summarizer_positions(summary_text: str) -> dict:
+    """P37: 从总结官输出中解析每个项目的 ⚡ 卡片定位 和 ⚡ 卡片催化剂"""
+    positions = {}
+    if not summary_text:
+        return positions
+    
+    # 按 ## 项目名 分块
+    import re
+    blocks = re.split(r"(?=^##\s)", summary_text, flags=re.MULTILINE)
+    for block in blocks:
+        block = block.strip()
+        if not block.startswith("##"):
+            continue
+        
+        # 提取项目名
+        name_match = re.match(r"##\s*(.+?)(?:\n|$)", block)
+        if not name_match:
+            continue
+        name = name_match.group(1).strip().lower()
+        
+        data = {}
+        
+        # 提取 ⚡ 卡片定位
+        pos_match = re.search(r"⚡\s*卡片定位[:：]\s*(.+?)(?:\n|$)", block)
+        if pos_match:
+            data["summary"] = pos_match.group(1).strip()[:40]
+        
+        # 提取 ⚡ 卡片催化剂
+        cat_match = re.search(r"⚡\s*卡片催化剂[:：]\s*(.+?)(?:\n|$)", block)
+        if cat_match:
+            cat_text = cat_match.group(1).strip()
+            if cat_text and cat_text not in ("无", "无。"):
+                data["catalyst"] = cat_text
+        
+        if data:
+            positions[name] = data
+    
+    logger.info(f"📋 总结官解析: 找到 {len(positions)} 个项目 "
+                f"({sum(1 for d in positions.values() if 'summary' in d)} 定位, "
+                f"{sum(1 for d in positions.values() if 'catalyst' in d)} 催化剂)")
+    return positions
+
 
 def _enrich_projects_from_analysis(
     projects: list[dict],
     analysis_results: list[dict],
+    summary_text: str = "",
 ) -> list[dict]:
     """
-    从策略官的深度报告中提取一句话定位和催化剂，回填到 projects 列表。
+    P37: 从总结官+策略官的报告中提取一句话定位和催化剂，回填到 projects 列表。
 
-    用于 Step 5 (配图) 和 Step 6 (推文) 的数据输入。
-    兼容新旧两种报告格式。
+    summary 优先从总结官的 ⚡ 卡片定位 提取（≤20字精炼版），
+    fallback 到策略官报告的 ## 项目定位 段落截取。
+    catalyst 仍从策略官报告的 ⚡ 卡片催化剂 行提取。
     """
     import re
 
@@ -427,9 +610,36 @@ def _enrich_projects_from_analysis(
     )
 
 
+    # P37: 解析总结官的卡片定位
+    summarizer_positions = _parse_summarizer_positions(summary_text)
+
+    # P37: KOL 信源账号集合（直接在 enrichment 清洗，不依赖 scout.py 模块缓存）
+    _KOL_HANDLES = {
+        "@leakmealpha", "@top7ico", "@eli5defi", "@web3alerts", "@wy_mask",
+        "@rootdatacrypto", "@sanyi_eth_", "@kiemusddongao", "@basezh",
+        "@airdroptrail", "@solana", "@base",
+    }
+
     enriched = []
     for p in projects:
         p = dict(p)  # shallow copy
+
+        # ---- P37: 清洗 Twitter handle（去除 KOL 信源账号） ----
+        raw_tw = p.get("twitter", "")
+        if raw_tw and "," in raw_tw:
+            handles = [h.strip() for h in raw_tw.split(",") if h.strip()]
+            non_kol = [h for h in handles if h.lower() not in _KOL_HANDLES]
+            if non_kol:
+                p["twitter"] = non_kol[0]
+            else:
+                # 全是 KOL → 用项目名
+                clean_name = re.sub(r"\s+", "", p.get("name", "")).lower()
+                p["twitter"] = f"@{clean_name}" if clean_name else ""
+            logger.info(f"📋 enrichment [{p.get('name')}] twitter 清洗: '{raw_tw}' → '{p['twitter']}'")
+
+        # ---- 保存侦察官催化剂（防止被策略官覆盖） ----
+        _scout_catalyst = p.get("catalyst", "") or p.get("buzz", "")
+
         # 优先用 twitter handle 匹配，fallback 到 name
         tw_key = p.get("twitter", "").lower().strip().lstrip("@")
         name_key = p.get("name", "").lower().strip()
@@ -445,12 +655,25 @@ def _enrich_projects_from_analysis(
         match_by = "twitter" if tw_key in analysis_map_tw else ("name" if name_key in analysis_map_name else ("fuzzy" if content else "none"))
         logger.info(f"📋 enrichment [{p.get('name')}] match={match_by} tw={tw_key} content={'✅' if content else '❌'}")
 
-        if content:
-            # ---------- 提取一句话定位（短版，适配配图卡片） ----------
+        # ---------- P37: 提取一句话定位（优先总结官）----------
+        summ_key = name_key
+        summ_data = summarizer_positions.get(summ_key)
+        # 模糊匹配：项目名可能不完全一致
+        if not summ_data:
+            for sk, sv in summarizer_positions.items():
+                if summ_key in sk or sk in summ_key:
+                    summ_data = sv
+                    break
+
+        # summary: 总结官 > 策略官 > 空
+        if summ_data and summ_data.get("summary"):
+            p["summary"] = summ_data["summary"]
+            logger.info(f"📋 enrichment [{p.get('name')}] summary=总结官 '{summ_data['summary']}'")
+        elif content:
+            # Fallback: 从策略官报告截取
             pos_match = POS_PATTERN.search(content)
             if pos_match:
                 text = pos_match.group(1).strip()
-                # 取第一段有效文字
                 lines = [
                     l.strip() for l in text.split("\n")
                     if l.strip()
@@ -459,7 +682,6 @@ def _enrich_projects_from_analysis(
                     and not l.strip().startswith("**")
                 ]
                 if lines:
-                    # 跳过模板指令行（如 "是什么、做什么、核心产品、目标市场"）
                     lines = [
                         l for l in lines
                         if len(l) > 8
@@ -468,27 +690,37 @@ def _enrich_projects_from_analysis(
                     ]
                 if lines:
                     raw = lines[0]
-                    # 去掉来源标注
                     raw = re.sub(r"[（(]来源[：:].*?[）)]", "", raw).strip()
-                    # P34: LLM prompt 已要求30字定位，不再做逗号截断
-                    # 安全兜底：限制60字符（配图卡片空间）
-                    p["summary"] = raw[:60]
+                    p["summary"] = raw[:40]
+                    logger.info(f"📋 enrichment [{p.get('name')}] summary=策略官fallback")
 
-            # ---------- P36: 简化催化剂提取 ----------
-            # 只从策略官的「卡片催化剂」行提取，不再做代码评分和三级fallback
+        # ---------- P37: 催化剂提取（优先总结官 > 策略官 > 侦察官）----------
+        # 总结官的催化剂是中文且带日期，不受前半段 API 影响
+        if summ_data and summ_data.get("catalyst"):
+            p["catalyst"] = summ_data["catalyst"]
+            logger.info(f"📋 enrichment [{p.get('name')}] catalyst=总结官 '{summ_data['catalyst']}'")
+        elif content:
+            # Fallback: 从策略官的 ⚡ 卡片催化剂 提取
             card_cat_match = re.search(r"(?:⚡\s*)?卡片催化剂[:：]\s*(.+)", content)
             if card_cat_match:
                 card_cat = card_cat_match.group(1).strip().rstrip("。.")
                 if card_cat and card_cat not in ("无", "无。"):
-                    # YYYY-MM-DD → MM-DD 短格式
-                    card_cat = re.sub(r"202[4-9]-(\d{2})-(\d{2})", r"\1-\2", card_cat)
-                    p["catalyst"] = card_cat.strip()
-                    logger.info(f"📋 enrichment [{p.get('name')}] catalyst='{p['catalyst']}'")
+                    has_stale_date = bool(re.search(r"202[0-5]", card_cat))
+                    if has_stale_date:
+                        p["catalyst"] = _scout_catalyst
+                        logger.warning(f"📋 enrichment [{p.get('name')}] 策略官催化剂含旧日期，恢复侦察官的: "
+                                      f"策略官='{card_cat}' → 侦察官='{_scout_catalyst}'")
+                    else:
+                        card_cat = re.sub(r"2026-(\d{2})-(\d{2})", r"\1-\2", card_cat)
+                        p["catalyst"] = card_cat.strip()
+                        logger.info(f"📋 enrichment [{p.get('name')}] catalyst=策略官 '{p['catalyst']}'")
 
-            # P36: 策略官输出"无"时，保留侦察官的催化剂（p["catalyst"] 可能已由侦察官填充）
-            # 不执行任何额外操作，侦察官的值自然保留
+        # 最终兜底: 如果 catalyst 仍为空，用侦察官的 buzz 填充
+        if not p.get("catalyst") and _scout_catalyst:
+            p["catalyst"] = _scout_catalyst
+            logger.info(f"📋 enrichment [{p.get('name')}] catalyst=侦察官buzz '{_scout_catalyst}'")
 
-        # P36: 无催化剂项目记录警告（后续可考虑过滤）
+        # P36: 无催化剂项目记录警告
         if not p.get("catalyst"):
             logger.warning(f"⚠️ [{p.get('name')}] 无催化剂")
 
@@ -663,145 +895,177 @@ def run_tweet_writer(
             system_prompt=system_prompt,
             max_tokens=6000,
         )
+    except Exception as e:
+        logger.warning(f"🐦 推文 {provider} 失败: {e}，尝试 Grok fallback...")
+        try:
+            result = generate_text(
+                prompt=user_prompt,
+                provider="grok",
+                temperature=0.7,
+                system_prompt=system_prompt,
+                max_tokens=6000,
+            )
+        except Exception as e2:
+            logger.error(f"🐦 推文 Grok 也失败: {e2}")
+            return []
 
-        # 解析: 按行首「项目名称：」分割为各项目推文（兼容旧版🔍格式）
-        import re
-        tweets = []
+    # 解析: 按行首「项目名称：」分割为各项目推文（兼容旧版🔍格式）
+    import re
+    tweets = []
 
-        # P35: 构建 name → twitter 映射（精确 + 模糊）
-        handle_map = {}  # exact lower name → twitter
-        for p in projects:
-            pname = p.get("name", "").strip()
-            tw = p.get("twitter", "")
-            if pname:
-                handle_map[pname.lower()] = tw
+    # P35: 构建 name → twitter 映射（精确 + 模糊）
+    handle_map = {}  # exact lower name → twitter
+    for p in projects:
+        pname = p.get("name", "").strip()
+        tw = p.get("twitter", "")
+        if pname:
+            handle_map[pname.lower()] = tw
 
-        def _find_twitter(tweet_name: str, tweet_text: str) -> str:
-            """3 级匹配: 精确 → 包含 → 从文本提取 @handle"""
-            key = tweet_name.lower()
-            # 1) 精确匹配
-            if key in handle_map:
-                return handle_map[key]
-            # 2) 包含匹配（项目名是对方子串，或对方是项目名子串）
-            for pname, tw in handle_map.items():
-                if pname in key or key in pname:
-                    return tw
-            # 3) 从推文文本第一行提取 @handle
-            at_match = re.search(r"@(\w+)", tweet_text[:200])
-            if at_match:
-                return f"@{at_match.group(1)}"
-            return ""
+    def _find_twitter(tweet_name: str, tweet_text: str) -> str:
+        """3 级匹配: 精确 → 包含 → 从文本提取 @handle"""
+        key = tweet_name.lower()
+        # 1) 精确匹配
+        if key in handle_map:
+            return handle_map[key]
+        # 2) 包含匹配（项目名是对方子串，或对方是项目名子串）
+        for pname, tw in handle_map.items():
+            if pname in key or key in pname:
+                return tw
+        # 3) 从推文文本第一行提取 @handle
+        at_match = re.search(r"@(\w+)", tweet_text[:200])
+        if at_match:
+            return f"@{at_match.group(1)}"
+        return ""
 
-        # 按行首「项目名称：」或「🔍」分割（避免内容中的"项目"误触发）
-        blocks = re.split(r"(?=^项目名称：|^🔍)", result.strip(), flags=re.MULTILINE)
-        for block in blocks:
-            block = block.strip()
-            if not block:
-                continue
-            # 提取项目名
-            name_match = re.match(r"(?:项目名称：|🔍)\s*(.+?)(?:\s*@|\n)", block)
-            if not name_match:
-                continue
-            name = name_match.group(1).strip()
-            # P34: 清理 LLM 输出的孤零零 # 和尾部空白
-            clean_text = re.sub(r'\n\s*#\s*$', '', block.strip()).strip()
-            # P36: 清理 LLM 常见杂质
-            clean_text = re.sub(r'###\s*项目\d+.*', '', clean_text)           # ### 项目4
-            clean_text = re.sub(r'[（(]注[：:].*?[）)]', '', clean_text)       # （注：...）
-            clean_text = re.sub(r'\n---+\n?', '\n', clean_text)               # --- 分隔线
-            clean_text = re.sub(r'\n{3,}', '\n\n', clean_text).strip()        # 多余空行
-            # P35: 3 级匹配查找 twitter handle
-            twitter = _find_twitter(name, clean_text)
+    # 按行首「项目名称：」或「🔍」或「**项目名 @handle**」分割
+    # 注意: 不能用 ^\*\*[^*] 因为会误匹配 **定位：** 等内部格式行
+    blocks = re.split(r"(?=^项目名称：|^🔍|^\*\*(?!定位|团队|代币|催化|🔥|背书|融资|数据))", result.strip(), flags=re.MULTILINE)
+    for block in blocks:
+        block = block.strip()
+        if not block:
+            continue
+        # 提取项目名（兼容 "项目名称：XX @yy"、"🔍 XX"、"**XX @yy**" 格式）
+        name_match = re.match(r"(?:项目名称：|🔍)\s*(.+?)(?:\s*@|\n)", block)
+        if not name_match:
+            # 兼容 LLM 输出 **ProjectName @handle** 格式
+            name_match = re.match(r"\*\*\s*(.+?)\s*(?:@|\*\*)", block)
+        if not name_match:
+            continue
+        name = name_match.group(1).strip().strip('*').strip()
+        # 跳过误匹配到的内部格式行
+        if name in ("定位", "团队与背书", "代币信息", "催化剂", "🔥 催化剂", "融资", "数据"):
+            continue
+        # P34: 清理 LLM 输出的孤零零 # 和尾部空白
+        clean_text = re.sub(r'\n\s*#\s*$', '', block.strip()).strip()
+        # P36: 清理 LLM 常见杂质
+        clean_text = re.sub(r'###\s*项目\d+.*', '', clean_text)           # ### 项目4
+        clean_text = re.sub(r'[（(]注[：:].*?[）)]', '', clean_text)       # （注：...）
+        clean_text = re.sub(r'\n---+\n?', '\n', clean_text)               # --- 分隔线
+        clean_text = re.sub(r'\n{3,}', '\n\n', clean_text).strip()        # 多余空行
+        # P35: 3 级匹配查找 twitter handle
+        twitter = _find_twitter(name, clean_text)
 
-            # P36: 将 @handle 注入推文文本（方便复制时带上X账号）
-            if twitter and twitter not in clean_text:
+        # P36: 将 @handle 注入推文文本（方便复制时带上X账号）
+        if twitter and twitter not in clean_text:
+            # 兼容 "项目名称：XX" 和 "**XX**" 两种格式
+            if f"项目名称：{name}" in clean_text:
                 clean_text = clean_text.replace(
                     f"项目名称：{name}",
                     f"项目名称：{name} {twitter}",
                     1
                 )
-
-            tweets.append({
-                "name": name,
-                "twitter": twitter,
-                "text": clean_text,
-                "char_count": len(clean_text),
-            })
-
-        # fallback: 如果解析失败，整段作为推文
-        if not tweets:
-            tweets.append({
-                "name": "Alpha日报",
-                "text": result,
-                "char_count": len(result),
-            })
-
-        # P33: 固定标语 + LLM 悬念内容的聚合主推文（tweets[0]）
-        # 前端 TweetCards.tsx 取 tweets[0] 作为主推文展示
-        if len(tweets) >= 2:
-            n = len(tweets)
-
-            # 提取每个项目的核心亮点供 LLM 参考
-            highlights = []
-            for t in tweets:
-                name = t.get("name", "?")
-                snippet = t["text"][:150].replace("🔍", "").strip()
-                highlights.append(f"- {name}: {snippet}")
-            highlights_text = "\n".join(highlights)
-
-            hook_prompt = (
-                f"今日投研发现了 {n} 个项目，亮点如下：\n{highlights_text}\n\n"
-                "请为每个项目写一句悬念式描述（不写项目名称），要求：\n"
-                "1. 每行以'一个'或具体数据开头，制造好奇心\n"
-                "2. 只陈述事实，不夸张，不用感叹号\n"
-                "3. 每行不超过25个字\n"
-                "4. 只输出描述行，不加任何标题、编号、解释\n"
-            )
-
-            try:
-                body_text = generate_text(
-                    prompt=hook_prompt,
-                    provider=provider,
-                    model_id=model_id,
-                    temperature=0.7,
-                    max_tokens=300,
+            elif f"**{name}**" in clean_text:
+                clean_text = clean_text.replace(
+                    f"**{name}**",
+                    f"**{name} {twitter}**",
+                    1
                 )
-                body_text = body_text.strip().strip("`").strip()
-                if body_text.startswith("```"):
-                    body_text = body_text.split("```")[1].strip()
-                # 只保留非空行
-                lines = [l.strip() for l in body_text.split("\n") if l.strip()]
-                body_text = "\n".join(lines[:n])  # 最多和项目数一样
-                logger.info(f"🐦 主推文内容(LLM): {len(body_text)}字")
+            elif f"**{name}" in clean_text:
+                clean_text = clean_text.replace(
+                    f"**{name}",
+                    f"**{name} {twitter}",
+                    1
+                )
 
-                # P36: 主推文最小长度检查（≥50字），不足用模板补充
-                if len(body_text) < 50:
-                    logger.warning(f"🐦 主推文过短({len(body_text)}字 < 50字)，使用模板补充")
-                    names = " | ".join(t.get("name", "?") for t in tweets[:6])
-                    body_text = f"今日 {n} 个 Alpha 项目值得关注：\n{names}\n\n{body_text}"
-            except Exception as e:
-                logger.warning(f"🐦 主推文 LLM 失败，使用 fallback: {e}")
+        # Bug fix: 去除 ** markdown 符号（前端不渲染 markdown）
+        clean_text = re.sub(r'\*\*', '', clean_text).strip()
+        clean_text = re.sub(r'\n{3,}', '\n\n', clean_text).strip()
+
+        tweets.append({
+            "name": name,
+            "twitter": twitter,
+            "text": clean_text,
+            "char_count": len(clean_text),
+        })
+
+    # fallback: 如果解析失败，整段作为推文
+    if not tweets:
+        tweets.append({
+            "name": "Alpha日报",
+            "text": result,
+            "char_count": len(result),
+        })
+
+    # P33: 固定标语 + LLM 悬念内容的聚合主推文（tweets[0]）
+    # 前端 TweetCards.tsx 取 tweets[0] 作为主推文展示
+    if len(tweets) >= 2:
+        n = len(tweets)
+
+        # 提取每个项目的核心亮点供 LLM 参考
+        highlights = []
+        for t in tweets:
+            name = t.get("name", "?")
+            snippet = t["text"][:150].replace("🔍", "").strip()
+            highlights.append(f"- {name}: {snippet}")
+        highlights_text = "\n".join(highlights)
+
+        hook_prompt = (
+            f"今日投研发现了 {n} 个项目，亮点如下：\n{highlights_text}\n\n"
+            "请为每个项目写一句悬念式描述（不写项目名称），要求：\n"
+            "1. 每行以'一个'或具体数据开头，制造好奇心\n"
+            "2. 只陈述事实，不夸张，不用感叹号\n"
+            "3. 每行不超过25个字\n"
+            "4. 只输出描述行，不加任何标题、编号、解释\n"
+        )
+
+        try:
+            body_text = generate_text(
+                prompt=hook_prompt,
+                provider="grok",  # P37: 主推文也用 Grok
+                temperature=0.7,
+                max_tokens=300,
+            )
+            body_text = body_text.strip().strip("`").strip()
+            if body_text.startswith("```"):
+                body_text = body_text.split("```")[1].strip()
+            # 只保留非空行
+            lines = [l.strip() for l in body_text.split("\n") if l.strip()]
+            body_text = "\n".join(lines[:n])  # 最多和项目数一样
+            logger.info(f"🐦 主推文内容(LLM): {len(body_text)}字")
+
+            # P36: 主推文最小长度检查（≥50字），不足用模板补充
+            if len(body_text) < 50:
+                logger.warning(f"🐦 主推文过短({len(body_text)}字 < 50字)，使用模板补充")
                 names = " | ".join(t.get("name", "?") for t in tweets[:6])
-                body_text = f"今日 {n} 个项目：{names}"
+                body_text = f"今日 {n} 个 Alpha 项目值得关注：\n{names}\n\n{body_text}"
+        except Exception as e:
+            logger.warning(f"🐦 主推文 LLM 失败，使用 fallback: {e}")
+            names = " | ".join(t.get("name", "?") for t in tweets[:6])
+            body_text = f"今日 {n} 个项目：{names}"
 
-            # 组装：固定标语 + LLM内容 + 固定结尾
-            hook_text = f"今日发现，值得细看\n\n{body_text}\n\n⬇️\n\n#AI #Alpha"
+        # 组装：固定标语 + LLM内容 + 固定结尾
+        hook_text = f"今日发现，值得细看\n\n{body_text}\n\n⬇️\n\n#AI #Alpha"
 
-            main_tweet = {
-                "name": "Alpha日报",
-                "text": hook_text,
-                "char_count": len(hook_text),
-            }
-            tweets.insert(0, main_tweet)
-            logger.info(f"🐦 主推文: {main_tweet['char_count']}字, 含 {n} 个项目")
+        main_tweet = {
+            "name": "Alpha日报",
+            "text": hook_text,
+            "char_count": len(hook_text),
+        }
+        tweets.insert(0, main_tweet)
+        logger.info(f"🐦 主推文: {main_tweet['char_count']}字, 含 {n} 个项目")
 
-        logger.info(f"🐦 推文完成: {len(tweets)} 条（含主推文）")
-        return tweets
-
-    except Exception as e:
-        import traceback
-        logger.error(f"🐦 推文失败: {e}\n{traceback.format_exc()}")
-        return []
+    logger.info(f"🐦 推文完成: {len(tweets)} 条（含主推文）")
+    return tweets
 
 
 def _save_tweets(tweets: list[dict], date_str: str) -> str:
@@ -1060,13 +1324,13 @@ async def _run_post_analysis_pipeline(
     Returns:
         {"report_path", "card_path", "tweets_path", "report_content", "tweets"}
     """
-    # ===== enrichment — 从策略官报告回填 summary + catalyst =====
-    _progress("enrich", "提取项目定位与催化剂...")
-    enriched_projects = _enrich_projects_from_analysis(projects, analysis_results)
-
-    # ===== 总结官（总结归纳） =====
+    # ===== P37: 总结官先跑（生成精炼定位） =====
     _progress("summarizer", "总结归纳分析报告...")
     summary = run_summarizer(analysis_results, api_config)
+
+    # ===== enrichment — 从总结官+策略官回填 summary + catalyst =====
+    _progress("enrich", "提取项目定位与催化剂...")
+    enriched_projects = _enrich_projects_from_analysis(projects, analysis_results, summary)
 
     # ===== 推文文案 =====
     _progress("tweets", "生成推文文案...")
@@ -1234,6 +1498,7 @@ async def generate_daily_report(
                     projects = [
                         p for p in projects
                         if p.get("twitter", "").lower().lstrip("@") not in recent_handles
+                        or p.get("twitter", "").lower().lstrip("@") in ("", "-")
                     ]
                     skipped_48h = before - len(projects)
                     if skipped_48h > 0:

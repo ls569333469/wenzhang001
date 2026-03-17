@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+}
+.canvas {
+    width: 1200px; height: 675px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+}
+.header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
+}
+.title-group { display: flex; flex-direction: column; }
+.subtitle { font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }
+.main-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; }
+.main-title .accent { color: #FF3A2D; }
+.date { font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
+}
+.card {
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
+    display: flex; flex-direction: column;
+}
+.card-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
+}
+.twitter { color: #666; }
+.project-name {
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+.desc { font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    overflow: hidden; max-height: 2.8em;
+}
+.catalyst {
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: inline-block;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
+}
+.footer {
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+    <div class="header">
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
+        </div>
+        <div class="date">2026.03.15</div>
+    </div>
+    <div class="grid">
+            <div class="card">
+                <div class="card-top"><span>💰 DeFi</span><span class="twitter">@grvt_io</span></div>
+                <h2 class="project-name">Grvt</h2>
+                <div class="desc">Berachain杠杆收益DeFi协议</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 TGE预期在Season 2结束后不久启动，社区空投分配增至28%。</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🏗️ Infra</span><span class="twitter">@Backpack</span></div>
+                <h2 class="project-name">Backpack</h2>
+                <div class="desc">Solana钱包与交易所服务</div>
+                <div class="catalyst">🔥 TGE定于3月23日，25%代币分配用于空投。</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI</span><span class="twitter">@perplexity_ai</span></div>
+                <h2 class="project-name">Perplexity AI</h2>
+                <div class="desc">AI答案引擎搜索引擎</div>
+                <div class="catalyst">🔥 填写邮箱加入等待名单。</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>💰 DeFi</span><span class="twitter">@katana</span></div>
+                <h2 class="project-name">Katana</h2>
+                <div class="desc">Ronin链上DEX与永续平台</div>
+                <div class="catalyst">🔥 03-18 Binance KAT现货上市带Seed Tag</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🏗️ Infra</span><span class="twitter">@debridge</span></div>
+                <h2 class="project-name">Debridge</h2>
+                <div class="desc">跨链桥基础设施协议</div>
+                
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI</span><span class="twitter">@KaitoAI</span></div>
+                <h2 class="project-name">Kaito</h2>
+                <div class="desc">AI加密情报搜索平台</div>
+                <div class="catalyst">🔥 03-15 ZKC代币第二批解锁和领取</div>
+            </div>
+    </div>
+    <div class="footer">
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
+    </div>
+</div>
+</body>
+</html>

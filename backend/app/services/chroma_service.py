@@ -44,12 +44,22 @@ class ChromaService:
 
     @property
     def client(self):
-        """懒初始化 Chroma 客户端"""
+        """懒初始化 Chroma 客户端（自动检测 Cloud 凭证）"""
         if self._client is None:
             try:
                 import chromadb
-                self._client = chromadb.PersistentClient(path=self._db_path)
-                logger.info(f"[Chroma] ✅ 初始化成功, 数据目录: {self._db_path}")
+                import os
+                api_key = os.getenv("CHROMA_CLOUD_API_KEY")
+                tenant = os.getenv("CHROMA_CLOUD_TENANT")
+                database = os.getenv("CHROMA_CLOUD_DATABASE")
+                if all([api_key, tenant, database]):
+                    self._client = chromadb.CloudClient(
+                        tenant=tenant, database=database, api_key=api_key
+                    )
+                    logger.info(f"[Chroma] ✅ Cloud 模式: tenant={tenant}, db={database}")
+                else:
+                    self._client = chromadb.PersistentClient(path=self._db_path)
+                    logger.info(f"[Chroma] ✅ 本地模式: {self._db_path}")
             except Exception as e:
                 logger.error(f"[Chroma] ❌ 初始化失败: {e}")
                 raise
