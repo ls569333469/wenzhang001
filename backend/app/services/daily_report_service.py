@@ -56,8 +56,137 @@ def _render_research_template(template_name: str, variables: dict) -> Optional[s
 
 
 # ============================================================
+#  Grok X Search: batch support for >10 accounts (P39)
+# ============================================================
+
+GROK_X_SEARCH_BATCH_SIZE = 10  # Grok API hard limit per x_search call
+
+
+def _grok_batch_x_search(sources: list[dict]) -> dict:
+    """
+    P39: Grok x_search with automatic batching for >10 accounts.
+
+    Grok's x_search tool allows at most 10 allowed_x_handles per call.
+    This function splits the source list into batches, calls Grok serially
+    for each batch, and merges results using _parse_projects_from_text()
+    which handles dedup via its internal `seen` set.
+
+    Args:
+        sources: [{handle: "@xxx", desc: "..."}, ...]
+
+    Returns:
+        {"projects": list[dict], "raw_text": str, "elapsed": float}
+    """
+    import time as _time
+    from datetime import timedelta
+
+    t0 = _time.time()
+    today = cn_now()
+    today_str = today.strftime("%Y-%m-%d")
+    two_days_ago = (today - timedelta(days=2)).strftime("%Y-%m-%d")
+
+    # Split into batches of GROK_X_SEARCH_BATCH_SIZE
+    all_handles = [s['handle'].replace('@', '').strip() for s in sources]
+    batches = [
+        all_handles[i:i + GROK_X_SEARCH_BATCH_SIZE]
+        for i in range(0, len(all_handles), GROK_X_SEARCH_BATCH_SIZE)
+    ]
+
+    if len(batches) > 1:
+        batch_sizes = "+".join(str(len(b)) for b in batches)
+        logger.info(
+            f"🔭 Grok batch x_search: {len(all_handles)} accounts "
+            f"-> {len(batches)} batches ({batch_sizes})"
+        )
+    else:
+        logger.info(f"🔭 Grok x_search: {len(all_handles)} accounts (single batch)")
+
+    grok_system = (
+        "你是加密货币投研侦察机器。你的唯一职责是将搜索到的数据转换为 Markdown 表格。\n"
+        "请搜索用户指定的 Twitter/X 账号近 48 小时的推文。只要推文提到了任何 Crypto 实体、代币符号、积分任务、空投或项目名称，"
+        "无论你认为其质量如何，都必须将其视为项目并收录。\n"
+        "【绝对强制要求】：不准写任何废话！不准做质量主观评判！不准写\u201c目前未发现重点项目\u201d！\n"
+        "只要你搜索到了任何上面提到的内容，你必须、绝对、强制输出一个完整的 Markdown 表格。\n"
+        "如果有任何相关提到项目，不要写除此之外的说明。"
+    )
+
+    all_raw_texts = []
+    batch_errors = []
+
+    for batch_idx, batch_handles in enumerate(batches, 1):
+        batch_label = f"batch {batch_idx}/{len(batches)}"
+        logger.info(
+            f"🔭 Grok {batch_label}: searching {', '.join(batch_handles)} "
+            f"({len(batch_handles)} accounts)"
+        )
+
+        grok_tools = [{
+            "type": "x_search",
+            "allowed_x_handles": batch_handles,
+            "from_date": two_days_ago,
+            "to_date": today_str
+        }]
+
+        grok_prompt = (
+            f"请搜索这些账号近48小时的内容: {', '.join(batch_handles)}\n"
+            "提取其中提到的所有加密货币项目、代币符号、空投活动或积分任务。\n"
+            "不用管是不是优质项目！全部放在这个格式的表格里：\n"
+            "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n\n"
+            "近期催化剂字段要求：必须包含具体日期！按以下优先级：\n"
+            "第一优先: TGE、空投、代币上线、主网上线（如'3月23日TGE'）\n"
+            "第二优先: 测试网、产品发布、Galxe/Zealy任务、快照、Binance Alpha\n"
+            "第三优先: 积分系统、竞赛活动、NFT铸造、代币解锁\n\n"
+            "所有表格内容必须用中文输出，项目名称和代币符号除外。近期催化剂务必用中文且带具体日期。"
+        )
+
+        try:
+            grok_text = generate_text(
+                prompt=grok_prompt,
+                provider="grok",
+                system_prompt=grok_system,
+                temperature=0.8,
+                max_tokens=4096,
+                extra_body={
+                    "search": True,
+                    "tools": grok_tools
+                },
+            )
+            logger.info(f"🔭 Grok {batch_label} raw output:\n{grok_text}")
+            all_raw_texts.append(grok_text)
+        except Exception as e:
+            logger.error(f"🔭 Grok {batch_label} failed: {e}")
+            batch_errors.append(f"{batch_label}: {e}")
+
+    # Merge all batch outputs and parse + dedup
+    elapsed = _time.time() - t0
+    if not all_raw_texts:
+        logger.error(f"🔭 Grok all {len(batches)} batches failed: {batch_errors}")
+        return {"projects": [], "raw_text": "", "elapsed": elapsed}
+
+    combined_text = "\n\n".join(all_raw_texts)
+    projects = _parse_projects_from_text(combined_text)
+
+    if batch_errors:
+        logger.warning(
+            f"🔭 Grok partial success: {len(all_raw_texts)}/{len(batches)} batches OK, "
+            f"failures: {batch_errors}"
+        )
+
+    logger.info(
+        f"🔭 Grok batch search done: {len(projects)} projects "
+        f"from {len(all_raw_texts)} batches ({elapsed:.0f}s)"
+    )
+    return {
+        "projects": projects,
+        "raw_text": combined_text,
+        "elapsed": elapsed,
+    }
+
+
+# ============================================================
 #  Step 1: 侦察官 — 搜索热门项目
 # ============================================================
+
 
 def run_scout() -> dict:
     """
@@ -126,75 +255,12 @@ def run_scout() -> dict:
             "elapsed": result.get("elapsed", 0),
     }
 
-    # Surf 失败 → Grok fallback
+    # Surf 失败 → Grok 分批搜索 fallback (P39)
     error = result.get("error", "Unknown")[:200]
-    logger.warning(f"🔭 Surf 失败({error})，尝试 Grok fallback...")
+    logger.warning(f"🔭 Surf 失败({error})，尝试 Grok 分批搜索...")
+    return _grok_batch_x_search(sources)
 
-    import time
-    from datetime import timedelta
-    t0 = time.time()
-    today = cn_now()
-    today_str = today.strftime("%Y-%m-%d")
-    two_days_ago = (today - timedelta(days=2)).strftime("%Y-%m-%d")
-    logger.info(f"🔭 Grok fallback: 今天={today_str}, 2天前={two_days_ago}")
 
-    try:
-        from app.core.llm import generate_text
-        grok_system = (
-            "你是加密货币投研侦察机器。你的唯一职责是将搜索到的数据转换为 Markdown 表格。\n"
-            "请搜索用户指定的 Twitter/X 账号近 48 小时的推文。只要推文提到了任何 Crypto 实体、代币符号、积分任务、空投或项目名称，"
-            "无论你认为其质量如何，都必须将其视为项目并收录。\n"
-            "【绝对强制要求】：不准写任何废话！不准做质量主观评判！不准写“目前未发现重点项目”！\n"
-            "只要你搜索到了任何上面提到的内容，你必须、绝对、强制输出一个完整的 Markdown 表格。\n"
-            "如果有任何相关提到项目，不要写除此之外的说明。"
-        )
-        # 提取追踪的所有 X 账号 (最多取前 10 个，因为 X Search API 限制最多 10 个 allowed_x_handles)
-        # 注意: sources 变量是一个包含 {"handle": "@xxx"} 的列表
-        x_handles = [s['handle'].replace('@', '').strip() for s in sources][:10]
-        
-        grok_tools = [{
-            "type": "x_search",
-            "allowed_x_handles": x_handles,
-            "from_date": two_days_ago,
-            "to_date": today_str
-        }]
-
-        # P38: 覆盖 Jinja2 强约束。Grok 容易因为看到“早期、优质”而全盘否定。必须用最基础的提取指令。
-        grok_prompt = (
-            f"请搜索这些账号近48小时的内容: {', '.join(x_handles)}\n"
-            "提取其中提到的所有加密货币项目、代币符号、空投活动或积分任务。\n"
-            "不用管是不是优质项目！全部放在这个格式的表格里：\n"
-            "| 项目名称 | Twitter | 赛道 | KOL 关注数 | 代币 | 阶段 | 近期催化剂 |\n\n"
-            "近期催化剂字段要求：必须包含具体日期！按以下优先级：\n"
-            "第一优先: TGE、空投、代币上线、主网上线（如'3月23日TGE'）\n"
-            "第二优先: 测试网、产品发布、Galxe/Zealy任务、快照、Binance Alpha\n"
-            "第三优先: 积分系统、竞赛活动、NFT铸造、代币解锁\n\n"
-            "所有表格内容必须用中文输出，项目名称和代币符号除外。近期催化剂务必用中文且带具体日期。"
-        )
-
-        grok_text = generate_text(
-            prompt=grok_prompt,
-            provider="grok",
-            system_prompt=grok_system,
-            temperature=0.8,
-            max_tokens=4096,
-            extra_body={
-                "search": True,
-                "tools": grok_tools
-            },
-        )
-        projects = _parse_projects_from_text(grok_text)
-        elapsed = time.time() - t0
-        logger.info(f"Grok Raw Output:\n{grok_text}")
-        logger.info(f"🔭 侦察官完成(Grok fallback): 发现 {len(projects)} 个项目 ({elapsed:.0f}s)")
-        return {
-            "projects": projects,
-            "raw_text": grok_text,
-            "elapsed": elapsed,
-        }
-    except Exception as e:
-        logger.error(f"🔭 Grok fallback 也失败: {e}")
-        return {"projects": [], "raw_text": "", "elapsed": time.time() - t0}
 
 # ============================================================
 #  Step 1.7: 6551 X 账号验证（P35 B3）
@@ -696,15 +762,25 @@ def _enrich_projects_from_analysis(
 
         # ---------- P37: 催化剂提取（优先总结官 > 策略官 > 侦察官）----------
         # 总结官的催化剂是中文且带日期，不受前半段 API 影响
+        def _clean_catalyst(val: str) -> str:
+            """清理催化剂: 去除 ** markdown, 判断是否实质为空"""
+            val = re.sub(r'\*\*', '', val).strip().rstrip("。.")
+            # 过滤 "无" 的各种变体
+            if not val or val in ("无", "暂无", "无。", "N/A", "n/a", "-", "—"):
+                return ""
+            return val
+
         if summ_data and summ_data.get("catalyst"):
-            p["catalyst"] = summ_data["catalyst"]
-            logger.info(f"📋 enrichment [{p.get('name')}] catalyst=总结官 '{summ_data['catalyst']}'")
+            cleaned = _clean_catalyst(summ_data["catalyst"])
+            if cleaned:
+                p["catalyst"] = cleaned
+                logger.info(f"📋 enrichment [{p.get('name')}] catalyst=总结官 '{cleaned}'")
         elif content:
             # Fallback: 从策略官的 ⚡ 卡片催化剂 提取
             card_cat_match = re.search(r"(?:⚡\s*)?卡片催化剂[:：]\s*(.+)", content)
             if card_cat_match:
-                card_cat = card_cat_match.group(1).strip().rstrip("。.")
-                if card_cat and card_cat not in ("无", "无。"):
+                card_cat = _clean_catalyst(card_cat_match.group(1))
+                if card_cat:
                     has_stale_date = bool(re.search(r"202[0-5]", card_cat))
                     if has_stale_date:
                         p["catalyst"] = _scout_catalyst
@@ -717,8 +793,12 @@ def _enrich_projects_from_analysis(
 
         # 最终兜底: 如果 catalyst 仍为空，用侦察官的 buzz 填充
         if not p.get("catalyst") and _scout_catalyst:
-            p["catalyst"] = _scout_catalyst
-            logger.info(f"📋 enrichment [{p.get('name')}] catalyst=侦察官buzz '{_scout_catalyst}'")
+            p["catalyst"] = _clean_catalyst(_scout_catalyst) or _scout_catalyst
+            logger.info(f"📋 enrichment [{p.get('name')}] catalyst=侦察官buzz '{p['catalyst']}'")
+
+        # 最终安全网: 再次清理 ** 符号
+        if p.get("catalyst"):
+            p["catalyst"] = re.sub(r'\*\*', '', p["catalyst"]).strip()
 
         # P36: 无催化剂项目记录警告
         if not p.get("catalyst"):
@@ -810,15 +890,34 @@ def run_reviewer(projects: list[dict], api_config: dict = None) -> list[dict]:
 
 def run_card_generator(projects: list[dict], date_str: str) -> str:
     """
-    生成 1200×675 配图 HTML
+    生成 1200×675 配图 HTML + PNG
 
     Returns:
         保存路径
     """
     logger.info("📸 配图: 生成中...")
-    from ..services.card_generator import save_card
+    from ..services.card_generator import save_card, generate_card_image
     path = save_card(projects, date_str)
-    logger.info(f"📸 配图完成: {path}")
+    logger.info(f"📸 配图 HTML 完成: {path}")
+
+    # 确保 PNG 也被生成（save_card 中 Playwright 可能静默失败）
+    png_path = path.replace(".html", ".png")
+    import os
+    if not os.path.exists(png_path):
+        logger.warning("📸 PNG 不存在，尝试重新生成...")
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                html = f.read()
+            generate_card_image(html, png_path)
+            if os.path.exists(png_path):
+                logger.info(f"📸 PNG 重新生成成功: {png_path}")
+            else:
+                logger.error("📸 PNG 重新生成仍然失败")
+        except Exception as e:
+            logger.error(f"📸 PNG 重新生成异常: {e}")
+    else:
+        logger.info(f"📸 PNG 已生成: {png_path}")
+
     return path
 
 

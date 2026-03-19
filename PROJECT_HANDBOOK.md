@@ -1,7 +1,7 @@
-# Quantum Studio v13.0 - 项目手册
+# Quantum Studio v14.0 - 项目手册
 
-> **更新日期**: 2026-03-11  
-> **版本**: v13.0 (P36 投研管线修复 + 催化剂评分系统)  
+> **更新日期**: 2026-03-17  
+> **版本**: v14.0 (P37 管线统一 + ChromaDB Cloud + 推文优化)  
 > **维护者**: AI 开发团队
 
 ---
@@ -13,7 +13,7 @@
 | 模块 | 功能 | 管线 |
 |------|------|------|
 | **创作工坊** | 爆款 Web3 文章生成 | Strategist → Writer → Critic → Polisher |
-| **投研快报** | 自动化项目调研 + 推文生成 | Scout → Strategist → Enrichment → Reviewer → Tweet → Card |
+| **投研快报** | 自动化项目调研 + 推文生成 | Scout → Strategist → Summarizer → Enrichment → Tweet → Card → Reviewer |
 
 ### 技术栈
 
@@ -24,8 +24,8 @@
 | **Agent 编排** | LangGraph (有状态工作流) |
 | **LLM 模型** | 火山引擎 (豆包/DeepSeek) + Google Gemini |
 | **投研搜索** | Surf AI API (surf-1.5) + leak.me KOL Tracker |
-| **实时数据** | Grok API (X/Twitter 实时搜索) |
-| **数据存储** | Google Sheets + ChromaDB (本地) + 本地文件系统 |
+| **实时数据** | xAI Grok API (X/Twitter 实时搜索, 策略官 fallback) |
+| **数据存储** | Google Sheets + ChromaDB Cloud (在线) + 本地文件系统 |
 | **配图截图** | Playwright (无头浏览器, subprocess 隔离) |
 
 ---
@@ -53,41 +53,65 @@
 ┌─ Strategist ────────────────────────────────┐
 │  • RAG 检索 (Google Sheets 知识库)            │
 │  • 生成 Context Card (事件脉络感知)            │
-│  • 推荐创作模式 (智能模式匹配)                 │
-└─────────────────────────────────────────────┘
-    ↓
-┌─ Writer ────────────────────────────────────┐
-│  • 8 种独立 Writer (per-mode .py + .jinja2)  │
-│  • Anti-AI 禁用词约束 (250+ 词)              │
-│  • 生成 3 个变体版本供选择                    │
-└─────────────────────────────────────────────┘
-    ↓
-┌─ Critic ────────────────────────────────────┐
-│  • 5 维度评分 + AI 痕迹检测                   │
-│  • score < 阈值 → 自动触发重写                │
-└─────────────────────────────────────────────┘
-    ↓
-┌─ Polisher ──────────────────────────────────┐
-│  • 最终检查清单 (节奏、禁用词、格式)           │
-└─────────────────────────────────────────────┘
-    ↓
-最终文章输出 (TipTap 富文本编辑器)
-```
+│  • 推荐创�### 二、投研快报管线 (P31-P37, 10 步流水线)
 
-### 二、投研快报管线 (P31-P36, 10 步流水线)
-
-> **P35 重构后的模块化管线**，支持自动模式和重组模式。
+> **P37 统一管线架构**：不管前半段用 Surf 还是 Grok，后半段（总结官→enrichment→推文→配图）都走统一流程。
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                    两种运行模式                               │
 │  🔄 自动模式: Scout 搜索 → 全流程自动                         │
-│  � 重组模式: 用户选择项目 → 从磁盘加载策略官报告 → 后半段重组   │
+│  📦 重组模式: 用户选择项目 → 从磁盘加载策略官报告 → 后半段重组   │
 └─────────────────────────────────────────────────────────────┘
+
+       ┌── 前半段 (API 可变) ──┐   ┌── 后半段 (统一流程) ──────────┐
 
 Step 1  🔭 侦察官 (Scout)
         │  Surf API 搜索 @leakmealpha (leak.me)
         │  输出: 项目表格 (名称/Twitter/赛道/KOL数/催化剂)
+        │  代码: backend/app/agents/research/scout.py
+        ↓
+Step 2  ☑️ 用户选择项目 (前端勾选 + 项目库混合)
+        │  支持跨日期选择: 今日发现 + 历史项目库
+        │  代码: frontend/src/features/studio/components/data/ResearchPanel.tsx
+        ↓
+Step 3  🔬 策略官 (Strategist)
+        │  Surf API 深度调研 → Surf 余额不足时自动 fallback 到 Grok
+        │  P37: Grok fallback 强制中文输出
+        │  输出: 项目报告 .md (定位/团队/融资/催化剂/风险)
+        │  存储: reports/research/projects/{handle}_{date}.md
+        ↓
+Step 4  ✅ 6551 验证 (Twitter Handle 校验)
+        │  调用 6551 API 验证 Twitter 账号真实性
+        ↓
+Step 5  📋 总结官 (Summarizer) ← P37 调整到 enrichment 前
+        │  火山引擎 LLM 总结归纳所有策略官报告
+        │  输出: ⚡ 卡片定位 + ⚡ 卡片催化剂 (中文, 每项带日期)
+        │  代码: summarizer.jinja2 → daily_report_service.py
+        ↓
+Step 6  📋 数据回填 (Enrichment)
+        │  P37: 优先从总结官提取 summary + catalyst
+        │  fallback 链: 总结官 → 策略官 → 侦察官
+        │  代码: daily_report_service.py → _enrich_projects()
+        ↓
+Step 7  🐦 推文写手 (Tweet Writer)
+        │  聚合项目生成 Alpha 速报推文 (主推文 + 各项目推文)
+        │  P37: 自动注入 @handle + 去除 ** markdown + 强制中文
+        │  存储: reports/research/tweets_{date}.md + .json
+        │  代码: copywriter/tweet_digest.jinja2
+        ↓
+Step 8  📸 配图生成 (Card Generator)
+        │  生成 1200×675 HTML 配图 (瑞士金融报纸风)
+        │  Playwright 无头浏览器截图为 PNG (subprocess 隔离)
+        │  存储: reports/research/card_{date}.html + .png
+        │  代码: backend/app/services/card_generator.py
+        ↓
+Step 9  🔍 质检官 (Post-Card Reviewer)
+        │  终检: 催化剂≤20字, 定位≤30字, 翻译, 截断修复
+        │  代码: backend/data/prompts/research/reviewer.jinja2
+        ↓
+Step 10 📡 API 返回前端展示
+``` (名称/Twitter/赛道/KOL数/催化剂)
         │  代码: backend/app/agents/research/scout.py
         ↓
 Step 2  ☑️ 用户选择项目 (前端勾选 + 项目库混合)
@@ -175,8 +199,9 @@ Step 10 📡 API 返回前端展示
 │       │   ├── prompts.py              # 模板渲染 + 词库注入
 │       │   └── forbidden_patterns.py   # P21 禁用词加载器
 │       └── services/
-│           ├── daily_report_service.py # ⭐ 投研管线核心 (1350+ 行)
+│           ├── daily_report_service.py # ⭐ 投研管线核心 (1600+ 行)
 │           ├── card_generator.py       # P31 HTML 配图 + 催化评分
+│           ├── chroma_service.py       # ChromaDB Cloud 向量引擎
 │           ├── surf_service.py         # Surf AI API 封装
 │           ├── data_service.py         # Google Sheets 读写
 │           ├── creation_store.py       # 本地 Markdown 存储
@@ -192,8 +217,9 @@ Step 10 📡 API 返回前端展示
 │           ├── polisher/ (4 个)        # Polisher 模板
 │           └── research/
 │               ├── scout.jinja2        # 侦察官提示词
-│               ├── tweet_digest.jinja2 # 推文写手提示词
-│               └── reviewer.jinja2     # 质检官提示词 (P36 更新)
+│               ├── summarizer.jinja2   # 总结官提示词 (P37 新增卡片催化剂)
+│               ├── copywriter/tweet_digest.jinja2 # 推文写手提示词
+│               └── reviewer.jinja2     # 质检官提示词
 │
 ├── frontend/src/features/
 │   ├── studio/
@@ -215,11 +241,11 @@ Step 10 📡 API 返回前端展示
 │   │   ├── tweets_{date}.json          # 推文 JSON (P36 保留 twitter handle)
 │   │   ├── card_{date}.html            # 配图 HTML
 │   │   └── card_{date}.png             # 配图截图
-│   ├── 设计文档/                        # P00-P36 设计方案
+│   ├── 设计文档/                        # P36-P37 设计方案 (旧版已归档清理)
 │   └── 工作日志/                        # 交接报告
 │
 ├── PROJECT_HANDBOOK.md                 # 本文档
-└── PROJECT_STATUS.md                   # 项目状态
+└── README.md                           # 项目说明
 ```
 
 ---
@@ -228,11 +254,12 @@ Step 10 📡 API 返回前端展示
 
 | 指标 | 值 |
 |------|-----|
-| **当前阶段** | P36 投研管线修复 (已完成) |
+| **当前阶段** | P37 管线统一 (已完成) |
 | **前端端口** | `localhost:3000` |
-| **后端端口** | `localhost:8000` |
-| **投研报告总数** | 123 个 (跨 9 个日期, 2026-02-27 ~ 2026-03-10) |
-| **Surf API** | ⚠️ 余额不足, 待充值 |
+| **后端端口** | `localhost:8001` |
+| **投研报告总数** | 231 个项目报告 (跨 16 个日期, 2026-02-25 ~ 2026-03-17) |
+| **Surf API** | ⚠️ 余额不足, 自动 fallback 到 Grok |
+| **ChromaDB** | ☁️ 在线模式 (ChromaDB Cloud, 本地/服务器共享) |
 
 ### 🤖 模型配置
 
@@ -240,16 +267,21 @@ Step 10 📡 API 返回前端展示
 |------|-----|----------|
 | **豆包 Seed** | `doubao-seed-1-8-251228` | 通用任务/多模态 |
 | **DeepSeek V3.2** | `deepseek-v3-2-251201` | 深度推理/联网搜索 |
-| **Surf AI** | `surf-1.5` | 投研深度调研 (策略官) |
+| **Surf AI** | `surf-1.5` | 投研深度调研 (策略官首选) |
 | **Surf AI (instant)** | `surf-1.5-instant` | 侦察官快速搜索 |
-| **Grok** | `grok-3-mini-beta` | 吹捧/Kaito 实时数据 |
+| **Grok** | `grok-3-mini-beta` | 策略官 fallback + 吹捧/Kaito 实时数据 |
+| **火山引擎** | volcengine (doubao) | 总结官 + 推文写手 |
 
 ### 环境变量 (.env)
 
 | 变量 | 用途 |
 |------|------|
 | `SURF_API_KEY` | Surf AI 调研搜索 |
-| `ANTHROPIC_API_KEY` | Anthropic Claude (备用) |
+| `XAI_API_KEY` | xAI Grok API (策略官 fallback) |
+| `VOLC_API_KEY` | 火山引擎 (总结官/推文写手) |
+| `CHROMA_CLOUD_API_KEY` | ChromaDB Cloud 在线向量库 |
+| `CHROMA_CLOUD_TENANT` | ChromaDB Cloud 租户 ID |
+| `CHROMA_CLOUD_DATABASE` | ChromaDB Cloud 数据库名 |
 | `TWITTER_TOKEN` | 6551 API Twitter 验证 |
 | `BINANCE_SQUARE_API_KEY` | 币安广场 API |
 
@@ -298,25 +330,26 @@ Step 10 📡 API 返回前端展示
 | P19-P22 | TipTap 编辑器 + Context Card + Anti-AI + 模式匹配 | ✅ |
 | P23-P27 | 素材源系统 + 独立管线 + Benchmark + 创作保存 | ✅ |
 | P30 | 吹捧模式提示词定稿 | ✅ |
-| **P31** | **投研模块 POC (Surf API + 4 层架构 + 配图)** | ✅ |
-| **P32** | **前端投研面板 (ResearchPanel + 项目库 + 进度条)** | ✅ |
-| **P34** | **6551 同步 + 币安广场 + 推文优化** | ✅ |
-| **P35** | **核心重组重构 (10 步管线 + 重组模式 + JSON 保存)** | ✅ |
-| **P36** | **投研管线修复 (催化剂简化 + 评分系统 + 跨日期)** | ✅ |
+| P31 | 投研模块 POC (Surf API + 4 层架构 + 配图) | ✅ |
+| P32 | 前端投研面板 (ResearchPanel + 项目库 + 进度条) | ✅ |
+| P34 | 6551 同步 + 币安广场 + 推文优化 | ✅ |
+| P35 | 核心重组重构 (10 步管线 + 重组模式 + JSON 保存) | ✅ |
+| P36 | 投研管线修复 (催化剂简化 + 评分系统 + 跨日期) | ✅ |
+| **P37** | **管线统一 + ChromaDB Cloud + Grok 适配 + 推文优化** | **✅** |
 
-### P36 修复清单 (2026-03-11 完成)
+### P37 变更清单 (2026-03-17 完成)
 
-| 修复项 | 说明 |
+| 变更项 | 说明 |
 |--------|------|
-| 催化剂流程简化 | 移除代码评分/三级 fallback/7天检查, 仅保留策略官 prompt |
-| 质检官后移 | 从 enrichment 后移到配图后 (终检) |
-| tweets JSON 双保存 | 保留 twitter handle 等结构化字段 |
-| 跨日期重组 | 支持混选不同日期的项目, 自动去重取最新 |
-| 推文清理 | 正则清除 `### 项目N` / `（注：...）` / `---` |
-| 配图截断修复 | 移除空格断词, summary 限制 40→60 字 |
-| 推文 @handle 注入 | 自动插入 @handle 到推文文本 (可复制) |
-| 侦察官红标签 | 前端 catalyst 字段映射 + localStorage 兼容 |
-| 催化剂评分过滤 | `_catalyst_importance()` 扩充至 55+ 关键词 |
+| 管线顺序调整 | 总结官移到 enrichment 前 (适配 Grok fallback) |
+| 总结官新增字段 | 输出 ⚡ 卡片催化剂 (中文, 带日期) |
+| enrichment 数据源统一 | summary + catalyst 优先从总结官取, fallback 策略官→侦察官 |
+| Grok fallback 中文 | 策略官 Surf 余额不足时 fallback Grok, 强制中文输出 |
+| ChromaDB Cloud | 从本地 PersistentClient 迁移到在线 CloudClient |
+| 推文去 markdown | 自动去除 `**` 加粗符号 |
+| 推文强制中文 | 英文术语翻译为中文 (onchain→链上, tokenized→代币化) |
+| 催化剂保留 | 推文写手不再丢弃总结官的催化剂信息 |
+| 项目清理 | 清理历史归档/测试文件/调试数据 ~300 个文件 |
 
 ---
 
@@ -326,7 +359,7 @@ Step 10 📡 API 返回前端展示
 ```bash
 cd d:/AI_Projects/2026001/backend
 .\venv\Scripts\activate       # Windows
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
 ```
 
 ### 2. 启动前端
@@ -342,7 +375,7 @@ npm run dev
 | 投研面板 | http://localhost:3000/studio (左侧 ResearchPanel) |
 | 素材中心 | http://localhost:3000/studio?view=materials |
 | 设置 | http://localhost:3000/settings |
-| 健康检查 | http://localhost:8000/health |
+| 健康检查 | http://localhost:8001/health |
 
 ---
 
@@ -366,14 +399,12 @@ npm run dev
 
 | 优先级 | 任务 | 说明 |
 |:---:|------|------|
-| 🔴 | Surf API 充值 | 侦察官搜索恢复, 当前 INSUFFICIENT_CREDIT |
-| 🔴 | 完整自动模式验证 | Scout → 全流程端到端测试 |
-| 🟠 | 催化剂 LLM 标注 | Scout prompt 加"催化优先级"列, 替代纯关键词 |
-| 🟠 | 知识库集成 | ChromaDB 存储历史报告, RAG 增强 |
+| 🔴 | Surf API 充值 | 当前 Surf 余额不足, 策略官依赖 Grok fallback |
 | 🟠 | Kaito Yap 模式 | 项目嘴撸任务内容生成 |
+| 🟠 | 催化剂 LLM 标注 | Scout prompt 加"催化优先级"列, 替代纯关键词 |
 | 🟡 | 定时任务引擎 | APScheduler 每日自动出报 |
 | 🟡 | X/Twitter API 发布 | 自动推送推文至 X |
-| 🟢 | 广场模式短帖 | 币安广场短文自动化 |
+| 🟢 | 投研产物云存储 | 将 reports/research/ 文件迁移到 R2/S3 |
 
 ---
 
@@ -381,7 +412,8 @@ npm run dev
 
 | 日期 | 版本 | 关键交付 |
 |------|------|----------|
-| **2026-03-11** | **v13.0** | **P36 投研管线修复: 催化剂简化/评分系统/跨日期重组/推文清理** |
+| **2026-03-17** | **v14.0** | **P37 管线统一: ChromaDB Cloud/Grok适配/总结官前置/推文中文化/项目清理** |
+| 2026-03-11 | v13.0 | P36 投研管线修复: 催化剂简化/评分系统/跨日期重组/推文清理 |
 | 2026-03-10 | v12.8 | P35 核心重组重构: 10 步管线/重组模式/JSON 保存 |
 | 2026-03-09 | v12.5 | P35 Phase 1: 模块化管线/重组 500 修复/DeepSeek 默认 |
 | 2026-03-08 | v12.3 | P34 6551 同步/币安广场/推文优化/动态卡片布局 |
@@ -395,4 +427,4 @@ npm run dev
 
 ---
 
-*Last updated: 2026-03-11 22:11*
+*Last updated: 2026-03-17 18:37*

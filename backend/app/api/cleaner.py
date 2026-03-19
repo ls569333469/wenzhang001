@@ -61,24 +61,19 @@ _jobs: Dict[str, CleanerJob] = {}
 
 @router.get("/stats", response_model=CleanerStats)
 async def get_stats():
-    """获取数据库统计"""
+    """获取数据库统计（ChromaDB）"""
     try:
-        from app.core.lark_client import lark_client
-        
-        app_token = os.getenv("LARK_BASE_TOKEN")
-        style_id = os.getenv("LARK_TABLE_ID")
-        knowledge_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
-        
-        style_resp = lark_client.list_records(app_token, style_id, page_size=1)
-        knowledge_resp = lark_client.list_records(app_token, knowledge_id, page_size=1)
-        
-        style_count = style_resp.get('data', {}).get('total', 0)
-        knowledge_count = knowledge_resp.get('data', {}).get('total', 0)
-        
+        from app.services.chroma_service import get_chroma_service
+        svc = get_chroma_service()
+        stats = svc.get_stats()
+
+        style_count = stats.get("style_samples", 0)
+        knowledge_count = stats.get("research_reports", 0)
+
         # 统计待处理文件
         data_dir = Path(__file__).parent.parent / "data"
         pending = sum(1 for _ in data_dir.glob("**/*.json")) + sum(1 for _ in data_dir.glob("**/*.txt"))
-        
+
         return CleanerStats(
             style_count=style_count,
             knowledge_count=knowledge_count,

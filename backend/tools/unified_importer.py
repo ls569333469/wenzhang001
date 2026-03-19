@@ -298,39 +298,6 @@ async def process_txt_with_ai(
     
     return results
 
-# ==========================================
-# Lark 上传
-# ==========================================
-
-async def upload_to_lark(record: Dict[str, Any], target: str) -> bool:
-    """上传到 Lark"""
-    try:
-        from app.core.lark_client import lark_client
-        
-        app_token = os.getenv("LARK_BASE_TOKEN")
-        
-        if target == "knowledge":
-            table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
-        else:
-            table_id = os.getenv("LARK_TABLE_ID")
-        
-        if not app_token or not table_id:
-            return False
-        
-        # 去重检查
-        content_hash = record.get("内容指纹", "")
-        # TODO: 实现 Lark 端去重
-        
-        loop = asyncio.get_event_loop()
-        await loop.run_in_executor(
-            None,
-            lambda: lark_client.create_record(app_token, table_id, record)
-        )
-        return True
-        
-    except Exception as e:
-        console.print(f"[red]Lark 上传错误: {e}[/red]")
-        return False
 
 # ==========================================
 # 主入口
@@ -413,7 +380,6 @@ async def _import_async(input_path: str, target: str, provider: str, dry_run: bo
                 if record:
                     total_processed += 1
                     if not dry_run:
-                        if await upload_to_lark(record, target):
                             total_uploaded += 1
                     else:
                         total_uploaded += 1
@@ -424,7 +390,6 @@ async def _import_async(input_path: str, target: str, provider: str, dry_run: bo
                 for record in records:
                     total_processed += 1
                     if not dry_run:
-                        if await upload_to_lark(record, target):
                             total_uploaded += 1
                     else:
                         total_uploaded += 1
@@ -439,21 +404,18 @@ async def _import_async(input_path: str, target: str, provider: str, dry_run: bo
 @app.command()
 def stats():
     """查看数据库统计"""
-    from app.core.lark_client import lark_client
-    
-    app_token = os.getenv("LARK_BASE_TOKEN")
-    style_id = os.getenv("LARK_TABLE_ID")
-    knowledge_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
-    
-    style_resp = lark_client.list_records(app_token, style_id, page_size=1)
-    knowledge_resp = lark_client.list_records(app_token, knowledge_id, page_size=1)
-    
-    style_count = style_resp.get('data', {}).get('total', 0)
-    knowledge_count = knowledge_resp.get('data', {}).get('total', 0)
+    try:
+        from app.services.chroma_service import get_chroma_service
+        svc = get_chroma_service()
+        stats = svc.get_stats()
+        style_count = stats.get("style_samples", 0)
+        knowledge_count = stats.get("research_reports", 0)
+    except Exception:
+        style_count = 0
+        knowledge_count = 0
     
     console.print(f"[bold]📊 数据库统计[/bold]")
     console.print(f"   🩸 Style_Repo: {style_count} 条")
     console.print(f"   🥩 Knowledge_Repo: {knowledge_count} 条")
-
 if __name__ == "__main__":
     app()

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: #E5E5E5;
+    font-family: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh;
+}
+.canvas {
+    width: 1200px; height: 675px;
+    background-color: #F4F3EE;
+    color: #1C1C1C;
+    padding: 40px 60px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+}
+.header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #1C1C1C;
+}
+.title-group { display: flex; flex-direction: column; }
+.subtitle { font-size: 16px; letter-spacing: 4px; font-weight: 500; margin-bottom: 4px; }
+.main-title { font-size: 42px; font-weight: 900; letter-spacing: -1px; }
+.main-title .accent { color: #FF3A2D; }
+.date { font-size: 24px; font-weight: 700; border-bottom: 2px solid #1C1C1C; padding-bottom: 4px; }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+    flex-grow: 1;
+    border-bottom: 1px solid #1C1C1C;
+    border-left: 1px solid #1C1C1C;
+}
+.card {
+    border-right: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    padding: 24px;
+    display: flex; flex-direction: column;
+}
+.card-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px; font-size: 14px; font-weight: 500;
+}
+.twitter { color: #666; }
+.project-name {
+    font-size: 32px; font-weight: 900; margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+.desc { font-size: 15px; color: #1C1C1C; line-height: 1.4; flex-grow: 1;
+    overflow: hidden; max-height: 2.8em;
+}
+.catalyst {
+    background-color: #FF3A2D; color: #FFF;
+    font-size: 12px; font-weight: 700;
+    padding: 5px 10px; display: inline-block;
+    overflow-wrap: break-word; word-break: break-all;
+    margin-top: 10px;
+    border-radius: 4px; line-height: 1.4;
+    max-width: 95%;
+}
+.footer {
+    display: flex; justify-content: space-between;
+    padding-top: 16px; font-size: 14px; font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="canvas">
+    <div class="header">
+        <div class="title-group">
+            <span class="subtitle">每日投研精选</span>
+            <div class="main-title"><span class="accent">ALPHA</span> 日报</div>
+        </div>
+        <div class="date">2026.03.18</div>
+    </div>
+    <div class="grid">
+            <div class="card">
+                <div class="card-top"><span>📌 Perp DEX / L</span><span class="twitter">@Aster_DEX</span></div>
+                <h2 class="project-name">Aster</h2>
+                <div class="desc">隐私优先的高性能Perp DEX L1区块链</div>
+                <div class="catalyst">🔥 2026年3月18日 巨大合作伙伴公告发布</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🔗 Web3游戏基础设施</span><span class="twitter">@Playnance_</span></div>
+                <h2 class="project-name">Playnance</h2>
+                <div class="desc">Web3 iGaming gasless区块链基础设施</div>
+                <div class="catalyst">🔥 2026年3月18日 $GCOIN MEXC上市及TGE</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI交易 / Perp</span><span class="twitter">@derivio_xyz</span></div>
+                <h2 class="project-name">Derivio</h2>
+                <div class="desc">AI驱动的一站式链上交易终端</div>
+                <div class="catalyst">🔥 无**</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 社区 / Meme</span><span class="twitter">@BasedFnd</span></div>
+                <h2 class="project-name">BASED</h2>
+                <div class="desc">Hyperliquid生态社区驱动Meme项目</div>
+                <div class="catalyst">🔥 2026年3月30日 $BASED TGE正式上线</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>📌 -</span><span class="twitter">@PerleLabs</span></div>
+                <h2 class="project-name">PerleLabs</h2>
+                <div class="desc">人类验证的具身智能AI数据网络</div>
+                <div class="catalyst" style="font-size:11px;padding:4px 8px;">🔥 2026年3月17日 $PRL被Coinbase加入上市路线图</div>
+            </div>
+            <div class="card">
+                <div class="card-top"><span>🤖 AI / Stablec</span><span class="twitter">@USDai_Official</span></div>
+                <h2 class="project-name">USD AI</h2>
+                <div class="desc">AI基础设施的去中心化结构化借贷协议</div>
+                <div class="catalyst">🔥 2026年3月22日 ICO退款窗口关闭</div>
+            </div>
+    </div>
+    <div class="footer">
+        <span style="color:#999;">⚠️ 以上内容仅供参考，不构成投资建议</span>
+        <span>雪球 @xueqiu88</span>
+    </div>
+</div>
+</body>
+</html>

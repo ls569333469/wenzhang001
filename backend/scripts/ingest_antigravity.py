@@ -1,9 +1,7 @@
 """
 Quantum Studio v3.0 - Antigravity 智能清洗入库脚本
 ==================================================
-使用 Google Gemini 将 TXT 原文清洗为结构化 JSON，自动入库到 Lark 知识库。
 
-数据流: TXT → Gemini (JSON) → Lark
 
 Usage:
     cd backend
@@ -41,7 +39,6 @@ WEB3_DATA_DIR = Path(__file__).parent.parent / "data" / "Web3素材"
 CONCURRENCY_LIMIT = 5   # 并发数 (从 3 提升到 5)
 MAX_RETRIES = 3         # 最大重试次数
 RETRY_DELAY = 2         # 重试间隔 (秒)
-LARK_TIMEOUT = 30       # Lark API 超时 (从 10s 提升到 30s)
 
 # v3.0 Prompt 模板 (优化版 - 使用句子数约束)
 SYSTEM_PROMPT = """**Role**: 
@@ -110,7 +107,6 @@ def clean_json_response(response: str) -> str:
     return response.strip()
 
 def parse_date_v3(date_str: str) -> Optional[int]:
-    """解析日期为 Lark 毫秒时间戳"""
     if not date_str or date_str == "Today":
         return int(datetime.now().timestamp() * 1000)
     
@@ -158,17 +154,14 @@ async def extract_with_antigravity(content: str, topic: str) -> dict:
         return None
 
 # ==========================================
-# Lark 操作
 # ==========================================
 
 async def check_exists_async(content_hash: str, app_token: str, table_id: str) -> bool:
     """查重：检查是否已存在"""
-    from app.core.lark_client import lark_client
     
     try:
         filter_str = f'CurrentValue.[内容指纹] = "{content_hash}"'
         result = await asyncio.to_thread(
-            lambda: lark_client.list_records(app_token, table_id, filter=filter_str, page_size=1)
         )
         items = result.get("data", {}).get("items", [])
         return len(items) > 0
@@ -185,7 +178,6 @@ async def upload_record_async(
     table_id: str
 ) -> bool:
     """上传记录到 Knowledge_Repo"""
-    from app.core.lark_client import lark_client
     
     # v3.0 字段映射 (含摘要截断)
     raw_summary = structured_data.get("summary", "")
@@ -198,7 +190,6 @@ async def upload_record_async(
         "信息深度": structured_data.get("info_depth", "资讯"),
         "事实类型": structured_data.get("fact_type", "事实"),
         "赛道分类": topic,
-        "正文原文": raw_content[:30000],  # Lark 字段限制
         "来源文件": source_file,
         "内容指纹": content_hash,
         "状态": "待处理"
@@ -211,7 +202,6 @@ async def upload_record_async(
     
     try:
         result = await asyncio.to_thread(
-            lambda: lark_client.create_record(app_token, table_id, fields, timeout=LARK_TIMEOUT)
         )
         if result.get("code") == 0:
             return True
@@ -239,7 +229,6 @@ async def upload_with_retry(
             )
             if success:
                 return True
-            # 如果是 Lark 逻辑错误（非网络），不重试
             return False
         except Exception as e:
             if attempt < MAX_RETRIES - 1:
@@ -366,8 +355,6 @@ async def main():
     args = parser.parse_args()
     
     # 配置
-    app_token = os.getenv("LARK_BASE_TOKEN")
-    table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
     
     console.print("=" * 60)
     console.print("🚀 Quantum Studio v3.0 - Antigravity 智能清洗")

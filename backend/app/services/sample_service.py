@@ -1,5 +1,4 @@
 # P28: Sample Service — Google Sheets Only
-# 数据源统一为 Google Sheets，移除 Lark/A/B 测试逻辑
 
 from typing import List, Dict
 from app.core.config import get_logger

@@ -1,7 +1,6 @@
 """
 Quantum Studio v5.1 - Knowledge_Repo 数据入库脚本
 ==================================================
-批量处理 Web3素材 文件夹中的 JSON 文件，清洗并上传至 Lark Knowledge_Repo 表。
 
 Usage:
     cd backend
@@ -33,7 +32,6 @@ except ImportError:
     print("Missing rich. Run: pip install rich")
     sys.exit(1)
 
-from app.core.lark_client import lark_client
 
 console = Console()
 
@@ -187,7 +185,6 @@ async def extract_entities_keywords(content: str, title: str) -> dict:
         return {"entities": [], "keywords": []}
 
 def parse_date(date_str: str) -> Optional[str]:
-    """解析日期格式，返回 Lark 接受的时间戳（毫秒）"""
     if not date_str:
         return None
     
@@ -202,7 +199,6 @@ def parse_date(date_str: str) -> Optional[str]:
     for fmt in formats:
         try:
             dt = datetime.strptime(date_str, fmt)
-            # Lark 日期字段需要毫秒时间戳
             return int(dt.timestamp() * 1000)
         except ValueError:
             continue
@@ -254,7 +250,6 @@ async def check_exists_async(content_hash: str, app_token: str, table_id: str) -
     try:
         filter_str = f'CurrentValue.[内容指纹] = "{content_hash}"'
         result = await asyncio.to_thread(
-            lambda: lark_client.list_records(app_token, table_id, filter=filter_str, page_size=1)
         )
         items = result.get("data", {}).get("items", [])
         return len(items) > 0
@@ -279,7 +274,6 @@ async def upload_record_async(
 ) -> bool:
     """上传单条记录到 Knowledge_Repo - 最终字段配置 v4"""
     
-    # Lark Knowledge_Repo 表字段 v4 (最终版):
     # 保留: 标题, 核心摘要, 正文原文, 赛道分类, 关键词, 项目/人名/代币, 事实类型, 质量评分, 发布日期, 内容指纹
     # 删除: 来源链接, 信息深度, 时效性, 状态, 来源文件
     
@@ -302,7 +296,6 @@ async def upload_record_async(
     
     try:
         result = await asyncio.to_thread(
-            lambda: lark_client.create_record(app_token, table_id, fields)
         )
         if result.get("code") == 0:
             return True
@@ -446,11 +439,8 @@ async def main():
     args = parser.parse_args()
     
     # 获取配置
-    app_token = os.getenv("LARK_BASE_TOKEN")
-    table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
     
     if not app_token or not table_id:
-        console.print("[red]❌ Error: LARK_BASE_TOKEN 或 LARK_KNOWLEDGE_TABLE_ID 未配置[/red]")
         console.print("   请确保 .env 文件中包含这两个配置项")
         return
     

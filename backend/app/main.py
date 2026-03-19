@@ -260,31 +260,6 @@ async def generate_narrative(request: GenerateRequest):
                 
                 await asyncio.sleep(0.2)
             
-            # --- P10: Auto-Archive to Lark ---
-            if generated_text:
-                try:
-                    ensure_config_dir()
-                    lark_base_token = os.getenv("LARK_BASE_TOKEN")
-                    lark_table_id = os.getenv("LARK_TABLE_ID")
-                    
-                    if lark_base_token and lark_table_id:
-                        yield f"data: {json.dumps({'type': 'thinking_step', 'agent': 'system', 'step': 'archiving', 'detail': 'Archiving to Lark Base...'})}\n\n"
-                        
-                        archive_fields = {
-                            "内容": request.input[:1000] + "..." if len(request.input) > 1000 else request.input, # Limited length
-                            "AI生成结果": generated_text,
-                            "状态": "已完成",
-                            "风格": request.mode,
-                            "类型": request.narrative_type
-                        }
-                        
-                        lark_client.create_record(lark_base_token, lark_table_id, archive_fields)
-                        yield f"data: {json.dumps({'type': 'agent_update', 'step': 'system', 'status': 'completed', 'logs': ['✅ Successfully archived to Lark Base']})}\n\n"
-                    else:
-                        yield f"data: {json.dumps({'type': 'agent_update', 'step': 'system', 'status': 'completed', 'logs': ['⚠️ Lark Token not set, skipping archive']})}\n\n"
-                        
-                except Exception as e:
-                    yield f"data: {json.dumps({'type': 'agent_update', 'step': 'system', 'status': 'failed', 'logs': [f'❌ Archive Failed: {str(e)}']})}\n\n"
 
             yield f"data: {json.dumps({'type': 'end', 'payload': 'Process Finished'})}\n\n"
         except Exception as e:
@@ -374,15 +349,6 @@ async def generate_hot_take(request: HotTakeRequest):
 
 @app.get("/health")
 async def health_check():
-    # Check Lark connection status
-    lark_connected = False
-    try:
-        # Test Lark connection by checking if client has valid token
-        if lark_client and hasattr(lark_client, 'tenant_access_token'):
-            lark_connected = lark_client.tenant_access_token is not None
-    except Exception:
-        lark_connected = False
-    
     # Check Chroma status
     chroma_connected = False
     try:
@@ -397,8 +363,7 @@ async def health_check():
         "status": "ok", 
         "version": "6.2", 
         "engine": "Web3 Consensus Engine",
-        "lark_connected": lark_connected,
-        "sheets_connected": lark_connected or chroma_connected,  # 前端用此字段判断知识库状态
+        "sheets_connected": chroma_connected,
         "chroma_connected": chroma_connected,
     }
 
@@ -615,7 +580,7 @@ async def get_research_projects(q: Optional[str] = None):
 
 @app.get("/ingest/status")
 async def get_ingest_status():
-    """获取入库状态 (Hash 缓存和 Lark 记录数)"""
+    """获取入库状态 (Hash 缓存)"""
     import sys
     from pathlib import Path
     
@@ -632,20 +597,8 @@ async def get_ingest_status():
     except Exception as e:
         print(f"[Ingest API] Hash cache error: {e}")
     
-    # 获取 Lark 表记录数
-    lark_count = 0
-    try:
-        base_token = os.getenv("LARK_BASE_TOKEN")
-        table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
-        if base_token and table_id:
-            resp = lark_client.list_records(base_token, table_id, page_size=1)
-            lark_count = resp.get("data", {}).get("total", 0)
-    except Exception as e:
-        print(f"[Ingest API] Lark count error: {e}")
-    
     return {
         "hash_cache_count": hash_count,
-        "lark_record_count": lark_count,
         "status": "ready"
     }
 
@@ -1013,8 +966,6 @@ async def get_ingest_config():
     """获取数据清洗配置"""
     import os
     return {
-        "web3_table_id": os.getenv("LARK_KNOWLEDGE_TABLE_ID", ""),
-        "web2_table_id": os.getenv("LARK_WEB2_TABLE_ID", "") or os.getenv("LARK_TABLE_ID", ""),
         "score_threshold": 6  # 默认阈值
     }
 
@@ -1042,10 +993,6 @@ async def update_ingest_config(config: IngestConfigRequest):
         
         # 更新或添加配置
         updated = {}
-        if config.web3_table_id:
-            updated["LARK_KNOWLEDGE_TABLE_ID"] = config.web3_table_id
-        if config.web2_table_id:
-            updated["LARK_WEB2_TABLE_ID"] = config.web2_table_id
         
         # 更新行
         new_lines = []

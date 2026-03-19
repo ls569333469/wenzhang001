@@ -5,8 +5,6 @@ Quantum Studio v5.2 - Knowledge_Repo 优化版入库脚本
 
 优化点:
 1. 合并 LLM 调用 (2次 -> 1次): 评分 + 实体/关键词同时返回
-2. 批量 Lark 上传 (单条 -> 500条/批)
-3. 本地 Hash 缓存查重 (替代 Lark API 查重)
 
 Usage:
     cd backend
@@ -40,7 +38,6 @@ except ImportError:
     print("Missing rich. Run: pip install rich")
     sys.exit(1)
 
-from app.core.lark_client import lark_client
 from scripts.batch.hash_cache import get_hash_cache, compute_content_hash
 
 # Windows 编码兼容：禁用所有格式化，避免 GBK 编码错误
@@ -58,7 +55,6 @@ console = Console(force_terminal=True, emoji=False, no_color=True, legacy_window
 # 配置区
 # ==========================================
 WEB3_DATA_DIR = Path(__file__).parent.parent / "data" / "Web3素材"
-BATCH_SIZE = 500  # Lark 批量上传每批数量
 ENABLE_LLM = True  # 是否启用 LLM
 
 # 需要清洗的前缀模式
@@ -126,7 +122,6 @@ def infer_fact_type(content: str) -> str:
     return FACT_TYPE_LABELS["news"]
 
 def parse_date(date_str: str) -> Optional[int]:
-    """解析日期格式，返回 Lark 接受的时间戳（毫秒）"""
     if not date_str:
         return None
     
@@ -258,7 +253,6 @@ async def process_single_file(
             cleaned_content = clean_content(content)
             content_hash = compute_hash(cleaned_content)
             
-            # 本地 Hash 缓存查重 (比 Lark API 快 100 倍)
             if hash_cache.contains(content_hash):
                 return {"status": "skipped", "data": None}
             
@@ -313,16 +307,12 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: 
     console.print(f"   [cyan][ASYNC] 并发模式: {LLM_CONCURRENCY} 个并行 LLM 调用[/cyan]")
     
     # 根据 target 选择表格 ID
-    app_token = os.getenv("LARK_BASE_TOKEN")
     if target == "web2":
-        table_id = os.getenv("LARK_WEB2_TABLE_ID") or os.getenv("LARK_TABLE_ID")
         console.print(f"   [cyan]目标表格: Web2 Style[/cyan]")
     else:
-        table_id = os.getenv("LARK_KNOWLEDGE_TABLE_ID")
         console.print(f"   [cyan]目标表格: Web3 Knowledge[/cyan]")
     
     if not app_token or not table_id:
-        console.print("[red][ERROR] 缺少 LARK_BASE_TOKEN 或表格 ID[/red]")
         return {"success": 0, "skipped": 0, "failed": len(json_files)}
     
     # 获取 Hash 缓存
@@ -361,14 +351,12 @@ async def process_folder(folder_path: Path, topic: str, limit: int = 0, target: 
             stats["failed"] += 1
 
     
-    # 批量上传到 Lark (500 条/批)
     if records_to_upload:
         console.print(f"   [UPLOAD] 批量上传 {len(records_to_upload)} 条记录...")
         
         for i in range(0, len(records_to_upload), BATCH_SIZE):
             batch = records_to_upload[i:i+BATCH_SIZE]
             try:
-                result = lark_client.batch_create_records(app_token, table_id, batch)
                 if result.get("code") == 0:
                     stats["success"] += len(batch)
                 else:
@@ -405,8 +393,6 @@ async def main():
     console.print("=" * 60)
     console.print("[INFO] Quantum Studio v5.2 - Knowledge_Repo 优化版入库")
     console.print("=" * 60)
-    console.print(f"[CONFIG] Base Token: {os.getenv('LARK_BASE_TOKEN', 'NOT SET')}")
-    console.print(f"[CONFIG] Knowledge Table ID: {os.getenv('LARK_KNOWLEDGE_TABLE_ID', 'NOT SET')}")
     console.print(f"[CONFIG] 优化特性: 合并LLM调用 + 批量上传 + 本地Hash缓存")
     console.print()
     
