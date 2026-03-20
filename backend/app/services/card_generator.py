@@ -296,9 +296,7 @@ def generate_card_html(
 
         catalyst_html = ""
         if catalyst:
-            # 长文本动态缩小字号
-            cat_style = ' style="font-size:11px;padding:4px 8px;"' if len(catalyst) > 30 else ''
-            catalyst_html = f'<div class="catalyst"{cat_style}>🔥 {catalyst}</div>'
+            catalyst_html = f'<div class="catalyst"><span class="catalyst-icon">🔥</span><span class="catalyst-text">{catalyst}</span></div>'
 
         cards_html += f"""
             <div class="card">
@@ -326,13 +324,13 @@ body {{
     width: 1200px; height: 675px;
     background-color: #F4F3EE;
     color: #1C1C1C;
-    padding: 40px 60px;
+    padding: 24px 60px 40px;
     display: flex; flex-direction: column;
     overflow: hidden;
 }}
 .header {{
     display: flex; justify-content: space-between; align-items: flex-end;
-    padding-bottom: 20px;
+    padding-bottom: 14px;
     border-bottom: 3px solid #1C1C1C;
 }}
 .title-group {{ display: flex; flex-direction: column; }}
@@ -366,13 +364,23 @@ body {{
     overflow: hidden; max-height: 2.8em;
 }}
 .catalyst {{
-    background-color: #FF3A2D; color: #FFF;
-    font-size: 12px; font-weight: 700;
-    padding: 5px 10px; display: inline-block;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(28, 28, 28, 0.2);
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    color: #FF3A2D;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+    width: 100%;
+}}
+.catalyst-icon {{
+    font-weight: 400; font-size: 15px;
+}}
+.catalyst-text {{
     overflow-wrap: break-word; word-break: break-all;
-    margin-top: 10px;
-    border-radius: 4px; line-height: 1.4;
-    max-width: 95%;
 }}
 .footer {{
     display: flex; justify-content: space-between;
